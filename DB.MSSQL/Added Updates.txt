@@ -1,0 +1,17 @@
+Supports
+French OS
+ENGLISH OS
+
+
+
++ Added Option to Load Only on First Call iNstead of loading all database on startup
++ Allowed general date format for sql servers
+
+
++ Changed to AnyCPU
++ Introduced Encoded Upgrades using base64 UTF8
++ Introduced DynamicServer Support
++ Introduced Timed Subscriptions- to Tables or Views
++ Allow listing of Instances on PC
++ Added ForceGlobalTableCacheInvalidation()
++ Added Ability to start service on constructor if service was stopped

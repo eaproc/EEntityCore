@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>EEntityCore.VB.MSSQL.WebTest</RootNamespace>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DBEntities\DatabaseSchema.Old.1\**" />
+    <EmbeddedResource Remove="DBEntities\DatabaseSchema.Old.1\**" />
+    <None Remove="DBEntities\DatabaseSchema.Old.1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="DBEntities\DatabaseSchema.ini" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EEntityCore.DB.MSSQL\EEntityCore.DB.MSSQL.vbproj" />
+    <ProjectReference Include="..\EEntityCore.DB\EEntityCore.DB.vbproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CODERiT.Logger.Standard.VB">
+      <HintPath>..\..\..\..\..\epro-libraries-for-vs\coderit-logger\CODERiT.Logger.Standard.VB\bin\Debug\netstandard2.0\CODERiT.Logger.Standard.VB.dll</HintPath>
+    </Reference>
+    <Reference Include="ELibrary.Standard.VB">
+      <HintPath>..\..\..\ELibrary\ELibrary.Standard.VB\bin\Debug\netstandard2.0\ELibrary.Standard.VB.dll</HintPath>
+    </Reference>
+    <Reference Include="EWebFrameworkCore.Vendor">
+      <HintPath>..\..\..\EWebFrameworkCore\EWebFrameworkCore.Vendor\bin\Debug\net5.0\EWebFrameworkCore.Vendor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

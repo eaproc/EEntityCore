@@ -1,0 +1,44 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+CODERiT.PopUps.v3.5
+</name>
+</assembly>
+<members>
+<member name="T:CODERiT.PopUps.v3._5.DefaultPopTextConvert">
+	<summary>
+ Returns default text in English
+ </summary>
+	<remarks></remarks>
+</member><member name="T:CODERiT.PopUps.v3._5.Forms.frmMsgBox__Scrollable">
+	<summary>
+ Universal Message Box
+ </summary>
+	<remarks></remarks>
+</member><member name="T:CODERiT.PopUps.v3._5.Forms.frmMsgBox__Fixed">
+	<summary>
+ Universal Message Box
+ </summary>
+	<remarks></remarks>
+</member><member name="P:CODERiT.PopUps.v3._5.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:CODERiT.PopUps.v3._5.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:CODERiT.PopUps.v3._5.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="T:CODERiT.PopUps.v3._5.Enumerations.ReturnTypes">
+	<summary>
+ Indicates the expected result
+ </summary>
+	<remarks></remarks>
+</member>
+</members>
+</doc>
