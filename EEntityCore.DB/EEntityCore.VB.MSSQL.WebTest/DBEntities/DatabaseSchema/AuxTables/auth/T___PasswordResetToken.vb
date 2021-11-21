@@ -421,11 +421,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___PasswordResetToken                  
-            Return New T___PasswordResetToken(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___PasswordResetToken(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___PasswordResetToken                  
-            Return New T___PasswordResetToken(DBConnectInterface.getDBConn(),                  
+            Return New T___PasswordResetToken(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -604,7 +604,7 @@ ByVal pUserID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPasswordResetTypeID As DataColumnParameter = New DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID)
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
  Dim paramToken As DataColumnParameter = New DataColumnParameter(defToken, defToken.DefaultValue)
@@ -614,7 +614,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Token],[PasswordResetTypeID],[UserID],[ExpiryDateTime],[IsUsed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramToken.getSQLQuotedValueForAdd(),
 paramPasswordResetTypeID.getSQLQuotedValueForAdd(),
@@ -649,7 +649,7 @@ Optional ByVal pUpdatedAt As Object = DataColumnNullParamValue.NULL_VALUE) As In
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramToken As DataColumnParameter = New DataColumnParameter(defToken, pToken)
  Dim paramPasswordResetTypeID As DataColumnParameter = New DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID)
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
@@ -659,7 +659,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Token],[PasswordResetTypeID],[UserID],[ExpiryDateTime],[IsUsed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramToken.getSQLQuotedValueForAdd(),
 paramPasswordResetTypeID.getSQLQuotedValueForAdd(),
@@ -704,7 +704,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Token],[PasswordResetTypeID],[UserID],[ExpiryDateTime],[IsUsed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramToken.getSQLQuotedValueForAdd(),
 paramPasswordResetTypeID.getSQLQuotedValueForAdd(),
@@ -752,7 +752,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([Token],[PasswordResetTypeID],[UserID],[ExpiryDateTime],[IsUsed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) ", TABLE_NAME,paramToken.getSQLQuotedValueForAdd(),
 paramPasswordResetTypeID.getSQLQuotedValueForAdd(),
 paramUserID.getSQLQuotedValueForAdd(),
@@ -798,7 +798,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [Token]={2},[PasswordResetTypeID]={3},[UserID]={4},[ExpiryDateTime]={5},[IsUsed]={6},[CreatedAt]={7},[UpdatedAt]={8} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramToken.getSQLQuotedValueForUpdate(),
 paramPasswordResetTypeID.getSQLQuotedValueForUpdate(),
 paramUserID.getSQLQuotedValueForUpdate(),
@@ -827,7 +827,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

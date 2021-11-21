@@ -509,11 +509,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___Invoice                  
-            Return New T___Invoice(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___Invoice(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___Invoice                  
-            Return New T___Invoice(DBConnectInterface.getDBConn(),                  
+            Return New T___Invoice(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -695,7 +695,7 @@ ByVal pPaymentTransactionID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramClientID As DataColumnParameter = New DataColumnParameter(defClientID, pClientID)
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
  Dim paramTermID As DataColumnParameter = New DataColumnParameter(defTermID, pTermID)
@@ -711,7 +711,7 @@ Try
  Dim paramIpAddress As DataColumnParameter = New DataColumnParameter(defIpAddress, defIpAddress.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
 paramBillDefinition.getSQLQuotedValueForAdd(),
@@ -758,7 +758,7 @@ Optional ByVal pPaymentTransactionID As Object = DataColumnNullParamValue.NULL_V
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramClientID As DataColumnParameter = New DataColumnParameter(defClientID, pClientID)
  Dim paramBillDefinition As DataColumnParameter = New DataColumnParameter(defBillDefinition, pBillDefinition)
  Dim paramBillDescription As DataColumnParameter = New DataColumnParameter(defBillDescription, pBillDescription)
@@ -774,7 +774,7 @@ Try
  Dim paramPaymentTransactionID As DataColumnParameter = New DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
 paramBillDefinition.getSQLQuotedValueForAdd(),
@@ -837,7 +837,7 @@ Try
  Dim paramPaymentTransactionID As DataColumnParameter = New DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
 paramBillDefinition.getSQLQuotedValueForAdd(),
@@ -903,7 +903,7 @@ Try
  Dim paramPaymentTransactionID As DataColumnParameter = New DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramClientID.getSQLQuotedValueForAdd(),
 paramBillDefinition.getSQLQuotedValueForAdd(),
 paramBillDescription.getSQLQuotedValueForAdd(),
@@ -967,7 +967,7 @@ Try
  Dim paramPaymentTransactionID As DataColumnParameter = New DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [ClientID]={2},[BillDefinition]={3},[BillDescription]={4},[BillAmount]={5},[Total]={6},[CreatedAt]={7},[CreatedByID]={8},[CanBeDeleted]={9},[Quantity]={10},[IpAddress]={11},[TermID]={12},[OriginalBillID]={13},[PaymentTransactionID]={14} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramClientID.getSQLQuotedValueForUpdate(),
 paramBillDefinition.getSQLQuotedValueForUpdate(),
 paramBillDescription.getSQLQuotedValueForUpdate(),
@@ -1002,7 +1002,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

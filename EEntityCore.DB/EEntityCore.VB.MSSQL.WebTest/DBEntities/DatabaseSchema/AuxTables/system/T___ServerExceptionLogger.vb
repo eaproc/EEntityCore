@@ -465,11 +465,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___ServerExceptionLogger                  
-            Return New T___ServerExceptionLogger(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___ServerExceptionLogger(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___ServerExceptionLogger                  
-            Return New T___ServerExceptionLogger(DBConnectInterface.getDBConn(),                  
+            Return New T___ServerExceptionLogger(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -648,7 +648,7 @@ ByVal pUserID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramTraceID As DataColumnParameter = New DataColumnParameter(defTraceID, pTraceID)
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
  Dim paramRequestParametersJSON As DataColumnParameter = New DataColumnParameter(defRequestParametersJSON, defRequestParametersJSON.DefaultValue)
@@ -662,7 +662,7 @@ Try
  Dim paramIPAddress As DataColumnParameter = New DataColumnParameter(defIPAddress, defIPAddress.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TraceID],[RequestParametersJSON],[ExceptionMessage],[StackTrace],[IsResolved],[Comments],[CreatedAt],[UpdatedAt],[AbsoluteURL],[IPAddress],[UserID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramTraceID.getSQLQuotedValueForAdd(),
 paramRequestParametersJSON.getSQLQuotedValueForAdd(),
@@ -705,7 +705,7 @@ Optional ByVal pUserID As Object = DataColumnNullParamValue.NULL_VALUE) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramTraceID As DataColumnParameter = New DataColumnParameter(defTraceID, pTraceID)
  Dim paramRequestParametersJSON As DataColumnParameter = New DataColumnParameter(defRequestParametersJSON, pRequestParametersJSON)
  Dim paramExceptionMessage As DataColumnParameter = New DataColumnParameter(defExceptionMessage, pExceptionMessage)
@@ -719,7 +719,7 @@ Try
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TraceID],[RequestParametersJSON],[ExceptionMessage],[StackTrace],[IsResolved],[Comments],[CreatedAt],[UpdatedAt],[AbsoluteURL],[IPAddress],[UserID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramTraceID.getSQLQuotedValueForAdd(),
 paramRequestParametersJSON.getSQLQuotedValueForAdd(),
@@ -776,7 +776,7 @@ Try
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TraceID],[RequestParametersJSON],[ExceptionMessage],[StackTrace],[IsResolved],[Comments],[CreatedAt],[UpdatedAt],[AbsoluteURL],[IPAddress],[UserID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramTraceID.getSQLQuotedValueForAdd(),
 paramRequestParametersJSON.getSQLQuotedValueForAdd(),
@@ -836,7 +836,7 @@ Try
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([TraceID],[RequestParametersJSON],[ExceptionMessage],[StackTrace],[IsResolved],[Comments],[CreatedAt],[UpdatedAt],[AbsoluteURL],[IPAddress],[UserID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) ", TABLE_NAME,paramTraceID.getSQLQuotedValueForAdd(),
 paramRequestParametersJSON.getSQLQuotedValueForAdd(),
 paramExceptionMessage.getSQLQuotedValueForAdd(),
@@ -894,7 +894,7 @@ Try
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [TraceID]={2},[RequestParametersJSON]={3},[ExceptionMessage]={4},[StackTrace]={5},[IsResolved]={6},[Comments]={7},[CreatedAt]={8},[UpdatedAt]={9},[AbsoluteURL]={10},[IPAddress]={11},[UserID]={12} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramTraceID.getSQLQuotedValueForUpdate(),
 paramRequestParametersJSON.getSQLQuotedValueForUpdate(),
 paramExceptionMessage.getSQLQuotedValueForUpdate(),
@@ -927,7 +927,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

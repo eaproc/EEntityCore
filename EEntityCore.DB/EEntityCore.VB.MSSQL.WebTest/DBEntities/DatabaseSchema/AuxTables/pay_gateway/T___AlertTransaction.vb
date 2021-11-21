@@ -436,11 +436,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___AlertTransaction                  
-            Return New T___AlertTransaction(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___AlertTransaction(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___AlertTransaction                  
-            Return New T___AlertTransaction(DBConnectInterface.getDBConn(),                  
+            Return New T___AlertTransaction(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -618,7 +618,7 @@ Public Shared Function addNewDefault(ByVal pTransactionReference As String) As I
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramTransactionReference As DataColumnParameter = New DataColumnParameter(defTransactionReference, pTransactionReference)
  Dim paramTransactionDate As DataColumnParameter = New DataColumnParameter(defTransactionDate, defTransactionDate.DefaultValue)
  Dim paramDescription As DataColumnParameter = New DataColumnParameter(defDescription, defDescription.DefaultValue)
@@ -630,7 +630,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionDate],[TransactionReference],[Description],[Channel],[Total],[Confirmed],[Processed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramTransactionDate.getSQLQuotedValueForAdd(),
 paramTransactionReference.getSQLQuotedValueForAdd(),
@@ -669,7 +669,7 @@ Optional ByVal pUpdatedAt As Object = DataColumnNullParamValue.NULL_VALUE) As In
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramTransactionDate As DataColumnParameter = New DataColumnParameter(defTransactionDate, pTransactionDate)
  Dim paramTransactionReference As DataColumnParameter = New DataColumnParameter(defTransactionReference, pTransactionReference)
  Dim paramDescription As DataColumnParameter = New DataColumnParameter(defDescription, pDescription)
@@ -681,7 +681,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionDate],[TransactionReference],[Description],[Channel],[Total],[Confirmed],[Processed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramTransactionDate.getSQLQuotedValueForAdd(),
 paramTransactionReference.getSQLQuotedValueForAdd(),
@@ -732,7 +732,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionDate],[TransactionReference],[Description],[Channel],[Total],[Confirmed],[Processed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramTransactionDate.getSQLQuotedValueForAdd(),
 paramTransactionReference.getSQLQuotedValueForAdd(),
@@ -786,7 +786,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([TransactionDate],[TransactionReference],[Description],[Channel],[Total],[Confirmed],[Processed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramTransactionDate.getSQLQuotedValueForAdd(),
 paramTransactionReference.getSQLQuotedValueForAdd(),
 paramDescription.getSQLQuotedValueForAdd(),
@@ -838,7 +838,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [TransactionDate]={2},[TransactionReference]={3},[Description]={4},[Channel]={5},[Total]={6},[Confirmed]={7},[Processed]={8},[CreatedAt]={9},[UpdatedAt]={10} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramTransactionDate.getSQLQuotedValueForUpdate(),
 paramTransactionReference.getSQLQuotedValueForUpdate(),
 paramDescription.getSQLQuotedValueForUpdate(),
@@ -869,7 +869,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

@@ -489,11 +489,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___OnlinePayment                  
-            Return New T___OnlinePayment(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___OnlinePayment(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___OnlinePayment                  
-            Return New T___OnlinePayment(DBConnectInterface.getDBConn(),                  
+            Return New T___OnlinePayment(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -671,7 +671,7 @@ Public Shared Function addNewDefault(ByVal pPaymentID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPaymentID As DataColumnParameter = New DataColumnParameter(defPaymentID, pPaymentID)
  Dim paramTransactionDate As DataColumnParameter = New DataColumnParameter(defTransactionDate, defTransactionDate.DefaultValue)
  Dim paramChannel As DataColumnParameter = New DataColumnParameter(defChannel, defChannel.DefaultValue)
@@ -687,7 +687,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPaymentID.getSQLQuotedValueForAdd(),
 paramTransactionDate.getSQLQuotedValueForAdd(),
@@ -734,7 +734,7 @@ Optional ByVal pPlatformChargesExplaination As Object = DataColumnNullParamValue
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPaymentID As DataColumnParameter = New DataColumnParameter(defPaymentID, pPaymentID)
  Dim paramTransactionDate As DataColumnParameter = New DataColumnParameter(defTransactionDate, pTransactionDate)
  Dim paramChannel As DataColumnParameter = New DataColumnParameter(defChannel, pChannel)
@@ -750,7 +750,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPaymentID.getSQLQuotedValueForAdd(),
 paramTransactionDate.getSQLQuotedValueForAdd(),
@@ -813,7 +813,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPaymentID.getSQLQuotedValueForAdd(),
 paramTransactionDate.getSQLQuotedValueForAdd(),
@@ -879,7 +879,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramPaymentID.getSQLQuotedValueForAdd(),
 paramTransactionDate.getSQLQuotedValueForAdd(),
 paramChannel.getSQLQuotedValueForAdd(),
@@ -943,7 +943,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [PaymentID]={2},[TransactionDate]={3},[Channel]={4},[IpAddress]={5},[GatewayCharges]={6},[GatewayLogReference]={7},[Gateway]={8},[PlatformCharges]={9},[GatewayAmountReceived]={10},[PlatformAmountReceived]={11},[GatewayChargesExplaination]={12},[PlatformChargesExplaination]={13},[CreatedAt]={14} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPaymentID.getSQLQuotedValueForUpdate(),
 paramTransactionDate.getSQLQuotedValueForUpdate(),
 paramChannel.getSQLQuotedValueForUpdate(),
@@ -978,7 +978,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

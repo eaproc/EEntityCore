@@ -426,11 +426,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___PasswordResetHistory                  
-            Return New T___PasswordResetHistory(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___PasswordResetHistory(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___PasswordResetHistory                  
-            Return New T___PasswordResetHistory(DBConnectInterface.getDBConn(),                  
+            Return New T___PasswordResetHistory(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -609,7 +609,7 @@ ByVal pPasswordResetTypeID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
  Dim paramPasswordResetTypeID As DataColumnParameter = New DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID)
  Dim paramOldPassword As DataColumnParameter = New DataColumnParameter(defOldPassword, defOldPassword.DefaultValue)
@@ -619,7 +619,7 @@ Try
  Dim paramIpAddress As DataColumnParameter = New DataColumnParameter(defIpAddress, defIpAddress.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[OldPassword],[NewPassword],[PasswordResetTypeID],[CreatedAt],[ChangedByUserID],[IpAddress]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramUserID.getSQLQuotedValueForAdd(),
 paramOldPassword.getSQLQuotedValueForAdd(),
@@ -654,7 +654,7 @@ ByVal pIpAddress As String) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
  Dim paramOldPassword As DataColumnParameter = New DataColumnParameter(defOldPassword, pOldPassword)
  Dim paramNewPassword As DataColumnParameter = New DataColumnParameter(defNewPassword, pNewPassword)
@@ -664,7 +664,7 @@ Try
  Dim paramIpAddress As DataColumnParameter = New DataColumnParameter(defIpAddress, pIpAddress)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[OldPassword],[NewPassword],[PasswordResetTypeID],[CreatedAt],[ChangedByUserID],[IpAddress]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramUserID.getSQLQuotedValueForAdd(),
 paramOldPassword.getSQLQuotedValueForAdd(),
@@ -709,7 +709,7 @@ Try
  Dim paramIpAddress As DataColumnParameter = New DataColumnParameter(defIpAddress, pIpAddress)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[OldPassword],[NewPassword],[PasswordResetTypeID],[CreatedAt],[ChangedByUserID],[IpAddress]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramUserID.getSQLQuotedValueForAdd(),
 paramOldPassword.getSQLQuotedValueForAdd(),
@@ -757,7 +757,7 @@ Try
  Dim paramIpAddress As DataColumnParameter = New DataColumnParameter(defIpAddress, pIpAddress)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([UserID],[OldPassword],[NewPassword],[PasswordResetTypeID],[CreatedAt],[ChangedByUserID],[IpAddress]) VALUES({1},{2},{3},{4},{5},{6},{7}) ", TABLE_NAME,paramUserID.getSQLQuotedValueForAdd(),
 paramOldPassword.getSQLQuotedValueForAdd(),
 paramNewPassword.getSQLQuotedValueForAdd(),
@@ -803,7 +803,7 @@ Try
  Dim paramIpAddress As DataColumnParameter = New DataColumnParameter(defIpAddress, pIpAddress)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [UserID]={2},[OldPassword]={3},[NewPassword]={4},[PasswordResetTypeID]={5},[CreatedAt]={6},[ChangedByUserID]={7},[IpAddress]={8} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramUserID.getSQLQuotedValueForUpdate(),
 paramOldPassword.getSQLQuotedValueForUpdate(),
 paramNewPassword.getSQLQuotedValueForUpdate(),
@@ -832,7 +832,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

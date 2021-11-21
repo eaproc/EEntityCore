@@ -484,11 +484,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___ResidingPastor                  
-            Return New T___ResidingPastor(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___ResidingPastor(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___ResidingPastor                  
-            Return New T___ResidingPastor(DBConnectInterface.getDBConn(),                  
+            Return New T___ResidingPastor(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -670,7 +670,7 @@ ByVal pUpdatedByID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramCenterID As DataColumnParameter = New DataColumnParameter(defCenterID, pCenterID)
  Dim paramBankID As DataColumnParameter = New DataColumnParameter(defBankID, pBankID)
  Dim paramPersonID As DataColumnParameter = New DataColumnParameter(defPersonID, pPersonID)
@@ -684,7 +684,7 @@ Try
  Dim paramIdPictureStoredPath As DataColumnParameter = New DataColumnParameter(defIdPictureStoredPath, defIdPictureStoredPath.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BankID],[AccountNumber],[PersonID],[ActivatedOn],[DeactivatedOn],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[IdPictureStoredPath]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramCenterID.getSQLQuotedValueForAdd(),
 paramBankID.getSQLQuotedValueForAdd(),
@@ -727,7 +727,7 @@ Optional ByVal pIdPictureStoredPath As Object = DataColumnNullParamValue.NULL_VA
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramCenterID As DataColumnParameter = New DataColumnParameter(defCenterID, pCenterID)
  Dim paramBankID As DataColumnParameter = New DataColumnParameter(defBankID, pBankID)
  Dim paramAccountNumber As DataColumnParameter = New DataColumnParameter(defAccountNumber, pAccountNumber)
@@ -741,7 +741,7 @@ Try
  Dim paramIdPictureStoredPath As DataColumnParameter = New DataColumnParameter(defIdPictureStoredPath, pIdPictureStoredPath)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BankID],[AccountNumber],[PersonID],[ActivatedOn],[DeactivatedOn],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[IdPictureStoredPath]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramCenterID.getSQLQuotedValueForAdd(),
 paramBankID.getSQLQuotedValueForAdd(),
@@ -798,7 +798,7 @@ Try
  Dim paramIdPictureStoredPath As DataColumnParameter = New DataColumnParameter(defIdPictureStoredPath, pIdPictureStoredPath)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BankID],[AccountNumber],[PersonID],[ActivatedOn],[DeactivatedOn],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[IdPictureStoredPath]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramCenterID.getSQLQuotedValueForAdd(),
 paramBankID.getSQLQuotedValueForAdd(),
@@ -858,7 +858,7 @@ Try
  Dim paramIdPictureStoredPath As DataColumnParameter = New DataColumnParameter(defIdPictureStoredPath, pIdPictureStoredPath)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([CenterID],[BankID],[AccountNumber],[PersonID],[ActivatedOn],[DeactivatedOn],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[IdPictureStoredPath]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) ", TABLE_NAME,paramCenterID.getSQLQuotedValueForAdd(),
 paramBankID.getSQLQuotedValueForAdd(),
 paramAccountNumber.getSQLQuotedValueForAdd(),
@@ -916,7 +916,7 @@ Try
  Dim paramIdPictureStoredPath As DataColumnParameter = New DataColumnParameter(defIdPictureStoredPath, pIdPictureStoredPath)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [CenterID]={2},[BankID]={3},[AccountNumber]={4},[PersonID]={5},[ActivatedOn]={6},[DeactivatedOn]={7},[CreatedAt]={8},[UpdatedAt]={9},[CreatedByID]={10},[UpdatedByID]={11},[IdPictureStoredPath]={12} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCenterID.getSQLQuotedValueForUpdate(),
 paramBankID.getSQLQuotedValueForUpdate(),
 paramAccountNumber.getSQLQuotedValueForUpdate(),
@@ -949,7 +949,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

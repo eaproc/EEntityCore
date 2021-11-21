@@ -440,11 +440,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___RequestMonitor                  
-            Return New T___RequestMonitor(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___RequestMonitor(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___RequestMonitor                  
-            Return New T___RequestMonitor(DBConnectInterface.getDBConn(),                  
+            Return New T___RequestMonitor(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -622,7 +622,7 @@ Public Shared Function addNewDefault(ByVal pUserID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
  Dim paramAbsoluteURL As DataColumnParameter = New DataColumnParameter(defAbsoluteURL, defAbsoluteURL.DefaultValue)
  Dim paramRequestParametersJSON As DataColumnParameter = New DataColumnParameter(defRequestParametersJSON, defRequestParametersJSON.DefaultValue)
@@ -634,7 +634,7 @@ Try
  Dim paramRequestHeaders As DataColumnParameter = New DataColumnParameter(defRequestHeaders, defRequestHeaders.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramAbsoluteURL.getSQLQuotedValueForAdd(),
 paramRequestParametersJSON.getSQLQuotedValueForAdd(),
@@ -673,7 +673,7 @@ Optional ByVal pRequestHeaders As Object = DataColumnNullParamValue.NULL_VALUE) 
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramAbsoluteURL As DataColumnParameter = New DataColumnParameter(defAbsoluteURL, pAbsoluteURL)
  Dim paramRequestParametersJSON As DataColumnParameter = New DataColumnParameter(defRequestParametersJSON, pRequestParametersJSON)
  Dim paramIPAddress As DataColumnParameter = New DataColumnParameter(defIPAddress, pIPAddress)
@@ -685,7 +685,7 @@ Try
  Dim paramRequestHeaders As DataColumnParameter = New DataColumnParameter(defRequestHeaders, pRequestHeaders)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramAbsoluteURL.getSQLQuotedValueForAdd(),
 paramRequestParametersJSON.getSQLQuotedValueForAdd(),
@@ -736,7 +736,7 @@ Try
  Dim paramRequestHeaders As DataColumnParameter = New DataColumnParameter(defRequestHeaders, pRequestHeaders)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramAbsoluteURL.getSQLQuotedValueForAdd(),
 paramRequestParametersJSON.getSQLQuotedValueForAdd(),
@@ -790,7 +790,7 @@ Try
  Dim paramRequestHeaders As DataColumnParameter = New DataColumnParameter(defRequestHeaders, pRequestHeaders)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramAbsoluteURL.getSQLQuotedValueForAdd(),
 paramRequestParametersJSON.getSQLQuotedValueForAdd(),
 paramIPAddress.getSQLQuotedValueForAdd(),
@@ -842,7 +842,7 @@ Try
  Dim paramRequestHeaders As DataColumnParameter = New DataColumnParameter(defRequestHeaders, pRequestHeaders)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [AbsoluteURL]={2},[RequestParametersJSON]={3},[IPAddress]={4},[SessionVariables]={5},[Browser]={6},[UserID]={7},[CreatedAt]={8},[RequestBody]={9},[RequestHeaders]={10} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramAbsoluteURL.getSQLQuotedValueForUpdate(),
 paramRequestParametersJSON.getSQLQuotedValueForUpdate(),
 paramIPAddress.getSQLQuotedValueForUpdate(),
@@ -873,7 +873,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

@@ -28,7 +28,7 @@ Public Class Client
     Public Overloads Function getConnectionString(ByVal DatabaseN As String) As String
 
         Return String.Format(
-                  "Data Source={0},{1};Network Library=DBMSSOCN;" &
+                  "Data Source={0},{1};Integrated Security=False;" &
                   "Initial Catalog={2};User ID={3};Password={4};",
                   Me.SQLServerAddress, Me.SQLServerPort, Me.CurrentDBInUse,
                   Me.SQLServerUserName, Me.SQLServerPassword

@@ -340,11 +340,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___CashInType                  
-            Return New T___CashInType(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___CashInType(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___CashInType                  
-            Return New T___CashInType(DBConnectInterface.getDBConn(),                  
+            Return New T___CashInType(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -522,11 +522,11 @@ Public Shared Function addNewDefault(ByVal pDefinition As String) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramDefinition As DataColumnParameter = New DataColumnParameter(defDefinition, pDefinition)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Definition]) VALUES({1},{2}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramDefinition.getSQLQuotedValueForAdd()  ), True)
 
@@ -549,11 +549,11 @@ Public Shared Function addWithID(ByVal pDefinition As String) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramDefinition As DataColumnParameter = New DataColumnParameter(defDefinition, pDefinition)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Definition]) VALUES({1},{2}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramDefinition.getSQLQuotedValueForAdd()  ), True)
 
@@ -580,7 +580,7 @@ Try
  Dim paramDefinition As DataColumnParameter = New DataColumnParameter(defDefinition, pDefinition)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Definition]) VALUES({1},{2}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramDefinition.getSQLQuotedValueForAdd()  ), True)
 
@@ -610,7 +610,7 @@ Try
  Dim paramDefinition As DataColumnParameter = New DataColumnParameter(defDefinition, pDefinition)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([Definition]) VALUES({1}) ", TABLE_NAME,paramDefinition.getSQLQuotedValueForAdd()  ), True)
 
 
@@ -638,7 +638,7 @@ Try
  Dim paramDefinition As DataColumnParameter = New DataColumnParameter(defDefinition, pDefinition)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [Definition]={2} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramDefinition.getSQLQuotedValueForUpdate()  ), True)
 
 
@@ -661,7 +661,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

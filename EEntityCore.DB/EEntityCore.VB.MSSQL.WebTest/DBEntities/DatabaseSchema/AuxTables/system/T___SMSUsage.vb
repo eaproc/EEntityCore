@@ -488,11 +488,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___SMSUsage                  
-            Return New T___SMSUsage(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___SMSUsage(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___SMSUsage                  
-            Return New T___SMSUsage(DBConnectInterface.getDBConn(),                  
+            Return New T___SMSUsage(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -670,7 +670,7 @@ Public Shared Function addNewDefault(ByVal pSMSDeliveryStatusID As Int32) As Int
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramSMSDeliveryStatusID As DataColumnParameter = New DataColumnParameter(defSMSDeliveryStatusID, pSMSDeliveryStatusID)
  Dim paramSender As DataColumnParameter = New DataColumnParameter(defSender, defSender.DefaultValue)
  Dim paramReceiver As DataColumnParameter = New DataColumnParameter(defReceiver, defReceiver.DefaultValue)
@@ -686,7 +686,7 @@ Try
  Dim paramGateway As DataColumnParameter = New DataColumnParameter(defGateway, defGateway.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramSMSDeliveryStatusID.getSQLQuotedValueForAdd(),
 paramSender.getSQLQuotedValueForAdd(),
@@ -733,7 +733,7 @@ Optional ByVal pExceptionStackTrace As Object = DataColumnNullParamValue.NULL_VA
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramSMSDeliveryStatusID As DataColumnParameter = New DataColumnParameter(defSMSDeliveryStatusID, pSMSDeliveryStatusID)
  Dim paramSender As DataColumnParameter = New DataColumnParameter(defSender, pSender)
  Dim paramReceiver As DataColumnParameter = New DataColumnParameter(defReceiver, pReceiver)
@@ -749,7 +749,7 @@ Try
  Dim paramGateway As DataColumnParameter = New DataColumnParameter(defGateway, pGateway)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramSMSDeliveryStatusID.getSQLQuotedValueForAdd(),
 paramSender.getSQLQuotedValueForAdd(),
@@ -812,7 +812,7 @@ Try
  Dim paramGateway As DataColumnParameter = New DataColumnParameter(defGateway, pGateway)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramSMSDeliveryStatusID.getSQLQuotedValueForAdd(),
 paramSender.getSQLQuotedValueForAdd(),
@@ -878,7 +878,7 @@ Try
  Dim paramGateway As DataColumnParameter = New DataColumnParameter(defGateway, pGateway)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramSMSDeliveryStatusID.getSQLQuotedValueForAdd(),
 paramSender.getSQLQuotedValueForAdd(),
 paramReceiver.getSQLQuotedValueForAdd(),
@@ -942,7 +942,7 @@ Try
  Dim paramGateway As DataColumnParameter = New DataColumnParameter(defGateway, pGateway)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [SMSDeliveryStatusID]={2},[Sender]={3},[Receiver]={4},[Message]={5},[UID]={6},[APICreateResponse]={7},[APIUpdateResponse]={8},[SMSCostNaira]={9},[CreatedAt]={10},[UpdatedAt]={11},[ExceptionMessage]={12},[ExceptionStackTrace]={13},[Gateway]={14} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramSMSDeliveryStatusID.getSQLQuotedValueForUpdate(),
 paramSender.getSQLQuotedValueForUpdate(),
 paramReceiver.getSQLQuotedValueForUpdate(),
@@ -977,7 +977,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

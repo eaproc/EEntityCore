@@ -368,11 +368,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___PaymentRecognitionTrail                  
-            Return New T___PaymentRecognitionTrail(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___PaymentRecognitionTrail(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___PaymentRecognitionTrail                  
-            Return New T___PaymentRecognitionTrail(DBConnectInterface.getDBConn(),                  
+            Return New T___PaymentRecognitionTrail(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -550,13 +550,13 @@ Public Shared Function addNewDefault(ByVal pAlertTransactionID As Int32) As Int3
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramAlertTransactionID As DataColumnParameter = New DataColumnParameter(defAlertTransactionID, pAlertTransactionID)
  Dim paramTrail As DataColumnParameter = New DataColumnParameter(defTrail, defTrail.DefaultValue)
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Trail],[CreatedAt],[AlertTransactionID]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramTrail.getSQLQuotedValueForAdd(),
 paramCreatedAt.getSQLQuotedValueForAdd(),
@@ -583,13 +583,13 @@ ByVal pAlertTransactionID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramTrail As DataColumnParameter = New DataColumnParameter(defTrail, pTrail)
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
  Dim paramAlertTransactionID As DataColumnParameter = New DataColumnParameter(defAlertTransactionID, pAlertTransactionID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Trail],[CreatedAt],[AlertTransactionID]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramTrail.getSQLQuotedValueForAdd(),
 paramCreatedAt.getSQLQuotedValueForAdd(),
@@ -622,7 +622,7 @@ Try
  Dim paramAlertTransactionID As DataColumnParameter = New DataColumnParameter(defAlertTransactionID, pAlertTransactionID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Trail],[CreatedAt],[AlertTransactionID]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramTrail.getSQLQuotedValueForAdd(),
 paramCreatedAt.getSQLQuotedValueForAdd(),
@@ -658,7 +658,7 @@ Try
  Dim paramAlertTransactionID As DataColumnParameter = New DataColumnParameter(defAlertTransactionID, pAlertTransactionID)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([Trail],[CreatedAt],[AlertTransactionID]) VALUES({1},{2},{3}) ", TABLE_NAME,paramTrail.getSQLQuotedValueForAdd(),
 paramCreatedAt.getSQLQuotedValueForAdd(),
 paramAlertTransactionID.getSQLQuotedValueForAdd()  ), True)
@@ -692,7 +692,7 @@ Try
  Dim paramAlertTransactionID As DataColumnParameter = New DataColumnParameter(defAlertTransactionID, pAlertTransactionID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [Trail]={2},[CreatedAt]={3},[AlertTransactionID]={4} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramTrail.getSQLQuotedValueForUpdate(),
 paramCreatedAt.getSQLQuotedValueForUpdate(),
 paramAlertTransactionID.getSQLQuotedValueForUpdate()  ), True)
@@ -717,7 +717,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

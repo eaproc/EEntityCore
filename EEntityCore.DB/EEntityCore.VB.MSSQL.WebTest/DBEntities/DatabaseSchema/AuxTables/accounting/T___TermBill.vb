@@ -444,11 +444,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___TermBill                  
-            Return New T___TermBill(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___TermBill(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___TermBill                  
-            Return New T___TermBill(DBConnectInterface.getDBConn(),                  
+            Return New T___TermBill(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -630,7 +630,7 @@ ByVal pBill As String) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramClientID As DataColumnParameter = New DataColumnParameter(defClientID, pClientID)
  Dim paramTermID As DataColumnParameter = New DataColumnParameter(defTermID, pTermID)
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
@@ -641,7 +641,7 @@ Try
  Dim paramDescription As DataColumnParameter = New DataColumnParameter(defDescription, defDescription.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[TermID],[CreatedByID],[CreatedAt],[OriginalBillID],[Amount],[Bill],[Description]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
 paramTermID.getSQLQuotedValueForAdd(),
@@ -678,7 +678,7 @@ Optional ByVal pDescription As Object = DataColumnNullParamValue.NULL_VALUE) As 
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramClientID As DataColumnParameter = New DataColumnParameter(defClientID, pClientID)
  Dim paramTermID As DataColumnParameter = New DataColumnParameter(defTermID, pTermID)
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
@@ -689,7 +689,7 @@ Try
  Dim paramDescription As DataColumnParameter = New DataColumnParameter(defDescription, pDescription)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[TermID],[CreatedByID],[CreatedAt],[OriginalBillID],[Amount],[Bill],[Description]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
 paramTermID.getSQLQuotedValueForAdd(),
@@ -737,7 +737,7 @@ Try
  Dim paramDescription As DataColumnParameter = New DataColumnParameter(defDescription, pDescription)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[TermID],[CreatedByID],[CreatedAt],[OriginalBillID],[Amount],[Bill],[Description]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
 paramTermID.getSQLQuotedValueForAdd(),
@@ -788,7 +788,7 @@ Try
  Dim paramDescription As DataColumnParameter = New DataColumnParameter(defDescription, pDescription)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([ClientID],[TermID],[CreatedByID],[CreatedAt],[OriginalBillID],[Amount],[Bill],[Description]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) ", TABLE_NAME,paramClientID.getSQLQuotedValueForAdd(),
 paramTermID.getSQLQuotedValueForAdd(),
 paramCreatedByID.getSQLQuotedValueForAdd(),
@@ -837,7 +837,7 @@ Try
  Dim paramDescription As DataColumnParameter = New DataColumnParameter(defDescription, pDescription)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [ClientID]={2},[TermID]={3},[CreatedByID]={4},[CreatedAt]={5},[OriginalBillID]={6},[Amount]={7},[Bill]={8},[Description]={9} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramClientID.getSQLQuotedValueForUpdate(),
 paramTermID.getSQLQuotedValueForUpdate(),
 paramCreatedByID.getSQLQuotedValueForUpdate(),
@@ -867,7 +867,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

@@ -368,11 +368,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___ImportTransactionFile                  
-            Return New T___ImportTransactionFile(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___ImportTransactionFile(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___ImportTransactionFile                  
-            Return New T___ImportTransactionFile(DBConnectInterface.getDBConn(),                  
+            Return New T___ImportTransactionFile(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -550,13 +550,13 @@ Public Shared Function addNewDefault(ByVal pCreatedByID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
  Dim paramFilePath As DataColumnParameter = New DataColumnParameter(defFilePath, defFilePath.DefaultValue)
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[FilePath],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramFilePath.getSQLQuotedValueForAdd(),
 paramCreatedAt.getSQLQuotedValueForAdd(),
@@ -583,13 +583,13 @@ ByVal pCreatedByID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramFilePath As DataColumnParameter = New DataColumnParameter(defFilePath, pFilePath)
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[FilePath],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramFilePath.getSQLQuotedValueForAdd(),
 paramCreatedAt.getSQLQuotedValueForAdd(),
@@ -622,7 +622,7 @@ Try
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[FilePath],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramFilePath.getSQLQuotedValueForAdd(),
 paramCreatedAt.getSQLQuotedValueForAdd(),
@@ -658,7 +658,7 @@ Try
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([FilePath],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3}) ", TABLE_NAME,paramFilePath.getSQLQuotedValueForAdd(),
 paramCreatedAt.getSQLQuotedValueForAdd(),
 paramCreatedByID.getSQLQuotedValueForAdd()  ), True)
@@ -692,7 +692,7 @@ Try
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [FilePath]={2},[CreatedAt]={3},[CreatedByID]={4} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramFilePath.getSQLQuotedValueForUpdate(),
 paramCreatedAt.getSQLQuotedValueForUpdate(),
 paramCreatedByID.getSQLQuotedValueForUpdate()  ), True)
@@ -717,7 +717,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

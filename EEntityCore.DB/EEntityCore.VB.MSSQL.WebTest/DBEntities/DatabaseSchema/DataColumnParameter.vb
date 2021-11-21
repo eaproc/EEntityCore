@@ -108,7 +108,7 @@ Namespace DBEntities.DatabaseSchema
                     Throw New Exception("You can not pass Blob values as inline SQL. ColumnName: " & Me.ColumnName)
 
                 Case DataColumnDefinition.AllowedDataTypes.DateTime
-                    Return DatabaseInit.DBConnectInterface.getDBConn().GetSQLDateTimeFormat(New NullableDateTime(Me.Value), True)
+                    Return DatabaseInit.DBConnectInterface.GetDBConn().GetSQLDateTimeFormat(New NullableDateTime(Me.Value), True)
 
                 Case DataColumnDefinition.AllowedDataTypes.Decimal
                     REM Format to English Culture, Since Database Saves in English

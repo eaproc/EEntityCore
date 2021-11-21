@@ -404,11 +404,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___AppModuleLicense                  
-            Return New T___AppModuleLicense(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___AppModuleLicense(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___AppModuleLicense                  
-            Return New T___AppModuleLicense(DBConnectInterface.getDBConn(),                  
+            Return New T___AppModuleLicense(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -586,7 +586,7 @@ Public Shared Function addNewDefault(ByVal pAppModuleID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramAppModuleID As DataColumnParameter = New DataColumnParameter(defAppModuleID, pAppModuleID)
  Dim paramStartDate As DataColumnParameter = New DataColumnParameter(defStartDate, defStartDate.DefaultValue)
  Dim paramEndDate As DataColumnParameter = New DataColumnParameter(defEndDate, defEndDate.DefaultValue)
@@ -595,7 +595,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AppModuleID],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramAppModuleID.getSQLQuotedValueForAdd(),
 paramStartDate.getSQLQuotedValueForAdd(),
@@ -628,7 +628,7 @@ Optional ByVal pUpdatedAt As Object = DataColumnNullParamValue.NULL_VALUE) As In
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramAppModuleID As DataColumnParameter = New DataColumnParameter(defAppModuleID, pAppModuleID)
  Dim paramStartDate As DataColumnParameter = New DataColumnParameter(defStartDate, pStartDate)
  Dim paramEndDate As DataColumnParameter = New DataColumnParameter(defEndDate, pEndDate)
@@ -637,7 +637,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AppModuleID],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramAppModuleID.getSQLQuotedValueForAdd(),
 paramStartDate.getSQLQuotedValueForAdd(),
@@ -679,7 +679,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AppModuleID],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramAppModuleID.getSQLQuotedValueForAdd(),
 paramStartDate.getSQLQuotedValueForAdd(),
@@ -724,7 +724,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([AppModuleID],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6}) ", TABLE_NAME,paramAppModuleID.getSQLQuotedValueForAdd(),
 paramStartDate.getSQLQuotedValueForAdd(),
 paramEndDate.getSQLQuotedValueForAdd(),
@@ -767,7 +767,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [AppModuleID]={2},[StartDate]={3},[EndDate]={4},[IsActive]={5},[CreatedAt]={6},[UpdatedAt]={7} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramAppModuleID.getSQLQuotedValueForUpdate(),
 paramStartDate.getSQLQuotedValueForUpdate(),
 paramEndDate.getSQLQuotedValueForUpdate(),
@@ -795,7 +795,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

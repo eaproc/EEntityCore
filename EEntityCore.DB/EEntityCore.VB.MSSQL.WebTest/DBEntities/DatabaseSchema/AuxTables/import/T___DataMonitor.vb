@@ -439,11 +439,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___DataMonitor                  
-            Return New T___DataMonitor(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___DataMonitor(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___DataMonitor                  
-            Return New T___DataMonitor(DBConnectInterface.getDBConn(),                  
+            Return New T___DataMonitor(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -624,7 +624,7 @@ ByVal pUpdatedByID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramImportTypeID As DataColumnParameter = New DataColumnParameter(defImportTypeID, pImportTypeID)
  Dim paramImportedFileName As DataColumnParameter = New DataColumnParameter(defImportedFileName, pImportedFileName)
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
@@ -635,7 +635,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ImportTypeID],[ImportedFileName],[FileSizeBytes],[TotalRowsRead],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramImportTypeID.getSQLQuotedValueForAdd(),
 paramImportedFileName.getSQLQuotedValueForAdd(),
@@ -672,7 +672,7 @@ Optional ByVal pUpdatedAt As Object = DataColumnNullParamValue.NULL_VALUE) As In
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramImportTypeID As DataColumnParameter = New DataColumnParameter(defImportTypeID, pImportTypeID)
  Dim paramImportedFileName As DataColumnParameter = New DataColumnParameter(defImportedFileName, pImportedFileName)
  Dim paramFileSizeBytes As DataColumnParameter = New DataColumnParameter(defFileSizeBytes, pFileSizeBytes)
@@ -683,7 +683,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ImportTypeID],[ImportedFileName],[FileSizeBytes],[TotalRowsRead],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramImportTypeID.getSQLQuotedValueForAdd(),
 paramImportedFileName.getSQLQuotedValueForAdd(),
@@ -731,7 +731,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ImportTypeID],[ImportedFileName],[FileSizeBytes],[TotalRowsRead],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramImportTypeID.getSQLQuotedValueForAdd(),
 paramImportedFileName.getSQLQuotedValueForAdd(),
@@ -782,7 +782,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([ImportTypeID],[ImportedFileName],[FileSizeBytes],[TotalRowsRead],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) ", TABLE_NAME,paramImportTypeID.getSQLQuotedValueForAdd(),
 paramImportedFileName.getSQLQuotedValueForAdd(),
 paramFileSizeBytes.getSQLQuotedValueForAdd(),
@@ -831,7 +831,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [ImportTypeID]={2},[ImportedFileName]={3},[FileSizeBytes]={4},[TotalRowsRead]={5},[CreatedByID]={6},[CreatedAt]={7},[UpdatedByID]={8},[UpdatedAt]={9} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramImportTypeID.getSQLQuotedValueForUpdate(),
 paramImportedFileName.getSQLQuotedValueForUpdate(),
 paramFileSizeBytes.getSQLQuotedValueForUpdate(),
@@ -861,7 +861,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

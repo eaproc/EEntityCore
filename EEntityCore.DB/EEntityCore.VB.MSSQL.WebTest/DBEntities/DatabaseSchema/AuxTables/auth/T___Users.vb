@@ -430,11 +430,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___Users                  
-            Return New T___Users(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___Users(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___Users                  
-            Return New T___Users(DBConnectInterface.getDBConn(),                  
+            Return New T___Users(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -613,7 +613,7 @@ ByVal pPersonID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramUsername As DataColumnParameter = New DataColumnParameter(defUsername, pUsername)
  Dim paramPersonID As DataColumnParameter = New DataColumnParameter(defPersonID, pPersonID)
  Dim paramUserPassword As DataColumnParameter = New DataColumnParameter(defUserPassword, defUserPassword.DefaultValue)
@@ -624,7 +624,7 @@ Try
  Dim paramResetModeCarrier As DataColumnParameter = New DataColumnParameter(defResetModeCarrier, defResetModeCarrier.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramUsername.getSQLQuotedValueForAdd(),
 paramPersonID.getSQLQuotedValueForAdd(),
@@ -661,7 +661,7 @@ Optional ByVal pResetModeCarrier As Object = DataColumnNullParamValue.NULL_VALUE
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramUsername As DataColumnParameter = New DataColumnParameter(defUsername, pUsername)
  Dim paramPersonID As DataColumnParameter = New DataColumnParameter(defPersonID, pPersonID)
  Dim paramUserPassword As DataColumnParameter = New DataColumnParameter(defUserPassword, pUserPassword)
@@ -672,7 +672,7 @@ Try
  Dim paramResetModeCarrier As DataColumnParameter = New DataColumnParameter(defResetModeCarrier, pResetModeCarrier)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramUsername.getSQLQuotedValueForAdd(),
 paramPersonID.getSQLQuotedValueForAdd(),
@@ -720,7 +720,7 @@ Try
  Dim paramResetModeCarrier As DataColumnParameter = New DataColumnParameter(defResetModeCarrier, pResetModeCarrier)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramUsername.getSQLQuotedValueForAdd(),
 paramPersonID.getSQLQuotedValueForAdd(),
@@ -771,7 +771,7 @@ Try
  Dim paramResetModeCarrier As DataColumnParameter = New DataColumnParameter(defResetModeCarrier, pResetModeCarrier)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) ", TABLE_NAME,paramUsername.getSQLQuotedValueForAdd(),
 paramPersonID.getSQLQuotedValueForAdd(),
 paramUserPassword.getSQLQuotedValueForAdd(),
@@ -820,7 +820,7 @@ Try
  Dim paramResetModeCarrier As DataColumnParameter = New DataColumnParameter(defResetModeCarrier, pResetModeCarrier)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [Username]={2},[PersonID]={3},[UserPassword]={4},[RememberToken]={5},[IsActive]={6},[CreatedAt]={7},[UpdatedAt]={8},[ResetModeCarrier]={9} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramUsername.getSQLQuotedValueForUpdate(),
 paramPersonID.getSQLQuotedValueForUpdate(),
 paramUserPassword.getSQLQuotedValueForUpdate(),
@@ -850,7 +850,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

@@ -530,11 +530,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___Client                  
-            Return New T___Client(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___Client(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___Client                  
-            Return New T___Client(DBConnectInterface.getDBConn(),                  
+            Return New T___Client(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -714,7 +714,7 @@ ByVal pBankID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramCompanyName As DataColumnParameter = New DataColumnParameter(defCompanyName, pCompanyName)
  Dim paramOwnerID As DataColumnParameter = New DataColumnParameter(defOwnerID, pOwnerID)
  Dim paramBankID As DataColumnParameter = New DataColumnParameter(defBankID, pBankID)
@@ -733,7 +733,7 @@ Try
  Dim paramAccountNumber As DataColumnParameter = New DataColumnParameter(defAccountNumber, defAccountNumber.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramCompanyName.getSQLQuotedValueForAdd(),
 paramCreatedAt.getSQLQuotedValueForAdd(),
@@ -786,7 +786,7 @@ Optional ByVal pAccountNumber As Object = DataColumnNullParamValue.NULL_VALUE) A
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramCompanyName As DataColumnParameter = New DataColumnParameter(defCompanyName, pCompanyName)
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
  Dim paramOwnerID As DataColumnParameter = New DataColumnParameter(defOwnerID, pOwnerID)
@@ -805,7 +805,7 @@ Try
  Dim paramAccountNumber As DataColumnParameter = New DataColumnParameter(defAccountNumber, pAccountNumber)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramCompanyName.getSQLQuotedValueForAdd(),
 paramCreatedAt.getSQLQuotedValueForAdd(),
@@ -877,7 +877,7 @@ Try
  Dim paramAccountNumber As DataColumnParameter = New DataColumnParameter(defAccountNumber, pAccountNumber)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramCompanyName.getSQLQuotedValueForAdd(),
 paramCreatedAt.getSQLQuotedValueForAdd(),
@@ -952,7 +952,7 @@ Try
  Dim paramAccountNumber As DataColumnParameter = New DataColumnParameter(defAccountNumber, pAccountNumber)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramCompanyName.getSQLQuotedValueForAdd(),
 paramCreatedAt.getSQLQuotedValueForAdd(),
 paramOwnerID.getSQLQuotedValueForAdd(),
@@ -1025,7 +1025,7 @@ Try
  Dim paramAccountNumber As DataColumnParameter = New DataColumnParameter(defAccountNumber, pAccountNumber)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [CompanyName]={2},[CreatedAt]={3},[OwnerID]={4},[SLAFileName]={5},[ScadwareURL]={6},[Email]={7},[Mobile]={8},[WebsiteURL]={9},[LogoFileName]={10},[UpdatedAt]={11},[IsActive]={12},[NameAbbreviation]={13},[Address]={14},[BankID]={15},[AccountName]={16},[AccountNumber]={17} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCompanyName.getSQLQuotedValueForUpdate(),
 paramCreatedAt.getSQLQuotedValueForUpdate(),
 paramOwnerID.getSQLQuotedValueForUpdate(),
@@ -1063,7 +1063,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

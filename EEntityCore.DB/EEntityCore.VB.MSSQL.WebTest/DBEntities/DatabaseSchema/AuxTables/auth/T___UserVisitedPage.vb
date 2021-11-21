@@ -445,11 +445,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___UserVisitedPage                  
-            Return New T___UserVisitedPage(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___UserVisitedPage(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___UserVisitedPage                  
-            Return New T___UserVisitedPage(DBConnectInterface.getDBConn(),                  
+            Return New T___UserVisitedPage(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -628,7 +628,7 @@ ByVal pRoleID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
  Dim paramRoleID As DataColumnParameter = New DataColumnParameter(defRoleID, pRoleID)
  Dim paramSessionID As DataColumnParameter = New DataColumnParameter(defSessionID, defSessionID.DefaultValue)
@@ -640,7 +640,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[SessionID],[IPAddress],[TimedOut],[WebURL],[Page],[CheckedOutTime],[RoleID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramUserID.getSQLQuotedValueForAdd(),
 paramSessionID.getSQLQuotedValueForAdd(),
@@ -679,7 +679,7 @@ Optional ByVal pCheckedOutTime As Object = DataColumnNullParamValue.NULL_VALUE) 
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
  Dim paramSessionID As DataColumnParameter = New DataColumnParameter(defSessionID, pSessionID)
  Dim paramIPAddress As DataColumnParameter = New DataColumnParameter(defIPAddress, pIPAddress)
@@ -691,7 +691,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[SessionID],[IPAddress],[TimedOut],[WebURL],[Page],[CheckedOutTime],[RoleID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramUserID.getSQLQuotedValueForAdd(),
 paramSessionID.getSQLQuotedValueForAdd(),
@@ -742,7 +742,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[SessionID],[IPAddress],[TimedOut],[WebURL],[Page],[CheckedOutTime],[RoleID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramUserID.getSQLQuotedValueForAdd(),
 paramSessionID.getSQLQuotedValueForAdd(),
@@ -796,7 +796,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([UserID],[SessionID],[IPAddress],[TimedOut],[WebURL],[Page],[CheckedOutTime],[RoleID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramUserID.getSQLQuotedValueForAdd(),
 paramSessionID.getSQLQuotedValueForAdd(),
 paramIPAddress.getSQLQuotedValueForAdd(),
@@ -848,7 +848,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [UserID]={2},[SessionID]={3},[IPAddress]={4},[TimedOut]={5},[WebURL]={6},[Page]={7},[CheckedOutTime]={8},[RoleID]={9},[CreatedAt]={10} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramUserID.getSQLQuotedValueForUpdate(),
 paramSessionID.getSQLQuotedValueForUpdate(),
 paramIPAddress.getSQLQuotedValueForUpdate(),
@@ -879,7 +879,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

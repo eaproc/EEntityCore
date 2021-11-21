@@ -6,7 +6,11 @@
     ''' <remarks></remarks>
     Public Interface ISQLServerDBPointer
 
-        Function getDBConn() As Server
+        ''' <summary>
+        ''' Gets a new instance of SQL Server Connection
+        ''' </summary>
+        ''' <returns></returns>
+        Function GetDBConn() As Server
 
 
     End Interface

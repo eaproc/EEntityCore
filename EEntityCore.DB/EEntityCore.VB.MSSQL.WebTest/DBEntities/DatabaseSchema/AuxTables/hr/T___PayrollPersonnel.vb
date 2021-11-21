@@ -540,11 +540,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___PayrollPersonnel                  
-            Return New T___PayrollPersonnel(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___PayrollPersonnel(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___PayrollPersonnel                  
-            Return New T___PayrollPersonnel(DBConnectInterface.getDBConn(),                  
+            Return New T___PayrollPersonnel(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -725,7 +725,7 @@ ByVal pUpdatedByID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPayrollID As DataColumnParameter = New DataColumnParameter(defPayrollID, pPayrollID)
  Dim paramPersonnelID As DataColumnParameter = New DataColumnParameter(defPersonnelID, pPersonnelID)
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
@@ -744,7 +744,7 @@ Try
  Dim paramDisbursedAt As DataColumnParameter = New DataColumnParameter(defDisbursedAt, defDisbursedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPayrollID.getSQLQuotedValueForAdd(),
 paramPersonnelID.getSQLQuotedValueForAdd(),
@@ -797,7 +797,7 @@ Optional ByVal pUpdatedByID As Object = DataColumnNullParamValue.NULL_VALUE) As 
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPayrollID As DataColumnParameter = New DataColumnParameter(defPayrollID, pPayrollID)
  Dim paramPersonnelID As DataColumnParameter = New DataColumnParameter(defPersonnelID, pPersonnelID)
  Dim paramAttendanceCount As DataColumnParameter = New DataColumnParameter(defAttendanceCount, pAttendanceCount)
@@ -816,7 +816,7 @@ Try
  Dim paramUpdatedByID As DataColumnParameter = New DataColumnParameter(defUpdatedByID, pUpdatedByID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPayrollID.getSQLQuotedValueForAdd(),
 paramPersonnelID.getSQLQuotedValueForAdd(),
@@ -888,7 +888,7 @@ Try
  Dim paramUpdatedByID As DataColumnParameter = New DataColumnParameter(defUpdatedByID, pUpdatedByID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPayrollID.getSQLQuotedValueForAdd(),
 paramPersonnelID.getSQLQuotedValueForAdd(),
@@ -963,7 +963,7 @@ Try
  Dim paramUpdatedByID As DataColumnParameter = New DataColumnParameter(defUpdatedByID, pUpdatedByID)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramPayrollID.getSQLQuotedValueForAdd(),
 paramPersonnelID.getSQLQuotedValueForAdd(),
 paramAttendanceCount.getSQLQuotedValueForAdd(),
@@ -1036,7 +1036,7 @@ Try
  Dim paramUpdatedByID As DataColumnParameter = New DataColumnParameter(defUpdatedByID, pUpdatedByID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [PayrollID]={2},[PersonnelID]={3},[AttendanceCount]={4},[SalaryAmount]={5},[RatePerDay]={6},[CalculatedAmount]={7},[IsDisbursed]={8},[HRComments]={9},[ApprovedAmount]={10},[BursarComments]={11},[DisbursedAmount]={12},[UpdatedAt]={13},[CreatedAt]={14},[CreatedByID]={15},[DisbursedAt]={16},[UpdatedByID]={17} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPayrollID.getSQLQuotedValueForUpdate(),
 paramPersonnelID.getSQLQuotedValueForUpdate(),
 paramAttendanceCount.getSQLQuotedValueForUpdate(),
@@ -1074,7 +1074,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

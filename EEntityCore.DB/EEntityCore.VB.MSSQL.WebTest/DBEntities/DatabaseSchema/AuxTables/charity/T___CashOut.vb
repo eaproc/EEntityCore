@@ -484,11 +484,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___CashOut                  
-            Return New T___CashOut(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___CashOut(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___CashOut                  
-            Return New T___CashOut(DBConnectInterface.getDBConn(),                  
+            Return New T___CashOut(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -670,7 +670,7 @@ ByVal pUpdatedByID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramCashRequestStatusID As DataColumnParameter = New DataColumnParameter(defCashRequestStatusID, pCashRequestStatusID)
  Dim paramCategoryID As DataColumnParameter = New DataColumnParameter(defCategoryID, pCategoryID)
  Dim paramReceiverID As DataColumnParameter = New DataColumnParameter(defReceiverID, pReceiverID)
@@ -684,7 +684,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CashRequestStatusID],[CategoryID],[Amount],[ReceiverID],[Description],[RequestComments],[ResponseComments],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramCashRequestStatusID.getSQLQuotedValueForAdd(),
 paramCategoryID.getSQLQuotedValueForAdd(),
@@ -727,7 +727,7 @@ Optional ByVal pResponseComments As Object = DataColumnNullParamValue.NULL_VALUE
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramCashRequestStatusID As DataColumnParameter = New DataColumnParameter(defCashRequestStatusID, pCashRequestStatusID)
  Dim paramCategoryID As DataColumnParameter = New DataColumnParameter(defCategoryID, pCategoryID)
  Dim paramAmount As DataColumnParameter = New DataColumnParameter(defAmount, pAmount)
@@ -741,7 +741,7 @@ Try
  Dim paramUpdatedByID As DataColumnParameter = New DataColumnParameter(defUpdatedByID, pUpdatedByID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CashRequestStatusID],[CategoryID],[Amount],[ReceiverID],[Description],[RequestComments],[ResponseComments],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramCashRequestStatusID.getSQLQuotedValueForAdd(),
 paramCategoryID.getSQLQuotedValueForAdd(),
@@ -798,7 +798,7 @@ Try
  Dim paramUpdatedByID As DataColumnParameter = New DataColumnParameter(defUpdatedByID, pUpdatedByID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CashRequestStatusID],[CategoryID],[Amount],[ReceiverID],[Description],[RequestComments],[ResponseComments],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramCashRequestStatusID.getSQLQuotedValueForAdd(),
 paramCategoryID.getSQLQuotedValueForAdd(),
@@ -858,7 +858,7 @@ Try
  Dim paramUpdatedByID As DataColumnParameter = New DataColumnParameter(defUpdatedByID, pUpdatedByID)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([CashRequestStatusID],[CategoryID],[Amount],[ReceiverID],[Description],[RequestComments],[ResponseComments],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) ", TABLE_NAME,paramCashRequestStatusID.getSQLQuotedValueForAdd(),
 paramCategoryID.getSQLQuotedValueForAdd(),
 paramAmount.getSQLQuotedValueForAdd(),
@@ -916,7 +916,7 @@ Try
  Dim paramUpdatedByID As DataColumnParameter = New DataColumnParameter(defUpdatedByID, pUpdatedByID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [CashRequestStatusID]={2},[CategoryID]={3},[Amount]={4},[ReceiverID]={5},[Description]={6},[RequestComments]={7},[ResponseComments]={8},[CreatedAt]={9},[UpdatedAt]={10},[CreatedByID]={11},[UpdatedByID]={12} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCashRequestStatusID.getSQLQuotedValueForUpdate(),
 paramCategoryID.getSQLQuotedValueForUpdate(),
 paramAmount.getSQLQuotedValueForUpdate(),
@@ -949,7 +949,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

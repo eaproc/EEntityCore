@@ -447,11 +447,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___Term                  
-            Return New T___Term(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___Term(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___Term                  
-            Return New T___Term(DBConnectInterface.getDBConn(),                  
+            Return New T___Term(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -631,7 +631,7 @@ ByVal pTermOrderID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramName As DataColumnParameter = New DataColumnParameter(defName, pName)
  Dim paramAcademicSessionID As DataColumnParameter = New DataColumnParameter(defAcademicSessionID, pAcademicSessionID)
  Dim paramTermOrderID As DataColumnParameter = New DataColumnParameter(defTermOrderID, pTermOrderID)
@@ -643,7 +643,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt],[AcademicSessionID],[TermOrderID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramName.getSQLQuotedValueForAdd(),
 paramDescription.getSQLQuotedValueForAdd(),
@@ -682,7 +682,7 @@ Optional ByVal pUpdatedAt As Object = DataColumnNullParamValue.NULL_VALUE) As In
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramName As DataColumnParameter = New DataColumnParameter(defName, pName)
  Dim paramDescription As DataColumnParameter = New DataColumnParameter(defDescription, pDescription)
  Dim paramStartDate As DataColumnParameter = New DataColumnParameter(defStartDate, pStartDate)
@@ -694,7 +694,7 @@ Try
  Dim paramTermOrderID As DataColumnParameter = New DataColumnParameter(defTermOrderID, pTermOrderID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt],[AcademicSessionID],[TermOrderID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramName.getSQLQuotedValueForAdd(),
 paramDescription.getSQLQuotedValueForAdd(),
@@ -745,7 +745,7 @@ Try
  Dim paramTermOrderID As DataColumnParameter = New DataColumnParameter(defTermOrderID, pTermOrderID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt],[AcademicSessionID],[TermOrderID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramName.getSQLQuotedValueForAdd(),
 paramDescription.getSQLQuotedValueForAdd(),
@@ -799,7 +799,7 @@ Try
  Dim paramTermOrderID As DataColumnParameter = New DataColumnParameter(defTermOrderID, pTermOrderID)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([Name],[Description],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt],[AcademicSessionID],[TermOrderID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramName.getSQLQuotedValueForAdd(),
 paramDescription.getSQLQuotedValueForAdd(),
 paramStartDate.getSQLQuotedValueForAdd(),
@@ -851,7 +851,7 @@ Try
  Dim paramTermOrderID As DataColumnParameter = New DataColumnParameter(defTermOrderID, pTermOrderID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [Name]={2},[Description]={3},[StartDate]={4},[EndDate]={5},[IsActive]={6},[CreatedAt]={7},[UpdatedAt]={8},[AcademicSessionID]={9},[TermOrderID]={10} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramName.getSQLQuotedValueForUpdate(),
 paramDescription.getSQLQuotedValueForUpdate(),
 paramStartDate.getSQLQuotedValueForUpdate(),
@@ -882,7 +882,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

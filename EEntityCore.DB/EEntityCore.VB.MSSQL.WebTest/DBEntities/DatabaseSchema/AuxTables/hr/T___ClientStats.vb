@@ -541,11 +541,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___ClientStats                  
-            Return New T___ClientStats(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___ClientStats(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___ClientStats                  
-            Return New T___ClientStats(DBConnectInterface.getDBConn(),                  
+            Return New T___ClientStats(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -724,7 +724,7 @@ ByVal pTermID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramClientID As DataColumnParameter = New DataColumnParameter(defClientID, pClientID)
  Dim paramTermID As DataColumnParameter = New DataColumnParameter(defTermID, pTermID)
  Dim paramRegisteredStudentCount As DataColumnParameter = New DataColumnParameter(defRegisteredStudentCount, defRegisteredStudentCount.DefaultValue)
@@ -744,7 +744,7 @@ Try
  Dim paramTermEndDate As DataColumnParameter = New DataColumnParameter(defTermEndDate, defTermEndDate.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[TermID],[RegisteredStudentCount],[AssignedStudentCount],[SCADWAREAccessCount],[SCADWAREAccessThreshold],[AverageTermBill],[RatePerStudent],[BilledPerStudent],[TotalReceivedOnSCADWAREBill],[MinimumExpectedOnSCADWAREBill],[ExpectedOnSCADWAREBill],[IPAddress],[CreatedAt],[FullScholarshipStudentCount],[TermStartDate],[TermEndDate]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
 paramTermID.getSQLQuotedValueForAdd(),
@@ -799,7 +799,7 @@ Optional ByVal pTermEndDate As Object = DataColumnNullParamValue.NULL_VALUE) As 
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramClientID As DataColumnParameter = New DataColumnParameter(defClientID, pClientID)
  Dim paramTermID As DataColumnParameter = New DataColumnParameter(defTermID, pTermID)
  Dim paramRegisteredStudentCount As DataColumnParameter = New DataColumnParameter(defRegisteredStudentCount, pRegisteredStudentCount)
@@ -819,7 +819,7 @@ Try
  Dim paramTermEndDate As DataColumnParameter = New DataColumnParameter(defTermEndDate, pTermEndDate)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[TermID],[RegisteredStudentCount],[AssignedStudentCount],[SCADWAREAccessCount],[SCADWAREAccessThreshold],[AverageTermBill],[RatePerStudent],[BilledPerStudent],[TotalReceivedOnSCADWAREBill],[MinimumExpectedOnSCADWAREBill],[ExpectedOnSCADWAREBill],[IPAddress],[CreatedAt],[FullScholarshipStudentCount],[TermStartDate],[TermEndDate]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
 paramTermID.getSQLQuotedValueForAdd(),
@@ -894,7 +894,7 @@ Try
  Dim paramTermEndDate As DataColumnParameter = New DataColumnParameter(defTermEndDate, pTermEndDate)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[TermID],[RegisteredStudentCount],[AssignedStudentCount],[SCADWAREAccessCount],[SCADWAREAccessThreshold],[AverageTermBill],[RatePerStudent],[BilledPerStudent],[TotalReceivedOnSCADWAREBill],[MinimumExpectedOnSCADWAREBill],[ExpectedOnSCADWAREBill],[IPAddress],[CreatedAt],[FullScholarshipStudentCount],[TermStartDate],[TermEndDate]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
 paramTermID.getSQLQuotedValueForAdd(),
@@ -972,7 +972,7 @@ Try
  Dim paramTermEndDate As DataColumnParameter = New DataColumnParameter(defTermEndDate, pTermEndDate)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([ClientID],[TermID],[RegisteredStudentCount],[AssignedStudentCount],[SCADWAREAccessCount],[SCADWAREAccessThreshold],[AverageTermBill],[RatePerStudent],[BilledPerStudent],[TotalReceivedOnSCADWAREBill],[MinimumExpectedOnSCADWAREBill],[ExpectedOnSCADWAREBill],[IPAddress],[CreatedAt],[FullScholarshipStudentCount],[TermStartDate],[TermEndDate]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) ", TABLE_NAME,paramClientID.getSQLQuotedValueForAdd(),
 paramTermID.getSQLQuotedValueForAdd(),
 paramRegisteredStudentCount.getSQLQuotedValueForAdd(),
@@ -1048,7 +1048,7 @@ Try
  Dim paramTermEndDate As DataColumnParameter = New DataColumnParameter(defTermEndDate, pTermEndDate)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [ClientID]={2},[TermID]={3},[RegisteredStudentCount]={4},[AssignedStudentCount]={5},[SCADWAREAccessCount]={6},[SCADWAREAccessThreshold]={7},[AverageTermBill]={8},[RatePerStudent]={9},[BilledPerStudent]={10},[TotalReceivedOnSCADWAREBill]={11},[MinimumExpectedOnSCADWAREBill]={12},[ExpectedOnSCADWAREBill]={13},[IPAddress]={14},[CreatedAt]={15},[FullScholarshipStudentCount]={16},[TermStartDate]={17},[TermEndDate]={18} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramClientID.getSQLQuotedValueForUpdate(),
 paramTermID.getSQLQuotedValueForUpdate(),
 paramRegisteredStudentCount.getSQLQuotedValueForUpdate(),
@@ -1087,7 +1087,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

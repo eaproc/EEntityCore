@@ -498,11 +498,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___PaystackLog                  
-            Return New T___PaystackLog(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___PaystackLog(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___PaystackLog                  
-            Return New T___PaystackLog(DBConnectInterface.getDBConn(),                  
+            Return New T___PaystackLog(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -682,7 +682,7 @@ ByVal pVerifiedByUserID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPaymentGatewayStatusID As DataColumnParameter = New DataColumnParameter(defPaymentGatewayStatusID, pPaymentGatewayStatusID)
  Dim paramInitializedByUserID As DataColumnParameter = New DataColumnParameter(defInitializedByUserID, pInitializedByUserID)
  Dim paramVerifiedByUserID As DataColumnParameter = New DataColumnParameter(defVerifiedByUserID, pVerifiedByUserID)
@@ -698,7 +698,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentGatewayStatusID],[IsFinalized],[InitializedByUserID],[Reference],[AccessCode],[InitialLizeURL],[PaymentURL],[VerifiyURL],[AmountKobo],[VerifyResponseJSON],[VerifiedByUserID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPaymentGatewayStatusID.getSQLQuotedValueForAdd(),
 paramIsFinalized.getSQLQuotedValueForAdd(),
@@ -745,7 +745,7 @@ Optional ByVal pUpdatedAt As Object = DataColumnNullParamValue.NULL_VALUE) As In
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPaymentGatewayStatusID As DataColumnParameter = New DataColumnParameter(defPaymentGatewayStatusID, pPaymentGatewayStatusID)
  Dim paramIsFinalized As DataColumnParameter = New DataColumnParameter(defIsFinalized, pIsFinalized)
  Dim paramInitializedByUserID As DataColumnParameter = New DataColumnParameter(defInitializedByUserID, pInitializedByUserID)
@@ -761,7 +761,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentGatewayStatusID],[IsFinalized],[InitializedByUserID],[Reference],[AccessCode],[InitialLizeURL],[PaymentURL],[VerifiyURL],[AmountKobo],[VerifyResponseJSON],[VerifiedByUserID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPaymentGatewayStatusID.getSQLQuotedValueForAdd(),
 paramIsFinalized.getSQLQuotedValueForAdd(),
@@ -824,7 +824,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentGatewayStatusID],[IsFinalized],[InitializedByUserID],[Reference],[AccessCode],[InitialLizeURL],[PaymentURL],[VerifiyURL],[AmountKobo],[VerifyResponseJSON],[VerifiedByUserID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPaymentGatewayStatusID.getSQLQuotedValueForAdd(),
 paramIsFinalized.getSQLQuotedValueForAdd(),
@@ -890,7 +890,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([PaymentGatewayStatusID],[IsFinalized],[InitializedByUserID],[Reference],[AccessCode],[InitialLizeURL],[PaymentURL],[VerifiyURL],[AmountKobo],[VerifyResponseJSON],[VerifiedByUserID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramPaymentGatewayStatusID.getSQLQuotedValueForAdd(),
 paramIsFinalized.getSQLQuotedValueForAdd(),
 paramInitializedByUserID.getSQLQuotedValueForAdd(),
@@ -954,7 +954,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [PaymentGatewayStatusID]={2},[IsFinalized]={3},[InitializedByUserID]={4},[Reference]={5},[AccessCode]={6},[InitialLizeURL]={7},[PaymentURL]={8},[VerifiyURL]={9},[AmountKobo]={10},[VerifyResponseJSON]={11},[VerifiedByUserID]={12},[CreatedAt]={13},[UpdatedAt]={14} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPaymentGatewayStatusID.getSQLQuotedValueForUpdate(),
 paramIsFinalized.getSQLQuotedValueForUpdate(),
 paramInitializedByUserID.getSQLQuotedValueForUpdate(),
@@ -989,7 +989,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

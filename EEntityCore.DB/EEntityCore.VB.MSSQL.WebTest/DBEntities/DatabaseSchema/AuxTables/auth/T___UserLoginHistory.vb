@@ -404,11 +404,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___UserLoginHistory                  
-            Return New T___UserLoginHistory(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___UserLoginHistory(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___UserLoginHistory                  
-            Return New T___UserLoginHistory(DBConnectInterface.getDBConn(),                  
+            Return New T___UserLoginHistory(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -586,7 +586,7 @@ Public Shared Function addNewDefault(ByVal pUserID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
  Dim paramIPAddress As DataColumnParameter = New DataColumnParameter(defIPAddress, defIPAddress.DefaultValue)
  Dim paramUserAgent As DataColumnParameter = New DataColumnParameter(defUserAgent, defUserAgent.DefaultValue)
@@ -595,7 +595,7 @@ Try
  Dim paramLoggedOutTime As DataColumnParameter = New DataColumnParameter(defLoggedOutTime, defLoggedOutTime.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[IPAddress],[UserAgent],[CreatedAt],[SessionID],[LoggedOutTime]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramUserID.getSQLQuotedValueForAdd(),
 paramIPAddress.getSQLQuotedValueForAdd(),
@@ -628,7 +628,7 @@ Optional ByVal pLoggedOutTime As Object = DataColumnNullParamValue.NULL_VALUE) A
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
  Dim paramIPAddress As DataColumnParameter = New DataColumnParameter(defIPAddress, pIPAddress)
  Dim paramUserAgent As DataColumnParameter = New DataColumnParameter(defUserAgent, pUserAgent)
@@ -637,7 +637,7 @@ Try
  Dim paramLoggedOutTime As DataColumnParameter = New DataColumnParameter(defLoggedOutTime, pLoggedOutTime)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[IPAddress],[UserAgent],[CreatedAt],[SessionID],[LoggedOutTime]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramUserID.getSQLQuotedValueForAdd(),
 paramIPAddress.getSQLQuotedValueForAdd(),
@@ -679,7 +679,7 @@ Try
  Dim paramLoggedOutTime As DataColumnParameter = New DataColumnParameter(defLoggedOutTime, pLoggedOutTime)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[IPAddress],[UserAgent],[CreatedAt],[SessionID],[LoggedOutTime]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramUserID.getSQLQuotedValueForAdd(),
 paramIPAddress.getSQLQuotedValueForAdd(),
@@ -724,7 +724,7 @@ Try
  Dim paramLoggedOutTime As DataColumnParameter = New DataColumnParameter(defLoggedOutTime, pLoggedOutTime)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([UserID],[IPAddress],[UserAgent],[CreatedAt],[SessionID],[LoggedOutTime]) VALUES({1},{2},{3},{4},{5},{6}) ", TABLE_NAME,paramUserID.getSQLQuotedValueForAdd(),
 paramIPAddress.getSQLQuotedValueForAdd(),
 paramUserAgent.getSQLQuotedValueForAdd(),
@@ -767,7 +767,7 @@ Try
  Dim paramLoggedOutTime As DataColumnParameter = New DataColumnParameter(defLoggedOutTime, pLoggedOutTime)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [UserID]={2},[IPAddress]={3},[UserAgent]={4},[CreatedAt]={5},[SessionID]={6},[LoggedOutTime]={7} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramUserID.getSQLQuotedValueForUpdate(),
 paramIPAddress.getSQLQuotedValueForUpdate(),
 paramUserAgent.getSQLQuotedValueForUpdate(),
@@ -795,7 +795,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

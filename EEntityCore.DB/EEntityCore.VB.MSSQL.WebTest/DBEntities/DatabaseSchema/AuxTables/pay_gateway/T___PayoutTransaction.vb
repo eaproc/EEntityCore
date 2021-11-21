@@ -362,11 +362,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___PayoutTransaction                  
-            Return New T___PayoutTransaction(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___PayoutTransaction(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___PayoutTransaction                  
-            Return New T___PayoutTransaction(DBConnectInterface.getDBConn(),                  
+            Return New T___PayoutTransaction(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -545,12 +545,12 @@ ByVal pPaymentTransactionID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPayoutID As DataColumnParameter = New DataColumnParameter(defPayoutID, pPayoutID)
  Dim paramPaymentTransactionID As DataColumnParameter = New DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PayoutID],[PaymentTransactionID]) VALUES({1},{2},{3}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPayoutID.getSQLQuotedValueForAdd(),
 paramPaymentTransactionID.getSQLQuotedValueForAdd()  ), True)
@@ -575,12 +575,12 @@ ByVal pPaymentTransactionID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPayoutID As DataColumnParameter = New DataColumnParameter(defPayoutID, pPayoutID)
  Dim paramPaymentTransactionID As DataColumnParameter = New DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PayoutID],[PaymentTransactionID]) VALUES({1},{2},{3}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPayoutID.getSQLQuotedValueForAdd(),
 paramPaymentTransactionID.getSQLQuotedValueForAdd()  ), True)
@@ -610,7 +610,7 @@ Try
  Dim paramPaymentTransactionID As DataColumnParameter = New DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PayoutID],[PaymentTransactionID]) VALUES({1},{2},{3}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPayoutID.getSQLQuotedValueForAdd(),
 paramPaymentTransactionID.getSQLQuotedValueForAdd()  ), True)
@@ -643,7 +643,7 @@ Try
  Dim paramPaymentTransactionID As DataColumnParameter = New DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([PayoutID],[PaymentTransactionID]) VALUES({1},{2}) ", TABLE_NAME,paramPayoutID.getSQLQuotedValueForAdd(),
 paramPaymentTransactionID.getSQLQuotedValueForAdd()  ), True)
 
@@ -674,7 +674,7 @@ Try
  Dim paramPaymentTransactionID As DataColumnParameter = New DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [PayoutID]={2},[PaymentTransactionID]={3} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPayoutID.getSQLQuotedValueForUpdate(),
 paramPaymentTransactionID.getSQLQuotedValueForUpdate()  ), True)
 
@@ -698,7 +698,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

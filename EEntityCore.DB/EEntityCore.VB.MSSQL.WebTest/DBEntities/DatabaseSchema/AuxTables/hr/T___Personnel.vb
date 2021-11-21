@@ -522,11 +522,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___Personnel                  
-            Return New T___Personnel(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___Personnel(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___Personnel                  
-            Return New T___Personnel(DBConnectInterface.getDBConn(),                  
+            Return New T___Personnel(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -709,7 +709,7 @@ ByVal pUpdatedByID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPersonnelNumber As DataColumnParameter = New DataColumnParameter(defPersonnelNumber, pPersonnelNumber)
  Dim paramPersonID As DataColumnParameter = New DataColumnParameter(defPersonID, pPersonID)
  Dim paramPositionID As DataColumnParameter = New DataColumnParameter(defPositionID, pPositionID)
@@ -726,7 +726,7 @@ Try
  Dim paramIsWebVisible As DataColumnParameter = New DataColumnParameter(defIsWebVisible, defIsWebVisible.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPersonnelNumber.getSQLQuotedValueForAdd(),
 paramPersonID.getSQLQuotedValueForAdd(),
@@ -775,7 +775,7 @@ Optional ByVal pIsWebVisible As Object = DataColumnNullParamValue.NULL_VALUE) As
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPersonnelNumber As DataColumnParameter = New DataColumnParameter(defPersonnelNumber, pPersonnelNumber)
  Dim paramPersonID As DataColumnParameter = New DataColumnParameter(defPersonID, pPersonID)
  Dim paramIsActive As DataColumnParameter = New DataColumnParameter(defIsActive, pIsActive)
@@ -792,7 +792,7 @@ Try
  Dim paramIsWebVisible As DataColumnParameter = New DataColumnParameter(defIsWebVisible, pIsWebVisible)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPersonnelNumber.getSQLQuotedValueForAdd(),
 paramPersonID.getSQLQuotedValueForAdd(),
@@ -858,7 +858,7 @@ Try
  Dim paramIsWebVisible As DataColumnParameter = New DataColumnParameter(defIsWebVisible, pIsWebVisible)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPersonnelNumber.getSQLQuotedValueForAdd(),
 paramPersonID.getSQLQuotedValueForAdd(),
@@ -927,7 +927,7 @@ Try
  Dim paramIsWebVisible As DataColumnParameter = New DataColumnParameter(defIsWebVisible, pIsWebVisible)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) ", TABLE_NAME,paramPersonnelNumber.getSQLQuotedValueForAdd(),
 paramPersonID.getSQLQuotedValueForAdd(),
 paramIsActive.getSQLQuotedValueForAdd(),
@@ -994,7 +994,7 @@ Try
  Dim paramIsWebVisible As DataColumnParameter = New DataColumnParameter(defIsWebVisible, pIsWebVisible)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [PersonnelNumber]={2},[PersonID]={3},[IsActive]={4},[EmploymentDate]={5},[IsSuperUser]={6},[PositionID]={7},[SalaryTypeID]={8},[SalaryAmount]={9},[CreatedByID]={10},[UpdatedByID]={11},[CreatedAt]={12},[UpdatedAt]={13},[Duties]={14},[IsWebVisible]={15} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPersonnelNumber.getSQLQuotedValueForUpdate(),
 paramPersonID.getSQLQuotedValueForUpdate(),
 paramIsActive.getSQLQuotedValueForUpdate(),
@@ -1030,7 +1030,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

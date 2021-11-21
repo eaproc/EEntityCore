@@ -529,11 +529,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___CommonPerson                  
-            Return New T___CommonPerson(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___CommonPerson(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___CommonPerson                  
-            Return New T___CommonPerson(DBConnectInterface.getDBConn(),                  
+            Return New T___CommonPerson(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -712,7 +712,7 @@ ByVal pImportStatusID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramDataMonitorID As DataColumnParameter = New DataColumnParameter(defDataMonitorID, pDataMonitorID)
  Dim paramImportStatusID As DataColumnParameter = New DataColumnParameter(defImportStatusID, pImportStatusID)
  Dim paramIdentificationNo As DataColumnParameter = New DataColumnParameter(defIdentificationNo, defIdentificationNo.DefaultValue)
@@ -731,7 +731,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramDataMonitorID.getSQLQuotedValueForAdd(),
 paramImportStatusID.getSQLQuotedValueForAdd(),
@@ -784,7 +784,7 @@ Optional ByVal pMobileNumber As Object = DataColumnNullParamValue.NULL_VALUE) As
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramDataMonitorID As DataColumnParameter = New DataColumnParameter(defDataMonitorID, pDataMonitorID)
  Dim paramImportStatusID As DataColumnParameter = New DataColumnParameter(defImportStatusID, pImportStatusID)
  Dim paramIdentificationNo As DataColumnParameter = New DataColumnParameter(defIdentificationNo, pIdentificationNo)
@@ -803,7 +803,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramDataMonitorID.getSQLQuotedValueForAdd(),
 paramImportStatusID.getSQLQuotedValueForAdd(),
@@ -875,7 +875,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramDataMonitorID.getSQLQuotedValueForAdd(),
 paramImportStatusID.getSQLQuotedValueForAdd(),
@@ -950,7 +950,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramDataMonitorID.getSQLQuotedValueForAdd(),
 paramImportStatusID.getSQLQuotedValueForAdd(),
 paramIdentificationNo.getSQLQuotedValueForAdd(),
@@ -1023,7 +1023,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [DataMonitorID]={2},[ImportStatusID]={3},[IdentificationNo]={4},[PersonTitle]={5},[FirstName]={6},[LastName]={7},[Country]={8},[DateOfBirth]={9},[Gender]={10},[HomeAddress]={11},[Email]={12},[BirthPlace]={13},[MobileAreaCode]={14},[MobileNumber]={15},[ImportComment]={16},[CreatedAt]={17} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramDataMonitorID.getSQLQuotedValueForUpdate(),
 paramImportStatusID.getSQLQuotedValueForUpdate(),
 paramIdentificationNo.getSQLQuotedValueForUpdate(),
@@ -1061,7 +1061,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

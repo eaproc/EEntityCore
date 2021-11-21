@@ -476,11 +476,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___Dealer                  
-            Return New T___Dealer(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___Dealer(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___Dealer                  
-            Return New T___Dealer(DBConnectInterface.getDBConn(),                  
+            Return New T___Dealer(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -661,7 +661,7 @@ ByVal pCountryID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPersonID As DataColumnParameter = New DataColumnParameter(defPersonID, pPersonID)
  Dim paramBankID As DataColumnParameter = New DataColumnParameter(defBankID, pBankID)
  Dim paramDealerCode As DataColumnParameter = New DataColumnParameter(defDealerCode, pDealerCode)
@@ -675,7 +675,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[BankID],[AccountNumber],[IsActive],[DealerCode],[CompanyName],[WebsiteUrl],[OfficeAddress],[CountryID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPersonID.getSQLQuotedValueForAdd(),
 paramBankID.getSQLQuotedValueForAdd(),
@@ -718,7 +718,7 @@ Optional ByVal pUpdatedAt As Object = DataColumnNullParamValue.NULL_VALUE) As In
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPersonID As DataColumnParameter = New DataColumnParameter(defPersonID, pPersonID)
  Dim paramBankID As DataColumnParameter = New DataColumnParameter(defBankID, pBankID)
  Dim paramAccountNumber As DataColumnParameter = New DataColumnParameter(defAccountNumber, pAccountNumber)
@@ -732,7 +732,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[BankID],[AccountNumber],[IsActive],[DealerCode],[CompanyName],[WebsiteUrl],[OfficeAddress],[CountryID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPersonID.getSQLQuotedValueForAdd(),
 paramBankID.getSQLQuotedValueForAdd(),
@@ -789,7 +789,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[BankID],[AccountNumber],[IsActive],[DealerCode],[CompanyName],[WebsiteUrl],[OfficeAddress],[CountryID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPersonID.getSQLQuotedValueForAdd(),
 paramBankID.getSQLQuotedValueForAdd(),
@@ -849,7 +849,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([PersonID],[BankID],[AccountNumber],[IsActive],[DealerCode],[CompanyName],[WebsiteUrl],[OfficeAddress],[CountryID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) ", TABLE_NAME,paramPersonID.getSQLQuotedValueForAdd(),
 paramBankID.getSQLQuotedValueForAdd(),
 paramAccountNumber.getSQLQuotedValueForAdd(),
@@ -907,7 +907,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [PersonID]={2},[BankID]={3},[AccountNumber]={4},[IsActive]={5},[DealerCode]={6},[CompanyName]={7},[WebsiteUrl]={8},[OfficeAddress]={9},[CountryID]={10},[CreatedAt]={11},[UpdatedAt]={12} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPersonID.getSQLQuotedValueForUpdate(),
 paramBankID.getSQLQuotedValueForUpdate(),
 paramAccountNumber.getSQLQuotedValueForUpdate(),
@@ -940,7 +940,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

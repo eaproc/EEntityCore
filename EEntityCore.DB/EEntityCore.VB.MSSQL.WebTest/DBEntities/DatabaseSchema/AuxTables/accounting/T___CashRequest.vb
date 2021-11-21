@@ -455,11 +455,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___CashRequest                  
-            Return New T___CashRequest(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___CashRequest(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___CashRequest                  
-            Return New T___CashRequest(DBConnectInterface.getDBConn(),                  
+            Return New T___CashRequest(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -640,7 +640,7 @@ ByVal pDataMonitorID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramExpenditureCategoryID As DataColumnParameter = New DataColumnParameter(defExpenditureCategoryID, pExpenditureCategoryID)
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
  Dim paramBeneficiaryID As DataColumnParameter = New DataColumnParameter(defBeneficiaryID, pBeneficiaryID)
@@ -652,7 +652,7 @@ Try
  Dim paramTrackingID As DataColumnParameter = New DataColumnParameter(defTrackingID, defTrackingID.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Request],[ExpenditureCategoryID],[Amount],[Deadline],[CreatedAt],[CreatedByID],[BeneficiaryID],[TrackingID],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramRequest.getSQLQuotedValueForAdd(),
 paramExpenditureCategoryID.getSQLQuotedValueForAdd(),
@@ -691,7 +691,7 @@ Optional ByVal pDataMonitorID As Object = DataColumnNullParamValue.NULL_VALUE) A
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramRequest As DataColumnParameter = New DataColumnParameter(defRequest, pRequest)
  Dim paramExpenditureCategoryID As DataColumnParameter = New DataColumnParameter(defExpenditureCategoryID, pExpenditureCategoryID)
  Dim paramAmount As DataColumnParameter = New DataColumnParameter(defAmount, pAmount)
@@ -703,7 +703,7 @@ Try
  Dim paramDataMonitorID As DataColumnParameter = New DataColumnParameter(defDataMonitorID, pDataMonitorID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Request],[ExpenditureCategoryID],[Amount],[Deadline],[CreatedAt],[CreatedByID],[BeneficiaryID],[TrackingID],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramRequest.getSQLQuotedValueForAdd(),
 paramExpenditureCategoryID.getSQLQuotedValueForAdd(),
@@ -754,7 +754,7 @@ Try
  Dim paramDataMonitorID As DataColumnParameter = New DataColumnParameter(defDataMonitorID, pDataMonitorID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Request],[ExpenditureCategoryID],[Amount],[Deadline],[CreatedAt],[CreatedByID],[BeneficiaryID],[TrackingID],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramRequest.getSQLQuotedValueForAdd(),
 paramExpenditureCategoryID.getSQLQuotedValueForAdd(),
@@ -808,7 +808,7 @@ Try
  Dim paramDataMonitorID As DataColumnParameter = New DataColumnParameter(defDataMonitorID, pDataMonitorID)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([Request],[ExpenditureCategoryID],[Amount],[Deadline],[CreatedAt],[CreatedByID],[BeneficiaryID],[TrackingID],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramRequest.getSQLQuotedValueForAdd(),
 paramExpenditureCategoryID.getSQLQuotedValueForAdd(),
 paramAmount.getSQLQuotedValueForAdd(),
@@ -860,7 +860,7 @@ Try
  Dim paramDataMonitorID As DataColumnParameter = New DataColumnParameter(defDataMonitorID, pDataMonitorID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [Request]={2},[ExpenditureCategoryID]={3},[Amount]={4},[Deadline]={5},[CreatedAt]={6},[CreatedByID]={7},[BeneficiaryID]={8},[TrackingID]={9},[DataMonitorID]={10} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramRequest.getSQLQuotedValueForUpdate(),
 paramExpenditureCategoryID.getSQLQuotedValueForUpdate(),
 paramAmount.getSQLQuotedValueForUpdate(),
@@ -891,7 +891,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

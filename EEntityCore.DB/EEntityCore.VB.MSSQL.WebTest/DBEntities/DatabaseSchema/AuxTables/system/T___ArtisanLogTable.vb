@@ -339,11 +339,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___ArtisanLogTable                  
-            Return New T___ArtisanLogTable(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___ArtisanLogTable(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___ArtisanLogTable                  
-            Return New T___ArtisanLogTable(DBConnectInterface.getDBConn(),                  
+            Return New T___ArtisanLogTable(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -521,11 +521,11 @@ Public Shared Function addNewDefault() As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramComments As DataColumnParameter = New DataColumnParameter(defComments, defComments.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Comments]) VALUES({1},{2}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramComments.getSQLQuotedValueForAdd()  ), True)
 
@@ -548,11 +548,11 @@ Public Shared Function addWithID(Optional ByVal pComments As Object = DataColumn
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramComments As DataColumnParameter = New DataColumnParameter(defComments, pComments)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Comments]) VALUES({1},{2}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramComments.getSQLQuotedValueForAdd()  ), True)
 
@@ -579,7 +579,7 @@ Try
  Dim paramComments As DataColumnParameter = New DataColumnParameter(defComments, pComments)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Comments]) VALUES({1},{2}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramComments.getSQLQuotedValueForAdd()  ), True)
 
@@ -609,7 +609,7 @@ Try
  Dim paramComments As DataColumnParameter = New DataColumnParameter(defComments, pComments)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([Comments]) VALUES({1}) ", TABLE_NAME,paramComments.getSQLQuotedValueForAdd()  ), True)
 
 
@@ -637,7 +637,7 @@ Try
  Dim paramComments As DataColumnParameter = New DataColumnParameter(defComments, pComments)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [Comments]={2} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramComments.getSQLQuotedValueForUpdate()  ), True)
 
 
@@ -660,7 +660,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

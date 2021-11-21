@@ -1,0 +1,876 @@
+using System;                  
+using System.Collections.Generic;                  
+using System.Data;                  
+using System.Linq;                  
+using EEntityCore.DB.Abstracts;                  
+using EEntityCore.DB.MSSQL.Interfaces;                  
+using ELibrary.Standard.VB.Objects;                  
+using ELibrary.Standard.VB.Types;                  
+using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
+using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
+
+namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTables.charity                  
+{                  
+
+    public class T___Beneficiary : Sample__Table, IDataColumnDefinitionsHolder, IDBTableDefinitionPlugIn                  
+    {                  
+                  
+#region Constructors                  
+                  
+                  
+       static T___Beneficiary()                  
+        {                  
+          ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
+          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defCenterID = new DataColumnDefinition(TableColumnNames.CenterID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defBeneficiaryStatusID = new DataColumnDefinition(TableColumnNames.BeneficiaryStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defFirstName = new DataColumnDefinition(TableColumnNames.FirstName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defLastName = new DataColumnDefinition(TableColumnNames.LastName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAddress = new DataColumnDefinition(TableColumnNames.Address.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCity = new DataColumnDefinition(TableColumnNames.City.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defState = new DataColumnDefinition(TableColumnNames.State.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defZipCode = new DataColumnDefinition(TableColumnNames.ZipCode.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSchoolName = new DataColumnDefinition(TableColumnNames.SchoolName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSchoolAddress = new DataColumnDefinition(TableColumnNames.SchoolAddress.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defClassOnEnrollment = new DataColumnDefinition(TableColumnNames.ClassOnEnrollment.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defHomePhone = new DataColumnDefinition(TableColumnNames.HomePhone.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAlternatePhone = new DataColumnDefinition(TableColumnNames.AlternatePhone.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defEmail = new DataColumnDefinition(TableColumnNames.Email.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGenderID = new DataColumnDefinition(TableColumnNames.GenderID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defDateOfBirth = new DataColumnDefinition(TableColumnNames.DateOfBirth.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defVocation = new DataColumnDefinition(TableColumnNames.Vocation.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBirthCertificatePath = new DataColumnDefinition(TableColumnNames.BirthCertificatePath.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPhotoPath = new DataColumnDefinition(TableColumnNames.PhotoPath.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defUpdatedByID = new DataColumnDefinition(TableColumnNames.UpdatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+
+
+          ColumnDefns.Add(defID.ColumnName, defID); 
+          ColumnDefns.Add(defCenterID.ColumnName, defCenterID); 
+          ColumnDefns.Add(defBeneficiaryStatusID.ColumnName, defBeneficiaryStatusID); 
+          ColumnDefns.Add(defFirstName.ColumnName, defFirstName); 
+          ColumnDefns.Add(defLastName.ColumnName, defLastName); 
+          ColumnDefns.Add(defAddress.ColumnName, defAddress); 
+          ColumnDefns.Add(defCity.ColumnName, defCity); 
+          ColumnDefns.Add(defState.ColumnName, defState); 
+          ColumnDefns.Add(defZipCode.ColumnName, defZipCode); 
+          ColumnDefns.Add(defSchoolName.ColumnName, defSchoolName); 
+          ColumnDefns.Add(defSchoolAddress.ColumnName, defSchoolAddress); 
+          ColumnDefns.Add(defClassOnEnrollment.ColumnName, defClassOnEnrollment); 
+          ColumnDefns.Add(defHomePhone.ColumnName, defHomePhone); 
+          ColumnDefns.Add(defAlternatePhone.ColumnName, defAlternatePhone); 
+          ColumnDefns.Add(defEmail.ColumnName, defEmail); 
+          ColumnDefns.Add(defGenderID.ColumnName, defGenderID); 
+          ColumnDefns.Add(defDateOfBirth.ColumnName, defDateOfBirth); 
+          ColumnDefns.Add(defVocation.ColumnName, defVocation); 
+          ColumnDefns.Add(defBirthCertificatePath.ColumnName, defBirthCertificatePath); 
+          ColumnDefns.Add(defPhotoPath.ColumnName, defPhotoPath); 
+          ColumnDefns.Add(defCreatedAt.ColumnName, defCreatedAt); 
+          ColumnDefns.Add(defUpdatedAt.ColumnName, defUpdatedAt); 
+          ColumnDefns.Add(defCreatedByID.ColumnName, defCreatedByID); 
+          ColumnDefns.Add(defUpdatedByID.ColumnName, defUpdatedByID); 
+                  
+          ForeignKeys = new List<IDBTableDefinitionPlugIn.ForeignKeyDefinition>();                  
+                  
+
+            ForeignKeys.Add(new IDBTableDefinitionPlugIn.ForeignKeyDefinition(                  
+                    "fk_charity_Beneficiary_CenterID", false, IDBTableDefinitionPlugIn.ReferentialAction.CASCADE,                  
+                    "charity.Beneficiary", "charity.Center"                  
+                            ));                  
+            ForeignKeys.Add(new IDBTableDefinitionPlugIn.ForeignKeyDefinition(                  
+                    "fk_charity_Beneficiary_GenderID", false, IDBTableDefinitionPlugIn.ReferentialAction.NO_ACTION,                  
+                    "charity.Beneficiary", "common.Gender"                  
+                            ));                  
+            ForeignKeys.Add(new IDBTableDefinitionPlugIn.ForeignKeyDefinition(                  
+                    "fk_charity_Beneficiary_BeneficiaryStatusID", false, IDBTableDefinitionPlugIn.ReferentialAction.NO_ACTION,                  
+                    "charity.Beneficiary", "charity.BeneficiaryStatus"                  
+                            ));                  
+            ForeignKeys.Add(new IDBTableDefinitionPlugIn.ForeignKeyDefinition(                  
+                    "fk_charity_Beneficiary_CreatedByID", false, IDBTableDefinitionPlugIn.ReferentialAction.NO_ACTION,                  
+                    "charity.Beneficiary", "auth.Users"                  
+                            ));                  
+            ForeignKeys.Add(new IDBTableDefinitionPlugIn.ForeignKeyDefinition(                  
+                    "fk_charity_Beneficiary_UpdatedByID", false, IDBTableDefinitionPlugIn.ReferentialAction.NO_ACTION,                  
+                    "charity.Beneficiary", "auth.Users"                  
+                            ));                  
+
+          }
+
+
+                  
+        public T___Beneficiary() : base(TABLE_NAME)                  
+        {                  
+        }                  
+
+
+                  
+                  
+        #region Full Access                  
+                  
+        // Full Access means initial data is loaded directly from database, so DBConn MUST be provided                                    
+                  
+        /// <summary>                                    
+        /// FULL ACCESS. This will load data with dbconn                                    
+        /// </summary>                                    
+        /// <param name="DBConn"></param>                                    
+        /// <param name="TableName"></param>                                    
+        /// <remarks></remarks>                  
+        public T___Beneficiary(All__DBs DBConn, string TableName) : base(DBConn, TableName)                  
+        {                  
+        }                  
+                  
+        /// <summary>                                    
+        /// Full Access. This will load data with dbconn                                    
+        /// </summary>                                    
+        /// <param name="DBConn"></param>                                    
+        /// <param name="pTableName"></param>                                    
+        /// <param name="pTargettedRowID">Only works if the table contains a column named ID</param>                                    
+        /// <remarks></remarks>                  
+        public T___Beneficiary(All__DBs DBConn, string pTableName, long pTargettedRowID) : base(DBConn, pTableName, pTargettedRowID: pTargettedRowID)                  
+        {                  
+        }                  
+                  
+        /// <summary>                                    
+        /// Full Access. This will load data with dbconn                                    
+        /// </summary>                                    
+        /// <param name="pDBConn"></param>                                    
+        /// <param name="pTableName"></param>                                    
+        /// <param name="pSQL">Load table with your own SQL</param>                                    
+        /// <remarks></remarks>                  
+        public T___Beneficiary(All__DBs pDBConn, string pTableName, string pSQL) : base(pDBConn, pTableName, pSQL)                  
+        {                  
+        }                  
+                  
+                  
+        /// <summary>                                    
+        /// Full Access. This will load data with dbconn                                    
+        /// </summary>                                    
+        /// <param name="pDBConn"></param>                                    
+        /// <param name="pTableName"></param>                                    
+        /// <param name="pTargettedRowID"></param>                                    
+        /// <param name="pSQL">Load table with your own SQL</param>                                    
+        /// <remarks></remarks>                  
+        public T___Beneficiary(All__DBs pDBConn, string pTableName, string pSQL, long pTargettedRowID) : base(pDBConn, pTableName, pSQL, pTargettedRowID)                  
+        {                  
+        }                  
+                  
+        #endregion                  
+                  
+                  
+        #region Partial Access                  
+                  
+        // Partial Simply means initial data is loaded directly from user but DBConn might be provided for reloadClass function to work                                    
+                  
+        /// <summary>                                    
+        /// Partial Access                                    
+        /// </summary>                                    
+        /// <param name="pDBConn"></param>                                    
+        /// <param name="pTableRows"></param>                                    
+        /// <param name="pTargettedRowID"></param>                                    
+        /// <remarks></remarks>                  
+        public T___Beneficiary(DataRowCollection pTableRows, long pTargettedRowID, string pTableName, All__DBs pDBConn) : base(pTableRows, pTargettedRowID, pTableName, pDBConn)                  
+        {                  
+        }                  
+                  
+                  
+        /// <summary>                                    
+        /// Partial Access                                    
+        /// </summary>                                    
+        /// <param name="pDBConn"></param>                                    
+        /// <param name="pTableRows"></param>                                    
+        /// <param name="pTargettedRowID"></param>                                    
+        /// <remarks></remarks>                  
+        public T___Beneficiary(IEnumerable<DataRow> pTableRows, long pTargettedRowID, string pTableName, All__DBs pDBConn) : base(pTableRows, pTargettedRowID, pTableName, pDBConn)                  
+        {                  
+        }                  
+                  
+        /// <summary>                                    
+        /// Partial Access                                    
+        /// </summary>                                    
+        /// <param name="DBConn"></param>                                    
+        /// <param name="FullTable"></param>                                    
+        /// <param name="TargettedRowID"></param>                                    
+        /// <remarks></remarks>                  
+        public T___Beneficiary(DataTable FullTable, int TargettedRowID, string TableName, All__DBs DBConn) : base(FullTable, TargettedRowID, TableName, DBConn)                  
+        {                  
+        }                  
+                  
+                  
+        #endregion                  
+                  
+                  
+        #region Shallow Access                  
+        // In the real definition, shallow reference partial. Just that it means partial with no DBConn                                    
+                  
+        /// <summary>                                    
+        /// Shallow Access                                    
+        /// </summary>                                    
+        /// <param name="TargettedRow"></param>                                    
+        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
+        public T___Beneficiary(DataRow TargettedRow) : base(TargettedRow)                  
+        {                  
+        }                  
+                  
+        /// <summary>                                    
+        /// Shallow Access                                    
+        /// </summary>                                    
+        /// <param name="pTableRows"></param>                                    
+        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
+        public T___Beneficiary(IEnumerable<DataRow> pTableRows) : base(pTableRows)                  
+        {                  
+        }                  
+                  
+        /// <summary>                                    
+        /// Shallow Access                                    
+        /// </summary>                                    
+        /// <param name="pTableRows"></param>                                    
+        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
+        public T___Beneficiary(IEnumerable<DataRow> pTableRows, long pTargettedRowID) : base(pTableRows, pTargettedRowID)                  
+        {                  
+        }                  
+                  
+        /// <summary>                                    
+        /// Shallow Access                                    
+        /// </summary>                                    
+        /// <param name="pTableRows"></param>                                    
+        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
+        public T___Beneficiary(IEnumerable<DataRow> pTableRows, long pTargettedRowID, string pTableName) : base(pTableRows, pTargettedRowID, pTableName)                  
+        {                  
+        }                  
+                  
+                  
+        /// <summary>                                    
+        /// Shallow Access                                    
+        /// </summary>                                    
+        /// <remarks></remarks>                  
+        public T___Beneficiary(DataTable FullTable, string pTableName) : base(FullTable, pTableName)                  
+        {                  
+        }                  
+                  
+                  
+        /// <summary>                                    
+        /// Shallow Access                                    
+        /// </summary>                                    
+        /// <remarks></remarks>                  
+        public T___Beneficiary(DataTable FullTable, string pTableName, long pTargettedRowID) : base(FullTable, pTableName, pTargettedRowID)                  
+        {                  
+        }                  
+                  
+                  
+        /// <summary>                                    
+        /// Shallow Access                                    
+        /// </summary>                                    
+        /// <remarks></remarks>                  
+        public T___Beneficiary(DataRowCollection pDataRows, string pTableName) : base(pDataRows, pTableName)                  
+        {                  
+        }                  
+                  
+        /// <summary>                                    
+        /// Shallow Access                                    
+        /// </summary>                                    
+        /// <param name="pTableRows"></param>                                    
+        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
+        public T___Beneficiary(IEnumerable<DataRow> pTableRows, string pTableName) : base(pTableRows, pTableName)                  
+        {                  
+        }                  
+                  
+        /// <summary>                                    
+        /// Shallow Access. Should always target this passed in                                    
+        /// </summary>                                    
+        /// <param name="pTargettedRow"></param>                                    
+        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
+        public T___Beneficiary(DataRow pTargettedRow, string pTableName) : base(pTargettedRow, pTableName)                  
+        {                  
+        }                  
+                  
+                  
+        #endregion                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+#endregion                  
+                  
+                  
+                  
+#region Consts and Enums                  
+
+       public const string TABLE_NAME = "charity.Beneficiary";
+       public const string Beneficiary__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [CenterID], [BeneficiaryStatusID], [FirstName], [LastName], [Address], [City], [State], [ZipCode], [SchoolName], [SchoolAddress], [ClassOnEnrollment], [HomePhone], [AlternatePhone], [Email], [GenderID], [DateOfBirth], [Vocation], [BirthCertificatePath], [PhotoPath], [CreatedAt], [UpdatedAt], [CreatedByID], [UpdatedByID] FROM Beneficiary";
+       public const string Beneficiary__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [ID], [CenterID], [BeneficiaryStatusID], [FirstName], [LastName], [Address], [City], [State], [ZipCode], [SchoolName], [SchoolAddress], [ClassOnEnrollment], [HomePhone], [AlternatePhone], [Email], [GenderID], [DateOfBirth], [Vocation], [BirthCertificatePath], [PhotoPath], [CreatedAt], [UpdatedAt], [CreatedByID], [UpdatedByID] FROM Beneficiary";
+
+
+       public enum TableColumnNames
+       {
+
+           ID,
+           CenterID,
+           BeneficiaryStatusID,
+           FirstName,
+           LastName,
+           Address,
+           City,
+           State,
+           ZipCode,
+           SchoolName,
+           SchoolAddress,
+           ClassOnEnrollment,
+           HomePhone,
+           AlternatePhone,
+           Email,
+           GenderID,
+           DateOfBirth,
+           Vocation,
+           BirthCertificatePath,
+           PhotoPath,
+           CreatedAt,
+           UpdatedAt,
+           CreatedByID,
+           UpdatedByID
+       } 
+
+
+
+       public enum TableConstraints{
+
+           pk_charity_Beneficiary, 
+           fk_charity_Beneficiary_CenterID, 
+           fk_charity_Beneficiary_GenderID, 
+           fk_charity_Beneficiary_BeneficiaryStatusID, 
+           fk_charity_Beneficiary_CreatedByID, 
+           fk_charity_Beneficiary_UpdatedByID, 
+       } 
+
+
+ #endregion 
+
+
+ #region Properties 
+
+        private static List<IDBTableDefinitionPlugIn.ForeignKeyDefinition> ForeignKeys;                  
+
+       private static Dictionary<string, DataColumnDefinition> ColumnDefns; 
+
+       public static readonly DataColumnDefinition defID;
+       public static readonly DataColumnDefinition defCenterID;
+       public static readonly DataColumnDefinition defBeneficiaryStatusID;
+       public static readonly DataColumnDefinition defFirstName;
+       public static readonly DataColumnDefinition defLastName;
+       public static readonly DataColumnDefinition defAddress;
+       public static readonly DataColumnDefinition defCity;
+       public static readonly DataColumnDefinition defState;
+       public static readonly DataColumnDefinition defZipCode;
+       public static readonly DataColumnDefinition defSchoolName;
+       public static readonly DataColumnDefinition defSchoolAddress;
+       public static readonly DataColumnDefinition defClassOnEnrollment;
+       public static readonly DataColumnDefinition defHomePhone;
+       public static readonly DataColumnDefinition defAlternatePhone;
+       public static readonly DataColumnDefinition defEmail;
+       public static readonly DataColumnDefinition defGenderID;
+       public static readonly DataColumnDefinition defDateOfBirth;
+       public static readonly DataColumnDefinition defVocation;
+       public static readonly DataColumnDefinition defBirthCertificatePath;
+       public static readonly DataColumnDefinition defPhotoPath;
+       public static readonly DataColumnDefinition defCreatedAt;
+       public static readonly DataColumnDefinition defUpdatedAt;
+       public static readonly DataColumnDefinition defCreatedByID;
+       public static readonly DataColumnDefinition defUpdatedByID;
+
+       public Int32 CenterID {
+           get{ 
+               if (!this.isValidRow) return 0;                          
+               return EInt.valueOf(this.TargettedRow[TableColumnNames.CenterID.ToString()]);
+           }
+       }
+
+
+       public Int32 BeneficiaryStatusID {
+           get{ 
+               if (!this.isValidRow) return 0;                          
+               return EInt.valueOf(this.TargettedRow[TableColumnNames.BeneficiaryStatusID.ToString()]);
+           }
+       }
+
+
+       public String FirstName {
+           get{ 
+               if (!this.isValidRow) return String.Empty;                          
+               return EStrings.valueOf(this.TargettedRow[TableColumnNames.FirstName.ToString()]);
+           }
+       }
+
+
+       public String LastName {
+           get{ 
+               if (!this.isValidRow) return String.Empty;                          
+               return EStrings.valueOf(this.TargettedRow[TableColumnNames.LastName.ToString()]);
+           }
+       }
+
+
+       public String Address {
+           get{ 
+               if (!this.isValidRow) return String.Empty;                          
+               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Address.ToString()]);
+           }
+       }
+
+
+       public String City {
+           get{ 
+               if (!this.isValidRow) return String.Empty;                          
+               return EStrings.valueOf(this.TargettedRow[TableColumnNames.City.ToString()]);
+           }
+       }
+
+
+       public String State {
+           get{ 
+               if (!this.isValidRow) return String.Empty;                          
+               return EStrings.valueOf(this.TargettedRow[TableColumnNames.State.ToString()]);
+           }
+       }
+
+
+       public String ZipCode {
+           get{ 
+               if (!this.isValidRow) return String.Empty;                          
+               return EStrings.valueOf(this.TargettedRow[TableColumnNames.ZipCode.ToString()]);
+           }
+       }
+
+
+       public String SchoolName {
+           get{ 
+               if (!this.isValidRow) return String.Empty;                          
+               return EStrings.valueOf(this.TargettedRow[TableColumnNames.SchoolName.ToString()]);
+           }
+       }
+
+
+       public String SchoolAddress {
+           get{ 
+               if (!this.isValidRow) return String.Empty;                          
+               return EStrings.valueOf(this.TargettedRow[TableColumnNames.SchoolAddress.ToString()]);
+           }
+       }
+
+
+       public String ClassOnEnrollment {
+           get{ 
+               if (!this.isValidRow) return String.Empty;                          
+               return EStrings.valueOf(this.TargettedRow[TableColumnNames.ClassOnEnrollment.ToString()]);
+           }
+       }
+
+
+       public String HomePhone {
+           get{ 
+               if (!this.isValidRow) return String.Empty;                          
+               return EStrings.valueOf(this.TargettedRow[TableColumnNames.HomePhone.ToString()]);
+           }
+       }
+
+
+       public String AlternatePhone {
+           get{ 
+               if (!this.isValidRow) return String.Empty;                          
+               return EStrings.valueOf(this.TargettedRow[TableColumnNames.AlternatePhone.ToString()]);
+           }
+       }
+
+
+       public String Email {
+           get{ 
+               if (!this.isValidRow) return String.Empty;                          
+               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Email.ToString()]);
+           }
+       }
+
+
+       public Int32 GenderID {
+           get{ 
+               if (!this.isValidRow) return 0;                          
+               return EInt.valueOf(this.TargettedRow[TableColumnNames.GenderID.ToString()]);
+           }
+       }
+
+
+       public NullableDateTime DateOfBirth {
+           get{ 
+               if (!this.isValidRow) return NullableDateTime.NULL_TIME;                          
+               return  new NullableDateTime(this.TargettedRow[TableColumnNames.DateOfBirth.ToString()]);
+           }
+       }
+
+
+       public String Vocation {
+           get{ 
+               if (!this.isValidRow) return String.Empty;                          
+               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Vocation.ToString()]);
+           }
+       }
+
+
+       public String BirthCertificatePath {
+           get{ 
+               if (!this.isValidRow) return String.Empty;                          
+               return EStrings.valueOf(this.TargettedRow[TableColumnNames.BirthCertificatePath.ToString()]);
+           }
+       }
+
+
+       public String PhotoPath {
+           get{ 
+               if (!this.isValidRow) return String.Empty;                          
+               return EStrings.valueOf(this.TargettedRow[TableColumnNames.PhotoPath.ToString()]);
+           }
+       }
+
+
+       public NullableDateTime CreatedAt {
+           get{ 
+               if (!this.isValidRow) return NullableDateTime.NULL_TIME;                          
+               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
+           }
+       }
+
+
+       public NullableDateTime UpdatedAt {
+           get{ 
+               if (!this.isValidRow) return NullableDateTime.NULL_TIME;                          
+               return  new NullableDateTime(this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]);
+           }
+       }
+
+
+       public Int32 CreatedByID {
+           get{ 
+               if (!this.isValidRow) return 0;                          
+               return EInt.valueOf(this.TargettedRow[TableColumnNames.CreatedByID.ToString()]);
+           }
+       }
+
+
+       public Int32 UpdatedByID {
+           get{ 
+               if (!this.isValidRow) return 0;                          
+               return EInt.valueOf(this.TargettedRow[TableColumnNames.UpdatedByID.ToString()]);
+           }
+       }
+
+
+#endregion
+
+#region Methods                  
+                  
+                  
+                  
+        /// <summary>                                                       
+        /// Returns Empty class on failure                                                       
+        /// </summary>                                                       
+        /// <returns></returns>                                                       
+        /// <remarks></remarks>                  
+        public T___Beneficiary getFirstRow()                  
+        {                  
+            if (this.hasRows())                  
+                return new T___Beneficiary(this.AllRows.ToArray()[0]);                  
+            return null;                  
+        }                  
+                  
+        public static T___Beneficiary getFullTable()                  
+        {                  
+            return new T___Beneficiary(DatabaseInit.DBConnectInterface.GetDBConn(), TABLE_NAME);                  
+        }                  
+                  
+        public static T___Beneficiary getRowWhereIDUsingSQL(int pID)                  
+        {                  
+            return new T___Beneficiary(DBConnectInterface.GetDBConn(), TABLE_NAME, string.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, (object)pID)).getFirstRow();                  
+        }                  
+                  
+        public T___Beneficiary getRowWhereID(int pID)                  
+        {                  
+            return new T___Beneficiary(this.RawTable, TABLE_NAME, pID);                  
+        }                  
+                  
+        private bool IsAllRowEqual(T___Beneficiary pRow, params DataColumnParameter[] pParams)                  
+        {                  
+            try                  
+            {                  
+                if (!this.hasRows())                  
+                    return false;                  
+                foreach (var pParam in pParams)                  
+                {                  
+                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                        return false;                  
+                }                  
+                  
+                return true;                  
+            }                  
+            catch (Exception)                  
+            {                  
+                return false;                  
+            }                  
+        }                  
+                  
+        private bool IsAnyRowEqual(T___Beneficiary pRow, params DataColumnParameter[] pParams)                  
+        {                  
+            try                  
+            {                  
+                if (!this.hasRows())                  
+                    return false;                  
+                foreach (var pParam in pParams)                  
+                {                  
+                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                        return true;                  
+                }                  
+                  
+                return false;                  
+            }                  
+            catch (Exception )                  
+            {                  
+                return false;                  
+            }                  
+        }                  
+                  
+        /// <summary>                                                       
+        /// Returns Empty class on failure                                                       
+        /// </summary>                                                       
+        /// <returns></returns>                                                       
+        /// <remarks></remarks>                  
+        public T___Beneficiary getAllRowsEquals(params DataColumnParameter[] pParams)                  
+        {                  
+            if (pParams is null || pParams.Count() == 0 || !this.hasRows())                  
+                return this;                  
+            try                  
+            {                  
+                IEnumerable<DataRow> drst = from dr in this.AllRows                  
+                                            where IsAllRowEqual(new T___Beneficiary(dr), pParams)                  
+                                            select dr;                  
+                if (drst is object && drst.Count() > 0)                  
+                    return new T___Beneficiary(drst.CopyToDataTable(), TABLE_NAME);                  
+                return null;                  
+            }                  
+            catch (Exception)                  
+            {                  
+                // REM                errorMsg(ex.Message, 1)                                                       
+                return null;                  
+            }                  
+        }                  
+                  
+        /// <summary>                                                       
+        /// Returns Empty class on failure                                                       
+        /// </summary>                                                       
+        /// <returns></returns>                                                       
+        /// <remarks></remarks>                  
+        public T___Beneficiary getAllRowsAny(params DataColumnParameter[] pParams)                  
+        {                  
+            if (pParams is null || pParams.Count() == 0 || !this.hasRows())                  
+                return this;                  
+            try                  
+            {                  
+                IEnumerable<DataRow> drst = from dr in this.AllRows                  
+                                            where IsAnyRowEqual(new T___Beneficiary(dr), pParams)                  
+                                            select dr;                  
+                if (drst is object && drst.Count() > 0)                  
+                    return new T___Beneficiary(drst.CopyToDataTable(), TABLE_NAME);                  
+                return null;                  
+            }                  
+            catch (Exception)                  
+            {                  
+                // REM errorMsg(ex.Message, 1)                                                       
+                return null;                  
+            }                  
+        }                  
+                  
+        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
+        {                  
+            return ColumnDefns;                  
+        }                  
+                  
+        private bool RowEqual(string pColumnName, object pColumnValue)                  
+        {                  
+            try                  
+            {                  
+                if (!this.isTargettedRowValid())                  
+                    return false;                  
+                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                {                  
+                    case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
+                        {                  
+                            return EBoolean.valueOf(this.TargettedRow[pColumnName]) == EBoolean.valueOf(pColumnValue);                  
+                        }                  
+                  
+                    case var case1 when case1 == DataColumnDefinition.AllowedDataTypes.Blob:                  
+                        {                  
+                            return object.Equals(this.TargettedRow[pColumnName], pColumnValue);                  
+                        }                  
+                  
+                    case var case2 when case2 == DataColumnDefinition.AllowedDataTypes.DateTime:                  
+                        {                  
+                            return EDateTime.EqualsDateWithoutTime(new NullableDateTime(this.TargettedRow[pColumnName]).DateTimeValue, new NullableDateTime(pColumnValue).DateTimeValue);                  
+                        }                  
+                  
+                    case var case3 when case3 == DataColumnDefinition.AllowedDataTypes.Decimal:                  
+                        {                  
+                            return EDouble.valueOf(this.TargettedRow[pColumnName]) == EDouble.valueOf(pColumnValue);                  
+                        }                  
+                  
+                    case var case4 when case4 == DataColumnDefinition.AllowedDataTypes.Int:                  
+                        {                  
+                            return EInt.valueOf(this.TargettedRow[pColumnName]) == EInt.valueOf(pColumnValue);                  
+                        }                  
+                  
+                    case var case5 when case5 == DataColumnDefinition.AllowedDataTypes.Long:                  
+                        {                  
+                            return ELong.valueOf(this.TargettedRow[pColumnName]) == ELong.valueOf(pColumnValue);                  
+                        }                  
+                  
+                    case var case6 when case6 == DataColumnDefinition.AllowedDataTypes.String:                  
+                        {                  
+                            return EStrings.equalsIgnoreCase(EStrings.valueOf(this.TargettedRow[pColumnName]), EStrings.valueOf(pColumnValue));                  
+                        }                  
+                  
+                    case var case7 when case7 == DataColumnDefinition.AllowedDataTypes.TimeSpan:                  
+                        {                  
+                            return object.Equals(this.TargettedRow[pColumnName], pColumnValue);                  
+                        }                  
+                  
+                    default:                  
+                        {                  
+                            // REM DataColumnDefinition.AllowedDataTypes.UNKNOWN()                                                       
+                            return object.Equals(this.TargettedRow[pColumnName], pColumnValue);                  
+                        }                  
+                }                  
+            }                  
+            catch (Exception)                  
+            {                  
+                return false;                  
+            }                  
+        }                  
+
+                  
+        public List<IDBTableDefinitionPlugIn.ForeignKeyDefinition> getForeignKeys()                  
+        {                  
+            return ForeignKeys;                  
+        }                  
+                  
+        public string getTableName()                  
+        {                  
+            return TABLE_NAME;                  
+        }                  
+
+                  
+        public virtual string getFillSQL(){                
+            return Beneficiary__NO__BINARY___SQL_FILL_QUERY;                  
+        }                  
+                  
+                  
+                  
+#endregion                  
+                  
+                  
+
+
+
+
+        public static int addNewDefault(Int32 pCenterID,
+Int32 pBeneficiaryStatusID,
+Int32 pGenderID,
+Int32 pCreatedByID,
+Int32 pUpdatedByID){
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramCenterID = new DataColumnParameter(defCenterID, pCenterID);
+                DataColumnParameter paramBeneficiaryStatusID = new DataColumnParameter(defBeneficiaryStatusID, pBeneficiaryStatusID);
+                DataColumnParameter paramGenderID = new DataColumnParameter(defGenderID, pGenderID);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+                DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, defFirstName.DefaultValue);
+                DataColumnParameter paramLastName = new DataColumnParameter(defLastName, defLastName.DefaultValue);
+                DataColumnParameter paramAddress = new DataColumnParameter(defAddress, defAddress.DefaultValue);
+                DataColumnParameter paramCity = new DataColumnParameter(defCity, defCity.DefaultValue);
+                DataColumnParameter paramState = new DataColumnParameter(defState, defState.DefaultValue);
+                DataColumnParameter paramZipCode = new DataColumnParameter(defZipCode, defZipCode.DefaultValue);
+                DataColumnParameter paramSchoolName = new DataColumnParameter(defSchoolName, defSchoolName.DefaultValue);
+                DataColumnParameter paramSchoolAddress = new DataColumnParameter(defSchoolAddress, defSchoolAddress.DefaultValue);
+                DataColumnParameter paramClassOnEnrollment = new DataColumnParameter(defClassOnEnrollment, defClassOnEnrollment.DefaultValue);
+                DataColumnParameter paramHomePhone = new DataColumnParameter(defHomePhone, defHomePhone.DefaultValue);
+                DataColumnParameter paramAlternatePhone = new DataColumnParameter(defAlternatePhone, defAlternatePhone.DefaultValue);
+                DataColumnParameter paramEmail = new DataColumnParameter(defEmail, defEmail.DefaultValue);
+                DataColumnParameter paramDateOfBirth = new DataColumnParameter(defDateOfBirth, defDateOfBirth.DefaultValue);
+                DataColumnParameter paramVocation = new DataColumnParameter(defVocation, defVocation.DefaultValue);
+                DataColumnParameter paramBirthCertificatePath = new DataColumnParameter(defBirthCertificatePath, defBirthCertificatePath.DefaultValue);
+                DataColumnParameter paramPhotoPath = new DataColumnParameter(defPhotoPath, defPhotoPath.DefaultValue);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
+                paramCenterID.getSQLQuotedValueForAdd(),
+                paramBeneficiaryStatusID.getSQLQuotedValueForAdd(),
+                paramFirstName.getSQLQuotedValueForAdd(),
+                paramLastName.getSQLQuotedValueForAdd(),
+                paramAddress.getSQLQuotedValueForAdd(),
+                paramCity.getSQLQuotedValueForAdd(),
+                paramState.getSQLQuotedValueForAdd(),
+                paramZipCode.getSQLQuotedValueForAdd(),
+                paramSchoolName.getSQLQuotedValueForAdd(),
+                paramSchoolAddress.getSQLQuotedValueForAdd(),
+                paramClassOnEnrollment.getSQLQuotedValueForAdd(),
+                paramHomePhone.getSQLQuotedValueForAdd(),
+                paramAlternatePhone.getSQLQuotedValueForAdd(),
+                paramEmail.getSQLQuotedValueForAdd(),
+                paramGenderID.getSQLQuotedValueForAdd(),
+                paramDateOfBirth.getSQLQuotedValueForAdd(),
+                paramVocation.getSQLQuotedValueForAdd(),
+                paramBirthCertificatePath.getSQLQuotedValueForAdd(),
+                paramPhotoPath.getSQLQuotedValueForAdd(),
+                paramCreatedAt.getSQLQuotedValueForAdd(),
+                paramUpdatedAt.getSQLQuotedValueForAdd(),
+                paramCreatedByID.getSQLQuotedValueForAdd(),
+                paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                  
+                return EInt.valueOf(paramID.Value);                   
+            }catch (Exception){                   
+                throw;                   
+            }                   
+        }                   
+
+
+
+
+        public static bool DeleteItemRow(long pID)                  
+        {                  
+            try                  
+            {                  
+                return DBConnectInterface.GetDBConn().DbExec(string.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID));                  
+            }                  
+            catch (Exception)                  
+            {                  
+                throw;                  
+            }                  
+        }                  
+
+
+   }
+
+
+}

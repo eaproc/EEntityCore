@@ -392,11 +392,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___PaymentTransactionTarget                  
-            Return New T___PaymentTransactionTarget(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___PaymentTransactionTarget(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___PaymentTransactionTarget                  
-            Return New T___PaymentTransactionTarget(DBConnectInterface.getDBConn(),                  
+            Return New T___PaymentTransactionTarget(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -574,7 +574,7 @@ Public Shared Function addNewDefault(ByVal pPaymentTransactionID As Int32) As In
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPaymentTransactionID As DataColumnParameter = New DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID)
  Dim paramStudentNumber As DataColumnParameter = New DataColumnParameter(defStudentNumber, defStudentNumber.DefaultValue)
  Dim paramFirstName As DataColumnParameter = New DataColumnParameter(defFirstName, defFirstName.DefaultValue)
@@ -582,7 +582,7 @@ Try
  Dim paramPaymentRequiredWithoutCharges As DataColumnParameter = New DataColumnParameter(defPaymentRequiredWithoutCharges, defPaymentRequiredWithoutCharges.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentTransactionID],[StudentNumber],[FirstName],[LastName],[PaymentRequiredWithoutCharges]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPaymentTransactionID.getSQLQuotedValueForAdd(),
 paramStudentNumber.getSQLQuotedValueForAdd(),
@@ -613,7 +613,7 @@ ByVal pPaymentRequiredWithoutCharges As Decimal) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPaymentTransactionID As DataColumnParameter = New DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID)
  Dim paramStudentNumber As DataColumnParameter = New DataColumnParameter(defStudentNumber, pStudentNumber)
  Dim paramFirstName As DataColumnParameter = New DataColumnParameter(defFirstName, pFirstName)
@@ -621,7 +621,7 @@ Try
  Dim paramPaymentRequiredWithoutCharges As DataColumnParameter = New DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentTransactionID],[StudentNumber],[FirstName],[LastName],[PaymentRequiredWithoutCharges]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPaymentTransactionID.getSQLQuotedValueForAdd(),
 paramStudentNumber.getSQLQuotedValueForAdd(),
@@ -660,7 +660,7 @@ Try
  Dim paramPaymentRequiredWithoutCharges As DataColumnParameter = New DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentTransactionID],[StudentNumber],[FirstName],[LastName],[PaymentRequiredWithoutCharges]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPaymentTransactionID.getSQLQuotedValueForAdd(),
 paramStudentNumber.getSQLQuotedValueForAdd(),
@@ -702,7 +702,7 @@ Try
  Dim paramPaymentRequiredWithoutCharges As DataColumnParameter = New DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([PaymentTransactionID],[StudentNumber],[FirstName],[LastName],[PaymentRequiredWithoutCharges]) VALUES({1},{2},{3},{4},{5}) ", TABLE_NAME,paramPaymentTransactionID.getSQLQuotedValueForAdd(),
 paramStudentNumber.getSQLQuotedValueForAdd(),
 paramFirstName.getSQLQuotedValueForAdd(),
@@ -742,7 +742,7 @@ Try
  Dim paramPaymentRequiredWithoutCharges As DataColumnParameter = New DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [PaymentTransactionID]={2},[StudentNumber]={3},[FirstName]={4},[LastName]={5},[PaymentRequiredWithoutCharges]={6} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPaymentTransactionID.getSQLQuotedValueForUpdate(),
 paramStudentNumber.getSQLQuotedValueForUpdate(),
 paramFirstName.getSQLQuotedValueForUpdate(),
@@ -769,7 +769,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

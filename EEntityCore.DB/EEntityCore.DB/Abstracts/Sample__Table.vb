@@ -38,7 +38,7 @@ Namespace Abstracts
         ''' <param name="DBConn"></param>
         ''' <param name="TableName"></param>
         ''' <remarks></remarks>
-        Public Sub New(ByRef DBConn As All__DBs,
+        Public Sub New(ByVal DBConn As All__DBs,
                       ByVal TableName As String
                      )
             MyBase.New(DBConn, TableName)
@@ -51,7 +51,7 @@ Namespace Abstracts
         ''' <param name="pTableName"></param>
         ''' <param name="pTargettedRowID">Only works if the table contains a column named ID</param>
         ''' <remarks></remarks>
-        Sub New(ByRef DBConn As All__DBs,
+        Sub New(ByVal DBConn As All__DBs,
                 ByVal pTableName As String,
                       ByVal pTargettedRowID As Int64)
 
@@ -66,7 +66,7 @@ Namespace Abstracts
         ''' <param name="pTableName"></param>
         ''' <param name="pSQL">Load table with your own SQL</param>
         ''' <remarks></remarks>
-        Public Sub New(ByRef pDBConn As All__DBs,
+        Public Sub New(ByVal pDBConn As All__DBs,
                 ByVal pTableName As String,
                 ByVal pSQL As String)
             MyBase.New(pDBConn, pTableName, pSQL)
@@ -81,7 +81,7 @@ Namespace Abstracts
         ''' <param name="pTargettedRowID"></param>
         ''' <param name="pSQL">Load table with your own SQL</param>
         ''' <remarks></remarks>
-        Sub New(ByRef pDBConn As All__DBs,
+        Sub New(ByVal pDBConn As All__DBs,
                 ByVal pTableName As String,
                 ByVal pSQL As String,
                      ByVal pTargettedRowID As Int64)
@@ -107,7 +107,7 @@ Namespace Abstracts
                 ByVal pTableRows As DataRowCollection,
                       ByVal pTargettedRowID As Int64,
                      pTableName As String,
-                     ByRef pDBConn As All__DBs)
+                     ByVal pDBConn As All__DBs)
             MyBase.New(pTableRows, pTargettedRowID, pTableName, pDBConn)
         End Sub
 
@@ -123,7 +123,7 @@ Namespace Abstracts
                 ByVal pTableRows As IEnumerable(Of DataRow),
                       ByVal pTargettedRowID As Int64,
                       ByVal pTableName As String,
-                     ByRef pDBConn As All__DBs)
+                     ByVal pDBConn As All__DBs)
 
             MyBase.New(pTableRows, pTargettedRowID, pTableName, pDBConn)
         End Sub
@@ -139,7 +139,7 @@ Namespace Abstracts
                 ByVal FullTable As DataTable,
                       ByVal TargettedRowID As Int32,
                       ByVal TableName As String,
-                      ByRef DBConn As All__DBs)
+                      ByVal DBConn As All__DBs)
 
             MyBase.New(FullTable, TargettedRowID, TableName, DBConn)
         End Sub
@@ -320,7 +320,7 @@ Namespace Abstracts
 
                 With pDBConn
                     Return _
-                            .dbExec(
+                            .DbExec(
                                 String.Format("DELETE FROM {0} WHERE ID={1} ",
                                                 pTableName, pID
                                                 )

@@ -70,7 +70,7 @@ Namespace Abstracts
             Dim GenNumber As Long
 
             Try
-                Dim dts As DataSet = getRS(String.Format(
+                Dim dts As DataSet = GetRS(String.Format(
                                            "Select {0} From {1} Order By {0} Desc", IDHolderColumn, TableName)
                                        )
                 If IsDataSetValid(dts) Then
@@ -334,7 +334,7 @@ Namespace Abstracts
         ''' <param name="SQL"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public MustOverride Overloads Function dbExec(ByVal SQL As String) As Boolean Implements IAll__DBs.dbExec
+        Public MustOverride Overloads Function DbExec(ByVal SQL As String) As Boolean Implements IAll__DBs.DbExec
 
         ''' <summary>
         ''' Makes sure the apostrophe issue is corrected in the strings. 
@@ -346,10 +346,10 @@ Namespace Abstracts
         ''' <remarks></remarks>
         Public Overridable Overloads Function dbExec(ByVal SQL As String, ByVal Address_Apostrophe_Issue As Boolean) As Boolean
 
-            If Not Address_Apostrophe_Issue Then Return dbExec(SQL)
+            If Not Address_Apostrophe_Issue Then Return DbExec(SQL)
 
             SQL = getHandledSQLApostrophe__Issue(SQL)
-            Return dbExec(SQL)
+            Return DbExec(SQL)
 
         End Function
 
@@ -374,7 +374,7 @@ Namespace Abstracts
         ''' <param name="SQL"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public MustOverride Overloads Function getRS(ByVal SQL As String) As DataSet Implements IAll__DBs.getRS
+        Public MustOverride Overloads Function GetRS(ByVal SQL As String) As DataSet Implements IAll__DBs.GetRS
 
 
         ''' <summary>
@@ -387,13 +387,13 @@ Namespace Abstracts
         ''' <remarks></remarks>
         Public Overloads Function getRS(ByVal SQL As String, ByVal Address_Apostrophe_Issue As Boolean) As DataSet
 
-            If Not Address_Apostrophe_Issue Then Return getRS(SQL)
+            If Not Address_Apostrophe_Issue Then Return GetRS(SQL)
 
             SQL = Replace(SQL, "\'", "[*===*]") REM Keep Original Apostrophe Encoded
             SQL = PrepareStringForDatabaseInsertOrUpdate(SQL)
             SQL = Replace(SQL, "[*===*]", "'")  REM Return Original Apostrophe Encoded
 
-            Return getRS(SQL)
+            Return GetRS(SQL)
 
         End Function
 

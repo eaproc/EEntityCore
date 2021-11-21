@@ -376,11 +376,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___Bill                  
-            Return New T___Bill(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___Bill(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___Bill                  
-            Return New T___Bill(DBConnectInterface.getDBConn(),                  
+            Return New T___Bill(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -558,14 +558,14 @@ Public Shared Function addNewDefault(ByVal pDefinition As String) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramDefinition As DataColumnParameter = New DataColumnParameter(defDefinition, pDefinition)
  Dim paramDescription As DataColumnParameter = New DataColumnParameter(defDescription, defDescription.DefaultValue)
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue)
  Dim paramIsFixed As DataColumnParameter = New DataColumnParameter(defIsFixed, defIsFixed.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Definition],[Description],[CreatedAt],[IsFixed]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramDefinition.getSQLQuotedValueForAdd(),
 paramDescription.getSQLQuotedValueForAdd(),
@@ -594,14 +594,14 @@ Optional ByVal pDescription As Object = DataColumnNullParamValue.NULL_VALUE) As 
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramDefinition As DataColumnParameter = New DataColumnParameter(defDefinition, pDefinition)
  Dim paramDescription As DataColumnParameter = New DataColumnParameter(defDescription, pDescription)
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
  Dim paramIsFixed As DataColumnParameter = New DataColumnParameter(defIsFixed, pIsFixed)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Definition],[Description],[CreatedAt],[IsFixed]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramDefinition.getSQLQuotedValueForAdd(),
 paramDescription.getSQLQuotedValueForAdd(),
@@ -637,7 +637,7 @@ Try
  Dim paramIsFixed As DataColumnParameter = New DataColumnParameter(defIsFixed, pIsFixed)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Definition],[Description],[CreatedAt],[IsFixed]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramDefinition.getSQLQuotedValueForAdd(),
 paramDescription.getSQLQuotedValueForAdd(),
@@ -676,7 +676,7 @@ Try
  Dim paramIsFixed As DataColumnParameter = New DataColumnParameter(defIsFixed, pIsFixed)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([Definition],[Description],[CreatedAt],[IsFixed]) VALUES({1},{2},{3},{4}) ", TABLE_NAME,paramDefinition.getSQLQuotedValueForAdd(),
 paramDescription.getSQLQuotedValueForAdd(),
 paramCreatedAt.getSQLQuotedValueForAdd(),
@@ -713,7 +713,7 @@ Try
  Dim paramIsFixed As DataColumnParameter = New DataColumnParameter(defIsFixed, pIsFixed)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [Definition]={2},[Description]={3},[CreatedAt]={4},[IsFixed]={5} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramDefinition.getSQLQuotedValueForUpdate(),
 paramDescription.getSQLQuotedValueForUpdate(),
 paramCreatedAt.getSQLQuotedValueForUpdate(),
@@ -739,7 +739,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

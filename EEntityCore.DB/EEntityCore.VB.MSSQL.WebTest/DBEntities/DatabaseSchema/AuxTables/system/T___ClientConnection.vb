@@ -513,11 +513,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___ClientConnection                  
-            Return New T___ClientConnection(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___ClientConnection(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___ClientConnection                  
-            Return New T___ClientConnection(DBConnectInterface.getDBConn(),                  
+            Return New T___ClientConnection(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -695,7 +695,7 @@ Public Shared Function addNewDefault(ByVal pClientID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramClientID As DataColumnParameter = New DataColumnParameter(defClientID, pClientID)
  Dim paramFileServerUrl As DataColumnParameter = New DataColumnParameter(defFileServerUrl, defFileServerUrl.DefaultValue)
  Dim paramFileServerAccessKey As DataColumnParameter = New DataColumnParameter(defFileServerAccessKey, defFileServerAccessKey.DefaultValue)
@@ -713,7 +713,7 @@ Try
  Dim paramFileServerUrlHttps As DataColumnParameter = New DataColumnParameter(defFileServerUrlHttps, defFileServerUrlHttps.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
 paramFileServerUrl.getSQLQuotedValueForAdd(),
@@ -764,7 +764,7 @@ Optional ByVal pUpdatedAt As Object = DataColumnNullParamValue.NULL_VALUE) As In
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramClientID As DataColumnParameter = New DataColumnParameter(defClientID, pClientID)
  Dim paramFileServerUrl As DataColumnParameter = New DataColumnParameter(defFileServerUrl, pFileServerUrl)
  Dim paramFileServerAccessKey As DataColumnParameter = New DataColumnParameter(defFileServerAccessKey, pFileServerAccessKey)
@@ -782,7 +782,7 @@ Try
  Dim paramFileServerUrlHttps As DataColumnParameter = New DataColumnParameter(defFileServerUrlHttps, pFileServerUrlHttps)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
 paramFileServerUrl.getSQLQuotedValueForAdd(),
@@ -851,7 +851,7 @@ Try
  Dim paramFileServerUrlHttps As DataColumnParameter = New DataColumnParameter(defFileServerUrlHttps, pFileServerUrlHttps)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
 paramFileServerUrl.getSQLQuotedValueForAdd(),
@@ -923,7 +923,7 @@ Try
  Dim paramFileServerUrlHttps As DataColumnParameter = New DataColumnParameter(defFileServerUrlHttps, pFileServerUrlHttps)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}) ", TABLE_NAME,paramClientID.getSQLQuotedValueForAdd(),
 paramFileServerUrl.getSQLQuotedValueForAdd(),
 paramFileServerAccessKey.getSQLQuotedValueForAdd(),
@@ -993,7 +993,7 @@ Try
  Dim paramFileServerUrlHttps As DataColumnParameter = New DataColumnParameter(defFileServerUrlHttps, pFileServerUrlHttps)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [ClientID]={2},[FileServerUrl]={3},[FileServerAccessKey]={4},[FileServerSecretKey]={5},[FileServerBucket]={6},[ClientAPIID]={7},[ClientAPIUrl]={8},[DB_HOST]={9},[DB_DATABASE]={10},[DB_USERNAME]={11},[DB_PASSWORD]={12},[DB_PORT]={13},[CreatedAt]={14},[UpdatedAt]={15},[FileServerUrlHttps]={16} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramClientID.getSQLQuotedValueForUpdate(),
 paramFileServerUrl.getSQLQuotedValueForUpdate(),
 paramFileServerAccessKey.getSQLQuotedValueForUpdate(),
@@ -1030,7 +1030,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

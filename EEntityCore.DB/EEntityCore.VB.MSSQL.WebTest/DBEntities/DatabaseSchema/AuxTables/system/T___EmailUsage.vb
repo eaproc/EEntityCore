@@ -471,11 +471,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___EmailUsage                  
-            Return New T___EmailUsage(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___EmailUsage(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___EmailUsage                  
-            Return New T___EmailUsage(DBConnectInterface.getDBConn(),                  
+            Return New T___EmailUsage(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -653,7 +653,7 @@ Public Shared Function addNewDefault() As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramDelivered As DataColumnParameter = New DataColumnParameter(defDelivered, defDelivered.DefaultValue)
  Dim paramSender As DataColumnParameter = New DataColumnParameter(defSender, defSender.DefaultValue)
  Dim paramReceiver As DataColumnParameter = New DataColumnParameter(defReceiver, defReceiver.DefaultValue)
@@ -668,7 +668,7 @@ Try
  Dim paramGateway As DataColumnParameter = New DataColumnParameter(defGateway, defGateway.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramDelivered.getSQLQuotedValueForAdd(),
 paramSender.getSQLQuotedValueForAdd(),
@@ -713,7 +713,7 @@ Optional ByVal pExceptionStackTrace As Object = DataColumnNullParamValue.NULL_VA
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramDelivered As DataColumnParameter = New DataColumnParameter(defDelivered, pDelivered)
  Dim paramSender As DataColumnParameter = New DataColumnParameter(defSender, pSender)
  Dim paramReceiver As DataColumnParameter = New DataColumnParameter(defReceiver, pReceiver)
@@ -728,7 +728,7 @@ Try
  Dim paramGateway As DataColumnParameter = New DataColumnParameter(defGateway, pGateway)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramDelivered.getSQLQuotedValueForAdd(),
 paramSender.getSQLQuotedValueForAdd(),
@@ -788,7 +788,7 @@ Try
  Dim paramGateway As DataColumnParameter = New DataColumnParameter(defGateway, pGateway)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramDelivered.getSQLQuotedValueForAdd(),
 paramSender.getSQLQuotedValueForAdd(),
@@ -851,7 +851,7 @@ Try
  Dim paramGateway As DataColumnParameter = New DataColumnParameter(defGateway, pGateway)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) ", TABLE_NAME,paramDelivered.getSQLQuotedValueForAdd(),
 paramSender.getSQLQuotedValueForAdd(),
 paramReceiver.getSQLQuotedValueForAdd(),
@@ -912,7 +912,7 @@ Try
  Dim paramGateway As DataColumnParameter = New DataColumnParameter(defGateway, pGateway)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [Delivered]={2},[Sender]={3},[Receiver]={4},[BCC]={5},[CC]={6},[Subject]={7},[MessageBodyFileName]={8},[CreatedAt]={9},[UpdatedAt]={10},[ExceptionMessage]={11},[ExceptionStackTrace]={12},[Gateway]={13} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramDelivered.getSQLQuotedValueForUpdate(),
 paramSender.getSQLQuotedValueForUpdate(),
 paramReceiver.getSQLQuotedValueForUpdate(),
@@ -946,7 +946,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

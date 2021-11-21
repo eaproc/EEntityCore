@@ -85,7 +85,7 @@ Namespace DBEntities.DatabaseSchema
 
 #Region "Methods"
 
-        Public Function getDBConn() As Server Implements ISQLServerDBPointer.getDBConn
+        Public Function GetDBConn() As Server Implements ISQLServerDBPointer.GetDBConn
             Return CType(DBConnClientRemote, Server)
         End Function
 

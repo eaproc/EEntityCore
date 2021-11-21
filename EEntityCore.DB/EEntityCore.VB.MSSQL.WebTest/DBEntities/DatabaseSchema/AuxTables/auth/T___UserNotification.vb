@@ -452,11 +452,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___UserNotification                  
-            Return New T___UserNotification(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___UserNotification(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___UserNotification                  
-            Return New T___UserNotification(DBConnectInterface.getDBConn(),                  
+            Return New T___UserNotification(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -634,7 +634,7 @@ Public Shared Function addNewDefault(ByVal pUserID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
  Dim paramTitle As DataColumnParameter = New DataColumnParameter(defTitle, defTitle.DefaultValue)
  Dim paramQuickNote As DataColumnParameter = New DataColumnParameter(defQuickNote, defQuickNote.DefaultValue)
@@ -647,7 +647,7 @@ Try
  Dim paramTargetURL As DataColumnParameter = New DataColumnParameter(defTargetURL, defTargetURL.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[Title],[QuickNote],[Description],[IconClass],[HeadingColorClass],[CreatedAt],[ReadAt],[Identifier],[TargetURL]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramUserID.getSQLQuotedValueForAdd(),
 paramTitle.getSQLQuotedValueForAdd(),
@@ -688,7 +688,7 @@ Optional ByVal pIdentifier As Object = DataColumnNullParamValue.NULL_VALUE) As I
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramUserID As DataColumnParameter = New DataColumnParameter(defUserID, pUserID)
  Dim paramTitle As DataColumnParameter = New DataColumnParameter(defTitle, pTitle)
  Dim paramQuickNote As DataColumnParameter = New DataColumnParameter(defQuickNote, pQuickNote)
@@ -701,7 +701,7 @@ Try
  Dim paramTargetURL As DataColumnParameter = New DataColumnParameter(defTargetURL, pTargetURL)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[Title],[QuickNote],[Description],[IconClass],[HeadingColorClass],[CreatedAt],[ReadAt],[Identifier],[TargetURL]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramUserID.getSQLQuotedValueForAdd(),
 paramTitle.getSQLQuotedValueForAdd(),
@@ -755,7 +755,7 @@ Try
  Dim paramTargetURL As DataColumnParameter = New DataColumnParameter(defTargetURL, pTargetURL)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[Title],[QuickNote],[Description],[IconClass],[HeadingColorClass],[CreatedAt],[ReadAt],[Identifier],[TargetURL]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramUserID.getSQLQuotedValueForAdd(),
 paramTitle.getSQLQuotedValueForAdd(),
@@ -812,7 +812,7 @@ Try
  Dim paramTargetURL As DataColumnParameter = New DataColumnParameter(defTargetURL, pTargetURL)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([UserID],[Title],[QuickNote],[Description],[IconClass],[HeadingColorClass],[CreatedAt],[ReadAt],[Identifier],[TargetURL]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,paramUserID.getSQLQuotedValueForAdd(),
 paramTitle.getSQLQuotedValueForAdd(),
 paramQuickNote.getSQLQuotedValueForAdd(),
@@ -867,7 +867,7 @@ Try
  Dim paramTargetURL As DataColumnParameter = New DataColumnParameter(defTargetURL, pTargetURL)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [UserID]={2},[Title]={3},[QuickNote]={4},[Description]={5},[IconClass]={6},[HeadingColorClass]={7},[CreatedAt]={8},[ReadAt]={9},[Identifier]={10},[TargetURL]={11} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramUserID.getSQLQuotedValueForUpdate(),
 paramTitle.getSQLQuotedValueForUpdate(),
 paramQuickNote.getSQLQuotedValueForUpdate(),
@@ -899,7 +899,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

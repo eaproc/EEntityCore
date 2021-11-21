@@ -412,11 +412,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___Role                  
-            Return New T___Role(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___Role(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___Role                  
-            Return New T___Role(DBConnectInterface.getDBConn(),                  
+            Return New T___Role(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -594,7 +594,7 @@ Public Shared Function addNewDefault(ByVal pName As String) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramName As DataColumnParameter = New DataColumnParameter(defName, pName)
  Dim paramDescription As DataColumnParameter = New DataColumnParameter(defDescription, defDescription.DefaultValue)
  Dim paramCanBeUpdated As DataColumnParameter = New DataColumnParameter(defCanBeUpdated, defCanBeUpdated.DefaultValue)
@@ -604,7 +604,7 @@ Try
  Dim paramRank As DataColumnParameter = New DataColumnParameter(defRank, defRank.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[Rank]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramName.getSQLQuotedValueForAdd(),
 paramDescription.getSQLQuotedValueForAdd(),
@@ -639,7 +639,7 @@ Optional ByVal pUpdatedAt As Object = DataColumnNullParamValue.NULL_VALUE) As In
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramName As DataColumnParameter = New DataColumnParameter(defName, pName)
  Dim paramDescription As DataColumnParameter = New DataColumnParameter(defDescription, pDescription)
  Dim paramCanBeUpdated As DataColumnParameter = New DataColumnParameter(defCanBeUpdated, pCanBeUpdated)
@@ -649,7 +649,7 @@ Try
  Dim paramRank As DataColumnParameter = New DataColumnParameter(defRank, pRank)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[Rank]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramName.getSQLQuotedValueForAdd(),
 paramDescription.getSQLQuotedValueForAdd(),
@@ -694,7 +694,7 @@ Try
  Dim paramRank As DataColumnParameter = New DataColumnParameter(defRank, pRank)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[Rank]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramName.getSQLQuotedValueForAdd(),
 paramDescription.getSQLQuotedValueForAdd(),
@@ -742,7 +742,7 @@ Try
  Dim paramRank As DataColumnParameter = New DataColumnParameter(defRank, pRank)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([Name],[Description],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[Rank]) VALUES({1},{2},{3},{4},{5},{6},{7}) ", TABLE_NAME,paramName.getSQLQuotedValueForAdd(),
 paramDescription.getSQLQuotedValueForAdd(),
 paramCanBeUpdated.getSQLQuotedValueForAdd(),
@@ -788,7 +788,7 @@ Try
  Dim paramRank As DataColumnParameter = New DataColumnParameter(defRank, pRank)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [Name]={2},[Description]={3},[CanBeUpdated]={4},[CanBeDeleted]={5},[CreatedAt]={6},[UpdatedAt]={7},[Rank]={8} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramName.getSQLQuotedValueForUpdate(),
 paramDescription.getSQLQuotedValueForUpdate(),
 paramCanBeUpdated.getSQLQuotedValueForUpdate(),
@@ -817,7 +817,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

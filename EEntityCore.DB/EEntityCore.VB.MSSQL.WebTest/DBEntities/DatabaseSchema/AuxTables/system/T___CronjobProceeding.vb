@@ -409,11 +409,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___CronjobProceeding                  
-            Return New T___CronjobProceeding(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___CronjobProceeding(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___CronjobProceeding                  
-            Return New T___CronjobProceeding(DBConnectInterface.getDBConn(),                  
+            Return New T___CronjobProceeding(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -592,7 +592,7 @@ ByVal pProceedingStatusID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramCronjobID As DataColumnParameter = New DataColumnParameter(defCronjobID, pCronjobID)
  Dim paramProceedingStatusID As DataColumnParameter = New DataColumnParameter(defProceedingStatusID, pProceedingStatusID)
  Dim paramComments As DataColumnParameter = New DataColumnParameter(defComments, defComments.DefaultValue)
@@ -601,7 +601,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CronjobID],[ProceedingStatusID],[Comments],[NextExpectedExecutionTime],[IsSuccessful],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramCronjobID.getSQLQuotedValueForAdd(),
 paramProceedingStatusID.getSQLQuotedValueForAdd(),
@@ -634,7 +634,7 @@ Optional ByVal pNextExpectedExecutionTime As Object = DataColumnNullParamValue.N
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramCronjobID As DataColumnParameter = New DataColumnParameter(defCronjobID, pCronjobID)
  Dim paramProceedingStatusID As DataColumnParameter = New DataColumnParameter(defProceedingStatusID, pProceedingStatusID)
  Dim paramComments As DataColumnParameter = New DataColumnParameter(defComments, pComments)
@@ -643,7 +643,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CronjobID],[ProceedingStatusID],[Comments],[NextExpectedExecutionTime],[IsSuccessful],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramCronjobID.getSQLQuotedValueForAdd(),
 paramProceedingStatusID.getSQLQuotedValueForAdd(),
@@ -685,7 +685,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CronjobID],[ProceedingStatusID],[Comments],[NextExpectedExecutionTime],[IsSuccessful],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramCronjobID.getSQLQuotedValueForAdd(),
 paramProceedingStatusID.getSQLQuotedValueForAdd(),
@@ -730,7 +730,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([CronjobID],[ProceedingStatusID],[Comments],[NextExpectedExecutionTime],[IsSuccessful],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6}) ", TABLE_NAME,paramCronjobID.getSQLQuotedValueForAdd(),
 paramProceedingStatusID.getSQLQuotedValueForAdd(),
 paramComments.getSQLQuotedValueForAdd(),
@@ -773,7 +773,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [CronjobID]={2},[ProceedingStatusID]={3},[Comments]={4},[NextExpectedExecutionTime]={5},[IsSuccessful]={6},[CreatedAt]={7} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCronjobID.getSQLQuotedValueForUpdate(),
 paramProceedingStatusID.getSQLQuotedValueForUpdate(),
 paramComments.getSQLQuotedValueForUpdate(),
@@ -801,7 +801,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

@@ -453,11 +453,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___OnlinePaymentAuthorization                  
-            Return New T___OnlinePaymentAuthorization(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___OnlinePaymentAuthorization(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___OnlinePaymentAuthorization                  
-            Return New T___OnlinePaymentAuthorization(DBConnectInterface.getDBConn(),                  
+            Return New T___OnlinePaymentAuthorization(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -635,7 +635,7 @@ Public Shared Function addNewDefault(ByVal pOnlinePaymentID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramOnlinePaymentID As DataColumnParameter = New DataColumnParameter(defOnlinePaymentID, pOnlinePaymentID)
  Dim paramAuthorizationCode As DataColumnParameter = New DataColumnParameter(defAuthorizationCode, defAuthorizationCode.DefaultValue)
  Dim paramCardType As DataColumnParameter = New DataColumnParameter(defCardType, defCardType.DefaultValue)
@@ -648,7 +648,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramOnlinePaymentID.getSQLQuotedValueForAdd(),
 paramAuthorizationCode.getSQLQuotedValueForAdd(),
@@ -689,7 +689,7 @@ Optional ByVal pCountryCode As Object = DataColumnNullParamValue.NULL_VALUE) As 
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramOnlinePaymentID As DataColumnParameter = New DataColumnParameter(defOnlinePaymentID, pOnlinePaymentID)
  Dim paramAuthorizationCode As DataColumnParameter = New DataColumnParameter(defAuthorizationCode, pAuthorizationCode)
  Dim paramCardType As DataColumnParameter = New DataColumnParameter(defCardType, pCardType)
@@ -702,7 +702,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramOnlinePaymentID.getSQLQuotedValueForAdd(),
 paramAuthorizationCode.getSQLQuotedValueForAdd(),
@@ -756,7 +756,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramOnlinePaymentID.getSQLQuotedValueForAdd(),
 paramAuthorizationCode.getSQLQuotedValueForAdd(),
@@ -813,7 +813,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,paramOnlinePaymentID.getSQLQuotedValueForAdd(),
 paramAuthorizationCode.getSQLQuotedValueForAdd(),
 paramCardType.getSQLQuotedValueForAdd(),
@@ -868,7 +868,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [OnlinePaymentID]={2},[AuthorizationCode]={3},[CardType]={4},[BIN]={5},[Last4Digits]={6},[ExpirationMonth]={7},[ExpirationYear]={8},[Bank]={9},[CountryCode]={10},[CreatedAt]={11} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramOnlinePaymentID.getSQLQuotedValueForUpdate(),
 paramAuthorizationCode.getSQLQuotedValueForUpdate(),
 paramCardType.getSQLQuotedValueForUpdate(),
@@ -900,7 +900,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

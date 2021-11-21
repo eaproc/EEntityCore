@@ -381,11 +381,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___Cronjob                  
-            Return New T___Cronjob(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___Cronjob(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___Cronjob                  
-            Return New T___Cronjob(DBConnectInterface.getDBConn(),                  
+            Return New T___Cronjob(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -564,14 +564,14 @@ ByVal pName As String) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramIntervalID As DataColumnParameter = New DataColumnParameter(defIntervalID, pIntervalID)
  Dim paramName As DataColumnParameter = New DataColumnParameter(defName, pName)
  Dim paramDescription As DataColumnParameter = New DataColumnParameter(defDescription, defDescription.DefaultValue)
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IntervalID],[Name],[Description],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramIntervalID.getSQLQuotedValueForAdd(),
 paramName.getSQLQuotedValueForAdd(),
@@ -600,14 +600,14 @@ Optional ByVal pDescription As Object = DataColumnNullParamValue.NULL_VALUE) As 
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramIntervalID As DataColumnParameter = New DataColumnParameter(defIntervalID, pIntervalID)
  Dim paramName As DataColumnParameter = New DataColumnParameter(defName, pName)
  Dim paramDescription As DataColumnParameter = New DataColumnParameter(defDescription, pDescription)
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IntervalID],[Name],[Description],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramIntervalID.getSQLQuotedValueForAdd(),
 paramName.getSQLQuotedValueForAdd(),
@@ -643,7 +643,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IntervalID],[Name],[Description],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramIntervalID.getSQLQuotedValueForAdd(),
 paramName.getSQLQuotedValueForAdd(),
@@ -682,7 +682,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([IntervalID],[Name],[Description],[CreatedAt]) VALUES({1},{2},{3},{4}) ", TABLE_NAME,paramIntervalID.getSQLQuotedValueForAdd(),
 paramName.getSQLQuotedValueForAdd(),
 paramDescription.getSQLQuotedValueForAdd(),
@@ -719,7 +719,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [IntervalID]={2},[Name]={3},[Description]={4},[CreatedAt]={5} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramIntervalID.getSQLQuotedValueForUpdate(),
 paramName.getSQLQuotedValueForUpdate(),
 paramDescription.getSQLQuotedValueForUpdate(),
@@ -745,7 +745,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

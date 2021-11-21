@@ -477,11 +477,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___BusinessPlan                  
-            Return New T___BusinessPlan(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___BusinessPlan(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___BusinessPlan                  
-            Return New T___BusinessPlan(DBConnectInterface.getDBConn(),                  
+            Return New T___BusinessPlan(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -659,7 +659,7 @@ Public Shared Function addNewDefault(ByVal pAcademicSessionID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramAcademicSessionID As DataColumnParameter = New DataColumnParameter(defAcademicSessionID, pAcademicSessionID)
  Dim paramStudentPopulation As DataColumnParameter = New DataColumnParameter(defStudentPopulation, defStudentPopulation.DefaultValue)
  Dim paramAveragePricePerStudent As DataColumnParameter = New DataColumnParameter(defAveragePricePerStudent, defAveragePricePerStudent.DefaultValue)
@@ -674,7 +674,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramAcademicSessionID.getSQLQuotedValueForAdd(),
 paramStudentPopulation.getSQLQuotedValueForAdd(),
@@ -719,7 +719,7 @@ Optional ByVal pUpdatedAt As Object = DataColumnNullParamValue.NULL_VALUE) As In
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramAcademicSessionID As DataColumnParameter = New DataColumnParameter(defAcademicSessionID, pAcademicSessionID)
  Dim paramStudentPopulation As DataColumnParameter = New DataColumnParameter(defStudentPopulation, pStudentPopulation)
  Dim paramAveragePricePerStudent As DataColumnParameter = New DataColumnParameter(defAveragePricePerStudent, pAveragePricePerStudent)
@@ -734,7 +734,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramAcademicSessionID.getSQLQuotedValueForAdd(),
 paramStudentPopulation.getSQLQuotedValueForAdd(),
@@ -794,7 +794,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramAcademicSessionID.getSQLQuotedValueForAdd(),
 paramStudentPopulation.getSQLQuotedValueForAdd(),
@@ -857,7 +857,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) ", TABLE_NAME,paramAcademicSessionID.getSQLQuotedValueForAdd(),
 paramStudentPopulation.getSQLQuotedValueForAdd(),
 paramAveragePricePerStudent.getSQLQuotedValueForAdd(),
@@ -918,7 +918,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [AcademicSessionID]={2},[StudentPopulation]={3},[AveragePricePerStudent]={4},[SCADWAREAccessRevenue]={5},[SideContractRevenue]={6},[GrossRevenue]={7},[Wages]={8},[Marketing]={9},[Charity]={10},[Others]={11},[CreatedAt]={12},[UpdatedAt]={13} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramAcademicSessionID.getSQLQuotedValueForUpdate(),
 paramStudentPopulation.getSQLQuotedValueForUpdate(),
 paramAveragePricePerStudent.getSQLQuotedValueForUpdate(),
@@ -952,7 +952,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

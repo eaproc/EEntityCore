@@ -489,11 +489,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___DealerWithdrawal                  
-            Return New T___DealerWithdrawal(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___DealerWithdrawal(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___DealerWithdrawal                  
-            Return New T___DealerWithdrawal(DBConnectInterface.getDBConn(),                  
+            Return New T___DealerWithdrawal(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -676,7 +676,7 @@ ByVal pTermID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramDealerID As DataColumnParameter = New DataColumnParameter(defDealerID, pDealerID)
  Dim paramWithdrawalStatusID As DataColumnParameter = New DataColumnParameter(defWithdrawalStatusID, pWithdrawalStatusID)
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
@@ -690,7 +690,7 @@ Try
  Dim paramAccountNumber As DataColumnParameter = New DataColumnParameter(defAccountNumber, defAccountNumber.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DealerID],[Amount],[WithdrawalStatusID],[Comments],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt],[BankID],[AccountNumber],[TermID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramDealerID.getSQLQuotedValueForAdd(),
 paramAmount.getSQLQuotedValueForAdd(),
@@ -733,7 +733,7 @@ Optional ByVal pUpdatedAt As Object = DataColumnNullParamValue.NULL_VALUE) As In
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramDealerID As DataColumnParameter = New DataColumnParameter(defDealerID, pDealerID)
  Dim paramAmount As DataColumnParameter = New DataColumnParameter(defAmount, pAmount)
  Dim paramWithdrawalStatusID As DataColumnParameter = New DataColumnParameter(defWithdrawalStatusID, pWithdrawalStatusID)
@@ -747,7 +747,7 @@ Try
  Dim paramTermID As DataColumnParameter = New DataColumnParameter(defTermID, pTermID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DealerID],[Amount],[WithdrawalStatusID],[Comments],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt],[BankID],[AccountNumber],[TermID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramDealerID.getSQLQuotedValueForAdd(),
 paramAmount.getSQLQuotedValueForAdd(),
@@ -804,7 +804,7 @@ Try
  Dim paramTermID As DataColumnParameter = New DataColumnParameter(defTermID, pTermID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DealerID],[Amount],[WithdrawalStatusID],[Comments],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt],[BankID],[AccountNumber],[TermID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramDealerID.getSQLQuotedValueForAdd(),
 paramAmount.getSQLQuotedValueForAdd(),
@@ -864,7 +864,7 @@ Try
  Dim paramTermID As DataColumnParameter = New DataColumnParameter(defTermID, pTermID)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([DealerID],[Amount],[WithdrawalStatusID],[Comments],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt],[BankID],[AccountNumber],[TermID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) ", TABLE_NAME,paramDealerID.getSQLQuotedValueForAdd(),
 paramAmount.getSQLQuotedValueForAdd(),
 paramWithdrawalStatusID.getSQLQuotedValueForAdd(),
@@ -922,7 +922,7 @@ Try
  Dim paramTermID As DataColumnParameter = New DataColumnParameter(defTermID, pTermID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [DealerID]={2},[Amount]={3},[WithdrawalStatusID]={4},[Comments]={5},[CreatedByID]={6},[CreatedAt]={7},[UpdatedByID]={8},[UpdatedAt]={9},[BankID]={10},[AccountNumber]={11},[TermID]={12} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramDealerID.getSQLQuotedValueForUpdate(),
 paramAmount.getSQLQuotedValueForUpdate(),
 paramWithdrawalStatusID.getSQLQuotedValueForUpdate(),
@@ -955,7 +955,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

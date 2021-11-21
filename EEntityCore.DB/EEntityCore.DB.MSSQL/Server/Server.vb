@@ -41,7 +41,7 @@ Public MustInherit Class Server
 
 
 
-    Protected __SQLServerAddress As String
+    Protected Property __SQLServerAddress As String
     ''' <summary>
     ''' Server address or host name with address like WINHOST-PC\SQLEXPRESS
     ''' </summary>
@@ -285,7 +285,7 @@ Public MustInherit Class Server
     ''' <param name="SQL"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Overrides Function dbExec(ByVal SQL As String) As Boolean
+    Public Overrides Function DbExec(ByVal SQL As String) As Boolean
         Return Me.dbExec(SQL, Me.CurrentDBInUse)
     End Function
 
@@ -356,7 +356,7 @@ Public MustInherit Class Server
     ''' <returns></returns>
     ''' <exception cref="Exception"></exception>
     ''' <remarks></remarks>
-    Public Overrides Function getRS(ByVal SQL As String) As System.Data.DataSet
+    Public Overrides Function GetRS(ByVal SQL As String) As System.Data.DataSet
         Return Me.getRS(SQL, Me.CurrentDBInUse)
     End Function
 
@@ -495,7 +495,7 @@ Public MustInherit Class Server
     Public Overrides Function PingDB() As Boolean
 
         Return IsDataSetValid(
-            getRS("SELECT * FROM sys.server_principals")
+            GetRS("SELECT * FROM sys.server_principals")
             )
 
     End Function
@@ -593,7 +593,7 @@ Public MustInherit Class Server
 
             Else
 
-                Return dbExec(sqlNull)
+                Return DbExec(sqlNull)
 
             End If
 
@@ -712,7 +712,7 @@ Public MustInherit Class Server
             Else
 
 SaveAsNull:
-                Return dbExec(sqlNull)
+                Return DbExec(sqlNull)
 
             End If
 
@@ -784,7 +784,7 @@ SaveAsNull:
             Else
 
 SaveAsNull:
-                Return dbExec(sqlNull)
+                Return DbExec(sqlNull)
 
             End If
 
@@ -855,7 +855,7 @@ SaveAsNull:
             Else
 
 SaveAsNull:
-                Return dbExec(sqlNull)
+                Return DbExec(sqlNull)
 
             End If
 
@@ -1450,7 +1450,7 @@ SaveAsNull:
 
                     SQLCommand = SQLCommand.Trim()
                     If SQLCommand <> "" Then
-                        If Not dbExec(SQLCommand) And TerminateOnError Then
+                        If Not DbExec(SQLCommand) And TerminateOnError Then
                             rValue = False
                             GoTo CleanUP
                         End If
@@ -1627,7 +1627,7 @@ CleanUP:
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Function IsSnapshotSetOnDatabase(ByVal pDatabase As String) As Boolean
-        Dim p = getRS(
+        Dim p = GetRS(
                               String.Format("SELECT snapshot_isolation_state FROM sys.databases WHERE [name]='{0}'",
                                                   pDatabase)
                                               )
@@ -1650,8 +1650,8 @@ CleanUP:
 
 
     Public Function setAllowSnapshotOnDatabase(pSetOn As Boolean, pDatabaseName As String) As Boolean
-        If pSetOn Then Return dbExec(String.Format("ALTER DATABASE {0} SET ALLOW_SNAPSHOT_ISOLATION ON", pDatabaseName))
-        Return dbExec(String.Format("ALTER DATABASE {0} SET ALLOW_SNAPSHOT_ISOLATION OFF", pDatabaseName))
+        If pSetOn Then Return DbExec(String.Format("ALTER DATABASE {0} SET ALLOW_SNAPSHOT_ISOLATION ON", pDatabaseName))
+        Return DbExec(String.Format("ALTER DATABASE {0} SET ALLOW_SNAPSHOT_ISOLATION OFF", pDatabaseName))
     End Function
 
     Public Function setAllowSnapshotOnDatabase(pSetOn As Boolean) As Boolean
@@ -1685,7 +1685,7 @@ CleanUP:
                     )
             '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-            Dim DBVersion As DataSet = getRS("SELECT Version From DBInfo")
+            Dim DBVersion As DataSet = GetRS("SELECT Version From DBInfo")
             Logger.Log(
                     String.Format(
                         "DBInfo Table Located: {0}",
@@ -1714,7 +1714,7 @@ CleanUP:
     Protected Function UpdateDBVersion(ByVal _Version As Double) As Boolean
 
         Try
-            Return dbExec(
+            Return DbExec(
                 String.Format(
                         "UPDATE DBInfo SET Version={0} WHERE ID=1 ",
                         _Version)

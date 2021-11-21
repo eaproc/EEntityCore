@@ -416,11 +416,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___Payroll                  
-            Return New T___Payroll(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___Payroll(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___Payroll                  
-            Return New T___Payroll(DBConnectInterface.getDBConn(),                  
+            Return New T___Payroll(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -598,7 +598,7 @@ Public Shared Function addNewDefault(ByVal pCreatedByID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
  Dim paramStartDate As DataColumnParameter = New DataColumnParameter(defStartDate, defStartDate.DefaultValue)
  Dim paramEndDate As DataColumnParameter = New DataColumnParameter(defEndDate, defEndDate.DefaultValue)
@@ -608,7 +608,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[StartDate],[EndDate],[PayrollWorkingDays],[IsApproved],[MonthWorkingDays],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramStartDate.getSQLQuotedValueForAdd(),
 paramEndDate.getSQLQuotedValueForAdd(),
@@ -643,7 +643,7 @@ ByVal pCreatedByID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramStartDate As DataColumnParameter = New DataColumnParameter(defStartDate, pStartDate)
  Dim paramEndDate As DataColumnParameter = New DataColumnParameter(defEndDate, pEndDate)
  Dim paramPayrollWorkingDays As DataColumnParameter = New DataColumnParameter(defPayrollWorkingDays, pPayrollWorkingDays)
@@ -653,7 +653,7 @@ Try
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[StartDate],[EndDate],[PayrollWorkingDays],[IsApproved],[MonthWorkingDays],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramStartDate.getSQLQuotedValueForAdd(),
 paramEndDate.getSQLQuotedValueForAdd(),
@@ -698,7 +698,7 @@ Try
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[StartDate],[EndDate],[PayrollWorkingDays],[IsApproved],[MonthWorkingDays],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramStartDate.getSQLQuotedValueForAdd(),
 paramEndDate.getSQLQuotedValueForAdd(),
@@ -746,7 +746,7 @@ Try
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([StartDate],[EndDate],[PayrollWorkingDays],[IsApproved],[MonthWorkingDays],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7}) ", TABLE_NAME,paramStartDate.getSQLQuotedValueForAdd(),
 paramEndDate.getSQLQuotedValueForAdd(),
 paramPayrollWorkingDays.getSQLQuotedValueForAdd(),
@@ -792,7 +792,7 @@ Try
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [StartDate]={2},[EndDate]={3},[PayrollWorkingDays]={4},[IsApproved]={5},[MonthWorkingDays]={6},[CreatedAt]={7},[CreatedByID]={8} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramStartDate.getSQLQuotedValueForUpdate(),
 paramEndDate.getSQLQuotedValueForUpdate(),
 paramPayrollWorkingDays.getSQLQuotedValueForUpdate(),
@@ -821,7 +821,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

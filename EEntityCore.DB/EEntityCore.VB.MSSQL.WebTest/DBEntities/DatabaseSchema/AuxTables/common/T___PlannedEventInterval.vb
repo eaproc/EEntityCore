@@ -397,11 +397,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___PlannedEventInterval                  
-            Return New T___PlannedEventInterval(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___PlannedEventInterval(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___PlannedEventInterval                  
-            Return New T___PlannedEventInterval(DBConnectInterface.getDBConn(),                  
+            Return New T___PlannedEventInterval(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -580,7 +580,7 @@ ByVal pDayOfWeekID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPlannedEventID As DataColumnParameter = New DataColumnParameter(defPlannedEventID, pPlannedEventID)
  Dim paramDayOfWeekID As DataColumnParameter = New DataColumnParameter(defDayOfWeekID, pDayOfWeekID)
  Dim paramStartTime As DataColumnParameter = New DataColumnParameter(defStartTime, defStartTime.DefaultValue)
@@ -588,7 +588,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PlannedEventID],[DayOfWeekID],[StartTime],[EndTime],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPlannedEventID.getSQLQuotedValueForAdd(),
 paramDayOfWeekID.getSQLQuotedValueForAdd(),
@@ -619,7 +619,7 @@ ByVal pCreatedAt As DateTime) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPlannedEventID As DataColumnParameter = New DataColumnParameter(defPlannedEventID, pPlannedEventID)
  Dim paramDayOfWeekID As DataColumnParameter = New DataColumnParameter(defDayOfWeekID, pDayOfWeekID)
  Dim paramStartTime As DataColumnParameter = New DataColumnParameter(defStartTime, pStartTime)
@@ -627,7 +627,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PlannedEventID],[DayOfWeekID],[StartTime],[EndTime],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPlannedEventID.getSQLQuotedValueForAdd(),
 paramDayOfWeekID.getSQLQuotedValueForAdd(),
@@ -666,7 +666,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PlannedEventID],[DayOfWeekID],[StartTime],[EndTime],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPlannedEventID.getSQLQuotedValueForAdd(),
 paramDayOfWeekID.getSQLQuotedValueForAdd(),
@@ -708,7 +708,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([PlannedEventID],[DayOfWeekID],[StartTime],[EndTime],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) ", TABLE_NAME,paramPlannedEventID.getSQLQuotedValueForAdd(),
 paramDayOfWeekID.getSQLQuotedValueForAdd(),
 paramStartTime.getSQLQuotedValueForAdd(),
@@ -748,7 +748,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [PlannedEventID]={2},[DayOfWeekID]={3},[StartTime]={4},[EndTime]={5},[CreatedAt]={6} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPlannedEventID.getSQLQuotedValueForUpdate(),
 paramDayOfWeekID.getSQLQuotedValueForUpdate(),
 paramStartTime.getSQLQuotedValueForUpdate(),
@@ -775,7 +775,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

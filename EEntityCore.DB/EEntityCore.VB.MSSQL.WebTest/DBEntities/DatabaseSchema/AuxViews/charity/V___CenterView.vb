@@ -466,11 +466,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As V___CenterView                  
-            Return New V___CenterView(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New V___CenterView(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As V___CenterView                  
-            Return New V___CenterView(DBConnectInterface.getDBConn(),                  
+            Return New V___CenterView(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  

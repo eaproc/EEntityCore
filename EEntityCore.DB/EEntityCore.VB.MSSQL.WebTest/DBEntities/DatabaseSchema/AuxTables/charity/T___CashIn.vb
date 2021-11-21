@@ -397,11 +397,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___CashIn                  
-            Return New T___CashIn(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___CashIn(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___CashIn                  
-            Return New T___CashIn(DBConnectInterface.getDBConn(),                  
+            Return New T___CashIn(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -580,7 +580,7 @@ ByVal pCreatedByID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramCashInTypeID As DataColumnParameter = New DataColumnParameter(defCashInTypeID, pCashInTypeID)
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
  Dim paramAmount As DataColumnParameter = New DataColumnParameter(defAmount, defAmount.DefaultValue)
@@ -588,7 +588,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CashInTypeID],[Amount],[Comments],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramCashInTypeID.getSQLQuotedValueForAdd(),
 paramAmount.getSQLQuotedValueForAdd(),
@@ -619,7 +619,7 @@ Optional ByVal pComments As Object = DataColumnNullParamValue.NULL_VALUE) As Int
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramCashInTypeID As DataColumnParameter = New DataColumnParameter(defCashInTypeID, pCashInTypeID)
  Dim paramAmount As DataColumnParameter = New DataColumnParameter(defAmount, pAmount)
  Dim paramComments As DataColumnParameter = New DataColumnParameter(defComments, pComments)
@@ -627,7 +627,7 @@ Try
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CashInTypeID],[Amount],[Comments],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramCashInTypeID.getSQLQuotedValueForAdd(),
 paramAmount.getSQLQuotedValueForAdd(),
@@ -666,7 +666,7 @@ Try
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CashInTypeID],[Amount],[Comments],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramCashInTypeID.getSQLQuotedValueForAdd(),
 paramAmount.getSQLQuotedValueForAdd(),
@@ -708,7 +708,7 @@ Try
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([CashInTypeID],[Amount],[Comments],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5}) ", TABLE_NAME,paramCashInTypeID.getSQLQuotedValueForAdd(),
 paramAmount.getSQLQuotedValueForAdd(),
 paramComments.getSQLQuotedValueForAdd(),
@@ -748,7 +748,7 @@ Try
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [CashInTypeID]={2},[Amount]={3},[Comments]={4},[CreatedAt]={5},[CreatedByID]={6} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCashInTypeID.getSQLQuotedValueForUpdate(),
 paramAmount.getSQLQuotedValueForUpdate(),
 paramComments.getSQLQuotedValueForUpdate(),
@@ -775,7 +775,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

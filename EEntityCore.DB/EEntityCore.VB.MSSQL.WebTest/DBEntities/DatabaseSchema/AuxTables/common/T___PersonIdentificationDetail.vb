@@ -468,11 +468,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___PersonIdentificationDetail                  
-            Return New T___PersonIdentificationDetail(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___PersonIdentificationDetail(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___PersonIdentificationDetail                  
-            Return New T___PersonIdentificationDetail(DBConnectInterface.getDBConn(),                  
+            Return New T___PersonIdentificationDetail(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -654,7 +654,7 @@ ByVal pIdentificationViabilityID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPersonID As DataColumnParameter = New DataColumnParameter(defPersonID, pPersonID)
  Dim paramNumber As DataColumnParameter = New DataColumnParameter(defNumber, pNumber)
  Dim paramIdentificationTypeID As DataColumnParameter = New DataColumnParameter(defIdentificationTypeID, pIdentificationTypeID)
@@ -667,7 +667,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[Number],[IdentificationTypeID],[IssuedDate],[IssuingCountryID],[ExpiryDate],[IdentificationViabilityID],[DocumentFileName],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPersonID.getSQLQuotedValueForAdd(),
 paramNumber.getSQLQuotedValueForAdd(),
@@ -708,7 +708,7 @@ Optional ByVal pUpdatedAt As Object = DataColumnNullParamValue.NULL_VALUE) As In
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramPersonID As DataColumnParameter = New DataColumnParameter(defPersonID, pPersonID)
  Dim paramNumber As DataColumnParameter = New DataColumnParameter(defNumber, pNumber)
  Dim paramIdentificationTypeID As DataColumnParameter = New DataColumnParameter(defIdentificationTypeID, pIdentificationTypeID)
@@ -721,7 +721,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[Number],[IdentificationTypeID],[IssuedDate],[IssuingCountryID],[ExpiryDate],[IdentificationViabilityID],[DocumentFileName],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPersonID.getSQLQuotedValueForAdd(),
 paramNumber.getSQLQuotedValueForAdd(),
@@ -775,7 +775,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[Number],[IdentificationTypeID],[IssuedDate],[IssuingCountryID],[ExpiryDate],[IdentificationViabilityID],[DocumentFileName],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramPersonID.getSQLQuotedValueForAdd(),
 paramNumber.getSQLQuotedValueForAdd(),
@@ -832,7 +832,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([PersonID],[Number],[IdentificationTypeID],[IssuedDate],[IssuingCountryID],[ExpiryDate],[IdentificationViabilityID],[DocumentFileName],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,paramPersonID.getSQLQuotedValueForAdd(),
 paramNumber.getSQLQuotedValueForAdd(),
 paramIdentificationTypeID.getSQLQuotedValueForAdd(),
@@ -887,7 +887,7 @@ Try
  Dim paramUpdatedAt As DataColumnParameter = New DataColumnParameter(defUpdatedAt, pUpdatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [PersonID]={2},[Number]={3},[IdentificationTypeID]={4},[IssuedDate]={5},[IssuingCountryID]={6},[ExpiryDate]={7},[IdentificationViabilityID]={8},[DocumentFileName]={9},[CreatedAt]={10},[UpdatedAt]={11} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPersonID.getSQLQuotedValueForUpdate(),
 paramNumber.getSQLQuotedValueForUpdate(),
 paramIdentificationTypeID.getSQLQuotedValueForUpdate(),
@@ -919,7 +919,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

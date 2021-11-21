@@ -531,11 +531,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As V___PersonLoginPlus1                  
-            Return New V___PersonLoginPlus1(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New V___PersonLoginPlus1(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As V___PersonLoginPlus1                  
-            Return New V___PersonLoginPlus1(DBConnectInterface.getDBConn(),                  
+            Return New V___PersonLoginPlus1(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  

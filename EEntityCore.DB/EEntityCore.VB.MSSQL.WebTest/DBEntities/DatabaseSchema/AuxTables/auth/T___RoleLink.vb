@@ -386,11 +386,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___RoleLink                  
-            Return New T___RoleLink(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___RoleLink(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___RoleLink                  
-            Return New T___RoleLink(DBConnectInterface.getDBConn(),                  
+            Return New T___RoleLink(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -569,14 +569,14 @@ ByVal pBaseLinkID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramRoleID As DataColumnParameter = New DataColumnParameter(defRoleID, pRoleID)
  Dim paramBaseLinkID As DataColumnParameter = New DataColumnParameter(defBaseLinkID, pBaseLinkID)
  Dim paramLinkPermissionID As DataColumnParameter = New DataColumnParameter(defLinkPermissionID, defLinkPermissionID.DefaultValue)
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[RoleID],[BaseLinkID],[LinkPermissionID],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramRoleID.getSQLQuotedValueForAdd(),
 paramBaseLinkID.getSQLQuotedValueForAdd(),
@@ -605,14 +605,14 @@ ByVal pCreatedAt As DateTime) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramRoleID As DataColumnParameter = New DataColumnParameter(defRoleID, pRoleID)
  Dim paramBaseLinkID As DataColumnParameter = New DataColumnParameter(defBaseLinkID, pBaseLinkID)
  Dim paramLinkPermissionID As DataColumnParameter = New DataColumnParameter(defLinkPermissionID, pLinkPermissionID)
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[RoleID],[BaseLinkID],[LinkPermissionID],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramRoleID.getSQLQuotedValueForAdd(),
 paramBaseLinkID.getSQLQuotedValueForAdd(),
@@ -648,7 +648,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[RoleID],[BaseLinkID],[LinkPermissionID],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramRoleID.getSQLQuotedValueForAdd(),
 paramBaseLinkID.getSQLQuotedValueForAdd(),
@@ -687,7 +687,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([RoleID],[BaseLinkID],[LinkPermissionID],[CreatedAt]) VALUES({1},{2},{3},{4}) ", TABLE_NAME,paramRoleID.getSQLQuotedValueForAdd(),
 paramBaseLinkID.getSQLQuotedValueForAdd(),
 paramLinkPermissionID.getSQLQuotedValueForAdd(),
@@ -724,7 +724,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [RoleID]={2},[BaseLinkID]={3},[LinkPermissionID]={4},[CreatedAt]={5} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramRoleID.getSQLQuotedValueForUpdate(),
 paramBaseLinkID.getSQLQuotedValueForUpdate(),
 paramLinkPermissionID.getSQLQuotedValueForUpdate(),
@@ -750,7 +750,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

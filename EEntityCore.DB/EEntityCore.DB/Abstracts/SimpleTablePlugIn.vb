@@ -56,7 +56,7 @@ Namespace Abstracts
 
 #Region "Contructors"
         ''' <summary>
-        ''' UNKNOWN ACCESS
+        ''' UNKNOWN ACCESS. Just sets table name only
         ''' </summary>
         ''' <param name="TableName"></param>
         ''' <remarks></remarks>
@@ -78,7 +78,7 @@ Namespace Abstracts
         ''' <param name="DBConn"></param>
         ''' <param name="TableName"></param>
         ''' <remarks></remarks>
-        Public Sub New(ByRef DBConn As All__DBs,
+        Public Sub New(ByVal DBConn As All__DBs,
                       ByVal TableName As String
                      )
             Me.New(DBConn, TableName, DO__NOT____TARGET__ANY_ROWID)
@@ -92,7 +92,7 @@ Namespace Abstracts
         ''' <param name="pTableName"></param>
         ''' <param name="pTargettedRowID">Only works if the table contains a column named ID</param>
         ''' <remarks></remarks>
-        Sub New(ByRef DBConn As All__DBs,
+        Sub New(ByVal DBConn As All__DBs,
                 ByVal pTableName As String,
                       ByVal pTargettedRowID As Int64)
 
@@ -107,7 +107,7 @@ Namespace Abstracts
         ''' <param name="pTableName"></param>
         ''' <param name="pSQL">Load table with your own SQL</param>
         ''' <remarks></remarks>
-        Public Sub New(ByRef pDBConn As All__DBs,
+        Public Sub New(ByVal pDBConn As All__DBs,
                 ByVal pTableName As String,
                 ByVal pSQL As String)
             Me.New(pDBConn, pTableName, pSQL, DO__NOT____TARGET__ANY_ROWID)
@@ -121,7 +121,7 @@ Namespace Abstracts
         ''' <param name="pTargettedRowID"></param>
         ''' <param name="pSQL">Load table with your own SQL</param>
         ''' <remarks></remarks>
-        Sub New(ByRef pDBConn As All__DBs,
+        Sub New(ByVal pDBConn As All__DBs,
                 ByVal pTableName As String,
                 ByVal pSQL As String,
                      ByVal pTargettedRowID As Int64)
@@ -134,7 +134,6 @@ Namespace Abstracts
             Me.reloadClass(pSQL)
 
             REM If no error then me.LoadID
-
             Me.LoadID(pTargettedRowID)
 
         End Sub
@@ -157,7 +156,7 @@ Namespace Abstracts
                 ByVal pTableRows As DataRowCollection,
                       ByVal pTargettedRowID As Int64,
                      pTableName As String,
-                     ByRef pDBConn As All__DBs)
+                     ByVal pDBConn As All__DBs)
 
             Me.New(pTableName)
             Me._OpenAccessFor = RecordAccessibility.PARTIAL_ACCESS
@@ -193,7 +192,7 @@ Namespace Abstracts
                 ByVal pTableRows As IEnumerable(Of DataRow),
                       ByVal pTargettedRowID As Int64,
                       ByVal pTableName As String,
-                     ByRef pDBConn As All__DBs)
+                     ByVal pDBConn As All__DBs)
 
             Me.New(pTableName)
             Me._OpenAccessFor = RecordAccessibility.PARTIAL_ACCESS
@@ -224,7 +223,7 @@ Namespace Abstracts
                 ByVal FullTable As DataTable,
                       ByVal pTargettedRowID As Int64,
                       ByVal TableName As String,
-                      ByRef DBConn As All__DBs)
+                      ByVal DBConn As All__DBs)
             Me.New(TableName)
             Me._OpenAccessFor = RecordAccessibility.PARTIAL_ACCESS
             Me._____DbConn = DBConn
@@ -533,7 +532,8 @@ Namespace Abstracts
 
                 Me.TargettedRow_Cached = Nothing
 
-                If Me.isTableValid AndAlso Me.hasNumericPrimaryKeyColumn AndAlso Me.RawTable.Columns.Contains(Me.NumericPrimaryKeyName) Then
+                If Me.isTableValid AndAlso pTargettedRowID <> DO__NOT____TARGET__ANY_ROWID _
+                    AndAlso Me.hasNumericPrimaryKeyColumn AndAlso Me.RawTable.Columns.Contains(Me.NumericPrimaryKeyName) Then
 
 
                     Dim pMatch As IEnumerable(Of DataRow) = From d As DataRow In Me.AllRows
@@ -588,9 +588,9 @@ Namespace Abstracts
 
                 Dim ds As DataSet
                 If SQL = vbNullString OrElse SQL.Equals(String.Empty) Then
-                    ds = Me.DBConn.getRS("SELECT * FROM " & Me.TableName)
+                    ds = Me.DBConn.GetRS("SELECT * FROM " & Me.TableName)
                 Else
-                    ds = Me.DBConn.getRS(SQL)
+                    ds = Me.DBConn.GetRS(SQL)
                 End If
 
                 If All__DBs.IsDataSetValid(ds) Then

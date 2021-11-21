@@ -659,11 +659,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___PaymentTransaction                  
-            Return New T___PaymentTransaction(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___PaymentTransaction(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___PaymentTransaction                  
-            Return New T___PaymentTransaction(DBConnectInterface.getDBConn(),                  
+            Return New T___PaymentTransaction(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -844,7 +844,7 @@ ByVal pUpdatedByID As Int32) As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramTransactionStatusID As DataColumnParameter = New DataColumnParameter(defTransactionStatusID, pTransactionStatusID)
  Dim paramClientID As DataColumnParameter = New DataColumnParameter(defClientID, pClientID)
  Dim paramCreatedByID As DataColumnParameter = New DataColumnParameter(defCreatedByID, pCreatedByID)
@@ -873,7 +873,7 @@ Try
  Dim paramIsMultiTarget As DataColumnParameter = New DataColumnParameter(defIsMultiTarget, defIsMultiTarget.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramTransactionStatusID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
@@ -946,7 +946,7 @@ Optional ByVal pIsMultiTarget As Object = DataColumnNullParamValue.NULL_VALUE) A
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramTransactionStatusID As DataColumnParameter = New DataColumnParameter(defTransactionStatusID, pTransactionStatusID)
  Dim paramClientID As DataColumnParameter = New DataColumnParameter(defClientID, pClientID)
  Dim paramStudentNumber As DataColumnParameter = New DataColumnParameter(defStudentNumber, pStudentNumber)
@@ -975,7 +975,7 @@ Try
  Dim paramIsMultiTarget As DataColumnParameter = New DataColumnParameter(defIsMultiTarget, pIsMultiTarget)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramTransactionStatusID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
@@ -1077,7 +1077,7 @@ Try
  Dim paramIsMultiTarget As DataColumnParameter = New DataColumnParameter(defIsMultiTarget, pIsMultiTarget)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramTransactionStatusID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
@@ -1182,7 +1182,7 @@ Try
  Dim paramIsMultiTarget As DataColumnParameter = New DataColumnParameter(defIsMultiTarget, pIsMultiTarget)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26}) ", TABLE_NAME,paramTransactionStatusID.getSQLQuotedValueForAdd(),
 paramClientID.getSQLQuotedValueForAdd(),
 paramStudentNumber.getSQLQuotedValueForAdd(),
@@ -1285,7 +1285,7 @@ Try
  Dim paramIsMultiTarget As DataColumnParameter = New DataColumnParameter(defIsMultiTarget, pIsMultiTarget)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [TransactionStatusID]={2},[ClientID]={3},[StudentNumber]={4},[FirstName]={5},[LastName]={6},[AccountName]={7},[AccountNumber]={8},[Bank]={9},[Channel]={10},[IPAddress]={11},[SchoolDiscountGiven]={12},[PaymentRequired]={13},[Charges]={14},[RefundAmount]={15},[Balance]={16},[ConfirmationThreshold]={17},[ConfirmationDate]={18},[AwaitingDisbursement]={19},[CreatedAt]={20},[UpdatedAt]={21},[CreatedByID]={22},[UpdatedByID]={23},[ConfirmedExplanation]={24},[ChargesBilledToClient]={25},[PaymentRequiredWithoutCharges]={26},[IsMultiTarget]={27} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramTransactionStatusID.getSQLQuotedValueForUpdate(),
 paramClientID.getSQLQuotedValueForUpdate(),
 paramStudentNumber.getSQLQuotedValueForUpdate(),
@@ -1333,7 +1333,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

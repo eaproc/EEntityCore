@@ -375,11 +375,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As T___SMSUnitStock                  
-            Return New T___SMSUnitStock(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New T___SMSUnitStock(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As T___SMSUnitStock                  
-            Return New T___SMSUnitStock(DBConnectInterface.getDBConn(),                  
+            Return New T___SMSUnitStock(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  
@@ -557,14 +557,14 @@ Public Shared Function addNewDefault() As Int32
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramStockAmountNaira As DataColumnParameter = New DataColumnParameter(defStockAmountNaira, defStockAmountNaira.DefaultValue)
  Dim paramQuantity As DataColumnParameter = New DataColumnParameter(defQuantity, defQuantity.DefaultValue)
  Dim paramComments As DataColumnParameter = New DataColumnParameter(defComments, defComments.DefaultValue)
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[StockAmountNaira],[Quantity],[Comments],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramStockAmountNaira.getSQLQuotedValueForAdd(),
 paramQuantity.getSQLQuotedValueForAdd(),
@@ -593,14 +593,14 @@ Optional ByVal pComments As Object = DataColumnNullParamValue.NULL_VALUE) As Int
 
 Try
 
- Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.getDBConn().GETNewID(TABLE_NAME))
+ Dim paramID As DataColumnParameter = New DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME))
  Dim paramStockAmountNaira As DataColumnParameter = New DataColumnParameter(defStockAmountNaira, pStockAmountNaira)
  Dim paramQuantity As DataColumnParameter = New DataColumnParameter(defQuantity, pQuantity)
  Dim paramComments As DataColumnParameter = New DataColumnParameter(defComments, pComments)
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[StockAmountNaira],[Quantity],[Comments],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramStockAmountNaira.getSQLQuotedValueForAdd(),
 paramQuantity.getSQLQuotedValueForAdd(),
@@ -636,7 +636,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[StockAmountNaira],[Quantity],[Comments],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
 paramStockAmountNaira.getSQLQuotedValueForAdd(),
 paramQuantity.getSQLQuotedValueForAdd(),
@@ -675,7 +675,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-Return DBConnectInterface.getDBConn().dbExec(
+Return DBConnectInterface.GetDBConn().dbExec(
      String.Format("INSERT INTO {0}([StockAmountNaira],[Quantity],[Comments],[CreatedAt]) VALUES({1},{2},{3},{4}) ", TABLE_NAME,paramStockAmountNaira.getSQLQuotedValueForAdd(),
 paramQuantity.getSQLQuotedValueForAdd(),
 paramComments.getSQLQuotedValueForAdd(),
@@ -712,7 +712,7 @@ Try
  Dim paramCreatedAt As DataColumnParameter = New DataColumnParameter(defCreatedAt, pCreatedAt)
 
 
-DBConnectInterface.getDBConn().dbExec(
+DBConnectInterface.GetDBConn().dbExec(
      String.Format("UPDATE {0} SET [StockAmountNaira]={2},[Quantity]={3},[Comments]={4},[CreatedAt]={5} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramStockAmountNaira.getSQLQuotedValueForUpdate(),
 paramQuantity.getSQLQuotedValueForUpdate(),
 paramComments.getSQLQuotedValueForUpdate(),
@@ -738,7 +738,7 @@ End Function
 Public Overloads Shared Function delete(ByVal pID As Int64) As Boolean 
 
 Try 
-Return DBConnectInterface.getDBConn().dbExec( 
+Return DBConnectInterface.GetDBConn().DbExec( 
 String.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID) 
 ) 
 

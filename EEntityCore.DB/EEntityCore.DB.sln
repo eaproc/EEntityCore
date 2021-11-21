@@ -7,7 +7,9 @@ Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "EEntityCore.DB", "EEntityCo
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "EEntityCore.DB.MSSQL", "EEntityCore.DB.MSSQL\EEntityCore.DB.MSSQL.vbproj", "{5C55A534-D7E3-4DBD-B909-7B73DEAE83E0}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "EEntityCore.VB.MSSQL.WebTest", "EEntityCore.VB.MSSQL.WebTest\EEntityCore.VB.MSSQL.WebTest.vbproj", "{944A44FD-F6ED-4922-9B9B-92769B54956F}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "EEntityCore.VB.MSSQL.WebTest", "EEntityCore.VB.MSSQL.WebTest\EEntityCore.VB.MSSQL.WebTest.vbproj", "{944A44FD-F6ED-4922-9B9B-92769B54956F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EEntityCore.MSSQL.WebTest", "EEntityCore.MSSQL.WebTest\EEntityCore.MSSQL.WebTest.csproj", "{DE7C5085-EE21-4F14-8819-223AEA70456A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{944A44FD-F6ED-4922-9B9B-92769B54956F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{944A44FD-F6ED-4922-9B9B-92769B54956F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{944A44FD-F6ED-4922-9B9B-92769B54956F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE7C5085-EE21-4F14-8819-223AEA70456A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE7C5085-EE21-4F14-8819-223AEA70456A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE7C5085-EE21-4F14-8819-223AEA70456A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE7C5085-EE21-4F14-8819-223AEA70456A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

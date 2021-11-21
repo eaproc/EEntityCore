@@ -635,11 +635,11 @@ End Sub
                   
                   
         Public Shared Function getFullTable() As V___PayrollPersonnelView                  
-            Return New V___PayrollPersonnelView(DBConnectInterface.getDBConn(), TABLE_NAME)                  
+            Return New V___PayrollPersonnelView(DBConnectInterface.GetDBConn(), TABLE_NAME)                  
         End Function                  
                   
         Public Shared Function getRowWhereIDUsingSQL(ByVal pID As Int32) As V___PayrollPersonnelView                  
-            Return New V___PayrollPersonnelView(DBConnectInterface.getDBConn(),                  
+            Return New V___PayrollPersonnelView(DBConnectInterface.GetDBConn(),                  
                                                TABLE_NAME,                  
                                                String.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, pID)                  
                                                ).getFirstRow()                  

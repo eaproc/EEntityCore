@@ -2,7 +2,9 @@
 
 Namespace Interfaces
 
-
+    ''' <summary>
+    ''' Indicates the DB can perform basic database operations
+    ''' </summary>
     Public Interface IAll__DBs
 
         'Make saving date and time an interface and saving binaries
@@ -28,7 +30,7 @@ Namespace Interfaces
         ''' <param name="SQL"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Function dbExec(ByVal SQL As String) As Boolean
+        Function DbExec(ByVal SQL As String) As Boolean
 
 
         ''' <summary>
@@ -37,7 +39,7 @@ Namespace Interfaces
         ''' <param name="SQL"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Function getRS(ByVal SQL As String) As DataSet
+        Function GetRS(ByVal SQL As String) As DataSet
 
 
 
