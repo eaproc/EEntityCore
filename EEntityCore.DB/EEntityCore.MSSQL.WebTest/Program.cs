@@ -11,10 +11,10 @@ namespace EEntityCore.MSSQL.WebTest
         {
             DatabaseInit.DBConnectInterface = new DatabaseInit("SalesSCADWARE", "sa", "netEPRO@2017", 51391, @"localhost\SQLSERVER2016");
 
-            T___AcademicSession academicSession = T___AcademicSession.getFullTable();
+            T___AcademicSession academicSession = T___AcademicSession.GetFullTable();
 
 
-            Console.WriteLine(academicSession.getFirstRow().Name);
+            Console.WriteLine(academicSession.GetFirstRow().Name);
         }
     }
 }

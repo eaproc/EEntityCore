@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
 
@@ -89,210 +90,130 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
 
                   
-        public V___PayrollPersonnelView() : base(TABLE_NAME)                  
+       public V___PayrollPersonnelView() : base()                  
         {                  
         }                  
 
 
                   
+        #region Full Access                                    
                   
-        #region Full Access                  
+        // Full Access means initial data is loaded directly from database, so DBConn MUST be provided                                                      
                   
-        // Full Access means initial data is loaded directly from database, so DBConn MUST be provided                                    
-                  
-        /// <summary>                                    
-        /// FULL ACCESS. This will load data with dbconn                                    
-        /// </summary>                                    
-        /// <param name="DBConn"></param>                                    
-        /// <param name="TableName"></param>                                    
-        /// <remarks></remarks>                  
-        public V___PayrollPersonnelView(All__DBs DBConn, string TableName) : base(DBConn, TableName)                  
-        {                  
+        /// <summary>                                                      
+        /// FULL ACCESS. This will load data with dbconn                                                      
+        /// </summary>                                                      
+        /// <param name="TableName"></param>                                                      
+        /// <remarks></remarks>                                    
+        public V___PayrollPersonnelView(All__DBs DBConn) : base(DBConn)                                    
+        {                                    
+        }                                    
+                                    
+        /// <summary>                                                      
+        /// Full Access. This will load data with dbconn                                                      
+        /// </summary>                                                      
+        /// <param name="pTableName"></param>                                                      
+        /// <param name="pTargettedRowID">Only works if the table contains a column named ID</param>                                                      
+        /// <remarks></remarks>                                    
+        public V___PayrollPersonnelView(All__DBs DBConn, long pTargettedRowID) : base(DBConn,  pTargettedRowID: pTargettedRowID)                                    
+        {                                    
+        }                                    
+                                    
+        /// <summary>                                                      
+        /// Full Access. This will load data with dbconn                                                      
+        /// </summary>                                                      
+        /// <param name="pTableName"></param>                                                      
+        /// <param name="pSQL">Load table with your own SQL</param>                                                      
+        /// <remarks></remarks>                                    
+        public V___PayrollPersonnelView(All__DBs pDBConn, string pSQL) : base(pDBConn,  pSQL)                                    
+        {                                    
+        }                                    
+                                    
+                                    
+        /// <summary>                                                      
+        /// Full Access. This will load data with dbconn                                                      
+        /// </summary>                                                      
+        /// <param name="pTableName"></param>                                                      
+        /// <param name="pTargettedRowID"></param>                                                      
+        /// <param name="pSQL">Load table with your own SQL</param>                                                      
+        /// <remarks></remarks>                                    
+        public V___PayrollPersonnelView(All__DBs pDBConn,  string pSQL, long pTargettedRowID) : base(pDBConn, pSQL, pTargettedRowID)                                    
+        {                                    
+        }                                    
+                                    
+        #endregion                                    
+                                    
+                                    
+        #region Partial Access                                    
+                                    
+        // Partial Simply means initial data is loaded directly from user but DBConn might be provided for reloadClass function to work                                                      
+                                    
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="pTableRows"></param>                                                      
+        /// <param name="pTargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public V___PayrollPersonnelView(DataRowCollection pTableRows, long pTargettedRowID) : base(pTableRows, pTargettedRowID)                                    
+        {                                    
         }                  
                   
-        /// <summary>                                    
-        /// Full Access. This will load data with dbconn                                    
-        /// </summary>                                    
-        /// <param name="DBConn"></param>                                    
-        /// <param name="pTableName"></param>                                    
-        /// <param name="pTargettedRowID">Only works if the table contains a column named ID</param>                                    
-        /// <remarks></remarks>                  
-        public V___PayrollPersonnelView(All__DBs DBConn, string pTableName, long pTargettedRowID) : base(DBConn, pTableName, pTargettedRowID: pTargettedRowID)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Full Access. This will load data with dbconn                                    
-        /// </summary>                                    
-        /// <param name="pDBConn"></param>                                    
-        /// <param name="pTableName"></param>                                    
-        /// <param name="pSQL">Load table with your own SQL</param>                                    
-        /// <remarks></remarks>                  
-        public V___PayrollPersonnelView(All__DBs pDBConn, string pTableName, string pSQL) : base(pDBConn, pTableName, pSQL)                  
-        {                  
-        }                  
-                  
-                  
-        /// <summary>                                    
-        /// Full Access. This will load data with dbconn                                    
-        /// </summary>                                    
-        /// <param name="pDBConn"></param>                                    
-        /// <param name="pTableName"></param>                                    
-        /// <param name="pTargettedRowID"></param>                                    
-        /// <param name="pSQL">Load table with your own SQL</param>                                    
-        /// <remarks></remarks>                  
-        public V___PayrollPersonnelView(All__DBs pDBConn, string pTableName, string pSQL, long pTargettedRowID) : base(pDBConn, pTableName, pSQL, pTargettedRowID)                  
-        {                  
-        }                  
-                  
-        #endregion                  
-                  
-                  
-        #region Partial Access                  
-                  
-        // Partial Simply means initial data is loaded directly from user but DBConn might be provided for reloadClass function to work                                    
-                  
-        /// <summary>                                    
-        /// Partial Access                                    
-        /// </summary>                                    
-        /// <param name="pDBConn"></param>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <param name="pTargettedRowID"></param>                                    
-        /// <remarks></remarks>                  
-        public V___PayrollPersonnelView(DataRowCollection pTableRows, long pTargettedRowID, string pTableName, All__DBs pDBConn) : base(pTableRows, pTargettedRowID, pTableName, pDBConn)                  
-        {                  
-        }                  
-                  
-                  
-        /// <summary>                                    
-        /// Partial Access                                    
-        /// </summary>                                    
-        /// <param name="pDBConn"></param>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <param name="pTargettedRowID"></param>                                    
-        /// <remarks></remarks>                  
-        public V___PayrollPersonnelView(IEnumerable<DataRow> pTableRows, long pTargettedRowID, string pTableName, All__DBs pDBConn) : base(pTableRows, pTargettedRowID, pTableName, pDBConn)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Partial Access                                    
-        /// </summary>                                    
-        /// <param name="DBConn"></param>                                    
-        /// <param name="FullTable"></param>                                    
-        /// <param name="TargettedRowID"></param>                                    
-        /// <remarks></remarks>                  
-        public V___PayrollPersonnelView(DataTable FullTable, int TargettedRowID, string TableName, All__DBs DBConn) : base(FullTable, TargettedRowID, TableName, DBConn)                  
-        {                  
-        }                  
-                  
-                  
-        #endregion                  
-                  
-                  
-        #region Shallow Access                  
-        // In the real definition, shallow reference partial. Just that it means partial with no DBConn                                    
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <param name="TargettedRow"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
-        public V___PayrollPersonnelView(DataRow TargettedRow) : base(TargettedRow)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="pTableRows"></param>                                                      
+        /// <param name="pTargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
         public V___PayrollPersonnelView(IEnumerable<DataRow> pTableRows) : base(pTableRows)                  
         {                  
         }                  
                   
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
-        public V___PayrollPersonnelView(IEnumerable<DataRow> pTableRows, long pTargettedRowID) : base(pTableRows, pTargettedRowID)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
-        public V___PayrollPersonnelView(IEnumerable<DataRow> pTableRows, long pTargettedRowID, string pTableName) : base(pTableRows, pTargettedRowID, pTableName)                  
-        {                  
-        }                  
-                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <remarks></remarks>                  
-        public V___PayrollPersonnelView(DataTable FullTable, string pTableName) : base(FullTable, pTableName)                  
-        {                  
-        }                  
-                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <remarks></remarks>                  
-        public V___PayrollPersonnelView(DataTable FullTable, string pTableName, long pTargettedRowID) : base(FullTable, pTableName, pTargettedRowID)                  
-        {                  
-        }                  
-                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <remarks></remarks>                  
-        public V___PayrollPersonnelView(DataRowCollection pDataRows, string pTableName) : base(pDataRows, pTableName)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
-        public V___PayrollPersonnelView(IEnumerable<DataRow> pTableRows, string pTableName) : base(pTableRows, pTableName)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Shallow Access. Should always target this passed in                                    
-        /// </summary>                                    
-        /// <param name="pTargettedRow"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
-        public V___PayrollPersonnelView(DataRow pTargettedRow, string pTableName) : base(pTargettedRow, pTableName)                  
-        {                  
-        }                  
-                  
-                  
-        #endregion                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-#endregion                  
-                  
-                  
-                  
-#region Consts and Enums                  
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="pTableRows"></param>                                                      
+        /// <param name="pTargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public V___PayrollPersonnelView(IEnumerable<DataRow> pTableRows, long pTargettedRowID) : base(pTableRows, pTargettedRowID)                                    
+        {                                    
+        }                                    
+                                    
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public V___PayrollPersonnelView(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        {                                    
+        }                                    
+                                    
+                                    
+        #endregion                                    
+                                    
+                                    
+        #region Shallow Access                                    
+        // In the real definition, shallow reference partial. Just that it means partial with no DBConn                                                      
+                                    
+        /// <summary>                                                      
+        /// Shallow Access                                                      
+        /// </summary>                                                      
+        /// <param name="TargettedRow"></param>                                                      
+        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                                    
+        public V___PayrollPersonnelView(DataRow TargettedRow) : base(TargettedRow)                                    
+        {                                    
+        }                                    
+                                    
+        #endregion                                    
+                                    
+                                    
+                                    
+                                    
+#endregion                                    
+                                    
+                                    
+                                    
+#region Consts and Enums                       
 
        public const string TABLE_NAME = "hr.PayrollPersonnelView";
        public const string PayrollPersonnelView__NO__BINARY___SQL_FILL_QUERY = "SELECT [PersonnelNumber], [FullName], [FirstName], [LastName], [AttendanceCount], [SalaryAmount], [RatePerDay], [ApprovedAmount], [IsDisbursed], [PersonnelID], [PayrollID], [BursarComments], [CalculatedAmount], [DisbursedAmount], [HRComments], [DisbursedAt], [PictureFileName], [PersonID], [StartDate], [EndDate], [IsApproved], [PayrollWorkingDays], [MonthWorkingDays], [ID], [BankName], [BankID], [AccountNumber] FROM PayrollPersonnelView";
@@ -337,7 +258,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
  #region Properties 
 
-        private static List<string> ReferencedTableNames;                  
+       private static List<string> ReferencedTableNames;                  
 
        private static Dictionary<string, DataColumnDefinition> ColumnDefns; 
 
@@ -371,7 +292,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public String PersonnelNumber {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.PersonnelNumber.ToString()]);
            }
        }
@@ -379,7 +300,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public String FullName {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.FullName.ToString()]);
            }
        }
@@ -387,7 +308,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public String FirstName {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.FirstName.ToString()]);
            }
        }
@@ -395,7 +316,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public String LastName {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.LastName.ToString()]);
            }
        }
@@ -403,7 +324,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public Int32 AttendanceCount {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EInt.valueOf(this.TargettedRow[TableColumnNames.AttendanceCount.ToString()]);
            }
        }
@@ -411,7 +332,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public Decimal SalaryAmount {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EDecimal.valueOf(this.TargettedRow[TableColumnNames.SalaryAmount.ToString()]);
            }
        }
@@ -419,7 +340,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public Decimal RatePerDay {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EDecimal.valueOf(this.TargettedRow[TableColumnNames.RatePerDay.ToString()]);
            }
        }
@@ -427,7 +348,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public Decimal ApprovedAmount {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EDecimal.valueOf(this.TargettedRow[TableColumnNames.ApprovedAmount.ToString()]);
            }
        }
@@ -435,7 +356,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public Boolean IsDisbursed {
            get{ 
-               if (!this.isValidRow) return false;
+               if (!this.IsTargettedRowValid) return false;
                return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsDisbursed.ToString()]);
            }
        }
@@ -443,7 +364,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public Int32 PersonnelID {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EInt.valueOf(this.TargettedRow[TableColumnNames.PersonnelID.ToString()]);
            }
        }
@@ -451,7 +372,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public Int32 PayrollID {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EInt.valueOf(this.TargettedRow[TableColumnNames.PayrollID.ToString()]);
            }
        }
@@ -459,7 +380,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public String BursarComments {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.BursarComments.ToString()]);
            }
        }
@@ -467,7 +388,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public Decimal CalculatedAmount {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EDecimal.valueOf(this.TargettedRow[TableColumnNames.CalculatedAmount.ToString()]);
            }
        }
@@ -475,7 +396,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public Decimal DisbursedAmount {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EDecimal.valueOf(this.TargettedRow[TableColumnNames.DisbursedAmount.ToString()]);
            }
        }
@@ -483,7 +404,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public String HRComments {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.HRComments.ToString()]);
            }
        }
@@ -491,7 +412,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public NullableDateTime DisbursedAt {
            get{ 
-               if (!this.isValidRow) return NullableDateTime.NULL_TIME;                          
+               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
                return  new NullableDateTime(this.TargettedRow[TableColumnNames.DisbursedAt.ToString()]);
            }
        }
@@ -499,7 +420,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public String PictureFileName {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.PictureFileName.ToString()]);
            }
        }
@@ -507,7 +428,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public Int32 PersonID {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EInt.valueOf(this.TargettedRow[TableColumnNames.PersonID.ToString()]);
            }
        }
@@ -515,7 +436,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public NullableDateTime StartDate {
            get{ 
-               if (!this.isValidRow) return NullableDateTime.NULL_TIME;                          
+               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
                return  new NullableDateTime(this.TargettedRow[TableColumnNames.StartDate.ToString()]);
            }
        }
@@ -523,7 +444,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public NullableDateTime EndDate {
            get{ 
-               if (!this.isValidRow) return NullableDateTime.NULL_TIME;                          
+               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
                return  new NullableDateTime(this.TargettedRow[TableColumnNames.EndDate.ToString()]);
            }
        }
@@ -531,7 +452,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public Boolean IsApproved {
            get{ 
-               if (!this.isValidRow) return false;
+               if (!this.IsTargettedRowValid) return false;
                return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsApproved.ToString()]);
            }
        }
@@ -539,7 +460,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public Int32 PayrollWorkingDays {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EInt.valueOf(this.TargettedRow[TableColumnNames.PayrollWorkingDays.ToString()]);
            }
        }
@@ -547,7 +468,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public Int32 MonthWorkingDays {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EInt.valueOf(this.TargettedRow[TableColumnNames.MonthWorkingDays.ToString()]);
            }
        }
@@ -555,7 +476,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public String BankName {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.BankName.ToString()]);
            }
        }
@@ -563,7 +484,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public Int32 BankID {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EInt.valueOf(this.TargettedRow[TableColumnNames.BankID.ToString()]);
            }
        }
@@ -571,7 +492,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        public String AccountNumber {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.AccountNumber.ToString()]);
            }
        }
@@ -588,33 +509,33 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// </summary>                                                       
         /// <returns></returns>                                                       
         /// <remarks></remarks>                  
-        public V___PayrollPersonnelView getFirstRow()                  
+        public V___PayrollPersonnelView GetFirstRow()                  
         {                  
-            if (this.hasRows())                  
-                return new V___PayrollPersonnelView(this.AllRows.ToArray()[0]);                  
+            if (this.HasRows())                  
+                return new V___PayrollPersonnelView(this.AllRows.First());                  
             return null;                  
         }                  
                   
-        public static V___PayrollPersonnelView getFullTable()                  
+        public static V___PayrollPersonnelView GetFullTable()                  
         {                  
-            return new V___PayrollPersonnelView(DatabaseInit.DBConnectInterface.GetDBConn(), TABLE_NAME);                  
+            return new V___PayrollPersonnelView(DBConnectInterface.GetDBConn());                  
         }                  
                   
-        public static V___PayrollPersonnelView getRowWhereIDUsingSQL(int pID)                  
+        public static V___PayrollPersonnelView GetRowWhereIDUsingSQL(int pID)                  
         {                  
-            return new V___PayrollPersonnelView(DBConnectInterface.GetDBConn(), TABLE_NAME, string.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, (object)pID)).getFirstRow();                  
+            return new V___PayrollPersonnelView(DBConnectInterface.GetDBConn(), string.Format("SELECT * FROM {0} WHERE ID={1}", (object)pID)).GetFirstRow();                  
         }                  
                   
-        public V___PayrollPersonnelView getRowWhereID(int pID)                  
+        public V___PayrollPersonnelView GetRowWhereID(int pID)                  
         {                  
-            return new V___PayrollPersonnelView(this.RawTable, TABLE_NAME, pID);                  
+            return new V___PayrollPersonnelView(this.RawTable, pID);                  
         }                  
                   
         private bool IsAllRowEqual(V___PayrollPersonnelView pRow, params DataColumnParameter[] pParams)                  
         {                  
             try                  
             {                  
-                if (!this.hasRows())                  
+                if (!this.HasRows())                  
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
@@ -634,7 +555,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         {                  
             try                  
             {                  
-                if (!this.hasRows())                  
+                if (!this.HasRows())                  
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
@@ -655,9 +576,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// </summary>                                                       
         /// <returns></returns>                                                       
         /// <remarks></remarks>                  
-        public V___PayrollPersonnelView getAllRowsEquals(params DataColumnParameter[] pParams)                  
+        public V___PayrollPersonnelView GetAllRowsEquals(params DataColumnParameter[] pParams)                  
         {                  
-            if (pParams is null || pParams.Count() == 0 || !this.hasRows())                  
+            if (pParams is null || pParams.Count() == 0 || !this.HasRows())                  
                 return this;                  
             try                  
             {                  
@@ -665,7 +586,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                                             where IsAllRowEqual(new V___PayrollPersonnelView(dr), pParams)                  
                                             select dr;                  
                 if (drst is object && drst.Count() > 0)                  
-                    return new V___PayrollPersonnelView(drst.CopyToDataTable(), TABLE_NAME);                  
+                    return new V___PayrollPersonnelView(drst);                  
                 return null;                  
             }                  
             catch (Exception)                  
@@ -682,7 +603,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <remarks></remarks>                  
         public V___PayrollPersonnelView getAllRowsAny(params DataColumnParameter[] pParams)                  
         {                  
-            if (pParams is null || pParams.Count() == 0 || !this.hasRows())                  
+            if (pParams is null || pParams.Count() == 0 || !this.HasRows())                  
                 return this;                  
             try                  
             {                  
@@ -690,7 +611,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                                             where IsAnyRowEqual(new V___PayrollPersonnelView(dr), pParams)                  
                                             select dr;                  
                 if (drst is object && drst.Count() > 0)                  
-                    return new V___PayrollPersonnelView(drst.CopyToDataTable(), TABLE_NAME);                  
+                    return new V___PayrollPersonnelView(drst);                  
                 return null;                  
             }                  
             catch (Exception)                  
@@ -709,7 +630,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         {                  
             try                  
             {                  
-                if (!this.isTargettedRowValid())                  
+                if (!this.IsTargettedRowValid)                  
                     return false;                  
                 switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  

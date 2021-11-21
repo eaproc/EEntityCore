@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
 
@@ -102,210 +103,130 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
                   
-        public T___PaymentTransaction() : base(TABLE_NAME)                  
+       public T___PaymentTransaction() : base()                  
         {                  
         }                  
 
 
                   
+        #region Full Access                                    
                   
-        #region Full Access                  
+        // Full Access means initial data is loaded directly from database, so DBConn MUST be provided                                                      
                   
-        // Full Access means initial data is loaded directly from database, so DBConn MUST be provided                                    
-                  
-        /// <summary>                                    
-        /// FULL ACCESS. This will load data with dbconn                                    
-        /// </summary>                                    
-        /// <param name="DBConn"></param>                                    
-        /// <param name="TableName"></param>                                    
-        /// <remarks></remarks>                  
-        public T___PaymentTransaction(All__DBs DBConn, string TableName) : base(DBConn, TableName)                  
-        {                  
+        /// <summary>                                                      
+        /// FULL ACCESS. This will load data with dbconn                                                      
+        /// </summary>                                                      
+        /// <param name="TableName"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___PaymentTransaction(All__DBs DBConn) : base(DBConn)                                    
+        {                                    
+        }                                    
+                                    
+        /// <summary>                                                      
+        /// Full Access. This will load data with dbconn                                                      
+        /// </summary>                                                      
+        /// <param name="pTableName"></param>                                                      
+        /// <param name="pTargettedRowID">Only works if the table contains a column named ID</param>                                                      
+        /// <remarks></remarks>                                    
+        public T___PaymentTransaction(All__DBs DBConn, long pTargettedRowID) : base(DBConn,  pTargettedRowID: pTargettedRowID)                                    
+        {                                    
+        }                                    
+                                    
+        /// <summary>                                                      
+        /// Full Access. This will load data with dbconn                                                      
+        /// </summary>                                                      
+        /// <param name="pTableName"></param>                                                      
+        /// <param name="pSQL">Load table with your own SQL</param>                                                      
+        /// <remarks></remarks>                                    
+        public T___PaymentTransaction(All__DBs pDBConn, string pSQL) : base(pDBConn,  pSQL)                                    
+        {                                    
+        }                                    
+                                    
+                                    
+        /// <summary>                                                      
+        /// Full Access. This will load data with dbconn                                                      
+        /// </summary>                                                      
+        /// <param name="pTableName"></param>                                                      
+        /// <param name="pTargettedRowID"></param>                                                      
+        /// <param name="pSQL">Load table with your own SQL</param>                                                      
+        /// <remarks></remarks>                                    
+        public T___PaymentTransaction(All__DBs pDBConn,  string pSQL, long pTargettedRowID) : base(pDBConn, pSQL, pTargettedRowID)                                    
+        {                                    
+        }                                    
+                                    
+        #endregion                                    
+                                    
+                                    
+        #region Partial Access                                    
+                                    
+        // Partial Simply means initial data is loaded directly from user but DBConn might be provided for reloadClass function to work                                                      
+                                    
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="pTableRows"></param>                                                      
+        /// <param name="pTargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___PaymentTransaction(DataRowCollection pTableRows, long pTargettedRowID) : base(pTableRows, pTargettedRowID)                                    
+        {                                    
         }                  
                   
-        /// <summary>                                    
-        /// Full Access. This will load data with dbconn                                    
-        /// </summary>                                    
-        /// <param name="DBConn"></param>                                    
-        /// <param name="pTableName"></param>                                    
-        /// <param name="pTargettedRowID">Only works if the table contains a column named ID</param>                                    
-        /// <remarks></remarks>                  
-        public T___PaymentTransaction(All__DBs DBConn, string pTableName, long pTargettedRowID) : base(DBConn, pTableName, pTargettedRowID: pTargettedRowID)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Full Access. This will load data with dbconn                                    
-        /// </summary>                                    
-        /// <param name="pDBConn"></param>                                    
-        /// <param name="pTableName"></param>                                    
-        /// <param name="pSQL">Load table with your own SQL</param>                                    
-        /// <remarks></remarks>                  
-        public T___PaymentTransaction(All__DBs pDBConn, string pTableName, string pSQL) : base(pDBConn, pTableName, pSQL)                  
-        {                  
-        }                  
-                  
-                  
-        /// <summary>                                    
-        /// Full Access. This will load data with dbconn                                    
-        /// </summary>                                    
-        /// <param name="pDBConn"></param>                                    
-        /// <param name="pTableName"></param>                                    
-        /// <param name="pTargettedRowID"></param>                                    
-        /// <param name="pSQL">Load table with your own SQL</param>                                    
-        /// <remarks></remarks>                  
-        public T___PaymentTransaction(All__DBs pDBConn, string pTableName, string pSQL, long pTargettedRowID) : base(pDBConn, pTableName, pSQL, pTargettedRowID)                  
-        {                  
-        }                  
-                  
-        #endregion                  
-                  
-                  
-        #region Partial Access                  
-                  
-        // Partial Simply means initial data is loaded directly from user but DBConn might be provided for reloadClass function to work                                    
-                  
-        /// <summary>                                    
-        /// Partial Access                                    
-        /// </summary>                                    
-        /// <param name="pDBConn"></param>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <param name="pTargettedRowID"></param>                                    
-        /// <remarks></remarks>                  
-        public T___PaymentTransaction(DataRowCollection pTableRows, long pTargettedRowID, string pTableName, All__DBs pDBConn) : base(pTableRows, pTargettedRowID, pTableName, pDBConn)                  
-        {                  
-        }                  
-                  
-                  
-        /// <summary>                                    
-        /// Partial Access                                    
-        /// </summary>                                    
-        /// <param name="pDBConn"></param>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <param name="pTargettedRowID"></param>                                    
-        /// <remarks></remarks>                  
-        public T___PaymentTransaction(IEnumerable<DataRow> pTableRows, long pTargettedRowID, string pTableName, All__DBs pDBConn) : base(pTableRows, pTargettedRowID, pTableName, pDBConn)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Partial Access                                    
-        /// </summary>                                    
-        /// <param name="DBConn"></param>                                    
-        /// <param name="FullTable"></param>                                    
-        /// <param name="TargettedRowID"></param>                                    
-        /// <remarks></remarks>                  
-        public T___PaymentTransaction(DataTable FullTable, int TargettedRowID, string TableName, All__DBs DBConn) : base(FullTable, TargettedRowID, TableName, DBConn)                  
-        {                  
-        }                  
-                  
-                  
-        #endregion                  
-                  
-                  
-        #region Shallow Access                  
-        // In the real definition, shallow reference partial. Just that it means partial with no DBConn                                    
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <param name="TargettedRow"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
-        public T___PaymentTransaction(DataRow TargettedRow) : base(TargettedRow)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="pTableRows"></param>                                                      
+        /// <param name="pTargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
         public T___PaymentTransaction(IEnumerable<DataRow> pTableRows) : base(pTableRows)                  
         {                  
         }                  
                   
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
-        public T___PaymentTransaction(IEnumerable<DataRow> pTableRows, long pTargettedRowID) : base(pTableRows, pTargettedRowID)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
-        public T___PaymentTransaction(IEnumerable<DataRow> pTableRows, long pTargettedRowID, string pTableName) : base(pTableRows, pTargettedRowID, pTableName)                  
-        {                  
-        }                  
-                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <remarks></remarks>                  
-        public T___PaymentTransaction(DataTable FullTable, string pTableName) : base(FullTable, pTableName)                  
-        {                  
-        }                  
-                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <remarks></remarks>                  
-        public T___PaymentTransaction(DataTable FullTable, string pTableName, long pTargettedRowID) : base(FullTable, pTableName, pTargettedRowID)                  
-        {                  
-        }                  
-                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <remarks></remarks>                  
-        public T___PaymentTransaction(DataRowCollection pDataRows, string pTableName) : base(pDataRows, pTableName)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
-        public T___PaymentTransaction(IEnumerable<DataRow> pTableRows, string pTableName) : base(pTableRows, pTableName)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Shallow Access. Should always target this passed in                                    
-        /// </summary>                                    
-        /// <param name="pTargettedRow"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
-        public T___PaymentTransaction(DataRow pTargettedRow, string pTableName) : base(pTargettedRow, pTableName)                  
-        {                  
-        }                  
-                  
-                  
-        #endregion                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-#endregion                  
-                  
-                  
-                  
-#region Consts and Enums                  
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="pTableRows"></param>                                                      
+        /// <param name="pTargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___PaymentTransaction(IEnumerable<DataRow> pTableRows, long pTargettedRowID) : base(pTableRows, pTargettedRowID)                                    
+        {                                    
+        }                                    
+                                    
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___PaymentTransaction(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        {                                    
+        }                                    
+                                    
+                                    
+        #endregion                                    
+                                    
+                                    
+        #region Shallow Access                                    
+        // In the real definition, shallow reference partial. Just that it means partial with no DBConn                                                      
+                                    
+        /// <summary>                                                      
+        /// Shallow Access                                                      
+        /// </summary>                                                      
+        /// <param name="TargettedRow"></param>                                                      
+        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                                    
+        public T___PaymentTransaction(DataRow TargettedRow) : base(TargettedRow)                                    
+        {                                    
+        }                                    
+                                    
+        #endregion                                    
+                                    
+                                    
+                                    
+                                    
+#endregion                                    
+                                    
+                                    
+                                    
+#region Consts and Enums                       
 
        public const string TABLE_NAME = "pay_gateway.PaymentTransaction";
        public const string PaymentTransaction__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [TransactionStatusID], [ClientID], [StudentNumber], [FirstName], [LastName], [AccountName], [AccountNumber], [Bank], [Channel], [IPAddress], [SchoolDiscountGiven], [PaymentRequired], [Charges], [RefundAmount], [Balance], [ConfirmationThreshold], [ConfirmationDate], [AwaitingDisbursement], [CreatedAt], [UpdatedAt], [CreatedByID], [UpdatedByID], [ConfirmedExplanation], [ChargesBilledToClient], [PaymentRequiredWithoutCharges], [IsMultiTarget] FROM PaymentTransaction";
@@ -361,7 +282,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
  #region Properties 
 
-        private static List<IDBTableDefinitionPlugIn.ForeignKeyDefinition> ForeignKeys;                  
+       private static List<IDBTableDefinitionPlugIn.ForeignKeyDefinition> ForeignKeys;                  
 
        private static Dictionary<string, DataColumnDefinition> ColumnDefns; 
 
@@ -395,7 +316,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public Int32 TransactionStatusID {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EInt.valueOf(this.TargettedRow[TableColumnNames.TransactionStatusID.ToString()]);
            }
        }
@@ -403,7 +324,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public Int32 ClientID {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EInt.valueOf(this.TargettedRow[TableColumnNames.ClientID.ToString()]);
            }
        }
@@ -411,7 +332,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public String StudentNumber {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.StudentNumber.ToString()]);
            }
        }
@@ -419,7 +340,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public String FirstName {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.FirstName.ToString()]);
            }
        }
@@ -427,7 +348,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public String LastName {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.LastName.ToString()]);
            }
        }
@@ -435,7 +356,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public String AccountName {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.AccountName.ToString()]);
            }
        }
@@ -443,7 +364,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public String AccountNumber {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.AccountNumber.ToString()]);
            }
        }
@@ -451,7 +372,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public String Bank {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.Bank.ToString()]);
            }
        }
@@ -459,7 +380,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public String Channel {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.Channel.ToString()]);
            }
        }
@@ -467,7 +388,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public String IPAddress {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.IPAddress.ToString()]);
            }
        }
@@ -475,7 +396,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public Decimal SchoolDiscountGiven {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EDecimal.valueOf(this.TargettedRow[TableColumnNames.SchoolDiscountGiven.ToString()]);
            }
        }
@@ -483,7 +404,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public Decimal PaymentRequired {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EDecimal.valueOf(this.TargettedRow[TableColumnNames.PaymentRequired.ToString()]);
            }
        }
@@ -491,7 +412,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public Decimal Charges {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Charges.ToString()]);
            }
        }
@@ -499,7 +420,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public Decimal RefundAmount {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EDecimal.valueOf(this.TargettedRow[TableColumnNames.RefundAmount.ToString()]);
            }
        }
@@ -507,7 +428,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public Decimal Balance {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Balance.ToString()]);
            }
        }
@@ -515,7 +436,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public Decimal ConfirmationThreshold {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EDecimal.valueOf(this.TargettedRow[TableColumnNames.ConfirmationThreshold.ToString()]);
            }
        }
@@ -523,7 +444,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public NullableDateTime ConfirmationDate {
            get{ 
-               if (!this.isValidRow) return NullableDateTime.NULL_TIME;                          
+               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
                return  new NullableDateTime(this.TargettedRow[TableColumnNames.ConfirmationDate.ToString()]);
            }
        }
@@ -531,7 +452,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public Boolean AwaitingDisbursement {
            get{ 
-               if (!this.isValidRow) return false;
+               if (!this.IsTargettedRowValid) return false;
                return EBoolean.valueOf(this.TargettedRow[TableColumnNames.AwaitingDisbursement.ToString()]);
            }
        }
@@ -539,7 +460,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public NullableDateTime CreatedAt {
            get{ 
-               if (!this.isValidRow) return NullableDateTime.NULL_TIME;                          
+               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
                return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
            }
        }
@@ -547,7 +468,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public NullableDateTime UpdatedAt {
            get{ 
-               if (!this.isValidRow) return NullableDateTime.NULL_TIME;                          
+               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
                return  new NullableDateTime(this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]);
            }
        }
@@ -555,7 +476,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public Int32 CreatedByID {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EInt.valueOf(this.TargettedRow[TableColumnNames.CreatedByID.ToString()]);
            }
        }
@@ -563,7 +484,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public Int32 UpdatedByID {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EInt.valueOf(this.TargettedRow[TableColumnNames.UpdatedByID.ToString()]);
            }
        }
@@ -571,7 +492,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public String ConfirmedExplanation {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.ConfirmedExplanation.ToString()]);
            }
        }
@@ -579,7 +500,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public Boolean ChargesBilledToClient {
            get{ 
-               if (!this.isValidRow) return false;
+               if (!this.IsTargettedRowValid) return false;
                return EBoolean.valueOf(this.TargettedRow[TableColumnNames.ChargesBilledToClient.ToString()]);
            }
        }
@@ -587,7 +508,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public Decimal PaymentRequiredWithoutCharges {
            get{ 
-               if (!this.isValidRow) return 0;                          
+               if (!this.IsTargettedRowValid) return 0;                          
                return EDecimal.valueOf(this.TargettedRow[TableColumnNames.PaymentRequiredWithoutCharges.ToString()]);
            }
        }
@@ -595,7 +516,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public Boolean IsMultiTarget {
            get{ 
-               if (!this.isValidRow) return false;
+               if (!this.IsTargettedRowValid) return false;
                return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsMultiTarget.ToString()]);
            }
        }
@@ -612,33 +533,33 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary>                                                       
         /// <returns></returns>                                                       
         /// <remarks></remarks>                  
-        public T___PaymentTransaction getFirstRow()                  
+        public T___PaymentTransaction GetFirstRow()                  
         {                  
-            if (this.hasRows())                  
-                return new T___PaymentTransaction(this.AllRows.ToArray()[0]);                  
+            if (this.HasRows())                  
+                return new T___PaymentTransaction(this.AllRows.First());                  
             return null;                  
         }                  
                   
-        public static T___PaymentTransaction getFullTable()                  
+        public static T___PaymentTransaction GetFullTable()                  
         {                  
-            return new T___PaymentTransaction(DatabaseInit.DBConnectInterface.GetDBConn(), TABLE_NAME);                  
+            return new T___PaymentTransaction(DBConnectInterface.GetDBConn());                  
         }                  
                   
-        public static T___PaymentTransaction getRowWhereIDUsingSQL(int pID)                  
+        public static T___PaymentTransaction GetRowWhereIDUsingSQL(int pID)                  
         {                  
-            return new T___PaymentTransaction(DBConnectInterface.GetDBConn(), TABLE_NAME, string.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, (object)pID)).getFirstRow();                  
+            return new T___PaymentTransaction(DBConnectInterface.GetDBConn(), string.Format("SELECT * FROM {0} WHERE ID={1}", (object)pID)).GetFirstRow();                  
         }                  
                   
-        public T___PaymentTransaction getRowWhereID(int pID)                  
+        public T___PaymentTransaction GetRowWhereID(int pID)                  
         {                  
-            return new T___PaymentTransaction(this.RawTable, TABLE_NAME, pID);                  
+            return new T___PaymentTransaction(this.RawTable, pID);                  
         }                  
                   
         private bool IsAllRowEqual(T___PaymentTransaction pRow, params DataColumnParameter[] pParams)                  
         {                  
             try                  
             {                  
-                if (!this.hasRows())                  
+                if (!this.HasRows())                  
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
@@ -658,7 +579,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         {                  
             try                  
             {                  
-                if (!this.hasRows())                  
+                if (!this.HasRows())                  
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
@@ -679,9 +600,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary>                                                       
         /// <returns></returns>                                                       
         /// <remarks></remarks>                  
-        public T___PaymentTransaction getAllRowsEquals(params DataColumnParameter[] pParams)                  
+        public T___PaymentTransaction GetAllRowsEquals(params DataColumnParameter[] pParams)                  
         {                  
-            if (pParams is null || pParams.Count() == 0 || !this.hasRows())                  
+            if (pParams is null || pParams.Count() == 0 || !this.HasRows())                  
                 return this;                  
             try                  
             {                  
@@ -689,7 +610,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                             where IsAllRowEqual(new T___PaymentTransaction(dr), pParams)                  
                                             select dr;                  
                 if (drst is object && drst.Count() > 0)                  
-                    return new T___PaymentTransaction(drst.CopyToDataTable(), TABLE_NAME);                  
+                    return new T___PaymentTransaction(drst);                  
                 return null;                  
             }                  
             catch (Exception)                  
@@ -706,7 +627,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <remarks></remarks>                  
         public T___PaymentTransaction getAllRowsAny(params DataColumnParameter[] pParams)                  
         {                  
-            if (pParams is null || pParams.Count() == 0 || !this.hasRows())                  
+            if (pParams is null || pParams.Count() == 0 || !this.HasRows())                  
                 return this;                  
             try                  
             {                  
@@ -714,7 +635,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                             where IsAnyRowEqual(new T___PaymentTransaction(dr), pParams)                  
                                             select dr;                  
                 if (drst is object && drst.Count() > 0)                  
-                    return new T___PaymentTransaction(drst.CopyToDataTable(), TABLE_NAME);                  
+                    return new T___PaymentTransaction(drst);                  
                 return null;                  
             }                  
             catch (Exception)                  
@@ -733,7 +654,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         {                  
             try                  
             {                  
-                if (!this.isTargettedRowValid())                  
+                if (!this.IsTargettedRowValid)                  
                     return false;                  
                 switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
@@ -815,7 +736,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int addNewDefault(Int32 pTransactionStatusID,
+        public static int AddNewDefault(Int32 pTransactionStatusID,
 Int32 pClientID,
 Int32 pCreatedByID,
 Int32 pUpdatedByID){
@@ -893,17 +814,12 @@ Int32 pUpdatedByID){
 
 
 
-        public static bool DeleteItemRow(long pID)                  
+                  
+                  
+        public static bool DeleteItemRow(long pID)                                    
         {                  
-            try                  
-            {                  
-                return DBConnectInterface.GetDBConn().DbExec(string.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID));                  
-            }                  
-            catch (Exception)                  
-            {                  
-                throw;                  
-            }                  
-        }                  
+            return DeleteRow(DBConnectInterface.GetDBConn(), pID: pID, pTableName: TABLE_NAME);                  
+        }                                    
 
 
    }

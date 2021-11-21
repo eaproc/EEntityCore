@@ -42,6 +42,7 @@ Public MustInherit Class Server
 
 
     Protected Property __SQLServerAddress As String
+
     ''' <summary>
     ''' Server address or host name with address like WINHOST-PC\SQLEXPRESS
     ''' </summary>

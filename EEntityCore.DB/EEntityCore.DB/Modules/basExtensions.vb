@@ -6,14 +6,6 @@ Namespace Modules
 
     Public Module basExtensions
 
-
-
-
-
-
-
-
-
         '   You must implement New() which you will use to pass in the table name. Anyways we will pass it for you
 
 
@@ -30,8 +22,7 @@ Namespace Modules
             If pObj Is Nothing OrElse Not pObj.hasRows() Then Return drst
 
             drst = (From dr As DataRow In pObj.AllRows
-                    Let p = New T()
-                    Select p.LoadGeneric(Of T)(pObj.TableName, dr, p)
+                    Select New T().LoadGeneric(Of T)(dr)
                    ).ToList()
 
             Return drst
@@ -46,17 +37,27 @@ Namespace Modules
         ''' <returns></returns>
         ''' <remarks></remarks>
         <System.Runtime.CompilerServices.Extension()>
-        Public Function getFirstRowIDASC(Of T As {DB.Abstracts.SimpleTablePlugIn, New})(ByVal pObj As T) As T
+        Public Function SortedRows(Of T As {DB.Abstracts.SimpleTablePlugIn, New})(ByVal pObj As T) As List(Of T)
             Dim drst As List(Of T)
-            If pObj Is Nothing OrElse Not pObj.hasRows() Then Return New T()
+            If pObj Is Nothing OrElse Not pObj.HasRows() Then Return New List(Of T)
 
             drst = (From dr As DataRow In pObj.AllRows
-                    Let p = New T()
-                    Order By p.ID Ascending
-                    Select p.LoadGeneric(Of T)(pObj.TableName, dr, p)
-                   ).ToList()
+                    Select New T().LoadGeneric(Of T)(dr)
+                   ).OrderBy(Function(x) x.ID).ToList()
 
-            Return drst.First()
+            Return drst
+        End Function
+
+        ''' <summary>
+        ''' This return first row according to ID Asc
+        ''' </summary>
+        ''' <typeparam name="T"></typeparam>
+        ''' <param name="pObj"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        <System.Runtime.CompilerServices.Extension()>
+        Public Function GetFirstRowIDASC(Of T As {DB.Abstracts.SimpleTablePlugIn, New})(ByVal pObj As T) As T
+            Return SortedRows(pObj).First()
         End Function
 
 
@@ -68,17 +69,8 @@ Namespace Modules
         ''' <returns></returns>
         ''' <remarks></remarks>
         <System.Runtime.CompilerServices.Extension()>
-        Public Function getLastRowIDASC(Of T As {DB.Abstracts.SimpleTablePlugIn, New})(ByVal pObj As T) As T
-            Dim drst As List(Of T)
-            If pObj Is Nothing OrElse Not pObj.hasRows() Then Return New T()
-
-            drst = (From dr As DataRow In pObj.AllRows
-                    Let p = New T()
-                    Order By p.ID Ascending
-                    Select p.LoadGeneric(Of T)(pObj.TableName, dr, p)
-                   ).ToList()
-
-            Return drst.Last()
+        Public Function GetLastRowIDASC(Of T As {DB.Abstracts.SimpleTablePlugIn, New})(ByVal pObj As T) As T
+            Return SortedRows(pObj).Last()
         End Function
 
 
@@ -104,12 +96,28 @@ Namespace Modules
         ''' <param name="pObj"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
+        <System.Runtime.CompilerServices.Extension()>
         Public Function ExtractFirstRow(Of T As {DB.Abstracts.SimpleTablePlugIn, New})(ByVal pObj As T) As T
-            If pObj Is Nothing OrElse Not pObj.hasRows() Then Return New T()
+            If pObj Is Nothing OrElse Not pObj.HasRows() Then Return New T()
             Return pObj.AsEnumerableDBTable().First()
 
         End Function
 
+
+        ''' <summary>
+        ''' gets net ID from the rows loaded using linq
+        ''' </summary>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        <System.Runtime.CompilerServices.Extension()>
+        Public Function GetNextID(Of T As {DB.Abstracts.SimpleTablePlugIn, New})(ByVal pObj As T) As Int64
+            If Not pObj.HasRows() Then Return 1 ' Might be empty table
+
+            If Not pObj.HasNumericPrimaryKeyColumn Then Throw New Exception("This table doesnt contain a numeric primary key")
+
+            Return pObj.GetLastRowIDASC().ID + 1
+
+        End Function
 
 
     End Module

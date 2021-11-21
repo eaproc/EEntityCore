@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
 
@@ -42,210 +43,130 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
                   
-        public T___Bill() : base(TABLE_NAME)                  
+       public T___Bill() : base()                  
         {                  
         }                  
 
 
                   
+        #region Full Access                                    
                   
-        #region Full Access                  
+        // Full Access means initial data is loaded directly from database, so DBConn MUST be provided                                                      
                   
-        // Full Access means initial data is loaded directly from database, so DBConn MUST be provided                                    
-                  
-        /// <summary>                                    
-        /// FULL ACCESS. This will load data with dbconn                                    
-        /// </summary>                                    
-        /// <param name="DBConn"></param>                                    
-        /// <param name="TableName"></param>                                    
-        /// <remarks></remarks>                  
-        public T___Bill(All__DBs DBConn, string TableName) : base(DBConn, TableName)                  
-        {                  
+        /// <summary>                                                      
+        /// FULL ACCESS. This will load data with dbconn                                                      
+        /// </summary>                                                      
+        /// <param name="TableName"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___Bill(All__DBs DBConn) : base(DBConn)                                    
+        {                                    
+        }                                    
+                                    
+        /// <summary>                                                      
+        /// Full Access. This will load data with dbconn                                                      
+        /// </summary>                                                      
+        /// <param name="pTableName"></param>                                                      
+        /// <param name="pTargettedRowID">Only works if the table contains a column named ID</param>                                                      
+        /// <remarks></remarks>                                    
+        public T___Bill(All__DBs DBConn, long pTargettedRowID) : base(DBConn,  pTargettedRowID: pTargettedRowID)                                    
+        {                                    
+        }                                    
+                                    
+        /// <summary>                                                      
+        /// Full Access. This will load data with dbconn                                                      
+        /// </summary>                                                      
+        /// <param name="pTableName"></param>                                                      
+        /// <param name="pSQL">Load table with your own SQL</param>                                                      
+        /// <remarks></remarks>                                    
+        public T___Bill(All__DBs pDBConn, string pSQL) : base(pDBConn,  pSQL)                                    
+        {                                    
+        }                                    
+                                    
+                                    
+        /// <summary>                                                      
+        /// Full Access. This will load data with dbconn                                                      
+        /// </summary>                                                      
+        /// <param name="pTableName"></param>                                                      
+        /// <param name="pTargettedRowID"></param>                                                      
+        /// <param name="pSQL">Load table with your own SQL</param>                                                      
+        /// <remarks></remarks>                                    
+        public T___Bill(All__DBs pDBConn,  string pSQL, long pTargettedRowID) : base(pDBConn, pSQL, pTargettedRowID)                                    
+        {                                    
+        }                                    
+                                    
+        #endregion                                    
+                                    
+                                    
+        #region Partial Access                                    
+                                    
+        // Partial Simply means initial data is loaded directly from user but DBConn might be provided for reloadClass function to work                                                      
+                                    
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="pTableRows"></param>                                                      
+        /// <param name="pTargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___Bill(DataRowCollection pTableRows, long pTargettedRowID) : base(pTableRows, pTargettedRowID)                                    
+        {                                    
         }                  
                   
-        /// <summary>                                    
-        /// Full Access. This will load data with dbconn                                    
-        /// </summary>                                    
-        /// <param name="DBConn"></param>                                    
-        /// <param name="pTableName"></param>                                    
-        /// <param name="pTargettedRowID">Only works if the table contains a column named ID</param>                                    
-        /// <remarks></remarks>                  
-        public T___Bill(All__DBs DBConn, string pTableName, long pTargettedRowID) : base(DBConn, pTableName, pTargettedRowID: pTargettedRowID)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Full Access. This will load data with dbconn                                    
-        /// </summary>                                    
-        /// <param name="pDBConn"></param>                                    
-        /// <param name="pTableName"></param>                                    
-        /// <param name="pSQL">Load table with your own SQL</param>                                    
-        /// <remarks></remarks>                  
-        public T___Bill(All__DBs pDBConn, string pTableName, string pSQL) : base(pDBConn, pTableName, pSQL)                  
-        {                  
-        }                  
-                  
-                  
-        /// <summary>                                    
-        /// Full Access. This will load data with dbconn                                    
-        /// </summary>                                    
-        /// <param name="pDBConn"></param>                                    
-        /// <param name="pTableName"></param>                                    
-        /// <param name="pTargettedRowID"></param>                                    
-        /// <param name="pSQL">Load table with your own SQL</param>                                    
-        /// <remarks></remarks>                  
-        public T___Bill(All__DBs pDBConn, string pTableName, string pSQL, long pTargettedRowID) : base(pDBConn, pTableName, pSQL, pTargettedRowID)                  
-        {                  
-        }                  
-                  
-        #endregion                  
-                  
-                  
-        #region Partial Access                  
-                  
-        // Partial Simply means initial data is loaded directly from user but DBConn might be provided for reloadClass function to work                                    
-                  
-        /// <summary>                                    
-        /// Partial Access                                    
-        /// </summary>                                    
-        /// <param name="pDBConn"></param>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <param name="pTargettedRowID"></param>                                    
-        /// <remarks></remarks>                  
-        public T___Bill(DataRowCollection pTableRows, long pTargettedRowID, string pTableName, All__DBs pDBConn) : base(pTableRows, pTargettedRowID, pTableName, pDBConn)                  
-        {                  
-        }                  
-                  
-                  
-        /// <summary>                                    
-        /// Partial Access                                    
-        /// </summary>                                    
-        /// <param name="pDBConn"></param>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <param name="pTargettedRowID"></param>                                    
-        /// <remarks></remarks>                  
-        public T___Bill(IEnumerable<DataRow> pTableRows, long pTargettedRowID, string pTableName, All__DBs pDBConn) : base(pTableRows, pTargettedRowID, pTableName, pDBConn)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Partial Access                                    
-        /// </summary>                                    
-        /// <param name="DBConn"></param>                                    
-        /// <param name="FullTable"></param>                                    
-        /// <param name="TargettedRowID"></param>                                    
-        /// <remarks></remarks>                  
-        public T___Bill(DataTable FullTable, int TargettedRowID, string TableName, All__DBs DBConn) : base(FullTable, TargettedRowID, TableName, DBConn)                  
-        {                  
-        }                  
-                  
-                  
-        #endregion                  
-                  
-                  
-        #region Shallow Access                  
-        // In the real definition, shallow reference partial. Just that it means partial with no DBConn                                    
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <param name="TargettedRow"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
-        public T___Bill(DataRow TargettedRow) : base(TargettedRow)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="pTableRows"></param>                                                      
+        /// <param name="pTargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
         public T___Bill(IEnumerable<DataRow> pTableRows) : base(pTableRows)                  
         {                  
         }                  
                   
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
-        public T___Bill(IEnumerable<DataRow> pTableRows, long pTargettedRowID) : base(pTableRows, pTargettedRowID)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
-        public T___Bill(IEnumerable<DataRow> pTableRows, long pTargettedRowID, string pTableName) : base(pTableRows, pTargettedRowID, pTableName)                  
-        {                  
-        }                  
-                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <remarks></remarks>                  
-        public T___Bill(DataTable FullTable, string pTableName) : base(FullTable, pTableName)                  
-        {                  
-        }                  
-                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <remarks></remarks>                  
-        public T___Bill(DataTable FullTable, string pTableName, long pTargettedRowID) : base(FullTable, pTableName, pTargettedRowID)                  
-        {                  
-        }                  
-                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <remarks></remarks>                  
-        public T___Bill(DataRowCollection pDataRows, string pTableName) : base(pDataRows, pTableName)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Shallow Access                                    
-        /// </summary>                                    
-        /// <param name="pTableRows"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
-        public T___Bill(IEnumerable<DataRow> pTableRows, string pTableName) : base(pTableRows, pTableName)                  
-        {                  
-        }                  
-                  
-        /// <summary>                                    
-        /// Shallow Access. Should always target this passed in                                    
-        /// </summary>                                    
-        /// <param name="pTargettedRow"></param>                                    
-        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                  
-        public T___Bill(DataRow pTargettedRow, string pTableName) : base(pTargettedRow, pTableName)                  
-        {                  
-        }                  
-                  
-                  
-        #endregion                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-#endregion                  
-                  
-                  
-                  
-#region Consts and Enums                  
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="pTableRows"></param>                                                      
+        /// <param name="pTargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___Bill(IEnumerable<DataRow> pTableRows, long pTargettedRowID) : base(pTableRows, pTargettedRowID)                                    
+        {                                    
+        }                                    
+                                    
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___Bill(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        {                                    
+        }                                    
+                                    
+                                    
+        #endregion                                    
+                                    
+                                    
+        #region Shallow Access                                    
+        // In the real definition, shallow reference partial. Just that it means partial with no DBConn                                                      
+                                    
+        /// <summary>                                                      
+        /// Shallow Access                                                      
+        /// </summary>                                                      
+        /// <param name="TargettedRow"></param>                                                      
+        /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>                                    
+        public T___Bill(DataRow TargettedRow) : base(TargettedRow)                                    
+        {                                    
+        }                                    
+                                    
+        #endregion                                    
+                                    
+                                    
+                                    
+                                    
+#endregion                                    
+                                    
+                                    
+                                    
+#region Consts and Enums                       
 
        public const string TABLE_NAME = "accounting.Bill";
        public const string Bill__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [Definition], [Description], [CreatedAt], [IsFixed] FROM Bill";
@@ -276,7 +197,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
  #region Properties 
 
-        private static List<IDBTableDefinitionPlugIn.ForeignKeyDefinition> ForeignKeys;                  
+       private static List<IDBTableDefinitionPlugIn.ForeignKeyDefinition> ForeignKeys;                  
 
        private static Dictionary<string, DataColumnDefinition> ColumnDefns; 
 
@@ -288,7 +209,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public String Definition {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.Definition.ToString()]);
            }
        }
@@ -296,7 +217,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public String Description {
            get{ 
-               if (!this.isValidRow) return String.Empty;                          
+               if (!this.IsTargettedRowValid) return String.Empty;                          
                return EStrings.valueOf(this.TargettedRow[TableColumnNames.Description.ToString()]);
            }
        }
@@ -304,7 +225,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public NullableDateTime CreatedAt {
            get{ 
-               if (!this.isValidRow) return NullableDateTime.NULL_TIME;                          
+               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
                return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
            }
        }
@@ -312,7 +233,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        public Boolean IsFixed {
            get{ 
-               if (!this.isValidRow) return false;
+               if (!this.IsTargettedRowValid) return false;
                return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsFixed.ToString()]);
            }
        }
@@ -329,33 +250,33 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary>                                                       
         /// <returns></returns>                                                       
         /// <remarks></remarks>                  
-        public T___Bill getFirstRow()                  
+        public T___Bill GetFirstRow()                  
         {                  
-            if (this.hasRows())                  
-                return new T___Bill(this.AllRows.ToArray()[0]);                  
+            if (this.HasRows())                  
+                return new T___Bill(this.AllRows.First());                  
             return null;                  
         }                  
                   
-        public static T___Bill getFullTable()                  
+        public static T___Bill GetFullTable()                  
         {                  
-            return new T___Bill(DatabaseInit.DBConnectInterface.GetDBConn(), TABLE_NAME);                  
+            return new T___Bill(DBConnectInterface.GetDBConn());                  
         }                  
                   
-        public static T___Bill getRowWhereIDUsingSQL(int pID)                  
+        public static T___Bill GetRowWhereIDUsingSQL(int pID)                  
         {                  
-            return new T___Bill(DBConnectInterface.GetDBConn(), TABLE_NAME, string.Format("SELECT * FROM {0} WHERE ID={1}", TABLE_NAME, (object)pID)).getFirstRow();                  
+            return new T___Bill(DBConnectInterface.GetDBConn(), string.Format("SELECT * FROM {0} WHERE ID={1}", (object)pID)).GetFirstRow();                  
         }                  
                   
-        public T___Bill getRowWhereID(int pID)                  
+        public T___Bill GetRowWhereID(int pID)                  
         {                  
-            return new T___Bill(this.RawTable, TABLE_NAME, pID);                  
+            return new T___Bill(this.RawTable, pID);                  
         }                  
                   
         private bool IsAllRowEqual(T___Bill pRow, params DataColumnParameter[] pParams)                  
         {                  
             try                  
             {                  
-                if (!this.hasRows())                  
+                if (!this.HasRows())                  
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
@@ -375,7 +296,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         {                  
             try                  
             {                  
-                if (!this.hasRows())                  
+                if (!this.HasRows())                  
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
@@ -396,9 +317,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary>                                                       
         /// <returns></returns>                                                       
         /// <remarks></remarks>                  
-        public T___Bill getAllRowsEquals(params DataColumnParameter[] pParams)                  
+        public T___Bill GetAllRowsEquals(params DataColumnParameter[] pParams)                  
         {                  
-            if (pParams is null || pParams.Count() == 0 || !this.hasRows())                  
+            if (pParams is null || pParams.Count() == 0 || !this.HasRows())                  
                 return this;                  
             try                  
             {                  
@@ -406,7 +327,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                             where IsAllRowEqual(new T___Bill(dr), pParams)                  
                                             select dr;                  
                 if (drst is object && drst.Count() > 0)                  
-                    return new T___Bill(drst.CopyToDataTable(), TABLE_NAME);                  
+                    return new T___Bill(drst);                  
                 return null;                  
             }                  
             catch (Exception)                  
@@ -423,7 +344,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <remarks></remarks>                  
         public T___Bill getAllRowsAny(params DataColumnParameter[] pParams)                  
         {                  
-            if (pParams is null || pParams.Count() == 0 || !this.hasRows())                  
+            if (pParams is null || pParams.Count() == 0 || !this.HasRows())                  
                 return this;                  
             try                  
             {                  
@@ -431,7 +352,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                             where IsAnyRowEqual(new T___Bill(dr), pParams)                  
                                             select dr;                  
                 if (drst is object && drst.Count() > 0)                  
-                    return new T___Bill(drst.CopyToDataTable(), TABLE_NAME);                  
+                    return new T___Bill(drst);                  
                 return null;                  
             }                  
             catch (Exception)                  
@@ -450,7 +371,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         {                  
             try                  
             {                  
-                if (!this.isTargettedRowValid())                  
+                if (!this.IsTargettedRowValid)                  
                     return false;                  
                 switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
@@ -532,7 +453,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int addNewDefault(String pDefinition){
+        public static int AddNewDefault(String pDefinition){
 
             try{
 
@@ -563,17 +484,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static bool DeleteItemRow(long pID)                  
+                  
+                  
+        public static bool DeleteItemRow(long pID)                                    
         {                  
-            try                  
-            {                  
-                return DBConnectInterface.GetDBConn().DbExec(string.Format("DELETE FROM {0} WHERE ID={1} ", TABLE_NAME, pID));                  
-            }                  
-            catch (Exception)                  
-            {                  
-                throw;                  
-            }                  
-        }                  
+            return DeleteRow(DBConnectInterface.GetDBConn(), pID: pID, pTableName: TABLE_NAME);                  
+        }                                    
 
 
    }
