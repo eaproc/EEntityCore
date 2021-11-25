@@ -723,6 +723,316 @@ Int32 pDataMonitorID){
         }                   
 
 
+        public static int AddWithID(String pIdentificationNo,
+String pFirstName,
+String pLastName,
+Int32 pCountryID,
+DateTime pDateOfBirth,
+Int32 pGenderID,
+Boolean pIsSuperUser,
+Int32 pMaritalStatusID,
+Boolean pCanBeUpdated,
+Boolean pCanBeDeleted,
+DateTime pCreatedAt,
+Object pHomeAddress = null,
+Object pEmail = null,
+Object pPersonTitleID = null,
+Object pBloodTypeID = null,
+Object pBirthPlace = null,
+Object pPictureFileName = null,
+Object pUpdatedAt = null,
+Object pDataMonitorID = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramIdentificationNo = new DataColumnParameter(defIdentificationNo, pIdentificationNo);
+                DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+                DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+                DataColumnParameter paramCountryID = new DataColumnParameter(defCountryID, pCountryID);
+                DataColumnParameter paramDateOfBirth = new DataColumnParameter(defDateOfBirth, pDateOfBirth);
+                DataColumnParameter paramGenderID = new DataColumnParameter(defGenderID, pGenderID);
+                DataColumnParameter paramHomeAddress = new DataColumnParameter(defHomeAddress, pHomeAddress);
+                DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+                DataColumnParameter paramPersonTitleID = new DataColumnParameter(defPersonTitleID, pPersonTitleID);
+                DataColumnParameter paramIsSuperUser = new DataColumnParameter(defIsSuperUser, pIsSuperUser);
+                DataColumnParameter paramBloodTypeID = new DataColumnParameter(defBloodTypeID, pBloodTypeID);
+                DataColumnParameter paramBirthPlace = new DataColumnParameter(defBirthPlace, pBirthPlace);
+                DataColumnParameter paramPictureFileName = new DataColumnParameter(defPictureFileName, pPictureFileName);
+                DataColumnParameter paramMaritalStatusID = new DataColumnParameter(defMaritalStatusID, pMaritalStatusID);
+                DataColumnParameter paramCanBeUpdated = new DataColumnParameter(defCanBeUpdated, pCanBeUpdated);
+                DataColumnParameter paramCanBeDeleted = new DataColumnParameter(defCanBeDeleted, pCanBeDeleted);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramIdentificationNo.getSQLQuotedValueForAdd(),
+paramFirstName.getSQLQuotedValueForAdd(),
+paramLastName.getSQLQuotedValueForAdd(),
+paramCountryID.getSQLQuotedValueForAdd(),
+paramDateOfBirth.getSQLQuotedValueForAdd(),
+paramGenderID.getSQLQuotedValueForAdd(),
+paramHomeAddress.getSQLQuotedValueForAdd(),
+paramEmail.getSQLQuotedValueForAdd(),
+paramPersonTitleID.getSQLQuotedValueForAdd(),
+paramIsSuperUser.getSQLQuotedValueForAdd(),
+paramBloodTypeID.getSQLQuotedValueForAdd(),
+paramBirthPlace.getSQLQuotedValueForAdd(),
+paramPictureFileName.getSQLQuotedValueForAdd(),
+paramMaritalStatusID.getSQLQuotedValueForAdd(),
+paramCanBeUpdated.getSQLQuotedValueForAdd(),
+paramCanBeDeleted.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramDataMonitorID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,String pIdentificationNo,
+String pFirstName,
+String pLastName,
+Int32 pCountryID,
+DateTime pDateOfBirth,
+Int32 pGenderID,
+Boolean pIsSuperUser,
+Int32 pMaritalStatusID,
+Boolean pCanBeUpdated,
+Boolean pCanBeDeleted,
+DateTime pCreatedAt,
+Object pHomeAddress = null,
+Object pEmail = null,
+Object pPersonTitleID = null,
+Object pBloodTypeID = null,
+Object pBirthPlace = null,
+Object pPictureFileName = null,
+Object pUpdatedAt = null,
+Object pDataMonitorID = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramIdentificationNo = new DataColumnParameter(defIdentificationNo, pIdentificationNo);
+DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+DataColumnParameter paramCountryID = new DataColumnParameter(defCountryID, pCountryID);
+DataColumnParameter paramDateOfBirth = new DataColumnParameter(defDateOfBirth, pDateOfBirth);
+DataColumnParameter paramGenderID = new DataColumnParameter(defGenderID, pGenderID);
+DataColumnParameter paramHomeAddress = new DataColumnParameter(defHomeAddress, pHomeAddress);
+DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+DataColumnParameter paramPersonTitleID = new DataColumnParameter(defPersonTitleID, pPersonTitleID);
+DataColumnParameter paramIsSuperUser = new DataColumnParameter(defIsSuperUser, pIsSuperUser);
+DataColumnParameter paramBloodTypeID = new DataColumnParameter(defBloodTypeID, pBloodTypeID);
+DataColumnParameter paramBirthPlace = new DataColumnParameter(defBirthPlace, pBirthPlace);
+DataColumnParameter paramPictureFileName = new DataColumnParameter(defPictureFileName, pPictureFileName);
+DataColumnParameter paramMaritalStatusID = new DataColumnParameter(defMaritalStatusID, pMaritalStatusID);
+DataColumnParameter paramCanBeUpdated = new DataColumnParameter(defCanBeUpdated, pCanBeUpdated);
+DataColumnParameter paramCanBeDeleted = new DataColumnParameter(defCanBeDeleted, pCanBeDeleted);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramIdentificationNo.getSQLQuotedValueForAdd(),
+paramFirstName.getSQLQuotedValueForAdd(),
+paramLastName.getSQLQuotedValueForAdd(),
+paramCountryID.getSQLQuotedValueForAdd(),
+paramDateOfBirth.getSQLQuotedValueForAdd(),
+paramGenderID.getSQLQuotedValueForAdd(),
+paramHomeAddress.getSQLQuotedValueForAdd(),
+paramEmail.getSQLQuotedValueForAdd(),
+paramPersonTitleID.getSQLQuotedValueForAdd(),
+paramIsSuperUser.getSQLQuotedValueForAdd(),
+paramBloodTypeID.getSQLQuotedValueForAdd(),
+paramBirthPlace.getSQLQuotedValueForAdd(),
+paramPictureFileName.getSQLQuotedValueForAdd(),
+paramMaritalStatusID.getSQLQuotedValueForAdd(),
+paramCanBeUpdated.getSQLQuotedValueForAdd(),
+paramCanBeDeleted.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramDataMonitorID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(String pIdentificationNo,
+String pFirstName,
+String pLastName,
+Int32 pCountryID,
+DateTime pDateOfBirth,
+Int32 pGenderID,
+Boolean pIsSuperUser,
+Int32 pMaritalStatusID,
+Boolean pCanBeUpdated,
+Boolean pCanBeDeleted,
+DateTime pCreatedAt,
+Object pHomeAddress= null,
+Object pEmail= null,
+Object pPersonTitleID= null,
+Object pBloodTypeID= null,
+Object pBirthPlace= null,
+Object pPictureFileName= null,
+Object pUpdatedAt= null,
+Object pDataMonitorID= null){
+
+        try{
+
+DataColumnParameter paramIdentificationNo = new DataColumnParameter(defIdentificationNo, pIdentificationNo);
+DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+DataColumnParameter paramCountryID = new DataColumnParameter(defCountryID, pCountryID);
+DataColumnParameter paramDateOfBirth = new DataColumnParameter(defDateOfBirth, pDateOfBirth);
+DataColumnParameter paramGenderID = new DataColumnParameter(defGenderID, pGenderID);
+DataColumnParameter paramHomeAddress = new DataColumnParameter(defHomeAddress, pHomeAddress);
+DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+DataColumnParameter paramPersonTitleID = new DataColumnParameter(defPersonTitleID, pPersonTitleID);
+DataColumnParameter paramIsSuperUser = new DataColumnParameter(defIsSuperUser, pIsSuperUser);
+DataColumnParameter paramBloodTypeID = new DataColumnParameter(defBloodTypeID, pBloodTypeID);
+DataColumnParameter paramBirthPlace = new DataColumnParameter(defBirthPlace, pBirthPlace);
+DataColumnParameter paramPictureFileName = new DataColumnParameter(defPictureFileName, pPictureFileName);
+DataColumnParameter paramMaritalStatusID = new DataColumnParameter(defMaritalStatusID, pMaritalStatusID);
+DataColumnParameter paramCanBeUpdated = new DataColumnParameter(defCanBeUpdated, pCanBeUpdated);
+DataColumnParameter paramCanBeDeleted = new DataColumnParameter(defCanBeDeleted, pCanBeDeleted);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19}) ", TABLE_NAME,paramIdentificationNo.getSQLQuotedValueForAdd(),
+paramFirstName.getSQLQuotedValueForAdd(),
+paramLastName.getSQLQuotedValueForAdd(),
+paramCountryID.getSQLQuotedValueForAdd(),
+paramDateOfBirth.getSQLQuotedValueForAdd(),
+paramGenderID.getSQLQuotedValueForAdd(),
+paramHomeAddress.getSQLQuotedValueForAdd(),
+paramEmail.getSQLQuotedValueForAdd(),
+paramPersonTitleID.getSQLQuotedValueForAdd(),
+paramIsSuperUser.getSQLQuotedValueForAdd(),
+paramBloodTypeID.getSQLQuotedValueForAdd(),
+paramBirthPlace.getSQLQuotedValueForAdd(),
+paramPictureFileName.getSQLQuotedValueForAdd(),
+paramMaritalStatusID.getSQLQuotedValueForAdd(),
+paramCanBeUpdated.getSQLQuotedValueForAdd(),
+paramCanBeDeleted.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramDataMonitorID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pIdentificationNo = null,
+Object pFirstName = null,
+Object pLastName = null,
+Object pCountryID = null,
+Object pDateOfBirth = null,
+Object pGenderID = null,
+Object pIsSuperUser = null,
+Object pMaritalStatusID = null,
+Object pCanBeUpdated = null,
+Object pCanBeDeleted = null,
+Object pCreatedAt = null,
+Object pHomeAddress = null,
+Object pEmail = null,
+Object pPersonTitleID = null,
+Object pBloodTypeID = null,
+Object pBirthPlace = null,
+Object pPictureFileName = null,
+Object pUpdatedAt = null,
+Object pDataMonitorID = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramIdentificationNo = new DataColumnParameter(defIdentificationNo, pIdentificationNo);
+ DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+ DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+ DataColumnParameter paramCountryID = new DataColumnParameter(defCountryID, pCountryID);
+ DataColumnParameter paramDateOfBirth = new DataColumnParameter(defDateOfBirth, pDateOfBirth);
+ DataColumnParameter paramGenderID = new DataColumnParameter(defGenderID, pGenderID);
+ DataColumnParameter paramHomeAddress = new DataColumnParameter(defHomeAddress, pHomeAddress);
+ DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+ DataColumnParameter paramPersonTitleID = new DataColumnParameter(defPersonTitleID, pPersonTitleID);
+ DataColumnParameter paramIsSuperUser = new DataColumnParameter(defIsSuperUser, pIsSuperUser);
+ DataColumnParameter paramBloodTypeID = new DataColumnParameter(defBloodTypeID, pBloodTypeID);
+ DataColumnParameter paramBirthPlace = new DataColumnParameter(defBirthPlace, pBirthPlace);
+ DataColumnParameter paramPictureFileName = new DataColumnParameter(defPictureFileName, pPictureFileName);
+ DataColumnParameter paramMaritalStatusID = new DataColumnParameter(defMaritalStatusID, pMaritalStatusID);
+ DataColumnParameter paramCanBeUpdated = new DataColumnParameter(defCanBeUpdated, pCanBeUpdated);
+ DataColumnParameter paramCanBeDeleted = new DataColumnParameter(defCanBeDeleted, pCanBeDeleted);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [IdentificationNo]={2},[FirstName]={3},[LastName]={4},[CountryID]={5},[DateOfBirth]={6},[GenderID]={7},[HomeAddress]={8},[Email]={9},[PersonTitleID]={10},[IsSuperUser]={11},[BloodTypeID]={12},[BirthPlace]={13},[PictureFileName]={14},[MaritalStatusID]={15},[CanBeUpdated]={16},[CanBeDeleted]={17},[CreatedAt]={18},[UpdatedAt]={19},[DataMonitorID]={20} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramIdentificationNo.getSQLQuotedValueForUpdate(),
+paramFirstName.getSQLQuotedValueForUpdate(),
+paramLastName.getSQLQuotedValueForUpdate(),
+paramCountryID.getSQLQuotedValueForUpdate(),
+paramDateOfBirth.getSQLQuotedValueForUpdate(),
+paramGenderID.getSQLQuotedValueForUpdate(),
+paramHomeAddress.getSQLQuotedValueForUpdate(),
+paramEmail.getSQLQuotedValueForUpdate(),
+paramPersonTitleID.getSQLQuotedValueForUpdate(),
+paramIsSuperUser.getSQLQuotedValueForUpdate(),
+paramBloodTypeID.getSQLQuotedValueForUpdate(),
+paramBirthPlace.getSQLQuotedValueForUpdate(),
+paramPictureFileName.getSQLQuotedValueForUpdate(),
+paramMaritalStatusID.getSQLQuotedValueForUpdate(),
+paramCanBeUpdated.getSQLQuotedValueForUpdate(),
+paramCanBeDeleted.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramDataMonitorID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

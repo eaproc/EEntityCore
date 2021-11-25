@@ -432,6 +432,100 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(Object pComments = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Comments]) VALUES({1},{2}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Object pComments = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Comments]) VALUES({1},{2}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Object pComments= null){
+
+        try{
+
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([Comments]) VALUES({1}) ", TABLE_NAME,paramComments.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pComments = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [Comments]={2} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramComments.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

@@ -590,6 +590,208 @@ Int32 pUpdatedByID){
         }                   
 
 
+        public static int AddWithID(Int32 pMonthlyDonationID,
+Int32 pBeneficiaryID,
+Int32 pDonationYear,
+Int32 pDonationMonth,
+Decimal pAmount,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pCashOutID = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramMonthlyDonationID = new DataColumnParameter(defMonthlyDonationID, pMonthlyDonationID);
+                DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+                DataColumnParameter paramCashOutID = new DataColumnParameter(defCashOutID, pCashOutID);
+                DataColumnParameter paramDonationYear = new DataColumnParameter(defDonationYear, pDonationYear);
+                DataColumnParameter paramDonationMonth = new DataColumnParameter(defDonationMonth, pDonationMonth);
+                DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[MonthlyDonationID],[BeneficiaryID],[CashOutID],[DonationYear],[DonationMonth],[Amount],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramMonthlyDonationID.getSQLQuotedValueForAdd(),
+paramBeneficiaryID.getSQLQuotedValueForAdd(),
+paramCashOutID.getSQLQuotedValueForAdd(),
+paramDonationYear.getSQLQuotedValueForAdd(),
+paramDonationMonth.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pMonthlyDonationID,
+Int32 pBeneficiaryID,
+Int32 pDonationYear,
+Int32 pDonationMonth,
+Decimal pAmount,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pCashOutID = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramMonthlyDonationID = new DataColumnParameter(defMonthlyDonationID, pMonthlyDonationID);
+DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+DataColumnParameter paramCashOutID = new DataColumnParameter(defCashOutID, pCashOutID);
+DataColumnParameter paramDonationYear = new DataColumnParameter(defDonationYear, pDonationYear);
+DataColumnParameter paramDonationMonth = new DataColumnParameter(defDonationMonth, pDonationMonth);
+DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[MonthlyDonationID],[BeneficiaryID],[CashOutID],[DonationYear],[DonationMonth],[Amount],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramMonthlyDonationID.getSQLQuotedValueForAdd(),
+paramBeneficiaryID.getSQLQuotedValueForAdd(),
+paramCashOutID.getSQLQuotedValueForAdd(),
+paramDonationYear.getSQLQuotedValueForAdd(),
+paramDonationMonth.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pMonthlyDonationID,
+Int32 pBeneficiaryID,
+Int32 pDonationYear,
+Int32 pDonationMonth,
+Decimal pAmount,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pCashOutID= null){
+
+        try{
+
+DataColumnParameter paramMonthlyDonationID = new DataColumnParameter(defMonthlyDonationID, pMonthlyDonationID);
+DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+DataColumnParameter paramCashOutID = new DataColumnParameter(defCashOutID, pCashOutID);
+DataColumnParameter paramDonationYear = new DataColumnParameter(defDonationYear, pDonationYear);
+DataColumnParameter paramDonationMonth = new DataColumnParameter(defDonationMonth, pDonationMonth);
+DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([MonthlyDonationID],[BeneficiaryID],[CashOutID],[DonationYear],[DonationMonth],[Amount],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,paramMonthlyDonationID.getSQLQuotedValueForAdd(),
+paramBeneficiaryID.getSQLQuotedValueForAdd(),
+paramCashOutID.getSQLQuotedValueForAdd(),
+paramDonationYear.getSQLQuotedValueForAdd(),
+paramDonationMonth.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pMonthlyDonationID = null,
+Object pBeneficiaryID = null,
+Object pDonationYear = null,
+Object pDonationMonth = null,
+Object pAmount = null,
+Object pCreatedAt = null,
+Object pUpdatedAt = null,
+Object pCreatedByID = null,
+Object pUpdatedByID = null,
+Object pCashOutID = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramMonthlyDonationID = new DataColumnParameter(defMonthlyDonationID, pMonthlyDonationID);
+ DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+ DataColumnParameter paramCashOutID = new DataColumnParameter(defCashOutID, pCashOutID);
+ DataColumnParameter paramDonationYear = new DataColumnParameter(defDonationYear, pDonationYear);
+ DataColumnParameter paramDonationMonth = new DataColumnParameter(defDonationMonth, pDonationMonth);
+ DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [MonthlyDonationID]={2},[BeneficiaryID]={3},[CashOutID]={4},[DonationYear]={5},[DonationMonth]={6},[Amount]={7},[CreatedAt]={8},[UpdatedAt]={9},[CreatedByID]={10},[UpdatedByID]={11} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramMonthlyDonationID.getSQLQuotedValueForUpdate(),
+paramBeneficiaryID.getSQLQuotedValueForUpdate(),
+paramCashOutID.getSQLQuotedValueForUpdate(),
+paramDonationYear.getSQLQuotedValueForUpdate(),
+paramDonationMonth.getSQLQuotedValueForUpdate(),
+paramAmount.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramUpdatedByID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

@@ -629,6 +629,244 @@ Int32 pClientID){
         }                   
 
 
+        public static int AddWithID(Int32 pTermID,
+Decimal pAmountCharged,
+Decimal pDiscountGiven,
+Decimal pDiscountRateApplied,
+Int32 pPaymentChannelID,
+Int32 pPaymentEntryModeID,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+String pIpAddress,
+Decimal pTotal,
+Int32 pClientID,
+Object pComments = null,
+Object pTransactionFileName = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+                DataColumnParameter paramAmountCharged = new DataColumnParameter(defAmountCharged, pAmountCharged);
+                DataColumnParameter paramDiscountGiven = new DataColumnParameter(defDiscountGiven, pDiscountGiven);
+                DataColumnParameter paramDiscountRateApplied = new DataColumnParameter(defDiscountRateApplied, pDiscountRateApplied);
+                DataColumnParameter paramPaymentChannelID = new DataColumnParameter(defPaymentChannelID, pPaymentChannelID);
+                DataColumnParameter paramPaymentEntryModeID = new DataColumnParameter(defPaymentEntryModeID, pPaymentEntryModeID);
+                DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+                DataColumnParameter paramTransactionFileName = new DataColumnParameter(defTransactionFileName, pTransactionFileName);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+                DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+                DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[AmountCharged],[DiscountGiven],[DiscountRateApplied],[PaymentChannelID],[PaymentEntryModeID],[Comments],[TransactionFileName],[CreatedAt],[CreatedByID],[IpAddress],[Total],[ClientID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd(),
+paramAmountCharged.getSQLQuotedValueForAdd(),
+paramDiscountGiven.getSQLQuotedValueForAdd(),
+paramDiscountRateApplied.getSQLQuotedValueForAdd(),
+paramPaymentChannelID.getSQLQuotedValueForAdd(),
+paramPaymentEntryModeID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramTransactionFileName.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramIpAddress.getSQLQuotedValueForAdd(),
+paramTotal.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pTermID,
+Decimal pAmountCharged,
+Decimal pDiscountGiven,
+Decimal pDiscountRateApplied,
+Int32 pPaymentChannelID,
+Int32 pPaymentEntryModeID,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+String pIpAddress,
+Decimal pTotal,
+Int32 pClientID,
+Object pComments = null,
+Object pTransactionFileName = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+DataColumnParameter paramAmountCharged = new DataColumnParameter(defAmountCharged, pAmountCharged);
+DataColumnParameter paramDiscountGiven = new DataColumnParameter(defDiscountGiven, pDiscountGiven);
+DataColumnParameter paramDiscountRateApplied = new DataColumnParameter(defDiscountRateApplied, pDiscountRateApplied);
+DataColumnParameter paramPaymentChannelID = new DataColumnParameter(defPaymentChannelID, pPaymentChannelID);
+DataColumnParameter paramPaymentEntryModeID = new DataColumnParameter(defPaymentEntryModeID, pPaymentEntryModeID);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramTransactionFileName = new DataColumnParameter(defTransactionFileName, pTransactionFileName);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[AmountCharged],[DiscountGiven],[DiscountRateApplied],[PaymentChannelID],[PaymentEntryModeID],[Comments],[TransactionFileName],[CreatedAt],[CreatedByID],[IpAddress],[Total],[ClientID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd(),
+paramAmountCharged.getSQLQuotedValueForAdd(),
+paramDiscountGiven.getSQLQuotedValueForAdd(),
+paramDiscountRateApplied.getSQLQuotedValueForAdd(),
+paramPaymentChannelID.getSQLQuotedValueForAdd(),
+paramPaymentEntryModeID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramTransactionFileName.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramIpAddress.getSQLQuotedValueForAdd(),
+paramTotal.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pTermID,
+Decimal pAmountCharged,
+Decimal pDiscountGiven,
+Decimal pDiscountRateApplied,
+Int32 pPaymentChannelID,
+Int32 pPaymentEntryModeID,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+String pIpAddress,
+Decimal pTotal,
+Int32 pClientID,
+Object pComments= null,
+Object pTransactionFileName= null){
+
+        try{
+
+DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+DataColumnParameter paramAmountCharged = new DataColumnParameter(defAmountCharged, pAmountCharged);
+DataColumnParameter paramDiscountGiven = new DataColumnParameter(defDiscountGiven, pDiscountGiven);
+DataColumnParameter paramDiscountRateApplied = new DataColumnParameter(defDiscountRateApplied, pDiscountRateApplied);
+DataColumnParameter paramPaymentChannelID = new DataColumnParameter(defPaymentChannelID, pPaymentChannelID);
+DataColumnParameter paramPaymentEntryModeID = new DataColumnParameter(defPaymentEntryModeID, pPaymentEntryModeID);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramTransactionFileName = new DataColumnParameter(defTransactionFileName, pTransactionFileName);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([TermID],[AmountCharged],[DiscountGiven],[DiscountRateApplied],[PaymentChannelID],[PaymentEntryModeID],[Comments],[TransactionFileName],[CreatedAt],[CreatedByID],[IpAddress],[Total],[ClientID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramTermID.getSQLQuotedValueForAdd(),
+paramAmountCharged.getSQLQuotedValueForAdd(),
+paramDiscountGiven.getSQLQuotedValueForAdd(),
+paramDiscountRateApplied.getSQLQuotedValueForAdd(),
+paramPaymentChannelID.getSQLQuotedValueForAdd(),
+paramPaymentEntryModeID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramTransactionFileName.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramIpAddress.getSQLQuotedValueForAdd(),
+paramTotal.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pTermID = null,
+Object pAmountCharged = null,
+Object pDiscountGiven = null,
+Object pDiscountRateApplied = null,
+Object pPaymentChannelID = null,
+Object pPaymentEntryModeID = null,
+Object pCreatedAt = null,
+Object pCreatedByID = null,
+Object pIpAddress = null,
+Object pTotal = null,
+Object pClientID = null,
+Object pComments = null,
+Object pTransactionFileName = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+ DataColumnParameter paramAmountCharged = new DataColumnParameter(defAmountCharged, pAmountCharged);
+ DataColumnParameter paramDiscountGiven = new DataColumnParameter(defDiscountGiven, pDiscountGiven);
+ DataColumnParameter paramDiscountRateApplied = new DataColumnParameter(defDiscountRateApplied, pDiscountRateApplied);
+ DataColumnParameter paramPaymentChannelID = new DataColumnParameter(defPaymentChannelID, pPaymentChannelID);
+ DataColumnParameter paramPaymentEntryModeID = new DataColumnParameter(defPaymentEntryModeID, pPaymentEntryModeID);
+ DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+ DataColumnParameter paramTransactionFileName = new DataColumnParameter(defTransactionFileName, pTransactionFileName);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+ DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+ DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [TermID]={2},[AmountCharged]={3},[DiscountGiven]={4},[DiscountRateApplied]={5},[PaymentChannelID]={6},[PaymentEntryModeID]={7},[Comments]={8},[TransactionFileName]={9},[CreatedAt]={10},[CreatedByID]={11},[IpAddress]={12},[Total]={13},[ClientID]={14} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramTermID.getSQLQuotedValueForUpdate(),
+paramAmountCharged.getSQLQuotedValueForUpdate(),
+paramDiscountGiven.getSQLQuotedValueForUpdate(),
+paramDiscountRateApplied.getSQLQuotedValueForUpdate(),
+paramPaymentChannelID.getSQLQuotedValueForUpdate(),
+paramPaymentEntryModeID.getSQLQuotedValueForUpdate(),
+paramComments.getSQLQuotedValueForUpdate(),
+paramTransactionFileName.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramIpAddress.getSQLQuotedValueForUpdate(),
+paramTotal.getSQLQuotedValueForUpdate(),
+paramClientID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

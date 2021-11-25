@@ -579,6 +579,220 @@ Int32 pUserID){
         }                   
 
 
+        public static int AddWithID(String pTraceID,
+String pExceptionMessage,
+Boolean pIsResolved,
+DateTime pCreatedAt,
+String pAbsoluteURL,
+String pIPAddress,
+Object pRequestParametersJSON = null,
+Object pStackTrace = null,
+Object pComments = null,
+Object pUpdatedAt = null,
+Object pUserID = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramTraceID = new DataColumnParameter(defTraceID, pTraceID);
+                DataColumnParameter paramRequestParametersJSON = new DataColumnParameter(defRequestParametersJSON, pRequestParametersJSON);
+                DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
+                DataColumnParameter paramStackTrace = new DataColumnParameter(defStackTrace, pStackTrace);
+                DataColumnParameter paramIsResolved = new DataColumnParameter(defIsResolved, pIsResolved);
+                DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramAbsoluteURL = new DataColumnParameter(defAbsoluteURL, pAbsoluteURL);
+                DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TraceID],[RequestParametersJSON],[ExceptionMessage],[StackTrace],[IsResolved],[Comments],[CreatedAt],[UpdatedAt],[AbsoluteURL],[IPAddress],[UserID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramTraceID.getSQLQuotedValueForAdd(),
+paramRequestParametersJSON.getSQLQuotedValueForAdd(),
+paramExceptionMessage.getSQLQuotedValueForAdd(),
+paramStackTrace.getSQLQuotedValueForAdd(),
+paramIsResolved.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramAbsoluteURL.getSQLQuotedValueForAdd(),
+paramIPAddress.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,String pTraceID,
+String pExceptionMessage,
+Boolean pIsResolved,
+DateTime pCreatedAt,
+String pAbsoluteURL,
+String pIPAddress,
+Object pRequestParametersJSON = null,
+Object pStackTrace = null,
+Object pComments = null,
+Object pUpdatedAt = null,
+Object pUserID = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramTraceID = new DataColumnParameter(defTraceID, pTraceID);
+DataColumnParameter paramRequestParametersJSON = new DataColumnParameter(defRequestParametersJSON, pRequestParametersJSON);
+DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
+DataColumnParameter paramStackTrace = new DataColumnParameter(defStackTrace, pStackTrace);
+DataColumnParameter paramIsResolved = new DataColumnParameter(defIsResolved, pIsResolved);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramAbsoluteURL = new DataColumnParameter(defAbsoluteURL, pAbsoluteURL);
+DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TraceID],[RequestParametersJSON],[ExceptionMessage],[StackTrace],[IsResolved],[Comments],[CreatedAt],[UpdatedAt],[AbsoluteURL],[IPAddress],[UserID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramTraceID.getSQLQuotedValueForAdd(),
+paramRequestParametersJSON.getSQLQuotedValueForAdd(),
+paramExceptionMessage.getSQLQuotedValueForAdd(),
+paramStackTrace.getSQLQuotedValueForAdd(),
+paramIsResolved.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramAbsoluteURL.getSQLQuotedValueForAdd(),
+paramIPAddress.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(String pTraceID,
+String pExceptionMessage,
+Boolean pIsResolved,
+DateTime pCreatedAt,
+String pAbsoluteURL,
+String pIPAddress,
+Object pRequestParametersJSON= null,
+Object pStackTrace= null,
+Object pComments= null,
+Object pUpdatedAt= null,
+Object pUserID= null){
+
+        try{
+
+DataColumnParameter paramTraceID = new DataColumnParameter(defTraceID, pTraceID);
+DataColumnParameter paramRequestParametersJSON = new DataColumnParameter(defRequestParametersJSON, pRequestParametersJSON);
+DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
+DataColumnParameter paramStackTrace = new DataColumnParameter(defStackTrace, pStackTrace);
+DataColumnParameter paramIsResolved = new DataColumnParameter(defIsResolved, pIsResolved);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramAbsoluteURL = new DataColumnParameter(defAbsoluteURL, pAbsoluteURL);
+DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([TraceID],[RequestParametersJSON],[ExceptionMessage],[StackTrace],[IsResolved],[Comments],[CreatedAt],[UpdatedAt],[AbsoluteURL],[IPAddress],[UserID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) ", TABLE_NAME,paramTraceID.getSQLQuotedValueForAdd(),
+paramRequestParametersJSON.getSQLQuotedValueForAdd(),
+paramExceptionMessage.getSQLQuotedValueForAdd(),
+paramStackTrace.getSQLQuotedValueForAdd(),
+paramIsResolved.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramAbsoluteURL.getSQLQuotedValueForAdd(),
+paramIPAddress.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pTraceID = null,
+Object pExceptionMessage = null,
+Object pIsResolved = null,
+Object pCreatedAt = null,
+Object pAbsoluteURL = null,
+Object pIPAddress = null,
+Object pRequestParametersJSON = null,
+Object pStackTrace = null,
+Object pComments = null,
+Object pUpdatedAt = null,
+Object pUserID = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramTraceID = new DataColumnParameter(defTraceID, pTraceID);
+ DataColumnParameter paramRequestParametersJSON = new DataColumnParameter(defRequestParametersJSON, pRequestParametersJSON);
+ DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
+ DataColumnParameter paramStackTrace = new DataColumnParameter(defStackTrace, pStackTrace);
+ DataColumnParameter paramIsResolved = new DataColumnParameter(defIsResolved, pIsResolved);
+ DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramAbsoluteURL = new DataColumnParameter(defAbsoluteURL, pAbsoluteURL);
+ DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+ DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [TraceID]={2},[RequestParametersJSON]={3},[ExceptionMessage]={4},[StackTrace]={5},[IsResolved]={6},[Comments]={7},[CreatedAt]={8},[UpdatedAt]={9},[AbsoluteURL]={10},[IPAddress]={11},[UserID]={12} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramTraceID.getSQLQuotedValueForUpdate(),
+paramRequestParametersJSON.getSQLQuotedValueForUpdate(),
+paramExceptionMessage.getSQLQuotedValueForUpdate(),
+paramStackTrace.getSQLQuotedValueForUpdate(),
+paramIsResolved.getSQLQuotedValueForUpdate(),
+paramComments.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramAbsoluteURL.getSQLQuotedValueForUpdate(),
+paramIPAddress.getSQLQuotedValueForUpdate(),
+paramUserID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

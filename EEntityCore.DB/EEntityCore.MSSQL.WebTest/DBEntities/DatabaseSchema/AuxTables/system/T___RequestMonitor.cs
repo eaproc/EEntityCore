@@ -549,6 +549,196 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(String pAbsoluteURL,
+String pIPAddress,
+DateTime pCreatedAt,
+Object pRequestParametersJSON = null,
+Object pSessionVariables = null,
+Object pBrowser = null,
+Object pUserID = null,
+Object pRequestBody = null,
+Object pRequestHeaders = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramAbsoluteURL = new DataColumnParameter(defAbsoluteURL, pAbsoluteURL);
+                DataColumnParameter paramRequestParametersJSON = new DataColumnParameter(defRequestParametersJSON, pRequestParametersJSON);
+                DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+                DataColumnParameter paramSessionVariables = new DataColumnParameter(defSessionVariables, pSessionVariables);
+                DataColumnParameter paramBrowser = new DataColumnParameter(defBrowser, pBrowser);
+                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramRequestBody = new DataColumnParameter(defRequestBody, pRequestBody);
+                DataColumnParameter paramRequestHeaders = new DataColumnParameter(defRequestHeaders, pRequestHeaders);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramAbsoluteURL.getSQLQuotedValueForAdd(),
+paramRequestParametersJSON.getSQLQuotedValueForAdd(),
+paramIPAddress.getSQLQuotedValueForAdd(),
+paramSessionVariables.getSQLQuotedValueForAdd(),
+paramBrowser.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramRequestBody.getSQLQuotedValueForAdd(),
+paramRequestHeaders.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,String pAbsoluteURL,
+String pIPAddress,
+DateTime pCreatedAt,
+Object pRequestParametersJSON = null,
+Object pSessionVariables = null,
+Object pBrowser = null,
+Object pUserID = null,
+Object pRequestBody = null,
+Object pRequestHeaders = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramAbsoluteURL = new DataColumnParameter(defAbsoluteURL, pAbsoluteURL);
+DataColumnParameter paramRequestParametersJSON = new DataColumnParameter(defRequestParametersJSON, pRequestParametersJSON);
+DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+DataColumnParameter paramSessionVariables = new DataColumnParameter(defSessionVariables, pSessionVariables);
+DataColumnParameter paramBrowser = new DataColumnParameter(defBrowser, pBrowser);
+DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramRequestBody = new DataColumnParameter(defRequestBody, pRequestBody);
+DataColumnParameter paramRequestHeaders = new DataColumnParameter(defRequestHeaders, pRequestHeaders);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramAbsoluteURL.getSQLQuotedValueForAdd(),
+paramRequestParametersJSON.getSQLQuotedValueForAdd(),
+paramIPAddress.getSQLQuotedValueForAdd(),
+paramSessionVariables.getSQLQuotedValueForAdd(),
+paramBrowser.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramRequestBody.getSQLQuotedValueForAdd(),
+paramRequestHeaders.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(String pAbsoluteURL,
+String pIPAddress,
+DateTime pCreatedAt,
+Object pRequestParametersJSON= null,
+Object pSessionVariables= null,
+Object pBrowser= null,
+Object pUserID= null,
+Object pRequestBody= null,
+Object pRequestHeaders= null){
+
+        try{
+
+DataColumnParameter paramAbsoluteURL = new DataColumnParameter(defAbsoluteURL, pAbsoluteURL);
+DataColumnParameter paramRequestParametersJSON = new DataColumnParameter(defRequestParametersJSON, pRequestParametersJSON);
+DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+DataColumnParameter paramSessionVariables = new DataColumnParameter(defSessionVariables, pSessionVariables);
+DataColumnParameter paramBrowser = new DataColumnParameter(defBrowser, pBrowser);
+DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramRequestBody = new DataColumnParameter(defRequestBody, pRequestBody);
+DataColumnParameter paramRequestHeaders = new DataColumnParameter(defRequestHeaders, pRequestHeaders);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramAbsoluteURL.getSQLQuotedValueForAdd(),
+paramRequestParametersJSON.getSQLQuotedValueForAdd(),
+paramIPAddress.getSQLQuotedValueForAdd(),
+paramSessionVariables.getSQLQuotedValueForAdd(),
+paramBrowser.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramRequestBody.getSQLQuotedValueForAdd(),
+paramRequestHeaders.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pAbsoluteURL = null,
+Object pIPAddress = null,
+Object pCreatedAt = null,
+Object pRequestParametersJSON = null,
+Object pSessionVariables = null,
+Object pBrowser = null,
+Object pUserID = null,
+Object pRequestBody = null,
+Object pRequestHeaders = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramAbsoluteURL = new DataColumnParameter(defAbsoluteURL, pAbsoluteURL);
+ DataColumnParameter paramRequestParametersJSON = new DataColumnParameter(defRequestParametersJSON, pRequestParametersJSON);
+ DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+ DataColumnParameter paramSessionVariables = new DataColumnParameter(defSessionVariables, pSessionVariables);
+ DataColumnParameter paramBrowser = new DataColumnParameter(defBrowser, pBrowser);
+ DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramRequestBody = new DataColumnParameter(defRequestBody, pRequestBody);
+ DataColumnParameter paramRequestHeaders = new DataColumnParameter(defRequestHeaders, pRequestHeaders);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [AbsoluteURL]={2},[RequestParametersJSON]={3},[IPAddress]={4},[SessionVariables]={5},[Browser]={6},[UserID]={7},[CreatedAt]={8},[RequestBody]={9},[RequestHeaders]={10} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramAbsoluteURL.getSQLQuotedValueForUpdate(),
+paramRequestParametersJSON.getSQLQuotedValueForUpdate(),
+paramIPAddress.getSQLQuotedValueForUpdate(),
+paramSessionVariables.getSQLQuotedValueForUpdate(),
+paramBrowser.getSQLQuotedValueForUpdate(),
+paramUserID.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramRequestBody.getSQLQuotedValueForUpdate(),
+paramRequestHeaders.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

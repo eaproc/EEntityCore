@@ -606,6 +606,244 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(Int32 pPaymentID,
+DateTime pTransactionDate,
+String pChannel,
+String pIpAddress,
+Decimal pGatewayCharges,
+String pGatewayLogReference,
+String pGateway,
+Decimal pPlatformCharges,
+Decimal pGatewayAmountReceived,
+Decimal pPlatformAmountReceived,
+DateTime pCreatedAt,
+Object pGatewayChargesExplaination = null,
+Object pPlatformChargesExplaination = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramPaymentID = new DataColumnParameter(defPaymentID, pPaymentID);
+                DataColumnParameter paramTransactionDate = new DataColumnParameter(defTransactionDate, pTransactionDate);
+                DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
+                DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+                DataColumnParameter paramGatewayCharges = new DataColumnParameter(defGatewayCharges, pGatewayCharges);
+                DataColumnParameter paramGatewayLogReference = new DataColumnParameter(defGatewayLogReference, pGatewayLogReference);
+                DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
+                DataColumnParameter paramPlatformCharges = new DataColumnParameter(defPlatformCharges, pPlatformCharges);
+                DataColumnParameter paramGatewayAmountReceived = new DataColumnParameter(defGatewayAmountReceived, pGatewayAmountReceived);
+                DataColumnParameter paramPlatformAmountReceived = new DataColumnParameter(defPlatformAmountReceived, pPlatformAmountReceived);
+                DataColumnParameter paramGatewayChargesExplaination = new DataColumnParameter(defGatewayChargesExplaination, pGatewayChargesExplaination);
+                DataColumnParameter paramPlatformChargesExplaination = new DataColumnParameter(defPlatformChargesExplaination, pPlatformChargesExplaination);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramPaymentID.getSQLQuotedValueForAdd(),
+paramTransactionDate.getSQLQuotedValueForAdd(),
+paramChannel.getSQLQuotedValueForAdd(),
+paramIpAddress.getSQLQuotedValueForAdd(),
+paramGatewayCharges.getSQLQuotedValueForAdd(),
+paramGatewayLogReference.getSQLQuotedValueForAdd(),
+paramGateway.getSQLQuotedValueForAdd(),
+paramPlatformCharges.getSQLQuotedValueForAdd(),
+paramGatewayAmountReceived.getSQLQuotedValueForAdd(),
+paramPlatformAmountReceived.getSQLQuotedValueForAdd(),
+paramGatewayChargesExplaination.getSQLQuotedValueForAdd(),
+paramPlatformChargesExplaination.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pPaymentID,
+DateTime pTransactionDate,
+String pChannel,
+String pIpAddress,
+Decimal pGatewayCharges,
+String pGatewayLogReference,
+String pGateway,
+Decimal pPlatformCharges,
+Decimal pGatewayAmountReceived,
+Decimal pPlatformAmountReceived,
+DateTime pCreatedAt,
+Object pGatewayChargesExplaination = null,
+Object pPlatformChargesExplaination = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramPaymentID = new DataColumnParameter(defPaymentID, pPaymentID);
+DataColumnParameter paramTransactionDate = new DataColumnParameter(defTransactionDate, pTransactionDate);
+DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
+DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+DataColumnParameter paramGatewayCharges = new DataColumnParameter(defGatewayCharges, pGatewayCharges);
+DataColumnParameter paramGatewayLogReference = new DataColumnParameter(defGatewayLogReference, pGatewayLogReference);
+DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
+DataColumnParameter paramPlatformCharges = new DataColumnParameter(defPlatformCharges, pPlatformCharges);
+DataColumnParameter paramGatewayAmountReceived = new DataColumnParameter(defGatewayAmountReceived, pGatewayAmountReceived);
+DataColumnParameter paramPlatformAmountReceived = new DataColumnParameter(defPlatformAmountReceived, pPlatformAmountReceived);
+DataColumnParameter paramGatewayChargesExplaination = new DataColumnParameter(defGatewayChargesExplaination, pGatewayChargesExplaination);
+DataColumnParameter paramPlatformChargesExplaination = new DataColumnParameter(defPlatformChargesExplaination, pPlatformChargesExplaination);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramPaymentID.getSQLQuotedValueForAdd(),
+paramTransactionDate.getSQLQuotedValueForAdd(),
+paramChannel.getSQLQuotedValueForAdd(),
+paramIpAddress.getSQLQuotedValueForAdd(),
+paramGatewayCharges.getSQLQuotedValueForAdd(),
+paramGatewayLogReference.getSQLQuotedValueForAdd(),
+paramGateway.getSQLQuotedValueForAdd(),
+paramPlatformCharges.getSQLQuotedValueForAdd(),
+paramGatewayAmountReceived.getSQLQuotedValueForAdd(),
+paramPlatformAmountReceived.getSQLQuotedValueForAdd(),
+paramGatewayChargesExplaination.getSQLQuotedValueForAdd(),
+paramPlatformChargesExplaination.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pPaymentID,
+DateTime pTransactionDate,
+String pChannel,
+String pIpAddress,
+Decimal pGatewayCharges,
+String pGatewayLogReference,
+String pGateway,
+Decimal pPlatformCharges,
+Decimal pGatewayAmountReceived,
+Decimal pPlatformAmountReceived,
+DateTime pCreatedAt,
+Object pGatewayChargesExplaination= null,
+Object pPlatformChargesExplaination= null){
+
+        try{
+
+DataColumnParameter paramPaymentID = new DataColumnParameter(defPaymentID, pPaymentID);
+DataColumnParameter paramTransactionDate = new DataColumnParameter(defTransactionDate, pTransactionDate);
+DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
+DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+DataColumnParameter paramGatewayCharges = new DataColumnParameter(defGatewayCharges, pGatewayCharges);
+DataColumnParameter paramGatewayLogReference = new DataColumnParameter(defGatewayLogReference, pGatewayLogReference);
+DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
+DataColumnParameter paramPlatformCharges = new DataColumnParameter(defPlatformCharges, pPlatformCharges);
+DataColumnParameter paramGatewayAmountReceived = new DataColumnParameter(defGatewayAmountReceived, pGatewayAmountReceived);
+DataColumnParameter paramPlatformAmountReceived = new DataColumnParameter(defPlatformAmountReceived, pPlatformAmountReceived);
+DataColumnParameter paramGatewayChargesExplaination = new DataColumnParameter(defGatewayChargesExplaination, pGatewayChargesExplaination);
+DataColumnParameter paramPlatformChargesExplaination = new DataColumnParameter(defPlatformChargesExplaination, pPlatformChargesExplaination);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramPaymentID.getSQLQuotedValueForAdd(),
+paramTransactionDate.getSQLQuotedValueForAdd(),
+paramChannel.getSQLQuotedValueForAdd(),
+paramIpAddress.getSQLQuotedValueForAdd(),
+paramGatewayCharges.getSQLQuotedValueForAdd(),
+paramGatewayLogReference.getSQLQuotedValueForAdd(),
+paramGateway.getSQLQuotedValueForAdd(),
+paramPlatformCharges.getSQLQuotedValueForAdd(),
+paramGatewayAmountReceived.getSQLQuotedValueForAdd(),
+paramPlatformAmountReceived.getSQLQuotedValueForAdd(),
+paramGatewayChargesExplaination.getSQLQuotedValueForAdd(),
+paramPlatformChargesExplaination.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pPaymentID = null,
+Object pTransactionDate = null,
+Object pChannel = null,
+Object pIpAddress = null,
+Object pGatewayCharges = null,
+Object pGatewayLogReference = null,
+Object pGateway = null,
+Object pPlatformCharges = null,
+Object pGatewayAmountReceived = null,
+Object pPlatformAmountReceived = null,
+Object pCreatedAt = null,
+Object pGatewayChargesExplaination = null,
+Object pPlatformChargesExplaination = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramPaymentID = new DataColumnParameter(defPaymentID, pPaymentID);
+ DataColumnParameter paramTransactionDate = new DataColumnParameter(defTransactionDate, pTransactionDate);
+ DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
+ DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+ DataColumnParameter paramGatewayCharges = new DataColumnParameter(defGatewayCharges, pGatewayCharges);
+ DataColumnParameter paramGatewayLogReference = new DataColumnParameter(defGatewayLogReference, pGatewayLogReference);
+ DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
+ DataColumnParameter paramPlatformCharges = new DataColumnParameter(defPlatformCharges, pPlatformCharges);
+ DataColumnParameter paramGatewayAmountReceived = new DataColumnParameter(defGatewayAmountReceived, pGatewayAmountReceived);
+ DataColumnParameter paramPlatformAmountReceived = new DataColumnParameter(defPlatformAmountReceived, pPlatformAmountReceived);
+ DataColumnParameter paramGatewayChargesExplaination = new DataColumnParameter(defGatewayChargesExplaination, pGatewayChargesExplaination);
+ DataColumnParameter paramPlatformChargesExplaination = new DataColumnParameter(defPlatformChargesExplaination, pPlatformChargesExplaination);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [PaymentID]={2},[TransactionDate]={3},[Channel]={4},[IpAddress]={5},[GatewayCharges]={6},[GatewayLogReference]={7},[Gateway]={8},[PlatformCharges]={9},[GatewayAmountReceived]={10},[PlatformAmountReceived]={11},[GatewayChargesExplaination]={12},[PlatformChargesExplaination]={13},[CreatedAt]={14} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPaymentID.getSQLQuotedValueForUpdate(),
+paramTransactionDate.getSQLQuotedValueForUpdate(),
+paramChannel.getSQLQuotedValueForUpdate(),
+paramIpAddress.getSQLQuotedValueForUpdate(),
+paramGatewayCharges.getSQLQuotedValueForUpdate(),
+paramGatewayLogReference.getSQLQuotedValueForUpdate(),
+paramGateway.getSQLQuotedValueForUpdate(),
+paramPlatformCharges.getSQLQuotedValueForUpdate(),
+paramGatewayAmountReceived.getSQLQuotedValueForUpdate(),
+paramPlatformAmountReceived.getSQLQuotedValueForUpdate(),
+paramGatewayChargesExplaination.getSQLQuotedValueForUpdate(),
+paramPlatformChargesExplaination.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

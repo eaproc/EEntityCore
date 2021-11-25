@@ -561,6 +561,196 @@ Int32 pAcademicSessionID){
         }                   
 
 
+        public static int AddWithID(Int32 pCalendarEventID,
+String pTitle,
+DateTime pStartDate,
+DateTime pEndDate,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Int32 pAcademicSessionID,
+Object pComments = null,
+Object pTrackID = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramCalendarEventID = new DataColumnParameter(defCalendarEventID, pCalendarEventID);
+                DataColumnParameter paramTitle = new DataColumnParameter(defTitle, pTitle);
+                DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+                DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+                DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramTrackID = new DataColumnParameter(defTrackID, pTrackID);
+                DataColumnParameter paramAcademicSessionID = new DataColumnParameter(defAcademicSessionID, pAcademicSessionID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CalendarEventID],[Title],[StartDate],[EndDate],[Comments],[CreatedAt],[CreatedByID],[TrackID],[AcademicSessionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCalendarEventID.getSQLQuotedValueForAdd(),
+paramTitle.getSQLQuotedValueForAdd(),
+paramStartDate.getSQLQuotedValueForAdd(),
+paramEndDate.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramTrackID.getSQLQuotedValueForAdd(),
+paramAcademicSessionID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pCalendarEventID,
+String pTitle,
+DateTime pStartDate,
+DateTime pEndDate,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Int32 pAcademicSessionID,
+Object pComments = null,
+Object pTrackID = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramCalendarEventID = new DataColumnParameter(defCalendarEventID, pCalendarEventID);
+DataColumnParameter paramTitle = new DataColumnParameter(defTitle, pTitle);
+DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramTrackID = new DataColumnParameter(defTrackID, pTrackID);
+DataColumnParameter paramAcademicSessionID = new DataColumnParameter(defAcademicSessionID, pAcademicSessionID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CalendarEventID],[Title],[StartDate],[EndDate],[Comments],[CreatedAt],[CreatedByID],[TrackID],[AcademicSessionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCalendarEventID.getSQLQuotedValueForAdd(),
+paramTitle.getSQLQuotedValueForAdd(),
+paramStartDate.getSQLQuotedValueForAdd(),
+paramEndDate.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramTrackID.getSQLQuotedValueForAdd(),
+paramAcademicSessionID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pCalendarEventID,
+String pTitle,
+DateTime pStartDate,
+DateTime pEndDate,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Int32 pAcademicSessionID,
+Object pComments= null,
+Object pTrackID= null){
+
+        try{
+
+DataColumnParameter paramCalendarEventID = new DataColumnParameter(defCalendarEventID, pCalendarEventID);
+DataColumnParameter paramTitle = new DataColumnParameter(defTitle, pTitle);
+DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramTrackID = new DataColumnParameter(defTrackID, pTrackID);
+DataColumnParameter paramAcademicSessionID = new DataColumnParameter(defAcademicSessionID, pAcademicSessionID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([CalendarEventID],[Title],[StartDate],[EndDate],[Comments],[CreatedAt],[CreatedByID],[TrackID],[AcademicSessionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramCalendarEventID.getSQLQuotedValueForAdd(),
+paramTitle.getSQLQuotedValueForAdd(),
+paramStartDate.getSQLQuotedValueForAdd(),
+paramEndDate.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramTrackID.getSQLQuotedValueForAdd(),
+paramAcademicSessionID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pCalendarEventID = null,
+Object pTitle = null,
+Object pStartDate = null,
+Object pEndDate = null,
+Object pCreatedAt = null,
+Object pCreatedByID = null,
+Object pAcademicSessionID = null,
+Object pComments = null,
+Object pTrackID = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramCalendarEventID = new DataColumnParameter(defCalendarEventID, pCalendarEventID);
+ DataColumnParameter paramTitle = new DataColumnParameter(defTitle, pTitle);
+ DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+ DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+ DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramTrackID = new DataColumnParameter(defTrackID, pTrackID);
+ DataColumnParameter paramAcademicSessionID = new DataColumnParameter(defAcademicSessionID, pAcademicSessionID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [CalendarEventID]={2},[Title]={3},[StartDate]={4},[EndDate]={5},[Comments]={6},[CreatedAt]={7},[CreatedByID]={8},[TrackID]={9},[AcademicSessionID]={10} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCalendarEventID.getSQLQuotedValueForUpdate(),
+paramTitle.getSQLQuotedValueForUpdate(),
+paramStartDate.getSQLQuotedValueForUpdate(),
+paramEndDate.getSQLQuotedValueForUpdate(),
+paramComments.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramTrackID.getSQLQuotedValueForUpdate(),
+paramAcademicSessionID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

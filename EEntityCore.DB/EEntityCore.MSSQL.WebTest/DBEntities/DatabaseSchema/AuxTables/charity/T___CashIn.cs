@@ -499,6 +499,148 @@ Int32 pCreatedByID){
         }                   
 
 
+        public static int AddWithID(Int32 pCashInTypeID,
+Decimal pAmount,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Object pComments = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramCashInTypeID = new DataColumnParameter(defCashInTypeID, pCashInTypeID);
+                DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+                DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CashInTypeID],[Amount],[Comments],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCashInTypeID.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pCashInTypeID,
+Decimal pAmount,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Object pComments = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramCashInTypeID = new DataColumnParameter(defCashInTypeID, pCashInTypeID);
+DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CashInTypeID],[Amount],[Comments],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCashInTypeID.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pCashInTypeID,
+Decimal pAmount,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Object pComments= null){
+
+        try{
+
+DataColumnParameter paramCashInTypeID = new DataColumnParameter(defCashInTypeID, pCashInTypeID);
+DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([CashInTypeID],[Amount],[Comments],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5}) ", TABLE_NAME,paramCashInTypeID.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pCashInTypeID = null,
+Object pAmount = null,
+Object pCreatedAt = null,
+Object pCreatedByID = null,
+Object pComments = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramCashInTypeID = new DataColumnParameter(defCashInTypeID, pCashInTypeID);
+ DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+ DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [CashInTypeID]={2},[Amount]={3},[Comments]={4},[CreatedAt]={5},[CreatedByID]={6} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCashInTypeID.getSQLQuotedValueForUpdate(),
+paramAmount.getSQLQuotedValueForUpdate(),
+paramComments.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

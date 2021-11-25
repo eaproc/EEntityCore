@@ -769,6 +769,364 @@ Int32 pUpdatedByID){
         }                   
 
 
+        public static int AddWithID(Int32 pCenterID,
+Int32 pBeneficiaryStatusID,
+String pFirstName,
+String pLastName,
+String pAddress,
+Int32 pGenderID,
+DateTime pDateOfBirth,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pCity = null,
+Object pState = null,
+Object pZipCode = null,
+Object pSchoolName = null,
+Object pSchoolAddress = null,
+Object pClassOnEnrollment = null,
+Object pHomePhone = null,
+Object pAlternatePhone = null,
+Object pEmail = null,
+Object pVocation = null,
+Object pBirthCertificatePath = null,
+Object pPhotoPath = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramCenterID = new DataColumnParameter(defCenterID, pCenterID);
+                DataColumnParameter paramBeneficiaryStatusID = new DataColumnParameter(defBeneficiaryStatusID, pBeneficiaryStatusID);
+                DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+                DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+                DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+                DataColumnParameter paramCity = new DataColumnParameter(defCity, pCity);
+                DataColumnParameter paramState = new DataColumnParameter(defState, pState);
+                DataColumnParameter paramZipCode = new DataColumnParameter(defZipCode, pZipCode);
+                DataColumnParameter paramSchoolName = new DataColumnParameter(defSchoolName, pSchoolName);
+                DataColumnParameter paramSchoolAddress = new DataColumnParameter(defSchoolAddress, pSchoolAddress);
+                DataColumnParameter paramClassOnEnrollment = new DataColumnParameter(defClassOnEnrollment, pClassOnEnrollment);
+                DataColumnParameter paramHomePhone = new DataColumnParameter(defHomePhone, pHomePhone);
+                DataColumnParameter paramAlternatePhone = new DataColumnParameter(defAlternatePhone, pAlternatePhone);
+                DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+                DataColumnParameter paramGenderID = new DataColumnParameter(defGenderID, pGenderID);
+                DataColumnParameter paramDateOfBirth = new DataColumnParameter(defDateOfBirth, pDateOfBirth);
+                DataColumnParameter paramVocation = new DataColumnParameter(defVocation, pVocation);
+                DataColumnParameter paramBirthCertificatePath = new DataColumnParameter(defBirthCertificatePath, pBirthCertificatePath);
+                DataColumnParameter paramPhotoPath = new DataColumnParameter(defPhotoPath, pPhotoPath);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCenterID.getSQLQuotedValueForAdd(),
+paramBeneficiaryStatusID.getSQLQuotedValueForAdd(),
+paramFirstName.getSQLQuotedValueForAdd(),
+paramLastName.getSQLQuotedValueForAdd(),
+paramAddress.getSQLQuotedValueForAdd(),
+paramCity.getSQLQuotedValueForAdd(),
+paramState.getSQLQuotedValueForAdd(),
+paramZipCode.getSQLQuotedValueForAdd(),
+paramSchoolName.getSQLQuotedValueForAdd(),
+paramSchoolAddress.getSQLQuotedValueForAdd(),
+paramClassOnEnrollment.getSQLQuotedValueForAdd(),
+paramHomePhone.getSQLQuotedValueForAdd(),
+paramAlternatePhone.getSQLQuotedValueForAdd(),
+paramEmail.getSQLQuotedValueForAdd(),
+paramGenderID.getSQLQuotedValueForAdd(),
+paramDateOfBirth.getSQLQuotedValueForAdd(),
+paramVocation.getSQLQuotedValueForAdd(),
+paramBirthCertificatePath.getSQLQuotedValueForAdd(),
+paramPhotoPath.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pCenterID,
+Int32 pBeneficiaryStatusID,
+String pFirstName,
+String pLastName,
+String pAddress,
+Int32 pGenderID,
+DateTime pDateOfBirth,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pCity = null,
+Object pState = null,
+Object pZipCode = null,
+Object pSchoolName = null,
+Object pSchoolAddress = null,
+Object pClassOnEnrollment = null,
+Object pHomePhone = null,
+Object pAlternatePhone = null,
+Object pEmail = null,
+Object pVocation = null,
+Object pBirthCertificatePath = null,
+Object pPhotoPath = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramCenterID = new DataColumnParameter(defCenterID, pCenterID);
+DataColumnParameter paramBeneficiaryStatusID = new DataColumnParameter(defBeneficiaryStatusID, pBeneficiaryStatusID);
+DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+DataColumnParameter paramCity = new DataColumnParameter(defCity, pCity);
+DataColumnParameter paramState = new DataColumnParameter(defState, pState);
+DataColumnParameter paramZipCode = new DataColumnParameter(defZipCode, pZipCode);
+DataColumnParameter paramSchoolName = new DataColumnParameter(defSchoolName, pSchoolName);
+DataColumnParameter paramSchoolAddress = new DataColumnParameter(defSchoolAddress, pSchoolAddress);
+DataColumnParameter paramClassOnEnrollment = new DataColumnParameter(defClassOnEnrollment, pClassOnEnrollment);
+DataColumnParameter paramHomePhone = new DataColumnParameter(defHomePhone, pHomePhone);
+DataColumnParameter paramAlternatePhone = new DataColumnParameter(defAlternatePhone, pAlternatePhone);
+DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+DataColumnParameter paramGenderID = new DataColumnParameter(defGenderID, pGenderID);
+DataColumnParameter paramDateOfBirth = new DataColumnParameter(defDateOfBirth, pDateOfBirth);
+DataColumnParameter paramVocation = new DataColumnParameter(defVocation, pVocation);
+DataColumnParameter paramBirthCertificatePath = new DataColumnParameter(defBirthCertificatePath, pBirthCertificatePath);
+DataColumnParameter paramPhotoPath = new DataColumnParameter(defPhotoPath, pPhotoPath);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCenterID.getSQLQuotedValueForAdd(),
+paramBeneficiaryStatusID.getSQLQuotedValueForAdd(),
+paramFirstName.getSQLQuotedValueForAdd(),
+paramLastName.getSQLQuotedValueForAdd(),
+paramAddress.getSQLQuotedValueForAdd(),
+paramCity.getSQLQuotedValueForAdd(),
+paramState.getSQLQuotedValueForAdd(),
+paramZipCode.getSQLQuotedValueForAdd(),
+paramSchoolName.getSQLQuotedValueForAdd(),
+paramSchoolAddress.getSQLQuotedValueForAdd(),
+paramClassOnEnrollment.getSQLQuotedValueForAdd(),
+paramHomePhone.getSQLQuotedValueForAdd(),
+paramAlternatePhone.getSQLQuotedValueForAdd(),
+paramEmail.getSQLQuotedValueForAdd(),
+paramGenderID.getSQLQuotedValueForAdd(),
+paramDateOfBirth.getSQLQuotedValueForAdd(),
+paramVocation.getSQLQuotedValueForAdd(),
+paramBirthCertificatePath.getSQLQuotedValueForAdd(),
+paramPhotoPath.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pCenterID,
+Int32 pBeneficiaryStatusID,
+String pFirstName,
+String pLastName,
+String pAddress,
+Int32 pGenderID,
+DateTime pDateOfBirth,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pCity= null,
+Object pState= null,
+Object pZipCode= null,
+Object pSchoolName= null,
+Object pSchoolAddress= null,
+Object pClassOnEnrollment= null,
+Object pHomePhone= null,
+Object pAlternatePhone= null,
+Object pEmail= null,
+Object pVocation= null,
+Object pBirthCertificatePath= null,
+Object pPhotoPath= null){
+
+        try{
+
+DataColumnParameter paramCenterID = new DataColumnParameter(defCenterID, pCenterID);
+DataColumnParameter paramBeneficiaryStatusID = new DataColumnParameter(defBeneficiaryStatusID, pBeneficiaryStatusID);
+DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+DataColumnParameter paramCity = new DataColumnParameter(defCity, pCity);
+DataColumnParameter paramState = new DataColumnParameter(defState, pState);
+DataColumnParameter paramZipCode = new DataColumnParameter(defZipCode, pZipCode);
+DataColumnParameter paramSchoolName = new DataColumnParameter(defSchoolName, pSchoolName);
+DataColumnParameter paramSchoolAddress = new DataColumnParameter(defSchoolAddress, pSchoolAddress);
+DataColumnParameter paramClassOnEnrollment = new DataColumnParameter(defClassOnEnrollment, pClassOnEnrollment);
+DataColumnParameter paramHomePhone = new DataColumnParameter(defHomePhone, pHomePhone);
+DataColumnParameter paramAlternatePhone = new DataColumnParameter(defAlternatePhone, pAlternatePhone);
+DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+DataColumnParameter paramGenderID = new DataColumnParameter(defGenderID, pGenderID);
+DataColumnParameter paramDateOfBirth = new DataColumnParameter(defDateOfBirth, pDateOfBirth);
+DataColumnParameter paramVocation = new DataColumnParameter(defVocation, pVocation);
+DataColumnParameter paramBirthCertificatePath = new DataColumnParameter(defBirthCertificatePath, pBirthCertificatePath);
+DataColumnParameter paramPhotoPath = new DataColumnParameter(defPhotoPath, pPhotoPath);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23}) ", TABLE_NAME,paramCenterID.getSQLQuotedValueForAdd(),
+paramBeneficiaryStatusID.getSQLQuotedValueForAdd(),
+paramFirstName.getSQLQuotedValueForAdd(),
+paramLastName.getSQLQuotedValueForAdd(),
+paramAddress.getSQLQuotedValueForAdd(),
+paramCity.getSQLQuotedValueForAdd(),
+paramState.getSQLQuotedValueForAdd(),
+paramZipCode.getSQLQuotedValueForAdd(),
+paramSchoolName.getSQLQuotedValueForAdd(),
+paramSchoolAddress.getSQLQuotedValueForAdd(),
+paramClassOnEnrollment.getSQLQuotedValueForAdd(),
+paramHomePhone.getSQLQuotedValueForAdd(),
+paramAlternatePhone.getSQLQuotedValueForAdd(),
+paramEmail.getSQLQuotedValueForAdd(),
+paramGenderID.getSQLQuotedValueForAdd(),
+paramDateOfBirth.getSQLQuotedValueForAdd(),
+paramVocation.getSQLQuotedValueForAdd(),
+paramBirthCertificatePath.getSQLQuotedValueForAdd(),
+paramPhotoPath.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pCenterID = null,
+Object pBeneficiaryStatusID = null,
+Object pFirstName = null,
+Object pLastName = null,
+Object pAddress = null,
+Object pGenderID = null,
+Object pDateOfBirth = null,
+Object pCreatedAt = null,
+Object pUpdatedAt = null,
+Object pCreatedByID = null,
+Object pUpdatedByID = null,
+Object pCity = null,
+Object pState = null,
+Object pZipCode = null,
+Object pSchoolName = null,
+Object pSchoolAddress = null,
+Object pClassOnEnrollment = null,
+Object pHomePhone = null,
+Object pAlternatePhone = null,
+Object pEmail = null,
+Object pVocation = null,
+Object pBirthCertificatePath = null,
+Object pPhotoPath = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramCenterID = new DataColumnParameter(defCenterID, pCenterID);
+ DataColumnParameter paramBeneficiaryStatusID = new DataColumnParameter(defBeneficiaryStatusID, pBeneficiaryStatusID);
+ DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+ DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+ DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+ DataColumnParameter paramCity = new DataColumnParameter(defCity, pCity);
+ DataColumnParameter paramState = new DataColumnParameter(defState, pState);
+ DataColumnParameter paramZipCode = new DataColumnParameter(defZipCode, pZipCode);
+ DataColumnParameter paramSchoolName = new DataColumnParameter(defSchoolName, pSchoolName);
+ DataColumnParameter paramSchoolAddress = new DataColumnParameter(defSchoolAddress, pSchoolAddress);
+ DataColumnParameter paramClassOnEnrollment = new DataColumnParameter(defClassOnEnrollment, pClassOnEnrollment);
+ DataColumnParameter paramHomePhone = new DataColumnParameter(defHomePhone, pHomePhone);
+ DataColumnParameter paramAlternatePhone = new DataColumnParameter(defAlternatePhone, pAlternatePhone);
+ DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+ DataColumnParameter paramGenderID = new DataColumnParameter(defGenderID, pGenderID);
+ DataColumnParameter paramDateOfBirth = new DataColumnParameter(defDateOfBirth, pDateOfBirth);
+ DataColumnParameter paramVocation = new DataColumnParameter(defVocation, pVocation);
+ DataColumnParameter paramBirthCertificatePath = new DataColumnParameter(defBirthCertificatePath, pBirthCertificatePath);
+ DataColumnParameter paramPhotoPath = new DataColumnParameter(defPhotoPath, pPhotoPath);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [CenterID]={2},[BeneficiaryStatusID]={3},[FirstName]={4},[LastName]={5},[Address]={6},[City]={7},[State]={8},[ZipCode]={9},[SchoolName]={10},[SchoolAddress]={11},[ClassOnEnrollment]={12},[HomePhone]={13},[AlternatePhone]={14},[Email]={15},[GenderID]={16},[DateOfBirth]={17},[Vocation]={18},[BirthCertificatePath]={19},[PhotoPath]={20},[CreatedAt]={21},[UpdatedAt]={22},[CreatedByID]={23},[UpdatedByID]={24} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCenterID.getSQLQuotedValueForUpdate(),
+paramBeneficiaryStatusID.getSQLQuotedValueForUpdate(),
+paramFirstName.getSQLQuotedValueForUpdate(),
+paramLastName.getSQLQuotedValueForUpdate(),
+paramAddress.getSQLQuotedValueForUpdate(),
+paramCity.getSQLQuotedValueForUpdate(),
+paramState.getSQLQuotedValueForUpdate(),
+paramZipCode.getSQLQuotedValueForUpdate(),
+paramSchoolName.getSQLQuotedValueForUpdate(),
+paramSchoolAddress.getSQLQuotedValueForUpdate(),
+paramClassOnEnrollment.getSQLQuotedValueForUpdate(),
+paramHomePhone.getSQLQuotedValueForUpdate(),
+paramAlternatePhone.getSQLQuotedValueForUpdate(),
+paramEmail.getSQLQuotedValueForUpdate(),
+paramGenderID.getSQLQuotedValueForUpdate(),
+paramDateOfBirth.getSQLQuotedValueForUpdate(),
+paramVocation.getSQLQuotedValueForUpdate(),
+paramBirthCertificatePath.getSQLQuotedValueForUpdate(),
+paramPhotoPath.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramUpdatedByID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

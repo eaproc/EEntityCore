@@ -555,6 +555,196 @@ Int32 pRoleID){
         }                   
 
 
+        public static int AddWithID(Int32 pUserID,
+String pSessionID,
+String pIPAddress,
+Boolean pTimedOut,
+String pWebURL,
+String pPage,
+Int32 pRoleID,
+DateTime pCreatedAt,
+Object pCheckedOutTime = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+                DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
+                DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+                DataColumnParameter paramTimedOut = new DataColumnParameter(defTimedOut, pTimedOut);
+                DataColumnParameter paramWebURL = new DataColumnParameter(defWebURL, pWebURL);
+                DataColumnParameter paramPage = new DataColumnParameter(defPage, pPage);
+                DataColumnParameter paramCheckedOutTime = new DataColumnParameter(defCheckedOutTime, pCheckedOutTime);
+                DataColumnParameter paramRoleID = new DataColumnParameter(defRoleID, pRoleID);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[SessionID],[IPAddress],[TimedOut],[WebURL],[Page],[CheckedOutTime],[RoleID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd(),
+paramSessionID.getSQLQuotedValueForAdd(),
+paramIPAddress.getSQLQuotedValueForAdd(),
+paramTimedOut.getSQLQuotedValueForAdd(),
+paramWebURL.getSQLQuotedValueForAdd(),
+paramPage.getSQLQuotedValueForAdd(),
+paramCheckedOutTime.getSQLQuotedValueForAdd(),
+paramRoleID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pUserID,
+String pSessionID,
+String pIPAddress,
+Boolean pTimedOut,
+String pWebURL,
+String pPage,
+Int32 pRoleID,
+DateTime pCreatedAt,
+Object pCheckedOutTime = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
+DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+DataColumnParameter paramTimedOut = new DataColumnParameter(defTimedOut, pTimedOut);
+DataColumnParameter paramWebURL = new DataColumnParameter(defWebURL, pWebURL);
+DataColumnParameter paramPage = new DataColumnParameter(defPage, pPage);
+DataColumnParameter paramCheckedOutTime = new DataColumnParameter(defCheckedOutTime, pCheckedOutTime);
+DataColumnParameter paramRoleID = new DataColumnParameter(defRoleID, pRoleID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[SessionID],[IPAddress],[TimedOut],[WebURL],[Page],[CheckedOutTime],[RoleID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd(),
+paramSessionID.getSQLQuotedValueForAdd(),
+paramIPAddress.getSQLQuotedValueForAdd(),
+paramTimedOut.getSQLQuotedValueForAdd(),
+paramWebURL.getSQLQuotedValueForAdd(),
+paramPage.getSQLQuotedValueForAdd(),
+paramCheckedOutTime.getSQLQuotedValueForAdd(),
+paramRoleID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pUserID,
+String pSessionID,
+String pIPAddress,
+Boolean pTimedOut,
+String pWebURL,
+String pPage,
+Int32 pRoleID,
+DateTime pCreatedAt,
+Object pCheckedOutTime= null){
+
+        try{
+
+DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
+DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+DataColumnParameter paramTimedOut = new DataColumnParameter(defTimedOut, pTimedOut);
+DataColumnParameter paramWebURL = new DataColumnParameter(defWebURL, pWebURL);
+DataColumnParameter paramPage = new DataColumnParameter(defPage, pPage);
+DataColumnParameter paramCheckedOutTime = new DataColumnParameter(defCheckedOutTime, pCheckedOutTime);
+DataColumnParameter paramRoleID = new DataColumnParameter(defRoleID, pRoleID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([UserID],[SessionID],[IPAddress],[TimedOut],[WebURL],[Page],[CheckedOutTime],[RoleID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramUserID.getSQLQuotedValueForAdd(),
+paramSessionID.getSQLQuotedValueForAdd(),
+paramIPAddress.getSQLQuotedValueForAdd(),
+paramTimedOut.getSQLQuotedValueForAdd(),
+paramWebURL.getSQLQuotedValueForAdd(),
+paramPage.getSQLQuotedValueForAdd(),
+paramCheckedOutTime.getSQLQuotedValueForAdd(),
+paramRoleID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pUserID = null,
+Object pSessionID = null,
+Object pIPAddress = null,
+Object pTimedOut = null,
+Object pWebURL = null,
+Object pPage = null,
+Object pRoleID = null,
+Object pCreatedAt = null,
+Object pCheckedOutTime = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+ DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
+ DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+ DataColumnParameter paramTimedOut = new DataColumnParameter(defTimedOut, pTimedOut);
+ DataColumnParameter paramWebURL = new DataColumnParameter(defWebURL, pWebURL);
+ DataColumnParameter paramPage = new DataColumnParameter(defPage, pPage);
+ DataColumnParameter paramCheckedOutTime = new DataColumnParameter(defCheckedOutTime, pCheckedOutTime);
+ DataColumnParameter paramRoleID = new DataColumnParameter(defRoleID, pRoleID);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [UserID]={2},[SessionID]={3},[IPAddress]={4},[TimedOut]={5},[WebURL]={6},[Page]={7},[CheckedOutTime]={8},[RoleID]={9},[CreatedAt]={10} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramUserID.getSQLQuotedValueForUpdate(),
+paramSessionID.getSQLQuotedValueForUpdate(),
+paramIPAddress.getSQLQuotedValueForUpdate(),
+paramTimedOut.getSQLQuotedValueForUpdate(),
+paramWebURL.getSQLQuotedValueForUpdate(),
+paramPage.getSQLQuotedValueForUpdate(),
+paramCheckedOutTime.getSQLQuotedValueForUpdate(),
+paramRoleID.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

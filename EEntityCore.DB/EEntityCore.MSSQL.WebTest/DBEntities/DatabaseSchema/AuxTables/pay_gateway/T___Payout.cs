@@ -679,6 +679,292 @@ Int32 pBankID){
         }                   
 
 
+        public static int AddWithID(Int32 pCreatedByID,
+Int32 pClientID,
+Decimal pPaidInAmount,
+Decimal pPaidInCharges,
+Decimal pPayoutAmount,
+Decimal pPayoutCharge,
+Decimal pBalance,
+DateTime pTransactionStartDate,
+DateTime pTransactionEndDate,
+DateTime pCreatedAt,
+Int32 pBankID,
+String pAccountName,
+String pAccountNumber,
+Object pUpdatedByID = null,
+Object pAwaitingPayout = null,
+Object pSynced = null,
+Object pUpdatedAt = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+                DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+                DataColumnParameter paramPaidInAmount = new DataColumnParameter(defPaidInAmount, pPaidInAmount);
+                DataColumnParameter paramPaidInCharges = new DataColumnParameter(defPaidInCharges, pPaidInCharges);
+                DataColumnParameter paramPayoutAmount = new DataColumnParameter(defPayoutAmount, pPayoutAmount);
+                DataColumnParameter paramPayoutCharge = new DataColumnParameter(defPayoutCharge, pPayoutCharge);
+                DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
+                DataColumnParameter paramTransactionStartDate = new DataColumnParameter(defTransactionStartDate, pTransactionStartDate);
+                DataColumnParameter paramTransactionEndDate = new DataColumnParameter(defTransactionEndDate, pTransactionEndDate);
+                DataColumnParameter paramAwaitingPayout = new DataColumnParameter(defAwaitingPayout, pAwaitingPayout);
+                DataColumnParameter paramSynced = new DataColumnParameter(defSynced, pSynced);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+                DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
+                DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CreatedByID],[UpdatedByID],[ClientID],[PaidInAmount],[PaidInCharges],[PayoutAmount],[PayoutCharge],[Balance],[TransactionStartDate],[TransactionEndDate],[AwaitingPayout],[Synced],[CreatedAt],[UpdatedAt],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd(),
+paramPaidInAmount.getSQLQuotedValueForAdd(),
+paramPaidInCharges.getSQLQuotedValueForAdd(),
+paramPayoutAmount.getSQLQuotedValueForAdd(),
+paramPayoutCharge.getSQLQuotedValueForAdd(),
+paramBalance.getSQLQuotedValueForAdd(),
+paramTransactionStartDate.getSQLQuotedValueForAdd(),
+paramTransactionEndDate.getSQLQuotedValueForAdd(),
+paramAwaitingPayout.getSQLQuotedValueForAdd(),
+paramSynced.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramAccountName.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pCreatedByID,
+Int32 pClientID,
+Decimal pPaidInAmount,
+Decimal pPaidInCharges,
+Decimal pPayoutAmount,
+Decimal pPayoutCharge,
+Decimal pBalance,
+DateTime pTransactionStartDate,
+DateTime pTransactionEndDate,
+DateTime pCreatedAt,
+Int32 pBankID,
+String pAccountName,
+String pAccountNumber,
+Object pUpdatedByID = null,
+Object pAwaitingPayout = null,
+Object pSynced = null,
+Object pUpdatedAt = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+DataColumnParameter paramPaidInAmount = new DataColumnParameter(defPaidInAmount, pPaidInAmount);
+DataColumnParameter paramPaidInCharges = new DataColumnParameter(defPaidInCharges, pPaidInCharges);
+DataColumnParameter paramPayoutAmount = new DataColumnParameter(defPayoutAmount, pPayoutAmount);
+DataColumnParameter paramPayoutCharge = new DataColumnParameter(defPayoutCharge, pPayoutCharge);
+DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
+DataColumnParameter paramTransactionStartDate = new DataColumnParameter(defTransactionStartDate, pTransactionStartDate);
+DataColumnParameter paramTransactionEndDate = new DataColumnParameter(defTransactionEndDate, pTransactionEndDate);
+DataColumnParameter paramAwaitingPayout = new DataColumnParameter(defAwaitingPayout, pAwaitingPayout);
+DataColumnParameter paramSynced = new DataColumnParameter(defSynced, pSynced);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
+DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CreatedByID],[UpdatedByID],[ClientID],[PaidInAmount],[PaidInCharges],[PayoutAmount],[PayoutCharge],[Balance],[TransactionStartDate],[TransactionEndDate],[AwaitingPayout],[Synced],[CreatedAt],[UpdatedAt],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd(),
+paramPaidInAmount.getSQLQuotedValueForAdd(),
+paramPaidInCharges.getSQLQuotedValueForAdd(),
+paramPayoutAmount.getSQLQuotedValueForAdd(),
+paramPayoutCharge.getSQLQuotedValueForAdd(),
+paramBalance.getSQLQuotedValueForAdd(),
+paramTransactionStartDate.getSQLQuotedValueForAdd(),
+paramTransactionEndDate.getSQLQuotedValueForAdd(),
+paramAwaitingPayout.getSQLQuotedValueForAdd(),
+paramSynced.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramAccountName.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pCreatedByID,
+Int32 pClientID,
+Decimal pPaidInAmount,
+Decimal pPaidInCharges,
+Decimal pPayoutAmount,
+Decimal pPayoutCharge,
+Decimal pBalance,
+DateTime pTransactionStartDate,
+DateTime pTransactionEndDate,
+DateTime pCreatedAt,
+Int32 pBankID,
+String pAccountName,
+String pAccountNumber,
+Object pUpdatedByID= null,
+Object pAwaitingPayout= null,
+Object pSynced= null,
+Object pUpdatedAt= null){
+
+        try{
+
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+DataColumnParameter paramPaidInAmount = new DataColumnParameter(defPaidInAmount, pPaidInAmount);
+DataColumnParameter paramPaidInCharges = new DataColumnParameter(defPaidInCharges, pPaidInCharges);
+DataColumnParameter paramPayoutAmount = new DataColumnParameter(defPayoutAmount, pPayoutAmount);
+DataColumnParameter paramPayoutCharge = new DataColumnParameter(defPayoutCharge, pPayoutCharge);
+DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
+DataColumnParameter paramTransactionStartDate = new DataColumnParameter(defTransactionStartDate, pTransactionStartDate);
+DataColumnParameter paramTransactionEndDate = new DataColumnParameter(defTransactionEndDate, pTransactionEndDate);
+DataColumnParameter paramAwaitingPayout = new DataColumnParameter(defAwaitingPayout, pAwaitingPayout);
+DataColumnParameter paramSynced = new DataColumnParameter(defSynced, pSynced);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
+DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([CreatedByID],[UpdatedByID],[ClientID],[PaidInAmount],[PaidInCharges],[PayoutAmount],[PayoutCharge],[Balance],[TransactionStartDate],[TransactionEndDate],[AwaitingPayout],[Synced],[CreatedAt],[UpdatedAt],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) ", TABLE_NAME,paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd(),
+paramPaidInAmount.getSQLQuotedValueForAdd(),
+paramPaidInCharges.getSQLQuotedValueForAdd(),
+paramPayoutAmount.getSQLQuotedValueForAdd(),
+paramPayoutCharge.getSQLQuotedValueForAdd(),
+paramBalance.getSQLQuotedValueForAdd(),
+paramTransactionStartDate.getSQLQuotedValueForAdd(),
+paramTransactionEndDate.getSQLQuotedValueForAdd(),
+paramAwaitingPayout.getSQLQuotedValueForAdd(),
+paramSynced.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramAccountName.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pCreatedByID = null,
+Object pClientID = null,
+Object pPaidInAmount = null,
+Object pPaidInCharges = null,
+Object pPayoutAmount = null,
+Object pPayoutCharge = null,
+Object pBalance = null,
+Object pTransactionStartDate = null,
+Object pTransactionEndDate = null,
+Object pCreatedAt = null,
+Object pBankID = null,
+Object pAccountName = null,
+Object pAccountNumber = null,
+Object pUpdatedByID = null,
+Object pAwaitingPayout = null,
+Object pSynced = null,
+Object pUpdatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+ DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+ DataColumnParameter paramPaidInAmount = new DataColumnParameter(defPaidInAmount, pPaidInAmount);
+ DataColumnParameter paramPaidInCharges = new DataColumnParameter(defPaidInCharges, pPaidInCharges);
+ DataColumnParameter paramPayoutAmount = new DataColumnParameter(defPayoutAmount, pPayoutAmount);
+ DataColumnParameter paramPayoutCharge = new DataColumnParameter(defPayoutCharge, pPayoutCharge);
+ DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
+ DataColumnParameter paramTransactionStartDate = new DataColumnParameter(defTransactionStartDate, pTransactionStartDate);
+ DataColumnParameter paramTransactionEndDate = new DataColumnParameter(defTransactionEndDate, pTransactionEndDate);
+ DataColumnParameter paramAwaitingPayout = new DataColumnParameter(defAwaitingPayout, pAwaitingPayout);
+ DataColumnParameter paramSynced = new DataColumnParameter(defSynced, pSynced);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+ DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
+ DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [CreatedByID]={2},[UpdatedByID]={3},[ClientID]={4},[PaidInAmount]={5},[PaidInCharges]={6},[PayoutAmount]={7},[PayoutCharge]={8},[Balance]={9},[TransactionStartDate]={10},[TransactionEndDate]={11},[AwaitingPayout]={12},[Synced]={13},[CreatedAt]={14},[UpdatedAt]={15},[BankID]={16},[AccountName]={17},[AccountNumber]={18} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramUpdatedByID.getSQLQuotedValueForUpdate(),
+paramClientID.getSQLQuotedValueForUpdate(),
+paramPaidInAmount.getSQLQuotedValueForUpdate(),
+paramPaidInCharges.getSQLQuotedValueForUpdate(),
+paramPayoutAmount.getSQLQuotedValueForUpdate(),
+paramPayoutCharge.getSQLQuotedValueForUpdate(),
+paramBalance.getSQLQuotedValueForUpdate(),
+paramTransactionStartDate.getSQLQuotedValueForUpdate(),
+paramTransactionEndDate.getSQLQuotedValueForUpdate(),
+paramAwaitingPayout.getSQLQuotedValueForUpdate(),
+paramSynced.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramBankID.getSQLQuotedValueForUpdate(),
+paramAccountName.getSQLQuotedValueForUpdate(),
+paramAccountNumber.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

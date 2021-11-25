@@ -805,6 +805,400 @@ Int32 pUpdatedByID){
         }                   
 
 
+        public static int AddWithID(Int32 pTransactionStatusID,
+Int32 pClientID,
+String pStudentNumber,
+String pFirstName,
+String pLastName,
+String pAccountName,
+String pAccountNumber,
+String pBank,
+String pChannel,
+String pIPAddress,
+Decimal pSchoolDiscountGiven,
+Decimal pPaymentRequired,
+Decimal pCharges,
+Decimal pRefundAmount,
+Decimal pBalance,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Decimal pPaymentRequiredWithoutCharges,
+Object pConfirmationThreshold = null,
+Object pConfirmationDate = null,
+Object pAwaitingDisbursement = null,
+Object pUpdatedAt = null,
+Object pConfirmedExplanation = null,
+Object pChargesBilledToClient = null,
+Object pIsMultiTarget = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramTransactionStatusID = new DataColumnParameter(defTransactionStatusID, pTransactionStatusID);
+                DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+                DataColumnParameter paramStudentNumber = new DataColumnParameter(defStudentNumber, pStudentNumber);
+                DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+                DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+                DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
+                DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+                DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
+                DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
+                DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+                DataColumnParameter paramSchoolDiscountGiven = new DataColumnParameter(defSchoolDiscountGiven, pSchoolDiscountGiven);
+                DataColumnParameter paramPaymentRequired = new DataColumnParameter(defPaymentRequired, pPaymentRequired);
+                DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
+                DataColumnParameter paramRefundAmount = new DataColumnParameter(defRefundAmount, pRefundAmount);
+                DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
+                DataColumnParameter paramConfirmationThreshold = new DataColumnParameter(defConfirmationThreshold, pConfirmationThreshold);
+                DataColumnParameter paramConfirmationDate = new DataColumnParameter(defConfirmationDate, pConfirmationDate);
+                DataColumnParameter paramAwaitingDisbursement = new DataColumnParameter(defAwaitingDisbursement, pAwaitingDisbursement);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+                DataColumnParameter paramConfirmedExplanation = new DataColumnParameter(defConfirmedExplanation, pConfirmedExplanation);
+                DataColumnParameter paramChargesBilledToClient = new DataColumnParameter(defChargesBilledToClient, pChargesBilledToClient);
+                DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
+                DataColumnParameter paramIsMultiTarget = new DataColumnParameter(defIsMultiTarget, pIsMultiTarget);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramTransactionStatusID.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd(),
+paramStudentNumber.getSQLQuotedValueForAdd(),
+paramFirstName.getSQLQuotedValueForAdd(),
+paramLastName.getSQLQuotedValueForAdd(),
+paramAccountName.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd(),
+paramBank.getSQLQuotedValueForAdd(),
+paramChannel.getSQLQuotedValueForAdd(),
+paramIPAddress.getSQLQuotedValueForAdd(),
+paramSchoolDiscountGiven.getSQLQuotedValueForAdd(),
+paramPaymentRequired.getSQLQuotedValueForAdd(),
+paramCharges.getSQLQuotedValueForAdd(),
+paramRefundAmount.getSQLQuotedValueForAdd(),
+paramBalance.getSQLQuotedValueForAdd(),
+paramConfirmationThreshold.getSQLQuotedValueForAdd(),
+paramConfirmationDate.getSQLQuotedValueForAdd(),
+paramAwaitingDisbursement.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd(),
+paramConfirmedExplanation.getSQLQuotedValueForAdd(),
+paramChargesBilledToClient.getSQLQuotedValueForAdd(),
+paramPaymentRequiredWithoutCharges.getSQLQuotedValueForAdd(),
+paramIsMultiTarget.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pTransactionStatusID,
+Int32 pClientID,
+String pStudentNumber,
+String pFirstName,
+String pLastName,
+String pAccountName,
+String pAccountNumber,
+String pBank,
+String pChannel,
+String pIPAddress,
+Decimal pSchoolDiscountGiven,
+Decimal pPaymentRequired,
+Decimal pCharges,
+Decimal pRefundAmount,
+Decimal pBalance,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Decimal pPaymentRequiredWithoutCharges,
+Object pConfirmationThreshold = null,
+Object pConfirmationDate = null,
+Object pAwaitingDisbursement = null,
+Object pUpdatedAt = null,
+Object pConfirmedExplanation = null,
+Object pChargesBilledToClient = null,
+Object pIsMultiTarget = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramTransactionStatusID = new DataColumnParameter(defTransactionStatusID, pTransactionStatusID);
+DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+DataColumnParameter paramStudentNumber = new DataColumnParameter(defStudentNumber, pStudentNumber);
+DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
+DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
+DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
+DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+DataColumnParameter paramSchoolDiscountGiven = new DataColumnParameter(defSchoolDiscountGiven, pSchoolDiscountGiven);
+DataColumnParameter paramPaymentRequired = new DataColumnParameter(defPaymentRequired, pPaymentRequired);
+DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
+DataColumnParameter paramRefundAmount = new DataColumnParameter(defRefundAmount, pRefundAmount);
+DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
+DataColumnParameter paramConfirmationThreshold = new DataColumnParameter(defConfirmationThreshold, pConfirmationThreshold);
+DataColumnParameter paramConfirmationDate = new DataColumnParameter(defConfirmationDate, pConfirmationDate);
+DataColumnParameter paramAwaitingDisbursement = new DataColumnParameter(defAwaitingDisbursement, pAwaitingDisbursement);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+DataColumnParameter paramConfirmedExplanation = new DataColumnParameter(defConfirmedExplanation, pConfirmedExplanation);
+DataColumnParameter paramChargesBilledToClient = new DataColumnParameter(defChargesBilledToClient, pChargesBilledToClient);
+DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
+DataColumnParameter paramIsMultiTarget = new DataColumnParameter(defIsMultiTarget, pIsMultiTarget);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramTransactionStatusID.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd(),
+paramStudentNumber.getSQLQuotedValueForAdd(),
+paramFirstName.getSQLQuotedValueForAdd(),
+paramLastName.getSQLQuotedValueForAdd(),
+paramAccountName.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd(),
+paramBank.getSQLQuotedValueForAdd(),
+paramChannel.getSQLQuotedValueForAdd(),
+paramIPAddress.getSQLQuotedValueForAdd(),
+paramSchoolDiscountGiven.getSQLQuotedValueForAdd(),
+paramPaymentRequired.getSQLQuotedValueForAdd(),
+paramCharges.getSQLQuotedValueForAdd(),
+paramRefundAmount.getSQLQuotedValueForAdd(),
+paramBalance.getSQLQuotedValueForAdd(),
+paramConfirmationThreshold.getSQLQuotedValueForAdd(),
+paramConfirmationDate.getSQLQuotedValueForAdd(),
+paramAwaitingDisbursement.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd(),
+paramConfirmedExplanation.getSQLQuotedValueForAdd(),
+paramChargesBilledToClient.getSQLQuotedValueForAdd(),
+paramPaymentRequiredWithoutCharges.getSQLQuotedValueForAdd(),
+paramIsMultiTarget.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pTransactionStatusID,
+Int32 pClientID,
+String pStudentNumber,
+String pFirstName,
+String pLastName,
+String pAccountName,
+String pAccountNumber,
+String pBank,
+String pChannel,
+String pIPAddress,
+Decimal pSchoolDiscountGiven,
+Decimal pPaymentRequired,
+Decimal pCharges,
+Decimal pRefundAmount,
+Decimal pBalance,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Decimal pPaymentRequiredWithoutCharges,
+Object pConfirmationThreshold= null,
+Object pConfirmationDate= null,
+Object pAwaitingDisbursement= null,
+Object pUpdatedAt= null,
+Object pConfirmedExplanation= null,
+Object pChargesBilledToClient= null,
+Object pIsMultiTarget= null){
+
+        try{
+
+DataColumnParameter paramTransactionStatusID = new DataColumnParameter(defTransactionStatusID, pTransactionStatusID);
+DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+DataColumnParameter paramStudentNumber = new DataColumnParameter(defStudentNumber, pStudentNumber);
+DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
+DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
+DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
+DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+DataColumnParameter paramSchoolDiscountGiven = new DataColumnParameter(defSchoolDiscountGiven, pSchoolDiscountGiven);
+DataColumnParameter paramPaymentRequired = new DataColumnParameter(defPaymentRequired, pPaymentRequired);
+DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
+DataColumnParameter paramRefundAmount = new DataColumnParameter(defRefundAmount, pRefundAmount);
+DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
+DataColumnParameter paramConfirmationThreshold = new DataColumnParameter(defConfirmationThreshold, pConfirmationThreshold);
+DataColumnParameter paramConfirmationDate = new DataColumnParameter(defConfirmationDate, pConfirmationDate);
+DataColumnParameter paramAwaitingDisbursement = new DataColumnParameter(defAwaitingDisbursement, pAwaitingDisbursement);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+DataColumnParameter paramConfirmedExplanation = new DataColumnParameter(defConfirmedExplanation, pConfirmedExplanation);
+DataColumnParameter paramChargesBilledToClient = new DataColumnParameter(defChargesBilledToClient, pChargesBilledToClient);
+DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
+DataColumnParameter paramIsMultiTarget = new DataColumnParameter(defIsMultiTarget, pIsMultiTarget);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26}) ", TABLE_NAME,paramTransactionStatusID.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd(),
+paramStudentNumber.getSQLQuotedValueForAdd(),
+paramFirstName.getSQLQuotedValueForAdd(),
+paramLastName.getSQLQuotedValueForAdd(),
+paramAccountName.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd(),
+paramBank.getSQLQuotedValueForAdd(),
+paramChannel.getSQLQuotedValueForAdd(),
+paramIPAddress.getSQLQuotedValueForAdd(),
+paramSchoolDiscountGiven.getSQLQuotedValueForAdd(),
+paramPaymentRequired.getSQLQuotedValueForAdd(),
+paramCharges.getSQLQuotedValueForAdd(),
+paramRefundAmount.getSQLQuotedValueForAdd(),
+paramBalance.getSQLQuotedValueForAdd(),
+paramConfirmationThreshold.getSQLQuotedValueForAdd(),
+paramConfirmationDate.getSQLQuotedValueForAdd(),
+paramAwaitingDisbursement.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd(),
+paramConfirmedExplanation.getSQLQuotedValueForAdd(),
+paramChargesBilledToClient.getSQLQuotedValueForAdd(),
+paramPaymentRequiredWithoutCharges.getSQLQuotedValueForAdd(),
+paramIsMultiTarget.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pTransactionStatusID = null,
+Object pClientID = null,
+Object pStudentNumber = null,
+Object pFirstName = null,
+Object pLastName = null,
+Object pAccountName = null,
+Object pAccountNumber = null,
+Object pBank = null,
+Object pChannel = null,
+Object pIPAddress = null,
+Object pSchoolDiscountGiven = null,
+Object pPaymentRequired = null,
+Object pCharges = null,
+Object pRefundAmount = null,
+Object pBalance = null,
+Object pCreatedAt = null,
+Object pCreatedByID = null,
+Object pUpdatedByID = null,
+Object pPaymentRequiredWithoutCharges = null,
+Object pConfirmationThreshold = null,
+Object pConfirmationDate = null,
+Object pAwaitingDisbursement = null,
+Object pUpdatedAt = null,
+Object pConfirmedExplanation = null,
+Object pChargesBilledToClient = null,
+Object pIsMultiTarget = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramTransactionStatusID = new DataColumnParameter(defTransactionStatusID, pTransactionStatusID);
+ DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+ DataColumnParameter paramStudentNumber = new DataColumnParameter(defStudentNumber, pStudentNumber);
+ DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+ DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+ DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
+ DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+ DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
+ DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
+ DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+ DataColumnParameter paramSchoolDiscountGiven = new DataColumnParameter(defSchoolDiscountGiven, pSchoolDiscountGiven);
+ DataColumnParameter paramPaymentRequired = new DataColumnParameter(defPaymentRequired, pPaymentRequired);
+ DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
+ DataColumnParameter paramRefundAmount = new DataColumnParameter(defRefundAmount, pRefundAmount);
+ DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
+ DataColumnParameter paramConfirmationThreshold = new DataColumnParameter(defConfirmationThreshold, pConfirmationThreshold);
+ DataColumnParameter paramConfirmationDate = new DataColumnParameter(defConfirmationDate, pConfirmationDate);
+ DataColumnParameter paramAwaitingDisbursement = new DataColumnParameter(defAwaitingDisbursement, pAwaitingDisbursement);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+ DataColumnParameter paramConfirmedExplanation = new DataColumnParameter(defConfirmedExplanation, pConfirmedExplanation);
+ DataColumnParameter paramChargesBilledToClient = new DataColumnParameter(defChargesBilledToClient, pChargesBilledToClient);
+ DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
+ DataColumnParameter paramIsMultiTarget = new DataColumnParameter(defIsMultiTarget, pIsMultiTarget);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [TransactionStatusID]={2},[ClientID]={3},[StudentNumber]={4},[FirstName]={5},[LastName]={6},[AccountName]={7},[AccountNumber]={8},[Bank]={9},[Channel]={10},[IPAddress]={11},[SchoolDiscountGiven]={12},[PaymentRequired]={13},[Charges]={14},[RefundAmount]={15},[Balance]={16},[ConfirmationThreshold]={17},[ConfirmationDate]={18},[AwaitingDisbursement]={19},[CreatedAt]={20},[UpdatedAt]={21},[CreatedByID]={22},[UpdatedByID]={23},[ConfirmedExplanation]={24},[ChargesBilledToClient]={25},[PaymentRequiredWithoutCharges]={26},[IsMultiTarget]={27} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramTransactionStatusID.getSQLQuotedValueForUpdate(),
+paramClientID.getSQLQuotedValueForUpdate(),
+paramStudentNumber.getSQLQuotedValueForUpdate(),
+paramFirstName.getSQLQuotedValueForUpdate(),
+paramLastName.getSQLQuotedValueForUpdate(),
+paramAccountName.getSQLQuotedValueForUpdate(),
+paramAccountNumber.getSQLQuotedValueForUpdate(),
+paramBank.getSQLQuotedValueForUpdate(),
+paramChannel.getSQLQuotedValueForUpdate(),
+paramIPAddress.getSQLQuotedValueForUpdate(),
+paramSchoolDiscountGiven.getSQLQuotedValueForUpdate(),
+paramPaymentRequired.getSQLQuotedValueForUpdate(),
+paramCharges.getSQLQuotedValueForUpdate(),
+paramRefundAmount.getSQLQuotedValueForUpdate(),
+paramBalance.getSQLQuotedValueForUpdate(),
+paramConfirmationThreshold.getSQLQuotedValueForUpdate(),
+paramConfirmationDate.getSQLQuotedValueForUpdate(),
+paramAwaitingDisbursement.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramUpdatedByID.getSQLQuotedValueForUpdate(),
+paramConfirmedExplanation.getSQLQuotedValueForUpdate(),
+paramChargesBilledToClient.getSQLQuotedValueForUpdate(),
+paramPaymentRequiredWithoutCharges.getSQLQuotedValueForUpdate(),
+paramIsMultiTarget.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

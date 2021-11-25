@@ -666,6 +666,280 @@ Int32 pUpdatedByID){
         }                   
 
 
+        public static int AddWithID(Int32 pPayrollID,
+Int32 pPersonnelID,
+Int32 pAttendanceCount,
+Decimal pSalaryAmount,
+Decimal pRatePerDay,
+Decimal pCalculatedAmount,
+Boolean pIsDisbursed,
+Decimal pApprovedAmount,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Object pHRComments = null,
+Object pBursarComments = null,
+Object pDisbursedAmount = null,
+Object pUpdatedAt = null,
+Object pDisbursedAt = null,
+Object pUpdatedByID = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramPayrollID = new DataColumnParameter(defPayrollID, pPayrollID);
+                DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
+                DataColumnParameter paramAttendanceCount = new DataColumnParameter(defAttendanceCount, pAttendanceCount);
+                DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
+                DataColumnParameter paramRatePerDay = new DataColumnParameter(defRatePerDay, pRatePerDay);
+                DataColumnParameter paramCalculatedAmount = new DataColumnParameter(defCalculatedAmount, pCalculatedAmount);
+                DataColumnParameter paramIsDisbursed = new DataColumnParameter(defIsDisbursed, pIsDisbursed);
+                DataColumnParameter paramHRComments = new DataColumnParameter(defHRComments, pHRComments);
+                DataColumnParameter paramApprovedAmount = new DataColumnParameter(defApprovedAmount, pApprovedAmount);
+                DataColumnParameter paramBursarComments = new DataColumnParameter(defBursarComments, pBursarComments);
+                DataColumnParameter paramDisbursedAmount = new DataColumnParameter(defDisbursedAmount, pDisbursedAmount);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramDisbursedAt = new DataColumnParameter(defDisbursedAt, pDisbursedAt);
+                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramPayrollID.getSQLQuotedValueForAdd(),
+paramPersonnelID.getSQLQuotedValueForAdd(),
+paramAttendanceCount.getSQLQuotedValueForAdd(),
+paramSalaryAmount.getSQLQuotedValueForAdd(),
+paramRatePerDay.getSQLQuotedValueForAdd(),
+paramCalculatedAmount.getSQLQuotedValueForAdd(),
+paramIsDisbursed.getSQLQuotedValueForAdd(),
+paramHRComments.getSQLQuotedValueForAdd(),
+paramApprovedAmount.getSQLQuotedValueForAdd(),
+paramBursarComments.getSQLQuotedValueForAdd(),
+paramDisbursedAmount.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramDisbursedAt.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pPayrollID,
+Int32 pPersonnelID,
+Int32 pAttendanceCount,
+Decimal pSalaryAmount,
+Decimal pRatePerDay,
+Decimal pCalculatedAmount,
+Boolean pIsDisbursed,
+Decimal pApprovedAmount,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Object pHRComments = null,
+Object pBursarComments = null,
+Object pDisbursedAmount = null,
+Object pUpdatedAt = null,
+Object pDisbursedAt = null,
+Object pUpdatedByID = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramPayrollID = new DataColumnParameter(defPayrollID, pPayrollID);
+DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
+DataColumnParameter paramAttendanceCount = new DataColumnParameter(defAttendanceCount, pAttendanceCount);
+DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
+DataColumnParameter paramRatePerDay = new DataColumnParameter(defRatePerDay, pRatePerDay);
+DataColumnParameter paramCalculatedAmount = new DataColumnParameter(defCalculatedAmount, pCalculatedAmount);
+DataColumnParameter paramIsDisbursed = new DataColumnParameter(defIsDisbursed, pIsDisbursed);
+DataColumnParameter paramHRComments = new DataColumnParameter(defHRComments, pHRComments);
+DataColumnParameter paramApprovedAmount = new DataColumnParameter(defApprovedAmount, pApprovedAmount);
+DataColumnParameter paramBursarComments = new DataColumnParameter(defBursarComments, pBursarComments);
+DataColumnParameter paramDisbursedAmount = new DataColumnParameter(defDisbursedAmount, pDisbursedAmount);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramDisbursedAt = new DataColumnParameter(defDisbursedAt, pDisbursedAt);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramPayrollID.getSQLQuotedValueForAdd(),
+paramPersonnelID.getSQLQuotedValueForAdd(),
+paramAttendanceCount.getSQLQuotedValueForAdd(),
+paramSalaryAmount.getSQLQuotedValueForAdd(),
+paramRatePerDay.getSQLQuotedValueForAdd(),
+paramCalculatedAmount.getSQLQuotedValueForAdd(),
+paramIsDisbursed.getSQLQuotedValueForAdd(),
+paramHRComments.getSQLQuotedValueForAdd(),
+paramApprovedAmount.getSQLQuotedValueForAdd(),
+paramBursarComments.getSQLQuotedValueForAdd(),
+paramDisbursedAmount.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramDisbursedAt.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pPayrollID,
+Int32 pPersonnelID,
+Int32 pAttendanceCount,
+Decimal pSalaryAmount,
+Decimal pRatePerDay,
+Decimal pCalculatedAmount,
+Boolean pIsDisbursed,
+Decimal pApprovedAmount,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Object pHRComments= null,
+Object pBursarComments= null,
+Object pDisbursedAmount= null,
+Object pUpdatedAt= null,
+Object pDisbursedAt= null,
+Object pUpdatedByID= null){
+
+        try{
+
+DataColumnParameter paramPayrollID = new DataColumnParameter(defPayrollID, pPayrollID);
+DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
+DataColumnParameter paramAttendanceCount = new DataColumnParameter(defAttendanceCount, pAttendanceCount);
+DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
+DataColumnParameter paramRatePerDay = new DataColumnParameter(defRatePerDay, pRatePerDay);
+DataColumnParameter paramCalculatedAmount = new DataColumnParameter(defCalculatedAmount, pCalculatedAmount);
+DataColumnParameter paramIsDisbursed = new DataColumnParameter(defIsDisbursed, pIsDisbursed);
+DataColumnParameter paramHRComments = new DataColumnParameter(defHRComments, pHRComments);
+DataColumnParameter paramApprovedAmount = new DataColumnParameter(defApprovedAmount, pApprovedAmount);
+DataColumnParameter paramBursarComments = new DataColumnParameter(defBursarComments, pBursarComments);
+DataColumnParameter paramDisbursedAmount = new DataColumnParameter(defDisbursedAmount, pDisbursedAmount);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramDisbursedAt = new DataColumnParameter(defDisbursedAt, pDisbursedAt);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramPayrollID.getSQLQuotedValueForAdd(),
+paramPersonnelID.getSQLQuotedValueForAdd(),
+paramAttendanceCount.getSQLQuotedValueForAdd(),
+paramSalaryAmount.getSQLQuotedValueForAdd(),
+paramRatePerDay.getSQLQuotedValueForAdd(),
+paramCalculatedAmount.getSQLQuotedValueForAdd(),
+paramIsDisbursed.getSQLQuotedValueForAdd(),
+paramHRComments.getSQLQuotedValueForAdd(),
+paramApprovedAmount.getSQLQuotedValueForAdd(),
+paramBursarComments.getSQLQuotedValueForAdd(),
+paramDisbursedAmount.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramDisbursedAt.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pPayrollID = null,
+Object pPersonnelID = null,
+Object pAttendanceCount = null,
+Object pSalaryAmount = null,
+Object pRatePerDay = null,
+Object pCalculatedAmount = null,
+Object pIsDisbursed = null,
+Object pApprovedAmount = null,
+Object pCreatedAt = null,
+Object pCreatedByID = null,
+Object pHRComments = null,
+Object pBursarComments = null,
+Object pDisbursedAmount = null,
+Object pUpdatedAt = null,
+Object pDisbursedAt = null,
+Object pUpdatedByID = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramPayrollID = new DataColumnParameter(defPayrollID, pPayrollID);
+ DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
+ DataColumnParameter paramAttendanceCount = new DataColumnParameter(defAttendanceCount, pAttendanceCount);
+ DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
+ DataColumnParameter paramRatePerDay = new DataColumnParameter(defRatePerDay, pRatePerDay);
+ DataColumnParameter paramCalculatedAmount = new DataColumnParameter(defCalculatedAmount, pCalculatedAmount);
+ DataColumnParameter paramIsDisbursed = new DataColumnParameter(defIsDisbursed, pIsDisbursed);
+ DataColumnParameter paramHRComments = new DataColumnParameter(defHRComments, pHRComments);
+ DataColumnParameter paramApprovedAmount = new DataColumnParameter(defApprovedAmount, pApprovedAmount);
+ DataColumnParameter paramBursarComments = new DataColumnParameter(defBursarComments, pBursarComments);
+ DataColumnParameter paramDisbursedAmount = new DataColumnParameter(defDisbursedAmount, pDisbursedAmount);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramDisbursedAt = new DataColumnParameter(defDisbursedAt, pDisbursedAt);
+ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [PayrollID]={2},[PersonnelID]={3},[AttendanceCount]={4},[SalaryAmount]={5},[RatePerDay]={6},[CalculatedAmount]={7},[IsDisbursed]={8},[HRComments]={9},[ApprovedAmount]={10},[BursarComments]={11},[DisbursedAmount]={12},[UpdatedAt]={13},[CreatedAt]={14},[CreatedByID]={15},[DisbursedAt]={16},[UpdatedByID]={17} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPayrollID.getSQLQuotedValueForUpdate(),
+paramPersonnelID.getSQLQuotedValueForUpdate(),
+paramAttendanceCount.getSQLQuotedValueForUpdate(),
+paramSalaryAmount.getSQLQuotedValueForUpdate(),
+paramRatePerDay.getSQLQuotedValueForUpdate(),
+paramCalculatedAmount.getSQLQuotedValueForUpdate(),
+paramIsDisbursed.getSQLQuotedValueForUpdate(),
+paramHRComments.getSQLQuotedValueForUpdate(),
+paramApprovedAmount.getSQLQuotedValueForUpdate(),
+paramBursarComments.getSQLQuotedValueForUpdate(),
+paramDisbursedAmount.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramDisbursedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedByID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

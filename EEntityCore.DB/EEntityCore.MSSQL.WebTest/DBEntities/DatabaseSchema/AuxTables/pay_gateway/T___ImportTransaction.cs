@@ -549,6 +549,196 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(Int32 pImportTransactionFileID,
+DateTime pTransactionDate,
+String pTransactionReference,
+String pDescription,
+String pChannel,
+Decimal pTotal,
+Boolean pConfirmed,
+DateTime pCreatedAt,
+Object pUpdatedAt = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramImportTransactionFileID = new DataColumnParameter(defImportTransactionFileID, pImportTransactionFileID);
+                DataColumnParameter paramTransactionDate = new DataColumnParameter(defTransactionDate, pTransactionDate);
+                DataColumnParameter paramTransactionReference = new DataColumnParameter(defTransactionReference, pTransactionReference);
+                DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+                DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
+                DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+                DataColumnParameter paramConfirmed = new DataColumnParameter(defConfirmed, pConfirmed);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ImportTransactionFileID],[TransactionDate],[TransactionReference],[Description],[Channel],[Total],[Confirmed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramImportTransactionFileID.getSQLQuotedValueForAdd(),
+paramTransactionDate.getSQLQuotedValueForAdd(),
+paramTransactionReference.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramChannel.getSQLQuotedValueForAdd(),
+paramTotal.getSQLQuotedValueForAdd(),
+paramConfirmed.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pImportTransactionFileID,
+DateTime pTransactionDate,
+String pTransactionReference,
+String pDescription,
+String pChannel,
+Decimal pTotal,
+Boolean pConfirmed,
+DateTime pCreatedAt,
+Object pUpdatedAt = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramImportTransactionFileID = new DataColumnParameter(defImportTransactionFileID, pImportTransactionFileID);
+DataColumnParameter paramTransactionDate = new DataColumnParameter(defTransactionDate, pTransactionDate);
+DataColumnParameter paramTransactionReference = new DataColumnParameter(defTransactionReference, pTransactionReference);
+DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
+DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+DataColumnParameter paramConfirmed = new DataColumnParameter(defConfirmed, pConfirmed);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ImportTransactionFileID],[TransactionDate],[TransactionReference],[Description],[Channel],[Total],[Confirmed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramImportTransactionFileID.getSQLQuotedValueForAdd(),
+paramTransactionDate.getSQLQuotedValueForAdd(),
+paramTransactionReference.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramChannel.getSQLQuotedValueForAdd(),
+paramTotal.getSQLQuotedValueForAdd(),
+paramConfirmed.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pImportTransactionFileID,
+DateTime pTransactionDate,
+String pTransactionReference,
+String pDescription,
+String pChannel,
+Decimal pTotal,
+Boolean pConfirmed,
+DateTime pCreatedAt,
+Object pUpdatedAt= null){
+
+        try{
+
+DataColumnParameter paramImportTransactionFileID = new DataColumnParameter(defImportTransactionFileID, pImportTransactionFileID);
+DataColumnParameter paramTransactionDate = new DataColumnParameter(defTransactionDate, pTransactionDate);
+DataColumnParameter paramTransactionReference = new DataColumnParameter(defTransactionReference, pTransactionReference);
+DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
+DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+DataColumnParameter paramConfirmed = new DataColumnParameter(defConfirmed, pConfirmed);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([ImportTransactionFileID],[TransactionDate],[TransactionReference],[Description],[Channel],[Total],[Confirmed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramImportTransactionFileID.getSQLQuotedValueForAdd(),
+paramTransactionDate.getSQLQuotedValueForAdd(),
+paramTransactionReference.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramChannel.getSQLQuotedValueForAdd(),
+paramTotal.getSQLQuotedValueForAdd(),
+paramConfirmed.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pImportTransactionFileID = null,
+Object pTransactionDate = null,
+Object pTransactionReference = null,
+Object pDescription = null,
+Object pChannel = null,
+Object pTotal = null,
+Object pConfirmed = null,
+Object pCreatedAt = null,
+Object pUpdatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramImportTransactionFileID = new DataColumnParameter(defImportTransactionFileID, pImportTransactionFileID);
+ DataColumnParameter paramTransactionDate = new DataColumnParameter(defTransactionDate, pTransactionDate);
+ DataColumnParameter paramTransactionReference = new DataColumnParameter(defTransactionReference, pTransactionReference);
+ DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+ DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
+ DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+ DataColumnParameter paramConfirmed = new DataColumnParameter(defConfirmed, pConfirmed);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [ImportTransactionFileID]={2},[TransactionDate]={3},[TransactionReference]={4},[Description]={5},[Channel]={6},[Total]={7},[Confirmed]={8},[CreatedAt]={9},[UpdatedAt]={10} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramImportTransactionFileID.getSQLQuotedValueForUpdate(),
+paramTransactionDate.getSQLQuotedValueForUpdate(),
+paramTransactionReference.getSQLQuotedValueForUpdate(),
+paramDescription.getSQLQuotedValueForUpdate(),
+paramChannel.getSQLQuotedValueForUpdate(),
+paramTotal.getSQLQuotedValueForUpdate(),
+paramConfirmed.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

@@ -573,6 +573,220 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(String pSessionID,
+Int32 pSessionTimeoutMins,
+DateTime pCreatedAt,
+Object pUserID = null,
+Object pIsNewSession = null,
+Object pIsReadOnly = null,
+Object pLastActive = null,
+Object pIpAddress = null,
+Object pBrowser = null,
+Object pSessionVariables = null,
+Object pUpdatedAt = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
+                DataColumnParameter paramSessionTimeoutMins = new DataColumnParameter(defSessionTimeoutMins, pSessionTimeoutMins);
+                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+                DataColumnParameter paramIsNewSession = new DataColumnParameter(defIsNewSession, pIsNewSession);
+                DataColumnParameter paramIsReadOnly = new DataColumnParameter(defIsReadOnly, pIsReadOnly);
+                DataColumnParameter paramLastActive = new DataColumnParameter(defLastActive, pLastActive);
+                DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+                DataColumnParameter paramBrowser = new DataColumnParameter(defBrowser, pBrowser);
+                DataColumnParameter paramSessionVariables = new DataColumnParameter(defSessionVariables, pSessionVariables);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SessionID],[SessionTimeoutMins],[UserID],[IsNewSession],[IsReadOnly],[LastActive],[IpAddress],[Browser],[SessionVariables],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramSessionID.getSQLQuotedValueForAdd(),
+paramSessionTimeoutMins.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd(),
+paramIsNewSession.getSQLQuotedValueForAdd(),
+paramIsReadOnly.getSQLQuotedValueForAdd(),
+paramLastActive.getSQLQuotedValueForAdd(),
+paramIpAddress.getSQLQuotedValueForAdd(),
+paramBrowser.getSQLQuotedValueForAdd(),
+paramSessionVariables.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,String pSessionID,
+Int32 pSessionTimeoutMins,
+DateTime pCreatedAt,
+Object pUserID = null,
+Object pIsNewSession = null,
+Object pIsReadOnly = null,
+Object pLastActive = null,
+Object pIpAddress = null,
+Object pBrowser = null,
+Object pSessionVariables = null,
+Object pUpdatedAt = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
+DataColumnParameter paramSessionTimeoutMins = new DataColumnParameter(defSessionTimeoutMins, pSessionTimeoutMins);
+DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+DataColumnParameter paramIsNewSession = new DataColumnParameter(defIsNewSession, pIsNewSession);
+DataColumnParameter paramIsReadOnly = new DataColumnParameter(defIsReadOnly, pIsReadOnly);
+DataColumnParameter paramLastActive = new DataColumnParameter(defLastActive, pLastActive);
+DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+DataColumnParameter paramBrowser = new DataColumnParameter(defBrowser, pBrowser);
+DataColumnParameter paramSessionVariables = new DataColumnParameter(defSessionVariables, pSessionVariables);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SessionID],[SessionTimeoutMins],[UserID],[IsNewSession],[IsReadOnly],[LastActive],[IpAddress],[Browser],[SessionVariables],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramSessionID.getSQLQuotedValueForAdd(),
+paramSessionTimeoutMins.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd(),
+paramIsNewSession.getSQLQuotedValueForAdd(),
+paramIsReadOnly.getSQLQuotedValueForAdd(),
+paramLastActive.getSQLQuotedValueForAdd(),
+paramIpAddress.getSQLQuotedValueForAdd(),
+paramBrowser.getSQLQuotedValueForAdd(),
+paramSessionVariables.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(String pSessionID,
+Int32 pSessionTimeoutMins,
+DateTime pCreatedAt,
+Object pUserID= null,
+Object pIsNewSession= null,
+Object pIsReadOnly= null,
+Object pLastActive= null,
+Object pIpAddress= null,
+Object pBrowser= null,
+Object pSessionVariables= null,
+Object pUpdatedAt= null){
+
+        try{
+
+DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
+DataColumnParameter paramSessionTimeoutMins = new DataColumnParameter(defSessionTimeoutMins, pSessionTimeoutMins);
+DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+DataColumnParameter paramIsNewSession = new DataColumnParameter(defIsNewSession, pIsNewSession);
+DataColumnParameter paramIsReadOnly = new DataColumnParameter(defIsReadOnly, pIsReadOnly);
+DataColumnParameter paramLastActive = new DataColumnParameter(defLastActive, pLastActive);
+DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+DataColumnParameter paramBrowser = new DataColumnParameter(defBrowser, pBrowser);
+DataColumnParameter paramSessionVariables = new DataColumnParameter(defSessionVariables, pSessionVariables);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([SessionID],[SessionTimeoutMins],[UserID],[IsNewSession],[IsReadOnly],[LastActive],[IpAddress],[Browser],[SessionVariables],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) ", TABLE_NAME,paramSessionID.getSQLQuotedValueForAdd(),
+paramSessionTimeoutMins.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd(),
+paramIsNewSession.getSQLQuotedValueForAdd(),
+paramIsReadOnly.getSQLQuotedValueForAdd(),
+paramLastActive.getSQLQuotedValueForAdd(),
+paramIpAddress.getSQLQuotedValueForAdd(),
+paramBrowser.getSQLQuotedValueForAdd(),
+paramSessionVariables.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pSessionID = null,
+Object pSessionTimeoutMins = null,
+Object pCreatedAt = null,
+Object pUserID = null,
+Object pIsNewSession = null,
+Object pIsReadOnly = null,
+Object pLastActive = null,
+Object pIpAddress = null,
+Object pBrowser = null,
+Object pSessionVariables = null,
+Object pUpdatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
+ DataColumnParameter paramSessionTimeoutMins = new DataColumnParameter(defSessionTimeoutMins, pSessionTimeoutMins);
+ DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+ DataColumnParameter paramIsNewSession = new DataColumnParameter(defIsNewSession, pIsNewSession);
+ DataColumnParameter paramIsReadOnly = new DataColumnParameter(defIsReadOnly, pIsReadOnly);
+ DataColumnParameter paramLastActive = new DataColumnParameter(defLastActive, pLastActive);
+ DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+ DataColumnParameter paramBrowser = new DataColumnParameter(defBrowser, pBrowser);
+ DataColumnParameter paramSessionVariables = new DataColumnParameter(defSessionVariables, pSessionVariables);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [SessionID]={2},[SessionTimeoutMins]={3},[UserID]={4},[IsNewSession]={5},[IsReadOnly]={6},[LastActive]={7},[IpAddress]={8},[Browser]={9},[SessionVariables]={10},[CreatedAt]={11},[UpdatedAt]={12} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramSessionID.getSQLQuotedValueForUpdate(),
+paramSessionTimeoutMins.getSQLQuotedValueForUpdate(),
+paramUserID.getSQLQuotedValueForUpdate(),
+paramIsNewSession.getSQLQuotedValueForUpdate(),
+paramIsReadOnly.getSQLQuotedValueForUpdate(),
+paramLastActive.getSQLQuotedValueForUpdate(),
+paramIpAddress.getSQLQuotedValueForUpdate(),
+paramBrowser.getSQLQuotedValueForUpdate(),
+paramSessionVariables.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

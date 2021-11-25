@@ -672,6 +672,280 @@ Int32 pUpdatedByID){
         }                   
 
 
+        public static int AddWithID(Int32 pBeneficiaryID,
+Int32 pRelationshipTypeID,
+Int32 pMaritalStatusID,
+Boolean pIsDeceased,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pRelationshipNarration = null,
+Object pFullName = null,
+Object pOccupation = null,
+Object pAddress = null,
+Object pHomePhone = null,
+Object pEmail = null,
+Object pDeathCertificatePath = null,
+Object pPhotoPath = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+                DataColumnParameter paramRelationshipTypeID = new DataColumnParameter(defRelationshipTypeID, pRelationshipTypeID);
+                DataColumnParameter paramMaritalStatusID = new DataColumnParameter(defMaritalStatusID, pMaritalStatusID);
+                DataColumnParameter paramIsDeceased = new DataColumnParameter(defIsDeceased, pIsDeceased);
+                DataColumnParameter paramRelationshipNarration = new DataColumnParameter(defRelationshipNarration, pRelationshipNarration);
+                DataColumnParameter paramFullName = new DataColumnParameter(defFullName, pFullName);
+                DataColumnParameter paramOccupation = new DataColumnParameter(defOccupation, pOccupation);
+                DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+                DataColumnParameter paramHomePhone = new DataColumnParameter(defHomePhone, pHomePhone);
+                DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+                DataColumnParameter paramDeathCertificatePath = new DataColumnParameter(defDeathCertificatePath, pDeathCertificatePath);
+                DataColumnParameter paramPhotoPath = new DataColumnParameter(defPhotoPath, pPhotoPath);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[BeneficiaryID],[RelationshipTypeID],[MaritalStatusID],[IsDeceased],[RelationshipNarration],[FullName],[Occupation],[Address],[HomePhone],[Email],[DeathCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramBeneficiaryID.getSQLQuotedValueForAdd(),
+paramRelationshipTypeID.getSQLQuotedValueForAdd(),
+paramMaritalStatusID.getSQLQuotedValueForAdd(),
+paramIsDeceased.getSQLQuotedValueForAdd(),
+paramRelationshipNarration.getSQLQuotedValueForAdd(),
+paramFullName.getSQLQuotedValueForAdd(),
+paramOccupation.getSQLQuotedValueForAdd(),
+paramAddress.getSQLQuotedValueForAdd(),
+paramHomePhone.getSQLQuotedValueForAdd(),
+paramEmail.getSQLQuotedValueForAdd(),
+paramDeathCertificatePath.getSQLQuotedValueForAdd(),
+paramPhotoPath.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pBeneficiaryID,
+Int32 pRelationshipTypeID,
+Int32 pMaritalStatusID,
+Boolean pIsDeceased,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pRelationshipNarration = null,
+Object pFullName = null,
+Object pOccupation = null,
+Object pAddress = null,
+Object pHomePhone = null,
+Object pEmail = null,
+Object pDeathCertificatePath = null,
+Object pPhotoPath = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+DataColumnParameter paramRelationshipTypeID = new DataColumnParameter(defRelationshipTypeID, pRelationshipTypeID);
+DataColumnParameter paramMaritalStatusID = new DataColumnParameter(defMaritalStatusID, pMaritalStatusID);
+DataColumnParameter paramIsDeceased = new DataColumnParameter(defIsDeceased, pIsDeceased);
+DataColumnParameter paramRelationshipNarration = new DataColumnParameter(defRelationshipNarration, pRelationshipNarration);
+DataColumnParameter paramFullName = new DataColumnParameter(defFullName, pFullName);
+DataColumnParameter paramOccupation = new DataColumnParameter(defOccupation, pOccupation);
+DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+DataColumnParameter paramHomePhone = new DataColumnParameter(defHomePhone, pHomePhone);
+DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+DataColumnParameter paramDeathCertificatePath = new DataColumnParameter(defDeathCertificatePath, pDeathCertificatePath);
+DataColumnParameter paramPhotoPath = new DataColumnParameter(defPhotoPath, pPhotoPath);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[BeneficiaryID],[RelationshipTypeID],[MaritalStatusID],[IsDeceased],[RelationshipNarration],[FullName],[Occupation],[Address],[HomePhone],[Email],[DeathCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramBeneficiaryID.getSQLQuotedValueForAdd(),
+paramRelationshipTypeID.getSQLQuotedValueForAdd(),
+paramMaritalStatusID.getSQLQuotedValueForAdd(),
+paramIsDeceased.getSQLQuotedValueForAdd(),
+paramRelationshipNarration.getSQLQuotedValueForAdd(),
+paramFullName.getSQLQuotedValueForAdd(),
+paramOccupation.getSQLQuotedValueForAdd(),
+paramAddress.getSQLQuotedValueForAdd(),
+paramHomePhone.getSQLQuotedValueForAdd(),
+paramEmail.getSQLQuotedValueForAdd(),
+paramDeathCertificatePath.getSQLQuotedValueForAdd(),
+paramPhotoPath.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pBeneficiaryID,
+Int32 pRelationshipTypeID,
+Int32 pMaritalStatusID,
+Boolean pIsDeceased,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pRelationshipNarration= null,
+Object pFullName= null,
+Object pOccupation= null,
+Object pAddress= null,
+Object pHomePhone= null,
+Object pEmail= null,
+Object pDeathCertificatePath= null,
+Object pPhotoPath= null){
+
+        try{
+
+DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+DataColumnParameter paramRelationshipTypeID = new DataColumnParameter(defRelationshipTypeID, pRelationshipTypeID);
+DataColumnParameter paramMaritalStatusID = new DataColumnParameter(defMaritalStatusID, pMaritalStatusID);
+DataColumnParameter paramIsDeceased = new DataColumnParameter(defIsDeceased, pIsDeceased);
+DataColumnParameter paramRelationshipNarration = new DataColumnParameter(defRelationshipNarration, pRelationshipNarration);
+DataColumnParameter paramFullName = new DataColumnParameter(defFullName, pFullName);
+DataColumnParameter paramOccupation = new DataColumnParameter(defOccupation, pOccupation);
+DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+DataColumnParameter paramHomePhone = new DataColumnParameter(defHomePhone, pHomePhone);
+DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+DataColumnParameter paramDeathCertificatePath = new DataColumnParameter(defDeathCertificatePath, pDeathCertificatePath);
+DataColumnParameter paramPhotoPath = new DataColumnParameter(defPhotoPath, pPhotoPath);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([BeneficiaryID],[RelationshipTypeID],[MaritalStatusID],[IsDeceased],[RelationshipNarration],[FullName],[Occupation],[Address],[HomePhone],[Email],[DeathCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramBeneficiaryID.getSQLQuotedValueForAdd(),
+paramRelationshipTypeID.getSQLQuotedValueForAdd(),
+paramMaritalStatusID.getSQLQuotedValueForAdd(),
+paramIsDeceased.getSQLQuotedValueForAdd(),
+paramRelationshipNarration.getSQLQuotedValueForAdd(),
+paramFullName.getSQLQuotedValueForAdd(),
+paramOccupation.getSQLQuotedValueForAdd(),
+paramAddress.getSQLQuotedValueForAdd(),
+paramHomePhone.getSQLQuotedValueForAdd(),
+paramEmail.getSQLQuotedValueForAdd(),
+paramDeathCertificatePath.getSQLQuotedValueForAdd(),
+paramPhotoPath.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pBeneficiaryID = null,
+Object pRelationshipTypeID = null,
+Object pMaritalStatusID = null,
+Object pIsDeceased = null,
+Object pCreatedAt = null,
+Object pUpdatedAt = null,
+Object pCreatedByID = null,
+Object pUpdatedByID = null,
+Object pRelationshipNarration = null,
+Object pFullName = null,
+Object pOccupation = null,
+Object pAddress = null,
+Object pHomePhone = null,
+Object pEmail = null,
+Object pDeathCertificatePath = null,
+Object pPhotoPath = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+ DataColumnParameter paramRelationshipTypeID = new DataColumnParameter(defRelationshipTypeID, pRelationshipTypeID);
+ DataColumnParameter paramMaritalStatusID = new DataColumnParameter(defMaritalStatusID, pMaritalStatusID);
+ DataColumnParameter paramIsDeceased = new DataColumnParameter(defIsDeceased, pIsDeceased);
+ DataColumnParameter paramRelationshipNarration = new DataColumnParameter(defRelationshipNarration, pRelationshipNarration);
+ DataColumnParameter paramFullName = new DataColumnParameter(defFullName, pFullName);
+ DataColumnParameter paramOccupation = new DataColumnParameter(defOccupation, pOccupation);
+ DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+ DataColumnParameter paramHomePhone = new DataColumnParameter(defHomePhone, pHomePhone);
+ DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+ DataColumnParameter paramDeathCertificatePath = new DataColumnParameter(defDeathCertificatePath, pDeathCertificatePath);
+ DataColumnParameter paramPhotoPath = new DataColumnParameter(defPhotoPath, pPhotoPath);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [BeneficiaryID]={2},[RelationshipTypeID]={3},[MaritalStatusID]={4},[IsDeceased]={5},[RelationshipNarration]={6},[FullName]={7},[Occupation]={8},[Address]={9},[HomePhone]={10},[Email]={11},[DeathCertificatePath]={12},[PhotoPath]={13},[CreatedAt]={14},[UpdatedAt]={15},[CreatedByID]={16},[UpdatedByID]={17} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramBeneficiaryID.getSQLQuotedValueForUpdate(),
+paramRelationshipTypeID.getSQLQuotedValueForUpdate(),
+paramMaritalStatusID.getSQLQuotedValueForUpdate(),
+paramIsDeceased.getSQLQuotedValueForUpdate(),
+paramRelationshipNarration.getSQLQuotedValueForUpdate(),
+paramFullName.getSQLQuotedValueForUpdate(),
+paramOccupation.getSQLQuotedValueForUpdate(),
+paramAddress.getSQLQuotedValueForUpdate(),
+paramHomePhone.getSQLQuotedValueForUpdate(),
+paramEmail.getSQLQuotedValueForUpdate(),
+paramDeathCertificatePath.getSQLQuotedValueForUpdate(),
+paramPhotoPath.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramUpdatedByID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

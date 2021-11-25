@@ -487,6 +487,136 @@ String pDocumentFileName){
         }                   
 
 
+        public static int AddWithID(Int32 pPersonID,
+Int32 pPersonDocumentTypeID,
+String pDocumentFileName,
+DateTime pCreatedAt){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+                DataColumnParameter paramPersonDocumentTypeID = new DataColumnParameter(defPersonDocumentTypeID, pPersonDocumentTypeID);
+                DataColumnParameter paramDocumentFileName = new DataColumnParameter(defDocumentFileName, pDocumentFileName);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[PersonDocumentTypeID],[DocumentFileName],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramPersonID.getSQLQuotedValueForAdd(),
+paramPersonDocumentTypeID.getSQLQuotedValueForAdd(),
+paramDocumentFileName.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pPersonID,
+Int32 pPersonDocumentTypeID,
+String pDocumentFileName,
+DateTime pCreatedAt){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+DataColumnParameter paramPersonDocumentTypeID = new DataColumnParameter(defPersonDocumentTypeID, pPersonDocumentTypeID);
+DataColumnParameter paramDocumentFileName = new DataColumnParameter(defDocumentFileName, pDocumentFileName);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[PersonDocumentTypeID],[DocumentFileName],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramPersonID.getSQLQuotedValueForAdd(),
+paramPersonDocumentTypeID.getSQLQuotedValueForAdd(),
+paramDocumentFileName.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pPersonID,
+Int32 pPersonDocumentTypeID,
+String pDocumentFileName,
+DateTime pCreatedAt){
+
+        try{
+
+DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+DataColumnParameter paramPersonDocumentTypeID = new DataColumnParameter(defPersonDocumentTypeID, pPersonDocumentTypeID);
+DataColumnParameter paramDocumentFileName = new DataColumnParameter(defDocumentFileName, pDocumentFileName);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([PersonID],[PersonDocumentTypeID],[DocumentFileName],[CreatedAt]) VALUES({1},{2},{3},{4}) ", TABLE_NAME,paramPersonID.getSQLQuotedValueForAdd(),
+paramPersonDocumentTypeID.getSQLQuotedValueForAdd(),
+paramDocumentFileName.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pPersonID = null,
+Object pPersonDocumentTypeID = null,
+Object pDocumentFileName = null,
+Object pCreatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+ DataColumnParameter paramPersonDocumentTypeID = new DataColumnParameter(defPersonDocumentTypeID, pPersonDocumentTypeID);
+ DataColumnParameter paramDocumentFileName = new DataColumnParameter(defDocumentFileName, pDocumentFileName);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [PersonID]={2},[PersonDocumentTypeID]={3},[DocumentFileName]={4},[CreatedAt]={5} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPersonID.getSQLQuotedValueForUpdate(),
+paramPersonDocumentTypeID.getSQLQuotedValueForUpdate(),
+paramDocumentFileName.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

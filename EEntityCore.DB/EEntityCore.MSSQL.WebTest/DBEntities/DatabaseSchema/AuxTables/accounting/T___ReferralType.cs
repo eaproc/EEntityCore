@@ -489,6 +489,148 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(String pDefinition,
+Boolean pIsActive,
+DateTime pCreatedAt,
+Decimal pDefaultPercentage,
+Object pDescription = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramDefinition = new DataColumnParameter(defDefinition, pDefinition);
+                DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+                DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramDefaultPercentage = new DataColumnParameter(defDefaultPercentage, pDefaultPercentage);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Definition],[Description],[IsActive],[CreatedAt],[DefaultPercentage]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramDefinition.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramDefaultPercentage.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,String pDefinition,
+Boolean pIsActive,
+DateTime pCreatedAt,
+Decimal pDefaultPercentage,
+Object pDescription = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramDefinition = new DataColumnParameter(defDefinition, pDefinition);
+DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramDefaultPercentage = new DataColumnParameter(defDefaultPercentage, pDefaultPercentage);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Definition],[Description],[IsActive],[CreatedAt],[DefaultPercentage]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramDefinition.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramDefaultPercentage.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(String pDefinition,
+Boolean pIsActive,
+DateTime pCreatedAt,
+Decimal pDefaultPercentage,
+Object pDescription= null){
+
+        try{
+
+DataColumnParameter paramDefinition = new DataColumnParameter(defDefinition, pDefinition);
+DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramDefaultPercentage = new DataColumnParameter(defDefaultPercentage, pDefaultPercentage);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([Definition],[Description],[IsActive],[CreatedAt],[DefaultPercentage]) VALUES({1},{2},{3},{4},{5}) ", TABLE_NAME,paramDefinition.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramDefaultPercentage.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pDefinition = null,
+Object pIsActive = null,
+Object pCreatedAt = null,
+Object pDefaultPercentage = null,
+Object pDescription = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramDefinition = new DataColumnParameter(defDefinition, pDefinition);
+ DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+ DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramDefaultPercentage = new DataColumnParameter(defDefaultPercentage, pDefaultPercentage);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [Definition]={2},[Description]={3},[IsActive]={4},[CreatedAt]={5},[DefaultPercentage]={6} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramDefinition.getSQLQuotedValueForUpdate(),
+paramDescription.getSQLQuotedValueForUpdate(),
+paramIsActive.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramDefaultPercentage.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

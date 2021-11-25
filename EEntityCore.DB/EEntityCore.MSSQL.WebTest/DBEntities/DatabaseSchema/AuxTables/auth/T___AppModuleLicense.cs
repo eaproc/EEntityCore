@@ -507,6 +507,160 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(Int32 pAppModuleID,
+DateTime pStartDate,
+DateTime pEndDate,
+Boolean pIsActive,
+DateTime pCreatedAt,
+Object pUpdatedAt = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramAppModuleID = new DataColumnParameter(defAppModuleID, pAppModuleID);
+                DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+                DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+                DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AppModuleID],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramAppModuleID.getSQLQuotedValueForAdd(),
+paramStartDate.getSQLQuotedValueForAdd(),
+paramEndDate.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pAppModuleID,
+DateTime pStartDate,
+DateTime pEndDate,
+Boolean pIsActive,
+DateTime pCreatedAt,
+Object pUpdatedAt = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramAppModuleID = new DataColumnParameter(defAppModuleID, pAppModuleID);
+DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AppModuleID],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramAppModuleID.getSQLQuotedValueForAdd(),
+paramStartDate.getSQLQuotedValueForAdd(),
+paramEndDate.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pAppModuleID,
+DateTime pStartDate,
+DateTime pEndDate,
+Boolean pIsActive,
+DateTime pCreatedAt,
+Object pUpdatedAt= null){
+
+        try{
+
+DataColumnParameter paramAppModuleID = new DataColumnParameter(defAppModuleID, pAppModuleID);
+DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([AppModuleID],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6}) ", TABLE_NAME,paramAppModuleID.getSQLQuotedValueForAdd(),
+paramStartDate.getSQLQuotedValueForAdd(),
+paramEndDate.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pAppModuleID = null,
+Object pStartDate = null,
+Object pEndDate = null,
+Object pIsActive = null,
+Object pCreatedAt = null,
+Object pUpdatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramAppModuleID = new DataColumnParameter(defAppModuleID, pAppModuleID);
+ DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+ DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+ DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [AppModuleID]={2},[StartDate]={3},[EndDate]={4},[IsActive]={5},[CreatedAt]={6},[UpdatedAt]={7} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramAppModuleID.getSQLQuotedValueForUpdate(),
+paramStartDate.getSQLQuotedValueForUpdate(),
+paramEndDate.getSQLQuotedValueForUpdate(),
+paramIsActive.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

@@ -630,6 +630,244 @@ Int32 pPaymentTransactionID){
         }                   
 
 
+        public static int AddWithID(Int32 pClientID,
+String pBillDefinition,
+Decimal pBillAmount,
+Decimal pTotal,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Boolean pCanBeDeleted,
+Int32 pQuantity,
+String pIpAddress,
+Int32 pTermID,
+Int32 pOriginalBillID,
+Object pBillDescription = null,
+Object pPaymentTransactionID = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+                DataColumnParameter paramBillDefinition = new DataColumnParameter(defBillDefinition, pBillDefinition);
+                DataColumnParameter paramBillDescription = new DataColumnParameter(defBillDescription, pBillDescription);
+                DataColumnParameter paramBillAmount = new DataColumnParameter(defBillAmount, pBillAmount);
+                DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramCanBeDeleted = new DataColumnParameter(defCanBeDeleted, pCanBeDeleted);
+                DataColumnParameter paramQuantity = new DataColumnParameter(defQuantity, pQuantity);
+                DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+                DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+                DataColumnParameter paramOriginalBillID = new DataColumnParameter(defOriginalBillID, pOriginalBillID);
+                DataColumnParameter paramPaymentTransactionID = new DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd(),
+paramBillDefinition.getSQLQuotedValueForAdd(),
+paramBillDescription.getSQLQuotedValueForAdd(),
+paramBillAmount.getSQLQuotedValueForAdd(),
+paramTotal.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramCanBeDeleted.getSQLQuotedValueForAdd(),
+paramQuantity.getSQLQuotedValueForAdd(),
+paramIpAddress.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd(),
+paramOriginalBillID.getSQLQuotedValueForAdd(),
+paramPaymentTransactionID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pClientID,
+String pBillDefinition,
+Decimal pBillAmount,
+Decimal pTotal,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Boolean pCanBeDeleted,
+Int32 pQuantity,
+String pIpAddress,
+Int32 pTermID,
+Int32 pOriginalBillID,
+Object pBillDescription = null,
+Object pPaymentTransactionID = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+DataColumnParameter paramBillDefinition = new DataColumnParameter(defBillDefinition, pBillDefinition);
+DataColumnParameter paramBillDescription = new DataColumnParameter(defBillDescription, pBillDescription);
+DataColumnParameter paramBillAmount = new DataColumnParameter(defBillAmount, pBillAmount);
+DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramCanBeDeleted = new DataColumnParameter(defCanBeDeleted, pCanBeDeleted);
+DataColumnParameter paramQuantity = new DataColumnParameter(defQuantity, pQuantity);
+DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+DataColumnParameter paramOriginalBillID = new DataColumnParameter(defOriginalBillID, pOriginalBillID);
+DataColumnParameter paramPaymentTransactionID = new DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd(),
+paramBillDefinition.getSQLQuotedValueForAdd(),
+paramBillDescription.getSQLQuotedValueForAdd(),
+paramBillAmount.getSQLQuotedValueForAdd(),
+paramTotal.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramCanBeDeleted.getSQLQuotedValueForAdd(),
+paramQuantity.getSQLQuotedValueForAdd(),
+paramIpAddress.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd(),
+paramOriginalBillID.getSQLQuotedValueForAdd(),
+paramPaymentTransactionID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pClientID,
+String pBillDefinition,
+Decimal pBillAmount,
+Decimal pTotal,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Boolean pCanBeDeleted,
+Int32 pQuantity,
+String pIpAddress,
+Int32 pTermID,
+Int32 pOriginalBillID,
+Object pBillDescription= null,
+Object pPaymentTransactionID= null){
+
+        try{
+
+DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+DataColumnParameter paramBillDefinition = new DataColumnParameter(defBillDefinition, pBillDefinition);
+DataColumnParameter paramBillDescription = new DataColumnParameter(defBillDescription, pBillDescription);
+DataColumnParameter paramBillAmount = new DataColumnParameter(defBillAmount, pBillAmount);
+DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramCanBeDeleted = new DataColumnParameter(defCanBeDeleted, pCanBeDeleted);
+DataColumnParameter paramQuantity = new DataColumnParameter(defQuantity, pQuantity);
+DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+DataColumnParameter paramOriginalBillID = new DataColumnParameter(defOriginalBillID, pOriginalBillID);
+DataColumnParameter paramPaymentTransactionID = new DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramClientID.getSQLQuotedValueForAdd(),
+paramBillDefinition.getSQLQuotedValueForAdd(),
+paramBillDescription.getSQLQuotedValueForAdd(),
+paramBillAmount.getSQLQuotedValueForAdd(),
+paramTotal.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramCanBeDeleted.getSQLQuotedValueForAdd(),
+paramQuantity.getSQLQuotedValueForAdd(),
+paramIpAddress.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd(),
+paramOriginalBillID.getSQLQuotedValueForAdd(),
+paramPaymentTransactionID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pClientID = null,
+Object pBillDefinition = null,
+Object pBillAmount = null,
+Object pTotal = null,
+Object pCreatedAt = null,
+Object pCreatedByID = null,
+Object pCanBeDeleted = null,
+Object pQuantity = null,
+Object pIpAddress = null,
+Object pTermID = null,
+Object pOriginalBillID = null,
+Object pBillDescription = null,
+Object pPaymentTransactionID = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+ DataColumnParameter paramBillDefinition = new DataColumnParameter(defBillDefinition, pBillDefinition);
+ DataColumnParameter paramBillDescription = new DataColumnParameter(defBillDescription, pBillDescription);
+ DataColumnParameter paramBillAmount = new DataColumnParameter(defBillAmount, pBillAmount);
+ DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramCanBeDeleted = new DataColumnParameter(defCanBeDeleted, pCanBeDeleted);
+ DataColumnParameter paramQuantity = new DataColumnParameter(defQuantity, pQuantity);
+ DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
+ DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+ DataColumnParameter paramOriginalBillID = new DataColumnParameter(defOriginalBillID, pOriginalBillID);
+ DataColumnParameter paramPaymentTransactionID = new DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [ClientID]={2},[BillDefinition]={3},[BillDescription]={4},[BillAmount]={5},[Total]={6},[CreatedAt]={7},[CreatedByID]={8},[CanBeDeleted]={9},[Quantity]={10},[IpAddress]={11},[TermID]={12},[OriginalBillID]={13},[PaymentTransactionID]={14} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramClientID.getSQLQuotedValueForUpdate(),
+paramBillDefinition.getSQLQuotedValueForUpdate(),
+paramBillDescription.getSQLQuotedValueForUpdate(),
+paramBillAmount.getSQLQuotedValueForUpdate(),
+paramTotal.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramCanBeDeleted.getSQLQuotedValueForUpdate(),
+paramQuantity.getSQLQuotedValueForUpdate(),
+paramIpAddress.getSQLQuotedValueForUpdate(),
+paramTermID.getSQLQuotedValueForUpdate(),
+paramOriginalBillID.getSQLQuotedValueForUpdate(),
+paramPaymentTransactionID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

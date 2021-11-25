@@ -472,6 +472,124 @@ Int32 pRoleID){
         }                   
 
 
+        public static int AddWithID(Int32 pUserID,
+Int32 pRoleID,
+DateTime pCreatedAt){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+                DataColumnParameter paramRoleID = new DataColumnParameter(defRoleID, pRoleID);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[RoleID],[CreatedAt]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd(),
+paramRoleID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pUserID,
+Int32 pRoleID,
+DateTime pCreatedAt){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+DataColumnParameter paramRoleID = new DataColumnParameter(defRoleID, pRoleID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[RoleID],[CreatedAt]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd(),
+paramRoleID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pUserID,
+Int32 pRoleID,
+DateTime pCreatedAt){
+
+        try{
+
+DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+DataColumnParameter paramRoleID = new DataColumnParameter(defRoleID, pRoleID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([UserID],[RoleID],[CreatedAt]) VALUES({1},{2},{3}) ", TABLE_NAME,paramUserID.getSQLQuotedValueForAdd(),
+paramRoleID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pUserID = null,
+Object pRoleID = null,
+Object pCreatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+ DataColumnParameter paramRoleID = new DataColumnParameter(defRoleID, pRoleID);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [UserID]={2},[RoleID]={3},[CreatedAt]={4} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramUserID.getSQLQuotedValueForUpdate(),
+paramRoleID.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

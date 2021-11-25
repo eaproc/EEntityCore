@@ -653,6 +653,280 @@ Int32 pImportStatusID){
         }                   
 
 
+        public static int AddWithID(Int32 pDataMonitorID,
+Int32 pImportStatusID,
+String pIdentificationNo,
+String pPersonTitle,
+String pFirstName,
+String pLastName,
+String pCountry,
+DateTime pDateOfBirth,
+String pGender,
+String pImportComment,
+DateTime pCreatedAt,
+Object pHomeAddress = null,
+Object pEmail = null,
+Object pBirthPlace = null,
+Object pMobileAreaCode = null,
+Object pMobileNumber = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+                DataColumnParameter paramImportStatusID = new DataColumnParameter(defImportStatusID, pImportStatusID);
+                DataColumnParameter paramIdentificationNo = new DataColumnParameter(defIdentificationNo, pIdentificationNo);
+                DataColumnParameter paramPersonTitle = new DataColumnParameter(defPersonTitle, pPersonTitle);
+                DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+                DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+                DataColumnParameter paramCountry = new DataColumnParameter(defCountry, pCountry);
+                DataColumnParameter paramDateOfBirth = new DataColumnParameter(defDateOfBirth, pDateOfBirth);
+                DataColumnParameter paramGender = new DataColumnParameter(defGender, pGender);
+                DataColumnParameter paramHomeAddress = new DataColumnParameter(defHomeAddress, pHomeAddress);
+                DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+                DataColumnParameter paramBirthPlace = new DataColumnParameter(defBirthPlace, pBirthPlace);
+                DataColumnParameter paramMobileAreaCode = new DataColumnParameter(defMobileAreaCode, pMobileAreaCode);
+                DataColumnParameter paramMobileNumber = new DataColumnParameter(defMobileNumber, pMobileNumber);
+                DataColumnParameter paramImportComment = new DataColumnParameter(defImportComment, pImportComment);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramDataMonitorID.getSQLQuotedValueForAdd(),
+paramImportStatusID.getSQLQuotedValueForAdd(),
+paramIdentificationNo.getSQLQuotedValueForAdd(),
+paramPersonTitle.getSQLQuotedValueForAdd(),
+paramFirstName.getSQLQuotedValueForAdd(),
+paramLastName.getSQLQuotedValueForAdd(),
+paramCountry.getSQLQuotedValueForAdd(),
+paramDateOfBirth.getSQLQuotedValueForAdd(),
+paramGender.getSQLQuotedValueForAdd(),
+paramHomeAddress.getSQLQuotedValueForAdd(),
+paramEmail.getSQLQuotedValueForAdd(),
+paramBirthPlace.getSQLQuotedValueForAdd(),
+paramMobileAreaCode.getSQLQuotedValueForAdd(),
+paramMobileNumber.getSQLQuotedValueForAdd(),
+paramImportComment.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pDataMonitorID,
+Int32 pImportStatusID,
+String pIdentificationNo,
+String pPersonTitle,
+String pFirstName,
+String pLastName,
+String pCountry,
+DateTime pDateOfBirth,
+String pGender,
+String pImportComment,
+DateTime pCreatedAt,
+Object pHomeAddress = null,
+Object pEmail = null,
+Object pBirthPlace = null,
+Object pMobileAreaCode = null,
+Object pMobileNumber = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+DataColumnParameter paramImportStatusID = new DataColumnParameter(defImportStatusID, pImportStatusID);
+DataColumnParameter paramIdentificationNo = new DataColumnParameter(defIdentificationNo, pIdentificationNo);
+DataColumnParameter paramPersonTitle = new DataColumnParameter(defPersonTitle, pPersonTitle);
+DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+DataColumnParameter paramCountry = new DataColumnParameter(defCountry, pCountry);
+DataColumnParameter paramDateOfBirth = new DataColumnParameter(defDateOfBirth, pDateOfBirth);
+DataColumnParameter paramGender = new DataColumnParameter(defGender, pGender);
+DataColumnParameter paramHomeAddress = new DataColumnParameter(defHomeAddress, pHomeAddress);
+DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+DataColumnParameter paramBirthPlace = new DataColumnParameter(defBirthPlace, pBirthPlace);
+DataColumnParameter paramMobileAreaCode = new DataColumnParameter(defMobileAreaCode, pMobileAreaCode);
+DataColumnParameter paramMobileNumber = new DataColumnParameter(defMobileNumber, pMobileNumber);
+DataColumnParameter paramImportComment = new DataColumnParameter(defImportComment, pImportComment);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramDataMonitorID.getSQLQuotedValueForAdd(),
+paramImportStatusID.getSQLQuotedValueForAdd(),
+paramIdentificationNo.getSQLQuotedValueForAdd(),
+paramPersonTitle.getSQLQuotedValueForAdd(),
+paramFirstName.getSQLQuotedValueForAdd(),
+paramLastName.getSQLQuotedValueForAdd(),
+paramCountry.getSQLQuotedValueForAdd(),
+paramDateOfBirth.getSQLQuotedValueForAdd(),
+paramGender.getSQLQuotedValueForAdd(),
+paramHomeAddress.getSQLQuotedValueForAdd(),
+paramEmail.getSQLQuotedValueForAdd(),
+paramBirthPlace.getSQLQuotedValueForAdd(),
+paramMobileAreaCode.getSQLQuotedValueForAdd(),
+paramMobileNumber.getSQLQuotedValueForAdd(),
+paramImportComment.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pDataMonitorID,
+Int32 pImportStatusID,
+String pIdentificationNo,
+String pPersonTitle,
+String pFirstName,
+String pLastName,
+String pCountry,
+DateTime pDateOfBirth,
+String pGender,
+String pImportComment,
+DateTime pCreatedAt,
+Object pHomeAddress= null,
+Object pEmail= null,
+Object pBirthPlace= null,
+Object pMobileAreaCode= null,
+Object pMobileNumber= null){
+
+        try{
+
+DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+DataColumnParameter paramImportStatusID = new DataColumnParameter(defImportStatusID, pImportStatusID);
+DataColumnParameter paramIdentificationNo = new DataColumnParameter(defIdentificationNo, pIdentificationNo);
+DataColumnParameter paramPersonTitle = new DataColumnParameter(defPersonTitle, pPersonTitle);
+DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+DataColumnParameter paramCountry = new DataColumnParameter(defCountry, pCountry);
+DataColumnParameter paramDateOfBirth = new DataColumnParameter(defDateOfBirth, pDateOfBirth);
+DataColumnParameter paramGender = new DataColumnParameter(defGender, pGender);
+DataColumnParameter paramHomeAddress = new DataColumnParameter(defHomeAddress, pHomeAddress);
+DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+DataColumnParameter paramBirthPlace = new DataColumnParameter(defBirthPlace, pBirthPlace);
+DataColumnParameter paramMobileAreaCode = new DataColumnParameter(defMobileAreaCode, pMobileAreaCode);
+DataColumnParameter paramMobileNumber = new DataColumnParameter(defMobileNumber, pMobileNumber);
+DataColumnParameter paramImportComment = new DataColumnParameter(defImportComment, pImportComment);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramDataMonitorID.getSQLQuotedValueForAdd(),
+paramImportStatusID.getSQLQuotedValueForAdd(),
+paramIdentificationNo.getSQLQuotedValueForAdd(),
+paramPersonTitle.getSQLQuotedValueForAdd(),
+paramFirstName.getSQLQuotedValueForAdd(),
+paramLastName.getSQLQuotedValueForAdd(),
+paramCountry.getSQLQuotedValueForAdd(),
+paramDateOfBirth.getSQLQuotedValueForAdd(),
+paramGender.getSQLQuotedValueForAdd(),
+paramHomeAddress.getSQLQuotedValueForAdd(),
+paramEmail.getSQLQuotedValueForAdd(),
+paramBirthPlace.getSQLQuotedValueForAdd(),
+paramMobileAreaCode.getSQLQuotedValueForAdd(),
+paramMobileNumber.getSQLQuotedValueForAdd(),
+paramImportComment.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pDataMonitorID = null,
+Object pImportStatusID = null,
+Object pIdentificationNo = null,
+Object pPersonTitle = null,
+Object pFirstName = null,
+Object pLastName = null,
+Object pCountry = null,
+Object pDateOfBirth = null,
+Object pGender = null,
+Object pImportComment = null,
+Object pCreatedAt = null,
+Object pHomeAddress = null,
+Object pEmail = null,
+Object pBirthPlace = null,
+Object pMobileAreaCode = null,
+Object pMobileNumber = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+ DataColumnParameter paramImportStatusID = new DataColumnParameter(defImportStatusID, pImportStatusID);
+ DataColumnParameter paramIdentificationNo = new DataColumnParameter(defIdentificationNo, pIdentificationNo);
+ DataColumnParameter paramPersonTitle = new DataColumnParameter(defPersonTitle, pPersonTitle);
+ DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+ DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+ DataColumnParameter paramCountry = new DataColumnParameter(defCountry, pCountry);
+ DataColumnParameter paramDateOfBirth = new DataColumnParameter(defDateOfBirth, pDateOfBirth);
+ DataColumnParameter paramGender = new DataColumnParameter(defGender, pGender);
+ DataColumnParameter paramHomeAddress = new DataColumnParameter(defHomeAddress, pHomeAddress);
+ DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+ DataColumnParameter paramBirthPlace = new DataColumnParameter(defBirthPlace, pBirthPlace);
+ DataColumnParameter paramMobileAreaCode = new DataColumnParameter(defMobileAreaCode, pMobileAreaCode);
+ DataColumnParameter paramMobileNumber = new DataColumnParameter(defMobileNumber, pMobileNumber);
+ DataColumnParameter paramImportComment = new DataColumnParameter(defImportComment, pImportComment);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [DataMonitorID]={2},[ImportStatusID]={3},[IdentificationNo]={4},[PersonTitle]={5},[FirstName]={6},[LastName]={7},[Country]={8},[DateOfBirth]={9},[Gender]={10},[HomeAddress]={11},[Email]={12},[BirthPlace]={13},[MobileAreaCode]={14},[MobileNumber]={15},[ImportComment]={16},[CreatedAt]={17} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramDataMonitorID.getSQLQuotedValueForUpdate(),
+paramImportStatusID.getSQLQuotedValueForUpdate(),
+paramIdentificationNo.getSQLQuotedValueForUpdate(),
+paramPersonTitle.getSQLQuotedValueForUpdate(),
+paramFirstName.getSQLQuotedValueForUpdate(),
+paramLastName.getSQLQuotedValueForUpdate(),
+paramCountry.getSQLQuotedValueForUpdate(),
+paramDateOfBirth.getSQLQuotedValueForUpdate(),
+paramGender.getSQLQuotedValueForUpdate(),
+paramHomeAddress.getSQLQuotedValueForUpdate(),
+paramEmail.getSQLQuotedValueForUpdate(),
+paramBirthPlace.getSQLQuotedValueForUpdate(),
+paramMobileAreaCode.getSQLQuotedValueForUpdate(),
+paramMobileNumber.getSQLQuotedValueForUpdate(),
+paramImportComment.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

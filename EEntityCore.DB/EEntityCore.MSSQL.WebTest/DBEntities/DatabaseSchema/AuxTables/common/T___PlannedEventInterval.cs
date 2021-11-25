@@ -499,6 +499,148 @@ Int32 pDayOfWeekID){
         }                   
 
 
+        public static int AddWithID(Int32 pPlannedEventID,
+Int32 pDayOfWeekID,
+DateTime pStartTime,
+DateTime pEndTime,
+DateTime pCreatedAt){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramPlannedEventID = new DataColumnParameter(defPlannedEventID, pPlannedEventID);
+                DataColumnParameter paramDayOfWeekID = new DataColumnParameter(defDayOfWeekID, pDayOfWeekID);
+                DataColumnParameter paramStartTime = new DataColumnParameter(defStartTime, pStartTime);
+                DataColumnParameter paramEndTime = new DataColumnParameter(defEndTime, pEndTime);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PlannedEventID],[DayOfWeekID],[StartTime],[EndTime],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramPlannedEventID.getSQLQuotedValueForAdd(),
+paramDayOfWeekID.getSQLQuotedValueForAdd(),
+paramStartTime.getSQLQuotedValueForAdd(),
+paramEndTime.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pPlannedEventID,
+Int32 pDayOfWeekID,
+DateTime pStartTime,
+DateTime pEndTime,
+DateTime pCreatedAt){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramPlannedEventID = new DataColumnParameter(defPlannedEventID, pPlannedEventID);
+DataColumnParameter paramDayOfWeekID = new DataColumnParameter(defDayOfWeekID, pDayOfWeekID);
+DataColumnParameter paramStartTime = new DataColumnParameter(defStartTime, pStartTime);
+DataColumnParameter paramEndTime = new DataColumnParameter(defEndTime, pEndTime);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PlannedEventID],[DayOfWeekID],[StartTime],[EndTime],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramPlannedEventID.getSQLQuotedValueForAdd(),
+paramDayOfWeekID.getSQLQuotedValueForAdd(),
+paramStartTime.getSQLQuotedValueForAdd(),
+paramEndTime.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pPlannedEventID,
+Int32 pDayOfWeekID,
+DateTime pStartTime,
+DateTime pEndTime,
+DateTime pCreatedAt){
+
+        try{
+
+DataColumnParameter paramPlannedEventID = new DataColumnParameter(defPlannedEventID, pPlannedEventID);
+DataColumnParameter paramDayOfWeekID = new DataColumnParameter(defDayOfWeekID, pDayOfWeekID);
+DataColumnParameter paramStartTime = new DataColumnParameter(defStartTime, pStartTime);
+DataColumnParameter paramEndTime = new DataColumnParameter(defEndTime, pEndTime);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([PlannedEventID],[DayOfWeekID],[StartTime],[EndTime],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) ", TABLE_NAME,paramPlannedEventID.getSQLQuotedValueForAdd(),
+paramDayOfWeekID.getSQLQuotedValueForAdd(),
+paramStartTime.getSQLQuotedValueForAdd(),
+paramEndTime.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pPlannedEventID = null,
+Object pDayOfWeekID = null,
+Object pStartTime = null,
+Object pEndTime = null,
+Object pCreatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramPlannedEventID = new DataColumnParameter(defPlannedEventID, pPlannedEventID);
+ DataColumnParameter paramDayOfWeekID = new DataColumnParameter(defDayOfWeekID, pDayOfWeekID);
+ DataColumnParameter paramStartTime = new DataColumnParameter(defStartTime, pStartTime);
+ DataColumnParameter paramEndTime = new DataColumnParameter(defEndTime, pEndTime);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [PlannedEventID]={2},[DayOfWeekID]={3},[StartTime]={4},[EndTime]={5},[CreatedAt]={6} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPlannedEventID.getSQLQuotedValueForUpdate(),
+paramDayOfWeekID.getSQLQuotedValueForUpdate(),
+paramStartTime.getSQLQuotedValueForUpdate(),
+paramEndTime.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

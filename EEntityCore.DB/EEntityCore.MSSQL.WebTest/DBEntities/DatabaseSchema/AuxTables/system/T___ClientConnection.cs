@@ -634,6 +634,268 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(Int32 pClientID,
+String pFileServerUrl,
+String pFileServerAccessKey,
+String pFileServerSecretKey,
+String pFileServerBucket,
+String pClientAPIID,
+String pClientAPIUrl,
+String pDB_HOST,
+String pDB_DATABASE,
+String pDB_USERNAME,
+String pDB_PASSWORD,
+Int32 pDB_PORT,
+DateTime pCreatedAt,
+String pFileServerUrlHttps,
+Object pUpdatedAt = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+                DataColumnParameter paramFileServerUrl = new DataColumnParameter(defFileServerUrl, pFileServerUrl);
+                DataColumnParameter paramFileServerAccessKey = new DataColumnParameter(defFileServerAccessKey, pFileServerAccessKey);
+                DataColumnParameter paramFileServerSecretKey = new DataColumnParameter(defFileServerSecretKey, pFileServerSecretKey);
+                DataColumnParameter paramFileServerBucket = new DataColumnParameter(defFileServerBucket, pFileServerBucket);
+                DataColumnParameter paramClientAPIID = new DataColumnParameter(defClientAPIID, pClientAPIID);
+                DataColumnParameter paramClientAPIUrl = new DataColumnParameter(defClientAPIUrl, pClientAPIUrl);
+                DataColumnParameter paramDB_HOST = new DataColumnParameter(defDB_HOST, pDB_HOST);
+                DataColumnParameter paramDB_DATABASE = new DataColumnParameter(defDB_DATABASE, pDB_DATABASE);
+                DataColumnParameter paramDB_USERNAME = new DataColumnParameter(defDB_USERNAME, pDB_USERNAME);
+                DataColumnParameter paramDB_PASSWORD = new DataColumnParameter(defDB_PASSWORD, pDB_PASSWORD);
+                DataColumnParameter paramDB_PORT = new DataColumnParameter(defDB_PORT, pDB_PORT);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramFileServerUrlHttps = new DataColumnParameter(defFileServerUrlHttps, pFileServerUrlHttps);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd(),
+paramFileServerUrl.getSQLQuotedValueForAdd(),
+paramFileServerAccessKey.getSQLQuotedValueForAdd(),
+paramFileServerSecretKey.getSQLQuotedValueForAdd(),
+paramFileServerBucket.getSQLQuotedValueForAdd(),
+paramClientAPIID.getSQLQuotedValueForAdd(),
+paramClientAPIUrl.getSQLQuotedValueForAdd(),
+paramDB_HOST.getSQLQuotedValueForAdd(),
+paramDB_DATABASE.getSQLQuotedValueForAdd(),
+paramDB_USERNAME.getSQLQuotedValueForAdd(),
+paramDB_PASSWORD.getSQLQuotedValueForAdd(),
+paramDB_PORT.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramFileServerUrlHttps.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pClientID,
+String pFileServerUrl,
+String pFileServerAccessKey,
+String pFileServerSecretKey,
+String pFileServerBucket,
+String pClientAPIID,
+String pClientAPIUrl,
+String pDB_HOST,
+String pDB_DATABASE,
+String pDB_USERNAME,
+String pDB_PASSWORD,
+Int32 pDB_PORT,
+DateTime pCreatedAt,
+String pFileServerUrlHttps,
+Object pUpdatedAt = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+DataColumnParameter paramFileServerUrl = new DataColumnParameter(defFileServerUrl, pFileServerUrl);
+DataColumnParameter paramFileServerAccessKey = new DataColumnParameter(defFileServerAccessKey, pFileServerAccessKey);
+DataColumnParameter paramFileServerSecretKey = new DataColumnParameter(defFileServerSecretKey, pFileServerSecretKey);
+DataColumnParameter paramFileServerBucket = new DataColumnParameter(defFileServerBucket, pFileServerBucket);
+DataColumnParameter paramClientAPIID = new DataColumnParameter(defClientAPIID, pClientAPIID);
+DataColumnParameter paramClientAPIUrl = new DataColumnParameter(defClientAPIUrl, pClientAPIUrl);
+DataColumnParameter paramDB_HOST = new DataColumnParameter(defDB_HOST, pDB_HOST);
+DataColumnParameter paramDB_DATABASE = new DataColumnParameter(defDB_DATABASE, pDB_DATABASE);
+DataColumnParameter paramDB_USERNAME = new DataColumnParameter(defDB_USERNAME, pDB_USERNAME);
+DataColumnParameter paramDB_PASSWORD = new DataColumnParameter(defDB_PASSWORD, pDB_PASSWORD);
+DataColumnParameter paramDB_PORT = new DataColumnParameter(defDB_PORT, pDB_PORT);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramFileServerUrlHttps = new DataColumnParameter(defFileServerUrlHttps, pFileServerUrlHttps);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd(),
+paramFileServerUrl.getSQLQuotedValueForAdd(),
+paramFileServerAccessKey.getSQLQuotedValueForAdd(),
+paramFileServerSecretKey.getSQLQuotedValueForAdd(),
+paramFileServerBucket.getSQLQuotedValueForAdd(),
+paramClientAPIID.getSQLQuotedValueForAdd(),
+paramClientAPIUrl.getSQLQuotedValueForAdd(),
+paramDB_HOST.getSQLQuotedValueForAdd(),
+paramDB_DATABASE.getSQLQuotedValueForAdd(),
+paramDB_USERNAME.getSQLQuotedValueForAdd(),
+paramDB_PASSWORD.getSQLQuotedValueForAdd(),
+paramDB_PORT.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramFileServerUrlHttps.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pClientID,
+String pFileServerUrl,
+String pFileServerAccessKey,
+String pFileServerSecretKey,
+String pFileServerBucket,
+String pClientAPIID,
+String pClientAPIUrl,
+String pDB_HOST,
+String pDB_DATABASE,
+String pDB_USERNAME,
+String pDB_PASSWORD,
+Int32 pDB_PORT,
+DateTime pCreatedAt,
+String pFileServerUrlHttps,
+Object pUpdatedAt= null){
+
+        try{
+
+DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+DataColumnParameter paramFileServerUrl = new DataColumnParameter(defFileServerUrl, pFileServerUrl);
+DataColumnParameter paramFileServerAccessKey = new DataColumnParameter(defFileServerAccessKey, pFileServerAccessKey);
+DataColumnParameter paramFileServerSecretKey = new DataColumnParameter(defFileServerSecretKey, pFileServerSecretKey);
+DataColumnParameter paramFileServerBucket = new DataColumnParameter(defFileServerBucket, pFileServerBucket);
+DataColumnParameter paramClientAPIID = new DataColumnParameter(defClientAPIID, pClientAPIID);
+DataColumnParameter paramClientAPIUrl = new DataColumnParameter(defClientAPIUrl, pClientAPIUrl);
+DataColumnParameter paramDB_HOST = new DataColumnParameter(defDB_HOST, pDB_HOST);
+DataColumnParameter paramDB_DATABASE = new DataColumnParameter(defDB_DATABASE, pDB_DATABASE);
+DataColumnParameter paramDB_USERNAME = new DataColumnParameter(defDB_USERNAME, pDB_USERNAME);
+DataColumnParameter paramDB_PASSWORD = new DataColumnParameter(defDB_PASSWORD, pDB_PASSWORD);
+DataColumnParameter paramDB_PORT = new DataColumnParameter(defDB_PORT, pDB_PORT);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramFileServerUrlHttps = new DataColumnParameter(defFileServerUrlHttps, pFileServerUrlHttps);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}) ", TABLE_NAME,paramClientID.getSQLQuotedValueForAdd(),
+paramFileServerUrl.getSQLQuotedValueForAdd(),
+paramFileServerAccessKey.getSQLQuotedValueForAdd(),
+paramFileServerSecretKey.getSQLQuotedValueForAdd(),
+paramFileServerBucket.getSQLQuotedValueForAdd(),
+paramClientAPIID.getSQLQuotedValueForAdd(),
+paramClientAPIUrl.getSQLQuotedValueForAdd(),
+paramDB_HOST.getSQLQuotedValueForAdd(),
+paramDB_DATABASE.getSQLQuotedValueForAdd(),
+paramDB_USERNAME.getSQLQuotedValueForAdd(),
+paramDB_PASSWORD.getSQLQuotedValueForAdd(),
+paramDB_PORT.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramFileServerUrlHttps.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pClientID = null,
+Object pFileServerUrl = null,
+Object pFileServerAccessKey = null,
+Object pFileServerSecretKey = null,
+Object pFileServerBucket = null,
+Object pClientAPIID = null,
+Object pClientAPIUrl = null,
+Object pDB_HOST = null,
+Object pDB_DATABASE = null,
+Object pDB_USERNAME = null,
+Object pDB_PASSWORD = null,
+Object pDB_PORT = null,
+Object pCreatedAt = null,
+Object pFileServerUrlHttps = null,
+Object pUpdatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+ DataColumnParameter paramFileServerUrl = new DataColumnParameter(defFileServerUrl, pFileServerUrl);
+ DataColumnParameter paramFileServerAccessKey = new DataColumnParameter(defFileServerAccessKey, pFileServerAccessKey);
+ DataColumnParameter paramFileServerSecretKey = new DataColumnParameter(defFileServerSecretKey, pFileServerSecretKey);
+ DataColumnParameter paramFileServerBucket = new DataColumnParameter(defFileServerBucket, pFileServerBucket);
+ DataColumnParameter paramClientAPIID = new DataColumnParameter(defClientAPIID, pClientAPIID);
+ DataColumnParameter paramClientAPIUrl = new DataColumnParameter(defClientAPIUrl, pClientAPIUrl);
+ DataColumnParameter paramDB_HOST = new DataColumnParameter(defDB_HOST, pDB_HOST);
+ DataColumnParameter paramDB_DATABASE = new DataColumnParameter(defDB_DATABASE, pDB_DATABASE);
+ DataColumnParameter paramDB_USERNAME = new DataColumnParameter(defDB_USERNAME, pDB_USERNAME);
+ DataColumnParameter paramDB_PASSWORD = new DataColumnParameter(defDB_PASSWORD, pDB_PASSWORD);
+ DataColumnParameter paramDB_PORT = new DataColumnParameter(defDB_PORT, pDB_PORT);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramFileServerUrlHttps = new DataColumnParameter(defFileServerUrlHttps, pFileServerUrlHttps);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [ClientID]={2},[FileServerUrl]={3},[FileServerAccessKey]={4},[FileServerSecretKey]={5},[FileServerBucket]={6},[ClientAPIID]={7},[ClientAPIUrl]={8},[DB_HOST]={9},[DB_DATABASE]={10},[DB_USERNAME]={11},[DB_PASSWORD]={12},[DB_PORT]={13},[CreatedAt]={14},[UpdatedAt]={15},[FileServerUrlHttps]={16} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramClientID.getSQLQuotedValueForUpdate(),
+paramFileServerUrl.getSQLQuotedValueForUpdate(),
+paramFileServerAccessKey.getSQLQuotedValueForUpdate(),
+paramFileServerSecretKey.getSQLQuotedValueForUpdate(),
+paramFileServerBucket.getSQLQuotedValueForUpdate(),
+paramClientAPIID.getSQLQuotedValueForUpdate(),
+paramClientAPIUrl.getSQLQuotedValueForUpdate(),
+paramDB_HOST.getSQLQuotedValueForUpdate(),
+paramDB_DATABASE.getSQLQuotedValueForUpdate(),
+paramDB_USERNAME.getSQLQuotedValueForUpdate(),
+paramDB_PASSWORD.getSQLQuotedValueForUpdate(),
+paramDB_PORT.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramFileServerUrlHttps.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

@@ -549,6 +549,184 @@ Int32 pUpdatedByID){
         }                   
 
 
+        public static int AddWithID(Int32 pImportTypeID,
+String pImportedFileName,
+Int32 pFileSizeBytes,
+Int32 pTotalRowsRead,
+Int32 pCreatedByID,
+DateTime pCreatedAt,
+Object pUpdatedByID = null,
+Object pUpdatedAt = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramImportTypeID = new DataColumnParameter(defImportTypeID, pImportTypeID);
+                DataColumnParameter paramImportedFileName = new DataColumnParameter(defImportedFileName, pImportedFileName);
+                DataColumnParameter paramFileSizeBytes = new DataColumnParameter(defFileSizeBytes, pFileSizeBytes);
+                DataColumnParameter paramTotalRowsRead = new DataColumnParameter(defTotalRowsRead, pTotalRowsRead);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ImportTypeID],[ImportedFileName],[FileSizeBytes],[TotalRowsRead],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramImportTypeID.getSQLQuotedValueForAdd(),
+paramImportedFileName.getSQLQuotedValueForAdd(),
+paramFileSizeBytes.getSQLQuotedValueForAdd(),
+paramTotalRowsRead.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pImportTypeID,
+String pImportedFileName,
+Int32 pFileSizeBytes,
+Int32 pTotalRowsRead,
+Int32 pCreatedByID,
+DateTime pCreatedAt,
+Object pUpdatedByID = null,
+Object pUpdatedAt = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramImportTypeID = new DataColumnParameter(defImportTypeID, pImportTypeID);
+DataColumnParameter paramImportedFileName = new DataColumnParameter(defImportedFileName, pImportedFileName);
+DataColumnParameter paramFileSizeBytes = new DataColumnParameter(defFileSizeBytes, pFileSizeBytes);
+DataColumnParameter paramTotalRowsRead = new DataColumnParameter(defTotalRowsRead, pTotalRowsRead);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ImportTypeID],[ImportedFileName],[FileSizeBytes],[TotalRowsRead],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramImportTypeID.getSQLQuotedValueForAdd(),
+paramImportedFileName.getSQLQuotedValueForAdd(),
+paramFileSizeBytes.getSQLQuotedValueForAdd(),
+paramTotalRowsRead.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pImportTypeID,
+String pImportedFileName,
+Int32 pFileSizeBytes,
+Int32 pTotalRowsRead,
+Int32 pCreatedByID,
+DateTime pCreatedAt,
+Object pUpdatedByID= null,
+Object pUpdatedAt= null){
+
+        try{
+
+DataColumnParameter paramImportTypeID = new DataColumnParameter(defImportTypeID, pImportTypeID);
+DataColumnParameter paramImportedFileName = new DataColumnParameter(defImportedFileName, pImportedFileName);
+DataColumnParameter paramFileSizeBytes = new DataColumnParameter(defFileSizeBytes, pFileSizeBytes);
+DataColumnParameter paramTotalRowsRead = new DataColumnParameter(defTotalRowsRead, pTotalRowsRead);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([ImportTypeID],[ImportedFileName],[FileSizeBytes],[TotalRowsRead],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) ", TABLE_NAME,paramImportTypeID.getSQLQuotedValueForAdd(),
+paramImportedFileName.getSQLQuotedValueForAdd(),
+paramFileSizeBytes.getSQLQuotedValueForAdd(),
+paramTotalRowsRead.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pImportTypeID = null,
+Object pImportedFileName = null,
+Object pFileSizeBytes = null,
+Object pTotalRowsRead = null,
+Object pCreatedByID = null,
+Object pCreatedAt = null,
+Object pUpdatedByID = null,
+Object pUpdatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramImportTypeID = new DataColumnParameter(defImportTypeID, pImportTypeID);
+ DataColumnParameter paramImportedFileName = new DataColumnParameter(defImportedFileName, pImportedFileName);
+ DataColumnParameter paramFileSizeBytes = new DataColumnParameter(defFileSizeBytes, pFileSizeBytes);
+ DataColumnParameter paramTotalRowsRead = new DataColumnParameter(defTotalRowsRead, pTotalRowsRead);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [ImportTypeID]={2},[ImportedFileName]={3},[FileSizeBytes]={4},[TotalRowsRead]={5},[CreatedByID]={6},[CreatedAt]={7},[UpdatedByID]={8},[UpdatedAt]={9} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramImportTypeID.getSQLQuotedValueForUpdate(),
+paramImportedFileName.getSQLQuotedValueForUpdate(),
+paramFileSizeBytes.getSQLQuotedValueForUpdate(),
+paramTotalRowsRead.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedByID.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

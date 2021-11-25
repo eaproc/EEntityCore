@@ -558,6 +558,196 @@ Int32 pTermOrderID){
         }                   
 
 
+        public static int AddWithID(String pName,
+DateTime pStartDate,
+DateTime pEndDate,
+Boolean pIsActive,
+DateTime pCreatedAt,
+Int32 pAcademicSessionID,
+Int32 pTermOrderID,
+Object pDescription = null,
+Object pUpdatedAt = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+                DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+                DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+                DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+                DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramAcademicSessionID = new DataColumnParameter(defAcademicSessionID, pAcademicSessionID);
+                DataColumnParameter paramTermOrderID = new DataColumnParameter(defTermOrderID, pTermOrderID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt],[AcademicSessionID],[TermOrderID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramName.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramStartDate.getSQLQuotedValueForAdd(),
+paramEndDate.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramAcademicSessionID.getSQLQuotedValueForAdd(),
+paramTermOrderID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,String pName,
+DateTime pStartDate,
+DateTime pEndDate,
+Boolean pIsActive,
+DateTime pCreatedAt,
+Int32 pAcademicSessionID,
+Int32 pTermOrderID,
+Object pDescription = null,
+Object pUpdatedAt = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramAcademicSessionID = new DataColumnParameter(defAcademicSessionID, pAcademicSessionID);
+DataColumnParameter paramTermOrderID = new DataColumnParameter(defTermOrderID, pTermOrderID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt],[AcademicSessionID],[TermOrderID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramName.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramStartDate.getSQLQuotedValueForAdd(),
+paramEndDate.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramAcademicSessionID.getSQLQuotedValueForAdd(),
+paramTermOrderID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(String pName,
+DateTime pStartDate,
+DateTime pEndDate,
+Boolean pIsActive,
+DateTime pCreatedAt,
+Int32 pAcademicSessionID,
+Int32 pTermOrderID,
+Object pDescription= null,
+Object pUpdatedAt= null){
+
+        try{
+
+DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramAcademicSessionID = new DataColumnParameter(defAcademicSessionID, pAcademicSessionID);
+DataColumnParameter paramTermOrderID = new DataColumnParameter(defTermOrderID, pTermOrderID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([Name],[Description],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt],[AcademicSessionID],[TermOrderID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramName.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramStartDate.getSQLQuotedValueForAdd(),
+paramEndDate.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramAcademicSessionID.getSQLQuotedValueForAdd(),
+paramTermOrderID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pName = null,
+Object pStartDate = null,
+Object pEndDate = null,
+Object pIsActive = null,
+Object pCreatedAt = null,
+Object pAcademicSessionID = null,
+Object pTermOrderID = null,
+Object pDescription = null,
+Object pUpdatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+ DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+ DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+ DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+ DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramAcademicSessionID = new DataColumnParameter(defAcademicSessionID, pAcademicSessionID);
+ DataColumnParameter paramTermOrderID = new DataColumnParameter(defTermOrderID, pTermOrderID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [Name]={2},[Description]={3},[StartDate]={4},[EndDate]={5},[IsActive]={6},[CreatedAt]={7},[UpdatedAt]={8},[AcademicSessionID]={9},[TermOrderID]={10} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramName.getSQLQuotedValueForUpdate(),
+paramDescription.getSQLQuotedValueForUpdate(),
+paramStartDate.getSQLQuotedValueForUpdate(),
+paramEndDate.getSQLQuotedValueForUpdate(),
+paramIsActive.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramAcademicSessionID.getSQLQuotedValueForUpdate(),
+paramTermOrderID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

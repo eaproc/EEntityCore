@@ -474,6 +474,136 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(Decimal pStockAmountNaira,
+Decimal pQuantity,
+DateTime pCreatedAt,
+Object pComments = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramStockAmountNaira = new DataColumnParameter(defStockAmountNaira, pStockAmountNaira);
+                DataColumnParameter paramQuantity = new DataColumnParameter(defQuantity, pQuantity);
+                DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[StockAmountNaira],[Quantity],[Comments],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramStockAmountNaira.getSQLQuotedValueForAdd(),
+paramQuantity.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Decimal pStockAmountNaira,
+Decimal pQuantity,
+DateTime pCreatedAt,
+Object pComments = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramStockAmountNaira = new DataColumnParameter(defStockAmountNaira, pStockAmountNaira);
+DataColumnParameter paramQuantity = new DataColumnParameter(defQuantity, pQuantity);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[StockAmountNaira],[Quantity],[Comments],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramStockAmountNaira.getSQLQuotedValueForAdd(),
+paramQuantity.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Decimal pStockAmountNaira,
+Decimal pQuantity,
+DateTime pCreatedAt,
+Object pComments= null){
+
+        try{
+
+DataColumnParameter paramStockAmountNaira = new DataColumnParameter(defStockAmountNaira, pStockAmountNaira);
+DataColumnParameter paramQuantity = new DataColumnParameter(defQuantity, pQuantity);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([StockAmountNaira],[Quantity],[Comments],[CreatedAt]) VALUES({1},{2},{3},{4}) ", TABLE_NAME,paramStockAmountNaira.getSQLQuotedValueForAdd(),
+paramQuantity.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pStockAmountNaira = null,
+Object pQuantity = null,
+Object pCreatedAt = null,
+Object pComments = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramStockAmountNaira = new DataColumnParameter(defStockAmountNaira, pStockAmountNaira);
+ DataColumnParameter paramQuantity = new DataColumnParameter(defQuantity, pQuantity);
+ DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [StockAmountNaira]={2},[Quantity]={3},[Comments]={4},[CreatedAt]={5} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramStockAmountNaira.getSQLQuotedValueForUpdate(),
+paramQuantity.getSQLQuotedValueForUpdate(),
+paramComments.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

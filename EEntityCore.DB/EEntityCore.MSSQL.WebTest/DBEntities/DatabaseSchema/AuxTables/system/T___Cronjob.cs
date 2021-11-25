@@ -481,6 +481,136 @@ String pName){
         }                   
 
 
+        public static int AddWithID(Int32 pIntervalID,
+String pName,
+DateTime pCreatedAt,
+Object pDescription = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramIntervalID = new DataColumnParameter(defIntervalID, pIntervalID);
+                DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+                DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IntervalID],[Name],[Description],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramIntervalID.getSQLQuotedValueForAdd(),
+paramName.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pIntervalID,
+String pName,
+DateTime pCreatedAt,
+Object pDescription = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramIntervalID = new DataColumnParameter(defIntervalID, pIntervalID);
+DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IntervalID],[Name],[Description],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramIntervalID.getSQLQuotedValueForAdd(),
+paramName.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pIntervalID,
+String pName,
+DateTime pCreatedAt,
+Object pDescription= null){
+
+        try{
+
+DataColumnParameter paramIntervalID = new DataColumnParameter(defIntervalID, pIntervalID);
+DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([IntervalID],[Name],[Description],[CreatedAt]) VALUES({1},{2},{3},{4}) ", TABLE_NAME,paramIntervalID.getSQLQuotedValueForAdd(),
+paramName.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pIntervalID = null,
+Object pName = null,
+Object pCreatedAt = null,
+Object pDescription = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramIntervalID = new DataColumnParameter(defIntervalID, pIntervalID);
+ DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+ DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [IntervalID]={2},[Name]={3},[Description]={4},[CreatedAt]={5} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramIntervalID.getSQLQuotedValueForUpdate(),
+paramName.getSQLQuotedValueForUpdate(),
+paramDescription.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

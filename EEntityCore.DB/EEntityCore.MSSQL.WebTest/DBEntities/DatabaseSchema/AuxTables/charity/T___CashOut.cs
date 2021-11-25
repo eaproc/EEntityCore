@@ -601,6 +601,220 @@ Int32 pUpdatedByID){
         }                   
 
 
+        public static int AddWithID(Int32 pCashRequestStatusID,
+Int32 pCategoryID,
+Decimal pAmount,
+Int32 pReceiverID,
+String pDescription,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pRequestComments = null,
+Object pResponseComments = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramCashRequestStatusID = new DataColumnParameter(defCashRequestStatusID, pCashRequestStatusID);
+                DataColumnParameter paramCategoryID = new DataColumnParameter(defCategoryID, pCategoryID);
+                DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+                DataColumnParameter paramReceiverID = new DataColumnParameter(defReceiverID, pReceiverID);
+                DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+                DataColumnParameter paramRequestComments = new DataColumnParameter(defRequestComments, pRequestComments);
+                DataColumnParameter paramResponseComments = new DataColumnParameter(defResponseComments, pResponseComments);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CashRequestStatusID],[CategoryID],[Amount],[ReceiverID],[Description],[RequestComments],[ResponseComments],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCashRequestStatusID.getSQLQuotedValueForAdd(),
+paramCategoryID.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramReceiverID.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramRequestComments.getSQLQuotedValueForAdd(),
+paramResponseComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pCashRequestStatusID,
+Int32 pCategoryID,
+Decimal pAmount,
+Int32 pReceiverID,
+String pDescription,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pRequestComments = null,
+Object pResponseComments = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramCashRequestStatusID = new DataColumnParameter(defCashRequestStatusID, pCashRequestStatusID);
+DataColumnParameter paramCategoryID = new DataColumnParameter(defCategoryID, pCategoryID);
+DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+DataColumnParameter paramReceiverID = new DataColumnParameter(defReceiverID, pReceiverID);
+DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+DataColumnParameter paramRequestComments = new DataColumnParameter(defRequestComments, pRequestComments);
+DataColumnParameter paramResponseComments = new DataColumnParameter(defResponseComments, pResponseComments);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CashRequestStatusID],[CategoryID],[Amount],[ReceiverID],[Description],[RequestComments],[ResponseComments],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCashRequestStatusID.getSQLQuotedValueForAdd(),
+paramCategoryID.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramReceiverID.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramRequestComments.getSQLQuotedValueForAdd(),
+paramResponseComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pCashRequestStatusID,
+Int32 pCategoryID,
+Decimal pAmount,
+Int32 pReceiverID,
+String pDescription,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pRequestComments= null,
+Object pResponseComments= null){
+
+        try{
+
+DataColumnParameter paramCashRequestStatusID = new DataColumnParameter(defCashRequestStatusID, pCashRequestStatusID);
+DataColumnParameter paramCategoryID = new DataColumnParameter(defCategoryID, pCategoryID);
+DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+DataColumnParameter paramReceiverID = new DataColumnParameter(defReceiverID, pReceiverID);
+DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+DataColumnParameter paramRequestComments = new DataColumnParameter(defRequestComments, pRequestComments);
+DataColumnParameter paramResponseComments = new DataColumnParameter(defResponseComments, pResponseComments);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([CashRequestStatusID],[CategoryID],[Amount],[ReceiverID],[Description],[RequestComments],[ResponseComments],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) ", TABLE_NAME,paramCashRequestStatusID.getSQLQuotedValueForAdd(),
+paramCategoryID.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramReceiverID.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramRequestComments.getSQLQuotedValueForAdd(),
+paramResponseComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pCashRequestStatusID = null,
+Object pCategoryID = null,
+Object pAmount = null,
+Object pReceiverID = null,
+Object pDescription = null,
+Object pCreatedAt = null,
+Object pUpdatedAt = null,
+Object pCreatedByID = null,
+Object pUpdatedByID = null,
+Object pRequestComments = null,
+Object pResponseComments = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramCashRequestStatusID = new DataColumnParameter(defCashRequestStatusID, pCashRequestStatusID);
+ DataColumnParameter paramCategoryID = new DataColumnParameter(defCategoryID, pCategoryID);
+ DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+ DataColumnParameter paramReceiverID = new DataColumnParameter(defReceiverID, pReceiverID);
+ DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+ DataColumnParameter paramRequestComments = new DataColumnParameter(defRequestComments, pRequestComments);
+ DataColumnParameter paramResponseComments = new DataColumnParameter(defResponseComments, pResponseComments);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [CashRequestStatusID]={2},[CategoryID]={3},[Amount]={4},[ReceiverID]={5},[Description]={6},[RequestComments]={7},[ResponseComments]={8},[CreatedAt]={9},[UpdatedAt]={10},[CreatedByID]={11},[UpdatedByID]={12} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCashRequestStatusID.getSQLQuotedValueForUpdate(),
+paramCategoryID.getSQLQuotedValueForUpdate(),
+paramAmount.getSQLQuotedValueForUpdate(),
+paramReceiverID.getSQLQuotedValueForUpdate(),
+paramDescription.getSQLQuotedValueForUpdate(),
+paramRequestComments.getSQLQuotedValueForUpdate(),
+paramResponseComments.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramUpdatedByID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

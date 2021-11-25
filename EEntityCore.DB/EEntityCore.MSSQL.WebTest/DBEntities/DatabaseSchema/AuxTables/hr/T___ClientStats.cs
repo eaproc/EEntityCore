@@ -667,6 +667,292 @@ Int32 pTermID){
         }                   
 
 
+        public static int AddWithID(Int32 pClientID,
+Int32 pTermID,
+Int32 pRegisteredStudentCount,
+Int32 pAssignedStudentCount,
+Int32 pSCADWAREAccessCount,
+Decimal pSCADWAREAccessThreshold,
+Decimal pAverageTermBill,
+Decimal pRatePerStudent,
+Decimal pBilledPerStudent,
+Decimal pTotalReceivedOnSCADWAREBill,
+Decimal pMinimumExpectedOnSCADWAREBill,
+Decimal pExpectedOnSCADWAREBill,
+String pIPAddress,
+DateTime pCreatedAt,
+Object pFullScholarshipStudentCount = null,
+Object pTermStartDate = null,
+Object pTermEndDate = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+                DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+                DataColumnParameter paramRegisteredStudentCount = new DataColumnParameter(defRegisteredStudentCount, pRegisteredStudentCount);
+                DataColumnParameter paramAssignedStudentCount = new DataColumnParameter(defAssignedStudentCount, pAssignedStudentCount);
+                DataColumnParameter paramSCADWAREAccessCount = new DataColumnParameter(defSCADWAREAccessCount, pSCADWAREAccessCount);
+                DataColumnParameter paramSCADWAREAccessThreshold = new DataColumnParameter(defSCADWAREAccessThreshold, pSCADWAREAccessThreshold);
+                DataColumnParameter paramAverageTermBill = new DataColumnParameter(defAverageTermBill, pAverageTermBill);
+                DataColumnParameter paramRatePerStudent = new DataColumnParameter(defRatePerStudent, pRatePerStudent);
+                DataColumnParameter paramBilledPerStudent = new DataColumnParameter(defBilledPerStudent, pBilledPerStudent);
+                DataColumnParameter paramTotalReceivedOnSCADWAREBill = new DataColumnParameter(defTotalReceivedOnSCADWAREBill, pTotalReceivedOnSCADWAREBill);
+                DataColumnParameter paramMinimumExpectedOnSCADWAREBill = new DataColumnParameter(defMinimumExpectedOnSCADWAREBill, pMinimumExpectedOnSCADWAREBill);
+                DataColumnParameter paramExpectedOnSCADWAREBill = new DataColumnParameter(defExpectedOnSCADWAREBill, pExpectedOnSCADWAREBill);
+                DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramFullScholarshipStudentCount = new DataColumnParameter(defFullScholarshipStudentCount, pFullScholarshipStudentCount);
+                DataColumnParameter paramTermStartDate = new DataColumnParameter(defTermStartDate, pTermStartDate);
+                DataColumnParameter paramTermEndDate = new DataColumnParameter(defTermEndDate, pTermEndDate);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[TermID],[RegisteredStudentCount],[AssignedStudentCount],[SCADWAREAccessCount],[SCADWAREAccessThreshold],[AverageTermBill],[RatePerStudent],[BilledPerStudent],[TotalReceivedOnSCADWAREBill],[MinimumExpectedOnSCADWAREBill],[ExpectedOnSCADWAREBill],[IPAddress],[CreatedAt],[FullScholarshipStudentCount],[TermStartDate],[TermEndDate]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd(),
+paramRegisteredStudentCount.getSQLQuotedValueForAdd(),
+paramAssignedStudentCount.getSQLQuotedValueForAdd(),
+paramSCADWAREAccessCount.getSQLQuotedValueForAdd(),
+paramSCADWAREAccessThreshold.getSQLQuotedValueForAdd(),
+paramAverageTermBill.getSQLQuotedValueForAdd(),
+paramRatePerStudent.getSQLQuotedValueForAdd(),
+paramBilledPerStudent.getSQLQuotedValueForAdd(),
+paramTotalReceivedOnSCADWAREBill.getSQLQuotedValueForAdd(),
+paramMinimumExpectedOnSCADWAREBill.getSQLQuotedValueForAdd(),
+paramExpectedOnSCADWAREBill.getSQLQuotedValueForAdd(),
+paramIPAddress.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramFullScholarshipStudentCount.getSQLQuotedValueForAdd(),
+paramTermStartDate.getSQLQuotedValueForAdd(),
+paramTermEndDate.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pClientID,
+Int32 pTermID,
+Int32 pRegisteredStudentCount,
+Int32 pAssignedStudentCount,
+Int32 pSCADWAREAccessCount,
+Decimal pSCADWAREAccessThreshold,
+Decimal pAverageTermBill,
+Decimal pRatePerStudent,
+Decimal pBilledPerStudent,
+Decimal pTotalReceivedOnSCADWAREBill,
+Decimal pMinimumExpectedOnSCADWAREBill,
+Decimal pExpectedOnSCADWAREBill,
+String pIPAddress,
+DateTime pCreatedAt,
+Object pFullScholarshipStudentCount = null,
+Object pTermStartDate = null,
+Object pTermEndDate = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+DataColumnParameter paramRegisteredStudentCount = new DataColumnParameter(defRegisteredStudentCount, pRegisteredStudentCount);
+DataColumnParameter paramAssignedStudentCount = new DataColumnParameter(defAssignedStudentCount, pAssignedStudentCount);
+DataColumnParameter paramSCADWAREAccessCount = new DataColumnParameter(defSCADWAREAccessCount, pSCADWAREAccessCount);
+DataColumnParameter paramSCADWAREAccessThreshold = new DataColumnParameter(defSCADWAREAccessThreshold, pSCADWAREAccessThreshold);
+DataColumnParameter paramAverageTermBill = new DataColumnParameter(defAverageTermBill, pAverageTermBill);
+DataColumnParameter paramRatePerStudent = new DataColumnParameter(defRatePerStudent, pRatePerStudent);
+DataColumnParameter paramBilledPerStudent = new DataColumnParameter(defBilledPerStudent, pBilledPerStudent);
+DataColumnParameter paramTotalReceivedOnSCADWAREBill = new DataColumnParameter(defTotalReceivedOnSCADWAREBill, pTotalReceivedOnSCADWAREBill);
+DataColumnParameter paramMinimumExpectedOnSCADWAREBill = new DataColumnParameter(defMinimumExpectedOnSCADWAREBill, pMinimumExpectedOnSCADWAREBill);
+DataColumnParameter paramExpectedOnSCADWAREBill = new DataColumnParameter(defExpectedOnSCADWAREBill, pExpectedOnSCADWAREBill);
+DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramFullScholarshipStudentCount = new DataColumnParameter(defFullScholarshipStudentCount, pFullScholarshipStudentCount);
+DataColumnParameter paramTermStartDate = new DataColumnParameter(defTermStartDate, pTermStartDate);
+DataColumnParameter paramTermEndDate = new DataColumnParameter(defTermEndDate, pTermEndDate);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[TermID],[RegisteredStudentCount],[AssignedStudentCount],[SCADWAREAccessCount],[SCADWAREAccessThreshold],[AverageTermBill],[RatePerStudent],[BilledPerStudent],[TotalReceivedOnSCADWAREBill],[MinimumExpectedOnSCADWAREBill],[ExpectedOnSCADWAREBill],[IPAddress],[CreatedAt],[FullScholarshipStudentCount],[TermStartDate],[TermEndDate]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd(),
+paramRegisteredStudentCount.getSQLQuotedValueForAdd(),
+paramAssignedStudentCount.getSQLQuotedValueForAdd(),
+paramSCADWAREAccessCount.getSQLQuotedValueForAdd(),
+paramSCADWAREAccessThreshold.getSQLQuotedValueForAdd(),
+paramAverageTermBill.getSQLQuotedValueForAdd(),
+paramRatePerStudent.getSQLQuotedValueForAdd(),
+paramBilledPerStudent.getSQLQuotedValueForAdd(),
+paramTotalReceivedOnSCADWAREBill.getSQLQuotedValueForAdd(),
+paramMinimumExpectedOnSCADWAREBill.getSQLQuotedValueForAdd(),
+paramExpectedOnSCADWAREBill.getSQLQuotedValueForAdd(),
+paramIPAddress.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramFullScholarshipStudentCount.getSQLQuotedValueForAdd(),
+paramTermStartDate.getSQLQuotedValueForAdd(),
+paramTermEndDate.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pClientID,
+Int32 pTermID,
+Int32 pRegisteredStudentCount,
+Int32 pAssignedStudentCount,
+Int32 pSCADWAREAccessCount,
+Decimal pSCADWAREAccessThreshold,
+Decimal pAverageTermBill,
+Decimal pRatePerStudent,
+Decimal pBilledPerStudent,
+Decimal pTotalReceivedOnSCADWAREBill,
+Decimal pMinimumExpectedOnSCADWAREBill,
+Decimal pExpectedOnSCADWAREBill,
+String pIPAddress,
+DateTime pCreatedAt,
+Object pFullScholarshipStudentCount= null,
+Object pTermStartDate= null,
+Object pTermEndDate= null){
+
+        try{
+
+DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+DataColumnParameter paramRegisteredStudentCount = new DataColumnParameter(defRegisteredStudentCount, pRegisteredStudentCount);
+DataColumnParameter paramAssignedStudentCount = new DataColumnParameter(defAssignedStudentCount, pAssignedStudentCount);
+DataColumnParameter paramSCADWAREAccessCount = new DataColumnParameter(defSCADWAREAccessCount, pSCADWAREAccessCount);
+DataColumnParameter paramSCADWAREAccessThreshold = new DataColumnParameter(defSCADWAREAccessThreshold, pSCADWAREAccessThreshold);
+DataColumnParameter paramAverageTermBill = new DataColumnParameter(defAverageTermBill, pAverageTermBill);
+DataColumnParameter paramRatePerStudent = new DataColumnParameter(defRatePerStudent, pRatePerStudent);
+DataColumnParameter paramBilledPerStudent = new DataColumnParameter(defBilledPerStudent, pBilledPerStudent);
+DataColumnParameter paramTotalReceivedOnSCADWAREBill = new DataColumnParameter(defTotalReceivedOnSCADWAREBill, pTotalReceivedOnSCADWAREBill);
+DataColumnParameter paramMinimumExpectedOnSCADWAREBill = new DataColumnParameter(defMinimumExpectedOnSCADWAREBill, pMinimumExpectedOnSCADWAREBill);
+DataColumnParameter paramExpectedOnSCADWAREBill = new DataColumnParameter(defExpectedOnSCADWAREBill, pExpectedOnSCADWAREBill);
+DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramFullScholarshipStudentCount = new DataColumnParameter(defFullScholarshipStudentCount, pFullScholarshipStudentCount);
+DataColumnParameter paramTermStartDate = new DataColumnParameter(defTermStartDate, pTermStartDate);
+DataColumnParameter paramTermEndDate = new DataColumnParameter(defTermEndDate, pTermEndDate);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([ClientID],[TermID],[RegisteredStudentCount],[AssignedStudentCount],[SCADWAREAccessCount],[SCADWAREAccessThreshold],[AverageTermBill],[RatePerStudent],[BilledPerStudent],[TotalReceivedOnSCADWAREBill],[MinimumExpectedOnSCADWAREBill],[ExpectedOnSCADWAREBill],[IPAddress],[CreatedAt],[FullScholarshipStudentCount],[TermStartDate],[TermEndDate]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) ", TABLE_NAME,paramClientID.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd(),
+paramRegisteredStudentCount.getSQLQuotedValueForAdd(),
+paramAssignedStudentCount.getSQLQuotedValueForAdd(),
+paramSCADWAREAccessCount.getSQLQuotedValueForAdd(),
+paramSCADWAREAccessThreshold.getSQLQuotedValueForAdd(),
+paramAverageTermBill.getSQLQuotedValueForAdd(),
+paramRatePerStudent.getSQLQuotedValueForAdd(),
+paramBilledPerStudent.getSQLQuotedValueForAdd(),
+paramTotalReceivedOnSCADWAREBill.getSQLQuotedValueForAdd(),
+paramMinimumExpectedOnSCADWAREBill.getSQLQuotedValueForAdd(),
+paramExpectedOnSCADWAREBill.getSQLQuotedValueForAdd(),
+paramIPAddress.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramFullScholarshipStudentCount.getSQLQuotedValueForAdd(),
+paramTermStartDate.getSQLQuotedValueForAdd(),
+paramTermEndDate.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pClientID = null,
+Object pTermID = null,
+Object pRegisteredStudentCount = null,
+Object pAssignedStudentCount = null,
+Object pSCADWAREAccessCount = null,
+Object pSCADWAREAccessThreshold = null,
+Object pAverageTermBill = null,
+Object pRatePerStudent = null,
+Object pBilledPerStudent = null,
+Object pTotalReceivedOnSCADWAREBill = null,
+Object pMinimumExpectedOnSCADWAREBill = null,
+Object pExpectedOnSCADWAREBill = null,
+Object pIPAddress = null,
+Object pCreatedAt = null,
+Object pFullScholarshipStudentCount = null,
+Object pTermStartDate = null,
+Object pTermEndDate = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+ DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+ DataColumnParameter paramRegisteredStudentCount = new DataColumnParameter(defRegisteredStudentCount, pRegisteredStudentCount);
+ DataColumnParameter paramAssignedStudentCount = new DataColumnParameter(defAssignedStudentCount, pAssignedStudentCount);
+ DataColumnParameter paramSCADWAREAccessCount = new DataColumnParameter(defSCADWAREAccessCount, pSCADWAREAccessCount);
+ DataColumnParameter paramSCADWAREAccessThreshold = new DataColumnParameter(defSCADWAREAccessThreshold, pSCADWAREAccessThreshold);
+ DataColumnParameter paramAverageTermBill = new DataColumnParameter(defAverageTermBill, pAverageTermBill);
+ DataColumnParameter paramRatePerStudent = new DataColumnParameter(defRatePerStudent, pRatePerStudent);
+ DataColumnParameter paramBilledPerStudent = new DataColumnParameter(defBilledPerStudent, pBilledPerStudent);
+ DataColumnParameter paramTotalReceivedOnSCADWAREBill = new DataColumnParameter(defTotalReceivedOnSCADWAREBill, pTotalReceivedOnSCADWAREBill);
+ DataColumnParameter paramMinimumExpectedOnSCADWAREBill = new DataColumnParameter(defMinimumExpectedOnSCADWAREBill, pMinimumExpectedOnSCADWAREBill);
+ DataColumnParameter paramExpectedOnSCADWAREBill = new DataColumnParameter(defExpectedOnSCADWAREBill, pExpectedOnSCADWAREBill);
+ DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramFullScholarshipStudentCount = new DataColumnParameter(defFullScholarshipStudentCount, pFullScholarshipStudentCount);
+ DataColumnParameter paramTermStartDate = new DataColumnParameter(defTermStartDate, pTermStartDate);
+ DataColumnParameter paramTermEndDate = new DataColumnParameter(defTermEndDate, pTermEndDate);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [ClientID]={2},[TermID]={3},[RegisteredStudentCount]={4},[AssignedStudentCount]={5},[SCADWAREAccessCount]={6},[SCADWAREAccessThreshold]={7},[AverageTermBill]={8},[RatePerStudent]={9},[BilledPerStudent]={10},[TotalReceivedOnSCADWAREBill]={11},[MinimumExpectedOnSCADWAREBill]={12},[ExpectedOnSCADWAREBill]={13},[IPAddress]={14},[CreatedAt]={15},[FullScholarshipStudentCount]={16},[TermStartDate]={17},[TermEndDate]={18} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramClientID.getSQLQuotedValueForUpdate(),
+paramTermID.getSQLQuotedValueForUpdate(),
+paramRegisteredStudentCount.getSQLQuotedValueForUpdate(),
+paramAssignedStudentCount.getSQLQuotedValueForUpdate(),
+paramSCADWAREAccessCount.getSQLQuotedValueForUpdate(),
+paramSCADWAREAccessThreshold.getSQLQuotedValueForUpdate(),
+paramAverageTermBill.getSQLQuotedValueForUpdate(),
+paramRatePerStudent.getSQLQuotedValueForUpdate(),
+paramBilledPerStudent.getSQLQuotedValueForUpdate(),
+paramTotalReceivedOnSCADWAREBill.getSQLQuotedValueForUpdate(),
+paramMinimumExpectedOnSCADWAREBill.getSQLQuotedValueForUpdate(),
+paramExpectedOnSCADWAREBill.getSQLQuotedValueForUpdate(),
+paramIPAddress.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramFullScholarshipStudentCount.getSQLQuotedValueForUpdate(),
+paramTermStartDate.getSQLQuotedValueForUpdate(),
+paramTermEndDate.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

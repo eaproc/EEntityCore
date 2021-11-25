@@ -521,6 +521,172 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(DateTime pStartDate,
+DateTime pEndDate,
+Int32 pPayrollWorkingDays,
+Boolean pIsApproved,
+Int32 pMonthWorkingDays,
+DateTime pCreatedAt,
+Int32 pCreatedByID){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+                DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+                DataColumnParameter paramPayrollWorkingDays = new DataColumnParameter(defPayrollWorkingDays, pPayrollWorkingDays);
+                DataColumnParameter paramIsApproved = new DataColumnParameter(defIsApproved, pIsApproved);
+                DataColumnParameter paramMonthWorkingDays = new DataColumnParameter(defMonthWorkingDays, pMonthWorkingDays);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[StartDate],[EndDate],[PayrollWorkingDays],[IsApproved],[MonthWorkingDays],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramStartDate.getSQLQuotedValueForAdd(),
+paramEndDate.getSQLQuotedValueForAdd(),
+paramPayrollWorkingDays.getSQLQuotedValueForAdd(),
+paramIsApproved.getSQLQuotedValueForAdd(),
+paramMonthWorkingDays.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,DateTime pStartDate,
+DateTime pEndDate,
+Int32 pPayrollWorkingDays,
+Boolean pIsApproved,
+Int32 pMonthWorkingDays,
+DateTime pCreatedAt,
+Int32 pCreatedByID){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+DataColumnParameter paramPayrollWorkingDays = new DataColumnParameter(defPayrollWorkingDays, pPayrollWorkingDays);
+DataColumnParameter paramIsApproved = new DataColumnParameter(defIsApproved, pIsApproved);
+DataColumnParameter paramMonthWorkingDays = new DataColumnParameter(defMonthWorkingDays, pMonthWorkingDays);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[StartDate],[EndDate],[PayrollWorkingDays],[IsApproved],[MonthWorkingDays],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramStartDate.getSQLQuotedValueForAdd(),
+paramEndDate.getSQLQuotedValueForAdd(),
+paramPayrollWorkingDays.getSQLQuotedValueForAdd(),
+paramIsApproved.getSQLQuotedValueForAdd(),
+paramMonthWorkingDays.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(DateTime pStartDate,
+DateTime pEndDate,
+Int32 pPayrollWorkingDays,
+Boolean pIsApproved,
+Int32 pMonthWorkingDays,
+DateTime pCreatedAt,
+Int32 pCreatedByID){
+
+        try{
+
+DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+DataColumnParameter paramPayrollWorkingDays = new DataColumnParameter(defPayrollWorkingDays, pPayrollWorkingDays);
+DataColumnParameter paramIsApproved = new DataColumnParameter(defIsApproved, pIsApproved);
+DataColumnParameter paramMonthWorkingDays = new DataColumnParameter(defMonthWorkingDays, pMonthWorkingDays);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([StartDate],[EndDate],[PayrollWorkingDays],[IsApproved],[MonthWorkingDays],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7}) ", TABLE_NAME,paramStartDate.getSQLQuotedValueForAdd(),
+paramEndDate.getSQLQuotedValueForAdd(),
+paramPayrollWorkingDays.getSQLQuotedValueForAdd(),
+paramIsApproved.getSQLQuotedValueForAdd(),
+paramMonthWorkingDays.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pStartDate = null,
+Object pEndDate = null,
+Object pPayrollWorkingDays = null,
+Object pIsApproved = null,
+Object pMonthWorkingDays = null,
+Object pCreatedAt = null,
+Object pCreatedByID = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
+ DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
+ DataColumnParameter paramPayrollWorkingDays = new DataColumnParameter(defPayrollWorkingDays, pPayrollWorkingDays);
+ DataColumnParameter paramIsApproved = new DataColumnParameter(defIsApproved, pIsApproved);
+ DataColumnParameter paramMonthWorkingDays = new DataColumnParameter(defMonthWorkingDays, pMonthWorkingDays);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [StartDate]={2},[EndDate]={3},[PayrollWorkingDays]={4},[IsApproved]={5},[MonthWorkingDays]={6},[CreatedAt]={7},[CreatedByID]={8} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramStartDate.getSQLQuotedValueForUpdate(),
+paramEndDate.getSQLQuotedValueForUpdate(),
+paramPayrollWorkingDays.getSQLQuotedValueForUpdate(),
+paramIsApproved.getSQLQuotedValueForUpdate(),
+paramMonthWorkingDays.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

@@ -27,7 +27,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 #region EDITABLE REGION                  
                   
                   
-        // --- EMPTY MASK [ = = = = = ] -- FOR NEWLY GENERATED SCRIPT !                  
+                          
                   
                   
                   

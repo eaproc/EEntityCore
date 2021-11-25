@@ -523,6 +523,172 @@ Int32 pCountryID){
         }                   
 
 
+        public static int AddWithID(String pName,
+Int32 pCountryID,
+DateTime pCreatedAt,
+Object pComments = null,
+Object pUpdatedAt = null,
+Object pUSSDCode = null,
+Object pBankCode = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+                DataColumnParameter paramCountryID = new DataColumnParameter(defCountryID, pCountryID);
+                DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramUSSDCode = new DataColumnParameter(defUSSDCode, pUSSDCode);
+                DataColumnParameter paramBankCode = new DataColumnParameter(defBankCode, pBankCode);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[CountryID],[Comments],[CreatedAt],[UpdatedAt],[USSDCode],[BankCode]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramName.getSQLQuotedValueForAdd(),
+paramCountryID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramUSSDCode.getSQLQuotedValueForAdd(),
+paramBankCode.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,String pName,
+Int32 pCountryID,
+DateTime pCreatedAt,
+Object pComments = null,
+Object pUpdatedAt = null,
+Object pUSSDCode = null,
+Object pBankCode = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+DataColumnParameter paramCountryID = new DataColumnParameter(defCountryID, pCountryID);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramUSSDCode = new DataColumnParameter(defUSSDCode, pUSSDCode);
+DataColumnParameter paramBankCode = new DataColumnParameter(defBankCode, pBankCode);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[CountryID],[Comments],[CreatedAt],[UpdatedAt],[USSDCode],[BankCode]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramName.getSQLQuotedValueForAdd(),
+paramCountryID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramUSSDCode.getSQLQuotedValueForAdd(),
+paramBankCode.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(String pName,
+Int32 pCountryID,
+DateTime pCreatedAt,
+Object pComments= null,
+Object pUpdatedAt= null,
+Object pUSSDCode= null,
+Object pBankCode= null){
+
+        try{
+
+DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+DataColumnParameter paramCountryID = new DataColumnParameter(defCountryID, pCountryID);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramUSSDCode = new DataColumnParameter(defUSSDCode, pUSSDCode);
+DataColumnParameter paramBankCode = new DataColumnParameter(defBankCode, pBankCode);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([Name],[CountryID],[Comments],[CreatedAt],[UpdatedAt],[USSDCode],[BankCode]) VALUES({1},{2},{3},{4},{5},{6},{7}) ", TABLE_NAME,paramName.getSQLQuotedValueForAdd(),
+paramCountryID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramUSSDCode.getSQLQuotedValueForAdd(),
+paramBankCode.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pName = null,
+Object pCountryID = null,
+Object pCreatedAt = null,
+Object pComments = null,
+Object pUpdatedAt = null,
+Object pUSSDCode = null,
+Object pBankCode = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+ DataColumnParameter paramCountryID = new DataColumnParameter(defCountryID, pCountryID);
+ DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramUSSDCode = new DataColumnParameter(defUSSDCode, pUSSDCode);
+ DataColumnParameter paramBankCode = new DataColumnParameter(defBankCode, pBankCode);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [Name]={2},[CountryID]={3},[Comments]={4},[CreatedAt]={5},[UpdatedAt]={6},[USSDCode]={7},[BankCode]={8} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramName.getSQLQuotedValueForUpdate(),
+paramCountryID.getSQLQuotedValueForUpdate(),
+paramComments.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramUSSDCode.getSQLQuotedValueForUpdate(),
+paramBankCode.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

@@ -646,6 +646,256 @@ Int32 pUpdatedByID){
         }                   
 
 
+        public static int AddWithID(String pPersonnelNumber,
+Int32 pPersonID,
+Boolean pIsActive,
+DateTime pEmploymentDate,
+Boolean pIsSuperUser,
+Int32 pPositionID,
+Int32 pCreatedByID,
+DateTime pCreatedAt,
+Object pSalaryTypeID = null,
+Object pSalaryAmount = null,
+Object pUpdatedByID = null,
+Object pUpdatedAt = null,
+Object pDuties = null,
+Object pIsWebVisible = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramPersonnelNumber = new DataColumnParameter(defPersonnelNumber, pPersonnelNumber);
+                DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+                DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+                DataColumnParameter paramEmploymentDate = new DataColumnParameter(defEmploymentDate, pEmploymentDate);
+                DataColumnParameter paramIsSuperUser = new DataColumnParameter(defIsSuperUser, pIsSuperUser);
+                DataColumnParameter paramPositionID = new DataColumnParameter(defPositionID, pPositionID);
+                DataColumnParameter paramSalaryTypeID = new DataColumnParameter(defSalaryTypeID, pSalaryTypeID);
+                DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramDuties = new DataColumnParameter(defDuties, pDuties);
+                DataColumnParameter paramIsWebVisible = new DataColumnParameter(defIsWebVisible, pIsWebVisible);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramPersonnelNumber.getSQLQuotedValueForAdd(),
+paramPersonID.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramEmploymentDate.getSQLQuotedValueForAdd(),
+paramIsSuperUser.getSQLQuotedValueForAdd(),
+paramPositionID.getSQLQuotedValueForAdd(),
+paramSalaryTypeID.getSQLQuotedValueForAdd(),
+paramSalaryAmount.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramDuties.getSQLQuotedValueForAdd(),
+paramIsWebVisible.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,String pPersonnelNumber,
+Int32 pPersonID,
+Boolean pIsActive,
+DateTime pEmploymentDate,
+Boolean pIsSuperUser,
+Int32 pPositionID,
+Int32 pCreatedByID,
+DateTime pCreatedAt,
+Object pSalaryTypeID = null,
+Object pSalaryAmount = null,
+Object pUpdatedByID = null,
+Object pUpdatedAt = null,
+Object pDuties = null,
+Object pIsWebVisible = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramPersonnelNumber = new DataColumnParameter(defPersonnelNumber, pPersonnelNumber);
+DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+DataColumnParameter paramEmploymentDate = new DataColumnParameter(defEmploymentDate, pEmploymentDate);
+DataColumnParameter paramIsSuperUser = new DataColumnParameter(defIsSuperUser, pIsSuperUser);
+DataColumnParameter paramPositionID = new DataColumnParameter(defPositionID, pPositionID);
+DataColumnParameter paramSalaryTypeID = new DataColumnParameter(defSalaryTypeID, pSalaryTypeID);
+DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramDuties = new DataColumnParameter(defDuties, pDuties);
+DataColumnParameter paramIsWebVisible = new DataColumnParameter(defIsWebVisible, pIsWebVisible);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramPersonnelNumber.getSQLQuotedValueForAdd(),
+paramPersonID.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramEmploymentDate.getSQLQuotedValueForAdd(),
+paramIsSuperUser.getSQLQuotedValueForAdd(),
+paramPositionID.getSQLQuotedValueForAdd(),
+paramSalaryTypeID.getSQLQuotedValueForAdd(),
+paramSalaryAmount.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramDuties.getSQLQuotedValueForAdd(),
+paramIsWebVisible.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(String pPersonnelNumber,
+Int32 pPersonID,
+Boolean pIsActive,
+DateTime pEmploymentDate,
+Boolean pIsSuperUser,
+Int32 pPositionID,
+Int32 pCreatedByID,
+DateTime pCreatedAt,
+Object pSalaryTypeID= null,
+Object pSalaryAmount= null,
+Object pUpdatedByID= null,
+Object pUpdatedAt= null,
+Object pDuties= null,
+Object pIsWebVisible= null){
+
+        try{
+
+DataColumnParameter paramPersonnelNumber = new DataColumnParameter(defPersonnelNumber, pPersonnelNumber);
+DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+DataColumnParameter paramEmploymentDate = new DataColumnParameter(defEmploymentDate, pEmploymentDate);
+DataColumnParameter paramIsSuperUser = new DataColumnParameter(defIsSuperUser, pIsSuperUser);
+DataColumnParameter paramPositionID = new DataColumnParameter(defPositionID, pPositionID);
+DataColumnParameter paramSalaryTypeID = new DataColumnParameter(defSalaryTypeID, pSalaryTypeID);
+DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramDuties = new DataColumnParameter(defDuties, pDuties);
+DataColumnParameter paramIsWebVisible = new DataColumnParameter(defIsWebVisible, pIsWebVisible);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) ", TABLE_NAME,paramPersonnelNumber.getSQLQuotedValueForAdd(),
+paramPersonID.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramEmploymentDate.getSQLQuotedValueForAdd(),
+paramIsSuperUser.getSQLQuotedValueForAdd(),
+paramPositionID.getSQLQuotedValueForAdd(),
+paramSalaryTypeID.getSQLQuotedValueForAdd(),
+paramSalaryAmount.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramDuties.getSQLQuotedValueForAdd(),
+paramIsWebVisible.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pPersonnelNumber = null,
+Object pPersonID = null,
+Object pIsActive = null,
+Object pEmploymentDate = null,
+Object pIsSuperUser = null,
+Object pPositionID = null,
+Object pCreatedByID = null,
+Object pCreatedAt = null,
+Object pSalaryTypeID = null,
+Object pSalaryAmount = null,
+Object pUpdatedByID = null,
+Object pUpdatedAt = null,
+Object pDuties = null,
+Object pIsWebVisible = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramPersonnelNumber = new DataColumnParameter(defPersonnelNumber, pPersonnelNumber);
+ DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+ DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+ DataColumnParameter paramEmploymentDate = new DataColumnParameter(defEmploymentDate, pEmploymentDate);
+ DataColumnParameter paramIsSuperUser = new DataColumnParameter(defIsSuperUser, pIsSuperUser);
+ DataColumnParameter paramPositionID = new DataColumnParameter(defPositionID, pPositionID);
+ DataColumnParameter paramSalaryTypeID = new DataColumnParameter(defSalaryTypeID, pSalaryTypeID);
+ DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramDuties = new DataColumnParameter(defDuties, pDuties);
+ DataColumnParameter paramIsWebVisible = new DataColumnParameter(defIsWebVisible, pIsWebVisible);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [PersonnelNumber]={2},[PersonID]={3},[IsActive]={4},[EmploymentDate]={5},[IsSuperUser]={6},[PositionID]={7},[SalaryTypeID]={8},[SalaryAmount]={9},[CreatedByID]={10},[UpdatedByID]={11},[CreatedAt]={12},[UpdatedAt]={13},[Duties]={14},[IsWebVisible]={15} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPersonnelNumber.getSQLQuotedValueForUpdate(),
+paramPersonID.getSQLQuotedValueForUpdate(),
+paramIsActive.getSQLQuotedValueForUpdate(),
+paramEmploymentDate.getSQLQuotedValueForUpdate(),
+paramIsSuperUser.getSQLQuotedValueForUpdate(),
+paramPositionID.getSQLQuotedValueForUpdate(),
+paramSalaryTypeID.getSQLQuotedValueForUpdate(),
+paramSalaryAmount.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramUpdatedByID.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramDuties.getSQLQuotedValueForUpdate(),
+paramIsWebVisible.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

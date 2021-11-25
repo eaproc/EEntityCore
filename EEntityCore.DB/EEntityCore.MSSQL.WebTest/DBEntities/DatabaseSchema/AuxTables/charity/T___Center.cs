@@ -603,6 +603,232 @@ Int32 pUpdatedByID){
         }                   
 
 
+        public static int AddWithID(Int32 pBeneficiariesAvailableOnRegistration,
+Int32 pCenterStatusID,
+Int32 pYearFounded,
+Int32 pChurchCapacity,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pName = null,
+Object pAddress = null,
+Object pComments = null,
+Object pPictureStoredPath = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+                DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+                DataColumnParameter paramBeneficiariesAvailableOnRegistration = new DataColumnParameter(defBeneficiariesAvailableOnRegistration, pBeneficiariesAvailableOnRegistration);
+                DataColumnParameter paramCenterStatusID = new DataColumnParameter(defCenterStatusID, pCenterStatusID);
+                DataColumnParameter paramYearFounded = new DataColumnParameter(defYearFounded, pYearFounded);
+                DataColumnParameter paramChurchCapacity = new DataColumnParameter(defChurchCapacity, pChurchCapacity);
+                DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+                DataColumnParameter paramPictureStoredPath = new DataColumnParameter(defPictureStoredPath, pPictureStoredPath);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Address],[BeneficiariesAvailableOnRegistration],[CenterStatusID],[YearFounded],[ChurchCapacity],[Comments],[PictureStoredPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramName.getSQLQuotedValueForAdd(),
+paramAddress.getSQLQuotedValueForAdd(),
+paramBeneficiariesAvailableOnRegistration.getSQLQuotedValueForAdd(),
+paramCenterStatusID.getSQLQuotedValueForAdd(),
+paramYearFounded.getSQLQuotedValueForAdd(),
+paramChurchCapacity.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramPictureStoredPath.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pBeneficiariesAvailableOnRegistration,
+Int32 pCenterStatusID,
+Int32 pYearFounded,
+Int32 pChurchCapacity,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pName = null,
+Object pAddress = null,
+Object pComments = null,
+Object pPictureStoredPath = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+DataColumnParameter paramBeneficiariesAvailableOnRegistration = new DataColumnParameter(defBeneficiariesAvailableOnRegistration, pBeneficiariesAvailableOnRegistration);
+DataColumnParameter paramCenterStatusID = new DataColumnParameter(defCenterStatusID, pCenterStatusID);
+DataColumnParameter paramYearFounded = new DataColumnParameter(defYearFounded, pYearFounded);
+DataColumnParameter paramChurchCapacity = new DataColumnParameter(defChurchCapacity, pChurchCapacity);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramPictureStoredPath = new DataColumnParameter(defPictureStoredPath, pPictureStoredPath);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Address],[BeneficiariesAvailableOnRegistration],[CenterStatusID],[YearFounded],[ChurchCapacity],[Comments],[PictureStoredPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramName.getSQLQuotedValueForAdd(),
+paramAddress.getSQLQuotedValueForAdd(),
+paramBeneficiariesAvailableOnRegistration.getSQLQuotedValueForAdd(),
+paramCenterStatusID.getSQLQuotedValueForAdd(),
+paramYearFounded.getSQLQuotedValueForAdd(),
+paramChurchCapacity.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramPictureStoredPath.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pBeneficiariesAvailableOnRegistration,
+Int32 pCenterStatusID,
+Int32 pYearFounded,
+Int32 pChurchCapacity,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pName= null,
+Object pAddress= null,
+Object pComments= null,
+Object pPictureStoredPath= null){
+
+        try{
+
+DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+DataColumnParameter paramBeneficiariesAvailableOnRegistration = new DataColumnParameter(defBeneficiariesAvailableOnRegistration, pBeneficiariesAvailableOnRegistration);
+DataColumnParameter paramCenterStatusID = new DataColumnParameter(defCenterStatusID, pCenterStatusID);
+DataColumnParameter paramYearFounded = new DataColumnParameter(defYearFounded, pYearFounded);
+DataColumnParameter paramChurchCapacity = new DataColumnParameter(defChurchCapacity, pChurchCapacity);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramPictureStoredPath = new DataColumnParameter(defPictureStoredPath, pPictureStoredPath);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([Name],[Address],[BeneficiariesAvailableOnRegistration],[CenterStatusID],[YearFounded],[ChurchCapacity],[Comments],[PictureStoredPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) ", TABLE_NAME,paramName.getSQLQuotedValueForAdd(),
+paramAddress.getSQLQuotedValueForAdd(),
+paramBeneficiariesAvailableOnRegistration.getSQLQuotedValueForAdd(),
+paramCenterStatusID.getSQLQuotedValueForAdd(),
+paramYearFounded.getSQLQuotedValueForAdd(),
+paramChurchCapacity.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramPictureStoredPath.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pBeneficiariesAvailableOnRegistration = null,
+Object pCenterStatusID = null,
+Object pYearFounded = null,
+Object pChurchCapacity = null,
+Object pCreatedAt = null,
+Object pUpdatedAt = null,
+Object pCreatedByID = null,
+Object pUpdatedByID = null,
+Object pName = null,
+Object pAddress = null,
+Object pComments = null,
+Object pPictureStoredPath = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramName = new DataColumnParameter(defName, pName);
+ DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+ DataColumnParameter paramBeneficiariesAvailableOnRegistration = new DataColumnParameter(defBeneficiariesAvailableOnRegistration, pBeneficiariesAvailableOnRegistration);
+ DataColumnParameter paramCenterStatusID = new DataColumnParameter(defCenterStatusID, pCenterStatusID);
+ DataColumnParameter paramYearFounded = new DataColumnParameter(defYearFounded, pYearFounded);
+ DataColumnParameter paramChurchCapacity = new DataColumnParameter(defChurchCapacity, pChurchCapacity);
+ DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+ DataColumnParameter paramPictureStoredPath = new DataColumnParameter(defPictureStoredPath, pPictureStoredPath);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [Name]={2},[Address]={3},[BeneficiariesAvailableOnRegistration]={4},[CenterStatusID]={5},[YearFounded]={6},[ChurchCapacity]={7},[Comments]={8},[PictureStoredPath]={9},[CreatedAt]={10},[UpdatedAt]={11},[CreatedByID]={12},[UpdatedByID]={13} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramName.getSQLQuotedValueForUpdate(),
+paramAddress.getSQLQuotedValueForUpdate(),
+paramBeneficiariesAvailableOnRegistration.getSQLQuotedValueForUpdate(),
+paramCenterStatusID.getSQLQuotedValueForUpdate(),
+paramYearFounded.getSQLQuotedValueForUpdate(),
+paramChurchCapacity.getSQLQuotedValueForUpdate(),
+paramComments.getSQLQuotedValueForUpdate(),
+paramPictureStoredPath.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramUpdatedByID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

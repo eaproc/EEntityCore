@@ -605,6 +605,244 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(Int32 pSMSDeliveryStatusID,
+String pSender,
+String pReceiver,
+String pMessage,
+DateTime pCreatedAt,
+String pGateway,
+Object pUID = null,
+Object pAPICreateResponse = null,
+Object pAPIUpdateResponse = null,
+Object pSMSCostNaira = null,
+Object pUpdatedAt = null,
+Object pExceptionMessage = null,
+Object pExceptionStackTrace = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramSMSDeliveryStatusID = new DataColumnParameter(defSMSDeliveryStatusID, pSMSDeliveryStatusID);
+                DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
+                DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
+                DataColumnParameter paramMessage = new DataColumnParameter(defMessage, pMessage);
+                DataColumnParameter paramUID = new DataColumnParameter(defUID, pUID);
+                DataColumnParameter paramAPICreateResponse = new DataColumnParameter(defAPICreateResponse, pAPICreateResponse);
+                DataColumnParameter paramAPIUpdateResponse = new DataColumnParameter(defAPIUpdateResponse, pAPIUpdateResponse);
+                DataColumnParameter paramSMSCostNaira = new DataColumnParameter(defSMSCostNaira, pSMSCostNaira);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
+                DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
+                DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramSMSDeliveryStatusID.getSQLQuotedValueForAdd(),
+paramSender.getSQLQuotedValueForAdd(),
+paramReceiver.getSQLQuotedValueForAdd(),
+paramMessage.getSQLQuotedValueForAdd(),
+paramUID.getSQLQuotedValueForAdd(),
+paramAPICreateResponse.getSQLQuotedValueForAdd(),
+paramAPIUpdateResponse.getSQLQuotedValueForAdd(),
+paramSMSCostNaira.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramExceptionMessage.getSQLQuotedValueForAdd(),
+paramExceptionStackTrace.getSQLQuotedValueForAdd(),
+paramGateway.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pSMSDeliveryStatusID,
+String pSender,
+String pReceiver,
+String pMessage,
+DateTime pCreatedAt,
+String pGateway,
+Object pUID = null,
+Object pAPICreateResponse = null,
+Object pAPIUpdateResponse = null,
+Object pSMSCostNaira = null,
+Object pUpdatedAt = null,
+Object pExceptionMessage = null,
+Object pExceptionStackTrace = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramSMSDeliveryStatusID = new DataColumnParameter(defSMSDeliveryStatusID, pSMSDeliveryStatusID);
+DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
+DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
+DataColumnParameter paramMessage = new DataColumnParameter(defMessage, pMessage);
+DataColumnParameter paramUID = new DataColumnParameter(defUID, pUID);
+DataColumnParameter paramAPICreateResponse = new DataColumnParameter(defAPICreateResponse, pAPICreateResponse);
+DataColumnParameter paramAPIUpdateResponse = new DataColumnParameter(defAPIUpdateResponse, pAPIUpdateResponse);
+DataColumnParameter paramSMSCostNaira = new DataColumnParameter(defSMSCostNaira, pSMSCostNaira);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
+DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
+DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramSMSDeliveryStatusID.getSQLQuotedValueForAdd(),
+paramSender.getSQLQuotedValueForAdd(),
+paramReceiver.getSQLQuotedValueForAdd(),
+paramMessage.getSQLQuotedValueForAdd(),
+paramUID.getSQLQuotedValueForAdd(),
+paramAPICreateResponse.getSQLQuotedValueForAdd(),
+paramAPIUpdateResponse.getSQLQuotedValueForAdd(),
+paramSMSCostNaira.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramExceptionMessage.getSQLQuotedValueForAdd(),
+paramExceptionStackTrace.getSQLQuotedValueForAdd(),
+paramGateway.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pSMSDeliveryStatusID,
+String pSender,
+String pReceiver,
+String pMessage,
+DateTime pCreatedAt,
+String pGateway,
+Object pUID= null,
+Object pAPICreateResponse= null,
+Object pAPIUpdateResponse= null,
+Object pSMSCostNaira= null,
+Object pUpdatedAt= null,
+Object pExceptionMessage= null,
+Object pExceptionStackTrace= null){
+
+        try{
+
+DataColumnParameter paramSMSDeliveryStatusID = new DataColumnParameter(defSMSDeliveryStatusID, pSMSDeliveryStatusID);
+DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
+DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
+DataColumnParameter paramMessage = new DataColumnParameter(defMessage, pMessage);
+DataColumnParameter paramUID = new DataColumnParameter(defUID, pUID);
+DataColumnParameter paramAPICreateResponse = new DataColumnParameter(defAPICreateResponse, pAPICreateResponse);
+DataColumnParameter paramAPIUpdateResponse = new DataColumnParameter(defAPIUpdateResponse, pAPIUpdateResponse);
+DataColumnParameter paramSMSCostNaira = new DataColumnParameter(defSMSCostNaira, pSMSCostNaira);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
+DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
+DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramSMSDeliveryStatusID.getSQLQuotedValueForAdd(),
+paramSender.getSQLQuotedValueForAdd(),
+paramReceiver.getSQLQuotedValueForAdd(),
+paramMessage.getSQLQuotedValueForAdd(),
+paramUID.getSQLQuotedValueForAdd(),
+paramAPICreateResponse.getSQLQuotedValueForAdd(),
+paramAPIUpdateResponse.getSQLQuotedValueForAdd(),
+paramSMSCostNaira.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramExceptionMessage.getSQLQuotedValueForAdd(),
+paramExceptionStackTrace.getSQLQuotedValueForAdd(),
+paramGateway.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pSMSDeliveryStatusID = null,
+Object pSender = null,
+Object pReceiver = null,
+Object pMessage = null,
+Object pCreatedAt = null,
+Object pGateway = null,
+Object pUID = null,
+Object pAPICreateResponse = null,
+Object pAPIUpdateResponse = null,
+Object pSMSCostNaira = null,
+Object pUpdatedAt = null,
+Object pExceptionMessage = null,
+Object pExceptionStackTrace = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramSMSDeliveryStatusID = new DataColumnParameter(defSMSDeliveryStatusID, pSMSDeliveryStatusID);
+ DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
+ DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
+ DataColumnParameter paramMessage = new DataColumnParameter(defMessage, pMessage);
+ DataColumnParameter paramUID = new DataColumnParameter(defUID, pUID);
+ DataColumnParameter paramAPICreateResponse = new DataColumnParameter(defAPICreateResponse, pAPICreateResponse);
+ DataColumnParameter paramAPIUpdateResponse = new DataColumnParameter(defAPIUpdateResponse, pAPIUpdateResponse);
+ DataColumnParameter paramSMSCostNaira = new DataColumnParameter(defSMSCostNaira, pSMSCostNaira);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
+ DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
+ DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [SMSDeliveryStatusID]={2},[Sender]={3},[Receiver]={4},[Message]={5},[UID]={6},[APICreateResponse]={7},[APIUpdateResponse]={8},[SMSCostNaira]={9},[CreatedAt]={10},[UpdatedAt]={11},[ExceptionMessage]={12},[ExceptionStackTrace]={13},[Gateway]={14} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramSMSDeliveryStatusID.getSQLQuotedValueForUpdate(),
+paramSender.getSQLQuotedValueForUpdate(),
+paramReceiver.getSQLQuotedValueForUpdate(),
+paramMessage.getSQLQuotedValueForUpdate(),
+paramUID.getSQLQuotedValueForUpdate(),
+paramAPICreateResponse.getSQLQuotedValueForUpdate(),
+paramAPIUpdateResponse.getSQLQuotedValueForUpdate(),
+paramSMSCostNaira.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramExceptionMessage.getSQLQuotedValueForUpdate(),
+paramExceptionStackTrace.getSQLQuotedValueForUpdate(),
+paramGateway.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

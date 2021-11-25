@@ -567,6 +567,196 @@ Int32 pDataMonitorID){
         }                   
 
 
+        public static int AddWithID(String pRequest,
+Int32 pExpenditureCategoryID,
+Decimal pAmount,
+DateTime pDeadline,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Int32 pBeneficiaryID,
+Object pTrackingID = null,
+Object pDataMonitorID = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramRequest = new DataColumnParameter(defRequest, pRequest);
+                DataColumnParameter paramExpenditureCategoryID = new DataColumnParameter(defExpenditureCategoryID, pExpenditureCategoryID);
+                DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+                DataColumnParameter paramDeadline = new DataColumnParameter(defDeadline, pDeadline);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+                DataColumnParameter paramTrackingID = new DataColumnParameter(defTrackingID, pTrackingID);
+                DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Request],[ExpenditureCategoryID],[Amount],[Deadline],[CreatedAt],[CreatedByID],[BeneficiaryID],[TrackingID],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramRequest.getSQLQuotedValueForAdd(),
+paramExpenditureCategoryID.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramDeadline.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramBeneficiaryID.getSQLQuotedValueForAdd(),
+paramTrackingID.getSQLQuotedValueForAdd(),
+paramDataMonitorID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,String pRequest,
+Int32 pExpenditureCategoryID,
+Decimal pAmount,
+DateTime pDeadline,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Int32 pBeneficiaryID,
+Object pTrackingID = null,
+Object pDataMonitorID = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramRequest = new DataColumnParameter(defRequest, pRequest);
+DataColumnParameter paramExpenditureCategoryID = new DataColumnParameter(defExpenditureCategoryID, pExpenditureCategoryID);
+DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+DataColumnParameter paramDeadline = new DataColumnParameter(defDeadline, pDeadline);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+DataColumnParameter paramTrackingID = new DataColumnParameter(defTrackingID, pTrackingID);
+DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Request],[ExpenditureCategoryID],[Amount],[Deadline],[CreatedAt],[CreatedByID],[BeneficiaryID],[TrackingID],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramRequest.getSQLQuotedValueForAdd(),
+paramExpenditureCategoryID.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramDeadline.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramBeneficiaryID.getSQLQuotedValueForAdd(),
+paramTrackingID.getSQLQuotedValueForAdd(),
+paramDataMonitorID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(String pRequest,
+Int32 pExpenditureCategoryID,
+Decimal pAmount,
+DateTime pDeadline,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Int32 pBeneficiaryID,
+Object pTrackingID= null,
+Object pDataMonitorID= null){
+
+        try{
+
+DataColumnParameter paramRequest = new DataColumnParameter(defRequest, pRequest);
+DataColumnParameter paramExpenditureCategoryID = new DataColumnParameter(defExpenditureCategoryID, pExpenditureCategoryID);
+DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+DataColumnParameter paramDeadline = new DataColumnParameter(defDeadline, pDeadline);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+DataColumnParameter paramTrackingID = new DataColumnParameter(defTrackingID, pTrackingID);
+DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([Request],[ExpenditureCategoryID],[Amount],[Deadline],[CreatedAt],[CreatedByID],[BeneficiaryID],[TrackingID],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramRequest.getSQLQuotedValueForAdd(),
+paramExpenditureCategoryID.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramDeadline.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramBeneficiaryID.getSQLQuotedValueForAdd(),
+paramTrackingID.getSQLQuotedValueForAdd(),
+paramDataMonitorID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pRequest = null,
+Object pExpenditureCategoryID = null,
+Object pAmount = null,
+Object pDeadline = null,
+Object pCreatedAt = null,
+Object pCreatedByID = null,
+Object pBeneficiaryID = null,
+Object pTrackingID = null,
+Object pDataMonitorID = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramRequest = new DataColumnParameter(defRequest, pRequest);
+ DataColumnParameter paramExpenditureCategoryID = new DataColumnParameter(defExpenditureCategoryID, pExpenditureCategoryID);
+ DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+ DataColumnParameter paramDeadline = new DataColumnParameter(defDeadline, pDeadline);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+ DataColumnParameter paramTrackingID = new DataColumnParameter(defTrackingID, pTrackingID);
+ DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [Request]={2},[ExpenditureCategoryID]={3},[Amount]={4},[Deadline]={5},[CreatedAt]={6},[CreatedByID]={7},[BeneficiaryID]={8},[TrackingID]={9},[DataMonitorID]={10} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramRequest.getSQLQuotedValueForUpdate(),
+paramExpenditureCategoryID.getSQLQuotedValueForUpdate(),
+paramAmount.getSQLQuotedValueForUpdate(),
+paramDeadline.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramBeneficiaryID.getSQLQuotedValueForUpdate(),
+paramTrackingID.getSQLQuotedValueForUpdate(),
+paramDataMonitorID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

@@ -538,6 +538,184 @@ Int32 pPersonID){
         }                   
 
 
+        public static int AddWithID(String pUsername,
+Int32 pPersonID,
+String pUserPassword,
+Boolean pIsActive,
+DateTime pCreatedAt,
+Object pRememberToken = null,
+Object pUpdatedAt = null,
+Object pResetModeCarrier = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramUsername = new DataColumnParameter(defUsername, pUsername);
+                DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+                DataColumnParameter paramUserPassword = new DataColumnParameter(defUserPassword, pUserPassword);
+                DataColumnParameter paramRememberToken = new DataColumnParameter(defRememberToken, pRememberToken);
+                DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramResetModeCarrier = new DataColumnParameter(defResetModeCarrier, pResetModeCarrier);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramUsername.getSQLQuotedValueForAdd(),
+paramPersonID.getSQLQuotedValueForAdd(),
+paramUserPassword.getSQLQuotedValueForAdd(),
+paramRememberToken.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramResetModeCarrier.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,String pUsername,
+Int32 pPersonID,
+String pUserPassword,
+Boolean pIsActive,
+DateTime pCreatedAt,
+Object pRememberToken = null,
+Object pUpdatedAt = null,
+Object pResetModeCarrier = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramUsername = new DataColumnParameter(defUsername, pUsername);
+DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+DataColumnParameter paramUserPassword = new DataColumnParameter(defUserPassword, pUserPassword);
+DataColumnParameter paramRememberToken = new DataColumnParameter(defRememberToken, pRememberToken);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramResetModeCarrier = new DataColumnParameter(defResetModeCarrier, pResetModeCarrier);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramUsername.getSQLQuotedValueForAdd(),
+paramPersonID.getSQLQuotedValueForAdd(),
+paramUserPassword.getSQLQuotedValueForAdd(),
+paramRememberToken.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramResetModeCarrier.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(String pUsername,
+Int32 pPersonID,
+String pUserPassword,
+Boolean pIsActive,
+DateTime pCreatedAt,
+Object pRememberToken= null,
+Object pUpdatedAt= null,
+Object pResetModeCarrier= null){
+
+        try{
+
+DataColumnParameter paramUsername = new DataColumnParameter(defUsername, pUsername);
+DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+DataColumnParameter paramUserPassword = new DataColumnParameter(defUserPassword, pUserPassword);
+DataColumnParameter paramRememberToken = new DataColumnParameter(defRememberToken, pRememberToken);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramResetModeCarrier = new DataColumnParameter(defResetModeCarrier, pResetModeCarrier);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) ", TABLE_NAME,paramUsername.getSQLQuotedValueForAdd(),
+paramPersonID.getSQLQuotedValueForAdd(),
+paramUserPassword.getSQLQuotedValueForAdd(),
+paramRememberToken.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramResetModeCarrier.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pUsername = null,
+Object pPersonID = null,
+Object pUserPassword = null,
+Object pIsActive = null,
+Object pCreatedAt = null,
+Object pRememberToken = null,
+Object pUpdatedAt = null,
+Object pResetModeCarrier = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramUsername = new DataColumnParameter(defUsername, pUsername);
+ DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+ DataColumnParameter paramUserPassword = new DataColumnParameter(defUserPassword, pUserPassword);
+ DataColumnParameter paramRememberToken = new DataColumnParameter(defRememberToken, pRememberToken);
+ DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramResetModeCarrier = new DataColumnParameter(defResetModeCarrier, pResetModeCarrier);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [Username]={2},[PersonID]={3},[UserPassword]={4},[RememberToken]={5},[IsActive]={6},[CreatedAt]={7},[UpdatedAt]={8},[ResetModeCarrier]={9} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramUsername.getSQLQuotedValueForUpdate(),
+paramPersonID.getSQLQuotedValueForUpdate(),
+paramUserPassword.getSQLQuotedValueForUpdate(),
+paramRememberToken.getSQLQuotedValueForUpdate(),
+paramIsActive.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramResetModeCarrier.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

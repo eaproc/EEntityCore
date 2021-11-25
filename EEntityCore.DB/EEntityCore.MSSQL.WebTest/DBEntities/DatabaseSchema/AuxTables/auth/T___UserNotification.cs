@@ -563,6 +563,208 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(Int32 pUserID,
+String pTitle,
+DateTime pCreatedAt,
+String pTargetURL,
+Object pQuickNote = null,
+Object pDescription = null,
+Object pIconClass = null,
+Object pHeadingColorClass = null,
+Object pReadAt = null,
+Object pIdentifier = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+                DataColumnParameter paramTitle = new DataColumnParameter(defTitle, pTitle);
+                DataColumnParameter paramQuickNote = new DataColumnParameter(defQuickNote, pQuickNote);
+                DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+                DataColumnParameter paramIconClass = new DataColumnParameter(defIconClass, pIconClass);
+                DataColumnParameter paramHeadingColorClass = new DataColumnParameter(defHeadingColorClass, pHeadingColorClass);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramReadAt = new DataColumnParameter(defReadAt, pReadAt);
+                DataColumnParameter paramIdentifier = new DataColumnParameter(defIdentifier, pIdentifier);
+                DataColumnParameter paramTargetURL = new DataColumnParameter(defTargetURL, pTargetURL);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[Title],[QuickNote],[Description],[IconClass],[HeadingColorClass],[CreatedAt],[ReadAt],[Identifier],[TargetURL]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd(),
+paramTitle.getSQLQuotedValueForAdd(),
+paramQuickNote.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramIconClass.getSQLQuotedValueForAdd(),
+paramHeadingColorClass.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramReadAt.getSQLQuotedValueForAdd(),
+paramIdentifier.getSQLQuotedValueForAdd(),
+paramTargetURL.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pUserID,
+String pTitle,
+DateTime pCreatedAt,
+String pTargetURL,
+Object pQuickNote = null,
+Object pDescription = null,
+Object pIconClass = null,
+Object pHeadingColorClass = null,
+Object pReadAt = null,
+Object pIdentifier = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+DataColumnParameter paramTitle = new DataColumnParameter(defTitle, pTitle);
+DataColumnParameter paramQuickNote = new DataColumnParameter(defQuickNote, pQuickNote);
+DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+DataColumnParameter paramIconClass = new DataColumnParameter(defIconClass, pIconClass);
+DataColumnParameter paramHeadingColorClass = new DataColumnParameter(defHeadingColorClass, pHeadingColorClass);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramReadAt = new DataColumnParameter(defReadAt, pReadAt);
+DataColumnParameter paramIdentifier = new DataColumnParameter(defIdentifier, pIdentifier);
+DataColumnParameter paramTargetURL = new DataColumnParameter(defTargetURL, pTargetURL);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[Title],[QuickNote],[Description],[IconClass],[HeadingColorClass],[CreatedAt],[ReadAt],[Identifier],[TargetURL]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd(),
+paramTitle.getSQLQuotedValueForAdd(),
+paramQuickNote.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramIconClass.getSQLQuotedValueForAdd(),
+paramHeadingColorClass.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramReadAt.getSQLQuotedValueForAdd(),
+paramIdentifier.getSQLQuotedValueForAdd(),
+paramTargetURL.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pUserID,
+String pTitle,
+DateTime pCreatedAt,
+String pTargetURL,
+Object pQuickNote= null,
+Object pDescription= null,
+Object pIconClass= null,
+Object pHeadingColorClass= null,
+Object pReadAt= null,
+Object pIdentifier= null){
+
+        try{
+
+DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+DataColumnParameter paramTitle = new DataColumnParameter(defTitle, pTitle);
+DataColumnParameter paramQuickNote = new DataColumnParameter(defQuickNote, pQuickNote);
+DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+DataColumnParameter paramIconClass = new DataColumnParameter(defIconClass, pIconClass);
+DataColumnParameter paramHeadingColorClass = new DataColumnParameter(defHeadingColorClass, pHeadingColorClass);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramReadAt = new DataColumnParameter(defReadAt, pReadAt);
+DataColumnParameter paramIdentifier = new DataColumnParameter(defIdentifier, pIdentifier);
+DataColumnParameter paramTargetURL = new DataColumnParameter(defTargetURL, pTargetURL);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([UserID],[Title],[QuickNote],[Description],[IconClass],[HeadingColorClass],[CreatedAt],[ReadAt],[Identifier],[TargetURL]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,paramUserID.getSQLQuotedValueForAdd(),
+paramTitle.getSQLQuotedValueForAdd(),
+paramQuickNote.getSQLQuotedValueForAdd(),
+paramDescription.getSQLQuotedValueForAdd(),
+paramIconClass.getSQLQuotedValueForAdd(),
+paramHeadingColorClass.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramReadAt.getSQLQuotedValueForAdd(),
+paramIdentifier.getSQLQuotedValueForAdd(),
+paramTargetURL.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pUserID = null,
+Object pTitle = null,
+Object pCreatedAt = null,
+Object pTargetURL = null,
+Object pQuickNote = null,
+Object pDescription = null,
+Object pIconClass = null,
+Object pHeadingColorClass = null,
+Object pReadAt = null,
+Object pIdentifier = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+ DataColumnParameter paramTitle = new DataColumnParameter(defTitle, pTitle);
+ DataColumnParameter paramQuickNote = new DataColumnParameter(defQuickNote, pQuickNote);
+ DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
+ DataColumnParameter paramIconClass = new DataColumnParameter(defIconClass, pIconClass);
+ DataColumnParameter paramHeadingColorClass = new DataColumnParameter(defHeadingColorClass, pHeadingColorClass);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramReadAt = new DataColumnParameter(defReadAt, pReadAt);
+ DataColumnParameter paramIdentifier = new DataColumnParameter(defIdentifier, pIdentifier);
+ DataColumnParameter paramTargetURL = new DataColumnParameter(defTargetURL, pTargetURL);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [UserID]={2},[Title]={3},[QuickNote]={4},[Description]={5},[IconClass]={6},[HeadingColorClass]={7},[CreatedAt]={8},[ReadAt]={9},[Identifier]={10},[TargetURL]={11} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramUserID.getSQLQuotedValueForUpdate(),
+paramTitle.getSQLQuotedValueForUpdate(),
+paramQuickNote.getSQLQuotedValueForUpdate(),
+paramDescription.getSQLQuotedValueForUpdate(),
+paramIconClass.getSQLQuotedValueForUpdate(),
+paramHeadingColorClass.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramReadAt.getSQLQuotedValueForUpdate(),
+paramIdentifier.getSQLQuotedValueForUpdate(),
+paramTargetURL.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

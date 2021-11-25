@@ -513,6 +513,160 @@ Int32 pProceedingStatusID){
         }                   
 
 
+        public static int AddWithID(Int32 pCronjobID,
+Int32 pProceedingStatusID,
+Boolean pIsSuccessful,
+DateTime pCreatedAt,
+Object pComments = null,
+Object pNextExpectedExecutionTime = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramCronjobID = new DataColumnParameter(defCronjobID, pCronjobID);
+                DataColumnParameter paramProceedingStatusID = new DataColumnParameter(defProceedingStatusID, pProceedingStatusID);
+                DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+                DataColumnParameter paramNextExpectedExecutionTime = new DataColumnParameter(defNextExpectedExecutionTime, pNextExpectedExecutionTime);
+                DataColumnParameter paramIsSuccessful = new DataColumnParameter(defIsSuccessful, pIsSuccessful);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CronjobID],[ProceedingStatusID],[Comments],[NextExpectedExecutionTime],[IsSuccessful],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCronjobID.getSQLQuotedValueForAdd(),
+paramProceedingStatusID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramNextExpectedExecutionTime.getSQLQuotedValueForAdd(),
+paramIsSuccessful.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pCronjobID,
+Int32 pProceedingStatusID,
+Boolean pIsSuccessful,
+DateTime pCreatedAt,
+Object pComments = null,
+Object pNextExpectedExecutionTime = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramCronjobID = new DataColumnParameter(defCronjobID, pCronjobID);
+DataColumnParameter paramProceedingStatusID = new DataColumnParameter(defProceedingStatusID, pProceedingStatusID);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramNextExpectedExecutionTime = new DataColumnParameter(defNextExpectedExecutionTime, pNextExpectedExecutionTime);
+DataColumnParameter paramIsSuccessful = new DataColumnParameter(defIsSuccessful, pIsSuccessful);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CronjobID],[ProceedingStatusID],[Comments],[NextExpectedExecutionTime],[IsSuccessful],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCronjobID.getSQLQuotedValueForAdd(),
+paramProceedingStatusID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramNextExpectedExecutionTime.getSQLQuotedValueForAdd(),
+paramIsSuccessful.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pCronjobID,
+Int32 pProceedingStatusID,
+Boolean pIsSuccessful,
+DateTime pCreatedAt,
+Object pComments= null,
+Object pNextExpectedExecutionTime= null){
+
+        try{
+
+DataColumnParameter paramCronjobID = new DataColumnParameter(defCronjobID, pCronjobID);
+DataColumnParameter paramProceedingStatusID = new DataColumnParameter(defProceedingStatusID, pProceedingStatusID);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramNextExpectedExecutionTime = new DataColumnParameter(defNextExpectedExecutionTime, pNextExpectedExecutionTime);
+DataColumnParameter paramIsSuccessful = new DataColumnParameter(defIsSuccessful, pIsSuccessful);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([CronjobID],[ProceedingStatusID],[Comments],[NextExpectedExecutionTime],[IsSuccessful],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6}) ", TABLE_NAME,paramCronjobID.getSQLQuotedValueForAdd(),
+paramProceedingStatusID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramNextExpectedExecutionTime.getSQLQuotedValueForAdd(),
+paramIsSuccessful.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pCronjobID = null,
+Object pProceedingStatusID = null,
+Object pIsSuccessful = null,
+Object pCreatedAt = null,
+Object pComments = null,
+Object pNextExpectedExecutionTime = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramCronjobID = new DataColumnParameter(defCronjobID, pCronjobID);
+ DataColumnParameter paramProceedingStatusID = new DataColumnParameter(defProceedingStatusID, pProceedingStatusID);
+ DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+ DataColumnParameter paramNextExpectedExecutionTime = new DataColumnParameter(defNextExpectedExecutionTime, pNextExpectedExecutionTime);
+ DataColumnParameter paramIsSuccessful = new DataColumnParameter(defIsSuccessful, pIsSuccessful);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [CronjobID]={2},[ProceedingStatusID]={3},[Comments]={4},[NextExpectedExecutionTime]={5},[IsSuccessful]={6},[CreatedAt]={7} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCronjobID.getSQLQuotedValueForUpdate(),
+paramProceedingStatusID.getSQLQuotedValueForUpdate(),
+paramComments.getSQLQuotedValueForUpdate(),
+paramNextExpectedExecutionTime.getSQLQuotedValueForUpdate(),
+paramIsSuccessful.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

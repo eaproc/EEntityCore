@@ -493,6 +493,148 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(Int32 pPaymentTransactionID,
+String pStudentNumber,
+String pFirstName,
+String pLastName,
+Decimal pPaymentRequiredWithoutCharges){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramPaymentTransactionID = new DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID);
+                DataColumnParameter paramStudentNumber = new DataColumnParameter(defStudentNumber, pStudentNumber);
+                DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+                DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+                DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentTransactionID],[StudentNumber],[FirstName],[LastName],[PaymentRequiredWithoutCharges]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramPaymentTransactionID.getSQLQuotedValueForAdd(),
+paramStudentNumber.getSQLQuotedValueForAdd(),
+paramFirstName.getSQLQuotedValueForAdd(),
+paramLastName.getSQLQuotedValueForAdd(),
+paramPaymentRequiredWithoutCharges.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pPaymentTransactionID,
+String pStudentNumber,
+String pFirstName,
+String pLastName,
+Decimal pPaymentRequiredWithoutCharges){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramPaymentTransactionID = new DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID);
+DataColumnParameter paramStudentNumber = new DataColumnParameter(defStudentNumber, pStudentNumber);
+DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentTransactionID],[StudentNumber],[FirstName],[LastName],[PaymentRequiredWithoutCharges]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramPaymentTransactionID.getSQLQuotedValueForAdd(),
+paramStudentNumber.getSQLQuotedValueForAdd(),
+paramFirstName.getSQLQuotedValueForAdd(),
+paramLastName.getSQLQuotedValueForAdd(),
+paramPaymentRequiredWithoutCharges.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pPaymentTransactionID,
+String pStudentNumber,
+String pFirstName,
+String pLastName,
+Decimal pPaymentRequiredWithoutCharges){
+
+        try{
+
+DataColumnParameter paramPaymentTransactionID = new DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID);
+DataColumnParameter paramStudentNumber = new DataColumnParameter(defStudentNumber, pStudentNumber);
+DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([PaymentTransactionID],[StudentNumber],[FirstName],[LastName],[PaymentRequiredWithoutCharges]) VALUES({1},{2},{3},{4},{5}) ", TABLE_NAME,paramPaymentTransactionID.getSQLQuotedValueForAdd(),
+paramStudentNumber.getSQLQuotedValueForAdd(),
+paramFirstName.getSQLQuotedValueForAdd(),
+paramLastName.getSQLQuotedValueForAdd(),
+paramPaymentRequiredWithoutCharges.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pPaymentTransactionID = null,
+Object pStudentNumber = null,
+Object pFirstName = null,
+Object pLastName = null,
+Object pPaymentRequiredWithoutCharges = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramPaymentTransactionID = new DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID);
+ DataColumnParameter paramStudentNumber = new DataColumnParameter(defStudentNumber, pStudentNumber);
+ DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
+ DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
+ DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [PaymentTransactionID]={2},[StudentNumber]={3},[FirstName]={4},[LastName]={5},[PaymentRequiredWithoutCharges]={6} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPaymentTransactionID.getSQLQuotedValueForUpdate(),
+paramStudentNumber.getSQLQuotedValueForUpdate(),
+paramFirstName.getSQLQuotedValueForUpdate(),
+paramLastName.getSQLQuotedValueForUpdate(),
+paramPaymentRequiredWithoutCharges.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

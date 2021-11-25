@@ -666,6 +666,280 @@ Int32 pUpdatedByID){
         }                   
 
 
+        public static int AddWithID(Int32 pCenterVisitationID,
+Int32 pBeneficiaryID,
+Boolean pIsPresent,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pPictureStoredPath = null,
+Object pEducation = null,
+Object pEmotion = null,
+Object pHealth = null,
+Object pSpiritual = null,
+Object pSocial = null,
+Object pTalent = null,
+Object pObservations = null,
+Object pChristSmilesFeedBack = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramCenterVisitationID = new DataColumnParameter(defCenterVisitationID, pCenterVisitationID);
+                DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+                DataColumnParameter paramIsPresent = new DataColumnParameter(defIsPresent, pIsPresent);
+                DataColumnParameter paramPictureStoredPath = new DataColumnParameter(defPictureStoredPath, pPictureStoredPath);
+                DataColumnParameter paramEducation = new DataColumnParameter(defEducation, pEducation);
+                DataColumnParameter paramEmotion = new DataColumnParameter(defEmotion, pEmotion);
+                DataColumnParameter paramHealth = new DataColumnParameter(defHealth, pHealth);
+                DataColumnParameter paramSpiritual = new DataColumnParameter(defSpiritual, pSpiritual);
+                DataColumnParameter paramSocial = new DataColumnParameter(defSocial, pSocial);
+                DataColumnParameter paramTalent = new DataColumnParameter(defTalent, pTalent);
+                DataColumnParameter paramObservations = new DataColumnParameter(defObservations, pObservations);
+                DataColumnParameter paramChristSmilesFeedBack = new DataColumnParameter(defChristSmilesFeedBack, pChristSmilesFeedBack);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterVisitationID],[BeneficiaryID],[IsPresent],[PictureStoredPath],[Education],[Emotion],[Health],[Spiritual],[Social],[Talent],[Observations],[ChristSmilesFeedBack],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCenterVisitationID.getSQLQuotedValueForAdd(),
+paramBeneficiaryID.getSQLQuotedValueForAdd(),
+paramIsPresent.getSQLQuotedValueForAdd(),
+paramPictureStoredPath.getSQLQuotedValueForAdd(),
+paramEducation.getSQLQuotedValueForAdd(),
+paramEmotion.getSQLQuotedValueForAdd(),
+paramHealth.getSQLQuotedValueForAdd(),
+paramSpiritual.getSQLQuotedValueForAdd(),
+paramSocial.getSQLQuotedValueForAdd(),
+paramTalent.getSQLQuotedValueForAdd(),
+paramObservations.getSQLQuotedValueForAdd(),
+paramChristSmilesFeedBack.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pCenterVisitationID,
+Int32 pBeneficiaryID,
+Boolean pIsPresent,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pPictureStoredPath = null,
+Object pEducation = null,
+Object pEmotion = null,
+Object pHealth = null,
+Object pSpiritual = null,
+Object pSocial = null,
+Object pTalent = null,
+Object pObservations = null,
+Object pChristSmilesFeedBack = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramCenterVisitationID = new DataColumnParameter(defCenterVisitationID, pCenterVisitationID);
+DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+DataColumnParameter paramIsPresent = new DataColumnParameter(defIsPresent, pIsPresent);
+DataColumnParameter paramPictureStoredPath = new DataColumnParameter(defPictureStoredPath, pPictureStoredPath);
+DataColumnParameter paramEducation = new DataColumnParameter(defEducation, pEducation);
+DataColumnParameter paramEmotion = new DataColumnParameter(defEmotion, pEmotion);
+DataColumnParameter paramHealth = new DataColumnParameter(defHealth, pHealth);
+DataColumnParameter paramSpiritual = new DataColumnParameter(defSpiritual, pSpiritual);
+DataColumnParameter paramSocial = new DataColumnParameter(defSocial, pSocial);
+DataColumnParameter paramTalent = new DataColumnParameter(defTalent, pTalent);
+DataColumnParameter paramObservations = new DataColumnParameter(defObservations, pObservations);
+DataColumnParameter paramChristSmilesFeedBack = new DataColumnParameter(defChristSmilesFeedBack, pChristSmilesFeedBack);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterVisitationID],[BeneficiaryID],[IsPresent],[PictureStoredPath],[Education],[Emotion],[Health],[Spiritual],[Social],[Talent],[Observations],[ChristSmilesFeedBack],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCenterVisitationID.getSQLQuotedValueForAdd(),
+paramBeneficiaryID.getSQLQuotedValueForAdd(),
+paramIsPresent.getSQLQuotedValueForAdd(),
+paramPictureStoredPath.getSQLQuotedValueForAdd(),
+paramEducation.getSQLQuotedValueForAdd(),
+paramEmotion.getSQLQuotedValueForAdd(),
+paramHealth.getSQLQuotedValueForAdd(),
+paramSpiritual.getSQLQuotedValueForAdd(),
+paramSocial.getSQLQuotedValueForAdd(),
+paramTalent.getSQLQuotedValueForAdd(),
+paramObservations.getSQLQuotedValueForAdd(),
+paramChristSmilesFeedBack.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pCenterVisitationID,
+Int32 pBeneficiaryID,
+Boolean pIsPresent,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID,
+Object pPictureStoredPath= null,
+Object pEducation= null,
+Object pEmotion= null,
+Object pHealth= null,
+Object pSpiritual= null,
+Object pSocial= null,
+Object pTalent= null,
+Object pObservations= null,
+Object pChristSmilesFeedBack= null){
+
+        try{
+
+DataColumnParameter paramCenterVisitationID = new DataColumnParameter(defCenterVisitationID, pCenterVisitationID);
+DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+DataColumnParameter paramIsPresent = new DataColumnParameter(defIsPresent, pIsPresent);
+DataColumnParameter paramPictureStoredPath = new DataColumnParameter(defPictureStoredPath, pPictureStoredPath);
+DataColumnParameter paramEducation = new DataColumnParameter(defEducation, pEducation);
+DataColumnParameter paramEmotion = new DataColumnParameter(defEmotion, pEmotion);
+DataColumnParameter paramHealth = new DataColumnParameter(defHealth, pHealth);
+DataColumnParameter paramSpiritual = new DataColumnParameter(defSpiritual, pSpiritual);
+DataColumnParameter paramSocial = new DataColumnParameter(defSocial, pSocial);
+DataColumnParameter paramTalent = new DataColumnParameter(defTalent, pTalent);
+DataColumnParameter paramObservations = new DataColumnParameter(defObservations, pObservations);
+DataColumnParameter paramChristSmilesFeedBack = new DataColumnParameter(defChristSmilesFeedBack, pChristSmilesFeedBack);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([CenterVisitationID],[BeneficiaryID],[IsPresent],[PictureStoredPath],[Education],[Emotion],[Health],[Spiritual],[Social],[Talent],[Observations],[ChristSmilesFeedBack],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramCenterVisitationID.getSQLQuotedValueForAdd(),
+paramBeneficiaryID.getSQLQuotedValueForAdd(),
+paramIsPresent.getSQLQuotedValueForAdd(),
+paramPictureStoredPath.getSQLQuotedValueForAdd(),
+paramEducation.getSQLQuotedValueForAdd(),
+paramEmotion.getSQLQuotedValueForAdd(),
+paramHealth.getSQLQuotedValueForAdd(),
+paramSpiritual.getSQLQuotedValueForAdd(),
+paramSocial.getSQLQuotedValueForAdd(),
+paramTalent.getSQLQuotedValueForAdd(),
+paramObservations.getSQLQuotedValueForAdd(),
+paramChristSmilesFeedBack.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pCenterVisitationID = null,
+Object pBeneficiaryID = null,
+Object pIsPresent = null,
+Object pCreatedAt = null,
+Object pUpdatedAt = null,
+Object pCreatedByID = null,
+Object pUpdatedByID = null,
+Object pPictureStoredPath = null,
+Object pEducation = null,
+Object pEmotion = null,
+Object pHealth = null,
+Object pSpiritual = null,
+Object pSocial = null,
+Object pTalent = null,
+Object pObservations = null,
+Object pChristSmilesFeedBack = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramCenterVisitationID = new DataColumnParameter(defCenterVisitationID, pCenterVisitationID);
+ DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
+ DataColumnParameter paramIsPresent = new DataColumnParameter(defIsPresent, pIsPresent);
+ DataColumnParameter paramPictureStoredPath = new DataColumnParameter(defPictureStoredPath, pPictureStoredPath);
+ DataColumnParameter paramEducation = new DataColumnParameter(defEducation, pEducation);
+ DataColumnParameter paramEmotion = new DataColumnParameter(defEmotion, pEmotion);
+ DataColumnParameter paramHealth = new DataColumnParameter(defHealth, pHealth);
+ DataColumnParameter paramSpiritual = new DataColumnParameter(defSpiritual, pSpiritual);
+ DataColumnParameter paramSocial = new DataColumnParameter(defSocial, pSocial);
+ DataColumnParameter paramTalent = new DataColumnParameter(defTalent, pTalent);
+ DataColumnParameter paramObservations = new DataColumnParameter(defObservations, pObservations);
+ DataColumnParameter paramChristSmilesFeedBack = new DataColumnParameter(defChristSmilesFeedBack, pChristSmilesFeedBack);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [CenterVisitationID]={2},[BeneficiaryID]={3},[IsPresent]={4},[PictureStoredPath]={5},[Education]={6},[Emotion]={7},[Health]={8},[Spiritual]={9},[Social]={10},[Talent]={11},[Observations]={12},[ChristSmilesFeedBack]={13},[CreatedAt]={14},[UpdatedAt]={15},[CreatedByID]={16},[UpdatedByID]={17} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCenterVisitationID.getSQLQuotedValueForUpdate(),
+paramBeneficiaryID.getSQLQuotedValueForUpdate(),
+paramIsPresent.getSQLQuotedValueForUpdate(),
+paramPictureStoredPath.getSQLQuotedValueForUpdate(),
+paramEducation.getSQLQuotedValueForUpdate(),
+paramEmotion.getSQLQuotedValueForUpdate(),
+paramHealth.getSQLQuotedValueForUpdate(),
+paramSpiritual.getSQLQuotedValueForUpdate(),
+paramSocial.getSQLQuotedValueForUpdate(),
+paramTalent.getSQLQuotedValueForUpdate(),
+paramObservations.getSQLQuotedValueForUpdate(),
+paramChristSmilesFeedBack.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramUpdatedByID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

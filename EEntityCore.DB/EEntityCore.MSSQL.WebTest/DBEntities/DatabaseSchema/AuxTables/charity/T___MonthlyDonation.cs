@@ -615,6 +615,232 @@ Int32 pUpdatedByID){
         }                   
 
 
+        public static int AddWithID(Int32 pCenterID,
+Int32 pResidingPastorID,
+Int32 pBankID,
+String pAccountNumber,
+Int32 pDonationYear,
+Int32 pDonationMonth,
+Boolean pIsApproved,
+Boolean pIsDisbursed,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramCenterID = new DataColumnParameter(defCenterID, pCenterID);
+                DataColumnParameter paramResidingPastorID = new DataColumnParameter(defResidingPastorID, pResidingPastorID);
+                DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+                DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+                DataColumnParameter paramDonationYear = new DataColumnParameter(defDonationYear, pDonationYear);
+                DataColumnParameter paramDonationMonth = new DataColumnParameter(defDonationMonth, pDonationMonth);
+                DataColumnParameter paramIsApproved = new DataColumnParameter(defIsApproved, pIsApproved);
+                DataColumnParameter paramIsDisbursed = new DataColumnParameter(defIsDisbursed, pIsDisbursed);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[ResidingPastorID],[BankID],[AccountNumber],[DonationYear],[DonationMonth],[IsApproved],[IsDisbursed],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCenterID.getSQLQuotedValueForAdd(),
+paramResidingPastorID.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd(),
+paramDonationYear.getSQLQuotedValueForAdd(),
+paramDonationMonth.getSQLQuotedValueForAdd(),
+paramIsApproved.getSQLQuotedValueForAdd(),
+paramIsDisbursed.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pCenterID,
+Int32 pResidingPastorID,
+Int32 pBankID,
+String pAccountNumber,
+Int32 pDonationYear,
+Int32 pDonationMonth,
+Boolean pIsApproved,
+Boolean pIsDisbursed,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramCenterID = new DataColumnParameter(defCenterID, pCenterID);
+DataColumnParameter paramResidingPastorID = new DataColumnParameter(defResidingPastorID, pResidingPastorID);
+DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+DataColumnParameter paramDonationYear = new DataColumnParameter(defDonationYear, pDonationYear);
+DataColumnParameter paramDonationMonth = new DataColumnParameter(defDonationMonth, pDonationMonth);
+DataColumnParameter paramIsApproved = new DataColumnParameter(defIsApproved, pIsApproved);
+DataColumnParameter paramIsDisbursed = new DataColumnParameter(defIsDisbursed, pIsDisbursed);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[ResidingPastorID],[BankID],[AccountNumber],[DonationYear],[DonationMonth],[IsApproved],[IsDisbursed],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCenterID.getSQLQuotedValueForAdd(),
+paramResidingPastorID.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd(),
+paramDonationYear.getSQLQuotedValueForAdd(),
+paramDonationMonth.getSQLQuotedValueForAdd(),
+paramIsApproved.getSQLQuotedValueForAdd(),
+paramIsDisbursed.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pCenterID,
+Int32 pResidingPastorID,
+Int32 pBankID,
+String pAccountNumber,
+Int32 pDonationYear,
+Int32 pDonationMonth,
+Boolean pIsApproved,
+Boolean pIsDisbursed,
+DateTime pCreatedAt,
+DateTime pUpdatedAt,
+Int32 pCreatedByID,
+Int32 pUpdatedByID){
+
+        try{
+
+DataColumnParameter paramCenterID = new DataColumnParameter(defCenterID, pCenterID);
+DataColumnParameter paramResidingPastorID = new DataColumnParameter(defResidingPastorID, pResidingPastorID);
+DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+DataColumnParameter paramDonationYear = new DataColumnParameter(defDonationYear, pDonationYear);
+DataColumnParameter paramDonationMonth = new DataColumnParameter(defDonationMonth, pDonationMonth);
+DataColumnParameter paramIsApproved = new DataColumnParameter(defIsApproved, pIsApproved);
+DataColumnParameter paramIsDisbursed = new DataColumnParameter(defIsDisbursed, pIsDisbursed);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([CenterID],[ResidingPastorID],[BankID],[AccountNumber],[DonationYear],[DonationMonth],[IsApproved],[IsDisbursed],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) ", TABLE_NAME,paramCenterID.getSQLQuotedValueForAdd(),
+paramResidingPastorID.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd(),
+paramDonationYear.getSQLQuotedValueForAdd(),
+paramDonationMonth.getSQLQuotedValueForAdd(),
+paramIsApproved.getSQLQuotedValueForAdd(),
+paramIsDisbursed.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pCenterID = null,
+Object pResidingPastorID = null,
+Object pBankID = null,
+Object pAccountNumber = null,
+Object pDonationYear = null,
+Object pDonationMonth = null,
+Object pIsApproved = null,
+Object pIsDisbursed = null,
+Object pCreatedAt = null,
+Object pUpdatedAt = null,
+Object pCreatedByID = null,
+Object pUpdatedByID = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramCenterID = new DataColumnParameter(defCenterID, pCenterID);
+ DataColumnParameter paramResidingPastorID = new DataColumnParameter(defResidingPastorID, pResidingPastorID);
+ DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+ DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+ DataColumnParameter paramDonationYear = new DataColumnParameter(defDonationYear, pDonationYear);
+ DataColumnParameter paramDonationMonth = new DataColumnParameter(defDonationMonth, pDonationMonth);
+ DataColumnParameter paramIsApproved = new DataColumnParameter(defIsApproved, pIsApproved);
+ DataColumnParameter paramIsDisbursed = new DataColumnParameter(defIsDisbursed, pIsDisbursed);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [CenterID]={2},[ResidingPastorID]={3},[BankID]={4},[AccountNumber]={5},[DonationYear]={6},[DonationMonth]={7},[IsApproved]={8},[IsDisbursed]={9},[CreatedAt]={10},[UpdatedAt]={11},[CreatedByID]={12},[UpdatedByID]={13} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCenterID.getSQLQuotedValueForUpdate(),
+paramResidingPastorID.getSQLQuotedValueForUpdate(),
+paramBankID.getSQLQuotedValueForUpdate(),
+paramAccountNumber.getSQLQuotedValueForUpdate(),
+paramDonationYear.getSQLQuotedValueForUpdate(),
+paramDonationMonth.getSQLQuotedValueForUpdate(),
+paramIsApproved.getSQLQuotedValueForUpdate(),
+paramIsDisbursed.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramUpdatedByID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

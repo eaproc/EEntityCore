@@ -547,6 +547,184 @@ Int32 pCreatedByID){
         }                   
 
 
+        public static int AddWithID(String pTitle,
+Int32 pCashRequestID,
+Int32 pCashRequestStatusID,
+Decimal pRevisedAmount,
+String pComments,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Object pDocumentFileName = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramTitle = new DataColumnParameter(defTitle, pTitle);
+                DataColumnParameter paramCashRequestID = new DataColumnParameter(defCashRequestID, pCashRequestID);
+                DataColumnParameter paramCashRequestStatusID = new DataColumnParameter(defCashRequestStatusID, pCashRequestStatusID);
+                DataColumnParameter paramRevisedAmount = new DataColumnParameter(defRevisedAmount, pRevisedAmount);
+                DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+                DataColumnParameter paramDocumentFileName = new DataColumnParameter(defDocumentFileName, pDocumentFileName);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Title],[CashRequestID],[CashRequestStatusID],[RevisedAmount],[Comments],[DocumentFileName],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramTitle.getSQLQuotedValueForAdd(),
+paramCashRequestID.getSQLQuotedValueForAdd(),
+paramCashRequestStatusID.getSQLQuotedValueForAdd(),
+paramRevisedAmount.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramDocumentFileName.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,String pTitle,
+Int32 pCashRequestID,
+Int32 pCashRequestStatusID,
+Decimal pRevisedAmount,
+String pComments,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Object pDocumentFileName = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramTitle = new DataColumnParameter(defTitle, pTitle);
+DataColumnParameter paramCashRequestID = new DataColumnParameter(defCashRequestID, pCashRequestID);
+DataColumnParameter paramCashRequestStatusID = new DataColumnParameter(defCashRequestStatusID, pCashRequestStatusID);
+DataColumnParameter paramRevisedAmount = new DataColumnParameter(defRevisedAmount, pRevisedAmount);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramDocumentFileName = new DataColumnParameter(defDocumentFileName, pDocumentFileName);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Title],[CashRequestID],[CashRequestStatusID],[RevisedAmount],[Comments],[DocumentFileName],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramTitle.getSQLQuotedValueForAdd(),
+paramCashRequestID.getSQLQuotedValueForAdd(),
+paramCashRequestStatusID.getSQLQuotedValueForAdd(),
+paramRevisedAmount.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramDocumentFileName.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(String pTitle,
+Int32 pCashRequestID,
+Int32 pCashRequestStatusID,
+Decimal pRevisedAmount,
+String pComments,
+DateTime pCreatedAt,
+Int32 pCreatedByID,
+Object pDocumentFileName= null){
+
+        try{
+
+DataColumnParameter paramTitle = new DataColumnParameter(defTitle, pTitle);
+DataColumnParameter paramCashRequestID = new DataColumnParameter(defCashRequestID, pCashRequestID);
+DataColumnParameter paramCashRequestStatusID = new DataColumnParameter(defCashRequestStatusID, pCashRequestStatusID);
+DataColumnParameter paramRevisedAmount = new DataColumnParameter(defRevisedAmount, pRevisedAmount);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramDocumentFileName = new DataColumnParameter(defDocumentFileName, pDocumentFileName);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([Title],[CashRequestID],[CashRequestStatusID],[RevisedAmount],[Comments],[DocumentFileName],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) ", TABLE_NAME,paramTitle.getSQLQuotedValueForAdd(),
+paramCashRequestID.getSQLQuotedValueForAdd(),
+paramCashRequestStatusID.getSQLQuotedValueForAdd(),
+paramRevisedAmount.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramDocumentFileName.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pTitle = null,
+Object pCashRequestID = null,
+Object pCashRequestStatusID = null,
+Object pRevisedAmount = null,
+Object pComments = null,
+Object pCreatedAt = null,
+Object pCreatedByID = null,
+Object pDocumentFileName = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramTitle = new DataColumnParameter(defTitle, pTitle);
+ DataColumnParameter paramCashRequestID = new DataColumnParameter(defCashRequestID, pCashRequestID);
+ DataColumnParameter paramCashRequestStatusID = new DataColumnParameter(defCashRequestStatusID, pCashRequestStatusID);
+ DataColumnParameter paramRevisedAmount = new DataColumnParameter(defRevisedAmount, pRevisedAmount);
+ DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+ DataColumnParameter paramDocumentFileName = new DataColumnParameter(defDocumentFileName, pDocumentFileName);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [Title]={2},[CashRequestID]={3},[CashRequestStatusID]={4},[RevisedAmount]={5},[Comments]={6},[DocumentFileName]={7},[CreatedAt]={8},[CreatedByID]={9} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramTitle.getSQLQuotedValueForUpdate(),
+paramCashRequestID.getSQLQuotedValueForUpdate(),
+paramCashRequestStatusID.getSQLQuotedValueForUpdate(),
+paramRevisedAmount.getSQLQuotedValueForUpdate(),
+paramComments.getSQLQuotedValueForUpdate(),
+paramDocumentFileName.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

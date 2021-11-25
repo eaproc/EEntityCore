@@ -527,6 +527,172 @@ Int32 pUserID){
         }                   
 
 
+        public static int AddWithID(String pToken,
+Int32 pPasswordResetTypeID,
+Int32 pUserID,
+DateTime pExpiryDateTime,
+Boolean pIsUsed,
+DateTime pCreatedAt,
+Object pUpdatedAt = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramToken = new DataColumnParameter(defToken, pToken);
+                DataColumnParameter paramPasswordResetTypeID = new DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID);
+                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+                DataColumnParameter paramExpiryDateTime = new DataColumnParameter(defExpiryDateTime, pExpiryDateTime);
+                DataColumnParameter paramIsUsed = new DataColumnParameter(defIsUsed, pIsUsed);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Token],[PasswordResetTypeID],[UserID],[ExpiryDateTime],[IsUsed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramToken.getSQLQuotedValueForAdd(),
+paramPasswordResetTypeID.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd(),
+paramExpiryDateTime.getSQLQuotedValueForAdd(),
+paramIsUsed.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,String pToken,
+Int32 pPasswordResetTypeID,
+Int32 pUserID,
+DateTime pExpiryDateTime,
+Boolean pIsUsed,
+DateTime pCreatedAt,
+Object pUpdatedAt = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramToken = new DataColumnParameter(defToken, pToken);
+DataColumnParameter paramPasswordResetTypeID = new DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID);
+DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+DataColumnParameter paramExpiryDateTime = new DataColumnParameter(defExpiryDateTime, pExpiryDateTime);
+DataColumnParameter paramIsUsed = new DataColumnParameter(defIsUsed, pIsUsed);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Token],[PasswordResetTypeID],[UserID],[ExpiryDateTime],[IsUsed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramToken.getSQLQuotedValueForAdd(),
+paramPasswordResetTypeID.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd(),
+paramExpiryDateTime.getSQLQuotedValueForAdd(),
+paramIsUsed.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(String pToken,
+Int32 pPasswordResetTypeID,
+Int32 pUserID,
+DateTime pExpiryDateTime,
+Boolean pIsUsed,
+DateTime pCreatedAt,
+Object pUpdatedAt= null){
+
+        try{
+
+DataColumnParameter paramToken = new DataColumnParameter(defToken, pToken);
+DataColumnParameter paramPasswordResetTypeID = new DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID);
+DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+DataColumnParameter paramExpiryDateTime = new DataColumnParameter(defExpiryDateTime, pExpiryDateTime);
+DataColumnParameter paramIsUsed = new DataColumnParameter(defIsUsed, pIsUsed);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([Token],[PasswordResetTypeID],[UserID],[ExpiryDateTime],[IsUsed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) ", TABLE_NAME,paramToken.getSQLQuotedValueForAdd(),
+paramPasswordResetTypeID.getSQLQuotedValueForAdd(),
+paramUserID.getSQLQuotedValueForAdd(),
+paramExpiryDateTime.getSQLQuotedValueForAdd(),
+paramIsUsed.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pToken = null,
+Object pPasswordResetTypeID = null,
+Object pUserID = null,
+Object pExpiryDateTime = null,
+Object pIsUsed = null,
+Object pCreatedAt = null,
+Object pUpdatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramToken = new DataColumnParameter(defToken, pToken);
+ DataColumnParameter paramPasswordResetTypeID = new DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID);
+ DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
+ DataColumnParameter paramExpiryDateTime = new DataColumnParameter(defExpiryDateTime, pExpiryDateTime);
+ DataColumnParameter paramIsUsed = new DataColumnParameter(defIsUsed, pIsUsed);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [Token]={2},[PasswordResetTypeID]={3},[UserID]={4},[ExpiryDateTime]={5},[IsUsed]={6},[CreatedAt]={7},[UpdatedAt]={8} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramToken.getSQLQuotedValueForUpdate(),
+paramPasswordResetTypeID.getSQLQuotedValueForUpdate(),
+paramUserID.getSQLQuotedValueForUpdate(),
+paramExpiryDateTime.getSQLQuotedValueForUpdate(),
+paramIsUsed.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

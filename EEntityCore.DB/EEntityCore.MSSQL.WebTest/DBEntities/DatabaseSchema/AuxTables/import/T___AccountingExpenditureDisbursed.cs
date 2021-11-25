@@ -569,6 +569,208 @@ Int32 pImportStatusID){
         }                   
 
 
+        public static int AddWithID(Int32 pDataMonitorID,
+Int32 pImportStatusID,
+String pRequest,
+DateTime pDisbursedDate,
+String pCategory,
+String pBeneficiary,
+Decimal pTotal,
+String pImportComment,
+DateTime pCreatedAt,
+Object pNotes = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+                DataColumnParameter paramImportStatusID = new DataColumnParameter(defImportStatusID, pImportStatusID);
+                DataColumnParameter paramRequest = new DataColumnParameter(defRequest, pRequest);
+                DataColumnParameter paramDisbursedDate = new DataColumnParameter(defDisbursedDate, pDisbursedDate);
+                DataColumnParameter paramCategory = new DataColumnParameter(defCategory, pCategory);
+                DataColumnParameter paramBeneficiary = new DataColumnParameter(defBeneficiary, pBeneficiary);
+                DataColumnParameter paramNotes = new DataColumnParameter(defNotes, pNotes);
+                DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+                DataColumnParameter paramImportComment = new DataColumnParameter(defImportComment, pImportComment);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[Request],[DisbursedDate],[Category],[Beneficiary],[Notes],[Total],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramDataMonitorID.getSQLQuotedValueForAdd(),
+paramImportStatusID.getSQLQuotedValueForAdd(),
+paramRequest.getSQLQuotedValueForAdd(),
+paramDisbursedDate.getSQLQuotedValueForAdd(),
+paramCategory.getSQLQuotedValueForAdd(),
+paramBeneficiary.getSQLQuotedValueForAdd(),
+paramNotes.getSQLQuotedValueForAdd(),
+paramTotal.getSQLQuotedValueForAdd(),
+paramImportComment.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pDataMonitorID,
+Int32 pImportStatusID,
+String pRequest,
+DateTime pDisbursedDate,
+String pCategory,
+String pBeneficiary,
+Decimal pTotal,
+String pImportComment,
+DateTime pCreatedAt,
+Object pNotes = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+DataColumnParameter paramImportStatusID = new DataColumnParameter(defImportStatusID, pImportStatusID);
+DataColumnParameter paramRequest = new DataColumnParameter(defRequest, pRequest);
+DataColumnParameter paramDisbursedDate = new DataColumnParameter(defDisbursedDate, pDisbursedDate);
+DataColumnParameter paramCategory = new DataColumnParameter(defCategory, pCategory);
+DataColumnParameter paramBeneficiary = new DataColumnParameter(defBeneficiary, pBeneficiary);
+DataColumnParameter paramNotes = new DataColumnParameter(defNotes, pNotes);
+DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+DataColumnParameter paramImportComment = new DataColumnParameter(defImportComment, pImportComment);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[Request],[DisbursedDate],[Category],[Beneficiary],[Notes],[Total],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramDataMonitorID.getSQLQuotedValueForAdd(),
+paramImportStatusID.getSQLQuotedValueForAdd(),
+paramRequest.getSQLQuotedValueForAdd(),
+paramDisbursedDate.getSQLQuotedValueForAdd(),
+paramCategory.getSQLQuotedValueForAdd(),
+paramBeneficiary.getSQLQuotedValueForAdd(),
+paramNotes.getSQLQuotedValueForAdd(),
+paramTotal.getSQLQuotedValueForAdd(),
+paramImportComment.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pDataMonitorID,
+Int32 pImportStatusID,
+String pRequest,
+DateTime pDisbursedDate,
+String pCategory,
+String pBeneficiary,
+Decimal pTotal,
+String pImportComment,
+DateTime pCreatedAt,
+Object pNotes= null){
+
+        try{
+
+DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+DataColumnParameter paramImportStatusID = new DataColumnParameter(defImportStatusID, pImportStatusID);
+DataColumnParameter paramRequest = new DataColumnParameter(defRequest, pRequest);
+DataColumnParameter paramDisbursedDate = new DataColumnParameter(defDisbursedDate, pDisbursedDate);
+DataColumnParameter paramCategory = new DataColumnParameter(defCategory, pCategory);
+DataColumnParameter paramBeneficiary = new DataColumnParameter(defBeneficiary, pBeneficiary);
+DataColumnParameter paramNotes = new DataColumnParameter(defNotes, pNotes);
+DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+DataColumnParameter paramImportComment = new DataColumnParameter(defImportComment, pImportComment);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([DataMonitorID],[ImportStatusID],[Request],[DisbursedDate],[Category],[Beneficiary],[Notes],[Total],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,paramDataMonitorID.getSQLQuotedValueForAdd(),
+paramImportStatusID.getSQLQuotedValueForAdd(),
+paramRequest.getSQLQuotedValueForAdd(),
+paramDisbursedDate.getSQLQuotedValueForAdd(),
+paramCategory.getSQLQuotedValueForAdd(),
+paramBeneficiary.getSQLQuotedValueForAdd(),
+paramNotes.getSQLQuotedValueForAdd(),
+paramTotal.getSQLQuotedValueForAdd(),
+paramImportComment.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pDataMonitorID = null,
+Object pImportStatusID = null,
+Object pRequest = null,
+Object pDisbursedDate = null,
+Object pCategory = null,
+Object pBeneficiary = null,
+Object pTotal = null,
+Object pImportComment = null,
+Object pCreatedAt = null,
+Object pNotes = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
+ DataColumnParameter paramImportStatusID = new DataColumnParameter(defImportStatusID, pImportStatusID);
+ DataColumnParameter paramRequest = new DataColumnParameter(defRequest, pRequest);
+ DataColumnParameter paramDisbursedDate = new DataColumnParameter(defDisbursedDate, pDisbursedDate);
+ DataColumnParameter paramCategory = new DataColumnParameter(defCategory, pCategory);
+ DataColumnParameter paramBeneficiary = new DataColumnParameter(defBeneficiary, pBeneficiary);
+ DataColumnParameter paramNotes = new DataColumnParameter(defNotes, pNotes);
+ DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
+ DataColumnParameter paramImportComment = new DataColumnParameter(defImportComment, pImportComment);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [DataMonitorID]={2},[ImportStatusID]={3},[Request]={4},[DisbursedDate]={5},[Category]={6},[Beneficiary]={7},[Notes]={8},[Total]={9},[ImportComment]={10},[CreatedAt]={11} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramDataMonitorID.getSQLQuotedValueForUpdate(),
+paramImportStatusID.getSQLQuotedValueForUpdate(),
+paramRequest.getSQLQuotedValueForUpdate(),
+paramDisbursedDate.getSQLQuotedValueForUpdate(),
+paramCategory.getSQLQuotedValueForUpdate(),
+paramBeneficiary.getSQLQuotedValueForUpdate(),
+paramNotes.getSQLQuotedValueForUpdate(),
+paramTotal.getSQLQuotedValueForUpdate(),
+paramImportComment.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

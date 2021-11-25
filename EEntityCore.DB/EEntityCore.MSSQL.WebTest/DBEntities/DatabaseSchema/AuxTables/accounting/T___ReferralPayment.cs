@@ -520,6 +520,160 @@ Int32 pCreatedByID){
         }                   
 
 
+        public static int AddWithID(Int32 pReferredClientID,
+Decimal pAmount,
+Int32 pTermID,
+Int32 pCreatedByID,
+DateTime pCreatedAt,
+Object pComments = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramReferredClientID = new DataColumnParameter(defReferredClientID, pReferredClientID);
+                DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+                DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+                DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ReferredClientID],[Amount],[TermID],[Comments],[CreatedByID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramReferredClientID.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pReferredClientID,
+Decimal pAmount,
+Int32 pTermID,
+Int32 pCreatedByID,
+DateTime pCreatedAt,
+Object pComments = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramReferredClientID = new DataColumnParameter(defReferredClientID, pReferredClientID);
+DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ReferredClientID],[Amount],[TermID],[Comments],[CreatedByID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramReferredClientID.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pReferredClientID,
+Decimal pAmount,
+Int32 pTermID,
+Int32 pCreatedByID,
+DateTime pCreatedAt,
+Object pComments= null){
+
+        try{
+
+DataColumnParameter paramReferredClientID = new DataColumnParameter(defReferredClientID, pReferredClientID);
+DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([ReferredClientID],[Amount],[TermID],[Comments],[CreatedByID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6}) ", TABLE_NAME,paramReferredClientID.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pReferredClientID = null,
+Object pAmount = null,
+Object pTermID = null,
+Object pCreatedByID = null,
+Object pCreatedAt = null,
+Object pComments = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramReferredClientID = new DataColumnParameter(defReferredClientID, pReferredClientID);
+ DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+ DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+ DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [ReferredClientID]={2},[Amount]={3},[TermID]={4},[Comments]={5},[CreatedByID]={6},[CreatedAt]={7} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramReferredClientID.getSQLQuotedValueForUpdate(),
+paramAmount.getSQLQuotedValueForUpdate(),
+paramTermID.getSQLQuotedValueForUpdate(),
+paramComments.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

@@ -607,6 +607,220 @@ Int32 pTermID){
         }                   
 
 
+        public static int AddWithID(Int32 pDealerID,
+Decimal pAmount,
+Int32 pWithdrawalStatusID,
+Int32 pCreatedByID,
+DateTime pCreatedAt,
+Int32 pBankID,
+String pAccountNumber,
+Int32 pTermID,
+Object pComments = null,
+Object pUpdatedByID = null,
+Object pUpdatedAt = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramDealerID = new DataColumnParameter(defDealerID, pDealerID);
+                DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+                DataColumnParameter paramWithdrawalStatusID = new DataColumnParameter(defWithdrawalStatusID, pWithdrawalStatusID);
+                DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+                DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+                DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DealerID],[Amount],[WithdrawalStatusID],[Comments],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt],[BankID],[AccountNumber],[TermID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramDealerID.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramWithdrawalStatusID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pDealerID,
+Decimal pAmount,
+Int32 pWithdrawalStatusID,
+Int32 pCreatedByID,
+DateTime pCreatedAt,
+Int32 pBankID,
+String pAccountNumber,
+Int32 pTermID,
+Object pComments = null,
+Object pUpdatedByID = null,
+Object pUpdatedAt = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramDealerID = new DataColumnParameter(defDealerID, pDealerID);
+DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+DataColumnParameter paramWithdrawalStatusID = new DataColumnParameter(defWithdrawalStatusID, pWithdrawalStatusID);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DealerID],[Amount],[WithdrawalStatusID],[Comments],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt],[BankID],[AccountNumber],[TermID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramDealerID.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramWithdrawalStatusID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pDealerID,
+Decimal pAmount,
+Int32 pWithdrawalStatusID,
+Int32 pCreatedByID,
+DateTime pCreatedAt,
+Int32 pBankID,
+String pAccountNumber,
+Int32 pTermID,
+Object pComments= null,
+Object pUpdatedByID= null,
+Object pUpdatedAt= null){
+
+        try{
+
+DataColumnParameter paramDealerID = new DataColumnParameter(defDealerID, pDealerID);
+DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+DataColumnParameter paramWithdrawalStatusID = new DataColumnParameter(defWithdrawalStatusID, pWithdrawalStatusID);
+DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([DealerID],[Amount],[WithdrawalStatusID],[Comments],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt],[BankID],[AccountNumber],[TermID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) ", TABLE_NAME,paramDealerID.getSQLQuotedValueForAdd(),
+paramAmount.getSQLQuotedValueForAdd(),
+paramWithdrawalStatusID.getSQLQuotedValueForAdd(),
+paramComments.getSQLQuotedValueForAdd(),
+paramCreatedByID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedByID.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pDealerID = null,
+Object pAmount = null,
+Object pWithdrawalStatusID = null,
+Object pCreatedByID = null,
+Object pCreatedAt = null,
+Object pBankID = null,
+Object pAccountNumber = null,
+Object pTermID = null,
+Object pComments = null,
+Object pUpdatedByID = null,
+Object pUpdatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramDealerID = new DataColumnParameter(defDealerID, pDealerID);
+ DataColumnParameter paramAmount = new DataColumnParameter(defAmount, pAmount);
+ DataColumnParameter paramWithdrawalStatusID = new DataColumnParameter(defWithdrawalStatusID, pWithdrawalStatusID);
+ DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
+ DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+ DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+ DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [DealerID]={2},[Amount]={3},[WithdrawalStatusID]={4},[Comments]={5},[CreatedByID]={6},[CreatedAt]={7},[UpdatedByID]={8},[UpdatedAt]={9},[BankID]={10},[AccountNumber]={11},[TermID]={12} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramDealerID.getSQLQuotedValueForUpdate(),
+paramAmount.getSQLQuotedValueForUpdate(),
+paramWithdrawalStatusID.getSQLQuotedValueForUpdate(),
+paramComments.getSQLQuotedValueForUpdate(),
+paramCreatedByID.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedByID.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramBankID.getSQLQuotedValueForUpdate(),
+paramAccountNumber.getSQLQuotedValueForUpdate(),
+paramTermID.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

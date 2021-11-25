@@ -655,6 +655,280 @@ Int32 pBankID){
         }                   
 
 
+        public static int AddWithID(String pCompanyName,
+DateTime pCreatedAt,
+Int32 pOwnerID,
+Boolean pIsActive,
+String pNameAbbreviation,
+Object pSLAFileName = null,
+Object pScadwareURL = null,
+Object pEmail = null,
+Object pMobile = null,
+Object pWebsiteURL = null,
+Object pLogoFileName = null,
+Object pUpdatedAt = null,
+Object pAddress = null,
+Object pBankID = null,
+Object pAccountName = null,
+Object pAccountNumber = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramCompanyName = new DataColumnParameter(defCompanyName, pCompanyName);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramOwnerID = new DataColumnParameter(defOwnerID, pOwnerID);
+                DataColumnParameter paramSLAFileName = new DataColumnParameter(defSLAFileName, pSLAFileName);
+                DataColumnParameter paramScadwareURL = new DataColumnParameter(defScadwareURL, pScadwareURL);
+                DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+                DataColumnParameter paramMobile = new DataColumnParameter(defMobile, pMobile);
+                DataColumnParameter paramWebsiteURL = new DataColumnParameter(defWebsiteURL, pWebsiteURL);
+                DataColumnParameter paramLogoFileName = new DataColumnParameter(defLogoFileName, pLogoFileName);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+                DataColumnParameter paramNameAbbreviation = new DataColumnParameter(defNameAbbreviation, pNameAbbreviation);
+                DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+                DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+                DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
+                DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCompanyName.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramOwnerID.getSQLQuotedValueForAdd(),
+paramSLAFileName.getSQLQuotedValueForAdd(),
+paramScadwareURL.getSQLQuotedValueForAdd(),
+paramEmail.getSQLQuotedValueForAdd(),
+paramMobile.getSQLQuotedValueForAdd(),
+paramWebsiteURL.getSQLQuotedValueForAdd(),
+paramLogoFileName.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramNameAbbreviation.getSQLQuotedValueForAdd(),
+paramAddress.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramAccountName.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,String pCompanyName,
+DateTime pCreatedAt,
+Int32 pOwnerID,
+Boolean pIsActive,
+String pNameAbbreviation,
+Object pSLAFileName = null,
+Object pScadwareURL = null,
+Object pEmail = null,
+Object pMobile = null,
+Object pWebsiteURL = null,
+Object pLogoFileName = null,
+Object pUpdatedAt = null,
+Object pAddress = null,
+Object pBankID = null,
+Object pAccountName = null,
+Object pAccountNumber = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramCompanyName = new DataColumnParameter(defCompanyName, pCompanyName);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramOwnerID = new DataColumnParameter(defOwnerID, pOwnerID);
+DataColumnParameter paramSLAFileName = new DataColumnParameter(defSLAFileName, pSLAFileName);
+DataColumnParameter paramScadwareURL = new DataColumnParameter(defScadwareURL, pScadwareURL);
+DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+DataColumnParameter paramMobile = new DataColumnParameter(defMobile, pMobile);
+DataColumnParameter paramWebsiteURL = new DataColumnParameter(defWebsiteURL, pWebsiteURL);
+DataColumnParameter paramLogoFileName = new DataColumnParameter(defLogoFileName, pLogoFileName);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+DataColumnParameter paramNameAbbreviation = new DataColumnParameter(defNameAbbreviation, pNameAbbreviation);
+DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
+DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramCompanyName.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramOwnerID.getSQLQuotedValueForAdd(),
+paramSLAFileName.getSQLQuotedValueForAdd(),
+paramScadwareURL.getSQLQuotedValueForAdd(),
+paramEmail.getSQLQuotedValueForAdd(),
+paramMobile.getSQLQuotedValueForAdd(),
+paramWebsiteURL.getSQLQuotedValueForAdd(),
+paramLogoFileName.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramNameAbbreviation.getSQLQuotedValueForAdd(),
+paramAddress.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramAccountName.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(String pCompanyName,
+DateTime pCreatedAt,
+Int32 pOwnerID,
+Boolean pIsActive,
+String pNameAbbreviation,
+Object pSLAFileName= null,
+Object pScadwareURL= null,
+Object pEmail= null,
+Object pMobile= null,
+Object pWebsiteURL= null,
+Object pLogoFileName= null,
+Object pUpdatedAt= null,
+Object pAddress= null,
+Object pBankID= null,
+Object pAccountName= null,
+Object pAccountNumber= null){
+
+        try{
+
+DataColumnParameter paramCompanyName = new DataColumnParameter(defCompanyName, pCompanyName);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramOwnerID = new DataColumnParameter(defOwnerID, pOwnerID);
+DataColumnParameter paramSLAFileName = new DataColumnParameter(defSLAFileName, pSLAFileName);
+DataColumnParameter paramScadwareURL = new DataColumnParameter(defScadwareURL, pScadwareURL);
+DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+DataColumnParameter paramMobile = new DataColumnParameter(defMobile, pMobile);
+DataColumnParameter paramWebsiteURL = new DataColumnParameter(defWebsiteURL, pWebsiteURL);
+DataColumnParameter paramLogoFileName = new DataColumnParameter(defLogoFileName, pLogoFileName);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+DataColumnParameter paramNameAbbreviation = new DataColumnParameter(defNameAbbreviation, pNameAbbreviation);
+DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
+DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramCompanyName.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramOwnerID.getSQLQuotedValueForAdd(),
+paramSLAFileName.getSQLQuotedValueForAdd(),
+paramScadwareURL.getSQLQuotedValueForAdd(),
+paramEmail.getSQLQuotedValueForAdd(),
+paramMobile.getSQLQuotedValueForAdd(),
+paramWebsiteURL.getSQLQuotedValueForAdd(),
+paramLogoFileName.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramNameAbbreviation.getSQLQuotedValueForAdd(),
+paramAddress.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramAccountName.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pCompanyName = null,
+Object pCreatedAt = null,
+Object pOwnerID = null,
+Object pIsActive = null,
+Object pNameAbbreviation = null,
+Object pSLAFileName = null,
+Object pScadwareURL = null,
+Object pEmail = null,
+Object pMobile = null,
+Object pWebsiteURL = null,
+Object pLogoFileName = null,
+Object pUpdatedAt = null,
+Object pAddress = null,
+Object pBankID = null,
+Object pAccountName = null,
+Object pAccountNumber = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramCompanyName = new DataColumnParameter(defCompanyName, pCompanyName);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramOwnerID = new DataColumnParameter(defOwnerID, pOwnerID);
+ DataColumnParameter paramSLAFileName = new DataColumnParameter(defSLAFileName, pSLAFileName);
+ DataColumnParameter paramScadwareURL = new DataColumnParameter(defScadwareURL, pScadwareURL);
+ DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
+ DataColumnParameter paramMobile = new DataColumnParameter(defMobile, pMobile);
+ DataColumnParameter paramWebsiteURL = new DataColumnParameter(defWebsiteURL, pWebsiteURL);
+ DataColumnParameter paramLogoFileName = new DataColumnParameter(defLogoFileName, pLogoFileName);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+ DataColumnParameter paramNameAbbreviation = new DataColumnParameter(defNameAbbreviation, pNameAbbreviation);
+ DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
+ DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+ DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
+ DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [CompanyName]={2},[CreatedAt]={3},[OwnerID]={4},[SLAFileName]={5},[ScadwareURL]={6},[Email]={7},[Mobile]={8},[WebsiteURL]={9},[LogoFileName]={10},[UpdatedAt]={11},[IsActive]={12},[NameAbbreviation]={13},[Address]={14},[BankID]={15},[AccountName]={16},[AccountNumber]={17} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCompanyName.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramOwnerID.getSQLQuotedValueForUpdate(),
+paramSLAFileName.getSQLQuotedValueForUpdate(),
+paramScadwareURL.getSQLQuotedValueForUpdate(),
+paramEmail.getSQLQuotedValueForUpdate(),
+paramMobile.getSQLQuotedValueForUpdate(),
+paramWebsiteURL.getSQLQuotedValueForUpdate(),
+paramLogoFileName.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramIsActive.getSQLQuotedValueForUpdate(),
+paramNameAbbreviation.getSQLQuotedValueForUpdate(),
+paramAddress.getSQLQuotedValueForUpdate(),
+paramBankID.getSQLQuotedValueForUpdate(),
+paramAccountName.getSQLQuotedValueForUpdate(),
+paramAccountNumber.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

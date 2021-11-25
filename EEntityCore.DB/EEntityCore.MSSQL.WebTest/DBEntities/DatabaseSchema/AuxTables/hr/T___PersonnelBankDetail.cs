@@ -544,6 +544,184 @@ String pAccountNumber){
         }                   
 
 
+        public static int AddWithID(Int32 pBankID,
+Int32 pPersonnelID,
+String pAccountNumber,
+DateTime pCreatedAt,
+Boolean pIsActive,
+Object pSwiftCode = null,
+Object pIBAN = null,
+Object pUpdatedAt = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+                DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
+                DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+                DataColumnParameter paramSwiftCode = new DataColumnParameter(defSwiftCode, pSwiftCode);
+                DataColumnParameter paramIBAN = new DataColumnParameter(defIBAN, pIBAN);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[BankID],[PersonnelID],[AccountNumber],[SwiftCode],[IBAN],[CreatedAt],[UpdatedAt],[IsActive]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramPersonnelID.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd(),
+paramSwiftCode.getSQLQuotedValueForAdd(),
+paramIBAN.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pBankID,
+Int32 pPersonnelID,
+String pAccountNumber,
+DateTime pCreatedAt,
+Boolean pIsActive,
+Object pSwiftCode = null,
+Object pIBAN = null,
+Object pUpdatedAt = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
+DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+DataColumnParameter paramSwiftCode = new DataColumnParameter(defSwiftCode, pSwiftCode);
+DataColumnParameter paramIBAN = new DataColumnParameter(defIBAN, pIBAN);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[BankID],[PersonnelID],[AccountNumber],[SwiftCode],[IBAN],[CreatedAt],[UpdatedAt],[IsActive]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramPersonnelID.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd(),
+paramSwiftCode.getSQLQuotedValueForAdd(),
+paramIBAN.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pBankID,
+Int32 pPersonnelID,
+String pAccountNumber,
+DateTime pCreatedAt,
+Boolean pIsActive,
+Object pSwiftCode= null,
+Object pIBAN= null,
+Object pUpdatedAt= null){
+
+        try{
+
+DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
+DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+DataColumnParameter paramSwiftCode = new DataColumnParameter(defSwiftCode, pSwiftCode);
+DataColumnParameter paramIBAN = new DataColumnParameter(defIBAN, pIBAN);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([BankID],[PersonnelID],[AccountNumber],[SwiftCode],[IBAN],[CreatedAt],[UpdatedAt],[IsActive]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) ", TABLE_NAME,paramBankID.getSQLQuotedValueForAdd(),
+paramPersonnelID.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd(),
+paramSwiftCode.getSQLQuotedValueForAdd(),
+paramIBAN.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pBankID = null,
+Object pPersonnelID = null,
+Object pAccountNumber = null,
+Object pCreatedAt = null,
+Object pIsActive = null,
+Object pSwiftCode = null,
+Object pIBAN = null,
+Object pUpdatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+ DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
+ DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+ DataColumnParameter paramSwiftCode = new DataColumnParameter(defSwiftCode, pSwiftCode);
+ DataColumnParameter paramIBAN = new DataColumnParameter(defIBAN, pIBAN);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [BankID]={2},[PersonnelID]={3},[AccountNumber]={4},[SwiftCode]={5},[IBAN]={6},[CreatedAt]={7},[UpdatedAt]={8},[IsActive]={9} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramBankID.getSQLQuotedValueForUpdate(),
+paramPersonnelID.getSQLQuotedValueForUpdate(),
+paramAccountNumber.getSQLQuotedValueForUpdate(),
+paramSwiftCode.getSQLQuotedValueForUpdate(),
+paramIBAN.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramIsActive.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

@@ -546,6 +546,172 @@ Int32 pReferralBenefitStatusID){
         }                   
 
 
+        public static int AddWithID(Int32 pDealerID,
+Int32 pClientID,
+Int32 pTermID,
+Int32 pReferralTypeID,
+Int32 pReferralBenefitStatusID,
+DateTime pCreatedAt,
+Object pUpdatedAt = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramDealerID = new DataColumnParameter(defDealerID, pDealerID);
+                DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+                DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+                DataColumnParameter paramReferralTypeID = new DataColumnParameter(defReferralTypeID, pReferralTypeID);
+                DataColumnParameter paramReferralBenefitStatusID = new DataColumnParameter(defReferralBenefitStatusID, pReferralBenefitStatusID);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DealerID],[ClientID],[TermID],[ReferralTypeID],[ReferralBenefitStatusID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramDealerID.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd(),
+paramReferralTypeID.getSQLQuotedValueForAdd(),
+paramReferralBenefitStatusID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pDealerID,
+Int32 pClientID,
+Int32 pTermID,
+Int32 pReferralTypeID,
+Int32 pReferralBenefitStatusID,
+DateTime pCreatedAt,
+Object pUpdatedAt = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramDealerID = new DataColumnParameter(defDealerID, pDealerID);
+DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+DataColumnParameter paramReferralTypeID = new DataColumnParameter(defReferralTypeID, pReferralTypeID);
+DataColumnParameter paramReferralBenefitStatusID = new DataColumnParameter(defReferralBenefitStatusID, pReferralBenefitStatusID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DealerID],[ClientID],[TermID],[ReferralTypeID],[ReferralBenefitStatusID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramDealerID.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd(),
+paramReferralTypeID.getSQLQuotedValueForAdd(),
+paramReferralBenefitStatusID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pDealerID,
+Int32 pClientID,
+Int32 pTermID,
+Int32 pReferralTypeID,
+Int32 pReferralBenefitStatusID,
+DateTime pCreatedAt,
+Object pUpdatedAt= null){
+
+        try{
+
+DataColumnParameter paramDealerID = new DataColumnParameter(defDealerID, pDealerID);
+DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+DataColumnParameter paramReferralTypeID = new DataColumnParameter(defReferralTypeID, pReferralTypeID);
+DataColumnParameter paramReferralBenefitStatusID = new DataColumnParameter(defReferralBenefitStatusID, pReferralBenefitStatusID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([DealerID],[ClientID],[TermID],[ReferralTypeID],[ReferralBenefitStatusID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) ", TABLE_NAME,paramDealerID.getSQLQuotedValueForAdd(),
+paramClientID.getSQLQuotedValueForAdd(),
+paramTermID.getSQLQuotedValueForAdd(),
+paramReferralTypeID.getSQLQuotedValueForAdd(),
+paramReferralBenefitStatusID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pDealerID = null,
+Object pClientID = null,
+Object pTermID = null,
+Object pReferralTypeID = null,
+Object pReferralBenefitStatusID = null,
+Object pCreatedAt = null,
+Object pUpdatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramDealerID = new DataColumnParameter(defDealerID, pDealerID);
+ DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
+ DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
+ DataColumnParameter paramReferralTypeID = new DataColumnParameter(defReferralTypeID, pReferralTypeID);
+ DataColumnParameter paramReferralBenefitStatusID = new DataColumnParameter(defReferralBenefitStatusID, pReferralBenefitStatusID);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [DealerID]={2},[ClientID]={3},[TermID]={4},[ReferralTypeID]={5},[ReferralBenefitStatusID]={6},[CreatedAt]={7},[UpdatedAt]={8} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramDealerID.getSQLQuotedValueForUpdate(),
+paramClientID.getSQLQuotedValueForUpdate(),
+paramTermID.getSQLQuotedValueForUpdate(),
+paramReferralTypeID.getSQLQuotedValueForUpdate(),
+paramReferralBenefitStatusID.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

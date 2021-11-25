@@ -586,6 +586,232 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(Boolean pDelivered,
+String pSender,
+String pReceiver,
+String pSubject,
+String pMessageBodyFileName,
+DateTime pCreatedAt,
+String pGateway,
+Object pBCC = null,
+Object pCC = null,
+Object pUpdatedAt = null,
+Object pExceptionMessage = null,
+Object pExceptionStackTrace = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramDelivered = new DataColumnParameter(defDelivered, pDelivered);
+                DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
+                DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
+                DataColumnParameter paramBCC = new DataColumnParameter(defBCC, pBCC);
+                DataColumnParameter paramCC = new DataColumnParameter(defCC, pCC);
+                DataColumnParameter paramSubject = new DataColumnParameter(defSubject, pSubject);
+                DataColumnParameter paramMessageBodyFileName = new DataColumnParameter(defMessageBodyFileName, pMessageBodyFileName);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+                DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
+                DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
+                DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramDelivered.getSQLQuotedValueForAdd(),
+paramSender.getSQLQuotedValueForAdd(),
+paramReceiver.getSQLQuotedValueForAdd(),
+paramBCC.getSQLQuotedValueForAdd(),
+paramCC.getSQLQuotedValueForAdd(),
+paramSubject.getSQLQuotedValueForAdd(),
+paramMessageBodyFileName.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramExceptionMessage.getSQLQuotedValueForAdd(),
+paramExceptionStackTrace.getSQLQuotedValueForAdd(),
+paramGateway.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Boolean pDelivered,
+String pSender,
+String pReceiver,
+String pSubject,
+String pMessageBodyFileName,
+DateTime pCreatedAt,
+String pGateway,
+Object pBCC = null,
+Object pCC = null,
+Object pUpdatedAt = null,
+Object pExceptionMessage = null,
+Object pExceptionStackTrace = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramDelivered = new DataColumnParameter(defDelivered, pDelivered);
+DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
+DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
+DataColumnParameter paramBCC = new DataColumnParameter(defBCC, pBCC);
+DataColumnParameter paramCC = new DataColumnParameter(defCC, pCC);
+DataColumnParameter paramSubject = new DataColumnParameter(defSubject, pSubject);
+DataColumnParameter paramMessageBodyFileName = new DataColumnParameter(defMessageBodyFileName, pMessageBodyFileName);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
+DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
+DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramDelivered.getSQLQuotedValueForAdd(),
+paramSender.getSQLQuotedValueForAdd(),
+paramReceiver.getSQLQuotedValueForAdd(),
+paramBCC.getSQLQuotedValueForAdd(),
+paramCC.getSQLQuotedValueForAdd(),
+paramSubject.getSQLQuotedValueForAdd(),
+paramMessageBodyFileName.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramExceptionMessage.getSQLQuotedValueForAdd(),
+paramExceptionStackTrace.getSQLQuotedValueForAdd(),
+paramGateway.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Boolean pDelivered,
+String pSender,
+String pReceiver,
+String pSubject,
+String pMessageBodyFileName,
+DateTime pCreatedAt,
+String pGateway,
+Object pBCC= null,
+Object pCC= null,
+Object pUpdatedAt= null,
+Object pExceptionMessage= null,
+Object pExceptionStackTrace= null){
+
+        try{
+
+DataColumnParameter paramDelivered = new DataColumnParameter(defDelivered, pDelivered);
+DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
+DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
+DataColumnParameter paramBCC = new DataColumnParameter(defBCC, pBCC);
+DataColumnParameter paramCC = new DataColumnParameter(defCC, pCC);
+DataColumnParameter paramSubject = new DataColumnParameter(defSubject, pSubject);
+DataColumnParameter paramMessageBodyFileName = new DataColumnParameter(defMessageBodyFileName, pMessageBodyFileName);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
+DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
+DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) ", TABLE_NAME,paramDelivered.getSQLQuotedValueForAdd(),
+paramSender.getSQLQuotedValueForAdd(),
+paramReceiver.getSQLQuotedValueForAdd(),
+paramBCC.getSQLQuotedValueForAdd(),
+paramCC.getSQLQuotedValueForAdd(),
+paramSubject.getSQLQuotedValueForAdd(),
+paramMessageBodyFileName.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd(),
+paramExceptionMessage.getSQLQuotedValueForAdd(),
+paramExceptionStackTrace.getSQLQuotedValueForAdd(),
+paramGateway.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pDelivered = null,
+Object pSender = null,
+Object pReceiver = null,
+Object pSubject = null,
+Object pMessageBodyFileName = null,
+Object pCreatedAt = null,
+Object pGateway = null,
+Object pBCC = null,
+Object pCC = null,
+Object pUpdatedAt = null,
+Object pExceptionMessage = null,
+Object pExceptionStackTrace = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramDelivered = new DataColumnParameter(defDelivered, pDelivered);
+ DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
+ DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
+ DataColumnParameter paramBCC = new DataColumnParameter(defBCC, pBCC);
+ DataColumnParameter paramCC = new DataColumnParameter(defCC, pCC);
+ DataColumnParameter paramSubject = new DataColumnParameter(defSubject, pSubject);
+ DataColumnParameter paramMessageBodyFileName = new DataColumnParameter(defMessageBodyFileName, pMessageBodyFileName);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+ DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
+ DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
+ DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [Delivered]={2},[Sender]={3},[Receiver]={4},[BCC]={5},[CC]={6},[Subject]={7},[MessageBodyFileName]={8},[CreatedAt]={9},[UpdatedAt]={10},[ExceptionMessage]={11},[ExceptionStackTrace]={12},[Gateway]={13} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramDelivered.getSQLQuotedValueForUpdate(),
+paramSender.getSQLQuotedValueForUpdate(),
+paramReceiver.getSQLQuotedValueForUpdate(),
+paramBCC.getSQLQuotedValueForUpdate(),
+paramCC.getSQLQuotedValueForUpdate(),
+paramSubject.getSQLQuotedValueForUpdate(),
+paramMessageBodyFileName.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate(),
+paramExceptionMessage.getSQLQuotedValueForUpdate(),
+paramExceptionStackTrace.getSQLQuotedValueForUpdate(),
+paramGateway.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

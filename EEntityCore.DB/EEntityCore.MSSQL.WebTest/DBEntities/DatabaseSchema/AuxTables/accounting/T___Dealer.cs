@@ -592,6 +592,220 @@ Int32 pCountryID){
         }                   
 
 
+        public static int AddWithID(Int32 pPersonID,
+Boolean pIsActive,
+String pDealerCode,
+Int32 pCountryID,
+DateTime pCreatedAt,
+Object pBankID = null,
+Object pAccountNumber = null,
+Object pCompanyName = null,
+Object pWebsiteUrl = null,
+Object pOfficeAddress = null,
+Object pUpdatedAt = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+                DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+                DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+                DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+                DataColumnParameter paramDealerCode = new DataColumnParameter(defDealerCode, pDealerCode);
+                DataColumnParameter paramCompanyName = new DataColumnParameter(defCompanyName, pCompanyName);
+                DataColumnParameter paramWebsiteUrl = new DataColumnParameter(defWebsiteUrl, pWebsiteUrl);
+                DataColumnParameter paramOfficeAddress = new DataColumnParameter(defOfficeAddress, pOfficeAddress);
+                DataColumnParameter paramCountryID = new DataColumnParameter(defCountryID, pCountryID);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[BankID],[AccountNumber],[IsActive],[DealerCode],[CompanyName],[WebsiteUrl],[OfficeAddress],[CountryID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramPersonID.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramDealerCode.getSQLQuotedValueForAdd(),
+paramCompanyName.getSQLQuotedValueForAdd(),
+paramWebsiteUrl.getSQLQuotedValueForAdd(),
+paramOfficeAddress.getSQLQuotedValueForAdd(),
+paramCountryID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pPersonID,
+Boolean pIsActive,
+String pDealerCode,
+Int32 pCountryID,
+DateTime pCreatedAt,
+Object pBankID = null,
+Object pAccountNumber = null,
+Object pCompanyName = null,
+Object pWebsiteUrl = null,
+Object pOfficeAddress = null,
+Object pUpdatedAt = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+DataColumnParameter paramDealerCode = new DataColumnParameter(defDealerCode, pDealerCode);
+DataColumnParameter paramCompanyName = new DataColumnParameter(defCompanyName, pCompanyName);
+DataColumnParameter paramWebsiteUrl = new DataColumnParameter(defWebsiteUrl, pWebsiteUrl);
+DataColumnParameter paramOfficeAddress = new DataColumnParameter(defOfficeAddress, pOfficeAddress);
+DataColumnParameter paramCountryID = new DataColumnParameter(defCountryID, pCountryID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[BankID],[AccountNumber],[IsActive],[DealerCode],[CompanyName],[WebsiteUrl],[OfficeAddress],[CountryID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramPersonID.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramDealerCode.getSQLQuotedValueForAdd(),
+paramCompanyName.getSQLQuotedValueForAdd(),
+paramWebsiteUrl.getSQLQuotedValueForAdd(),
+paramOfficeAddress.getSQLQuotedValueForAdd(),
+paramCountryID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pPersonID,
+Boolean pIsActive,
+String pDealerCode,
+Int32 pCountryID,
+DateTime pCreatedAt,
+Object pBankID= null,
+Object pAccountNumber= null,
+Object pCompanyName= null,
+Object pWebsiteUrl= null,
+Object pOfficeAddress= null,
+Object pUpdatedAt= null){
+
+        try{
+
+DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+DataColumnParameter paramDealerCode = new DataColumnParameter(defDealerCode, pDealerCode);
+DataColumnParameter paramCompanyName = new DataColumnParameter(defCompanyName, pCompanyName);
+DataColumnParameter paramWebsiteUrl = new DataColumnParameter(defWebsiteUrl, pWebsiteUrl);
+DataColumnParameter paramOfficeAddress = new DataColumnParameter(defOfficeAddress, pOfficeAddress);
+DataColumnParameter paramCountryID = new DataColumnParameter(defCountryID, pCountryID);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([PersonID],[BankID],[AccountNumber],[IsActive],[DealerCode],[CompanyName],[WebsiteUrl],[OfficeAddress],[CountryID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) ", TABLE_NAME,paramPersonID.getSQLQuotedValueForAdd(),
+paramBankID.getSQLQuotedValueForAdd(),
+paramAccountNumber.getSQLQuotedValueForAdd(),
+paramIsActive.getSQLQuotedValueForAdd(),
+paramDealerCode.getSQLQuotedValueForAdd(),
+paramCompanyName.getSQLQuotedValueForAdd(),
+paramWebsiteUrl.getSQLQuotedValueForAdd(),
+paramOfficeAddress.getSQLQuotedValueForAdd(),
+paramCountryID.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pPersonID = null,
+Object pIsActive = null,
+Object pDealerCode = null,
+Object pCountryID = null,
+Object pCreatedAt = null,
+Object pBankID = null,
+Object pAccountNumber = null,
+Object pCompanyName = null,
+Object pWebsiteUrl = null,
+Object pOfficeAddress = null,
+Object pUpdatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
+ DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
+ DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
+ DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
+ DataColumnParameter paramDealerCode = new DataColumnParameter(defDealerCode, pDealerCode);
+ DataColumnParameter paramCompanyName = new DataColumnParameter(defCompanyName, pCompanyName);
+ DataColumnParameter paramWebsiteUrl = new DataColumnParameter(defWebsiteUrl, pWebsiteUrl);
+ DataColumnParameter paramOfficeAddress = new DataColumnParameter(defOfficeAddress, pOfficeAddress);
+ DataColumnParameter paramCountryID = new DataColumnParameter(defCountryID, pCountryID);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [PersonID]={2},[BankID]={3},[AccountNumber]={4},[IsActive]={5},[DealerCode]={6},[CompanyName]={7},[WebsiteUrl]={8},[OfficeAddress]={9},[CountryID]={10},[CreatedAt]={11},[UpdatedAt]={12} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPersonID.getSQLQuotedValueForUpdate(),
+paramBankID.getSQLQuotedValueForUpdate(),
+paramAccountNumber.getSQLQuotedValueForUpdate(),
+paramIsActive.getSQLQuotedValueForUpdate(),
+paramDealerCode.getSQLQuotedValueForUpdate(),
+paramCompanyName.getSQLQuotedValueForUpdate(),
+paramWebsiteUrl.getSQLQuotedValueForUpdate(),
+paramOfficeAddress.getSQLQuotedValueForUpdate(),
+paramCountryID.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

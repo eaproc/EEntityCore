@@ -564,6 +564,208 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(Int32 pOnlinePaymentID,
+DateTime pCreatedAt,
+Object pAuthorizationCode = null,
+Object pCardType = null,
+Object pBIN = null,
+Object pLast4Digits = null,
+Object pExpirationMonth = null,
+Object pExpirationYear = null,
+Object pBank = null,
+Object pCountryCode = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramOnlinePaymentID = new DataColumnParameter(defOnlinePaymentID, pOnlinePaymentID);
+                DataColumnParameter paramAuthorizationCode = new DataColumnParameter(defAuthorizationCode, pAuthorizationCode);
+                DataColumnParameter paramCardType = new DataColumnParameter(defCardType, pCardType);
+                DataColumnParameter paramBIN = new DataColumnParameter(defBIN, pBIN);
+                DataColumnParameter paramLast4Digits = new DataColumnParameter(defLast4Digits, pLast4Digits);
+                DataColumnParameter paramExpirationMonth = new DataColumnParameter(defExpirationMonth, pExpirationMonth);
+                DataColumnParameter paramExpirationYear = new DataColumnParameter(defExpirationYear, pExpirationYear);
+                DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
+                DataColumnParameter paramCountryCode = new DataColumnParameter(defCountryCode, pCountryCode);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramOnlinePaymentID.getSQLQuotedValueForAdd(),
+paramAuthorizationCode.getSQLQuotedValueForAdd(),
+paramCardType.getSQLQuotedValueForAdd(),
+paramBIN.getSQLQuotedValueForAdd(),
+paramLast4Digits.getSQLQuotedValueForAdd(),
+paramExpirationMonth.getSQLQuotedValueForAdd(),
+paramExpirationYear.getSQLQuotedValueForAdd(),
+paramBank.getSQLQuotedValueForAdd(),
+paramCountryCode.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pOnlinePaymentID,
+DateTime pCreatedAt,
+Object pAuthorizationCode = null,
+Object pCardType = null,
+Object pBIN = null,
+Object pLast4Digits = null,
+Object pExpirationMonth = null,
+Object pExpirationYear = null,
+Object pBank = null,
+Object pCountryCode = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramOnlinePaymentID = new DataColumnParameter(defOnlinePaymentID, pOnlinePaymentID);
+DataColumnParameter paramAuthorizationCode = new DataColumnParameter(defAuthorizationCode, pAuthorizationCode);
+DataColumnParameter paramCardType = new DataColumnParameter(defCardType, pCardType);
+DataColumnParameter paramBIN = new DataColumnParameter(defBIN, pBIN);
+DataColumnParameter paramLast4Digits = new DataColumnParameter(defLast4Digits, pLast4Digits);
+DataColumnParameter paramExpirationMonth = new DataColumnParameter(defExpirationMonth, pExpirationMonth);
+DataColumnParameter paramExpirationYear = new DataColumnParameter(defExpirationYear, pExpirationYear);
+DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
+DataColumnParameter paramCountryCode = new DataColumnParameter(defCountryCode, pCountryCode);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramOnlinePaymentID.getSQLQuotedValueForAdd(),
+paramAuthorizationCode.getSQLQuotedValueForAdd(),
+paramCardType.getSQLQuotedValueForAdd(),
+paramBIN.getSQLQuotedValueForAdd(),
+paramLast4Digits.getSQLQuotedValueForAdd(),
+paramExpirationMonth.getSQLQuotedValueForAdd(),
+paramExpirationYear.getSQLQuotedValueForAdd(),
+paramBank.getSQLQuotedValueForAdd(),
+paramCountryCode.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pOnlinePaymentID,
+DateTime pCreatedAt,
+Object pAuthorizationCode= null,
+Object pCardType= null,
+Object pBIN= null,
+Object pLast4Digits= null,
+Object pExpirationMonth= null,
+Object pExpirationYear= null,
+Object pBank= null,
+Object pCountryCode= null){
+
+        try{
+
+DataColumnParameter paramOnlinePaymentID = new DataColumnParameter(defOnlinePaymentID, pOnlinePaymentID);
+DataColumnParameter paramAuthorizationCode = new DataColumnParameter(defAuthorizationCode, pAuthorizationCode);
+DataColumnParameter paramCardType = new DataColumnParameter(defCardType, pCardType);
+DataColumnParameter paramBIN = new DataColumnParameter(defBIN, pBIN);
+DataColumnParameter paramLast4Digits = new DataColumnParameter(defLast4Digits, pLast4Digits);
+DataColumnParameter paramExpirationMonth = new DataColumnParameter(defExpirationMonth, pExpirationMonth);
+DataColumnParameter paramExpirationYear = new DataColumnParameter(defExpirationYear, pExpirationYear);
+DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
+DataColumnParameter paramCountryCode = new DataColumnParameter(defCountryCode, pCountryCode);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,paramOnlinePaymentID.getSQLQuotedValueForAdd(),
+paramAuthorizationCode.getSQLQuotedValueForAdd(),
+paramCardType.getSQLQuotedValueForAdd(),
+paramBIN.getSQLQuotedValueForAdd(),
+paramLast4Digits.getSQLQuotedValueForAdd(),
+paramExpirationMonth.getSQLQuotedValueForAdd(),
+paramExpirationYear.getSQLQuotedValueForAdd(),
+paramBank.getSQLQuotedValueForAdd(),
+paramCountryCode.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pOnlinePaymentID = null,
+Object pCreatedAt = null,
+Object pAuthorizationCode = null,
+Object pCardType = null,
+Object pBIN = null,
+Object pLast4Digits = null,
+Object pExpirationMonth = null,
+Object pExpirationYear = null,
+Object pBank = null,
+Object pCountryCode = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramOnlinePaymentID = new DataColumnParameter(defOnlinePaymentID, pOnlinePaymentID);
+ DataColumnParameter paramAuthorizationCode = new DataColumnParameter(defAuthorizationCode, pAuthorizationCode);
+ DataColumnParameter paramCardType = new DataColumnParameter(defCardType, pCardType);
+ DataColumnParameter paramBIN = new DataColumnParameter(defBIN, pBIN);
+ DataColumnParameter paramLast4Digits = new DataColumnParameter(defLast4Digits, pLast4Digits);
+ DataColumnParameter paramExpirationMonth = new DataColumnParameter(defExpirationMonth, pExpirationMonth);
+ DataColumnParameter paramExpirationYear = new DataColumnParameter(defExpirationYear, pExpirationYear);
+ DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
+ DataColumnParameter paramCountryCode = new DataColumnParameter(defCountryCode, pCountryCode);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [OnlinePaymentID]={2},[AuthorizationCode]={3},[CardType]={4},[BIN]={5},[Last4Digits]={6},[ExpirationMonth]={7},[ExpirationYear]={8},[Bank]={9},[CountryCode]={10},[CreatedAt]={11} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramOnlinePaymentID.getSQLQuotedValueForUpdate(),
+paramAuthorizationCode.getSQLQuotedValueForUpdate(),
+paramCardType.getSQLQuotedValueForUpdate(),
+paramBIN.getSQLQuotedValueForUpdate(),
+paramLast4Digits.getSQLQuotedValueForUpdate(),
+paramExpirationMonth.getSQLQuotedValueForUpdate(),
+paramExpirationYear.getSQLQuotedValueForUpdate(),
+paramBank.getSQLQuotedValueForUpdate(),
+paramCountryCode.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   

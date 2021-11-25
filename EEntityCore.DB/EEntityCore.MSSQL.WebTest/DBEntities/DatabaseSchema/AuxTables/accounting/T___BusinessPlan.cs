@@ -592,6 +592,232 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                   
 
 
+        public static int AddWithID(Int32 pAcademicSessionID,
+Int32 pStudentPopulation,
+Decimal pAveragePricePerStudent,
+Decimal pSCADWAREAccessRevenue,
+Decimal pSideContractRevenue,
+Decimal pGrossRevenue,
+Decimal pWages,
+Decimal pMarketing,
+Decimal pCharity,
+Decimal pOthers,
+DateTime pCreatedAt,
+Object pUpdatedAt = null){
+
+
+            try{
+
+                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
+                DataColumnParameter paramAcademicSessionID = new DataColumnParameter(defAcademicSessionID, pAcademicSessionID);
+                DataColumnParameter paramStudentPopulation = new DataColumnParameter(defStudentPopulation, pStudentPopulation);
+                DataColumnParameter paramAveragePricePerStudent = new DataColumnParameter(defAveragePricePerStudent, pAveragePricePerStudent);
+                DataColumnParameter paramSCADWAREAccessRevenue = new DataColumnParameter(defSCADWAREAccessRevenue, pSCADWAREAccessRevenue);
+                DataColumnParameter paramSideContractRevenue = new DataColumnParameter(defSideContractRevenue, pSideContractRevenue);
+                DataColumnParameter paramGrossRevenue = new DataColumnParameter(defGrossRevenue, pGrossRevenue);
+                DataColumnParameter paramWages = new DataColumnParameter(defWages, pWages);
+                DataColumnParameter paramMarketing = new DataColumnParameter(defMarketing, pMarketing);
+                DataColumnParameter paramCharity = new DataColumnParameter(defCharity, pCharity);
+                DataColumnParameter paramOthers = new DataColumnParameter(defOthers, pOthers);
+                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+                DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramAcademicSessionID.getSQLQuotedValueForAdd(),
+paramStudentPopulation.getSQLQuotedValueForAdd(),
+paramAveragePricePerStudent.getSQLQuotedValueForAdd(),
+paramSCADWAREAccessRevenue.getSQLQuotedValueForAdd(),
+paramSideContractRevenue.getSQLQuotedValueForAdd(),
+paramGrossRevenue.getSQLQuotedValueForAdd(),
+paramWages.getSQLQuotedValueForAdd(),
+paramMarketing.getSQLQuotedValueForAdd(),
+paramCharity.getSQLQuotedValueForAdd(),
+paramOthers.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+                return EInt.valueOf(paramID.Value);                                     
+            }catch (Exception){                                     
+                throw;                                     
+            }                         
+       }                         
+
+
+        public static int  AddWithParseID(Int32 pParseID ,Int32 pAcademicSessionID,
+Int32 pStudentPopulation,
+Decimal pAveragePricePerStudent,
+Decimal pSCADWAREAccessRevenue,
+Decimal pSideContractRevenue,
+Decimal pGrossRevenue,
+Decimal pWages,
+Decimal pMarketing,
+Decimal pCharity,
+Decimal pOthers,
+DateTime pCreatedAt,
+Object pUpdatedAt = null){
+
+        try{
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
+DataColumnParameter paramAcademicSessionID = new DataColumnParameter(defAcademicSessionID, pAcademicSessionID);
+DataColumnParameter paramStudentPopulation = new DataColumnParameter(defStudentPopulation, pStudentPopulation);
+DataColumnParameter paramAveragePricePerStudent = new DataColumnParameter(defAveragePricePerStudent, pAveragePricePerStudent);
+DataColumnParameter paramSCADWAREAccessRevenue = new DataColumnParameter(defSCADWAREAccessRevenue, pSCADWAREAccessRevenue);
+DataColumnParameter paramSideContractRevenue = new DataColumnParameter(defSideContractRevenue, pSideContractRevenue);
+DataColumnParameter paramGrossRevenue = new DataColumnParameter(defGrossRevenue, pGrossRevenue);
+DataColumnParameter paramWages = new DataColumnParameter(defWages, pWages);
+DataColumnParameter paramMarketing = new DataColumnParameter(defMarketing, pMarketing);
+DataColumnParameter paramCharity = new DataColumnParameter(defCharity, pCharity);
+DataColumnParameter paramOthers = new DataColumnParameter(defOthers, pOthers);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
+paramAcademicSessionID.getSQLQuotedValueForAdd(),
+paramStudentPopulation.getSQLQuotedValueForAdd(),
+paramAveragePricePerStudent.getSQLQuotedValueForAdd(),
+paramSCADWAREAccessRevenue.getSQLQuotedValueForAdd(),
+paramSideContractRevenue.getSQLQuotedValueForAdd(),
+paramGrossRevenue.getSQLQuotedValueForAdd(),
+paramWages.getSQLQuotedValueForAdd(),
+paramMarketing.getSQLQuotedValueForAdd(),
+paramCharity.getSQLQuotedValueForAdd(),
+paramOthers.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+
+
+            return EInt.valueOf(paramID.Value); 
+
+}catch (Exception){
+throw; 
+}
+}
+
+
+
+/// <summary> 
+/// You can not save image with this method 
+/// </summary> 
+/// <returns>Boolean</returns> /// <remarks></remarks> 
+        public static bool Add(Int32 pAcademicSessionID,
+Int32 pStudentPopulation,
+Decimal pAveragePricePerStudent,
+Decimal pSCADWAREAccessRevenue,
+Decimal pSideContractRevenue,
+Decimal pGrossRevenue,
+Decimal pWages,
+Decimal pMarketing,
+Decimal pCharity,
+Decimal pOthers,
+DateTime pCreatedAt,
+Object pUpdatedAt= null){
+
+        try{
+
+DataColumnParameter paramAcademicSessionID = new DataColumnParameter(defAcademicSessionID, pAcademicSessionID);
+DataColumnParameter paramStudentPopulation = new DataColumnParameter(defStudentPopulation, pStudentPopulation);
+DataColumnParameter paramAveragePricePerStudent = new DataColumnParameter(defAveragePricePerStudent, pAveragePricePerStudent);
+DataColumnParameter paramSCADWAREAccessRevenue = new DataColumnParameter(defSCADWAREAccessRevenue, pSCADWAREAccessRevenue);
+DataColumnParameter paramSideContractRevenue = new DataColumnParameter(defSideContractRevenue, pSideContractRevenue);
+DataColumnParameter paramGrossRevenue = new DataColumnParameter(defGrossRevenue, pGrossRevenue);
+DataColumnParameter paramWages = new DataColumnParameter(defWages, pWages);
+DataColumnParameter paramMarketing = new DataColumnParameter(defMarketing, pMarketing);
+DataColumnParameter paramCharity = new DataColumnParameter(defCharity, pCharity);
+DataColumnParameter paramOthers = new DataColumnParameter(defOthers, pOthers);
+DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+return DBConnectInterface.GetDBConn().DbExec(
+     String.Format("INSERT INTO {0}([AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) ", TABLE_NAME,paramAcademicSessionID.getSQLQuotedValueForAdd(),
+paramStudentPopulation.getSQLQuotedValueForAdd(),
+paramAveragePricePerStudent.getSQLQuotedValueForAdd(),
+paramSCADWAREAccessRevenue.getSQLQuotedValueForAdd(),
+paramSideContractRevenue.getSQLQuotedValueForAdd(),
+paramGrossRevenue.getSQLQuotedValueForAdd(),
+paramWages.getSQLQuotedValueForAdd(),
+paramMarketing.getSQLQuotedValueForAdd(),
+paramCharity.getSQLQuotedValueForAdd(),
+paramOthers.getSQLQuotedValueForAdd(),
+paramCreatedAt.getSQLQuotedValueForAdd(),
+paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+
+
+}catch (Exception){
+throw; 
+}
+}
+
+/// <summary> 
+/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
+/// </summary> 
+/// <returns>Boolean</returns> 
+/// <remarks></remarks>                            
+        public static bool Update(Int64 pID  ,
+Object pAcademicSessionID = null,
+Object pStudentPopulation = null,
+Object pAveragePricePerStudent = null,
+Object pSCADWAREAccessRevenue = null,
+Object pSideContractRevenue = null,
+Object pGrossRevenue = null,
+Object pWages = null,
+Object pMarketing = null,
+Object pCharity = null,
+Object pOthers = null,
+Object pCreatedAt = null,
+Object pUpdatedAt = null){
+
+try{
+
+
+ DataColumnParameter paramID = new DataColumnParameter(defID, pID);
+ DataColumnParameter paramAcademicSessionID = new DataColumnParameter(defAcademicSessionID, pAcademicSessionID);
+ DataColumnParameter paramStudentPopulation = new DataColumnParameter(defStudentPopulation, pStudentPopulation);
+ DataColumnParameter paramAveragePricePerStudent = new DataColumnParameter(defAveragePricePerStudent, pAveragePricePerStudent);
+ DataColumnParameter paramSCADWAREAccessRevenue = new DataColumnParameter(defSCADWAREAccessRevenue, pSCADWAREAccessRevenue);
+ DataColumnParameter paramSideContractRevenue = new DataColumnParameter(defSideContractRevenue, pSideContractRevenue);
+ DataColumnParameter paramGrossRevenue = new DataColumnParameter(defGrossRevenue, pGrossRevenue);
+ DataColumnParameter paramWages = new DataColumnParameter(defWages, pWages);
+ DataColumnParameter paramMarketing = new DataColumnParameter(defMarketing, pMarketing);
+ DataColumnParameter paramCharity = new DataColumnParameter(defCharity, pCharity);
+ DataColumnParameter paramOthers = new DataColumnParameter(defOthers, pOthers);
+ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
+ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
+
+
+DBConnectInterface.GetDBConn().DbExec(
+     String.Format("UPDATE {0} SET [AcademicSessionID]={2},[StudentPopulation]={3},[AveragePricePerStudent]={4},[SCADWAREAccessRevenue]={5},[SideContractRevenue]={6},[GrossRevenue]={7},[Wages]={8},[Marketing]={9},[Charity]={10},[Others]={11},[CreatedAt]={12},[UpdatedAt]={13} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramAcademicSessionID.getSQLQuotedValueForUpdate(),
+paramStudentPopulation.getSQLQuotedValueForUpdate(),
+paramAveragePricePerStudent.getSQLQuotedValueForUpdate(),
+paramSCADWAREAccessRevenue.getSQLQuotedValueForUpdate(),
+paramSideContractRevenue.getSQLQuotedValueForUpdate(),
+paramGrossRevenue.getSQLQuotedValueForUpdate(),
+paramWages.getSQLQuotedValueForUpdate(),
+paramMarketing.getSQLQuotedValueForUpdate(),
+paramCharity.getSQLQuotedValueForUpdate(),
+paramOthers.getSQLQuotedValueForUpdate(),
+paramCreatedAt.getSQLQuotedValueForUpdate(),
+paramUpdatedAt.getSQLQuotedValueForUpdate()  ), true);
+
+
+                       // Nothing means ignore but null means clear
+                               return true;
+
+}catch (Exception){
+throw; 
+}
+}
+
 
 
                   
