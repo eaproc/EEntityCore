@@ -11,9 +11,9 @@ Namespace Interfaces
         ''' </summary>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Function getReferencedTableNames() As List(Of String)
+        Function GetReferencedTableNames() As List(Of String)
 
-        Function getViewName() As String
+        Function GetViewName() As String
 
     End Interface
 

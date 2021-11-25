@@ -13,7 +13,7 @@ using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
 namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTables.auth                  
 {                  
 
-    public class T___Link : Sample__Table, IDataColumnDefinitionsHolder, IDBTableDefinitionPlugIn                  
+    public class T___Link : SimpleTablePlugIn, IDataColumnDefinitionsHolder, IDBTableDefinitionPlugIn                  
     {                  
                   
 #region Constructors                  
@@ -234,6 +234,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
        private static List<IDBTableDefinitionPlugIn.ForeignKeyDefinition> ForeignKeys;                  
 
+       public override string TableName => TABLE_NAME;
        private static Dictionary<string, DataColumnDefinition> ColumnDefns; 
 
        public static readonly DataColumnDefinition defID;
@@ -509,20 +510,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
                   
-        public List<IDBTableDefinitionPlugIn.ForeignKeyDefinition> getForeignKeys()                  
-        {                  
-            return ForeignKeys;                  
-        }                  
+        public List<IDBTableDefinitionPlugIn.ForeignKeyDefinition> GetForeignKeys() => ForeignKeys;                  
                   
-        public string getTableName()                  
-        {                  
-            return TABLE_NAME;                  
-        }                  
+        public string GetTableName() => TableName;
 
                   
-        public virtual string getFillSQL(){                
-            return Link__NO__BINARY___SQL_FILL_QUERY;                  
-        }                  
+        public virtual string GetFillSQL() => Link__NO__BINARY___SQL_FILL_QUERY;
                   
                   
                   

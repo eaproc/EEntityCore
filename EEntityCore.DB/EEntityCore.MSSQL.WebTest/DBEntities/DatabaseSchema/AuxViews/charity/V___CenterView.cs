@@ -13,7 +13,7 @@ using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
 namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews.charity                  
 {                  
 
-    public class V___CenterView : Sample__Table, IDataColumnDefinitionsHolder, IDBViewDefinitionPlugIn                  
+    public class V___CenterView : SimpleTablePlugIn, IDataColumnDefinitionsHolder, IDBViewDefinitionPlugIn                  
     {                  
                   
 #region Constructors                  
@@ -217,6 +217,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
        private static List<string> ReferencedTableNames;                  
 
+       public override string TableName => TABLE_NAME;
        private static Dictionary<string, DataColumnDefinition> ColumnDefns; 
 
        public static readonly DataColumnDefinition defName;
@@ -519,15 +520,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         }                  
 
                   
-    public List<string> getReferencedTableNames()                  
-    {                  
-        return ReferencedTableNames;                  
-    }                  
+        public List<string> GetReferencedTableNames() => ReferencedTableNames;                  
                   
-    public string getViewName()                  
-    {                  
-        return TABLE_NAME;                  
-    }                  
+        public string GetViewName() => TableName;
 
                   
                   

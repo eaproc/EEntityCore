@@ -66,12 +66,12 @@ Namespace Interfaces
         ''' </summary>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Function getForeignKeys() As List(Of ForeignKeyDefinition)
+        Function GetForeignKeys() As List(Of ForeignKeyDefinition)
 
 
-        Function getTableName() As String
+        Function GetTableName() As String
 
-        Function getFillSQL() As String
+        Function GetFillSQL() As String
 
     End Interface
 
