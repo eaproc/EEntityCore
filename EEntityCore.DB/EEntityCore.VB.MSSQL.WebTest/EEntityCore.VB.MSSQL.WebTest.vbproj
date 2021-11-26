@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="DBEntities\CredentialManager.vb" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="DBEntities\DatabaseSchema.ini" />
   </ItemGroup>
 
@@ -31,6 +35,10 @@
     <Reference Include="EWebFrameworkCore.Vendor">
       <HintPath>..\..\..\EWebFrameworkCore\EWebFrameworkCore.Vendor\bin\Debug\net5.0\EWebFrameworkCore.Vendor.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DBEntities\" />
   </ItemGroup>
 
 </Project>

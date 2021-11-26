@@ -1,9 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>EEntityCore.DB</RootNamespace>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Abstracts\All__DBs.vb" />
+    <None Remove="Abstracts\Sample__Table.vb" />
+    <None Remove="Abstracts\SimpleTablePlugIn.vb" />
+    <None Remove="Exceptions\SQLCodeException.vb" />
+    <None Remove="Generic\RecordSet.vb" />
+    <None Remove="Interfaces\IAll__DBs.vb" />
+    <None Remove="Modules\basExtensions.vb" />
+  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="CODERiT.Logger.Standard.VB">

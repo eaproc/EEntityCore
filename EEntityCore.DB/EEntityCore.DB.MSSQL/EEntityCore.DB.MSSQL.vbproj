@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EEntityCore.DB\EEntityCore.DB.vbproj" />
+    <ProjectReference Include="..\EEntityCore.DB\EEntityCore.DB.csproj" />
   </ItemGroup>
 
   <ItemGroup>
