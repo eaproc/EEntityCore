@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,15 +23,15 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___Users()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defUsername = new DataColumnDefinition(TableColumnNames.Username.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defPersonID = new DataColumnDefinition(TableColumnNames.PersonID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defUserPassword = new DataColumnDefinition(TableColumnNames.UserPassword.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defRememberToken = new DataColumnDefinition(TableColumnNames.RememberToken.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsActive = new DataColumnDefinition(TableColumnNames.IsActive.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defResetModeCarrier = new DataColumnDefinition(TableColumnNames.ResetModeCarrier.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defUsername = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Username.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defPersonID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defUserPassword = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserPassword.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defRememberToken = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RememberToken.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsActive.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defResetModeCarrier = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ResetModeCarrier.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -335,7 +336,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -355,7 +356,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -417,10 +418,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -428,7 +426,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -517,15 +515,15 @@ Int32 pPersonID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramUsername.getSQLQuotedValueForAdd(),
-                paramPersonID.getSQLQuotedValueForAdd(),
-                paramUserPassword.getSQLQuotedValueForAdd(),
-                paramRememberToken.getSQLQuotedValueForAdd(),
-                paramIsActive.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramUpdatedAt.getSQLQuotedValueForAdd(),
-                paramResetModeCarrier.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramUsername.GetSQLQuotedValueForAdd(),
+                paramPersonID.GetSQLQuotedValueForAdd(),
+                paramUserPassword.GetSQLQuotedValueForAdd(),
+                paramRememberToken.GetSQLQuotedValueForAdd(),
+                paramIsActive.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                paramResetModeCarrier.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -562,15 +560,15 @@ Object pResetModeCarrier = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramUsername.getSQLQuotedValueForAdd(),
-paramPersonID.getSQLQuotedValueForAdd(),
-paramUserPassword.getSQLQuotedValueForAdd(),
-paramRememberToken.getSQLQuotedValueForAdd(),
-paramIsActive.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramResetModeCarrier.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramUsername.GetSQLQuotedValueForAdd(),
+paramPersonID.GetSQLQuotedValueForAdd(),
+paramUserPassword.GetSQLQuotedValueForAdd(),
+paramRememberToken.GetSQLQuotedValueForAdd(),
+paramIsActive.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramResetModeCarrier.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -605,15 +603,15 @@ DataColumnParameter paramResetModeCarrier = new DataColumnParameter(defResetMode
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramUsername.getSQLQuotedValueForAdd(),
-paramPersonID.getSQLQuotedValueForAdd(),
-paramUserPassword.getSQLQuotedValueForAdd(),
-paramRememberToken.getSQLQuotedValueForAdd(),
-paramIsActive.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramResetModeCarrier.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramUsername.GetSQLQuotedValueForAdd(),
+paramPersonID.GetSQLQuotedValueForAdd(),
+paramUserPassword.GetSQLQuotedValueForAdd(),
+paramRememberToken.GetSQLQuotedValueForAdd(),
+paramIsActive.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramResetModeCarrier.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -653,14 +651,14 @@ DataColumnParameter paramResetModeCarrier = new DataColumnParameter(defResetMode
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) ", TABLE_NAME,paramUsername.getSQLQuotedValueForAdd(),
-paramPersonID.getSQLQuotedValueForAdd(),
-paramUserPassword.getSQLQuotedValueForAdd(),
-paramRememberToken.getSQLQuotedValueForAdd(),
-paramIsActive.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramResetModeCarrier.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) ", TABLE_NAME,paramUsername.GetSQLQuotedValueForAdd(),
+paramPersonID.GetSQLQuotedValueForAdd(),
+paramUserPassword.GetSQLQuotedValueForAdd(),
+paramRememberToken.GetSQLQuotedValueForAdd(),
+paramIsActive.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramResetModeCarrier.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -700,14 +698,14 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [Username]={2},[PersonID]={3},[UserPassword]={4},[RememberToken]={5},[IsActive]={6},[CreatedAt]={7},[UpdatedAt]={8},[ResetModeCarrier]={9} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramUsername.getSQLQuotedValueForUpdate(),
-paramPersonID.getSQLQuotedValueForUpdate(),
-paramUserPassword.getSQLQuotedValueForUpdate(),
-paramRememberToken.getSQLQuotedValueForUpdate(),
-paramIsActive.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramUpdatedAt.getSQLQuotedValueForUpdate(),
-paramResetModeCarrier.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [Username]={2},[PersonID]={3},[UserPassword]={4},[RememberToken]={5},[IsActive]={6},[CreatedAt]={7},[UpdatedAt]={8},[ResetModeCarrier]={9} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramUsername.GetSQLQuotedValueForUpdate(),
+paramPersonID.GetSQLQuotedValueForUpdate(),
+paramUserPassword.GetSQLQuotedValueForUpdate(),
+paramRememberToken.GetSQLQuotedValueForUpdate(),
+paramIsActive.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramUpdatedAt.GetSQLQuotedValueForUpdate(),
+paramResetModeCarrier.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

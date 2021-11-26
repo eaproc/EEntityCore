@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,19 +23,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___MonthlyDonation()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defCenterID = new DataColumnDefinition(TableColumnNames.CenterID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defResidingPastorID = new DataColumnDefinition(TableColumnNames.ResidingPastorID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defBankID = new DataColumnDefinition(TableColumnNames.BankID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defAccountNumber = new DataColumnDefinition(TableColumnNames.AccountNumber.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDonationYear = new DataColumnDefinition(TableColumnNames.DonationYear.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDonationMonth = new DataColumnDefinition(TableColumnNames.DonationMonth.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsApproved = new DataColumnDefinition(TableColumnNames.IsApproved.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsDisbursed = new DataColumnDefinition(TableColumnNames.IsDisbursed.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedByID = new DataColumnDefinition(TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defUpdatedByID = new DataColumnDefinition(TableColumnNames.UpdatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defCenterID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CenterID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defResidingPastorID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ResidingPastorID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defBankID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BankID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defAccountNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountNumber.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDonationYear = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DonationYear.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDonationMonth = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DonationMonth.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsApproved = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsApproved.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsDisbursed = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsDisbursed.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defUpdatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -401,7 +402,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -421,7 +422,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -483,10 +484,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -494,7 +492,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -590,19 +588,19 @@ Int32 pUpdatedByID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[ResidingPastorID],[BankID],[AccountNumber],[DonationYear],[DonationMonth],[IsApproved],[IsDisbursed],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramCenterID.getSQLQuotedValueForAdd(),
-                paramResidingPastorID.getSQLQuotedValueForAdd(),
-                paramBankID.getSQLQuotedValueForAdd(),
-                paramAccountNumber.getSQLQuotedValueForAdd(),
-                paramDonationYear.getSQLQuotedValueForAdd(),
-                paramDonationMonth.getSQLQuotedValueForAdd(),
-                paramIsApproved.getSQLQuotedValueForAdd(),
-                paramIsDisbursed.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramUpdatedAt.getSQLQuotedValueForAdd(),
-                paramCreatedByID.getSQLQuotedValueForAdd(),
-                paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[ResidingPastorID],[BankID],[AccountNumber],[DonationYear],[DonationMonth],[IsApproved],[IsDisbursed],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramCenterID.GetSQLQuotedValueForAdd(),
+                paramResidingPastorID.GetSQLQuotedValueForAdd(),
+                paramBankID.GetSQLQuotedValueForAdd(),
+                paramAccountNumber.GetSQLQuotedValueForAdd(),
+                paramDonationYear.GetSQLQuotedValueForAdd(),
+                paramDonationMonth.GetSQLQuotedValueForAdd(),
+                paramIsApproved.GetSQLQuotedValueForAdd(),
+                paramIsDisbursed.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                paramCreatedByID.GetSQLQuotedValueForAdd(),
+                paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -647,19 +645,19 @@ Int32 pUpdatedByID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[ResidingPastorID],[BankID],[AccountNumber],[DonationYear],[DonationMonth],[IsApproved],[IsDisbursed],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramCenterID.getSQLQuotedValueForAdd(),
-paramResidingPastorID.getSQLQuotedValueForAdd(),
-paramBankID.getSQLQuotedValueForAdd(),
-paramAccountNumber.getSQLQuotedValueForAdd(),
-paramDonationYear.getSQLQuotedValueForAdd(),
-paramDonationMonth.getSQLQuotedValueForAdd(),
-paramIsApproved.getSQLQuotedValueForAdd(),
-paramIsDisbursed.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[ResidingPastorID],[BankID],[AccountNumber],[DonationYear],[DonationMonth],[IsApproved],[IsDisbursed],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramCenterID.GetSQLQuotedValueForAdd(),
+paramResidingPastorID.GetSQLQuotedValueForAdd(),
+paramBankID.GetSQLQuotedValueForAdd(),
+paramAccountNumber.GetSQLQuotedValueForAdd(),
+paramDonationYear.GetSQLQuotedValueForAdd(),
+paramDonationMonth.GetSQLQuotedValueForAdd(),
+paramIsApproved.GetSQLQuotedValueForAdd(),
+paramIsDisbursed.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -702,19 +700,19 @@ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, p
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[ResidingPastorID],[BankID],[AccountNumber],[DonationYear],[DonationMonth],[IsApproved],[IsDisbursed],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramCenterID.getSQLQuotedValueForAdd(),
-paramResidingPastorID.getSQLQuotedValueForAdd(),
-paramBankID.getSQLQuotedValueForAdd(),
-paramAccountNumber.getSQLQuotedValueForAdd(),
-paramDonationYear.getSQLQuotedValueForAdd(),
-paramDonationMonth.getSQLQuotedValueForAdd(),
-paramIsApproved.getSQLQuotedValueForAdd(),
-paramIsDisbursed.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[ResidingPastorID],[BankID],[AccountNumber],[DonationYear],[DonationMonth],[IsApproved],[IsDisbursed],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramCenterID.GetSQLQuotedValueForAdd(),
+paramResidingPastorID.GetSQLQuotedValueForAdd(),
+paramBankID.GetSQLQuotedValueForAdd(),
+paramAccountNumber.GetSQLQuotedValueForAdd(),
+paramDonationYear.GetSQLQuotedValueForAdd(),
+paramDonationMonth.GetSQLQuotedValueForAdd(),
+paramIsApproved.GetSQLQuotedValueForAdd(),
+paramIsDisbursed.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -762,18 +760,18 @@ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, p
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([CenterID],[ResidingPastorID],[BankID],[AccountNumber],[DonationYear],[DonationMonth],[IsApproved],[IsDisbursed],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) ", TABLE_NAME,paramCenterID.getSQLQuotedValueForAdd(),
-paramResidingPastorID.getSQLQuotedValueForAdd(),
-paramBankID.getSQLQuotedValueForAdd(),
-paramAccountNumber.getSQLQuotedValueForAdd(),
-paramDonationYear.getSQLQuotedValueForAdd(),
-paramDonationMonth.getSQLQuotedValueForAdd(),
-paramIsApproved.getSQLQuotedValueForAdd(),
-paramIsDisbursed.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([CenterID],[ResidingPastorID],[BankID],[AccountNumber],[DonationYear],[DonationMonth],[IsApproved],[IsDisbursed],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) ", TABLE_NAME,paramCenterID.GetSQLQuotedValueForAdd(),
+paramResidingPastorID.GetSQLQuotedValueForAdd(),
+paramBankID.GetSQLQuotedValueForAdd(),
+paramAccountNumber.GetSQLQuotedValueForAdd(),
+paramDonationYear.GetSQLQuotedValueForAdd(),
+paramDonationMonth.GetSQLQuotedValueForAdd(),
+paramIsApproved.GetSQLQuotedValueForAdd(),
+paramIsDisbursed.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -821,18 +819,18 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [CenterID]={2},[ResidingPastorID]={3},[BankID]={4},[AccountNumber]={5},[DonationYear]={6},[DonationMonth]={7},[IsApproved]={8},[IsDisbursed]={9},[CreatedAt]={10},[UpdatedAt]={11},[CreatedByID]={12},[UpdatedByID]={13} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCenterID.getSQLQuotedValueForUpdate(),
-paramResidingPastorID.getSQLQuotedValueForUpdate(),
-paramBankID.getSQLQuotedValueForUpdate(),
-paramAccountNumber.getSQLQuotedValueForUpdate(),
-paramDonationYear.getSQLQuotedValueForUpdate(),
-paramDonationMonth.getSQLQuotedValueForUpdate(),
-paramIsApproved.getSQLQuotedValueForUpdate(),
-paramIsDisbursed.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramUpdatedAt.getSQLQuotedValueForUpdate(),
-paramCreatedByID.getSQLQuotedValueForUpdate(),
-paramUpdatedByID.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [CenterID]={2},[ResidingPastorID]={3},[BankID]={4},[AccountNumber]={5},[DonationYear]={6},[DonationMonth]={7},[IsApproved]={8},[IsDisbursed]={9},[CreatedAt]={10},[UpdatedAt]={11},[CreatedByID]={12},[UpdatedByID]={13} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramCenterID.GetSQLQuotedValueForUpdate(),
+paramResidingPastorID.GetSQLQuotedValueForUpdate(),
+paramBankID.GetSQLQuotedValueForUpdate(),
+paramAccountNumber.GetSQLQuotedValueForUpdate(),
+paramDonationYear.GetSQLQuotedValueForUpdate(),
+paramDonationMonth.GetSQLQuotedValueForUpdate(),
+paramIsApproved.GetSQLQuotedValueForUpdate(),
+paramIsDisbursed.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramUpdatedAt.GetSQLQuotedValueForUpdate(),
+paramCreatedByID.GetSQLQuotedValueForUpdate(),
+paramUpdatedByID.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

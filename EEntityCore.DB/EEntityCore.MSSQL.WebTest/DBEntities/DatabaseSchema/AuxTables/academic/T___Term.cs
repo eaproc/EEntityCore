@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,16 +23,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___Term()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defName = new DataColumnDefinition(TableColumnNames.Name.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defDescription = new DataColumnDefinition(TableColumnNames.Description.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defStartDate = new DataColumnDefinition(TableColumnNames.StartDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defEndDate = new DataColumnDefinition(TableColumnNames.EndDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsActive = new DataColumnDefinition(TableColumnNames.IsActive.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAcademicSessionID = new DataColumnDefinition(TableColumnNames.AcademicSessionID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defTermOrderID = new DataColumnDefinition(TableColumnNames.TermOrderID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Name.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defDescription = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Description.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defStartDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.StartDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defEndDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.EndDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsActive.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAcademicSessionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AcademicSessionID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defTermOrderID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermOrderID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -352,7 +353,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -372,7 +373,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -434,10 +435,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -445,7 +443,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -536,16 +534,16 @@ Int32 pTermOrderID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt],[AcademicSessionID],[TermOrderID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramName.getSQLQuotedValueForAdd(),
-                paramDescription.getSQLQuotedValueForAdd(),
-                paramStartDate.getSQLQuotedValueForAdd(),
-                paramEndDate.getSQLQuotedValueForAdd(),
-                paramIsActive.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramUpdatedAt.getSQLQuotedValueForAdd(),
-                paramAcademicSessionID.getSQLQuotedValueForAdd(),
-                paramTermOrderID.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt],[AcademicSessionID],[TermOrderID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramName.GetSQLQuotedValueForAdd(),
+                paramDescription.GetSQLQuotedValueForAdd(),
+                paramStartDate.GetSQLQuotedValueForAdd(),
+                paramEndDate.GetSQLQuotedValueForAdd(),
+                paramIsActive.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                paramAcademicSessionID.GetSQLQuotedValueForAdd(),
+                paramTermOrderID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -584,16 +582,16 @@ Object pUpdatedAt = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt],[AcademicSessionID],[TermOrderID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramName.getSQLQuotedValueForAdd(),
-paramDescription.getSQLQuotedValueForAdd(),
-paramStartDate.getSQLQuotedValueForAdd(),
-paramEndDate.getSQLQuotedValueForAdd(),
-paramIsActive.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramAcademicSessionID.getSQLQuotedValueForAdd(),
-paramTermOrderID.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt],[AcademicSessionID],[TermOrderID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramName.GetSQLQuotedValueForAdd(),
+paramDescription.GetSQLQuotedValueForAdd(),
+paramStartDate.GetSQLQuotedValueForAdd(),
+paramEndDate.GetSQLQuotedValueForAdd(),
+paramIsActive.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramAcademicSessionID.GetSQLQuotedValueForAdd(),
+paramTermOrderID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -630,16 +628,16 @@ DataColumnParameter paramTermOrderID = new DataColumnParameter(defTermOrderID, p
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt],[AcademicSessionID],[TermOrderID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramName.getSQLQuotedValueForAdd(),
-paramDescription.getSQLQuotedValueForAdd(),
-paramStartDate.getSQLQuotedValueForAdd(),
-paramEndDate.getSQLQuotedValueForAdd(),
-paramIsActive.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramAcademicSessionID.getSQLQuotedValueForAdd(),
-paramTermOrderID.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt],[AcademicSessionID],[TermOrderID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramName.GetSQLQuotedValueForAdd(),
+paramDescription.GetSQLQuotedValueForAdd(),
+paramStartDate.GetSQLQuotedValueForAdd(),
+paramEndDate.GetSQLQuotedValueForAdd(),
+paramIsActive.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramAcademicSessionID.GetSQLQuotedValueForAdd(),
+paramTermOrderID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -681,15 +679,15 @@ DataColumnParameter paramTermOrderID = new DataColumnParameter(defTermOrderID, p
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([Name],[Description],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt],[AcademicSessionID],[TermOrderID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramName.getSQLQuotedValueForAdd(),
-paramDescription.getSQLQuotedValueForAdd(),
-paramStartDate.getSQLQuotedValueForAdd(),
-paramEndDate.getSQLQuotedValueForAdd(),
-paramIsActive.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramAcademicSessionID.getSQLQuotedValueForAdd(),
-paramTermOrderID.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([Name],[Description],[StartDate],[EndDate],[IsActive],[CreatedAt],[UpdatedAt],[AcademicSessionID],[TermOrderID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramName.GetSQLQuotedValueForAdd(),
+paramDescription.GetSQLQuotedValueForAdd(),
+paramStartDate.GetSQLQuotedValueForAdd(),
+paramEndDate.GetSQLQuotedValueForAdd(),
+paramIsActive.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramAcademicSessionID.GetSQLQuotedValueForAdd(),
+paramTermOrderID.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -731,15 +729,15 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [Name]={2},[Description]={3},[StartDate]={4},[EndDate]={5},[IsActive]={6},[CreatedAt]={7},[UpdatedAt]={8},[AcademicSessionID]={9},[TermOrderID]={10} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramName.getSQLQuotedValueForUpdate(),
-paramDescription.getSQLQuotedValueForUpdate(),
-paramStartDate.getSQLQuotedValueForUpdate(),
-paramEndDate.getSQLQuotedValueForUpdate(),
-paramIsActive.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramUpdatedAt.getSQLQuotedValueForUpdate(),
-paramAcademicSessionID.getSQLQuotedValueForUpdate(),
-paramTermOrderID.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [Name]={2},[Description]={3},[StartDate]={4},[EndDate]={5},[IsActive]={6},[CreatedAt]={7},[UpdatedAt]={8},[AcademicSessionID]={9},[TermOrderID]={10} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramName.GetSQLQuotedValueForUpdate(),
+paramDescription.GetSQLQuotedValueForUpdate(),
+paramStartDate.GetSQLQuotedValueForUpdate(),
+paramEndDate.GetSQLQuotedValueForUpdate(),
+paramIsActive.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramUpdatedAt.GetSQLQuotedValueForUpdate(),
+paramAcademicSessionID.GetSQLQuotedValueForUpdate(),
+paramTermOrderID.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

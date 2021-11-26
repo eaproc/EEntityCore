@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,30 +23,30 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___Beneficiary()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defCenterID = new DataColumnDefinition(TableColumnNames.CenterID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defBeneficiaryStatusID = new DataColumnDefinition(TableColumnNames.BeneficiaryStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defFirstName = new DataColumnDefinition(TableColumnNames.FirstName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defLastName = new DataColumnDefinition(TableColumnNames.LastName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAddress = new DataColumnDefinition(TableColumnNames.Address.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCity = new DataColumnDefinition(TableColumnNames.City.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defState = new DataColumnDefinition(TableColumnNames.State.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defZipCode = new DataColumnDefinition(TableColumnNames.ZipCode.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSchoolName = new DataColumnDefinition(TableColumnNames.SchoolName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSchoolAddress = new DataColumnDefinition(TableColumnNames.SchoolAddress.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defClassOnEnrollment = new DataColumnDefinition(TableColumnNames.ClassOnEnrollment.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defHomePhone = new DataColumnDefinition(TableColumnNames.HomePhone.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAlternatePhone = new DataColumnDefinition(TableColumnNames.AlternatePhone.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defEmail = new DataColumnDefinition(TableColumnNames.Email.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGenderID = new DataColumnDefinition(TableColumnNames.GenderID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defDateOfBirth = new DataColumnDefinition(TableColumnNames.DateOfBirth.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defVocation = new DataColumnDefinition(TableColumnNames.Vocation.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBirthCertificatePath = new DataColumnDefinition(TableColumnNames.BirthCertificatePath.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPhotoPath = new DataColumnDefinition(TableColumnNames.PhotoPath.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedByID = new DataColumnDefinition(TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defUpdatedByID = new DataColumnDefinition(TableColumnNames.UpdatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defCenterID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CenterID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defBeneficiaryStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BeneficiaryStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defFirstName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FirstName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defLastName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LastName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Address.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCity = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.City.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defState = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.State.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defZipCode = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ZipCode.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSchoolName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SchoolName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSchoolAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SchoolAddress.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defClassOnEnrollment = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClassOnEnrollment.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defHomePhone = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.HomePhone.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAlternatePhone = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AlternatePhone.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defEmail = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Email.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGenderID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.GenderID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defDateOfBirth = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DateOfBirth.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defVocation = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Vocation.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBirthCertificatePath = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BirthCertificatePath.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPhotoPath = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PhotoPath.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defUpdatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -533,7 +534,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -553,7 +554,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -615,10 +616,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -626,7 +624,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -733,30 +731,30 @@ Int32 pUpdatedByID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramCenterID.getSQLQuotedValueForAdd(),
-                paramBeneficiaryStatusID.getSQLQuotedValueForAdd(),
-                paramFirstName.getSQLQuotedValueForAdd(),
-                paramLastName.getSQLQuotedValueForAdd(),
-                paramAddress.getSQLQuotedValueForAdd(),
-                paramCity.getSQLQuotedValueForAdd(),
-                paramState.getSQLQuotedValueForAdd(),
-                paramZipCode.getSQLQuotedValueForAdd(),
-                paramSchoolName.getSQLQuotedValueForAdd(),
-                paramSchoolAddress.getSQLQuotedValueForAdd(),
-                paramClassOnEnrollment.getSQLQuotedValueForAdd(),
-                paramHomePhone.getSQLQuotedValueForAdd(),
-                paramAlternatePhone.getSQLQuotedValueForAdd(),
-                paramEmail.getSQLQuotedValueForAdd(),
-                paramGenderID.getSQLQuotedValueForAdd(),
-                paramDateOfBirth.getSQLQuotedValueForAdd(),
-                paramVocation.getSQLQuotedValueForAdd(),
-                paramBirthCertificatePath.getSQLQuotedValueForAdd(),
-                paramPhotoPath.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramUpdatedAt.getSQLQuotedValueForAdd(),
-                paramCreatedByID.getSQLQuotedValueForAdd(),
-                paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramCenterID.GetSQLQuotedValueForAdd(),
+                paramBeneficiaryStatusID.GetSQLQuotedValueForAdd(),
+                paramFirstName.GetSQLQuotedValueForAdd(),
+                paramLastName.GetSQLQuotedValueForAdd(),
+                paramAddress.GetSQLQuotedValueForAdd(),
+                paramCity.GetSQLQuotedValueForAdd(),
+                paramState.GetSQLQuotedValueForAdd(),
+                paramZipCode.GetSQLQuotedValueForAdd(),
+                paramSchoolName.GetSQLQuotedValueForAdd(),
+                paramSchoolAddress.GetSQLQuotedValueForAdd(),
+                paramClassOnEnrollment.GetSQLQuotedValueForAdd(),
+                paramHomePhone.GetSQLQuotedValueForAdd(),
+                paramAlternatePhone.GetSQLQuotedValueForAdd(),
+                paramEmail.GetSQLQuotedValueForAdd(),
+                paramGenderID.GetSQLQuotedValueForAdd(),
+                paramDateOfBirth.GetSQLQuotedValueForAdd(),
+                paramVocation.GetSQLQuotedValueForAdd(),
+                paramBirthCertificatePath.GetSQLQuotedValueForAdd(),
+                paramPhotoPath.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                paramCreatedByID.GetSQLQuotedValueForAdd(),
+                paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -823,30 +821,30 @@ Object pPhotoPath = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramCenterID.getSQLQuotedValueForAdd(),
-paramBeneficiaryStatusID.getSQLQuotedValueForAdd(),
-paramFirstName.getSQLQuotedValueForAdd(),
-paramLastName.getSQLQuotedValueForAdd(),
-paramAddress.getSQLQuotedValueForAdd(),
-paramCity.getSQLQuotedValueForAdd(),
-paramState.getSQLQuotedValueForAdd(),
-paramZipCode.getSQLQuotedValueForAdd(),
-paramSchoolName.getSQLQuotedValueForAdd(),
-paramSchoolAddress.getSQLQuotedValueForAdd(),
-paramClassOnEnrollment.getSQLQuotedValueForAdd(),
-paramHomePhone.getSQLQuotedValueForAdd(),
-paramAlternatePhone.getSQLQuotedValueForAdd(),
-paramEmail.getSQLQuotedValueForAdd(),
-paramGenderID.getSQLQuotedValueForAdd(),
-paramDateOfBirth.getSQLQuotedValueForAdd(),
-paramVocation.getSQLQuotedValueForAdd(),
-paramBirthCertificatePath.getSQLQuotedValueForAdd(),
-paramPhotoPath.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramCenterID.GetSQLQuotedValueForAdd(),
+paramBeneficiaryStatusID.GetSQLQuotedValueForAdd(),
+paramFirstName.GetSQLQuotedValueForAdd(),
+paramLastName.GetSQLQuotedValueForAdd(),
+paramAddress.GetSQLQuotedValueForAdd(),
+paramCity.GetSQLQuotedValueForAdd(),
+paramState.GetSQLQuotedValueForAdd(),
+paramZipCode.GetSQLQuotedValueForAdd(),
+paramSchoolName.GetSQLQuotedValueForAdd(),
+paramSchoolAddress.GetSQLQuotedValueForAdd(),
+paramClassOnEnrollment.GetSQLQuotedValueForAdd(),
+paramHomePhone.GetSQLQuotedValueForAdd(),
+paramAlternatePhone.GetSQLQuotedValueForAdd(),
+paramEmail.GetSQLQuotedValueForAdd(),
+paramGenderID.GetSQLQuotedValueForAdd(),
+paramDateOfBirth.GetSQLQuotedValueForAdd(),
+paramVocation.GetSQLQuotedValueForAdd(),
+paramBirthCertificatePath.GetSQLQuotedValueForAdd(),
+paramPhotoPath.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -911,30 +909,30 @@ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, p
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramCenterID.getSQLQuotedValueForAdd(),
-paramBeneficiaryStatusID.getSQLQuotedValueForAdd(),
-paramFirstName.getSQLQuotedValueForAdd(),
-paramLastName.getSQLQuotedValueForAdd(),
-paramAddress.getSQLQuotedValueForAdd(),
-paramCity.getSQLQuotedValueForAdd(),
-paramState.getSQLQuotedValueForAdd(),
-paramZipCode.getSQLQuotedValueForAdd(),
-paramSchoolName.getSQLQuotedValueForAdd(),
-paramSchoolAddress.getSQLQuotedValueForAdd(),
-paramClassOnEnrollment.getSQLQuotedValueForAdd(),
-paramHomePhone.getSQLQuotedValueForAdd(),
-paramAlternatePhone.getSQLQuotedValueForAdd(),
-paramEmail.getSQLQuotedValueForAdd(),
-paramGenderID.getSQLQuotedValueForAdd(),
-paramDateOfBirth.getSQLQuotedValueForAdd(),
-paramVocation.getSQLQuotedValueForAdd(),
-paramBirthCertificatePath.getSQLQuotedValueForAdd(),
-paramPhotoPath.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramCenterID.GetSQLQuotedValueForAdd(),
+paramBeneficiaryStatusID.GetSQLQuotedValueForAdd(),
+paramFirstName.GetSQLQuotedValueForAdd(),
+paramLastName.GetSQLQuotedValueForAdd(),
+paramAddress.GetSQLQuotedValueForAdd(),
+paramCity.GetSQLQuotedValueForAdd(),
+paramState.GetSQLQuotedValueForAdd(),
+paramZipCode.GetSQLQuotedValueForAdd(),
+paramSchoolName.GetSQLQuotedValueForAdd(),
+paramSchoolAddress.GetSQLQuotedValueForAdd(),
+paramClassOnEnrollment.GetSQLQuotedValueForAdd(),
+paramHomePhone.GetSQLQuotedValueForAdd(),
+paramAlternatePhone.GetSQLQuotedValueForAdd(),
+paramEmail.GetSQLQuotedValueForAdd(),
+paramGenderID.GetSQLQuotedValueForAdd(),
+paramDateOfBirth.GetSQLQuotedValueForAdd(),
+paramVocation.GetSQLQuotedValueForAdd(),
+paramBirthCertificatePath.GetSQLQuotedValueForAdd(),
+paramPhotoPath.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -1004,29 +1002,29 @@ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, p
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23}) ", TABLE_NAME,paramCenterID.getSQLQuotedValueForAdd(),
-paramBeneficiaryStatusID.getSQLQuotedValueForAdd(),
-paramFirstName.getSQLQuotedValueForAdd(),
-paramLastName.getSQLQuotedValueForAdd(),
-paramAddress.getSQLQuotedValueForAdd(),
-paramCity.getSQLQuotedValueForAdd(),
-paramState.getSQLQuotedValueForAdd(),
-paramZipCode.getSQLQuotedValueForAdd(),
-paramSchoolName.getSQLQuotedValueForAdd(),
-paramSchoolAddress.getSQLQuotedValueForAdd(),
-paramClassOnEnrollment.getSQLQuotedValueForAdd(),
-paramHomePhone.getSQLQuotedValueForAdd(),
-paramAlternatePhone.getSQLQuotedValueForAdd(),
-paramEmail.getSQLQuotedValueForAdd(),
-paramGenderID.getSQLQuotedValueForAdd(),
-paramDateOfBirth.getSQLQuotedValueForAdd(),
-paramVocation.getSQLQuotedValueForAdd(),
-paramBirthCertificatePath.getSQLQuotedValueForAdd(),
-paramPhotoPath.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23}) ", TABLE_NAME,paramCenterID.GetSQLQuotedValueForAdd(),
+paramBeneficiaryStatusID.GetSQLQuotedValueForAdd(),
+paramFirstName.GetSQLQuotedValueForAdd(),
+paramLastName.GetSQLQuotedValueForAdd(),
+paramAddress.GetSQLQuotedValueForAdd(),
+paramCity.GetSQLQuotedValueForAdd(),
+paramState.GetSQLQuotedValueForAdd(),
+paramZipCode.GetSQLQuotedValueForAdd(),
+paramSchoolName.GetSQLQuotedValueForAdd(),
+paramSchoolAddress.GetSQLQuotedValueForAdd(),
+paramClassOnEnrollment.GetSQLQuotedValueForAdd(),
+paramHomePhone.GetSQLQuotedValueForAdd(),
+paramAlternatePhone.GetSQLQuotedValueForAdd(),
+paramEmail.GetSQLQuotedValueForAdd(),
+paramGenderID.GetSQLQuotedValueForAdd(),
+paramDateOfBirth.GetSQLQuotedValueForAdd(),
+paramVocation.GetSQLQuotedValueForAdd(),
+paramBirthCertificatePath.GetSQLQuotedValueForAdd(),
+paramPhotoPath.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -1096,29 +1094,29 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [CenterID]={2},[BeneficiaryStatusID]={3},[FirstName]={4},[LastName]={5},[Address]={6},[City]={7},[State]={8},[ZipCode]={9},[SchoolName]={10},[SchoolAddress]={11},[ClassOnEnrollment]={12},[HomePhone]={13},[AlternatePhone]={14},[Email]={15},[GenderID]={16},[DateOfBirth]={17},[Vocation]={18},[BirthCertificatePath]={19},[PhotoPath]={20},[CreatedAt]={21},[UpdatedAt]={22},[CreatedByID]={23},[UpdatedByID]={24} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCenterID.getSQLQuotedValueForUpdate(),
-paramBeneficiaryStatusID.getSQLQuotedValueForUpdate(),
-paramFirstName.getSQLQuotedValueForUpdate(),
-paramLastName.getSQLQuotedValueForUpdate(),
-paramAddress.getSQLQuotedValueForUpdate(),
-paramCity.getSQLQuotedValueForUpdate(),
-paramState.getSQLQuotedValueForUpdate(),
-paramZipCode.getSQLQuotedValueForUpdate(),
-paramSchoolName.getSQLQuotedValueForUpdate(),
-paramSchoolAddress.getSQLQuotedValueForUpdate(),
-paramClassOnEnrollment.getSQLQuotedValueForUpdate(),
-paramHomePhone.getSQLQuotedValueForUpdate(),
-paramAlternatePhone.getSQLQuotedValueForUpdate(),
-paramEmail.getSQLQuotedValueForUpdate(),
-paramGenderID.getSQLQuotedValueForUpdate(),
-paramDateOfBirth.getSQLQuotedValueForUpdate(),
-paramVocation.getSQLQuotedValueForUpdate(),
-paramBirthCertificatePath.getSQLQuotedValueForUpdate(),
-paramPhotoPath.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramUpdatedAt.getSQLQuotedValueForUpdate(),
-paramCreatedByID.getSQLQuotedValueForUpdate(),
-paramUpdatedByID.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [CenterID]={2},[BeneficiaryStatusID]={3},[FirstName]={4},[LastName]={5},[Address]={6},[City]={7},[State]={8},[ZipCode]={9},[SchoolName]={10},[SchoolAddress]={11},[ClassOnEnrollment]={12},[HomePhone]={13},[AlternatePhone]={14},[Email]={15},[GenderID]={16},[DateOfBirth]={17},[Vocation]={18},[BirthCertificatePath]={19},[PhotoPath]={20},[CreatedAt]={21},[UpdatedAt]={22},[CreatedByID]={23},[UpdatedByID]={24} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramCenterID.GetSQLQuotedValueForUpdate(),
+paramBeneficiaryStatusID.GetSQLQuotedValueForUpdate(),
+paramFirstName.GetSQLQuotedValueForUpdate(),
+paramLastName.GetSQLQuotedValueForUpdate(),
+paramAddress.GetSQLQuotedValueForUpdate(),
+paramCity.GetSQLQuotedValueForUpdate(),
+paramState.GetSQLQuotedValueForUpdate(),
+paramZipCode.GetSQLQuotedValueForUpdate(),
+paramSchoolName.GetSQLQuotedValueForUpdate(),
+paramSchoolAddress.GetSQLQuotedValueForUpdate(),
+paramClassOnEnrollment.GetSQLQuotedValueForUpdate(),
+paramHomePhone.GetSQLQuotedValueForUpdate(),
+paramAlternatePhone.GetSQLQuotedValueForUpdate(),
+paramEmail.GetSQLQuotedValueForUpdate(),
+paramGenderID.GetSQLQuotedValueForUpdate(),
+paramDateOfBirth.GetSQLQuotedValueForUpdate(),
+paramVocation.GetSQLQuotedValueForUpdate(),
+paramBirthCertificatePath.GetSQLQuotedValueForUpdate(),
+paramPhotoPath.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramUpdatedAt.GetSQLQuotedValueForUpdate(),
+paramCreatedByID.GetSQLQuotedValueForUpdate(),
+paramUpdatedByID.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

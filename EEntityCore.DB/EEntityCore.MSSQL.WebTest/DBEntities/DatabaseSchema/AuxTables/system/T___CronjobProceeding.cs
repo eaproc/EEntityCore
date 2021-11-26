@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,13 +23,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___CronjobProceeding()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defCronjobID = new DataColumnDefinition(TableColumnNames.CronjobID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defProceedingStatusID = new DataColumnDefinition(TableColumnNames.ProceedingStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defComments = new DataColumnDefinition(TableColumnNames.Comments.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defNextExpectedExecutionTime = new DataColumnDefinition(TableColumnNames.NextExpectedExecutionTime.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsSuccessful = new DataColumnDefinition(TableColumnNames.IsSuccessful.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defCronjobID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CronjobID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defProceedingStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ProceedingStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defComments = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Comments.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defNextExpectedExecutionTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.NextExpectedExecutionTime.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsSuccessful = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsSuccessful.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -314,7 +315,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -334,7 +335,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -396,10 +397,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -407,7 +405,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -494,13 +492,13 @@ Int32 pProceedingStatusID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CronjobID],[ProceedingStatusID],[Comments],[NextExpectedExecutionTime],[IsSuccessful],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramCronjobID.getSQLQuotedValueForAdd(),
-                paramProceedingStatusID.getSQLQuotedValueForAdd(),
-                paramComments.getSQLQuotedValueForAdd(),
-                paramNextExpectedExecutionTime.getSQLQuotedValueForAdd(),
-                paramIsSuccessful.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CronjobID],[ProceedingStatusID],[Comments],[NextExpectedExecutionTime],[IsSuccessful],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramCronjobID.GetSQLQuotedValueForAdd(),
+                paramProceedingStatusID.GetSQLQuotedValueForAdd(),
+                paramComments.GetSQLQuotedValueForAdd(),
+                paramNextExpectedExecutionTime.GetSQLQuotedValueForAdd(),
+                paramIsSuccessful.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -533,13 +531,13 @@ Object pNextExpectedExecutionTime = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CronjobID],[ProceedingStatusID],[Comments],[NextExpectedExecutionTime],[IsSuccessful],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramCronjobID.getSQLQuotedValueForAdd(),
-paramProceedingStatusID.getSQLQuotedValueForAdd(),
-paramComments.getSQLQuotedValueForAdd(),
-paramNextExpectedExecutionTime.getSQLQuotedValueForAdd(),
-paramIsSuccessful.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CronjobID],[ProceedingStatusID],[Comments],[NextExpectedExecutionTime],[IsSuccessful],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramCronjobID.GetSQLQuotedValueForAdd(),
+paramProceedingStatusID.GetSQLQuotedValueForAdd(),
+paramComments.GetSQLQuotedValueForAdd(),
+paramNextExpectedExecutionTime.GetSQLQuotedValueForAdd(),
+paramIsSuccessful.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -570,13 +568,13 @@ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCrea
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CronjobID],[ProceedingStatusID],[Comments],[NextExpectedExecutionTime],[IsSuccessful],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramCronjobID.getSQLQuotedValueForAdd(),
-paramProceedingStatusID.getSQLQuotedValueForAdd(),
-paramComments.getSQLQuotedValueForAdd(),
-paramNextExpectedExecutionTime.getSQLQuotedValueForAdd(),
-paramIsSuccessful.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CronjobID],[ProceedingStatusID],[Comments],[NextExpectedExecutionTime],[IsSuccessful],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramCronjobID.GetSQLQuotedValueForAdd(),
+paramProceedingStatusID.GetSQLQuotedValueForAdd(),
+paramComments.GetSQLQuotedValueForAdd(),
+paramNextExpectedExecutionTime.GetSQLQuotedValueForAdd(),
+paramIsSuccessful.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -612,12 +610,12 @@ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCrea
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([CronjobID],[ProceedingStatusID],[Comments],[NextExpectedExecutionTime],[IsSuccessful],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6}) ", TABLE_NAME,paramCronjobID.getSQLQuotedValueForAdd(),
-paramProceedingStatusID.getSQLQuotedValueForAdd(),
-paramComments.getSQLQuotedValueForAdd(),
-paramNextExpectedExecutionTime.getSQLQuotedValueForAdd(),
-paramIsSuccessful.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([CronjobID],[ProceedingStatusID],[Comments],[NextExpectedExecutionTime],[IsSuccessful],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6}) ", TABLE_NAME,paramCronjobID.GetSQLQuotedValueForAdd(),
+paramProceedingStatusID.GetSQLQuotedValueForAdd(),
+paramComments.GetSQLQuotedValueForAdd(),
+paramNextExpectedExecutionTime.GetSQLQuotedValueForAdd(),
+paramIsSuccessful.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -653,12 +651,12 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [CronjobID]={2},[ProceedingStatusID]={3},[Comments]={4},[NextExpectedExecutionTime]={5},[IsSuccessful]={6},[CreatedAt]={7} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCronjobID.getSQLQuotedValueForUpdate(),
-paramProceedingStatusID.getSQLQuotedValueForUpdate(),
-paramComments.getSQLQuotedValueForUpdate(),
-paramNextExpectedExecutionTime.getSQLQuotedValueForUpdate(),
-paramIsSuccessful.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [CronjobID]={2},[ProceedingStatusID]={3},[Comments]={4},[NextExpectedExecutionTime]={5},[IsSuccessful]={6},[CreatedAt]={7} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramCronjobID.GetSQLQuotedValueForUpdate(),
+paramProceedingStatusID.GetSQLQuotedValueForUpdate(),
+paramComments.GetSQLQuotedValueForUpdate(),
+paramNextExpectedExecutionTime.GetSQLQuotedValueForUpdate(),
+paramIsSuccessful.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,12 +23,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___ReferralType()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defDefinition = new DataColumnDefinition(TableColumnNames.Definition.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defDescription = new DataColumnDefinition(TableColumnNames.Description.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsActive = new DataColumnDefinition(TableColumnNames.IsActive.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDefaultPercentage = new DataColumnDefinition(TableColumnNames.DefaultPercentage.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defDefinition = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Definition.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defDescription = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Description.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsActive.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDefaultPercentage = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DefaultPercentage.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -293,7 +294,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -313,7 +314,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -375,10 +376,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -386,7 +384,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -471,12 +469,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Definition],[Description],[IsActive],[CreatedAt],[DefaultPercentage]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramDefinition.getSQLQuotedValueForAdd(),
-                paramDescription.getSQLQuotedValueForAdd(),
-                paramIsActive.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramDefaultPercentage.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Definition],[Description],[IsActive],[CreatedAt],[DefaultPercentage]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramDefinition.GetSQLQuotedValueForAdd(),
+                paramDescription.GetSQLQuotedValueForAdd(),
+                paramIsActive.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramDefaultPercentage.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -507,12 +505,12 @@ Object pDescription = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Definition],[Description],[IsActive],[CreatedAt],[DefaultPercentage]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramDefinition.getSQLQuotedValueForAdd(),
-paramDescription.getSQLQuotedValueForAdd(),
-paramIsActive.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramDefaultPercentage.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Definition],[Description],[IsActive],[CreatedAt],[DefaultPercentage]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramDefinition.GetSQLQuotedValueForAdd(),
+paramDescription.GetSQLQuotedValueForAdd(),
+paramIsActive.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramDefaultPercentage.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -541,12 +539,12 @@ DataColumnParameter paramDefaultPercentage = new DataColumnParameter(defDefaultP
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Definition],[Description],[IsActive],[CreatedAt],[DefaultPercentage]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramDefinition.getSQLQuotedValueForAdd(),
-paramDescription.getSQLQuotedValueForAdd(),
-paramIsActive.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramDefaultPercentage.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Definition],[Description],[IsActive],[CreatedAt],[DefaultPercentage]) VALUES({1},{2},{3},{4},{5},{6}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramDefinition.GetSQLQuotedValueForAdd(),
+paramDescription.GetSQLQuotedValueForAdd(),
+paramIsActive.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramDefaultPercentage.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -580,11 +578,11 @@ DataColumnParameter paramDefaultPercentage = new DataColumnParameter(defDefaultP
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([Definition],[Description],[IsActive],[CreatedAt],[DefaultPercentage]) VALUES({1},{2},{3},{4},{5}) ", TABLE_NAME,paramDefinition.getSQLQuotedValueForAdd(),
-paramDescription.getSQLQuotedValueForAdd(),
-paramIsActive.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramDefaultPercentage.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([Definition],[Description],[IsActive],[CreatedAt],[DefaultPercentage]) VALUES({1},{2},{3},{4},{5}) ", TABLE_NAME,paramDefinition.GetSQLQuotedValueForAdd(),
+paramDescription.GetSQLQuotedValueForAdd(),
+paramIsActive.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramDefaultPercentage.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -618,11 +616,11 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [Definition]={2},[Description]={3},[IsActive]={4},[CreatedAt]={5},[DefaultPercentage]={6} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramDefinition.getSQLQuotedValueForUpdate(),
-paramDescription.getSQLQuotedValueForUpdate(),
-paramIsActive.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramDefaultPercentage.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [Definition]={2},[Description]={3},[IsActive]={4},[CreatedAt]={5},[DefaultPercentage]={6} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramDefinition.GetSQLQuotedValueForUpdate(),
+paramDescription.GetSQLQuotedValueForUpdate(),
+paramIsActive.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramDefaultPercentage.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

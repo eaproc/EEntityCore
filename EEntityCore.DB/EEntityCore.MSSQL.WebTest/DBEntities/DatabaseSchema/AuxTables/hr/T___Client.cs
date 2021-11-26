@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,23 +23,23 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___Client()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defCompanyName = new DataColumnDefinition(TableColumnNames.CompanyName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defOwnerID = new DataColumnDefinition(TableColumnNames.OwnerID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defSLAFileName = new DataColumnDefinition(TableColumnNames.SLAFileName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defScadwareURL = new DataColumnDefinition(TableColumnNames.ScadwareURL.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defEmail = new DataColumnDefinition(TableColumnNames.Email.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defMobile = new DataColumnDefinition(TableColumnNames.Mobile.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defWebsiteURL = new DataColumnDefinition(TableColumnNames.WebsiteURL.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defLogoFileName = new DataColumnDefinition(TableColumnNames.LogoFileName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsActive = new DataColumnDefinition(TableColumnNames.IsActive.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defNameAbbreviation = new DataColumnDefinition(TableColumnNames.NameAbbreviation.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAddress = new DataColumnDefinition(TableColumnNames.Address.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBankID = new DataColumnDefinition(TableColumnNames.BankID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defAccountName = new DataColumnDefinition(TableColumnNames.AccountName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAccountNumber = new DataColumnDefinition(TableColumnNames.AccountNumber.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defCompanyName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CompanyName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defOwnerID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.OwnerID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defSLAFileName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SLAFileName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defScadwareURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ScadwareURL.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defEmail = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Email.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defMobile = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Mobile.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defWebsiteURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.WebsiteURL.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defLogoFileName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LogoFileName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsActive.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defNameAbbreviation = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.NameAbbreviation.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Address.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBankID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BankID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defAccountName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAccountNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountNumber.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -435,7 +436,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -455,7 +456,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -517,10 +518,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -528,7 +526,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -626,23 +624,23 @@ Int32 pBankID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramCompanyName.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramOwnerID.getSQLQuotedValueForAdd(),
-                paramSLAFileName.getSQLQuotedValueForAdd(),
-                paramScadwareURL.getSQLQuotedValueForAdd(),
-                paramEmail.getSQLQuotedValueForAdd(),
-                paramMobile.getSQLQuotedValueForAdd(),
-                paramWebsiteURL.getSQLQuotedValueForAdd(),
-                paramLogoFileName.getSQLQuotedValueForAdd(),
-                paramUpdatedAt.getSQLQuotedValueForAdd(),
-                paramIsActive.getSQLQuotedValueForAdd(),
-                paramNameAbbreviation.getSQLQuotedValueForAdd(),
-                paramAddress.getSQLQuotedValueForAdd(),
-                paramBankID.getSQLQuotedValueForAdd(),
-                paramAccountName.getSQLQuotedValueForAdd(),
-                paramAccountNumber.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramCompanyName.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramOwnerID.GetSQLQuotedValueForAdd(),
+                paramSLAFileName.GetSQLQuotedValueForAdd(),
+                paramScadwareURL.GetSQLQuotedValueForAdd(),
+                paramEmail.GetSQLQuotedValueForAdd(),
+                paramMobile.GetSQLQuotedValueForAdd(),
+                paramWebsiteURL.GetSQLQuotedValueForAdd(),
+                paramLogoFileName.GetSQLQuotedValueForAdd(),
+                paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                paramIsActive.GetSQLQuotedValueForAdd(),
+                paramNameAbbreviation.GetSQLQuotedValueForAdd(),
+                paramAddress.GetSQLQuotedValueForAdd(),
+                paramBankID.GetSQLQuotedValueForAdd(),
+                paramAccountName.GetSQLQuotedValueForAdd(),
+                paramAccountNumber.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -695,23 +693,23 @@ Object pAccountNumber = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramCompanyName.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramOwnerID.getSQLQuotedValueForAdd(),
-paramSLAFileName.getSQLQuotedValueForAdd(),
-paramScadwareURL.getSQLQuotedValueForAdd(),
-paramEmail.getSQLQuotedValueForAdd(),
-paramMobile.getSQLQuotedValueForAdd(),
-paramWebsiteURL.getSQLQuotedValueForAdd(),
-paramLogoFileName.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramIsActive.getSQLQuotedValueForAdd(),
-paramNameAbbreviation.getSQLQuotedValueForAdd(),
-paramAddress.getSQLQuotedValueForAdd(),
-paramBankID.getSQLQuotedValueForAdd(),
-paramAccountName.getSQLQuotedValueForAdd(),
-paramAccountNumber.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramCompanyName.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramOwnerID.GetSQLQuotedValueForAdd(),
+paramSLAFileName.GetSQLQuotedValueForAdd(),
+paramScadwareURL.GetSQLQuotedValueForAdd(),
+paramEmail.GetSQLQuotedValueForAdd(),
+paramMobile.GetSQLQuotedValueForAdd(),
+paramWebsiteURL.GetSQLQuotedValueForAdd(),
+paramLogoFileName.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramIsActive.GetSQLQuotedValueForAdd(),
+paramNameAbbreviation.GetSQLQuotedValueForAdd(),
+paramAddress.GetSQLQuotedValueForAdd(),
+paramBankID.GetSQLQuotedValueForAdd(),
+paramAccountName.GetSQLQuotedValueForAdd(),
+paramAccountNumber.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -762,23 +760,23 @@ DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumbe
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramCompanyName.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramOwnerID.getSQLQuotedValueForAdd(),
-paramSLAFileName.getSQLQuotedValueForAdd(),
-paramScadwareURL.getSQLQuotedValueForAdd(),
-paramEmail.getSQLQuotedValueForAdd(),
-paramMobile.getSQLQuotedValueForAdd(),
-paramWebsiteURL.getSQLQuotedValueForAdd(),
-paramLogoFileName.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramIsActive.getSQLQuotedValueForAdd(),
-paramNameAbbreviation.getSQLQuotedValueForAdd(),
-paramAddress.getSQLQuotedValueForAdd(),
-paramBankID.getSQLQuotedValueForAdd(),
-paramAccountName.getSQLQuotedValueForAdd(),
-paramAccountNumber.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramCompanyName.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramOwnerID.GetSQLQuotedValueForAdd(),
+paramSLAFileName.GetSQLQuotedValueForAdd(),
+paramScadwareURL.GetSQLQuotedValueForAdd(),
+paramEmail.GetSQLQuotedValueForAdd(),
+paramMobile.GetSQLQuotedValueForAdd(),
+paramWebsiteURL.GetSQLQuotedValueForAdd(),
+paramLogoFileName.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramIsActive.GetSQLQuotedValueForAdd(),
+paramNameAbbreviation.GetSQLQuotedValueForAdd(),
+paramAddress.GetSQLQuotedValueForAdd(),
+paramBankID.GetSQLQuotedValueForAdd(),
+paramAccountName.GetSQLQuotedValueForAdd(),
+paramAccountNumber.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -834,22 +832,22 @@ DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumbe
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramCompanyName.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramOwnerID.getSQLQuotedValueForAdd(),
-paramSLAFileName.getSQLQuotedValueForAdd(),
-paramScadwareURL.getSQLQuotedValueForAdd(),
-paramEmail.getSQLQuotedValueForAdd(),
-paramMobile.getSQLQuotedValueForAdd(),
-paramWebsiteURL.getSQLQuotedValueForAdd(),
-paramLogoFileName.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramIsActive.getSQLQuotedValueForAdd(),
-paramNameAbbreviation.getSQLQuotedValueForAdd(),
-paramAddress.getSQLQuotedValueForAdd(),
-paramBankID.getSQLQuotedValueForAdd(),
-paramAccountName.getSQLQuotedValueForAdd(),
-paramAccountNumber.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramCompanyName.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramOwnerID.GetSQLQuotedValueForAdd(),
+paramSLAFileName.GetSQLQuotedValueForAdd(),
+paramScadwareURL.GetSQLQuotedValueForAdd(),
+paramEmail.GetSQLQuotedValueForAdd(),
+paramMobile.GetSQLQuotedValueForAdd(),
+paramWebsiteURL.GetSQLQuotedValueForAdd(),
+paramLogoFileName.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramIsActive.GetSQLQuotedValueForAdd(),
+paramNameAbbreviation.GetSQLQuotedValueForAdd(),
+paramAddress.GetSQLQuotedValueForAdd(),
+paramBankID.GetSQLQuotedValueForAdd(),
+paramAccountName.GetSQLQuotedValueForAdd(),
+paramAccountNumber.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -905,22 +903,22 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [CompanyName]={2},[CreatedAt]={3},[OwnerID]={4},[SLAFileName]={5},[ScadwareURL]={6},[Email]={7},[Mobile]={8},[WebsiteURL]={9},[LogoFileName]={10},[UpdatedAt]={11},[IsActive]={12},[NameAbbreviation]={13},[Address]={14},[BankID]={15},[AccountName]={16},[AccountNumber]={17} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramCompanyName.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramOwnerID.getSQLQuotedValueForUpdate(),
-paramSLAFileName.getSQLQuotedValueForUpdate(),
-paramScadwareURL.getSQLQuotedValueForUpdate(),
-paramEmail.getSQLQuotedValueForUpdate(),
-paramMobile.getSQLQuotedValueForUpdate(),
-paramWebsiteURL.getSQLQuotedValueForUpdate(),
-paramLogoFileName.getSQLQuotedValueForUpdate(),
-paramUpdatedAt.getSQLQuotedValueForUpdate(),
-paramIsActive.getSQLQuotedValueForUpdate(),
-paramNameAbbreviation.getSQLQuotedValueForUpdate(),
-paramAddress.getSQLQuotedValueForUpdate(),
-paramBankID.getSQLQuotedValueForUpdate(),
-paramAccountName.getSQLQuotedValueForUpdate(),
-paramAccountNumber.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [CompanyName]={2},[CreatedAt]={3},[OwnerID]={4},[SLAFileName]={5},[ScadwareURL]={6},[Email]={7},[Mobile]={8},[WebsiteURL]={9},[LogoFileName]={10},[UpdatedAt]={11},[IsActive]={12},[NameAbbreviation]={13},[Address]={14},[BankID]={15},[AccountName]={16},[AccountNumber]={17} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramCompanyName.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramOwnerID.GetSQLQuotedValueForUpdate(),
+paramSLAFileName.GetSQLQuotedValueForUpdate(),
+paramScadwareURL.GetSQLQuotedValueForUpdate(),
+paramEmail.GetSQLQuotedValueForUpdate(),
+paramMobile.GetSQLQuotedValueForUpdate(),
+paramWebsiteURL.GetSQLQuotedValueForUpdate(),
+paramLogoFileName.GetSQLQuotedValueForUpdate(),
+paramUpdatedAt.GetSQLQuotedValueForUpdate(),
+paramIsActive.GetSQLQuotedValueForUpdate(),
+paramNameAbbreviation.GetSQLQuotedValueForUpdate(),
+paramAddress.GetSQLQuotedValueForUpdate(),
+paramBankID.GetSQLQuotedValueForUpdate(),
+paramAccountName.GetSQLQuotedValueForUpdate(),
+paramAccountNumber.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

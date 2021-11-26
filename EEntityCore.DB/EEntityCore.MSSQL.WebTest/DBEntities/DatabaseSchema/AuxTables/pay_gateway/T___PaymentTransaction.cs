@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,33 +23,33 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___PaymentTransaction()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defTransactionStatusID = new DataColumnDefinition(TableColumnNames.TransactionStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defClientID = new DataColumnDefinition(TableColumnNames.ClientID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defStudentNumber = new DataColumnDefinition(TableColumnNames.StudentNumber.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFirstName = new DataColumnDefinition(TableColumnNames.FirstName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defLastName = new DataColumnDefinition(TableColumnNames.LastName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAccountName = new DataColumnDefinition(TableColumnNames.AccountName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAccountNumber = new DataColumnDefinition(TableColumnNames.AccountNumber.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBank = new DataColumnDefinition(TableColumnNames.Bank.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defChannel = new DataColumnDefinition(TableColumnNames.Channel.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIPAddress = new DataColumnDefinition(TableColumnNames.IPAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSchoolDiscountGiven = new DataColumnDefinition(TableColumnNames.SchoolDiscountGiven.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPaymentRequired = new DataColumnDefinition(TableColumnNames.PaymentRequired.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCharges = new DataColumnDefinition(TableColumnNames.Charges.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defRefundAmount = new DataColumnDefinition(TableColumnNames.RefundAmount.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBalance = new DataColumnDefinition(TableColumnNames.Balance.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defConfirmationThreshold = new DataColumnDefinition(TableColumnNames.ConfirmationThreshold.ToString(), typeof(Decimal),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defConfirmationDate = new DataColumnDefinition(TableColumnNames.ConfirmationDate.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAwaitingDisbursement = new DataColumnDefinition(TableColumnNames.AwaitingDisbursement.ToString(), typeof(Boolean),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedByID = new DataColumnDefinition(TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defUpdatedByID = new DataColumnDefinition(TableColumnNames.UpdatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defConfirmedExplanation = new DataColumnDefinition(TableColumnNames.ConfirmedExplanation.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defChargesBilledToClient = new DataColumnDefinition(TableColumnNames.ChargesBilledToClient.ToString(), typeof(Boolean),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPaymentRequiredWithoutCharges = new DataColumnDefinition(TableColumnNames.PaymentRequiredWithoutCharges.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsMultiTarget = new DataColumnDefinition(TableColumnNames.IsMultiTarget.ToString(), typeof(Boolean),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defTransactionStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TransactionStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defClientID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClientID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defStudentNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.StudentNumber.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFirstName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FirstName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defLastName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LastName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAccountName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAccountNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountNumber.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBank = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Bank.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defChannel = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Channel.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIPAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IPAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSchoolDiscountGiven = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SchoolDiscountGiven.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPaymentRequired = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentRequired.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Charges.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defRefundAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RefundAmount.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBalance = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Balance.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defConfirmationThreshold = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ConfirmationThreshold.ToString(), typeof(Decimal),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defConfirmationDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ConfirmationDate.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAwaitingDisbursement = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AwaitingDisbursement.ToString(), typeof(Boolean),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defUpdatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defConfirmedExplanation = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ConfirmedExplanation.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defChargesBilledToClient = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ChargesBilledToClient.ToString(), typeof(Boolean),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPaymentRequiredWithoutCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentRequiredWithoutCharges.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsMultiTarget = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsMultiTarget.ToString(), typeof(Boolean),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -564,7 +565,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -584,7 +585,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -646,10 +647,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -657,7 +655,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -766,33 +764,33 @@ Int32 pUpdatedByID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramTransactionStatusID.getSQLQuotedValueForAdd(),
-                paramClientID.getSQLQuotedValueForAdd(),
-                paramStudentNumber.getSQLQuotedValueForAdd(),
-                paramFirstName.getSQLQuotedValueForAdd(),
-                paramLastName.getSQLQuotedValueForAdd(),
-                paramAccountName.getSQLQuotedValueForAdd(),
-                paramAccountNumber.getSQLQuotedValueForAdd(),
-                paramBank.getSQLQuotedValueForAdd(),
-                paramChannel.getSQLQuotedValueForAdd(),
-                paramIPAddress.getSQLQuotedValueForAdd(),
-                paramSchoolDiscountGiven.getSQLQuotedValueForAdd(),
-                paramPaymentRequired.getSQLQuotedValueForAdd(),
-                paramCharges.getSQLQuotedValueForAdd(),
-                paramRefundAmount.getSQLQuotedValueForAdd(),
-                paramBalance.getSQLQuotedValueForAdd(),
-                paramConfirmationThreshold.getSQLQuotedValueForAdd(),
-                paramConfirmationDate.getSQLQuotedValueForAdd(),
-                paramAwaitingDisbursement.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramUpdatedAt.getSQLQuotedValueForAdd(),
-                paramCreatedByID.getSQLQuotedValueForAdd(),
-                paramUpdatedByID.getSQLQuotedValueForAdd(),
-                paramConfirmedExplanation.getSQLQuotedValueForAdd(),
-                paramChargesBilledToClient.getSQLQuotedValueForAdd(),
-                paramPaymentRequiredWithoutCharges.getSQLQuotedValueForAdd(),
-                paramIsMultiTarget.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramTransactionStatusID.GetSQLQuotedValueForAdd(),
+                paramClientID.GetSQLQuotedValueForAdd(),
+                paramStudentNumber.GetSQLQuotedValueForAdd(),
+                paramFirstName.GetSQLQuotedValueForAdd(),
+                paramLastName.GetSQLQuotedValueForAdd(),
+                paramAccountName.GetSQLQuotedValueForAdd(),
+                paramAccountNumber.GetSQLQuotedValueForAdd(),
+                paramBank.GetSQLQuotedValueForAdd(),
+                paramChannel.GetSQLQuotedValueForAdd(),
+                paramIPAddress.GetSQLQuotedValueForAdd(),
+                paramSchoolDiscountGiven.GetSQLQuotedValueForAdd(),
+                paramPaymentRequired.GetSQLQuotedValueForAdd(),
+                paramCharges.GetSQLQuotedValueForAdd(),
+                paramRefundAmount.GetSQLQuotedValueForAdd(),
+                paramBalance.GetSQLQuotedValueForAdd(),
+                paramConfirmationThreshold.GetSQLQuotedValueForAdd(),
+                paramConfirmationDate.GetSQLQuotedValueForAdd(),
+                paramAwaitingDisbursement.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                paramCreatedByID.GetSQLQuotedValueForAdd(),
+                paramUpdatedByID.GetSQLQuotedValueForAdd(),
+                paramConfirmedExplanation.GetSQLQuotedValueForAdd(),
+                paramChargesBilledToClient.GetSQLQuotedValueForAdd(),
+                paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
+                paramIsMultiTarget.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -865,33 +863,33 @@ Object pIsMultiTarget = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramTransactionStatusID.getSQLQuotedValueForAdd(),
-paramClientID.getSQLQuotedValueForAdd(),
-paramStudentNumber.getSQLQuotedValueForAdd(),
-paramFirstName.getSQLQuotedValueForAdd(),
-paramLastName.getSQLQuotedValueForAdd(),
-paramAccountName.getSQLQuotedValueForAdd(),
-paramAccountNumber.getSQLQuotedValueForAdd(),
-paramBank.getSQLQuotedValueForAdd(),
-paramChannel.getSQLQuotedValueForAdd(),
-paramIPAddress.getSQLQuotedValueForAdd(),
-paramSchoolDiscountGiven.getSQLQuotedValueForAdd(),
-paramPaymentRequired.getSQLQuotedValueForAdd(),
-paramCharges.getSQLQuotedValueForAdd(),
-paramRefundAmount.getSQLQuotedValueForAdd(),
-paramBalance.getSQLQuotedValueForAdd(),
-paramConfirmationThreshold.getSQLQuotedValueForAdd(),
-paramConfirmationDate.getSQLQuotedValueForAdd(),
-paramAwaitingDisbursement.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramUpdatedByID.getSQLQuotedValueForAdd(),
-paramConfirmedExplanation.getSQLQuotedValueForAdd(),
-paramChargesBilledToClient.getSQLQuotedValueForAdd(),
-paramPaymentRequiredWithoutCharges.getSQLQuotedValueForAdd(),
-paramIsMultiTarget.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramTransactionStatusID.GetSQLQuotedValueForAdd(),
+paramClientID.GetSQLQuotedValueForAdd(),
+paramStudentNumber.GetSQLQuotedValueForAdd(),
+paramFirstName.GetSQLQuotedValueForAdd(),
+paramLastName.GetSQLQuotedValueForAdd(),
+paramAccountName.GetSQLQuotedValueForAdd(),
+paramAccountNumber.GetSQLQuotedValueForAdd(),
+paramBank.GetSQLQuotedValueForAdd(),
+paramChannel.GetSQLQuotedValueForAdd(),
+paramIPAddress.GetSQLQuotedValueForAdd(),
+paramSchoolDiscountGiven.GetSQLQuotedValueForAdd(),
+paramPaymentRequired.GetSQLQuotedValueForAdd(),
+paramCharges.GetSQLQuotedValueForAdd(),
+paramRefundAmount.GetSQLQuotedValueForAdd(),
+paramBalance.GetSQLQuotedValueForAdd(),
+paramConfirmationThreshold.GetSQLQuotedValueForAdd(),
+paramConfirmationDate.GetSQLQuotedValueForAdd(),
+paramAwaitingDisbursement.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramUpdatedByID.GetSQLQuotedValueForAdd(),
+paramConfirmedExplanation.GetSQLQuotedValueForAdd(),
+paramChargesBilledToClient.GetSQLQuotedValueForAdd(),
+paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
+paramIsMultiTarget.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -962,33 +960,33 @@ DataColumnParameter paramIsMultiTarget = new DataColumnParameter(defIsMultiTarge
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramTransactionStatusID.getSQLQuotedValueForAdd(),
-paramClientID.getSQLQuotedValueForAdd(),
-paramStudentNumber.getSQLQuotedValueForAdd(),
-paramFirstName.getSQLQuotedValueForAdd(),
-paramLastName.getSQLQuotedValueForAdd(),
-paramAccountName.getSQLQuotedValueForAdd(),
-paramAccountNumber.getSQLQuotedValueForAdd(),
-paramBank.getSQLQuotedValueForAdd(),
-paramChannel.getSQLQuotedValueForAdd(),
-paramIPAddress.getSQLQuotedValueForAdd(),
-paramSchoolDiscountGiven.getSQLQuotedValueForAdd(),
-paramPaymentRequired.getSQLQuotedValueForAdd(),
-paramCharges.getSQLQuotedValueForAdd(),
-paramRefundAmount.getSQLQuotedValueForAdd(),
-paramBalance.getSQLQuotedValueForAdd(),
-paramConfirmationThreshold.getSQLQuotedValueForAdd(),
-paramConfirmationDate.getSQLQuotedValueForAdd(),
-paramAwaitingDisbursement.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramUpdatedByID.getSQLQuotedValueForAdd(),
-paramConfirmedExplanation.getSQLQuotedValueForAdd(),
-paramChargesBilledToClient.getSQLQuotedValueForAdd(),
-paramPaymentRequiredWithoutCharges.getSQLQuotedValueForAdd(),
-paramIsMultiTarget.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramTransactionStatusID.GetSQLQuotedValueForAdd(),
+paramClientID.GetSQLQuotedValueForAdd(),
+paramStudentNumber.GetSQLQuotedValueForAdd(),
+paramFirstName.GetSQLQuotedValueForAdd(),
+paramLastName.GetSQLQuotedValueForAdd(),
+paramAccountName.GetSQLQuotedValueForAdd(),
+paramAccountNumber.GetSQLQuotedValueForAdd(),
+paramBank.GetSQLQuotedValueForAdd(),
+paramChannel.GetSQLQuotedValueForAdd(),
+paramIPAddress.GetSQLQuotedValueForAdd(),
+paramSchoolDiscountGiven.GetSQLQuotedValueForAdd(),
+paramPaymentRequired.GetSQLQuotedValueForAdd(),
+paramCharges.GetSQLQuotedValueForAdd(),
+paramRefundAmount.GetSQLQuotedValueForAdd(),
+paramBalance.GetSQLQuotedValueForAdd(),
+paramConfirmationThreshold.GetSQLQuotedValueForAdd(),
+paramConfirmationDate.GetSQLQuotedValueForAdd(),
+paramAwaitingDisbursement.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramUpdatedByID.GetSQLQuotedValueForAdd(),
+paramConfirmedExplanation.GetSQLQuotedValueForAdd(),
+paramChargesBilledToClient.GetSQLQuotedValueForAdd(),
+paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
+paramIsMultiTarget.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -1064,32 +1062,32 @@ DataColumnParameter paramIsMultiTarget = new DataColumnParameter(defIsMultiTarge
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26}) ", TABLE_NAME,paramTransactionStatusID.getSQLQuotedValueForAdd(),
-paramClientID.getSQLQuotedValueForAdd(),
-paramStudentNumber.getSQLQuotedValueForAdd(),
-paramFirstName.getSQLQuotedValueForAdd(),
-paramLastName.getSQLQuotedValueForAdd(),
-paramAccountName.getSQLQuotedValueForAdd(),
-paramAccountNumber.getSQLQuotedValueForAdd(),
-paramBank.getSQLQuotedValueForAdd(),
-paramChannel.getSQLQuotedValueForAdd(),
-paramIPAddress.getSQLQuotedValueForAdd(),
-paramSchoolDiscountGiven.getSQLQuotedValueForAdd(),
-paramPaymentRequired.getSQLQuotedValueForAdd(),
-paramCharges.getSQLQuotedValueForAdd(),
-paramRefundAmount.getSQLQuotedValueForAdd(),
-paramBalance.getSQLQuotedValueForAdd(),
-paramConfirmationThreshold.getSQLQuotedValueForAdd(),
-paramConfirmationDate.getSQLQuotedValueForAdd(),
-paramAwaitingDisbursement.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramUpdatedByID.getSQLQuotedValueForAdd(),
-paramConfirmedExplanation.getSQLQuotedValueForAdd(),
-paramChargesBilledToClient.getSQLQuotedValueForAdd(),
-paramPaymentRequiredWithoutCharges.getSQLQuotedValueForAdd(),
-paramIsMultiTarget.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26}) ", TABLE_NAME,paramTransactionStatusID.GetSQLQuotedValueForAdd(),
+paramClientID.GetSQLQuotedValueForAdd(),
+paramStudentNumber.GetSQLQuotedValueForAdd(),
+paramFirstName.GetSQLQuotedValueForAdd(),
+paramLastName.GetSQLQuotedValueForAdd(),
+paramAccountName.GetSQLQuotedValueForAdd(),
+paramAccountNumber.GetSQLQuotedValueForAdd(),
+paramBank.GetSQLQuotedValueForAdd(),
+paramChannel.GetSQLQuotedValueForAdd(),
+paramIPAddress.GetSQLQuotedValueForAdd(),
+paramSchoolDiscountGiven.GetSQLQuotedValueForAdd(),
+paramPaymentRequired.GetSQLQuotedValueForAdd(),
+paramCharges.GetSQLQuotedValueForAdd(),
+paramRefundAmount.GetSQLQuotedValueForAdd(),
+paramBalance.GetSQLQuotedValueForAdd(),
+paramConfirmationThreshold.GetSQLQuotedValueForAdd(),
+paramConfirmationDate.GetSQLQuotedValueForAdd(),
+paramAwaitingDisbursement.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramUpdatedByID.GetSQLQuotedValueForAdd(),
+paramConfirmedExplanation.GetSQLQuotedValueForAdd(),
+paramChargesBilledToClient.GetSQLQuotedValueForAdd(),
+paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
+paramIsMultiTarget.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -1165,32 +1163,32 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [TransactionStatusID]={2},[ClientID]={3},[StudentNumber]={4},[FirstName]={5},[LastName]={6},[AccountName]={7},[AccountNumber]={8},[Bank]={9},[Channel]={10},[IPAddress]={11},[SchoolDiscountGiven]={12},[PaymentRequired]={13},[Charges]={14},[RefundAmount]={15},[Balance]={16},[ConfirmationThreshold]={17},[ConfirmationDate]={18},[AwaitingDisbursement]={19},[CreatedAt]={20},[UpdatedAt]={21},[CreatedByID]={22},[UpdatedByID]={23},[ConfirmedExplanation]={24},[ChargesBilledToClient]={25},[PaymentRequiredWithoutCharges]={26},[IsMultiTarget]={27} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramTransactionStatusID.getSQLQuotedValueForUpdate(),
-paramClientID.getSQLQuotedValueForUpdate(),
-paramStudentNumber.getSQLQuotedValueForUpdate(),
-paramFirstName.getSQLQuotedValueForUpdate(),
-paramLastName.getSQLQuotedValueForUpdate(),
-paramAccountName.getSQLQuotedValueForUpdate(),
-paramAccountNumber.getSQLQuotedValueForUpdate(),
-paramBank.getSQLQuotedValueForUpdate(),
-paramChannel.getSQLQuotedValueForUpdate(),
-paramIPAddress.getSQLQuotedValueForUpdate(),
-paramSchoolDiscountGiven.getSQLQuotedValueForUpdate(),
-paramPaymentRequired.getSQLQuotedValueForUpdate(),
-paramCharges.getSQLQuotedValueForUpdate(),
-paramRefundAmount.getSQLQuotedValueForUpdate(),
-paramBalance.getSQLQuotedValueForUpdate(),
-paramConfirmationThreshold.getSQLQuotedValueForUpdate(),
-paramConfirmationDate.getSQLQuotedValueForUpdate(),
-paramAwaitingDisbursement.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramUpdatedAt.getSQLQuotedValueForUpdate(),
-paramCreatedByID.getSQLQuotedValueForUpdate(),
-paramUpdatedByID.getSQLQuotedValueForUpdate(),
-paramConfirmedExplanation.getSQLQuotedValueForUpdate(),
-paramChargesBilledToClient.getSQLQuotedValueForUpdate(),
-paramPaymentRequiredWithoutCharges.getSQLQuotedValueForUpdate(),
-paramIsMultiTarget.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [TransactionStatusID]={2},[ClientID]={3},[StudentNumber]={4},[FirstName]={5},[LastName]={6},[AccountName]={7},[AccountNumber]={8},[Bank]={9},[Channel]={10},[IPAddress]={11},[SchoolDiscountGiven]={12},[PaymentRequired]={13},[Charges]={14},[RefundAmount]={15},[Balance]={16},[ConfirmationThreshold]={17},[ConfirmationDate]={18},[AwaitingDisbursement]={19},[CreatedAt]={20},[UpdatedAt]={21},[CreatedByID]={22},[UpdatedByID]={23},[ConfirmedExplanation]={24},[ChargesBilledToClient]={25},[PaymentRequiredWithoutCharges]={26},[IsMultiTarget]={27} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramTransactionStatusID.GetSQLQuotedValueForUpdate(),
+paramClientID.GetSQLQuotedValueForUpdate(),
+paramStudentNumber.GetSQLQuotedValueForUpdate(),
+paramFirstName.GetSQLQuotedValueForUpdate(),
+paramLastName.GetSQLQuotedValueForUpdate(),
+paramAccountName.GetSQLQuotedValueForUpdate(),
+paramAccountNumber.GetSQLQuotedValueForUpdate(),
+paramBank.GetSQLQuotedValueForUpdate(),
+paramChannel.GetSQLQuotedValueForUpdate(),
+paramIPAddress.GetSQLQuotedValueForUpdate(),
+paramSchoolDiscountGiven.GetSQLQuotedValueForUpdate(),
+paramPaymentRequired.GetSQLQuotedValueForUpdate(),
+paramCharges.GetSQLQuotedValueForUpdate(),
+paramRefundAmount.GetSQLQuotedValueForUpdate(),
+paramBalance.GetSQLQuotedValueForUpdate(),
+paramConfirmationThreshold.GetSQLQuotedValueForUpdate(),
+paramConfirmationDate.GetSQLQuotedValueForUpdate(),
+paramAwaitingDisbursement.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramUpdatedAt.GetSQLQuotedValueForUpdate(),
+paramCreatedByID.GetSQLQuotedValueForUpdate(),
+paramUpdatedByID.GetSQLQuotedValueForUpdate(),
+paramConfirmedExplanation.GetSQLQuotedValueForUpdate(),
+paramChargesBilledToClient.GetSQLQuotedValueForUpdate(),
+paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForUpdate(),
+paramIsMultiTarget.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,23 +23,23 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___BeneficiaryRelation()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defBeneficiaryID = new DataColumnDefinition(TableColumnNames.BeneficiaryID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defRelationshipTypeID = new DataColumnDefinition(TableColumnNames.RelationshipTypeID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defMaritalStatusID = new DataColumnDefinition(TableColumnNames.MaritalStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defIsDeceased = new DataColumnDefinition(TableColumnNames.IsDeceased.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defRelationshipNarration = new DataColumnDefinition(TableColumnNames.RelationshipNarration.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFullName = new DataColumnDefinition(TableColumnNames.FullName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defOccupation = new DataColumnDefinition(TableColumnNames.Occupation.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAddress = new DataColumnDefinition(TableColumnNames.Address.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defHomePhone = new DataColumnDefinition(TableColumnNames.HomePhone.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defEmail = new DataColumnDefinition(TableColumnNames.Email.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDeathCertificatePath = new DataColumnDefinition(TableColumnNames.DeathCertificatePath.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPhotoPath = new DataColumnDefinition(TableColumnNames.PhotoPath.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedByID = new DataColumnDefinition(TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defUpdatedByID = new DataColumnDefinition(TableColumnNames.UpdatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defBeneficiaryID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BeneficiaryID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defRelationshipTypeID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RelationshipTypeID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defMaritalStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.MaritalStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defIsDeceased = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsDeceased.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defRelationshipNarration = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RelationshipNarration.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFullName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FullName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defOccupation = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Occupation.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Address.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defHomePhone = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.HomePhone.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defEmail = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Email.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDeathCertificatePath = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DeathCertificatePath.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPhotoPath = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PhotoPath.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defUpdatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -450,7 +451,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -470,7 +471,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -532,10 +533,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -543,7 +541,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -643,23 +641,23 @@ Int32 pUpdatedByID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[BeneficiaryID],[RelationshipTypeID],[MaritalStatusID],[IsDeceased],[RelationshipNarration],[FullName],[Occupation],[Address],[HomePhone],[Email],[DeathCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramBeneficiaryID.getSQLQuotedValueForAdd(),
-                paramRelationshipTypeID.getSQLQuotedValueForAdd(),
-                paramMaritalStatusID.getSQLQuotedValueForAdd(),
-                paramIsDeceased.getSQLQuotedValueForAdd(),
-                paramRelationshipNarration.getSQLQuotedValueForAdd(),
-                paramFullName.getSQLQuotedValueForAdd(),
-                paramOccupation.getSQLQuotedValueForAdd(),
-                paramAddress.getSQLQuotedValueForAdd(),
-                paramHomePhone.getSQLQuotedValueForAdd(),
-                paramEmail.getSQLQuotedValueForAdd(),
-                paramDeathCertificatePath.getSQLQuotedValueForAdd(),
-                paramPhotoPath.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramUpdatedAt.getSQLQuotedValueForAdd(),
-                paramCreatedByID.getSQLQuotedValueForAdd(),
-                paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[BeneficiaryID],[RelationshipTypeID],[MaritalStatusID],[IsDeceased],[RelationshipNarration],[FullName],[Occupation],[Address],[HomePhone],[Email],[DeathCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramBeneficiaryID.GetSQLQuotedValueForAdd(),
+                paramRelationshipTypeID.GetSQLQuotedValueForAdd(),
+                paramMaritalStatusID.GetSQLQuotedValueForAdd(),
+                paramIsDeceased.GetSQLQuotedValueForAdd(),
+                paramRelationshipNarration.GetSQLQuotedValueForAdd(),
+                paramFullName.GetSQLQuotedValueForAdd(),
+                paramOccupation.GetSQLQuotedValueForAdd(),
+                paramAddress.GetSQLQuotedValueForAdd(),
+                paramHomePhone.GetSQLQuotedValueForAdd(),
+                paramEmail.GetSQLQuotedValueForAdd(),
+                paramDeathCertificatePath.GetSQLQuotedValueForAdd(),
+                paramPhotoPath.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                paramCreatedByID.GetSQLQuotedValueForAdd(),
+                paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -712,23 +710,23 @@ Object pPhotoPath = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[BeneficiaryID],[RelationshipTypeID],[MaritalStatusID],[IsDeceased],[RelationshipNarration],[FullName],[Occupation],[Address],[HomePhone],[Email],[DeathCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramBeneficiaryID.getSQLQuotedValueForAdd(),
-paramRelationshipTypeID.getSQLQuotedValueForAdd(),
-paramMaritalStatusID.getSQLQuotedValueForAdd(),
-paramIsDeceased.getSQLQuotedValueForAdd(),
-paramRelationshipNarration.getSQLQuotedValueForAdd(),
-paramFullName.getSQLQuotedValueForAdd(),
-paramOccupation.getSQLQuotedValueForAdd(),
-paramAddress.getSQLQuotedValueForAdd(),
-paramHomePhone.getSQLQuotedValueForAdd(),
-paramEmail.getSQLQuotedValueForAdd(),
-paramDeathCertificatePath.getSQLQuotedValueForAdd(),
-paramPhotoPath.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[BeneficiaryID],[RelationshipTypeID],[MaritalStatusID],[IsDeceased],[RelationshipNarration],[FullName],[Occupation],[Address],[HomePhone],[Email],[DeathCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramBeneficiaryID.GetSQLQuotedValueForAdd(),
+paramRelationshipTypeID.GetSQLQuotedValueForAdd(),
+paramMaritalStatusID.GetSQLQuotedValueForAdd(),
+paramIsDeceased.GetSQLQuotedValueForAdd(),
+paramRelationshipNarration.GetSQLQuotedValueForAdd(),
+paramFullName.GetSQLQuotedValueForAdd(),
+paramOccupation.GetSQLQuotedValueForAdd(),
+paramAddress.GetSQLQuotedValueForAdd(),
+paramHomePhone.GetSQLQuotedValueForAdd(),
+paramEmail.GetSQLQuotedValueForAdd(),
+paramDeathCertificatePath.GetSQLQuotedValueForAdd(),
+paramPhotoPath.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -779,23 +777,23 @@ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, p
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[BeneficiaryID],[RelationshipTypeID],[MaritalStatusID],[IsDeceased],[RelationshipNarration],[FullName],[Occupation],[Address],[HomePhone],[Email],[DeathCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramBeneficiaryID.getSQLQuotedValueForAdd(),
-paramRelationshipTypeID.getSQLQuotedValueForAdd(),
-paramMaritalStatusID.getSQLQuotedValueForAdd(),
-paramIsDeceased.getSQLQuotedValueForAdd(),
-paramRelationshipNarration.getSQLQuotedValueForAdd(),
-paramFullName.getSQLQuotedValueForAdd(),
-paramOccupation.getSQLQuotedValueForAdd(),
-paramAddress.getSQLQuotedValueForAdd(),
-paramHomePhone.getSQLQuotedValueForAdd(),
-paramEmail.getSQLQuotedValueForAdd(),
-paramDeathCertificatePath.getSQLQuotedValueForAdd(),
-paramPhotoPath.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[BeneficiaryID],[RelationshipTypeID],[MaritalStatusID],[IsDeceased],[RelationshipNarration],[FullName],[Occupation],[Address],[HomePhone],[Email],[DeathCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramBeneficiaryID.GetSQLQuotedValueForAdd(),
+paramRelationshipTypeID.GetSQLQuotedValueForAdd(),
+paramMaritalStatusID.GetSQLQuotedValueForAdd(),
+paramIsDeceased.GetSQLQuotedValueForAdd(),
+paramRelationshipNarration.GetSQLQuotedValueForAdd(),
+paramFullName.GetSQLQuotedValueForAdd(),
+paramOccupation.GetSQLQuotedValueForAdd(),
+paramAddress.GetSQLQuotedValueForAdd(),
+paramHomePhone.GetSQLQuotedValueForAdd(),
+paramEmail.GetSQLQuotedValueForAdd(),
+paramDeathCertificatePath.GetSQLQuotedValueForAdd(),
+paramPhotoPath.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -851,22 +849,22 @@ DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, p
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([BeneficiaryID],[RelationshipTypeID],[MaritalStatusID],[IsDeceased],[RelationshipNarration],[FullName],[Occupation],[Address],[HomePhone],[Email],[DeathCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramBeneficiaryID.getSQLQuotedValueForAdd(),
-paramRelationshipTypeID.getSQLQuotedValueForAdd(),
-paramMaritalStatusID.getSQLQuotedValueForAdd(),
-paramIsDeceased.getSQLQuotedValueForAdd(),
-paramRelationshipNarration.getSQLQuotedValueForAdd(),
-paramFullName.getSQLQuotedValueForAdd(),
-paramOccupation.getSQLQuotedValueForAdd(),
-paramAddress.getSQLQuotedValueForAdd(),
-paramHomePhone.getSQLQuotedValueForAdd(),
-paramEmail.getSQLQuotedValueForAdd(),
-paramDeathCertificatePath.getSQLQuotedValueForAdd(),
-paramPhotoPath.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramUpdatedByID.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([BeneficiaryID],[RelationshipTypeID],[MaritalStatusID],[IsDeceased],[RelationshipNarration],[FullName],[Occupation],[Address],[HomePhone],[Email],[DeathCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramBeneficiaryID.GetSQLQuotedValueForAdd(),
+paramRelationshipTypeID.GetSQLQuotedValueForAdd(),
+paramMaritalStatusID.GetSQLQuotedValueForAdd(),
+paramIsDeceased.GetSQLQuotedValueForAdd(),
+paramRelationshipNarration.GetSQLQuotedValueForAdd(),
+paramFullName.GetSQLQuotedValueForAdd(),
+paramOccupation.GetSQLQuotedValueForAdd(),
+paramAddress.GetSQLQuotedValueForAdd(),
+paramHomePhone.GetSQLQuotedValueForAdd(),
+paramEmail.GetSQLQuotedValueForAdd(),
+paramDeathCertificatePath.GetSQLQuotedValueForAdd(),
+paramPhotoPath.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -922,22 +920,22 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [BeneficiaryID]={2},[RelationshipTypeID]={3},[MaritalStatusID]={4},[IsDeceased]={5},[RelationshipNarration]={6},[FullName]={7},[Occupation]={8},[Address]={9},[HomePhone]={10},[Email]={11},[DeathCertificatePath]={12},[PhotoPath]={13},[CreatedAt]={14},[UpdatedAt]={15},[CreatedByID]={16},[UpdatedByID]={17} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramBeneficiaryID.getSQLQuotedValueForUpdate(),
-paramRelationshipTypeID.getSQLQuotedValueForUpdate(),
-paramMaritalStatusID.getSQLQuotedValueForUpdate(),
-paramIsDeceased.getSQLQuotedValueForUpdate(),
-paramRelationshipNarration.getSQLQuotedValueForUpdate(),
-paramFullName.getSQLQuotedValueForUpdate(),
-paramOccupation.getSQLQuotedValueForUpdate(),
-paramAddress.getSQLQuotedValueForUpdate(),
-paramHomePhone.getSQLQuotedValueForUpdate(),
-paramEmail.getSQLQuotedValueForUpdate(),
-paramDeathCertificatePath.getSQLQuotedValueForUpdate(),
-paramPhotoPath.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramUpdatedAt.getSQLQuotedValueForUpdate(),
-paramCreatedByID.getSQLQuotedValueForUpdate(),
-paramUpdatedByID.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [BeneficiaryID]={2},[RelationshipTypeID]={3},[MaritalStatusID]={4},[IsDeceased]={5},[RelationshipNarration]={6},[FullName]={7},[Occupation]={8},[Address]={9},[HomePhone]={10},[Email]={11},[DeathCertificatePath]={12},[PhotoPath]={13},[CreatedAt]={14},[UpdatedAt]={15},[CreatedByID]={16},[UpdatedByID]={17} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramBeneficiaryID.GetSQLQuotedValueForUpdate(),
+paramRelationshipTypeID.GetSQLQuotedValueForUpdate(),
+paramMaritalStatusID.GetSQLQuotedValueForUpdate(),
+paramIsDeceased.GetSQLQuotedValueForUpdate(),
+paramRelationshipNarration.GetSQLQuotedValueForUpdate(),
+paramFullName.GetSQLQuotedValueForUpdate(),
+paramOccupation.GetSQLQuotedValueForUpdate(),
+paramAddress.GetSQLQuotedValueForUpdate(),
+paramHomePhone.GetSQLQuotedValueForUpdate(),
+paramEmail.GetSQLQuotedValueForUpdate(),
+paramDeathCertificatePath.GetSQLQuotedValueForUpdate(),
+paramPhotoPath.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramUpdatedAt.GetSQLQuotedValueForUpdate(),
+paramCreatedByID.GetSQLQuotedValueForUpdate(),
+paramUpdatedByID.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

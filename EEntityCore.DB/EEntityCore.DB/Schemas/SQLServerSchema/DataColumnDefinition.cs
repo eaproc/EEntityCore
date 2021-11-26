@@ -1,13 +1,19 @@
 using System;
 
-namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
+namespace EEntityCore.DB.Schemas.SQLServerSchema
 {
     public class DataColumnDefinition
     {
 
         #region Constructors
-        public DataColumnDefinition(string pColumnName, Type pDataType, bool pNullable, object pDefaultValue, ConstraintTypes pConstraintType = ConstraintTypes.UNKNOWN)
+        public DataColumnDefinition(
+            IDatabaseInit pointerDatabaseInit,
+            string pColumnName, Type pDataType, 
+            bool pNullable, object pDefaultValue,
+            ConstraintTypes pConstraintType = ConstraintTypes.UNKNOWN
+            )
         {
+            this.PointerDatabaseInit = pointerDatabaseInit;
             vNullable = pNullable;
             vDefaultValue = pDefaultValue;
             vDataType = pDataType;
@@ -18,11 +24,17 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
         #endregion
 
 
-        #region Constructors
+        #region Properties
+
+        // This part should adjust after it has been moved to MSSQL
+        private IDatabaseInit PointerDatabaseInit { get; }
+        public IDatabaseInit DatabaseInit { get { return PointerDatabaseInit.GetDatabaseInit(); } }
 
         private string vColumnName;
         private Type vDataType;
         private object vDefaultValue;
+
+
         private bool vNullable;
         private ConstraintTypes vConstraintType;
 
@@ -49,7 +61,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
                 if (!Nullable)
                 {
                     // REM WHoop up something
-                    switch (getTypeAllowed(DataType))
+                    switch (GetTypeAllowed(DataType))
                     {
                         case AllowedDataTypes.Bool:
                             {
@@ -149,7 +161,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
         #endregion
 
 
-        public static AllowedDataTypes getTypeAllowed(Type pType)
+        public static AllowedDataTypes GetTypeAllowed(Type pType)
         {
             switch (pType)
             {

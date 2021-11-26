@@ -1,5 +1,5 @@
 
-namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
+namespace EEntityCore.DB.Schemas.SQLServerSchema
 {
     public interface ISQLServerDBCredential
     {

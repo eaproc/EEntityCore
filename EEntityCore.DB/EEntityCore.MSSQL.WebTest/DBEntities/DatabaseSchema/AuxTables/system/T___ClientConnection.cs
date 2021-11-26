@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,22 +23,22 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___ClientConnection()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defClientID = new DataColumnDefinition(TableColumnNames.ClientID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defFileServerUrl = new DataColumnDefinition(TableColumnNames.FileServerUrl.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFileServerAccessKey = new DataColumnDefinition(TableColumnNames.FileServerAccessKey.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFileServerSecretKey = new DataColumnDefinition(TableColumnNames.FileServerSecretKey.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFileServerBucket = new DataColumnDefinition(TableColumnNames.FileServerBucket.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defClientAPIID = new DataColumnDefinition(TableColumnNames.ClientAPIID.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defClientAPIUrl = new DataColumnDefinition(TableColumnNames.ClientAPIUrl.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDB_HOST = new DataColumnDefinition(TableColumnNames.DB_HOST.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDB_DATABASE = new DataColumnDefinition(TableColumnNames.DB_DATABASE.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDB_USERNAME = new DataColumnDefinition(TableColumnNames.DB_USERNAME.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDB_PASSWORD = new DataColumnDefinition(TableColumnNames.DB_PASSWORD.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDB_PORT = new DataColumnDefinition(TableColumnNames.DB_PORT.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFileServerUrlHttps = new DataColumnDefinition(TableColumnNames.FileServerUrlHttps.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defClientID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClientID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defFileServerUrl = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FileServerUrl.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFileServerAccessKey = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FileServerAccessKey.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFileServerSecretKey = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FileServerSecretKey.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFileServerBucket = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FileServerBucket.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defClientAPIID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClientAPIID.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defClientAPIUrl = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClientAPIUrl.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDB_HOST = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DB_HOST.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDB_DATABASE = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DB_DATABASE.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDB_USERNAME = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DB_USERNAME.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDB_PASSWORD = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DB_PASSWORD.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDB_PORT = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DB_PORT.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFileServerUrlHttps = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FileServerUrlHttps.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -418,7 +419,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -438,7 +439,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -500,10 +501,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -511,7 +509,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -606,22 +604,22 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramClientID.getSQLQuotedValueForAdd(),
-                paramFileServerUrl.getSQLQuotedValueForAdd(),
-                paramFileServerAccessKey.getSQLQuotedValueForAdd(),
-                paramFileServerSecretKey.getSQLQuotedValueForAdd(),
-                paramFileServerBucket.getSQLQuotedValueForAdd(),
-                paramClientAPIID.getSQLQuotedValueForAdd(),
-                paramClientAPIUrl.getSQLQuotedValueForAdd(),
-                paramDB_HOST.getSQLQuotedValueForAdd(),
-                paramDB_DATABASE.getSQLQuotedValueForAdd(),
-                paramDB_USERNAME.getSQLQuotedValueForAdd(),
-                paramDB_PASSWORD.getSQLQuotedValueForAdd(),
-                paramDB_PORT.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramUpdatedAt.getSQLQuotedValueForAdd(),
-                paramFileServerUrlHttps.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramClientID.GetSQLQuotedValueForAdd(),
+                paramFileServerUrl.GetSQLQuotedValueForAdd(),
+                paramFileServerAccessKey.GetSQLQuotedValueForAdd(),
+                paramFileServerSecretKey.GetSQLQuotedValueForAdd(),
+                paramFileServerBucket.GetSQLQuotedValueForAdd(),
+                paramClientAPIID.GetSQLQuotedValueForAdd(),
+                paramClientAPIUrl.GetSQLQuotedValueForAdd(),
+                paramDB_HOST.GetSQLQuotedValueForAdd(),
+                paramDB_DATABASE.GetSQLQuotedValueForAdd(),
+                paramDB_USERNAME.GetSQLQuotedValueForAdd(),
+                paramDB_PASSWORD.GetSQLQuotedValueForAdd(),
+                paramDB_PORT.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                paramFileServerUrlHttps.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -672,22 +670,22 @@ Object pUpdatedAt = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramClientID.getSQLQuotedValueForAdd(),
-paramFileServerUrl.getSQLQuotedValueForAdd(),
-paramFileServerAccessKey.getSQLQuotedValueForAdd(),
-paramFileServerSecretKey.getSQLQuotedValueForAdd(),
-paramFileServerBucket.getSQLQuotedValueForAdd(),
-paramClientAPIID.getSQLQuotedValueForAdd(),
-paramClientAPIUrl.getSQLQuotedValueForAdd(),
-paramDB_HOST.getSQLQuotedValueForAdd(),
-paramDB_DATABASE.getSQLQuotedValueForAdd(),
-paramDB_USERNAME.getSQLQuotedValueForAdd(),
-paramDB_PASSWORD.getSQLQuotedValueForAdd(),
-paramDB_PORT.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramFileServerUrlHttps.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramClientID.GetSQLQuotedValueForAdd(),
+paramFileServerUrl.GetSQLQuotedValueForAdd(),
+paramFileServerAccessKey.GetSQLQuotedValueForAdd(),
+paramFileServerSecretKey.GetSQLQuotedValueForAdd(),
+paramFileServerBucket.GetSQLQuotedValueForAdd(),
+paramClientAPIID.GetSQLQuotedValueForAdd(),
+paramClientAPIUrl.GetSQLQuotedValueForAdd(),
+paramDB_HOST.GetSQLQuotedValueForAdd(),
+paramDB_DATABASE.GetSQLQuotedValueForAdd(),
+paramDB_USERNAME.GetSQLQuotedValueForAdd(),
+paramDB_PASSWORD.GetSQLQuotedValueForAdd(),
+paramDB_PORT.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramFileServerUrlHttps.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -736,22 +734,22 @@ DataColumnParameter paramFileServerUrlHttps = new DataColumnParameter(defFileSer
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramClientID.getSQLQuotedValueForAdd(),
-paramFileServerUrl.getSQLQuotedValueForAdd(),
-paramFileServerAccessKey.getSQLQuotedValueForAdd(),
-paramFileServerSecretKey.getSQLQuotedValueForAdd(),
-paramFileServerBucket.getSQLQuotedValueForAdd(),
-paramClientAPIID.getSQLQuotedValueForAdd(),
-paramClientAPIUrl.getSQLQuotedValueForAdd(),
-paramDB_HOST.getSQLQuotedValueForAdd(),
-paramDB_DATABASE.getSQLQuotedValueForAdd(),
-paramDB_USERNAME.getSQLQuotedValueForAdd(),
-paramDB_PASSWORD.getSQLQuotedValueForAdd(),
-paramDB_PORT.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramFileServerUrlHttps.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramClientID.GetSQLQuotedValueForAdd(),
+paramFileServerUrl.GetSQLQuotedValueForAdd(),
+paramFileServerAccessKey.GetSQLQuotedValueForAdd(),
+paramFileServerSecretKey.GetSQLQuotedValueForAdd(),
+paramFileServerBucket.GetSQLQuotedValueForAdd(),
+paramClientAPIID.GetSQLQuotedValueForAdd(),
+paramClientAPIUrl.GetSQLQuotedValueForAdd(),
+paramDB_HOST.GetSQLQuotedValueForAdd(),
+paramDB_DATABASE.GetSQLQuotedValueForAdd(),
+paramDB_USERNAME.GetSQLQuotedValueForAdd(),
+paramDB_PASSWORD.GetSQLQuotedValueForAdd(),
+paramDB_PORT.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramFileServerUrlHttps.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -805,21 +803,21 @@ DataColumnParameter paramFileServerUrlHttps = new DataColumnParameter(defFileSer
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}) ", TABLE_NAME,paramClientID.getSQLQuotedValueForAdd(),
-paramFileServerUrl.getSQLQuotedValueForAdd(),
-paramFileServerAccessKey.getSQLQuotedValueForAdd(),
-paramFileServerSecretKey.getSQLQuotedValueForAdd(),
-paramFileServerBucket.getSQLQuotedValueForAdd(),
-paramClientAPIID.getSQLQuotedValueForAdd(),
-paramClientAPIUrl.getSQLQuotedValueForAdd(),
-paramDB_HOST.getSQLQuotedValueForAdd(),
-paramDB_DATABASE.getSQLQuotedValueForAdd(),
-paramDB_USERNAME.getSQLQuotedValueForAdd(),
-paramDB_PASSWORD.getSQLQuotedValueForAdd(),
-paramDB_PORT.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramFileServerUrlHttps.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}) ", TABLE_NAME,paramClientID.GetSQLQuotedValueForAdd(),
+paramFileServerUrl.GetSQLQuotedValueForAdd(),
+paramFileServerAccessKey.GetSQLQuotedValueForAdd(),
+paramFileServerSecretKey.GetSQLQuotedValueForAdd(),
+paramFileServerBucket.GetSQLQuotedValueForAdd(),
+paramClientAPIID.GetSQLQuotedValueForAdd(),
+paramClientAPIUrl.GetSQLQuotedValueForAdd(),
+paramDB_HOST.GetSQLQuotedValueForAdd(),
+paramDB_DATABASE.GetSQLQuotedValueForAdd(),
+paramDB_USERNAME.GetSQLQuotedValueForAdd(),
+paramDB_PASSWORD.GetSQLQuotedValueForAdd(),
+paramDB_PORT.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramFileServerUrlHttps.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -873,21 +871,21 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [ClientID]={2},[FileServerUrl]={3},[FileServerAccessKey]={4},[FileServerSecretKey]={5},[FileServerBucket]={6},[ClientAPIID]={7},[ClientAPIUrl]={8},[DB_HOST]={9},[DB_DATABASE]={10},[DB_USERNAME]={11},[DB_PASSWORD]={12},[DB_PORT]={13},[CreatedAt]={14},[UpdatedAt]={15},[FileServerUrlHttps]={16} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramClientID.getSQLQuotedValueForUpdate(),
-paramFileServerUrl.getSQLQuotedValueForUpdate(),
-paramFileServerAccessKey.getSQLQuotedValueForUpdate(),
-paramFileServerSecretKey.getSQLQuotedValueForUpdate(),
-paramFileServerBucket.getSQLQuotedValueForUpdate(),
-paramClientAPIID.getSQLQuotedValueForUpdate(),
-paramClientAPIUrl.getSQLQuotedValueForUpdate(),
-paramDB_HOST.getSQLQuotedValueForUpdate(),
-paramDB_DATABASE.getSQLQuotedValueForUpdate(),
-paramDB_USERNAME.getSQLQuotedValueForUpdate(),
-paramDB_PASSWORD.getSQLQuotedValueForUpdate(),
-paramDB_PORT.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramUpdatedAt.getSQLQuotedValueForUpdate(),
-paramFileServerUrlHttps.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [ClientID]={2},[FileServerUrl]={3},[FileServerAccessKey]={4},[FileServerSecretKey]={5},[FileServerBucket]={6},[ClientAPIID]={7},[ClientAPIUrl]={8},[DB_HOST]={9},[DB_DATABASE]={10},[DB_USERNAME]={11},[DB_PASSWORD]={12},[DB_PORT]={13},[CreatedAt]={14},[UpdatedAt]={15},[FileServerUrlHttps]={16} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramClientID.GetSQLQuotedValueForUpdate(),
+paramFileServerUrl.GetSQLQuotedValueForUpdate(),
+paramFileServerAccessKey.GetSQLQuotedValueForUpdate(),
+paramFileServerSecretKey.GetSQLQuotedValueForUpdate(),
+paramFileServerBucket.GetSQLQuotedValueForUpdate(),
+paramClientAPIID.GetSQLQuotedValueForUpdate(),
+paramClientAPIUrl.GetSQLQuotedValueForUpdate(),
+paramDB_HOST.GetSQLQuotedValueForUpdate(),
+paramDB_DATABASE.GetSQLQuotedValueForUpdate(),
+paramDB_USERNAME.GetSQLQuotedValueForUpdate(),
+paramDB_PASSWORD.GetSQLQuotedValueForUpdate(),
+paramDB_PORT.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramUpdatedAt.GetSQLQuotedValueForUpdate(),
+paramFileServerUrlHttps.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

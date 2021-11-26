@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,16 +23,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___RequestMonitor()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defAbsoluteURL = new DataColumnDefinition(TableColumnNames.AbsoluteURL.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defRequestParametersJSON = new DataColumnDefinition(TableColumnNames.RequestParametersJSON.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIPAddress = new DataColumnDefinition(TableColumnNames.IPAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSessionVariables = new DataColumnDefinition(TableColumnNames.SessionVariables.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBrowser = new DataColumnDefinition(TableColumnNames.Browser.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUserID = new DataColumnDefinition(TableColumnNames.UserID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defRequestBody = new DataColumnDefinition(TableColumnNames.RequestBody.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defRequestHeaders = new DataColumnDefinition(TableColumnNames.RequestHeaders.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defAbsoluteURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AbsoluteURL.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defRequestParametersJSON = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RequestParametersJSON.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIPAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IPAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSessionVariables = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionVariables.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBrowser = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Browser.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defRequestBody = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RequestBody.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defRequestHeaders = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RequestHeaders.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -345,7 +346,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -365,7 +366,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -427,10 +428,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -438,7 +436,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -527,16 +525,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramAbsoluteURL.getSQLQuotedValueForAdd(),
-                paramRequestParametersJSON.getSQLQuotedValueForAdd(),
-                paramIPAddress.getSQLQuotedValueForAdd(),
-                paramSessionVariables.getSQLQuotedValueForAdd(),
-                paramBrowser.getSQLQuotedValueForAdd(),
-                paramUserID.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramRequestBody.getSQLQuotedValueForAdd(),
-                paramRequestHeaders.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramAbsoluteURL.GetSQLQuotedValueForAdd(),
+                paramRequestParametersJSON.GetSQLQuotedValueForAdd(),
+                paramIPAddress.GetSQLQuotedValueForAdd(),
+                paramSessionVariables.GetSQLQuotedValueForAdd(),
+                paramBrowser.GetSQLQuotedValueForAdd(),
+                paramUserID.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramRequestBody.GetSQLQuotedValueForAdd(),
+                paramRequestHeaders.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -575,16 +573,16 @@ Object pRequestHeaders = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramAbsoluteURL.getSQLQuotedValueForAdd(),
-paramRequestParametersJSON.getSQLQuotedValueForAdd(),
-paramIPAddress.getSQLQuotedValueForAdd(),
-paramSessionVariables.getSQLQuotedValueForAdd(),
-paramBrowser.getSQLQuotedValueForAdd(),
-paramUserID.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramRequestBody.getSQLQuotedValueForAdd(),
-paramRequestHeaders.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramAbsoluteURL.GetSQLQuotedValueForAdd(),
+paramRequestParametersJSON.GetSQLQuotedValueForAdd(),
+paramIPAddress.GetSQLQuotedValueForAdd(),
+paramSessionVariables.GetSQLQuotedValueForAdd(),
+paramBrowser.GetSQLQuotedValueForAdd(),
+paramUserID.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramRequestBody.GetSQLQuotedValueForAdd(),
+paramRequestHeaders.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -621,16 +619,16 @@ DataColumnParameter paramRequestHeaders = new DataColumnParameter(defRequestHead
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramAbsoluteURL.getSQLQuotedValueForAdd(),
-paramRequestParametersJSON.getSQLQuotedValueForAdd(),
-paramIPAddress.getSQLQuotedValueForAdd(),
-paramSessionVariables.getSQLQuotedValueForAdd(),
-paramBrowser.getSQLQuotedValueForAdd(),
-paramUserID.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramRequestBody.getSQLQuotedValueForAdd(),
-paramRequestHeaders.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramAbsoluteURL.GetSQLQuotedValueForAdd(),
+paramRequestParametersJSON.GetSQLQuotedValueForAdd(),
+paramIPAddress.GetSQLQuotedValueForAdd(),
+paramSessionVariables.GetSQLQuotedValueForAdd(),
+paramBrowser.GetSQLQuotedValueForAdd(),
+paramUserID.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramRequestBody.GetSQLQuotedValueForAdd(),
+paramRequestHeaders.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -672,15 +670,15 @@ DataColumnParameter paramRequestHeaders = new DataColumnParameter(defRequestHead
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramAbsoluteURL.getSQLQuotedValueForAdd(),
-paramRequestParametersJSON.getSQLQuotedValueForAdd(),
-paramIPAddress.getSQLQuotedValueForAdd(),
-paramSessionVariables.getSQLQuotedValueForAdd(),
-paramBrowser.getSQLQuotedValueForAdd(),
-paramUserID.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramRequestBody.getSQLQuotedValueForAdd(),
-paramRequestHeaders.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramAbsoluteURL.GetSQLQuotedValueForAdd(),
+paramRequestParametersJSON.GetSQLQuotedValueForAdd(),
+paramIPAddress.GetSQLQuotedValueForAdd(),
+paramSessionVariables.GetSQLQuotedValueForAdd(),
+paramBrowser.GetSQLQuotedValueForAdd(),
+paramUserID.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramRequestBody.GetSQLQuotedValueForAdd(),
+paramRequestHeaders.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -722,15 +720,15 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [AbsoluteURL]={2},[RequestParametersJSON]={3},[IPAddress]={4},[SessionVariables]={5},[Browser]={6},[UserID]={7},[CreatedAt]={8},[RequestBody]={9},[RequestHeaders]={10} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramAbsoluteURL.getSQLQuotedValueForUpdate(),
-paramRequestParametersJSON.getSQLQuotedValueForUpdate(),
-paramIPAddress.getSQLQuotedValueForUpdate(),
-paramSessionVariables.getSQLQuotedValueForUpdate(),
-paramBrowser.getSQLQuotedValueForUpdate(),
-paramUserID.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramRequestBody.getSQLQuotedValueForUpdate(),
-paramRequestHeaders.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [AbsoluteURL]={2},[RequestParametersJSON]={3},[IPAddress]={4},[SessionVariables]={5},[Browser]={6},[UserID]={7},[CreatedAt]={8},[RequestBody]={9},[RequestHeaders]={10} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramAbsoluteURL.GetSQLQuotedValueForUpdate(),
+paramRequestParametersJSON.GetSQLQuotedValueForUpdate(),
+paramIPAddress.GetSQLQuotedValueForUpdate(),
+paramSessionVariables.GetSQLQuotedValueForUpdate(),
+paramBrowser.GetSQLQuotedValueForUpdate(),
+paramUserID.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramRequestBody.GetSQLQuotedValueForUpdate(),
+paramRequestHeaders.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

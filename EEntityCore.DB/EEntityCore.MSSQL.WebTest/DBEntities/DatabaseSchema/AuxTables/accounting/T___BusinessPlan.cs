@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,19 +23,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___BusinessPlan()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defAcademicSessionID = new DataColumnDefinition(TableColumnNames.AcademicSessionID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defStudentPopulation = new DataColumnDefinition(TableColumnNames.StudentPopulation.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAveragePricePerStudent = new DataColumnDefinition(TableColumnNames.AveragePricePerStudent.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSCADWAREAccessRevenue = new DataColumnDefinition(TableColumnNames.SCADWAREAccessRevenue.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSideContractRevenue = new DataColumnDefinition(TableColumnNames.SideContractRevenue.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGrossRevenue = new DataColumnDefinition(TableColumnNames.GrossRevenue.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defWages = new DataColumnDefinition(TableColumnNames.Wages.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defMarketing = new DataColumnDefinition(TableColumnNames.Marketing.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCharity = new DataColumnDefinition(TableColumnNames.Charity.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defOthers = new DataColumnDefinition(TableColumnNames.Others.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defAcademicSessionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AcademicSessionID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defStudentPopulation = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.StudentPopulation.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAveragePricePerStudent = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AveragePricePerStudent.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSCADWAREAccessRevenue = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SCADWAREAccessRevenue.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSideContractRevenue = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SideContractRevenue.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGrossRevenue = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.GrossRevenue.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defWages = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Wages.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defMarketing = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Marketing.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCharity = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Charity.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defOthers = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Others.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -382,7 +383,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -402,7 +403,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -464,10 +465,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -475,7 +473,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -567,19 +565,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramAcademicSessionID.getSQLQuotedValueForAdd(),
-                paramStudentPopulation.getSQLQuotedValueForAdd(),
-                paramAveragePricePerStudent.getSQLQuotedValueForAdd(),
-                paramSCADWAREAccessRevenue.getSQLQuotedValueForAdd(),
-                paramSideContractRevenue.getSQLQuotedValueForAdd(),
-                paramGrossRevenue.getSQLQuotedValueForAdd(),
-                paramWages.getSQLQuotedValueForAdd(),
-                paramMarketing.getSQLQuotedValueForAdd(),
-                paramCharity.getSQLQuotedValueForAdd(),
-                paramOthers.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramAcademicSessionID.GetSQLQuotedValueForAdd(),
+                paramStudentPopulation.GetSQLQuotedValueForAdd(),
+                paramAveragePricePerStudent.GetSQLQuotedValueForAdd(),
+                paramSCADWAREAccessRevenue.GetSQLQuotedValueForAdd(),
+                paramSideContractRevenue.GetSQLQuotedValueForAdd(),
+                paramGrossRevenue.GetSQLQuotedValueForAdd(),
+                paramWages.GetSQLQuotedValueForAdd(),
+                paramMarketing.GetSQLQuotedValueForAdd(),
+                paramCharity.GetSQLQuotedValueForAdd(),
+                paramOthers.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -624,19 +622,19 @@ Object pUpdatedAt = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramAcademicSessionID.getSQLQuotedValueForAdd(),
-paramStudentPopulation.getSQLQuotedValueForAdd(),
-paramAveragePricePerStudent.getSQLQuotedValueForAdd(),
-paramSCADWAREAccessRevenue.getSQLQuotedValueForAdd(),
-paramSideContractRevenue.getSQLQuotedValueForAdd(),
-paramGrossRevenue.getSQLQuotedValueForAdd(),
-paramWages.getSQLQuotedValueForAdd(),
-paramMarketing.getSQLQuotedValueForAdd(),
-paramCharity.getSQLQuotedValueForAdd(),
-paramOthers.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramAcademicSessionID.GetSQLQuotedValueForAdd(),
+paramStudentPopulation.GetSQLQuotedValueForAdd(),
+paramAveragePricePerStudent.GetSQLQuotedValueForAdd(),
+paramSCADWAREAccessRevenue.GetSQLQuotedValueForAdd(),
+paramSideContractRevenue.GetSQLQuotedValueForAdd(),
+paramGrossRevenue.GetSQLQuotedValueForAdd(),
+paramWages.GetSQLQuotedValueForAdd(),
+paramMarketing.GetSQLQuotedValueForAdd(),
+paramCharity.GetSQLQuotedValueForAdd(),
+paramOthers.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -679,19 +677,19 @@ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpda
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramAcademicSessionID.getSQLQuotedValueForAdd(),
-paramStudentPopulation.getSQLQuotedValueForAdd(),
-paramAveragePricePerStudent.getSQLQuotedValueForAdd(),
-paramSCADWAREAccessRevenue.getSQLQuotedValueForAdd(),
-paramSideContractRevenue.getSQLQuotedValueForAdd(),
-paramGrossRevenue.getSQLQuotedValueForAdd(),
-paramWages.getSQLQuotedValueForAdd(),
-paramMarketing.getSQLQuotedValueForAdd(),
-paramCharity.getSQLQuotedValueForAdd(),
-paramOthers.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramAcademicSessionID.GetSQLQuotedValueForAdd(),
+paramStudentPopulation.GetSQLQuotedValueForAdd(),
+paramAveragePricePerStudent.GetSQLQuotedValueForAdd(),
+paramSCADWAREAccessRevenue.GetSQLQuotedValueForAdd(),
+paramSideContractRevenue.GetSQLQuotedValueForAdd(),
+paramGrossRevenue.GetSQLQuotedValueForAdd(),
+paramWages.GetSQLQuotedValueForAdd(),
+paramMarketing.GetSQLQuotedValueForAdd(),
+paramCharity.GetSQLQuotedValueForAdd(),
+paramOthers.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -739,18 +737,18 @@ DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpda
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) ", TABLE_NAME,paramAcademicSessionID.getSQLQuotedValueForAdd(),
-paramStudentPopulation.getSQLQuotedValueForAdd(),
-paramAveragePricePerStudent.getSQLQuotedValueForAdd(),
-paramSCADWAREAccessRevenue.getSQLQuotedValueForAdd(),
-paramSideContractRevenue.getSQLQuotedValueForAdd(),
-paramGrossRevenue.getSQLQuotedValueForAdd(),
-paramWages.getSQLQuotedValueForAdd(),
-paramMarketing.getSQLQuotedValueForAdd(),
-paramCharity.getSQLQuotedValueForAdd(),
-paramOthers.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) ", TABLE_NAME,paramAcademicSessionID.GetSQLQuotedValueForAdd(),
+paramStudentPopulation.GetSQLQuotedValueForAdd(),
+paramAveragePricePerStudent.GetSQLQuotedValueForAdd(),
+paramSCADWAREAccessRevenue.GetSQLQuotedValueForAdd(),
+paramSideContractRevenue.GetSQLQuotedValueForAdd(),
+paramGrossRevenue.GetSQLQuotedValueForAdd(),
+paramWages.GetSQLQuotedValueForAdd(),
+paramMarketing.GetSQLQuotedValueForAdd(),
+paramCharity.GetSQLQuotedValueForAdd(),
+paramOthers.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -798,18 +796,18 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [AcademicSessionID]={2},[StudentPopulation]={3},[AveragePricePerStudent]={4},[SCADWAREAccessRevenue]={5},[SideContractRevenue]={6},[GrossRevenue]={7},[Wages]={8},[Marketing]={9},[Charity]={10},[Others]={11},[CreatedAt]={12},[UpdatedAt]={13} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramAcademicSessionID.getSQLQuotedValueForUpdate(),
-paramStudentPopulation.getSQLQuotedValueForUpdate(),
-paramAveragePricePerStudent.getSQLQuotedValueForUpdate(),
-paramSCADWAREAccessRevenue.getSQLQuotedValueForUpdate(),
-paramSideContractRevenue.getSQLQuotedValueForUpdate(),
-paramGrossRevenue.getSQLQuotedValueForUpdate(),
-paramWages.getSQLQuotedValueForUpdate(),
-paramMarketing.getSQLQuotedValueForUpdate(),
-paramCharity.getSQLQuotedValueForUpdate(),
-paramOthers.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramUpdatedAt.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [AcademicSessionID]={2},[StudentPopulation]={3},[AveragePricePerStudent]={4},[SCADWAREAccessRevenue]={5},[SideContractRevenue]={6},[GrossRevenue]={7},[Wages]={8},[Marketing]={9},[Charity]={10},[Others]={11},[CreatedAt]={12},[UpdatedAt]={13} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramAcademicSessionID.GetSQLQuotedValueForUpdate(),
+paramStudentPopulation.GetSQLQuotedValueForUpdate(),
+paramAveragePricePerStudent.GetSQLQuotedValueForUpdate(),
+paramSCADWAREAccessRevenue.GetSQLQuotedValueForUpdate(),
+paramSideContractRevenue.GetSQLQuotedValueForUpdate(),
+paramGrossRevenue.GetSQLQuotedValueForUpdate(),
+paramWages.GetSQLQuotedValueForUpdate(),
+paramMarketing.GetSQLQuotedValueForUpdate(),
+paramCharity.GetSQLQuotedValueForUpdate(),
+paramOthers.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramUpdatedAt.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

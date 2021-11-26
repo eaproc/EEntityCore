@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,10 +23,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___LinkPermissionMember()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defLinkPermissionID = new DataColumnDefinition(TableColumnNames.LinkPermissionID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defHasPermissionID = new DataColumnDefinition(TableColumnNames.HasPermissionID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defLinkPermissionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LinkPermissionID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defHasPermissionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.HasPermissionID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -279,7 +280,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -299,7 +300,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -361,10 +362,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -372,7 +370,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -456,10 +454,10 @@ Int32 pHasPermissionID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[LinkPermissionID],[HasPermissionID],[CreatedAt]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramLinkPermissionID.getSQLQuotedValueForAdd(),
-                paramHasPermissionID.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[LinkPermissionID],[HasPermissionID],[CreatedAt]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramLinkPermissionID.GetSQLQuotedValueForAdd(),
+                paramHasPermissionID.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -486,10 +484,10 @@ DateTime pCreatedAt){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[LinkPermissionID],[HasPermissionID],[CreatedAt]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramLinkPermissionID.getSQLQuotedValueForAdd(),
-paramHasPermissionID.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[LinkPermissionID],[HasPermissionID],[CreatedAt]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramLinkPermissionID.GetSQLQuotedValueForAdd(),
+paramHasPermissionID.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -514,10 +512,10 @@ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCrea
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[LinkPermissionID],[HasPermissionID],[CreatedAt]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramLinkPermissionID.getSQLQuotedValueForAdd(),
-paramHasPermissionID.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[LinkPermissionID],[HasPermissionID],[CreatedAt]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramLinkPermissionID.GetSQLQuotedValueForAdd(),
+paramHasPermissionID.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -547,9 +545,9 @@ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCrea
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([LinkPermissionID],[HasPermissionID],[CreatedAt]) VALUES({1},{2},{3}) ", TABLE_NAME,paramLinkPermissionID.getSQLQuotedValueForAdd(),
-paramHasPermissionID.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([LinkPermissionID],[HasPermissionID],[CreatedAt]) VALUES({1},{2},{3}) ", TABLE_NAME,paramLinkPermissionID.GetSQLQuotedValueForAdd(),
+paramHasPermissionID.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -579,9 +577,9 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [LinkPermissionID]={2},[HasPermissionID]={3},[CreatedAt]={4} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramLinkPermissionID.getSQLQuotedValueForUpdate(),
-paramHasPermissionID.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [LinkPermissionID]={2},[HasPermissionID]={3},[CreatedAt]={4} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramLinkPermissionID.GetSQLQuotedValueForUpdate(),
+paramHasPermissionID.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

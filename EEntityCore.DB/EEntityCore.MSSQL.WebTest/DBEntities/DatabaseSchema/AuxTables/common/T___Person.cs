@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,26 +23,26 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___Person()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defIdentificationNo = new DataColumnDefinition(TableColumnNames.IdentificationNo.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defFirstName = new DataColumnDefinition(TableColumnNames.FirstName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defLastName = new DataColumnDefinition(TableColumnNames.LastName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCountryID = new DataColumnDefinition(TableColumnNames.CountryID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defDateOfBirth = new DataColumnDefinition(TableColumnNames.DateOfBirth.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGenderID = new DataColumnDefinition(TableColumnNames.GenderID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defHomeAddress = new DataColumnDefinition(TableColumnNames.HomeAddress.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defEmail = new DataColumnDefinition(TableColumnNames.Email.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defPersonTitleID = new DataColumnDefinition(TableColumnNames.PersonTitleID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defIsSuperUser = new DataColumnDefinition(TableColumnNames.IsSuperUser.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBloodTypeID = new DataColumnDefinition(TableColumnNames.BloodTypeID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defBirthPlace = new DataColumnDefinition(TableColumnNames.BirthPlace.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPictureFileName = new DataColumnDefinition(TableColumnNames.PictureFileName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defMaritalStatusID = new DataColumnDefinition(TableColumnNames.MaritalStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defCanBeUpdated = new DataColumnDefinition(TableColumnNames.CanBeUpdated.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCanBeDeleted = new DataColumnDefinition(TableColumnNames.CanBeDeleted.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDataMonitorID = new DataColumnDefinition(TableColumnNames.DataMonitorID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defIdentificationNo = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IdentificationNo.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defFirstName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FirstName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defLastName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LastName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCountryID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CountryID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defDateOfBirth = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DateOfBirth.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGenderID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.GenderID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defHomeAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.HomeAddress.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defEmail = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Email.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defPersonTitleID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonTitleID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defIsSuperUser = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsSuperUser.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBloodTypeID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BloodTypeID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defBirthPlace = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BirthPlace.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPictureFileName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PictureFileName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defMaritalStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.MaritalStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defCanBeUpdated = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CanBeUpdated.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCanBeDeleted = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CanBeDeleted.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDataMonitorID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DataMonitorID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -492,7 +493,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -512,7 +513,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -574,10 +575,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -585,7 +583,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -691,26 +689,26 @@ Int32 pDataMonitorID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramIdentificationNo.getSQLQuotedValueForAdd(),
-                paramFirstName.getSQLQuotedValueForAdd(),
-                paramLastName.getSQLQuotedValueForAdd(),
-                paramCountryID.getSQLQuotedValueForAdd(),
-                paramDateOfBirth.getSQLQuotedValueForAdd(),
-                paramGenderID.getSQLQuotedValueForAdd(),
-                paramHomeAddress.getSQLQuotedValueForAdd(),
-                paramEmail.getSQLQuotedValueForAdd(),
-                paramPersonTitleID.getSQLQuotedValueForAdd(),
-                paramIsSuperUser.getSQLQuotedValueForAdd(),
-                paramBloodTypeID.getSQLQuotedValueForAdd(),
-                paramBirthPlace.getSQLQuotedValueForAdd(),
-                paramPictureFileName.getSQLQuotedValueForAdd(),
-                paramMaritalStatusID.getSQLQuotedValueForAdd(),
-                paramCanBeUpdated.getSQLQuotedValueForAdd(),
-                paramCanBeDeleted.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramUpdatedAt.getSQLQuotedValueForAdd(),
-                paramDataMonitorID.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramIdentificationNo.GetSQLQuotedValueForAdd(),
+                paramFirstName.GetSQLQuotedValueForAdd(),
+                paramLastName.GetSQLQuotedValueForAdd(),
+                paramCountryID.GetSQLQuotedValueForAdd(),
+                paramDateOfBirth.GetSQLQuotedValueForAdd(),
+                paramGenderID.GetSQLQuotedValueForAdd(),
+                paramHomeAddress.GetSQLQuotedValueForAdd(),
+                paramEmail.GetSQLQuotedValueForAdd(),
+                paramPersonTitleID.GetSQLQuotedValueForAdd(),
+                paramIsSuperUser.GetSQLQuotedValueForAdd(),
+                paramBloodTypeID.GetSQLQuotedValueForAdd(),
+                paramBirthPlace.GetSQLQuotedValueForAdd(),
+                paramPictureFileName.GetSQLQuotedValueForAdd(),
+                paramMaritalStatusID.GetSQLQuotedValueForAdd(),
+                paramCanBeUpdated.GetSQLQuotedValueForAdd(),
+                paramCanBeDeleted.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                paramDataMonitorID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -769,26 +767,26 @@ Object pDataMonitorID = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramIdentificationNo.getSQLQuotedValueForAdd(),
-paramFirstName.getSQLQuotedValueForAdd(),
-paramLastName.getSQLQuotedValueForAdd(),
-paramCountryID.getSQLQuotedValueForAdd(),
-paramDateOfBirth.getSQLQuotedValueForAdd(),
-paramGenderID.getSQLQuotedValueForAdd(),
-paramHomeAddress.getSQLQuotedValueForAdd(),
-paramEmail.getSQLQuotedValueForAdd(),
-paramPersonTitleID.getSQLQuotedValueForAdd(),
-paramIsSuperUser.getSQLQuotedValueForAdd(),
-paramBloodTypeID.getSQLQuotedValueForAdd(),
-paramBirthPlace.getSQLQuotedValueForAdd(),
-paramPictureFileName.getSQLQuotedValueForAdd(),
-paramMaritalStatusID.getSQLQuotedValueForAdd(),
-paramCanBeUpdated.getSQLQuotedValueForAdd(),
-paramCanBeDeleted.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramDataMonitorID.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramIdentificationNo.GetSQLQuotedValueForAdd(),
+paramFirstName.GetSQLQuotedValueForAdd(),
+paramLastName.GetSQLQuotedValueForAdd(),
+paramCountryID.GetSQLQuotedValueForAdd(),
+paramDateOfBirth.GetSQLQuotedValueForAdd(),
+paramGenderID.GetSQLQuotedValueForAdd(),
+paramHomeAddress.GetSQLQuotedValueForAdd(),
+paramEmail.GetSQLQuotedValueForAdd(),
+paramPersonTitleID.GetSQLQuotedValueForAdd(),
+paramIsSuperUser.GetSQLQuotedValueForAdd(),
+paramBloodTypeID.GetSQLQuotedValueForAdd(),
+paramBirthPlace.GetSQLQuotedValueForAdd(),
+paramPictureFileName.GetSQLQuotedValueForAdd(),
+paramMaritalStatusID.GetSQLQuotedValueForAdd(),
+paramCanBeUpdated.GetSQLQuotedValueForAdd(),
+paramCanBeDeleted.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramDataMonitorID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -845,26 +843,26 @@ DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorI
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramIdentificationNo.getSQLQuotedValueForAdd(),
-paramFirstName.getSQLQuotedValueForAdd(),
-paramLastName.getSQLQuotedValueForAdd(),
-paramCountryID.getSQLQuotedValueForAdd(),
-paramDateOfBirth.getSQLQuotedValueForAdd(),
-paramGenderID.getSQLQuotedValueForAdd(),
-paramHomeAddress.getSQLQuotedValueForAdd(),
-paramEmail.getSQLQuotedValueForAdd(),
-paramPersonTitleID.getSQLQuotedValueForAdd(),
-paramIsSuperUser.getSQLQuotedValueForAdd(),
-paramBloodTypeID.getSQLQuotedValueForAdd(),
-paramBirthPlace.getSQLQuotedValueForAdd(),
-paramPictureFileName.getSQLQuotedValueForAdd(),
-paramMaritalStatusID.getSQLQuotedValueForAdd(),
-paramCanBeUpdated.getSQLQuotedValueForAdd(),
-paramCanBeDeleted.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramDataMonitorID.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramIdentificationNo.GetSQLQuotedValueForAdd(),
+paramFirstName.GetSQLQuotedValueForAdd(),
+paramLastName.GetSQLQuotedValueForAdd(),
+paramCountryID.GetSQLQuotedValueForAdd(),
+paramDateOfBirth.GetSQLQuotedValueForAdd(),
+paramGenderID.GetSQLQuotedValueForAdd(),
+paramHomeAddress.GetSQLQuotedValueForAdd(),
+paramEmail.GetSQLQuotedValueForAdd(),
+paramPersonTitleID.GetSQLQuotedValueForAdd(),
+paramIsSuperUser.GetSQLQuotedValueForAdd(),
+paramBloodTypeID.GetSQLQuotedValueForAdd(),
+paramBirthPlace.GetSQLQuotedValueForAdd(),
+paramPictureFileName.GetSQLQuotedValueForAdd(),
+paramMaritalStatusID.GetSQLQuotedValueForAdd(),
+paramCanBeUpdated.GetSQLQuotedValueForAdd(),
+paramCanBeDeleted.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramDataMonitorID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -926,25 +924,25 @@ DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorI
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19}) ", TABLE_NAME,paramIdentificationNo.getSQLQuotedValueForAdd(),
-paramFirstName.getSQLQuotedValueForAdd(),
-paramLastName.getSQLQuotedValueForAdd(),
-paramCountryID.getSQLQuotedValueForAdd(),
-paramDateOfBirth.getSQLQuotedValueForAdd(),
-paramGenderID.getSQLQuotedValueForAdd(),
-paramHomeAddress.getSQLQuotedValueForAdd(),
-paramEmail.getSQLQuotedValueForAdd(),
-paramPersonTitleID.getSQLQuotedValueForAdd(),
-paramIsSuperUser.getSQLQuotedValueForAdd(),
-paramBloodTypeID.getSQLQuotedValueForAdd(),
-paramBirthPlace.getSQLQuotedValueForAdd(),
-paramPictureFileName.getSQLQuotedValueForAdd(),
-paramMaritalStatusID.getSQLQuotedValueForAdd(),
-paramCanBeUpdated.getSQLQuotedValueForAdd(),
-paramCanBeDeleted.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramDataMonitorID.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19}) ", TABLE_NAME,paramIdentificationNo.GetSQLQuotedValueForAdd(),
+paramFirstName.GetSQLQuotedValueForAdd(),
+paramLastName.GetSQLQuotedValueForAdd(),
+paramCountryID.GetSQLQuotedValueForAdd(),
+paramDateOfBirth.GetSQLQuotedValueForAdd(),
+paramGenderID.GetSQLQuotedValueForAdd(),
+paramHomeAddress.GetSQLQuotedValueForAdd(),
+paramEmail.GetSQLQuotedValueForAdd(),
+paramPersonTitleID.GetSQLQuotedValueForAdd(),
+paramIsSuperUser.GetSQLQuotedValueForAdd(),
+paramBloodTypeID.GetSQLQuotedValueForAdd(),
+paramBirthPlace.GetSQLQuotedValueForAdd(),
+paramPictureFileName.GetSQLQuotedValueForAdd(),
+paramMaritalStatusID.GetSQLQuotedValueForAdd(),
+paramCanBeUpdated.GetSQLQuotedValueForAdd(),
+paramCanBeDeleted.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramDataMonitorID.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -1006,25 +1004,25 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [IdentificationNo]={2},[FirstName]={3},[LastName]={4},[CountryID]={5},[DateOfBirth]={6},[GenderID]={7},[HomeAddress]={8},[Email]={9},[PersonTitleID]={10},[IsSuperUser]={11},[BloodTypeID]={12},[BirthPlace]={13},[PictureFileName]={14},[MaritalStatusID]={15},[CanBeUpdated]={16},[CanBeDeleted]={17},[CreatedAt]={18},[UpdatedAt]={19},[DataMonitorID]={20} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramIdentificationNo.getSQLQuotedValueForUpdate(),
-paramFirstName.getSQLQuotedValueForUpdate(),
-paramLastName.getSQLQuotedValueForUpdate(),
-paramCountryID.getSQLQuotedValueForUpdate(),
-paramDateOfBirth.getSQLQuotedValueForUpdate(),
-paramGenderID.getSQLQuotedValueForUpdate(),
-paramHomeAddress.getSQLQuotedValueForUpdate(),
-paramEmail.getSQLQuotedValueForUpdate(),
-paramPersonTitleID.getSQLQuotedValueForUpdate(),
-paramIsSuperUser.getSQLQuotedValueForUpdate(),
-paramBloodTypeID.getSQLQuotedValueForUpdate(),
-paramBirthPlace.getSQLQuotedValueForUpdate(),
-paramPictureFileName.getSQLQuotedValueForUpdate(),
-paramMaritalStatusID.getSQLQuotedValueForUpdate(),
-paramCanBeUpdated.getSQLQuotedValueForUpdate(),
-paramCanBeDeleted.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramUpdatedAt.getSQLQuotedValueForUpdate(),
-paramDataMonitorID.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [IdentificationNo]={2},[FirstName]={3},[LastName]={4},[CountryID]={5},[DateOfBirth]={6},[GenderID]={7},[HomeAddress]={8},[Email]={9},[PersonTitleID]={10},[IsSuperUser]={11},[BloodTypeID]={12},[BirthPlace]={13},[PictureFileName]={14},[MaritalStatusID]={15},[CanBeUpdated]={16},[CanBeDeleted]={17},[CreatedAt]={18},[UpdatedAt]={19},[DataMonitorID]={20} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramIdentificationNo.GetSQLQuotedValueForUpdate(),
+paramFirstName.GetSQLQuotedValueForUpdate(),
+paramLastName.GetSQLQuotedValueForUpdate(),
+paramCountryID.GetSQLQuotedValueForUpdate(),
+paramDateOfBirth.GetSQLQuotedValueForUpdate(),
+paramGenderID.GetSQLQuotedValueForUpdate(),
+paramHomeAddress.GetSQLQuotedValueForUpdate(),
+paramEmail.GetSQLQuotedValueForUpdate(),
+paramPersonTitleID.GetSQLQuotedValueForUpdate(),
+paramIsSuperUser.GetSQLQuotedValueForUpdate(),
+paramBloodTypeID.GetSQLQuotedValueForUpdate(),
+paramBirthPlace.GetSQLQuotedValueForUpdate(),
+paramPictureFileName.GetSQLQuotedValueForUpdate(),
+paramMaritalStatusID.GetSQLQuotedValueForUpdate(),
+paramCanBeUpdated.GetSQLQuotedValueForUpdate(),
+paramCanBeDeleted.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramUpdatedAt.GetSQLQuotedValueForUpdate(),
+paramDataMonitorID.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

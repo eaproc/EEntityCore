@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,14 +23,14 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___PasswordResetHistory()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defUserID = new DataColumnDefinition(TableColumnNames.UserID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defOldPassword = new DataColumnDefinition(TableColumnNames.OldPassword.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defNewPassword = new DataColumnDefinition(TableColumnNames.NewPassword.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPasswordResetTypeID = new DataColumnDefinition(TableColumnNames.PasswordResetTypeID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defChangedByUserID = new DataColumnDefinition(TableColumnNames.ChangedByUserID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIpAddress = new DataColumnDefinition(TableColumnNames.IpAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defOldPassword = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.OldPassword.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defNewPassword = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.NewPassword.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPasswordResetTypeID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PasswordResetTypeID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defChangedByUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ChangedByUserID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIpAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IpAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -331,7 +332,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -351,7 +352,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -413,10 +414,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -424,7 +422,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -512,14 +510,14 @@ Int32 pPasswordResetTypeID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[OldPassword],[NewPassword],[PasswordResetTypeID],[CreatedAt],[ChangedByUserID],[IpAddress]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramUserID.getSQLQuotedValueForAdd(),
-                paramOldPassword.getSQLQuotedValueForAdd(),
-                paramNewPassword.getSQLQuotedValueForAdd(),
-                paramPasswordResetTypeID.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramChangedByUserID.getSQLQuotedValueForAdd(),
-                paramIpAddress.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[OldPassword],[NewPassword],[PasswordResetTypeID],[CreatedAt],[ChangedByUserID],[IpAddress]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramUserID.GetSQLQuotedValueForAdd(),
+                paramOldPassword.GetSQLQuotedValueForAdd(),
+                paramNewPassword.GetSQLQuotedValueForAdd(),
+                paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramChangedByUserID.GetSQLQuotedValueForAdd(),
+                paramIpAddress.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -554,14 +552,14 @@ String pIpAddress){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[OldPassword],[NewPassword],[PasswordResetTypeID],[CreatedAt],[ChangedByUserID],[IpAddress]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramUserID.getSQLQuotedValueForAdd(),
-paramOldPassword.getSQLQuotedValueForAdd(),
-paramNewPassword.getSQLQuotedValueForAdd(),
-paramPasswordResetTypeID.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramChangedByUserID.getSQLQuotedValueForAdd(),
-paramIpAddress.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[OldPassword],[NewPassword],[PasswordResetTypeID],[CreatedAt],[ChangedByUserID],[IpAddress]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramUserID.GetSQLQuotedValueForAdd(),
+paramOldPassword.GetSQLQuotedValueForAdd(),
+paramNewPassword.GetSQLQuotedValueForAdd(),
+paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramChangedByUserID.GetSQLQuotedValueForAdd(),
+paramIpAddress.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -594,14 +592,14 @@ DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAd
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[OldPassword],[NewPassword],[PasswordResetTypeID],[CreatedAt],[ChangedByUserID],[IpAddress]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramUserID.getSQLQuotedValueForAdd(),
-paramOldPassword.getSQLQuotedValueForAdd(),
-paramNewPassword.getSQLQuotedValueForAdd(),
-paramPasswordResetTypeID.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramChangedByUserID.getSQLQuotedValueForAdd(),
-paramIpAddress.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[OldPassword],[NewPassword],[PasswordResetTypeID],[CreatedAt],[ChangedByUserID],[IpAddress]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramUserID.GetSQLQuotedValueForAdd(),
+paramOldPassword.GetSQLQuotedValueForAdd(),
+paramNewPassword.GetSQLQuotedValueForAdd(),
+paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramChangedByUserID.GetSQLQuotedValueForAdd(),
+paramIpAddress.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -639,13 +637,13 @@ DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAd
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([UserID],[OldPassword],[NewPassword],[PasswordResetTypeID],[CreatedAt],[ChangedByUserID],[IpAddress]) VALUES({1},{2},{3},{4},{5},{6},{7}) ", TABLE_NAME,paramUserID.getSQLQuotedValueForAdd(),
-paramOldPassword.getSQLQuotedValueForAdd(),
-paramNewPassword.getSQLQuotedValueForAdd(),
-paramPasswordResetTypeID.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramChangedByUserID.getSQLQuotedValueForAdd(),
-paramIpAddress.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([UserID],[OldPassword],[NewPassword],[PasswordResetTypeID],[CreatedAt],[ChangedByUserID],[IpAddress]) VALUES({1},{2},{3},{4},{5},{6},{7}) ", TABLE_NAME,paramUserID.GetSQLQuotedValueForAdd(),
+paramOldPassword.GetSQLQuotedValueForAdd(),
+paramNewPassword.GetSQLQuotedValueForAdd(),
+paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramChangedByUserID.GetSQLQuotedValueForAdd(),
+paramIpAddress.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -683,13 +681,13 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [UserID]={2},[OldPassword]={3},[NewPassword]={4},[PasswordResetTypeID]={5},[CreatedAt]={6},[ChangedByUserID]={7},[IpAddress]={8} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramUserID.getSQLQuotedValueForUpdate(),
-paramOldPassword.getSQLQuotedValueForUpdate(),
-paramNewPassword.getSQLQuotedValueForUpdate(),
-paramPasswordResetTypeID.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramChangedByUserID.getSQLQuotedValueForUpdate(),
-paramIpAddress.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [UserID]={2},[OldPassword]={3},[NewPassword]={4},[PasswordResetTypeID]={5},[CreatedAt]={6},[ChangedByUserID]={7},[IpAddress]={8} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramUserID.GetSQLQuotedValueForUpdate(),
+paramOldPassword.GetSQLQuotedValueForUpdate(),
+paramNewPassword.GetSQLQuotedValueForUpdate(),
+paramPasswordResetTypeID.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramChangedByUserID.GetSQLQuotedValueForUpdate(),
+paramIpAddress.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

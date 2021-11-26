@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,23 +23,23 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___CommonPerson()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defDataMonitorID = new DataColumnDefinition(TableColumnNames.DataMonitorID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defImportStatusID = new DataColumnDefinition(TableColumnNames.ImportStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defIdentificationNo = new DataColumnDefinition(TableColumnNames.IdentificationNo.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPersonTitle = new DataColumnDefinition(TableColumnNames.PersonTitle.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFirstName = new DataColumnDefinition(TableColumnNames.FirstName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defLastName = new DataColumnDefinition(TableColumnNames.LastName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCountry = new DataColumnDefinition(TableColumnNames.Country.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDateOfBirth = new DataColumnDefinition(TableColumnNames.DateOfBirth.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGender = new DataColumnDefinition(TableColumnNames.Gender.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defHomeAddress = new DataColumnDefinition(TableColumnNames.HomeAddress.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defEmail = new DataColumnDefinition(TableColumnNames.Email.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBirthPlace = new DataColumnDefinition(TableColumnNames.BirthPlace.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defMobileAreaCode = new DataColumnDefinition(TableColumnNames.MobileAreaCode.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defMobileNumber = new DataColumnDefinition(TableColumnNames.MobileNumber.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defImportComment = new DataColumnDefinition(TableColumnNames.ImportComment.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defDataMonitorID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DataMonitorID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defImportStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ImportStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defIdentificationNo = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IdentificationNo.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPersonTitle = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonTitle.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFirstName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FirstName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defLastName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LastName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCountry = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Country.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDateOfBirth = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DateOfBirth.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGender = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Gender.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defHomeAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.HomeAddress.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defEmail = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Email.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBirthPlace = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BirthPlace.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defMobileAreaCode = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.MobileAreaCode.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defMobileNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.MobileNumber.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defImportComment = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ImportComment.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -434,7 +435,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -454,7 +455,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -516,10 +517,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -527,7 +525,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -624,23 +622,23 @@ Int32 pImportStatusID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramDataMonitorID.getSQLQuotedValueForAdd(),
-                paramImportStatusID.getSQLQuotedValueForAdd(),
-                paramIdentificationNo.getSQLQuotedValueForAdd(),
-                paramPersonTitle.getSQLQuotedValueForAdd(),
-                paramFirstName.getSQLQuotedValueForAdd(),
-                paramLastName.getSQLQuotedValueForAdd(),
-                paramCountry.getSQLQuotedValueForAdd(),
-                paramDateOfBirth.getSQLQuotedValueForAdd(),
-                paramGender.getSQLQuotedValueForAdd(),
-                paramHomeAddress.getSQLQuotedValueForAdd(),
-                paramEmail.getSQLQuotedValueForAdd(),
-                paramBirthPlace.getSQLQuotedValueForAdd(),
-                paramMobileAreaCode.getSQLQuotedValueForAdd(),
-                paramMobileNumber.getSQLQuotedValueForAdd(),
-                paramImportComment.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramDataMonitorID.GetSQLQuotedValueForAdd(),
+                paramImportStatusID.GetSQLQuotedValueForAdd(),
+                paramIdentificationNo.GetSQLQuotedValueForAdd(),
+                paramPersonTitle.GetSQLQuotedValueForAdd(),
+                paramFirstName.GetSQLQuotedValueForAdd(),
+                paramLastName.GetSQLQuotedValueForAdd(),
+                paramCountry.GetSQLQuotedValueForAdd(),
+                paramDateOfBirth.GetSQLQuotedValueForAdd(),
+                paramGender.GetSQLQuotedValueForAdd(),
+                paramHomeAddress.GetSQLQuotedValueForAdd(),
+                paramEmail.GetSQLQuotedValueForAdd(),
+                paramBirthPlace.GetSQLQuotedValueForAdd(),
+                paramMobileAreaCode.GetSQLQuotedValueForAdd(),
+                paramMobileNumber.GetSQLQuotedValueForAdd(),
+                paramImportComment.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -693,23 +691,23 @@ Object pMobileNumber = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramDataMonitorID.getSQLQuotedValueForAdd(),
-paramImportStatusID.getSQLQuotedValueForAdd(),
-paramIdentificationNo.getSQLQuotedValueForAdd(),
-paramPersonTitle.getSQLQuotedValueForAdd(),
-paramFirstName.getSQLQuotedValueForAdd(),
-paramLastName.getSQLQuotedValueForAdd(),
-paramCountry.getSQLQuotedValueForAdd(),
-paramDateOfBirth.getSQLQuotedValueForAdd(),
-paramGender.getSQLQuotedValueForAdd(),
-paramHomeAddress.getSQLQuotedValueForAdd(),
-paramEmail.getSQLQuotedValueForAdd(),
-paramBirthPlace.getSQLQuotedValueForAdd(),
-paramMobileAreaCode.getSQLQuotedValueForAdd(),
-paramMobileNumber.getSQLQuotedValueForAdd(),
-paramImportComment.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramDataMonitorID.GetSQLQuotedValueForAdd(),
+paramImportStatusID.GetSQLQuotedValueForAdd(),
+paramIdentificationNo.GetSQLQuotedValueForAdd(),
+paramPersonTitle.GetSQLQuotedValueForAdd(),
+paramFirstName.GetSQLQuotedValueForAdd(),
+paramLastName.GetSQLQuotedValueForAdd(),
+paramCountry.GetSQLQuotedValueForAdd(),
+paramDateOfBirth.GetSQLQuotedValueForAdd(),
+paramGender.GetSQLQuotedValueForAdd(),
+paramHomeAddress.GetSQLQuotedValueForAdd(),
+paramEmail.GetSQLQuotedValueForAdd(),
+paramBirthPlace.GetSQLQuotedValueForAdd(),
+paramMobileAreaCode.GetSQLQuotedValueForAdd(),
+paramMobileNumber.GetSQLQuotedValueForAdd(),
+paramImportComment.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -760,23 +758,23 @@ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCrea
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramDataMonitorID.getSQLQuotedValueForAdd(),
-paramImportStatusID.getSQLQuotedValueForAdd(),
-paramIdentificationNo.getSQLQuotedValueForAdd(),
-paramPersonTitle.getSQLQuotedValueForAdd(),
-paramFirstName.getSQLQuotedValueForAdd(),
-paramLastName.getSQLQuotedValueForAdd(),
-paramCountry.getSQLQuotedValueForAdd(),
-paramDateOfBirth.getSQLQuotedValueForAdd(),
-paramGender.getSQLQuotedValueForAdd(),
-paramHomeAddress.getSQLQuotedValueForAdd(),
-paramEmail.getSQLQuotedValueForAdd(),
-paramBirthPlace.getSQLQuotedValueForAdd(),
-paramMobileAreaCode.getSQLQuotedValueForAdd(),
-paramMobileNumber.getSQLQuotedValueForAdd(),
-paramImportComment.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramDataMonitorID.GetSQLQuotedValueForAdd(),
+paramImportStatusID.GetSQLQuotedValueForAdd(),
+paramIdentificationNo.GetSQLQuotedValueForAdd(),
+paramPersonTitle.GetSQLQuotedValueForAdd(),
+paramFirstName.GetSQLQuotedValueForAdd(),
+paramLastName.GetSQLQuotedValueForAdd(),
+paramCountry.GetSQLQuotedValueForAdd(),
+paramDateOfBirth.GetSQLQuotedValueForAdd(),
+paramGender.GetSQLQuotedValueForAdd(),
+paramHomeAddress.GetSQLQuotedValueForAdd(),
+paramEmail.GetSQLQuotedValueForAdd(),
+paramBirthPlace.GetSQLQuotedValueForAdd(),
+paramMobileAreaCode.GetSQLQuotedValueForAdd(),
+paramMobileNumber.GetSQLQuotedValueForAdd(),
+paramImportComment.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -832,22 +830,22 @@ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCrea
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramDataMonitorID.getSQLQuotedValueForAdd(),
-paramImportStatusID.getSQLQuotedValueForAdd(),
-paramIdentificationNo.getSQLQuotedValueForAdd(),
-paramPersonTitle.getSQLQuotedValueForAdd(),
-paramFirstName.getSQLQuotedValueForAdd(),
-paramLastName.getSQLQuotedValueForAdd(),
-paramCountry.getSQLQuotedValueForAdd(),
-paramDateOfBirth.getSQLQuotedValueForAdd(),
-paramGender.getSQLQuotedValueForAdd(),
-paramHomeAddress.getSQLQuotedValueForAdd(),
-paramEmail.getSQLQuotedValueForAdd(),
-paramBirthPlace.getSQLQuotedValueForAdd(),
-paramMobileAreaCode.getSQLQuotedValueForAdd(),
-paramMobileNumber.getSQLQuotedValueForAdd(),
-paramImportComment.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramDataMonitorID.GetSQLQuotedValueForAdd(),
+paramImportStatusID.GetSQLQuotedValueForAdd(),
+paramIdentificationNo.GetSQLQuotedValueForAdd(),
+paramPersonTitle.GetSQLQuotedValueForAdd(),
+paramFirstName.GetSQLQuotedValueForAdd(),
+paramLastName.GetSQLQuotedValueForAdd(),
+paramCountry.GetSQLQuotedValueForAdd(),
+paramDateOfBirth.GetSQLQuotedValueForAdd(),
+paramGender.GetSQLQuotedValueForAdd(),
+paramHomeAddress.GetSQLQuotedValueForAdd(),
+paramEmail.GetSQLQuotedValueForAdd(),
+paramBirthPlace.GetSQLQuotedValueForAdd(),
+paramMobileAreaCode.GetSQLQuotedValueForAdd(),
+paramMobileNumber.GetSQLQuotedValueForAdd(),
+paramImportComment.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -903,22 +901,22 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [DataMonitorID]={2},[ImportStatusID]={3},[IdentificationNo]={4},[PersonTitle]={5},[FirstName]={6},[LastName]={7},[Country]={8},[DateOfBirth]={9},[Gender]={10},[HomeAddress]={11},[Email]={12},[BirthPlace]={13},[MobileAreaCode]={14},[MobileNumber]={15},[ImportComment]={16},[CreatedAt]={17} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramDataMonitorID.getSQLQuotedValueForUpdate(),
-paramImportStatusID.getSQLQuotedValueForUpdate(),
-paramIdentificationNo.getSQLQuotedValueForUpdate(),
-paramPersonTitle.getSQLQuotedValueForUpdate(),
-paramFirstName.getSQLQuotedValueForUpdate(),
-paramLastName.getSQLQuotedValueForUpdate(),
-paramCountry.getSQLQuotedValueForUpdate(),
-paramDateOfBirth.getSQLQuotedValueForUpdate(),
-paramGender.getSQLQuotedValueForUpdate(),
-paramHomeAddress.getSQLQuotedValueForUpdate(),
-paramEmail.getSQLQuotedValueForUpdate(),
-paramBirthPlace.getSQLQuotedValueForUpdate(),
-paramMobileAreaCode.getSQLQuotedValueForUpdate(),
-paramMobileNumber.getSQLQuotedValueForUpdate(),
-paramImportComment.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [DataMonitorID]={2},[ImportStatusID]={3},[IdentificationNo]={4},[PersonTitle]={5},[FirstName]={6},[LastName]={7},[Country]={8},[DateOfBirth]={9},[Gender]={10},[HomeAddress]={11},[Email]={12},[BirthPlace]={13},[MobileAreaCode]={14},[MobileNumber]={15},[ImportComment]={16},[CreatedAt]={17} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramDataMonitorID.GetSQLQuotedValueForUpdate(),
+paramImportStatusID.GetSQLQuotedValueForUpdate(),
+paramIdentificationNo.GetSQLQuotedValueForUpdate(),
+paramPersonTitle.GetSQLQuotedValueForUpdate(),
+paramFirstName.GetSQLQuotedValueForUpdate(),
+paramLastName.GetSQLQuotedValueForUpdate(),
+paramCountry.GetSQLQuotedValueForUpdate(),
+paramDateOfBirth.GetSQLQuotedValueForUpdate(),
+paramGender.GetSQLQuotedValueForUpdate(),
+paramHomeAddress.GetSQLQuotedValueForUpdate(),
+paramEmail.GetSQLQuotedValueForUpdate(),
+paramBirthPlace.GetSQLQuotedValueForUpdate(),
+paramMobileAreaCode.GetSQLQuotedValueForUpdate(),
+paramMobileNumber.GetSQLQuotedValueForUpdate(),
+paramImportComment.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

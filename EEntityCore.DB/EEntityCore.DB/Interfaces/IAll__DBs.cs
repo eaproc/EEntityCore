@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using ELibrary.Standard.VB.Types;
+using System.Data;
 
 namespace EEntityCore.DB.Interfaces
 {
@@ -55,5 +56,7 @@ namespace EEntityCore.DB.Interfaces
         /// <returns></returns>
         /// <remarks></remarks>
         bool ExecuteSQLFile(string SQLFileName, bool TerminateOnError = false, string StatementDelimiter = "GO;");
+
+        string GetSQLDateTimeFormat(NullableDateTime _DateTime);
     }
 }

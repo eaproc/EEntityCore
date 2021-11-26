@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,17 +23,17 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___OnlinePaymentAuthorization()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defOnlinePaymentID = new DataColumnDefinition(TableColumnNames.OnlinePaymentID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defAuthorizationCode = new DataColumnDefinition(TableColumnNames.AuthorizationCode.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCardType = new DataColumnDefinition(TableColumnNames.CardType.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBIN = new DataColumnDefinition(TableColumnNames.BIN.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defLast4Digits = new DataColumnDefinition(TableColumnNames.Last4Digits.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defExpirationMonth = new DataColumnDefinition(TableColumnNames.ExpirationMonth.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defExpirationYear = new DataColumnDefinition(TableColumnNames.ExpirationYear.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBank = new DataColumnDefinition(TableColumnNames.Bank.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCountryCode = new DataColumnDefinition(TableColumnNames.CountryCode.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defOnlinePaymentID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.OnlinePaymentID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defAuthorizationCode = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AuthorizationCode.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCardType = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CardType.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBIN = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BIN.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defLast4Digits = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Last4Digits.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defExpirationMonth = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExpirationMonth.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defExpirationYear = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExpirationYear.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBank = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Bank.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCountryCode = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CountryCode.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -358,7 +359,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -378,7 +379,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -440,10 +441,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -451,7 +449,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -541,17 +539,17 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramOnlinePaymentID.getSQLQuotedValueForAdd(),
-                paramAuthorizationCode.getSQLQuotedValueForAdd(),
-                paramCardType.getSQLQuotedValueForAdd(),
-                paramBIN.getSQLQuotedValueForAdd(),
-                paramLast4Digits.getSQLQuotedValueForAdd(),
-                paramExpirationMonth.getSQLQuotedValueForAdd(),
-                paramExpirationYear.getSQLQuotedValueForAdd(),
-                paramBank.getSQLQuotedValueForAdd(),
-                paramCountryCode.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramOnlinePaymentID.GetSQLQuotedValueForAdd(),
+                paramAuthorizationCode.GetSQLQuotedValueForAdd(),
+                paramCardType.GetSQLQuotedValueForAdd(),
+                paramBIN.GetSQLQuotedValueForAdd(),
+                paramLast4Digits.GetSQLQuotedValueForAdd(),
+                paramExpirationMonth.GetSQLQuotedValueForAdd(),
+                paramExpirationYear.GetSQLQuotedValueForAdd(),
+                paramBank.GetSQLQuotedValueForAdd(),
+                paramCountryCode.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -592,17 +590,17 @@ Object pCountryCode = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramOnlinePaymentID.getSQLQuotedValueForAdd(),
-paramAuthorizationCode.getSQLQuotedValueForAdd(),
-paramCardType.getSQLQuotedValueForAdd(),
-paramBIN.getSQLQuotedValueForAdd(),
-paramLast4Digits.getSQLQuotedValueForAdd(),
-paramExpirationMonth.getSQLQuotedValueForAdd(),
-paramExpirationYear.getSQLQuotedValueForAdd(),
-paramBank.getSQLQuotedValueForAdd(),
-paramCountryCode.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramOnlinePaymentID.GetSQLQuotedValueForAdd(),
+paramAuthorizationCode.GetSQLQuotedValueForAdd(),
+paramCardType.GetSQLQuotedValueForAdd(),
+paramBIN.GetSQLQuotedValueForAdd(),
+paramLast4Digits.GetSQLQuotedValueForAdd(),
+paramExpirationMonth.GetSQLQuotedValueForAdd(),
+paramExpirationYear.GetSQLQuotedValueForAdd(),
+paramBank.GetSQLQuotedValueForAdd(),
+paramCountryCode.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -641,17 +639,17 @@ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCrea
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramOnlinePaymentID.getSQLQuotedValueForAdd(),
-paramAuthorizationCode.getSQLQuotedValueForAdd(),
-paramCardType.getSQLQuotedValueForAdd(),
-paramBIN.getSQLQuotedValueForAdd(),
-paramLast4Digits.getSQLQuotedValueForAdd(),
-paramExpirationMonth.getSQLQuotedValueForAdd(),
-paramExpirationYear.getSQLQuotedValueForAdd(),
-paramBank.getSQLQuotedValueForAdd(),
-paramCountryCode.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramOnlinePaymentID.GetSQLQuotedValueForAdd(),
+paramAuthorizationCode.GetSQLQuotedValueForAdd(),
+paramCardType.GetSQLQuotedValueForAdd(),
+paramBIN.GetSQLQuotedValueForAdd(),
+paramLast4Digits.GetSQLQuotedValueForAdd(),
+paramExpirationMonth.GetSQLQuotedValueForAdd(),
+paramExpirationYear.GetSQLQuotedValueForAdd(),
+paramBank.GetSQLQuotedValueForAdd(),
+paramCountryCode.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -695,16 +693,16 @@ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCrea
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,paramOnlinePaymentID.getSQLQuotedValueForAdd(),
-paramAuthorizationCode.getSQLQuotedValueForAdd(),
-paramCardType.getSQLQuotedValueForAdd(),
-paramBIN.getSQLQuotedValueForAdd(),
-paramLast4Digits.getSQLQuotedValueForAdd(),
-paramExpirationMonth.getSQLQuotedValueForAdd(),
-paramExpirationYear.getSQLQuotedValueForAdd(),
-paramBank.getSQLQuotedValueForAdd(),
-paramCountryCode.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,paramOnlinePaymentID.GetSQLQuotedValueForAdd(),
+paramAuthorizationCode.GetSQLQuotedValueForAdd(),
+paramCardType.GetSQLQuotedValueForAdd(),
+paramBIN.GetSQLQuotedValueForAdd(),
+paramLast4Digits.GetSQLQuotedValueForAdd(),
+paramExpirationMonth.GetSQLQuotedValueForAdd(),
+paramExpirationYear.GetSQLQuotedValueForAdd(),
+paramBank.GetSQLQuotedValueForAdd(),
+paramCountryCode.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -748,16 +746,16 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [OnlinePaymentID]={2},[AuthorizationCode]={3},[CardType]={4},[BIN]={5},[Last4Digits]={6},[ExpirationMonth]={7},[ExpirationYear]={8},[Bank]={9},[CountryCode]={10},[CreatedAt]={11} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramOnlinePaymentID.getSQLQuotedValueForUpdate(),
-paramAuthorizationCode.getSQLQuotedValueForUpdate(),
-paramCardType.getSQLQuotedValueForUpdate(),
-paramBIN.getSQLQuotedValueForUpdate(),
-paramLast4Digits.getSQLQuotedValueForUpdate(),
-paramExpirationMonth.getSQLQuotedValueForUpdate(),
-paramExpirationYear.getSQLQuotedValueForUpdate(),
-paramBank.getSQLQuotedValueForUpdate(),
-paramCountryCode.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [OnlinePaymentID]={2},[AuthorizationCode]={3},[CardType]={4},[BIN]={5},[Last4Digits]={6},[ExpirationMonth]={7},[ExpirationYear]={8},[Bank]={9},[CountryCode]={10},[CreatedAt]={11} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramOnlinePaymentID.GetSQLQuotedValueForUpdate(),
+paramAuthorizationCode.GetSQLQuotedValueForUpdate(),
+paramCardType.GetSQLQuotedValueForUpdate(),
+paramBIN.GetSQLQuotedValueForUpdate(),
+paramLast4Digits.GetSQLQuotedValueForUpdate(),
+paramExpirationMonth.GetSQLQuotedValueForUpdate(),
+paramExpirationYear.GetSQLQuotedValueForUpdate(),
+paramBank.GetSQLQuotedValueForUpdate(),
+paramCountryCode.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

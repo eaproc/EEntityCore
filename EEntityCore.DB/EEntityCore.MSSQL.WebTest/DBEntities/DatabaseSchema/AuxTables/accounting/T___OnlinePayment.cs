@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,20 +23,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___OnlinePayment()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defPaymentID = new DataColumnDefinition(TableColumnNames.PaymentID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defTransactionDate = new DataColumnDefinition(TableColumnNames.TransactionDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defChannel = new DataColumnDefinition(TableColumnNames.Channel.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIpAddress = new DataColumnDefinition(TableColumnNames.IpAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGatewayCharges = new DataColumnDefinition(TableColumnNames.GatewayCharges.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGatewayLogReference = new DataColumnDefinition(TableColumnNames.GatewayLogReference.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGateway = new DataColumnDefinition(TableColumnNames.Gateway.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPlatformCharges = new DataColumnDefinition(TableColumnNames.PlatformCharges.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGatewayAmountReceived = new DataColumnDefinition(TableColumnNames.GatewayAmountReceived.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPlatformAmountReceived = new DataColumnDefinition(TableColumnNames.PlatformAmountReceived.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGatewayChargesExplaination = new DataColumnDefinition(TableColumnNames.GatewayChargesExplaination.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPlatformChargesExplaination = new DataColumnDefinition(TableColumnNames.PlatformChargesExplaination.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defPaymentID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defTransactionDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TransactionDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defChannel = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Channel.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIpAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IpAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGatewayCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.GatewayCharges.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGatewayLogReference = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.GatewayLogReference.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGateway = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Gateway.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPlatformCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PlatformCharges.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGatewayAmountReceived = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.GatewayAmountReceived.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPlatformAmountReceived = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PlatformAmountReceived.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGatewayChargesExplaination = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.GatewayChargesExplaination.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPlatformChargesExplaination = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PlatformChargesExplaination.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -394,7 +395,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -414,7 +415,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -476,10 +477,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -487,7 +485,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -580,20 +578,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramPaymentID.getSQLQuotedValueForAdd(),
-                paramTransactionDate.getSQLQuotedValueForAdd(),
-                paramChannel.getSQLQuotedValueForAdd(),
-                paramIpAddress.getSQLQuotedValueForAdd(),
-                paramGatewayCharges.getSQLQuotedValueForAdd(),
-                paramGatewayLogReference.getSQLQuotedValueForAdd(),
-                paramGateway.getSQLQuotedValueForAdd(),
-                paramPlatformCharges.getSQLQuotedValueForAdd(),
-                paramGatewayAmountReceived.getSQLQuotedValueForAdd(),
-                paramPlatformAmountReceived.getSQLQuotedValueForAdd(),
-                paramGatewayChargesExplaination.getSQLQuotedValueForAdd(),
-                paramPlatformChargesExplaination.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramPaymentID.GetSQLQuotedValueForAdd(),
+                paramTransactionDate.GetSQLQuotedValueForAdd(),
+                paramChannel.GetSQLQuotedValueForAdd(),
+                paramIpAddress.GetSQLQuotedValueForAdd(),
+                paramGatewayCharges.GetSQLQuotedValueForAdd(),
+                paramGatewayLogReference.GetSQLQuotedValueForAdd(),
+                paramGateway.GetSQLQuotedValueForAdd(),
+                paramPlatformCharges.GetSQLQuotedValueForAdd(),
+                paramGatewayAmountReceived.GetSQLQuotedValueForAdd(),
+                paramPlatformAmountReceived.GetSQLQuotedValueForAdd(),
+                paramGatewayChargesExplaination.GetSQLQuotedValueForAdd(),
+                paramPlatformChargesExplaination.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -640,20 +638,20 @@ Object pPlatformChargesExplaination = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramPaymentID.getSQLQuotedValueForAdd(),
-paramTransactionDate.getSQLQuotedValueForAdd(),
-paramChannel.getSQLQuotedValueForAdd(),
-paramIpAddress.getSQLQuotedValueForAdd(),
-paramGatewayCharges.getSQLQuotedValueForAdd(),
-paramGatewayLogReference.getSQLQuotedValueForAdd(),
-paramGateway.getSQLQuotedValueForAdd(),
-paramPlatformCharges.getSQLQuotedValueForAdd(),
-paramGatewayAmountReceived.getSQLQuotedValueForAdd(),
-paramPlatformAmountReceived.getSQLQuotedValueForAdd(),
-paramGatewayChargesExplaination.getSQLQuotedValueForAdd(),
-paramPlatformChargesExplaination.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramPaymentID.GetSQLQuotedValueForAdd(),
+paramTransactionDate.GetSQLQuotedValueForAdd(),
+paramChannel.GetSQLQuotedValueForAdd(),
+paramIpAddress.GetSQLQuotedValueForAdd(),
+paramGatewayCharges.GetSQLQuotedValueForAdd(),
+paramGatewayLogReference.GetSQLQuotedValueForAdd(),
+paramGateway.GetSQLQuotedValueForAdd(),
+paramPlatformCharges.GetSQLQuotedValueForAdd(),
+paramGatewayAmountReceived.GetSQLQuotedValueForAdd(),
+paramPlatformAmountReceived.GetSQLQuotedValueForAdd(),
+paramGatewayChargesExplaination.GetSQLQuotedValueForAdd(),
+paramPlatformChargesExplaination.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -698,20 +696,20 @@ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCrea
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramPaymentID.getSQLQuotedValueForAdd(),
-paramTransactionDate.getSQLQuotedValueForAdd(),
-paramChannel.getSQLQuotedValueForAdd(),
-paramIpAddress.getSQLQuotedValueForAdd(),
-paramGatewayCharges.getSQLQuotedValueForAdd(),
-paramGatewayLogReference.getSQLQuotedValueForAdd(),
-paramGateway.getSQLQuotedValueForAdd(),
-paramPlatformCharges.getSQLQuotedValueForAdd(),
-paramGatewayAmountReceived.getSQLQuotedValueForAdd(),
-paramPlatformAmountReceived.getSQLQuotedValueForAdd(),
-paramGatewayChargesExplaination.getSQLQuotedValueForAdd(),
-paramPlatformChargesExplaination.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramPaymentID.GetSQLQuotedValueForAdd(),
+paramTransactionDate.GetSQLQuotedValueForAdd(),
+paramChannel.GetSQLQuotedValueForAdd(),
+paramIpAddress.GetSQLQuotedValueForAdd(),
+paramGatewayCharges.GetSQLQuotedValueForAdd(),
+paramGatewayLogReference.GetSQLQuotedValueForAdd(),
+paramGateway.GetSQLQuotedValueForAdd(),
+paramPlatformCharges.GetSQLQuotedValueForAdd(),
+paramGatewayAmountReceived.GetSQLQuotedValueForAdd(),
+paramPlatformAmountReceived.GetSQLQuotedValueForAdd(),
+paramGatewayChargesExplaination.GetSQLQuotedValueForAdd(),
+paramPlatformChargesExplaination.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -761,19 +759,19 @@ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCrea
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramPaymentID.getSQLQuotedValueForAdd(),
-paramTransactionDate.getSQLQuotedValueForAdd(),
-paramChannel.getSQLQuotedValueForAdd(),
-paramIpAddress.getSQLQuotedValueForAdd(),
-paramGatewayCharges.getSQLQuotedValueForAdd(),
-paramGatewayLogReference.getSQLQuotedValueForAdd(),
-paramGateway.getSQLQuotedValueForAdd(),
-paramPlatformCharges.getSQLQuotedValueForAdd(),
-paramGatewayAmountReceived.getSQLQuotedValueForAdd(),
-paramPlatformAmountReceived.getSQLQuotedValueForAdd(),
-paramGatewayChargesExplaination.getSQLQuotedValueForAdd(),
-paramPlatformChargesExplaination.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramPaymentID.GetSQLQuotedValueForAdd(),
+paramTransactionDate.GetSQLQuotedValueForAdd(),
+paramChannel.GetSQLQuotedValueForAdd(),
+paramIpAddress.GetSQLQuotedValueForAdd(),
+paramGatewayCharges.GetSQLQuotedValueForAdd(),
+paramGatewayLogReference.GetSQLQuotedValueForAdd(),
+paramGateway.GetSQLQuotedValueForAdd(),
+paramPlatformCharges.GetSQLQuotedValueForAdd(),
+paramGatewayAmountReceived.GetSQLQuotedValueForAdd(),
+paramPlatformAmountReceived.GetSQLQuotedValueForAdd(),
+paramGatewayChargesExplaination.GetSQLQuotedValueForAdd(),
+paramPlatformChargesExplaination.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -823,19 +821,19 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [PaymentID]={2},[TransactionDate]={3},[Channel]={4},[IpAddress]={5},[GatewayCharges]={6},[GatewayLogReference]={7},[Gateway]={8},[PlatformCharges]={9},[GatewayAmountReceived]={10},[PlatformAmountReceived]={11},[GatewayChargesExplaination]={12},[PlatformChargesExplaination]={13},[CreatedAt]={14} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramPaymentID.getSQLQuotedValueForUpdate(),
-paramTransactionDate.getSQLQuotedValueForUpdate(),
-paramChannel.getSQLQuotedValueForUpdate(),
-paramIpAddress.getSQLQuotedValueForUpdate(),
-paramGatewayCharges.getSQLQuotedValueForUpdate(),
-paramGatewayLogReference.getSQLQuotedValueForUpdate(),
-paramGateway.getSQLQuotedValueForUpdate(),
-paramPlatformCharges.getSQLQuotedValueForUpdate(),
-paramGatewayAmountReceived.getSQLQuotedValueForUpdate(),
-paramPlatformAmountReceived.getSQLQuotedValueForUpdate(),
-paramGatewayChargesExplaination.getSQLQuotedValueForUpdate(),
-paramPlatformChargesExplaination.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [PaymentID]={2},[TransactionDate]={3},[Channel]={4},[IpAddress]={5},[GatewayCharges]={6},[GatewayLogReference]={7},[Gateway]={8},[PlatformCharges]={9},[GatewayAmountReceived]={10},[PlatformAmountReceived]={11},[GatewayChargesExplaination]={12},[PlatformChargesExplaination]={13},[CreatedAt]={14} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramPaymentID.GetSQLQuotedValueForUpdate(),
+paramTransactionDate.GetSQLQuotedValueForUpdate(),
+paramChannel.GetSQLQuotedValueForUpdate(),
+paramIpAddress.GetSQLQuotedValueForUpdate(),
+paramGatewayCharges.GetSQLQuotedValueForUpdate(),
+paramGatewayLogReference.GetSQLQuotedValueForUpdate(),
+paramGateway.GetSQLQuotedValueForUpdate(),
+paramPlatformCharges.GetSQLQuotedValueForUpdate(),
+paramGatewayAmountReceived.GetSQLQuotedValueForUpdate(),
+paramPlatformAmountReceived.GetSQLQuotedValueForUpdate(),
+paramGatewayChargesExplaination.GetSQLQuotedValueForUpdate(),
+paramPlatformChargesExplaination.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

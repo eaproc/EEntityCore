@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,19 +23,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___EmailUsage()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defDelivered = new DataColumnDefinition(TableColumnNames.Delivered.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSender = new DataColumnDefinition(TableColumnNames.Sender.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defReceiver = new DataColumnDefinition(TableColumnNames.Receiver.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBCC = new DataColumnDefinition(TableColumnNames.BCC.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCC = new DataColumnDefinition(TableColumnNames.CC.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSubject = new DataColumnDefinition(TableColumnNames.Subject.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defMessageBodyFileName = new DataColumnDefinition(TableColumnNames.MessageBodyFileName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defExceptionMessage = new DataColumnDefinition(TableColumnNames.ExceptionMessage.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defExceptionStackTrace = new DataColumnDefinition(TableColumnNames.ExceptionStackTrace.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGateway = new DataColumnDefinition(TableColumnNames.Gateway.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defDelivered = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Delivered.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSender = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Sender.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defReceiver = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Receiver.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBCC = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BCC.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCC = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CC.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSubject = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Subject.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defMessageBodyFileName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.MessageBodyFileName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defExceptionMessage = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExceptionMessage.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defExceptionStackTrace = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExceptionStackTrace.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGateway = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Gateway.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -376,7 +377,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -396,7 +397,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -458,10 +459,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -469,7 +467,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -561,19 +559,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramDelivered.getSQLQuotedValueForAdd(),
-                paramSender.getSQLQuotedValueForAdd(),
-                paramReceiver.getSQLQuotedValueForAdd(),
-                paramBCC.getSQLQuotedValueForAdd(),
-                paramCC.getSQLQuotedValueForAdd(),
-                paramSubject.getSQLQuotedValueForAdd(),
-                paramMessageBodyFileName.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramUpdatedAt.getSQLQuotedValueForAdd(),
-                paramExceptionMessage.getSQLQuotedValueForAdd(),
-                paramExceptionStackTrace.getSQLQuotedValueForAdd(),
-                paramGateway.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramDelivered.GetSQLQuotedValueForAdd(),
+                paramSender.GetSQLQuotedValueForAdd(),
+                paramReceiver.GetSQLQuotedValueForAdd(),
+                paramBCC.GetSQLQuotedValueForAdd(),
+                paramCC.GetSQLQuotedValueForAdd(),
+                paramSubject.GetSQLQuotedValueForAdd(),
+                paramMessageBodyFileName.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                paramExceptionMessage.GetSQLQuotedValueForAdd(),
+                paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
+                paramGateway.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -618,19 +616,19 @@ Object pExceptionStackTrace = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramDelivered.getSQLQuotedValueForAdd(),
-paramSender.getSQLQuotedValueForAdd(),
-paramReceiver.getSQLQuotedValueForAdd(),
-paramBCC.getSQLQuotedValueForAdd(),
-paramCC.getSQLQuotedValueForAdd(),
-paramSubject.getSQLQuotedValueForAdd(),
-paramMessageBodyFileName.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramExceptionMessage.getSQLQuotedValueForAdd(),
-paramExceptionStackTrace.getSQLQuotedValueForAdd(),
-paramGateway.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramDelivered.GetSQLQuotedValueForAdd(),
+paramSender.GetSQLQuotedValueForAdd(),
+paramReceiver.GetSQLQuotedValueForAdd(),
+paramBCC.GetSQLQuotedValueForAdd(),
+paramCC.GetSQLQuotedValueForAdd(),
+paramSubject.GetSQLQuotedValueForAdd(),
+paramMessageBodyFileName.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramExceptionMessage.GetSQLQuotedValueForAdd(),
+paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
+paramGateway.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -673,19 +671,19 @@ DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway)
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramDelivered.getSQLQuotedValueForAdd(),
-paramSender.getSQLQuotedValueForAdd(),
-paramReceiver.getSQLQuotedValueForAdd(),
-paramBCC.getSQLQuotedValueForAdd(),
-paramCC.getSQLQuotedValueForAdd(),
-paramSubject.getSQLQuotedValueForAdd(),
-paramMessageBodyFileName.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramExceptionMessage.getSQLQuotedValueForAdd(),
-paramExceptionStackTrace.getSQLQuotedValueForAdd(),
-paramGateway.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramDelivered.GetSQLQuotedValueForAdd(),
+paramSender.GetSQLQuotedValueForAdd(),
+paramReceiver.GetSQLQuotedValueForAdd(),
+paramBCC.GetSQLQuotedValueForAdd(),
+paramCC.GetSQLQuotedValueForAdd(),
+paramSubject.GetSQLQuotedValueForAdd(),
+paramMessageBodyFileName.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramExceptionMessage.GetSQLQuotedValueForAdd(),
+paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
+paramGateway.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -733,18 +731,18 @@ DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway)
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) ", TABLE_NAME,paramDelivered.getSQLQuotedValueForAdd(),
-paramSender.getSQLQuotedValueForAdd(),
-paramReceiver.getSQLQuotedValueForAdd(),
-paramBCC.getSQLQuotedValueForAdd(),
-paramCC.getSQLQuotedValueForAdd(),
-paramSubject.getSQLQuotedValueForAdd(),
-paramMessageBodyFileName.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramExceptionMessage.getSQLQuotedValueForAdd(),
-paramExceptionStackTrace.getSQLQuotedValueForAdd(),
-paramGateway.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) ", TABLE_NAME,paramDelivered.GetSQLQuotedValueForAdd(),
+paramSender.GetSQLQuotedValueForAdd(),
+paramReceiver.GetSQLQuotedValueForAdd(),
+paramBCC.GetSQLQuotedValueForAdd(),
+paramCC.GetSQLQuotedValueForAdd(),
+paramSubject.GetSQLQuotedValueForAdd(),
+paramMessageBodyFileName.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramExceptionMessage.GetSQLQuotedValueForAdd(),
+paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
+paramGateway.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -792,18 +790,18 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [Delivered]={2},[Sender]={3},[Receiver]={4},[BCC]={5},[CC]={6},[Subject]={7},[MessageBodyFileName]={8},[CreatedAt]={9},[UpdatedAt]={10},[ExceptionMessage]={11},[ExceptionStackTrace]={12},[Gateway]={13} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramDelivered.getSQLQuotedValueForUpdate(),
-paramSender.getSQLQuotedValueForUpdate(),
-paramReceiver.getSQLQuotedValueForUpdate(),
-paramBCC.getSQLQuotedValueForUpdate(),
-paramCC.getSQLQuotedValueForUpdate(),
-paramSubject.getSQLQuotedValueForUpdate(),
-paramMessageBodyFileName.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramUpdatedAt.getSQLQuotedValueForUpdate(),
-paramExceptionMessage.getSQLQuotedValueForUpdate(),
-paramExceptionStackTrace.getSQLQuotedValueForUpdate(),
-paramGateway.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [Delivered]={2},[Sender]={3},[Receiver]={4},[BCC]={5},[CC]={6},[Subject]={7},[MessageBodyFileName]={8},[CreatedAt]={9},[UpdatedAt]={10},[ExceptionMessage]={11},[ExceptionStackTrace]={12},[Gateway]={13} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramDelivered.GetSQLQuotedValueForUpdate(),
+paramSender.GetSQLQuotedValueForUpdate(),
+paramReceiver.GetSQLQuotedValueForUpdate(),
+paramBCC.GetSQLQuotedValueForUpdate(),
+paramCC.GetSQLQuotedValueForUpdate(),
+paramSubject.GetSQLQuotedValueForUpdate(),
+paramMessageBodyFileName.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramUpdatedAt.GetSQLQuotedValueForUpdate(),
+paramExceptionMessage.GetSQLQuotedValueForUpdate(),
+paramExceptionStackTrace.GetSQLQuotedValueForUpdate(),
+paramGateway.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

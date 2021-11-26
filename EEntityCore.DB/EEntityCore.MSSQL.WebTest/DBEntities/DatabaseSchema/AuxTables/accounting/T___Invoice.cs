@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,20 +23,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___Invoice()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defClientID = new DataColumnDefinition(TableColumnNames.ClientID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defBillDefinition = new DataColumnDefinition(TableColumnNames.BillDefinition.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBillDescription = new DataColumnDefinition(TableColumnNames.BillDescription.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBillAmount = new DataColumnDefinition(TableColumnNames.BillAmount.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTotal = new DataColumnDefinition(TableColumnNames.Total.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedByID = new DataColumnDefinition(TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defCanBeDeleted = new DataColumnDefinition(TableColumnNames.CanBeDeleted.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defQuantity = new DataColumnDefinition(TableColumnNames.Quantity.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIpAddress = new DataColumnDefinition(TableColumnNames.IpAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTermID = new DataColumnDefinition(TableColumnNames.TermID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defOriginalBillID = new DataColumnDefinition(TableColumnNames.OriginalBillID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defPaymentTransactionID = new DataColumnDefinition(TableColumnNames.PaymentTransactionID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defClientID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClientID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defBillDefinition = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BillDefinition.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBillDescription = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BillDescription.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBillAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BillAmount.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTotal = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Total.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defCanBeDeleted = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CanBeDeleted.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defQuantity = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Quantity.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIpAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IpAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTermID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defOriginalBillID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.OriginalBillID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defPaymentTransactionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentTransactionID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -414,7 +415,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -434,7 +435,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -496,10 +497,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -507,7 +505,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -604,20 +602,20 @@ Int32 pPaymentTransactionID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramClientID.getSQLQuotedValueForAdd(),
-                paramBillDefinition.getSQLQuotedValueForAdd(),
-                paramBillDescription.getSQLQuotedValueForAdd(),
-                paramBillAmount.getSQLQuotedValueForAdd(),
-                paramTotal.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramCreatedByID.getSQLQuotedValueForAdd(),
-                paramCanBeDeleted.getSQLQuotedValueForAdd(),
-                paramQuantity.getSQLQuotedValueForAdd(),
-                paramIpAddress.getSQLQuotedValueForAdd(),
-                paramTermID.getSQLQuotedValueForAdd(),
-                paramOriginalBillID.getSQLQuotedValueForAdd(),
-                paramPaymentTransactionID.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramClientID.GetSQLQuotedValueForAdd(),
+                paramBillDefinition.GetSQLQuotedValueForAdd(),
+                paramBillDescription.GetSQLQuotedValueForAdd(),
+                paramBillAmount.GetSQLQuotedValueForAdd(),
+                paramTotal.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramCreatedByID.GetSQLQuotedValueForAdd(),
+                paramCanBeDeleted.GetSQLQuotedValueForAdd(),
+                paramQuantity.GetSQLQuotedValueForAdd(),
+                paramIpAddress.GetSQLQuotedValueForAdd(),
+                paramTermID.GetSQLQuotedValueForAdd(),
+                paramOriginalBillID.GetSQLQuotedValueForAdd(),
+                paramPaymentTransactionID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -664,20 +662,20 @@ Object pPaymentTransactionID = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramClientID.getSQLQuotedValueForAdd(),
-paramBillDefinition.getSQLQuotedValueForAdd(),
-paramBillDescription.getSQLQuotedValueForAdd(),
-paramBillAmount.getSQLQuotedValueForAdd(),
-paramTotal.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramCanBeDeleted.getSQLQuotedValueForAdd(),
-paramQuantity.getSQLQuotedValueForAdd(),
-paramIpAddress.getSQLQuotedValueForAdd(),
-paramTermID.getSQLQuotedValueForAdd(),
-paramOriginalBillID.getSQLQuotedValueForAdd(),
-paramPaymentTransactionID.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramClientID.GetSQLQuotedValueForAdd(),
+paramBillDefinition.GetSQLQuotedValueForAdd(),
+paramBillDescription.GetSQLQuotedValueForAdd(),
+paramBillAmount.GetSQLQuotedValueForAdd(),
+paramTotal.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramCanBeDeleted.GetSQLQuotedValueForAdd(),
+paramQuantity.GetSQLQuotedValueForAdd(),
+paramIpAddress.GetSQLQuotedValueForAdd(),
+paramTermID.GetSQLQuotedValueForAdd(),
+paramOriginalBillID.GetSQLQuotedValueForAdd(),
+paramPaymentTransactionID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -722,20 +720,20 @@ DataColumnParameter paramPaymentTransactionID = new DataColumnParameter(defPayme
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramClientID.getSQLQuotedValueForAdd(),
-paramBillDefinition.getSQLQuotedValueForAdd(),
-paramBillDescription.getSQLQuotedValueForAdd(),
-paramBillAmount.getSQLQuotedValueForAdd(),
-paramTotal.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramCanBeDeleted.getSQLQuotedValueForAdd(),
-paramQuantity.getSQLQuotedValueForAdd(),
-paramIpAddress.getSQLQuotedValueForAdd(),
-paramTermID.getSQLQuotedValueForAdd(),
-paramOriginalBillID.getSQLQuotedValueForAdd(),
-paramPaymentTransactionID.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramClientID.GetSQLQuotedValueForAdd(),
+paramBillDefinition.GetSQLQuotedValueForAdd(),
+paramBillDescription.GetSQLQuotedValueForAdd(),
+paramBillAmount.GetSQLQuotedValueForAdd(),
+paramTotal.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramCanBeDeleted.GetSQLQuotedValueForAdd(),
+paramQuantity.GetSQLQuotedValueForAdd(),
+paramIpAddress.GetSQLQuotedValueForAdd(),
+paramTermID.GetSQLQuotedValueForAdd(),
+paramOriginalBillID.GetSQLQuotedValueForAdd(),
+paramPaymentTransactionID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -785,19 +783,19 @@ DataColumnParameter paramPaymentTransactionID = new DataColumnParameter(defPayme
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramClientID.getSQLQuotedValueForAdd(),
-paramBillDefinition.getSQLQuotedValueForAdd(),
-paramBillDescription.getSQLQuotedValueForAdd(),
-paramBillAmount.getSQLQuotedValueForAdd(),
-paramTotal.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramCanBeDeleted.getSQLQuotedValueForAdd(),
-paramQuantity.getSQLQuotedValueForAdd(),
-paramIpAddress.getSQLQuotedValueForAdd(),
-paramTermID.getSQLQuotedValueForAdd(),
-paramOriginalBillID.getSQLQuotedValueForAdd(),
-paramPaymentTransactionID.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramClientID.GetSQLQuotedValueForAdd(),
+paramBillDefinition.GetSQLQuotedValueForAdd(),
+paramBillDescription.GetSQLQuotedValueForAdd(),
+paramBillAmount.GetSQLQuotedValueForAdd(),
+paramTotal.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramCanBeDeleted.GetSQLQuotedValueForAdd(),
+paramQuantity.GetSQLQuotedValueForAdd(),
+paramIpAddress.GetSQLQuotedValueForAdd(),
+paramTermID.GetSQLQuotedValueForAdd(),
+paramOriginalBillID.GetSQLQuotedValueForAdd(),
+paramPaymentTransactionID.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -847,19 +845,19 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [ClientID]={2},[BillDefinition]={3},[BillDescription]={4},[BillAmount]={5},[Total]={6},[CreatedAt]={7},[CreatedByID]={8},[CanBeDeleted]={9},[Quantity]={10},[IpAddress]={11},[TermID]={12},[OriginalBillID]={13},[PaymentTransactionID]={14} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramClientID.getSQLQuotedValueForUpdate(),
-paramBillDefinition.getSQLQuotedValueForUpdate(),
-paramBillDescription.getSQLQuotedValueForUpdate(),
-paramBillAmount.getSQLQuotedValueForUpdate(),
-paramTotal.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramCreatedByID.getSQLQuotedValueForUpdate(),
-paramCanBeDeleted.getSQLQuotedValueForUpdate(),
-paramQuantity.getSQLQuotedValueForUpdate(),
-paramIpAddress.getSQLQuotedValueForUpdate(),
-paramTermID.getSQLQuotedValueForUpdate(),
-paramOriginalBillID.getSQLQuotedValueForUpdate(),
-paramPaymentTransactionID.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [ClientID]={2},[BillDefinition]={3},[BillDescription]={4},[BillAmount]={5},[Total]={6},[CreatedAt]={7},[CreatedByID]={8},[CanBeDeleted]={9},[Quantity]={10},[IpAddress]={11},[TermID]={12},[OriginalBillID]={13},[PaymentTransactionID]={14} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramClientID.GetSQLQuotedValueForUpdate(),
+paramBillDefinition.GetSQLQuotedValueForUpdate(),
+paramBillDescription.GetSQLQuotedValueForUpdate(),
+paramBillAmount.GetSQLQuotedValueForUpdate(),
+paramTotal.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramCreatedByID.GetSQLQuotedValueForUpdate(),
+paramCanBeDeleted.GetSQLQuotedValueForUpdate(),
+paramQuantity.GetSQLQuotedValueForUpdate(),
+paramIpAddress.GetSQLQuotedValueForUpdate(),
+paramTermID.GetSQLQuotedValueForUpdate(),
+paramOriginalBillID.GetSQLQuotedValueForUpdate(),
+paramPaymentTransactionID.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

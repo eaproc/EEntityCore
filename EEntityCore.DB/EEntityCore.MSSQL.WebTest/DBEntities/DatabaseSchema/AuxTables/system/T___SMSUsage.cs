@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,20 +23,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___SMSUsage()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defSMSDeliveryStatusID = new DataColumnDefinition(TableColumnNames.SMSDeliveryStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defSender = new DataColumnDefinition(TableColumnNames.Sender.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defReceiver = new DataColumnDefinition(TableColumnNames.Receiver.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defMessage = new DataColumnDefinition(TableColumnNames.Message.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUID = new DataColumnDefinition(TableColumnNames.UID.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAPICreateResponse = new DataColumnDefinition(TableColumnNames.APICreateResponse.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAPIUpdateResponse = new DataColumnDefinition(TableColumnNames.APIUpdateResponse.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSMSCostNaira = new DataColumnDefinition(TableColumnNames.SMSCostNaira.ToString(), typeof(Decimal),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defExceptionMessage = new DataColumnDefinition(TableColumnNames.ExceptionMessage.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defExceptionStackTrace = new DataColumnDefinition(TableColumnNames.ExceptionStackTrace.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGateway = new DataColumnDefinition(TableColumnNames.Gateway.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defSMSDeliveryStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SMSDeliveryStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defSender = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Sender.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defReceiver = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Receiver.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defMessage = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Message.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UID.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAPICreateResponse = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.APICreateResponse.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAPIUpdateResponse = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.APIUpdateResponse.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSMSCostNaira = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SMSCostNaira.ToString(), typeof(Decimal),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defExceptionMessage = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExceptionMessage.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defExceptionStackTrace = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExceptionStackTrace.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGateway = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Gateway.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -393,7 +394,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -413,7 +414,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -475,10 +476,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -486,7 +484,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -579,20 +577,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramSMSDeliveryStatusID.getSQLQuotedValueForAdd(),
-                paramSender.getSQLQuotedValueForAdd(),
-                paramReceiver.getSQLQuotedValueForAdd(),
-                paramMessage.getSQLQuotedValueForAdd(),
-                paramUID.getSQLQuotedValueForAdd(),
-                paramAPICreateResponse.getSQLQuotedValueForAdd(),
-                paramAPIUpdateResponse.getSQLQuotedValueForAdd(),
-                paramSMSCostNaira.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramUpdatedAt.getSQLQuotedValueForAdd(),
-                paramExceptionMessage.getSQLQuotedValueForAdd(),
-                paramExceptionStackTrace.getSQLQuotedValueForAdd(),
-                paramGateway.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramSMSDeliveryStatusID.GetSQLQuotedValueForAdd(),
+                paramSender.GetSQLQuotedValueForAdd(),
+                paramReceiver.GetSQLQuotedValueForAdd(),
+                paramMessage.GetSQLQuotedValueForAdd(),
+                paramUID.GetSQLQuotedValueForAdd(),
+                paramAPICreateResponse.GetSQLQuotedValueForAdd(),
+                paramAPIUpdateResponse.GetSQLQuotedValueForAdd(),
+                paramSMSCostNaira.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                paramExceptionMessage.GetSQLQuotedValueForAdd(),
+                paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
+                paramGateway.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -639,20 +637,20 @@ Object pExceptionStackTrace = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramSMSDeliveryStatusID.getSQLQuotedValueForAdd(),
-paramSender.getSQLQuotedValueForAdd(),
-paramReceiver.getSQLQuotedValueForAdd(),
-paramMessage.getSQLQuotedValueForAdd(),
-paramUID.getSQLQuotedValueForAdd(),
-paramAPICreateResponse.getSQLQuotedValueForAdd(),
-paramAPIUpdateResponse.getSQLQuotedValueForAdd(),
-paramSMSCostNaira.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramExceptionMessage.getSQLQuotedValueForAdd(),
-paramExceptionStackTrace.getSQLQuotedValueForAdd(),
-paramGateway.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramSMSDeliveryStatusID.GetSQLQuotedValueForAdd(),
+paramSender.GetSQLQuotedValueForAdd(),
+paramReceiver.GetSQLQuotedValueForAdd(),
+paramMessage.GetSQLQuotedValueForAdd(),
+paramUID.GetSQLQuotedValueForAdd(),
+paramAPICreateResponse.GetSQLQuotedValueForAdd(),
+paramAPIUpdateResponse.GetSQLQuotedValueForAdd(),
+paramSMSCostNaira.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramExceptionMessage.GetSQLQuotedValueForAdd(),
+paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
+paramGateway.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -697,20 +695,20 @@ DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway)
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramSMSDeliveryStatusID.getSQLQuotedValueForAdd(),
-paramSender.getSQLQuotedValueForAdd(),
-paramReceiver.getSQLQuotedValueForAdd(),
-paramMessage.getSQLQuotedValueForAdd(),
-paramUID.getSQLQuotedValueForAdd(),
-paramAPICreateResponse.getSQLQuotedValueForAdd(),
-paramAPIUpdateResponse.getSQLQuotedValueForAdd(),
-paramSMSCostNaira.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramExceptionMessage.getSQLQuotedValueForAdd(),
-paramExceptionStackTrace.getSQLQuotedValueForAdd(),
-paramGateway.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramSMSDeliveryStatusID.GetSQLQuotedValueForAdd(),
+paramSender.GetSQLQuotedValueForAdd(),
+paramReceiver.GetSQLQuotedValueForAdd(),
+paramMessage.GetSQLQuotedValueForAdd(),
+paramUID.GetSQLQuotedValueForAdd(),
+paramAPICreateResponse.GetSQLQuotedValueForAdd(),
+paramAPIUpdateResponse.GetSQLQuotedValueForAdd(),
+paramSMSCostNaira.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramExceptionMessage.GetSQLQuotedValueForAdd(),
+paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
+paramGateway.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -760,19 +758,19 @@ DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway)
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramSMSDeliveryStatusID.getSQLQuotedValueForAdd(),
-paramSender.getSQLQuotedValueForAdd(),
-paramReceiver.getSQLQuotedValueForAdd(),
-paramMessage.getSQLQuotedValueForAdd(),
-paramUID.getSQLQuotedValueForAdd(),
-paramAPICreateResponse.getSQLQuotedValueForAdd(),
-paramAPIUpdateResponse.getSQLQuotedValueForAdd(),
-paramSMSCostNaira.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramUpdatedAt.getSQLQuotedValueForAdd(),
-paramExceptionMessage.getSQLQuotedValueForAdd(),
-paramExceptionStackTrace.getSQLQuotedValueForAdd(),
-paramGateway.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramSMSDeliveryStatusID.GetSQLQuotedValueForAdd(),
+paramSender.GetSQLQuotedValueForAdd(),
+paramReceiver.GetSQLQuotedValueForAdd(),
+paramMessage.GetSQLQuotedValueForAdd(),
+paramUID.GetSQLQuotedValueForAdd(),
+paramAPICreateResponse.GetSQLQuotedValueForAdd(),
+paramAPIUpdateResponse.GetSQLQuotedValueForAdd(),
+paramSMSCostNaira.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramUpdatedAt.GetSQLQuotedValueForAdd(),
+paramExceptionMessage.GetSQLQuotedValueForAdd(),
+paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
+paramGateway.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -822,19 +820,19 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [SMSDeliveryStatusID]={2},[Sender]={3},[Receiver]={4},[Message]={5},[UID]={6},[APICreateResponse]={7},[APIUpdateResponse]={8},[SMSCostNaira]={9},[CreatedAt]={10},[UpdatedAt]={11},[ExceptionMessage]={12},[ExceptionStackTrace]={13},[Gateway]={14} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramSMSDeliveryStatusID.getSQLQuotedValueForUpdate(),
-paramSender.getSQLQuotedValueForUpdate(),
-paramReceiver.getSQLQuotedValueForUpdate(),
-paramMessage.getSQLQuotedValueForUpdate(),
-paramUID.getSQLQuotedValueForUpdate(),
-paramAPICreateResponse.getSQLQuotedValueForUpdate(),
-paramAPIUpdateResponse.getSQLQuotedValueForUpdate(),
-paramSMSCostNaira.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramUpdatedAt.getSQLQuotedValueForUpdate(),
-paramExceptionMessage.getSQLQuotedValueForUpdate(),
-paramExceptionStackTrace.getSQLQuotedValueForUpdate(),
-paramGateway.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [SMSDeliveryStatusID]={2},[Sender]={3},[Receiver]={4},[Message]={5},[UID]={6},[APICreateResponse]={7},[APIUpdateResponse]={8},[SMSCostNaira]={9},[CreatedAt]={10},[UpdatedAt]={11},[ExceptionMessage]={12},[ExceptionStackTrace]={13},[Gateway]={14} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramSMSDeliveryStatusID.GetSQLQuotedValueForUpdate(),
+paramSender.GetSQLQuotedValueForUpdate(),
+paramReceiver.GetSQLQuotedValueForUpdate(),
+paramMessage.GetSQLQuotedValueForUpdate(),
+paramUID.GetSQLQuotedValueForUpdate(),
+paramAPICreateResponse.GetSQLQuotedValueForUpdate(),
+paramAPIUpdateResponse.GetSQLQuotedValueForUpdate(),
+paramSMSCostNaira.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramUpdatedAt.GetSQLQuotedValueForUpdate(),
+paramExceptionMessage.GetSQLQuotedValueForUpdate(),
+paramExceptionStackTrace.GetSQLQuotedValueForUpdate(),
+paramGateway.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

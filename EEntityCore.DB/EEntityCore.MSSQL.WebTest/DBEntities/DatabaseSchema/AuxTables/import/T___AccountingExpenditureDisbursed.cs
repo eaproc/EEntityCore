@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,17 +23,17 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___AccountingExpenditureDisbursed()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defDataMonitorID = new DataColumnDefinition(TableColumnNames.DataMonitorID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defImportStatusID = new DataColumnDefinition(TableColumnNames.ImportStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defRequest = new DataColumnDefinition(TableColumnNames.Request.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDisbursedDate = new DataColumnDefinition(TableColumnNames.DisbursedDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCategory = new DataColumnDefinition(TableColumnNames.Category.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBeneficiary = new DataColumnDefinition(TableColumnNames.Beneficiary.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defNotes = new DataColumnDefinition(TableColumnNames.Notes.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTotal = new DataColumnDefinition(TableColumnNames.Total.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defImportComment = new DataColumnDefinition(TableColumnNames.ImportComment.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defDataMonitorID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DataMonitorID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defImportStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ImportStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defRequest = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Request.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDisbursedDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DisbursedDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCategory = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Category.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBeneficiary = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Beneficiary.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defNotes = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Notes.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTotal = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Total.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defImportComment = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ImportComment.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -362,7 +363,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -382,7 +383,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -444,10 +445,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -455,7 +453,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -546,17 +544,17 @@ Int32 pImportStatusID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[Request],[DisbursedDate],[Category],[Beneficiary],[Notes],[Total],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramDataMonitorID.getSQLQuotedValueForAdd(),
-                paramImportStatusID.getSQLQuotedValueForAdd(),
-                paramRequest.getSQLQuotedValueForAdd(),
-                paramDisbursedDate.getSQLQuotedValueForAdd(),
-                paramCategory.getSQLQuotedValueForAdd(),
-                paramBeneficiary.getSQLQuotedValueForAdd(),
-                paramNotes.getSQLQuotedValueForAdd(),
-                paramTotal.getSQLQuotedValueForAdd(),
-                paramImportComment.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[Request],[DisbursedDate],[Category],[Beneficiary],[Notes],[Total],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramDataMonitorID.GetSQLQuotedValueForAdd(),
+                paramImportStatusID.GetSQLQuotedValueForAdd(),
+                paramRequest.GetSQLQuotedValueForAdd(),
+                paramDisbursedDate.GetSQLQuotedValueForAdd(),
+                paramCategory.GetSQLQuotedValueForAdd(),
+                paramBeneficiary.GetSQLQuotedValueForAdd(),
+                paramNotes.GetSQLQuotedValueForAdd(),
+                paramTotal.GetSQLQuotedValueForAdd(),
+                paramImportComment.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -597,17 +595,17 @@ Object pNotes = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[Request],[DisbursedDate],[Category],[Beneficiary],[Notes],[Total],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramDataMonitorID.getSQLQuotedValueForAdd(),
-paramImportStatusID.getSQLQuotedValueForAdd(),
-paramRequest.getSQLQuotedValueForAdd(),
-paramDisbursedDate.getSQLQuotedValueForAdd(),
-paramCategory.getSQLQuotedValueForAdd(),
-paramBeneficiary.getSQLQuotedValueForAdd(),
-paramNotes.getSQLQuotedValueForAdd(),
-paramTotal.getSQLQuotedValueForAdd(),
-paramImportComment.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[Request],[DisbursedDate],[Category],[Beneficiary],[Notes],[Total],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramDataMonitorID.GetSQLQuotedValueForAdd(),
+paramImportStatusID.GetSQLQuotedValueForAdd(),
+paramRequest.GetSQLQuotedValueForAdd(),
+paramDisbursedDate.GetSQLQuotedValueForAdd(),
+paramCategory.GetSQLQuotedValueForAdd(),
+paramBeneficiary.GetSQLQuotedValueForAdd(),
+paramNotes.GetSQLQuotedValueForAdd(),
+paramTotal.GetSQLQuotedValueForAdd(),
+paramImportComment.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -646,17 +644,17 @@ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCrea
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[Request],[DisbursedDate],[Category],[Beneficiary],[Notes],[Total],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramDataMonitorID.getSQLQuotedValueForAdd(),
-paramImportStatusID.getSQLQuotedValueForAdd(),
-paramRequest.getSQLQuotedValueForAdd(),
-paramDisbursedDate.getSQLQuotedValueForAdd(),
-paramCategory.getSQLQuotedValueForAdd(),
-paramBeneficiary.getSQLQuotedValueForAdd(),
-paramNotes.getSQLQuotedValueForAdd(),
-paramTotal.getSQLQuotedValueForAdd(),
-paramImportComment.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[Request],[DisbursedDate],[Category],[Beneficiary],[Notes],[Total],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramDataMonitorID.GetSQLQuotedValueForAdd(),
+paramImportStatusID.GetSQLQuotedValueForAdd(),
+paramRequest.GetSQLQuotedValueForAdd(),
+paramDisbursedDate.GetSQLQuotedValueForAdd(),
+paramCategory.GetSQLQuotedValueForAdd(),
+paramBeneficiary.GetSQLQuotedValueForAdd(),
+paramNotes.GetSQLQuotedValueForAdd(),
+paramTotal.GetSQLQuotedValueForAdd(),
+paramImportComment.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -700,16 +698,16 @@ DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCrea
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([DataMonitorID],[ImportStatusID],[Request],[DisbursedDate],[Category],[Beneficiary],[Notes],[Total],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,paramDataMonitorID.getSQLQuotedValueForAdd(),
-paramImportStatusID.getSQLQuotedValueForAdd(),
-paramRequest.getSQLQuotedValueForAdd(),
-paramDisbursedDate.getSQLQuotedValueForAdd(),
-paramCategory.getSQLQuotedValueForAdd(),
-paramBeneficiary.getSQLQuotedValueForAdd(),
-paramNotes.getSQLQuotedValueForAdd(),
-paramTotal.getSQLQuotedValueForAdd(),
-paramImportComment.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([DataMonitorID],[ImportStatusID],[Request],[DisbursedDate],[Category],[Beneficiary],[Notes],[Total],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,paramDataMonitorID.GetSQLQuotedValueForAdd(),
+paramImportStatusID.GetSQLQuotedValueForAdd(),
+paramRequest.GetSQLQuotedValueForAdd(),
+paramDisbursedDate.GetSQLQuotedValueForAdd(),
+paramCategory.GetSQLQuotedValueForAdd(),
+paramBeneficiary.GetSQLQuotedValueForAdd(),
+paramNotes.GetSQLQuotedValueForAdd(),
+paramTotal.GetSQLQuotedValueForAdd(),
+paramImportComment.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -753,16 +751,16 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [DataMonitorID]={2},[ImportStatusID]={3},[Request]={4},[DisbursedDate]={5},[Category]={6},[Beneficiary]={7},[Notes]={8},[Total]={9},[ImportComment]={10},[CreatedAt]={11} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramDataMonitorID.getSQLQuotedValueForUpdate(),
-paramImportStatusID.getSQLQuotedValueForUpdate(),
-paramRequest.getSQLQuotedValueForUpdate(),
-paramDisbursedDate.getSQLQuotedValueForUpdate(),
-paramCategory.getSQLQuotedValueForUpdate(),
-paramBeneficiary.getSQLQuotedValueForUpdate(),
-paramNotes.getSQLQuotedValueForUpdate(),
-paramTotal.getSQLQuotedValueForUpdate(),
-paramImportComment.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [DataMonitorID]={2},[ImportStatusID]={3},[Request]={4},[DisbursedDate]={5},[Category]={6},[Beneficiary]={7},[Notes]={8},[Total]={9},[ImportComment]={10},[CreatedAt]={11} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramDataMonitorID.GetSQLQuotedValueForUpdate(),
+paramImportStatusID.GetSQLQuotedValueForUpdate(),
+paramRequest.GetSQLQuotedValueForUpdate(),
+paramDisbursedDate.GetSQLQuotedValueForUpdate(),
+paramCategory.GetSQLQuotedValueForUpdate(),
+paramBeneficiary.GetSQLQuotedValueForUpdate(),
+paramNotes.GetSQLQuotedValueForUpdate(),
+paramTotal.GetSQLQuotedValueForUpdate(),
+paramImportComment.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

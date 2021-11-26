@@ -6,17 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    
-    <None Remove="DBEntities\DatabaseSchema.*" />
-    <Compile Remove="DBEntities\DatabaseSchema.*\**" />
-    <EmbeddedResource Remove="DBEntities\DatabaseSchema.*\**" />
-    <None Remove="DBEntities\DatabaseSchema.*\**" />
-    
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="DBEntities\CredentialManager.cs" />
-    <Compile Remove="T___AcademicSession.cs" />
+     <None Remove="DBEntities\DatabaseSchema.*" />
+     <Compile Remove="DBEntities\DatabaseSchema.*\**" />
+     <EmbeddedResource Remove="DBEntities\DatabaseSchema.*\**" />
+     <None Remove="DBEntities\DatabaseSchema.*\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +19,9 @@
   <ItemGroup>
     <Reference Include="CODERiT.Logger.Standard.VB">
       <HintPath>..\..\..\..\..\epro-libraries-for-vs\coderit-logger\CODERiT.Logger.Standard.VB\bin\Debug\netstandard2.0\CODERiT.Logger.Standard.VB.dll</HintPath>
+    </Reference>
+    <Reference Include="EEntityCore.DB">
+      <HintPath>..\EEntityCore.DB\bin\Debug\net5.0\EEntityCore.DB.dll</HintPath>
     </Reference>
     <Reference Include="ELibrary.Standard.VB">
       <HintPath>..\..\..\ELibrary\ELibrary.Standard.VB\bin\Debug\netstandard2.0\ELibrary.Standard.VB.dll</HintPath>

@@ -1,9 +1,7 @@
-using System;
-using CODERiT.Logger.Standard.VB;
-using EEntityCore.DB;
-using EEntityCore.DB.Abstracts;
+using EEntityCore.DB.Interfaces;
 using EEntityCore.DB.MSSQL;
-using EEntityCore.DB.MSSQL.Interfaces;
+using EEntityCore.DB.Schemas.SQLServerSchema;
+using System;
 
 namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
 {
@@ -17,6 +15,14 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
     {
 
         #region Constructors
+
+        /// <summary>
+        /// Just for pointer access
+        /// </summary>
+        public DatabaseInit()
+        {
+
+        }
 
         /// <summary>
         /// Create Default. NOTE: Server name is not required for FULL_SERVER MODE.
@@ -49,7 +55,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
         /// You are responsible for initializing this
         /// </summary>
         /// <remarks></remarks>
-        public static IDatabaseInit DBConnectInterface;
+        public static DatabaseInit DBConnectInterface;
 
 
         private readonly string ServerName;
@@ -65,16 +71,24 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
 
         #region Methods
 
+        public IDatabaseInit GetDatabaseInit()
+        {
+            return DBConnectInterface;
+        }
+
         /// <summary>
         /// Returns new connection on each call
         /// </summary>
         /// <returns></returns>
         public Server GetDBConn()
         {
-            return new Client(ServerIPAddressOrName(), ServerPort(), DBUserName(), DBUserPassword(), DBName());
+            return (Server)this.GetAllDBConn();
         }
 
-
+        public IAll__DBs GetAllDBConn()
+        {
+            return new Client(ServerIPAddressOrName(), ServerPort(), DBUserName(), DBUserPassword(), DBName());
+        }
 
         public string DBName()
         {
@@ -102,8 +116,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
         }
 
 
+
+
         #endregion
 
-        
+
     }
 }

@@ -6,6 +6,7 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using EEntityCore.DB.Schemas.SQLServerSchema;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -22,20 +23,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___Payment()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defTermID = new DataColumnDefinition(TableColumnNames.TermID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defAmountCharged = new DataColumnDefinition(TableColumnNames.AmountCharged.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDiscountGiven = new DataColumnDefinition(TableColumnNames.DiscountGiven.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDiscountRateApplied = new DataColumnDefinition(TableColumnNames.DiscountRateApplied.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPaymentChannelID = new DataColumnDefinition(TableColumnNames.PaymentChannelID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defPaymentEntryModeID = new DataColumnDefinition(TableColumnNames.PaymentEntryModeID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defComments = new DataColumnDefinition(TableColumnNames.Comments.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTransactionFileName = new DataColumnDefinition(TableColumnNames.TransactionFileName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedByID = new DataColumnDefinition(TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defIpAddress = new DataColumnDefinition(TableColumnNames.IpAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTotal = new DataColumnDefinition(TableColumnNames.Total.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defClientID = new DataColumnDefinition(TableColumnNames.ClientID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defTermID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defAmountCharged = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AmountCharged.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDiscountGiven = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DiscountGiven.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDiscountRateApplied = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DiscountRateApplied.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPaymentChannelID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentChannelID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defPaymentEntryModeID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentEntryModeID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defComments = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Comments.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTransactionFileName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TransactionFileName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defIpAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IpAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTotal = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Total.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defClientID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClientID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -413,7 +414,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (!pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return false;                  
                 }                  
                   
@@ -433,7 +434,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     return false;                  
                 foreach (var pParam in pParams)                  
                 {                  
-                    if (pRow.RowEqual(pParam.ColumnName, pParam.Value))                  
+                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
                         return true;                  
                 }                  
                   
@@ -495,10 +496,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             }                  
         }                  
                   
-        public Dictionary<string, DataColumnDefinition> getDefinitions()                  
-        {                  
-            return ColumnDefns;                  
-        }                  
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
                   
         private bool RowEqual(string pColumnName, object pColumnValue)                  
         {                  
@@ -506,7 +504,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                  
                 if (!this.IsTargettedRowValid)                  
                     return false;                  
-                switch (DataColumnDefinition.getTypeAllowed(ColumnDefns[pColumnName].DataType))                  
+                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
                 {                  
                     case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
                         {                  
@@ -603,20 +601,20 @@ Int32 pClientID){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[AmountCharged],[DiscountGiven],[DiscountRateApplied],[PaymentChannelID],[PaymentEntryModeID],[Comments],[TransactionFileName],[CreatedAt],[CreatedByID],[IpAddress],[Total],[ClientID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.getSQLQuotedValueForAdd(),
-                paramTermID.getSQLQuotedValueForAdd(),
-                paramAmountCharged.getSQLQuotedValueForAdd(),
-                paramDiscountGiven.getSQLQuotedValueForAdd(),
-                paramDiscountRateApplied.getSQLQuotedValueForAdd(),
-                paramPaymentChannelID.getSQLQuotedValueForAdd(),
-                paramPaymentEntryModeID.getSQLQuotedValueForAdd(),
-                paramComments.getSQLQuotedValueForAdd(),
-                paramTransactionFileName.getSQLQuotedValueForAdd(),
-                paramCreatedAt.getSQLQuotedValueForAdd(),
-                paramCreatedByID.getSQLQuotedValueForAdd(),
-                paramIpAddress.getSQLQuotedValueForAdd(),
-                paramTotal.getSQLQuotedValueForAdd(),
-                paramClientID.getSQLQuotedValueForAdd()  ), true);
+                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[AmountCharged],[DiscountGiven],[DiscountRateApplied],[PaymentChannelID],[PaymentEntryModeID],[Comments],[TransactionFileName],[CreatedAt],[CreatedByID],[IpAddress],[Total],[ClientID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
+                paramTermID.GetSQLQuotedValueForAdd(),
+                paramAmountCharged.GetSQLQuotedValueForAdd(),
+                paramDiscountGiven.GetSQLQuotedValueForAdd(),
+                paramDiscountRateApplied.GetSQLQuotedValueForAdd(),
+                paramPaymentChannelID.GetSQLQuotedValueForAdd(),
+                paramPaymentEntryModeID.GetSQLQuotedValueForAdd(),
+                paramComments.GetSQLQuotedValueForAdd(),
+                paramTransactionFileName.GetSQLQuotedValueForAdd(),
+                paramCreatedAt.GetSQLQuotedValueForAdd(),
+                paramCreatedByID.GetSQLQuotedValueForAdd(),
+                paramIpAddress.GetSQLQuotedValueForAdd(),
+                paramTotal.GetSQLQuotedValueForAdd(),
+                paramClientID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -663,20 +661,20 @@ Object pTransactionFileName = null){
 
 
                 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[AmountCharged],[DiscountGiven],[DiscountRateApplied],[PaymentChannelID],[PaymentEntryModeID],[Comments],[TransactionFileName],[CreatedAt],[CreatedByID],[IpAddress],[Total],[ClientID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramTermID.getSQLQuotedValueForAdd(),
-paramAmountCharged.getSQLQuotedValueForAdd(),
-paramDiscountGiven.getSQLQuotedValueForAdd(),
-paramDiscountRateApplied.getSQLQuotedValueForAdd(),
-paramPaymentChannelID.getSQLQuotedValueForAdd(),
-paramPaymentEntryModeID.getSQLQuotedValueForAdd(),
-paramComments.getSQLQuotedValueForAdd(),
-paramTransactionFileName.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramIpAddress.getSQLQuotedValueForAdd(),
-paramTotal.getSQLQuotedValueForAdd(),
-paramClientID.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[AmountCharged],[DiscountGiven],[DiscountRateApplied],[PaymentChannelID],[PaymentEntryModeID],[Comments],[TransactionFileName],[CreatedAt],[CreatedByID],[IpAddress],[Total],[ClientID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramTermID.GetSQLQuotedValueForAdd(),
+paramAmountCharged.GetSQLQuotedValueForAdd(),
+paramDiscountGiven.GetSQLQuotedValueForAdd(),
+paramDiscountRateApplied.GetSQLQuotedValueForAdd(),
+paramPaymentChannelID.GetSQLQuotedValueForAdd(),
+paramPaymentEntryModeID.GetSQLQuotedValueForAdd(),
+paramComments.GetSQLQuotedValueForAdd(),
+paramTransactionFileName.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramIpAddress.GetSQLQuotedValueForAdd(),
+paramTotal.GetSQLQuotedValueForAdd(),
+paramClientID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -721,20 +719,20 @@ DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClient
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[AmountCharged],[DiscountGiven],[DiscountRateApplied],[PaymentChannelID],[PaymentEntryModeID],[Comments],[TransactionFileName],[CreatedAt],[CreatedByID],[IpAddress],[Total],[ClientID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.getSQLQuotedValueForAdd(),
-paramTermID.getSQLQuotedValueForAdd(),
-paramAmountCharged.getSQLQuotedValueForAdd(),
-paramDiscountGiven.getSQLQuotedValueForAdd(),
-paramDiscountRateApplied.getSQLQuotedValueForAdd(),
-paramPaymentChannelID.getSQLQuotedValueForAdd(),
-paramPaymentEntryModeID.getSQLQuotedValueForAdd(),
-paramComments.getSQLQuotedValueForAdd(),
-paramTransactionFileName.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramIpAddress.getSQLQuotedValueForAdd(),
-paramTotal.getSQLQuotedValueForAdd(),
-paramClientID.getSQLQuotedValueForAdd()  ), true);
+     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[AmountCharged],[DiscountGiven],[DiscountRateApplied],[PaymentChannelID],[PaymentEntryModeID],[Comments],[TransactionFileName],[CreatedAt],[CreatedByID],[IpAddress],[Total],[ClientID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
+paramTermID.GetSQLQuotedValueForAdd(),
+paramAmountCharged.GetSQLQuotedValueForAdd(),
+paramDiscountGiven.GetSQLQuotedValueForAdd(),
+paramDiscountRateApplied.GetSQLQuotedValueForAdd(),
+paramPaymentChannelID.GetSQLQuotedValueForAdd(),
+paramPaymentEntryModeID.GetSQLQuotedValueForAdd(),
+paramComments.GetSQLQuotedValueForAdd(),
+paramTransactionFileName.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramIpAddress.GetSQLQuotedValueForAdd(),
+paramTotal.GetSQLQuotedValueForAdd(),
+paramClientID.GetSQLQuotedValueForAdd()  ), true);
 
 
 
@@ -784,19 +782,19 @@ DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClient
 
 
 return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([TermID],[AmountCharged],[DiscountGiven],[DiscountRateApplied],[PaymentChannelID],[PaymentEntryModeID],[Comments],[TransactionFileName],[CreatedAt],[CreatedByID],[IpAddress],[Total],[ClientID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramTermID.getSQLQuotedValueForAdd(),
-paramAmountCharged.getSQLQuotedValueForAdd(),
-paramDiscountGiven.getSQLQuotedValueForAdd(),
-paramDiscountRateApplied.getSQLQuotedValueForAdd(),
-paramPaymentChannelID.getSQLQuotedValueForAdd(),
-paramPaymentEntryModeID.getSQLQuotedValueForAdd(),
-paramComments.getSQLQuotedValueForAdd(),
-paramTransactionFileName.getSQLQuotedValueForAdd(),
-paramCreatedAt.getSQLQuotedValueForAdd(),
-paramCreatedByID.getSQLQuotedValueForAdd(),
-paramIpAddress.getSQLQuotedValueForAdd(),
-paramTotal.getSQLQuotedValueForAdd(),
-paramClientID.getSQLQuotedValueForAdd()  ), true);
+     String.Format("INSERT INTO {0}([TermID],[AmountCharged],[DiscountGiven],[DiscountRateApplied],[PaymentChannelID],[PaymentEntryModeID],[Comments],[TransactionFileName],[CreatedAt],[CreatedByID],[IpAddress],[Total],[ClientID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramTermID.GetSQLQuotedValueForAdd(),
+paramAmountCharged.GetSQLQuotedValueForAdd(),
+paramDiscountGiven.GetSQLQuotedValueForAdd(),
+paramDiscountRateApplied.GetSQLQuotedValueForAdd(),
+paramPaymentChannelID.GetSQLQuotedValueForAdd(),
+paramPaymentEntryModeID.GetSQLQuotedValueForAdd(),
+paramComments.GetSQLQuotedValueForAdd(),
+paramTransactionFileName.GetSQLQuotedValueForAdd(),
+paramCreatedAt.GetSQLQuotedValueForAdd(),
+paramCreatedByID.GetSQLQuotedValueForAdd(),
+paramIpAddress.GetSQLQuotedValueForAdd(),
+paramTotal.GetSQLQuotedValueForAdd(),
+paramClientID.GetSQLQuotedValueForAdd()  ), true);
 
 
 }catch (Exception){
@@ -846,19 +844,19 @@ try{
 
 
 DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [TermID]={2},[AmountCharged]={3},[DiscountGiven]={4},[DiscountRateApplied]={5},[PaymentChannelID]={6},[PaymentEntryModeID]={7},[Comments]={8},[TransactionFileName]={9},[CreatedAt]={10},[CreatedByID]={11},[IpAddress]={12},[Total]={13},[ClientID]={14} WHERE ID={1} ", TABLE_NAME, paramID.getSQLQuotedValueForUpdate(),paramTermID.getSQLQuotedValueForUpdate(),
-paramAmountCharged.getSQLQuotedValueForUpdate(),
-paramDiscountGiven.getSQLQuotedValueForUpdate(),
-paramDiscountRateApplied.getSQLQuotedValueForUpdate(),
-paramPaymentChannelID.getSQLQuotedValueForUpdate(),
-paramPaymentEntryModeID.getSQLQuotedValueForUpdate(),
-paramComments.getSQLQuotedValueForUpdate(),
-paramTransactionFileName.getSQLQuotedValueForUpdate(),
-paramCreatedAt.getSQLQuotedValueForUpdate(),
-paramCreatedByID.getSQLQuotedValueForUpdate(),
-paramIpAddress.getSQLQuotedValueForUpdate(),
-paramTotal.getSQLQuotedValueForUpdate(),
-paramClientID.getSQLQuotedValueForUpdate()  ), true);
+     String.Format("UPDATE {0} SET [TermID]={2},[AmountCharged]={3},[DiscountGiven]={4},[DiscountRateApplied]={5},[PaymentChannelID]={6},[PaymentEntryModeID]={7},[Comments]={8},[TransactionFileName]={9},[CreatedAt]={10},[CreatedByID]={11},[IpAddress]={12},[Total]={13},[ClientID]={14} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramTermID.GetSQLQuotedValueForUpdate(),
+paramAmountCharged.GetSQLQuotedValueForUpdate(),
+paramDiscountGiven.GetSQLQuotedValueForUpdate(),
+paramDiscountRateApplied.GetSQLQuotedValueForUpdate(),
+paramPaymentChannelID.GetSQLQuotedValueForUpdate(),
+paramPaymentEntryModeID.GetSQLQuotedValueForUpdate(),
+paramComments.GetSQLQuotedValueForUpdate(),
+paramTransactionFileName.GetSQLQuotedValueForUpdate(),
+paramCreatedAt.GetSQLQuotedValueForUpdate(),
+paramCreatedByID.GetSQLQuotedValueForUpdate(),
+paramIpAddress.GetSQLQuotedValueForUpdate(),
+paramTotal.GetSQLQuotedValueForUpdate(),
+paramClientID.GetSQLQuotedValueForUpdate()  ), true);
 
 
                        // Nothing means ignore but null means clear

@@ -3,26 +3,29 @@ using ELibrary.Standard.VB.Modules;
 using ELibrary.Standard.VB.Objects;
 using ELibrary.Standard.VB.Types;
 
-namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
+namespace EEntityCore.DB.Schemas.SQLServerSchema
 {
 
     /// <summary>
     /// The purpose of this class is to differentiate when you are passing in null parameter or nothing(that is ignoring the parameter)
     /// </summary>
     /// <remarks>On Comparison you can't ignore a param. it is treated as null</remarks>
-    public class DataColumnParameter : DatabaseSchema.DataColumnDefinition
+    public class DataColumnParameter 
     {
-        public DataColumnParameter(DatabaseSchema.DataColumnDefinition pColumn, object pValue) : base(pColumn.ColumnName, pColumn.DataType, pColumn.Nullable, pColumn.DefaultValue, pColumn.ConstraintType)
+        public DataColumnParameter(DataColumnDefinition pColumn, object pValue)
         {
             vValue = pValue;
+            this.ColumnDefinition = pColumn;
         }
 
-        public DataColumnParameter(string pColumn, object pValue) : this(new DatabaseSchema.DataColumnDefinition(pColumn, typeof(object), false, null), pValue)
-        {
-        }
+        //public DataColumnParameter(string pColumn, object pValue) : this(new DataColumnDefinition(pColumn, typeof(object), false, null), pValue)
+        //{
+        //}
 
         public const string NULL_SQLServerValue = "NULL";
         private object vValue;
+
+        public DataColumnDefinition ColumnDefinition { private set; get; }
 
         public object Value
         {
@@ -36,7 +39,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
         {
             get
             {
-                return new DatabaseSchema.DataColumnNullParamValue().Equals(Value) && Value is object;
+                return new DataColumnNullParamValue().Equals(Value) && Value is object;
             }
         }
 
@@ -50,13 +53,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
         {
             get
             {
-                return new DatabaseSchema.DataColumnNullParamValue().Equals(Value);
+                return new DataColumnNullParamValue().Equals(Value);
             }
         }
 
-        public static DataColumnParameter get_NULL_Value(DatabaseSchema.DataColumnDefinition pColumn)
+        public static DataColumnParameter get_NULL_Value(DataColumnDefinition pColumn)
         {
-            return new DataColumnParameter(pColumn, new DatabaseSchema.DataColumnNullParamValue());
+            return new DataColumnParameter(pColumn, new DataColumnNullParamValue());
         }
 
 
@@ -79,9 +82,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
 
         // End Function
 
-        private object getSQLQuotedValue()
+        private object GetSQLQuotedValue()
         {
-            if (this.ConstraintType == DatabaseSchema.DataColumnDefinition.ConstraintTypes.FOREIGN & this.Nullable)
+            if (this.ColumnDefinition.ConstraintType == DataColumnDefinition.ConstraintTypes.FOREIGN & this.ColumnDefinition.Nullable)
             {
                 // REM This must be int
                 try
@@ -95,46 +98,46 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
                 }
             }
 
-            switch (DatabaseSchema.DataColumnDefinition.getTypeAllowed(this.DataType))
+            switch (DataColumnDefinition.GetTypeAllowed(this.ColumnDefinition.DataType))
             {
-                case DatabaseSchema.DataColumnDefinition.AllowedDataTypes.Bool:
+                case DataColumnDefinition.AllowedDataTypes.Bool:
                     {
                         return EBoolean.valueOf(Value).toInt32();
                     }
 
-                case DatabaseSchema.DataColumnDefinition.AllowedDataTypes.Blob:
+                case DataColumnDefinition.AllowedDataTypes.Blob:
                     {
-                        throw new Exception("You can not pass Blob values as inline SQL. ColumnName: " + this.ColumnName);
+                        throw new Exception("You can not pass Blob values as inline SQL. ColumnName: " + this.ColumnDefinition.ColumnName);
                     }
 
-                case DatabaseSchema.DataColumnDefinition.AllowedDataTypes.DateTime:
+                case DataColumnDefinition.AllowedDataTypes.DateTime:
                     {
-                        return DatabaseSchema.DatabaseInit.DBConnectInterface.GetDBConn().GetSQLDateTimeFormat(new NullableDateTime(Value), true);
+                        return this.ColumnDefinition.DatabaseInit.GetAllDBConn().GetSQLDateTimeFormat(new NullableDateTime(Value));
                     }
 
-                case DatabaseSchema.DataColumnDefinition.AllowedDataTypes.Decimal:
+                case DataColumnDefinition.AllowedDataTypes.Decimal:
                     {
                         // REM Format to English Culture, Since Database Saves in English
                         // REM Use Culture to reformat it
                         return EDouble.valueOf(Value).ToString(new System.Globalization.CultureInfo(1033));   // USA
                     }
 
-                case DatabaseSchema.DataColumnDefinition.AllowedDataTypes.Int:
+                case DataColumnDefinition.AllowedDataTypes.Int:
                     {
                         return EInt.valueOf(Value);
                     }
 
-                case DatabaseSchema.DataColumnDefinition.AllowedDataTypes.Long:
+                case DataColumnDefinition.AllowedDataTypes.Long:
                     {
                         return ELong.valueOf(Value);
                     }
 
-                case DatabaseSchema.DataColumnDefinition.AllowedDataTypes.String:
+                case DataColumnDefinition.AllowedDataTypes.String:
                     {
                         return string.Format(@"N\'{0}\'", EStrings.valueOf(Value));
                     }
 
-                case DatabaseSchema.DataColumnDefinition.AllowedDataTypes.TimeSpan:
+                case DataColumnDefinition.AllowedDataTypes.TimeSpan:
                     {
                         throw new Exception("TimeSpan is not currently supported");
                     }
@@ -142,7 +145,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
                 default:
                     {
                         // REM DataColumnDefinition.AllowedDataTypes.UNKNOWN()
-                        throw new Exception(this.DataType.FullName + " is NOT currently supported!");
+                        throw new Exception(this.ColumnDefinition.DataType.FullName + " is NOT currently supported!");
                     }
             }
         }
@@ -152,13 +155,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
-        public object getSQLQuotedValueForAdd()
+        public object GetSQLQuotedValueForAdd()
         {
-            if ((Value is null || IsNull) && !this.Nullable)
-                throw new Exception(this.ColumnName + " can not be NULL");
+            if ((Value is null || IsNull) && !this.ColumnDefinition.Nullable)
+                throw new Exception(this.ColumnDefinition.ColumnName + " can not be NULL");
             if (Value is null || IsNull)
                 return NULL_SQLServerValue;
-            return getSQLQuotedValue();
+            return GetSQLQuotedValue();
         }
 
         /// <summary>
@@ -166,15 +169,15 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
-        public object getSQLQuotedValueForUpdate()
+        public object GetSQLQuotedValueForUpdate()
         {
-            if (IsNullButNotEqualsNothing && !this.Nullable)
-                throw new Exception(this.ColumnName + " can not be NULL");
+            if (IsNullButNotEqualsNothing && !this.ColumnDefinition.Nullable)
+                throw new Exception(this.ColumnDefinition.ColumnName + " can not be NULL");
             if (Value is null)
-                return this.ColumnName;
+                return this.ColumnDefinition.ColumnName;
             if (IsNull)
                 return NULL_SQLServerValue;
-            return getSQLQuotedValue();
+            return GetSQLQuotedValue();
         }
 
 
@@ -187,7 +190,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
         public static object TranslateNothingToNull(object pValue)
         {
             if (pValue is null)
-                return new DatabaseSchema.DataColumnNullParamValue();
+                return new DataColumnNullParamValue();
             return pValue;
         }
 
