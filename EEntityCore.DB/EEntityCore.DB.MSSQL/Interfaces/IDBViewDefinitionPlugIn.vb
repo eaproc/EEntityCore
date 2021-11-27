@@ -15,6 +15,8 @@ Namespace Interfaces
 
         Function GetViewName() As String
 
+        Function GetFillSQL() As String
+
     End Interface
 
 

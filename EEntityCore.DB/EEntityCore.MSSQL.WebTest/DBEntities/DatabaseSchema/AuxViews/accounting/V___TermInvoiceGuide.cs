@@ -17,7 +17,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
     public class V___TermInvoiceGuide : SimpleTablePlugIn, IDataColumnDefinitionsHolder, IDBViewDefinitionPlugIn                  
     {                  
                   
-#region Constructors                  
+ #region Constructors                  
                   
                   
        static V___TermInvoiceGuide()                  
@@ -86,7 +86,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
 
                   
-        #region Full Access                                    
+   #region Full Access                                    
                   
         // Full Access means initial data is loaded directly from database, so DBConn MUST be provided                                                      
                   
@@ -134,7 +134,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         #endregion                                    
                                     
                                     
-        #region Partial Access                                    
+   #region Partial Access                                    
                                     
         // Partial Simply means initial data is loaded directly from user but DBConn might be provided for reloadClass function to work                                                      
                                     
@@ -182,7 +182,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         #endregion                                    
                                     
                                     
-        #region Shallow Access                                    
+   #region Shallow Access                                    
         // In the real definition, shallow reference partial. Just that it means partial with no DBConn                                                      
                                     
         /// <summary>                                                      
@@ -199,11 +199,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                                     
                                     
                                     
-#endregion                                    
+ #endregion                                    
                                     
-                                    
-                                    
-#region Consts and Enums                       
+
+ #region Consts and Enums                       
 
        public const string TABLE_NAME = "accounting.TermInvoiceGuide";
        public const string TermInvoiceGuide__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [TermID], [ClientID], [CompanyName], [OriginalBillID], [BillDefinition], [BillDescription], [TermStartDate], [CurrentWeek], [FirstBillDeadline], [TermEndDate], [SecondBillDeadline], [RatePerStudent], [BilledRatePerStudent], [RegisteredStudentCount], [FullScholarshipStudentCount], [BillableStudentCount], [ExpectedMinimumBillable], [ExpectedTotalBillable], [BilledAmount], [Balance], [BalanceDue] FROM TermInvoiceGuide";
@@ -239,6 +238,8 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
 
  #endregion 
+
+
 
 
  #region Properties 
@@ -439,192 +440,37 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        }
 
 
-#endregion
+ #endregion
 
-#region Methods                  
+ #region Methods                                    
+                                    
+                                                      
+        /// <summary>                                                                                           
+        /// Returns null on failure                                                                                           
+        /// </summary>                                                                                           
+        /// <returns></returns>                                                                                           
+        /// <remarks></remarks>                                                      
+        public V___TermInvoiceGuide GetFirstRow()                                                      
+        {                                                      
+            if (this.HasRows())                                                      
+                return new (AllRows.First());                                                      
+            return null;                                                      
+        }                                                      
+                                                      
+        public static V___TermInvoiceGuide GetFullTable() => new(DBConnectInterface.GetDBConn());                                    
+                                    
+        public static V___TermInvoiceGuide GetRowWhereIDUsingSQL(int pID)                                                      
+        {                                                      
+            return new V___TermInvoiceGuide(DBConnectInterface.GetDBConn(), string.Format("SELECT * FROM {0} WHERE ID={1}", pID, TABLE_NAME)).GetFirstRow();                                                      
+        }                                                      
+                                                      
+        public V___TermInvoiceGuide GetRowWhereID(int pID) => new(this.RawTable, pID);                                    
+                                    
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                           
+                          
                   
+        public virtual string GetFillSQL() => TermInvoiceGuide__NO__BINARY___SQL_FILL_QUERY;
                   
-                  
-        /// <summary>                                                       
-        /// Returns Empty class on failure                                                       
-        /// </summary>                                                       
-        /// <returns></returns>                                                       
-        /// <remarks></remarks>                  
-        public V___TermInvoiceGuide GetFirstRow()                  
-        {                  
-            if (this.HasRows())                  
-                return new V___TermInvoiceGuide(this.AllRows.First());                  
-            return null;                  
-        }                  
-                  
-        public static V___TermInvoiceGuide GetFullTable()                  
-        {                  
-            return new V___TermInvoiceGuide(DBConnectInterface.GetDBConn());                  
-        }                  
-                  
-        public static V___TermInvoiceGuide GetRowWhereIDUsingSQL(int pID)                  
-        {                  
-            return new V___TermInvoiceGuide(DBConnectInterface.GetDBConn(), string.Format("SELECT * FROM {0} WHERE ID={1}", (object)pID)).GetFirstRow();                  
-        }                  
-                  
-        public V___TermInvoiceGuide GetRowWhereID(int pID)                  
-        {                  
-            return new V___TermInvoiceGuide(this.RawTable, pID);                  
-        }                  
-                  
-        private bool IsAllRowEqual(V___TermInvoiceGuide pRow, params DataColumnParameter[] pParams)                  
-        {                  
-            try                  
-            {                  
-                if (!this.HasRows())                  
-                    return false;                  
-                foreach (var pParam in pParams)                  
-                {                  
-                    if (!pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
-                        return false;                  
-                }                  
-                  
-                return true;                  
-            }                  
-            catch (Exception)                  
-            {                  
-                return false;                  
-            }                  
-        }                  
-                  
-        private bool IsAnyRowEqual(V___TermInvoiceGuide pRow, params DataColumnParameter[] pParams)                  
-        {                  
-            try                  
-            {                  
-                if (!this.HasRows())                  
-                    return false;                  
-                foreach (var pParam in pParams)                  
-                {                  
-                    if (pRow.RowEqual(pParam.ColumnDefinition.ColumnName, pParam.Value))                  
-                        return true;                  
-                }                  
-                  
-                return false;                  
-            }                  
-            catch (Exception )                  
-            {                  
-                return false;                  
-            }                  
-        }                  
-                  
-        /// <summary>                                                       
-        /// Returns Empty class on failure                                                       
-        /// </summary>                                                       
-        /// <returns></returns>                                                       
-        /// <remarks></remarks>                  
-        public V___TermInvoiceGuide GetAllRowsEquals(params DataColumnParameter[] pParams)                  
-        {                  
-            if (pParams is null || pParams.Count() == 0 || !this.HasRows())                  
-                return this;                  
-            try                  
-            {                  
-                IEnumerable<DataRow> drst = from dr in this.AllRows                  
-                                            where IsAllRowEqual(new V___TermInvoiceGuide(dr), pParams)                  
-                                            select dr;                  
-                if (drst is object && drst.Count() > 0)                  
-                    return new V___TermInvoiceGuide(drst);                  
-                return null;                  
-            }                  
-            catch (Exception)                  
-            {                  
-                // REM                errorMsg(ex.Message, 1)                                                       
-                return null;                  
-            }                  
-        }                  
-                  
-        /// <summary>                                                       
-        /// Returns Empty class on failure                                                       
-        /// </summary>                                                       
-        /// <returns></returns>                                                       
-        /// <remarks></remarks>                  
-        public V___TermInvoiceGuide getAllRowsAny(params DataColumnParameter[] pParams)                  
-        {                  
-            if (pParams is null || pParams.Count() == 0 || !this.HasRows())                  
-                return this;                  
-            try                  
-            {                  
-                IEnumerable<DataRow> drst = from dr in this.AllRows                  
-                                            where IsAnyRowEqual(new V___TermInvoiceGuide(dr), pParams)                  
-                                            select dr;                  
-                if (drst is object && drst.Count() > 0)                  
-                    return new V___TermInvoiceGuide(drst);                  
-                return null;                  
-            }                  
-            catch (Exception)                  
-            {                  
-                // REM errorMsg(ex.Message, 1)                                                       
-                return null;                  
-            }                  
-        }                  
-                  
-        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                  
-                  
-        private bool RowEqual(string pColumnName, object pColumnValue)                  
-        {                  
-            try                  
-            {                  
-                if (!this.IsTargettedRowValid)                  
-                    return false;                  
-                switch (DataColumnDefinition.GetTypeAllowed(ColumnDefns[pColumnName].DataType))                  
-                {                  
-                    case var @case when @case == DataColumnDefinition.AllowedDataTypes.Bool:                  
-                        {                  
-                            return EBoolean.valueOf(this.TargettedRow[pColumnName]) == EBoolean.valueOf(pColumnValue);                  
-                        }                  
-                  
-                    case var case1 when case1 == DataColumnDefinition.AllowedDataTypes.Blob:                  
-                        {                  
-                            return object.Equals(this.TargettedRow[pColumnName], pColumnValue);                  
-                        }                  
-                  
-                    case var case2 when case2 == DataColumnDefinition.AllowedDataTypes.DateTime:                  
-                        {                  
-                            return EDateTime.EqualsDateWithoutTime(new NullableDateTime(this.TargettedRow[pColumnName]).DateTimeValue, new NullableDateTime(pColumnValue).DateTimeValue);                  
-                        }                  
-                  
-                    case var case3 when case3 == DataColumnDefinition.AllowedDataTypes.Decimal:                  
-                        {                  
-                            return EDouble.valueOf(this.TargettedRow[pColumnName]) == EDouble.valueOf(pColumnValue);                  
-                        }                  
-                  
-                    case var case4 when case4 == DataColumnDefinition.AllowedDataTypes.Int:                  
-                        {                  
-                            return EInt.valueOf(this.TargettedRow[pColumnName]) == EInt.valueOf(pColumnValue);                  
-                        }                  
-                  
-                    case var case5 when case5 == DataColumnDefinition.AllowedDataTypes.Long:                  
-                        {                  
-                            return ELong.valueOf(this.TargettedRow[pColumnName]) == ELong.valueOf(pColumnValue);                  
-                        }                  
-                  
-                    case var case6 when case6 == DataColumnDefinition.AllowedDataTypes.String:                  
-                        {                  
-                            return EStrings.equalsIgnoreCase(EStrings.valueOf(this.TargettedRow[pColumnName]), EStrings.valueOf(pColumnValue));                  
-                        }                  
-                  
-                    case var case7 when case7 == DataColumnDefinition.AllowedDataTypes.TimeSpan:                  
-                        {                  
-                            return object.Equals(this.TargettedRow[pColumnName], pColumnValue);                  
-                        }                  
-                  
-                    default:                  
-                        {                  
-                            // REM DataColumnDefinition.AllowedDataTypes.UNKNOWN()                                                       
-                            return object.Equals(this.TargettedRow[pColumnName], pColumnValue);                  
-                        }                  
-                }                  
-            }                  
-            catch (Exception)                  
-            {                  
-                return false;                  
-            }                  
-        }                  
-
                   
         public List<string> GetReferencedTableNames() => ReferencedTableNames;                  
                   
@@ -632,7 +478,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
                   
                   
-#endregion                  
+ #endregion                  
                   
                   
 
