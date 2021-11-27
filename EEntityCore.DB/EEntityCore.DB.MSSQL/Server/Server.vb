@@ -358,7 +358,7 @@ Public MustInherit Class Server
     ''' <exception cref="Exception"></exception>
     ''' <remarks></remarks>
     Public Overrides Function GetRS(ByVal SQL As String) As System.Data.DataSet
-        Return Me.getRS(SQL, Me.CurrentDBInUse)
+        Return Me.GetRS(SQL, Me.CurrentDBInUse)
     End Function
 
 
@@ -370,7 +370,7 @@ Public MustInherit Class Server
     ''' <returns></returns>
     ''' <exception cref="Exception"></exception>
     ''' <remarks></remarks>
-    Public Overloads Function getRS(ByVal SQL As String,
+    Public Overloads Function GetRS(ByVal SQL As String,
                                      ByVal UsingDatabase As String) As System.Data.DataSet
 
         '
@@ -405,12 +405,7 @@ Public MustInherit Class Server
             End Using
 
         Catch ex As Exception
-            Dim ex2 = New SQLCodeException(SQL, ex)
-
-            ' Logger.Log(New SQLCodeException(SQL, ex))
-
-            Throw ex2
-
+            Throw New SQLCodeException(SQL, ex)
         Finally
 
             If sqlDBCon IsNot Nothing Then
@@ -432,7 +427,7 @@ Public MustInherit Class Server
     ''' <param name="StoredProcedure "></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Overloads Function getRS(ByVal StoredProcedure As String,
+    Public Overloads Function GetRS(ByVal StoredProcedure As String,
                                 ByVal ParamArray SQLParameters() As SqlClient.SqlParameter) As System.Data.DataSet
 
 
@@ -1601,7 +1596,7 @@ CleanUP:
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Function IsTableCreatedOnDatabase(ByVal pTableName As String, pDatabase As String) As Boolean
-        Return IsDataSetValid(getRS(String.Format("Select * from sys.tables c WHERE c.name='{0}'", pTableName), pDatabase))
+        Return IsDataSetValid(GetRS(String.Format("Select * from sys.tables c WHERE c.name='{0}'", pTableName), pDatabase))
     End Function
 
 
@@ -1751,16 +1746,16 @@ CleanUP:
 
 
         If Not dbExec(
-"CREATE TABLE [dbo].[DBInfo] ( " & _
-  "[Version] decimal(19, 2) DEFAULT 0 NOT NULL, " & _
-  "[ID] int IDENTITY(1, 1) NOT FOR REPLICATION NOT NULL " & _
-") " & _
+"CREATE TABLE [dbo].[DBInfo] ( " &
+  "[Version] decimal(19, 2) DEFAULT 0 NOT NULL, " &
+  "[ID] int IDENTITY(1, 1) NOT FOR REPLICATION NOT NULL " &
+") " &
 "ON [PRIMARY]", DatabaseName
 ) Then Return False REM I expect by now this table shouldnt be on db
 
         Return dbExec(
        String.Format(
-           "INSERT INTO DBInfo (Version ) " & _
+           "INSERT INTO DBInfo (Version ) " &
         "VALUES({0})", 0
         ), DatabaseName
        )

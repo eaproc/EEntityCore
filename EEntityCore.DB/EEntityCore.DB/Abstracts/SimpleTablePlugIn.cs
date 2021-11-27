@@ -467,33 +467,27 @@ namespace EEntityCore.DB.Abstracts
             ___RawTable = null;
             TargettedRow_Cached = null;
             long pLastID = ID;
-            try
-            {
-                if (DBConn is null)
-                    return;
-                DataSet ds;
-                if (string.IsNullOrEmpty(SQL) || SQL.Equals(string.Empty))
-                {
-                    ds = DBConn.GetRS("SELECT * FROM " + TableName);
-                }
-                else
-                {
-                    ds = DBConn.GetRS(SQL);
-                }
+            if (DBConn is null)
+                return;
 
-                if (IsDataSetValid(ds))
-                {
-                    ___RawTable = ds.Tables[0];
-                }
-
-                // Retarget if possible
-                if (pLastID != DO__NOT____TARGET__ANY_ROWID)
-                    LoadID(pLastID);
-            }
-            catch (Exception ex)
+            DataSet ds;
+            if (string.IsNullOrEmpty(SQL) || SQL.Equals(string.Empty))
             {
-                Logger.Print(ex);
+                ds = DBConn.GetRS("SELECT * FROM " + TableName);
             }
+            else
+            {
+                ds = DBConn.GetRS(SQL);
+            }
+
+            if (IsDataSetValid(ds))
+            {
+                ___RawTable = ds.Tables[0];
+            }
+
+            // Retarget if possible
+            if (pLastID != DO__NOT____TARGET__ANY_ROWID)
+                LoadID(pLastID);
         }
 
         public virtual bool HasRows()

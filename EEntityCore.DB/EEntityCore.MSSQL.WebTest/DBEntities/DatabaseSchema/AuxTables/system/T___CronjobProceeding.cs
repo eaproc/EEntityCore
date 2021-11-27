@@ -214,10 +214,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
  #region Properties 
 
-       private static List<IDBTableDefinitionPlugIn.ForeignKeyDefinition> ForeignKeys;                  
+       private static readonly List<IDBTableDefinitionPlugIn.ForeignKeyDefinition> ForeignKeys;                  
 
        public override string TableName => TABLE_NAME;
-       private static Dictionary<string, DataColumnDefinition> ColumnDefns; 
+       private static readonly Dictionary<string, DataColumnDefinition> ColumnDefns; 
 
        public static readonly DataColumnDefinition defID;
        public static readonly DataColumnDefinition defCronjobID;

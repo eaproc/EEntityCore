@@ -200,10 +200,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
  #region Properties 
 
-       private static List<string> ReferencedTableNames;                  
+       private static readonly List<string> ReferencedTableNames;                  
 
        public override string TableName => TABLE_NAME;
-       private static Dictionary<string, DataColumnDefinition> ColumnDefns; 
+       private static readonly Dictionary<string, DataColumnDefinition> ColumnDefns; 
 
        public static readonly DataColumnDefinition defID;
        public static readonly DataColumnDefinition defRoleID;

@@ -9,12 +9,22 @@ namespace EEntityCore.MSSQL.WebTest
     {
         static void Main(string[] args)
         {
-            DatabaseInit.DBConnectInterface = new DatabaseInit("SalesSCADWARE", "sa", "netEPRO@2017", 51391, @"localhost\SQLSERVER2016");
+            try
+            {
 
-            T___AcademicSession academicSession = T___AcademicSession.GetFullTable();
+                DatabaseInit.DBConnectInterface = new DatabaseInit("SalesSCADWARE", "sa", "netEPRO@2017", 51391, @"localhost\SQLSERVER2016");
+
+                T___AcademicSession academicSession = T___AcademicSession.GetFullTable();
 
 
-            Console.WriteLine(academicSession.GetFirstRow().Name);
+                Console.WriteLine(academicSession.GetFirstRow().Name);
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.Error.WriteLine(ex);
+            }
         }
     }
 }
