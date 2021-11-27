@@ -247,60 +247,25 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defUpdatedAt;
 
-       public Int32 DealerID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.DealerID.ToString()]);
-           }
-       }
+       public int DealerID { get => (int)TargettedRow[TableColumnNames.DealerID.ToString()]; }
 
 
-       public Int32 ClientID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.ClientID.ToString()]);
-           }
-       }
+       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()]; }
 
 
-       public Int32 TermID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.TermID.ToString()]);
-           }
-       }
+       public int TermID { get => (int)TargettedRow[TableColumnNames.TermID.ToString()]; }
 
 
-       public Int32 ReferralTypeID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.ReferralTypeID.ToString()]);
-           }
-       }
+       public int ReferralTypeID { get => (int)TargettedRow[TableColumnNames.ReferralTypeID.ToString()]; }
 
 
-       public Int32 ReferralBenefitStatusID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.ReferralBenefitStatusID.ToString()]);
-           }
-       }
+       public int ReferralBenefitStatusID { get => (int)TargettedRow[TableColumnNames.ReferralBenefitStatusID.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public NullableDateTime UpdatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
 
 
  #endregion

@@ -222,52 +222,22 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defSessionID;
        public static readonly DataColumnDefinition defLoggedOutTime;
 
-       public Int32 UserID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.UserID.ToString()]);
-           }
-       }
+       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()]; }
 
 
-       public String IPAddress {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.IPAddress.ToString()]);
-           }
-       }
+       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()]; }
 
 
-       public String UserAgent {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.UserAgent.ToString()]);
-           }
-       }
+       public string UserAgent { get => (string)TargettedRow[TableColumnNames.UserAgent.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public String SessionID {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.SessionID.ToString()]);
-           }
-       }
+       public string SessionID { get => (string)TargettedRow[TableColumnNames.SessionID.ToString()]; }
 
 
-       public NullableDateTime LoggedOutTime {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.LoggedOutTime.ToString()]);
-           }
-       }
+       public NullableDateTime LoggedOutTime { get => new (this.TargettedRow[TableColumnNames.LoggedOutTime.ToString()]); }
 
 
  #endregion

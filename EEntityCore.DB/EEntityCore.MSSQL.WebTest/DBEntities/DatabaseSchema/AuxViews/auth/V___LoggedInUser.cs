@@ -222,76 +222,31 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defPictureFileName;
        public static readonly DataColumnDefinition defFullName;
 
-       public String Username {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Username.ToString()]);
-           }
-       }
+       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()]; }
 
 
-       public Int32 PersonID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PersonID.ToString()]);
-           }
-       }
+       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
 
 
-       public String RememberToken {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.RememberToken.ToString()]);
-           }
-       }
+       public string RememberToken { get => (string)TargettedRow[TableColumnNames.RememberToken.ToString()]; }
 
 
-       public String FirstName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.FirstName.ToString()]);
-           }
-       }
+       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()]; }
 
 
-       public String LastName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.LastName.ToString()]);
-           }
-       }
+       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()]; }
 
 
-       public String VerifiedMobileNumber {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.VerifiedMobileNumber.ToString()]);
-           }
-       }
+       public string VerifiedMobileNumber { get => (string)TargettedRow[TableColumnNames.VerifiedMobileNumber.ToString()]; }
 
 
-       public String VerifiedEmail {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.VerifiedEmail.ToString()]);
-           }
-       }
+       public string VerifiedEmail { get => (string)TargettedRow[TableColumnNames.VerifiedEmail.ToString()]; }
 
 
-       public String PictureFileName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.PictureFileName.ToString()]);
-           }
-       }
+       public string PictureFileName { get => (string)TargettedRow[TableColumnNames.PictureFileName.ToString()]; }
 
 
-       public String FullName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.FullName.ToString()]);
-           }
-       }
+       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()]; }
 
 
  #endregion

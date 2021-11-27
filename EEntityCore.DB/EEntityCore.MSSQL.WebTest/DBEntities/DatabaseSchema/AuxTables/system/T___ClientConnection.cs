@@ -259,124 +259,49 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defUpdatedAt;
        public static readonly DataColumnDefinition defFileServerUrlHttps;
 
-       public Int32 ClientID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.ClientID.ToString()]);
-           }
-       }
+       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()]; }
 
 
-       public String FileServerUrl {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.FileServerUrl.ToString()]);
-           }
-       }
+       public string FileServerUrl { get => (string)TargettedRow[TableColumnNames.FileServerUrl.ToString()]; }
 
 
-       public String FileServerAccessKey {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.FileServerAccessKey.ToString()]);
-           }
-       }
+       public string FileServerAccessKey { get => (string)TargettedRow[TableColumnNames.FileServerAccessKey.ToString()]; }
 
 
-       public String FileServerSecretKey {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.FileServerSecretKey.ToString()]);
-           }
-       }
+       public string FileServerSecretKey { get => (string)TargettedRow[TableColumnNames.FileServerSecretKey.ToString()]; }
 
 
-       public String FileServerBucket {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.FileServerBucket.ToString()]);
-           }
-       }
+       public string FileServerBucket { get => (string)TargettedRow[TableColumnNames.FileServerBucket.ToString()]; }
 
 
-       public String ClientAPIID {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.ClientAPIID.ToString()]);
-           }
-       }
+       public string ClientAPIID { get => (string)TargettedRow[TableColumnNames.ClientAPIID.ToString()]; }
 
 
-       public String ClientAPIUrl {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.ClientAPIUrl.ToString()]);
-           }
-       }
+       public string ClientAPIUrl { get => (string)TargettedRow[TableColumnNames.ClientAPIUrl.ToString()]; }
 
 
-       public String DB_HOST {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.DB_HOST.ToString()]);
-           }
-       }
+       public string DB_HOST { get => (string)TargettedRow[TableColumnNames.DB_HOST.ToString()]; }
 
 
-       public String DB_DATABASE {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.DB_DATABASE.ToString()]);
-           }
-       }
+       public string DB_DATABASE { get => (string)TargettedRow[TableColumnNames.DB_DATABASE.ToString()]; }
 
 
-       public String DB_USERNAME {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.DB_USERNAME.ToString()]);
-           }
-       }
+       public string DB_USERNAME { get => (string)TargettedRow[TableColumnNames.DB_USERNAME.ToString()]; }
 
 
-       public String DB_PASSWORD {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.DB_PASSWORD.ToString()]);
-           }
-       }
+       public string DB_PASSWORD { get => (string)TargettedRow[TableColumnNames.DB_PASSWORD.ToString()]; }
 
 
-       public Int32 DB_PORT {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.DB_PORT.ToString()]);
-           }
-       }
+       public int DB_PORT { get => (int)TargettedRow[TableColumnNames.DB_PORT.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public NullableDateTime UpdatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
 
 
-       public String FileServerUrlHttps {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.FileServerUrlHttps.ToString()]);
-           }
-       }
+       public string FileServerUrlHttps { get => (string)TargettedRow[TableColumnNames.FileServerUrlHttps.ToString()]; }
 
 
  #endregion

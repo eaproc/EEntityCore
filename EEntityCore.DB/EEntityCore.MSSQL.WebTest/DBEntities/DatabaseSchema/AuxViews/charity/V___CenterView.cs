@@ -236,100 +236,40 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defCenterStatusID;
        public static readonly DataColumnDefinition defCenterStatus;
 
-       public String Name {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Name.ToString()]);
-           }
-       }
+       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()]; }
 
 
-       public String Address {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Address.ToString()]);
-           }
-       }
+       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()]; }
 
 
-       public String PastorName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.PastorName.ToString()]);
-           }
-       }
+       public string PastorName { get => (string)TargettedRow[TableColumnNames.PastorName.ToString()]; }
 
 
-       public String PastorEmail {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.PastorEmail.ToString()]);
-           }
-       }
+       public string PastorEmail { get => (string)TargettedRow[TableColumnNames.PastorEmail.ToString()]; }
 
 
-       public String PastorPhone {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.PastorPhone.ToString()]);
-           }
-       }
+       public string PastorPhone { get => (string)TargettedRow[TableColumnNames.PastorPhone.ToString()]; }
 
 
-       public String PastorAddress {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.PastorAddress.ToString()]);
-           }
-       }
+       public string PastorAddress { get => (string)TargettedRow[TableColumnNames.PastorAddress.ToString()]; }
 
 
-       public Int32 PastorID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PastorID.ToString()]);
-           }
-       }
+       public int PastorID { get => (int)TargettedRow[TableColumnNames.PastorID.ToString()]; }
 
 
-       public Int32 PastorPersonID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PastorPersonID.ToString()]);
-           }
-       }
+       public int PastorPersonID { get => (int)TargettedRow[TableColumnNames.PastorPersonID.ToString()]; }
 
 
-       public Int32 BeneficiaryCount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.BeneficiaryCount.ToString()]);
-           }
-       }
+       public int? BeneficiaryCount { get => (int?)TargettedRow[TableColumnNames.BeneficiaryCount.ToString()]; }
 
 
-       public Int32 ChurchCapacity {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.ChurchCapacity.ToString()]);
-           }
-       }
+       public int ChurchCapacity { get => (int)TargettedRow[TableColumnNames.ChurchCapacity.ToString()]; }
 
 
-       public Int32 CenterStatusID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CenterStatusID.ToString()]);
-           }
-       }
+       public int CenterStatusID { get => (int)TargettedRow[TableColumnNames.CenterStatusID.ToString()]; }
 
 
-       public String CenterStatus {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.CenterStatus.ToString()]);
-           }
-       }
+       public string CenterStatus { get => (string)TargettedRow[TableColumnNames.CenterStatus.ToString()]; }
 
 
  #endregion

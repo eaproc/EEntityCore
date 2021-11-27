@@ -243,84 +243,34 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defImportComment;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public Int32 DataMonitorID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.DataMonitorID.ToString()]);
-           }
-       }
+       public int DataMonitorID { get => (int)TargettedRow[TableColumnNames.DataMonitorID.ToString()]; }
 
 
-       public Int32 ImportStatusID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.ImportStatusID.ToString()]);
-           }
-       }
+       public int ImportStatusID { get => (int)TargettedRow[TableColumnNames.ImportStatusID.ToString()]; }
 
 
-       public String Request {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Request.ToString()]);
-           }
-       }
+       public string Request { get => (string)TargettedRow[TableColumnNames.Request.ToString()]; }
 
 
-       public NullableDateTime DisbursedDate {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.DisbursedDate.ToString()]);
-           }
-       }
+       public NullableDateTime DisbursedDate { get => new (this.TargettedRow[TableColumnNames.DisbursedDate.ToString()]); }
 
 
-       public String Category {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Category.ToString()]);
-           }
-       }
+       public string Category { get => (string)TargettedRow[TableColumnNames.Category.ToString()]; }
 
 
-       public String Beneficiary {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Beneficiary.ToString()]);
-           }
-       }
+       public string Beneficiary { get => (string)TargettedRow[TableColumnNames.Beneficiary.ToString()]; }
 
 
-       public String Notes {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Notes.ToString()]);
-           }
-       }
+       public string Notes { get => (string)TargettedRow[TableColumnNames.Notes.ToString()]; }
 
 
-       public Decimal Total {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Total.ToString()]);
-           }
-       }
+       public decimal Total { get => (decimal)TargettedRow[TableColumnNames.Total.ToString()]; }
 
 
-       public String ImportComment {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.ImportComment.ToString()]);
-           }
-       }
+       public string ImportComment { get => (string)TargettedRow[TableColumnNames.ImportComment.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
  #endregion

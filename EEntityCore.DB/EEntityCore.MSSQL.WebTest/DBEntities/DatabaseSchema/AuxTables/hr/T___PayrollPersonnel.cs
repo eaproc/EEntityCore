@@ -278,132 +278,52 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defDisbursedAt;
        public static readonly DataColumnDefinition defUpdatedByID;
 
-       public Int32 PayrollID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PayrollID.ToString()]);
-           }
-       }
+       public int PayrollID { get => (int)TargettedRow[TableColumnNames.PayrollID.ToString()]; }
 
 
-       public Int32 PersonnelID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PersonnelID.ToString()]);
-           }
-       }
+       public int PersonnelID { get => (int)TargettedRow[TableColumnNames.PersonnelID.ToString()]; }
 
 
-       public Int32 AttendanceCount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.AttendanceCount.ToString()]);
-           }
-       }
+       public int AttendanceCount { get => (int)TargettedRow[TableColumnNames.AttendanceCount.ToString()]; }
 
 
-       public Decimal SalaryAmount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.SalaryAmount.ToString()]);
-           }
-       }
+       public decimal SalaryAmount { get => (decimal)TargettedRow[TableColumnNames.SalaryAmount.ToString()]; }
 
 
-       public Decimal RatePerDay {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.RatePerDay.ToString()]);
-           }
-       }
+       public decimal RatePerDay { get => (decimal)TargettedRow[TableColumnNames.RatePerDay.ToString()]; }
 
 
-       public Decimal CalculatedAmount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.CalculatedAmount.ToString()]);
-           }
-       }
+       public decimal CalculatedAmount { get => (decimal)TargettedRow[TableColumnNames.CalculatedAmount.ToString()]; }
 
 
-       public Boolean IsDisbursed {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsDisbursed.ToString()]);
-           }
-       }
+       public bool IsDisbursed { get => (bool)TargettedRow[TableColumnNames.IsDisbursed.ToString()]; }
 
 
-       public String HRComments {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.HRComments.ToString()]);
-           }
-       }
+       public string HRComments { get => (string)TargettedRow[TableColumnNames.HRComments.ToString()]; }
 
 
-       public Decimal ApprovedAmount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.ApprovedAmount.ToString()]);
-           }
-       }
+       public decimal ApprovedAmount { get => (decimal)TargettedRow[TableColumnNames.ApprovedAmount.ToString()]; }
 
 
-       public String BursarComments {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.BursarComments.ToString()]);
-           }
-       }
+       public string BursarComments { get => (string)TargettedRow[TableColumnNames.BursarComments.ToString()]; }
 
 
-       public Decimal DisbursedAmount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.DisbursedAmount.ToString()]);
-           }
-       }
+       public decimal? DisbursedAmount { get => (decimal?)TargettedRow[TableColumnNames.DisbursedAmount.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public Int32 CreatedByID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CreatedByID.ToString()]);
-           }
-       }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
 
 
-       public NullableDateTime DisbursedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.DisbursedAt.ToString()]);
-           }
-       }
+       public NullableDateTime DisbursedAt { get => new (this.TargettedRow[TableColumnNames.DisbursedAt.ToString()]); }
 
 
-       public Int32 UpdatedByID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.UpdatedByID.ToString()]);
-           }
-       }
+       public int? UpdatedByID { get => (int?)TargettedRow[TableColumnNames.UpdatedByID.ToString()]; }
 
 
  #endregion

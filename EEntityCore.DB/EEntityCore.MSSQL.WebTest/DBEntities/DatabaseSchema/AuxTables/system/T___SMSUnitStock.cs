@@ -209,36 +209,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defComments;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public Decimal StockAmountNaira {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.StockAmountNaira.ToString()]);
-           }
-       }
+       public decimal StockAmountNaira { get => (decimal)TargettedRow[TableColumnNames.StockAmountNaira.ToString()]; }
 
 
-       public Decimal Quantity {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Quantity.ToString()]);
-           }
-       }
+       public decimal Quantity { get => (decimal)TargettedRow[TableColumnNames.Quantity.ToString()]; }
 
 
-       public String Comments {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Comments.ToString()]);
-           }
-       }
+       public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
  #endregion

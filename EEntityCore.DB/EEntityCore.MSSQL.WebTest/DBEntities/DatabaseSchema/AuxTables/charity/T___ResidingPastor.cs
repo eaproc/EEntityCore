@@ -262,92 +262,37 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defUpdatedByID;
        public static readonly DataColumnDefinition defIdPictureStoredPath;
 
-       public Int32 CenterID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CenterID.ToString()]);
-           }
-       }
+       public int CenterID { get => (int)TargettedRow[TableColumnNames.CenterID.ToString()]; }
 
 
-       public Int32 BankID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.BankID.ToString()]);
-           }
-       }
+       public int BankID { get => (int)TargettedRow[TableColumnNames.BankID.ToString()]; }
 
 
-       public String AccountNumber {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.AccountNumber.ToString()]);
-           }
-       }
+       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()]; }
 
 
-       public Int32 PersonID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PersonID.ToString()]);
-           }
-       }
+       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
 
 
-       public NullableDateTime ActivatedOn {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.ActivatedOn.ToString()]);
-           }
-       }
+       public NullableDateTime ActivatedOn { get => new (this.TargettedRow[TableColumnNames.ActivatedOn.ToString()]); }
 
 
-       public NullableDateTime DeactivatedOn {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.DeactivatedOn.ToString()]);
-           }
-       }
+       public NullableDateTime DeactivatedOn { get => new (this.TargettedRow[TableColumnNames.DeactivatedOn.ToString()]); }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public NullableDateTime UpdatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
 
 
-       public Int32 CreatedByID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CreatedByID.ToString()]);
-           }
-       }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
 
 
-       public Int32 UpdatedByID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.UpdatedByID.ToString()]);
-           }
-       }
+       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()]; }
 
 
-       public String IdPictureStoredPath {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.IdPictureStoredPath.ToString()]);
-           }
-       }
+       public string IdPictureStoredPath { get => (string)TargettedRow[TableColumnNames.IdPictureStoredPath.ToString()]; }
 
 
  #endregion

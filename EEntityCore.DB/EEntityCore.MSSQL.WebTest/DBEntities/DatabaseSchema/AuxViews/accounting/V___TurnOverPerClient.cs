@@ -215,68 +215,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defBalanceDue;
        public static readonly DataColumnDefinition defSurplus;
 
-       public Int32 ClientID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.ClientID.ToString()]);
-           }
-       }
+       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()]; }
 
 
-       public String Name {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Name.ToString()]);
-           }
-       }
+       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()]; }
 
 
-       public Decimal BillTotal {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.BillTotal.ToString()]);
-           }
-       }
+       public decimal? BillTotal { get => (decimal?)TargettedRow[TableColumnNames.BillTotal.ToString()]; }
 
 
-       public Decimal Arrears {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Arrears.ToString()]);
-           }
-       }
+       public decimal? Arrears { get => (decimal?)TargettedRow[TableColumnNames.Arrears.ToString()]; }
 
 
-       public Decimal PaymentMade {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.PaymentMade.ToString()]);
-           }
-       }
+       public decimal? PaymentMade { get => (decimal?)TargettedRow[TableColumnNames.PaymentMade.ToString()]; }
 
 
-       public Decimal Discount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Discount.ToString()]);
-           }
-       }
+       public decimal? Discount { get => (decimal?)TargettedRow[TableColumnNames.Discount.ToString()]; }
 
 
-       public Decimal BalanceDue {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.BalanceDue.ToString()]);
-           }
-       }
+       public decimal? BalanceDue { get => (decimal?)TargettedRow[TableColumnNames.BalanceDue.ToString()]; }
 
 
-       public Decimal Surplus {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Surplus.ToString()]);
-           }
-       }
+       public decimal? Surplus { get => (decimal?)TargettedRow[TableColumnNames.Surplus.ToString()]; }
 
 
  #endregion

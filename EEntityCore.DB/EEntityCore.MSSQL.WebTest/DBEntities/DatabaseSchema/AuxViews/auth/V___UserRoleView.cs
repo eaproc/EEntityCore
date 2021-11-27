@@ -201,36 +201,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defRole;
        public static readonly DataColumnDefinition defRoleRank;
 
-       public Int32 RoleID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.RoleID.ToString()]);
-           }
-       }
+       public int RoleID { get => (int)TargettedRow[TableColumnNames.RoleID.ToString()]; }
 
 
-       public Int32 UserID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.UserID.ToString()]);
-           }
-       }
+       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()]; }
 
 
-       public String Role {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Role.ToString()]);
-           }
-       }
+       public string Role { get => (string)TargettedRow[TableColumnNames.Role.ToString()]; }
 
 
-       public Byte RoleRank {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return (Byte)EShort.valueOf(this.TargettedRow[TableColumnNames.RoleRank.ToString()]);
-           }
-       }
+       public byte RoleRank { get => (byte)TargettedRow[TableColumnNames.RoleRank.ToString()]; }
 
 
  #endregion

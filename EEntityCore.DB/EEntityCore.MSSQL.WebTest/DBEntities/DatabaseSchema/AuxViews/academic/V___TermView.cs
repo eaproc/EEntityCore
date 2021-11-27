@@ -230,92 +230,37 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defID;
        public static readonly DataColumnDefinition defDescription;
 
-       public String Name {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Name.ToString()]);
-           }
-       }
+       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()]; }
 
 
-       public String TermOrder {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.TermOrder.ToString()]);
-           }
-       }
+       public string TermOrder { get => (string)TargettedRow[TableColumnNames.TermOrder.ToString()]; }
 
 
-       public String AcademicSession {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.AcademicSession.ToString()]);
-           }
-       }
+       public string AcademicSession { get => (string)TargettedRow[TableColumnNames.AcademicSession.ToString()]; }
 
 
-       public Boolean IsActive {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsActive.ToString()]);
-           }
-       }
+       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()]; }
 
 
-       public Int32 AcademicSessionID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.AcademicSessionID.ToString()]);
-           }
-       }
+       public int AcademicSessionID { get => (int)TargettedRow[TableColumnNames.AcademicSessionID.ToString()]; }
 
 
-       public NullableDateTime TermStartDate {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.TermStartDate.ToString()]);
-           }
-       }
+       public NullableDateTime TermStartDate { get => new (this.TargettedRow[TableColumnNames.TermStartDate.ToString()]); }
 
 
-       public NullableDateTime TermEndDate {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.TermEndDate.ToString()]);
-           }
-       }
+       public NullableDateTime TermEndDate { get => new (this.TargettedRow[TableColumnNames.TermEndDate.ToString()]); }
 
 
-       public NullableDateTime SessionStartDate {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.SessionStartDate.ToString()]);
-           }
-       }
+       public NullableDateTime SessionStartDate { get => new (this.TargettedRow[TableColumnNames.SessionStartDate.ToString()]); }
 
 
-       public NullableDateTime SessionEndDate {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.SessionEndDate.ToString()]);
-           }
-       }
+       public NullableDateTime SessionEndDate { get => new (this.TargettedRow[TableColumnNames.SessionEndDate.ToString()]); }
 
 
-       public Int32 TermOrderID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.TermOrderID.ToString()]);
-           }
-       }
+       public int TermOrderID { get => (int)TargettedRow[TableColumnNames.TermOrderID.ToString()]; }
 
 
-       public String Description {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Description.ToString()]);
-           }
-       }
+       public string Description { get => (string)TargettedRow[TableColumnNames.Description.ToString()]; }
 
 
  #endregion

@@ -222,60 +222,25 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defUpdatedAt;
        public static readonly DataColumnDefinition defRank;
 
-       public String Name {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Name.ToString()]);
-           }
-       }
+       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()]; }
 
 
-       public String Description {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Description.ToString()]);
-           }
-       }
+       public string Description { get => (string)TargettedRow[TableColumnNames.Description.ToString()]; }
 
 
-       public Boolean CanBeUpdated {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.CanBeUpdated.ToString()]);
-           }
-       }
+       public bool CanBeUpdated { get => (bool)TargettedRow[TableColumnNames.CanBeUpdated.ToString()]; }
 
 
-       public Boolean CanBeDeleted {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.CanBeDeleted.ToString()]);
-           }
-       }
+       public bool CanBeDeleted { get => (bool)TargettedRow[TableColumnNames.CanBeDeleted.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public NullableDateTime UpdatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
 
 
-       public Byte Rank {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return (Byte)EShort.valueOf(this.TargettedRow[TableColumnNames.Rank.ToString()]);
-           }
-       }
+       public byte Rank { get => (byte)TargettedRow[TableColumnNames.Rank.ToString()]; }
 
 
  #endregion

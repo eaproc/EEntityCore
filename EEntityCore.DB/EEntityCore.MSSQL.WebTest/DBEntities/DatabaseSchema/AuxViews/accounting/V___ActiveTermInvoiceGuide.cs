@@ -248,132 +248,52 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defRegisteredStudentCount;
        public static readonly DataColumnDefinition defFullScholarshipStudentCount;
 
-       public String CompanyName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.CompanyName.ToString()]);
-           }
-       }
+       public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()]; }
 
 
-       public NullableDateTime TermStartDate {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.TermStartDate.ToString()]);
-           }
-       }
+       public NullableDateTime TermStartDate { get => new (this.TargettedRow[TableColumnNames.TermStartDate.ToString()]); }
 
 
-       public Int32 CurrentWeek {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CurrentWeek.ToString()]);
-           }
-       }
+       public int? CurrentWeek { get => (int?)TargettedRow[TableColumnNames.CurrentWeek.ToString()]; }
 
 
-       public NullableDateTime FirstBillDeadline {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.FirstBillDeadline.ToString()]);
-           }
-       }
+       public NullableDateTime FirstBillDeadline { get => new (this.TargettedRow[TableColumnNames.FirstBillDeadline.ToString()]); }
 
 
-       public NullableDateTime SecondBillDeadline {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.SecondBillDeadline.ToString()]);
-           }
-       }
+       public NullableDateTime SecondBillDeadline { get => new (this.TargettedRow[TableColumnNames.SecondBillDeadline.ToString()]); }
 
 
-       public NullableDateTime TermEndDate {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.TermEndDate.ToString()]);
-           }
-       }
+       public NullableDateTime TermEndDate { get => new (this.TargettedRow[TableColumnNames.TermEndDate.ToString()]); }
 
 
-       public Decimal RatePerStudent {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.RatePerStudent.ToString()]);
-           }
-       }
+       public decimal RatePerStudent { get => (decimal)TargettedRow[TableColumnNames.RatePerStudent.ToString()]; }
 
 
-       public Decimal BilledRatePerStudent {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.BilledRatePerStudent.ToString()]);
-           }
-       }
+       public decimal BilledRatePerStudent { get => (decimal)TargettedRow[TableColumnNames.BilledRatePerStudent.ToString()]; }
 
 
-       public Int32 BillableStudentCount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.BillableStudentCount.ToString()]);
-           }
-       }
+       public int? BillableStudentCount { get => (int?)TargettedRow[TableColumnNames.BillableStudentCount.ToString()]; }
 
 
-       public Decimal ExpectedMinimumBillable {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.ExpectedMinimumBillable.ToString()]);
-           }
-       }
+       public decimal? ExpectedMinimumBillable { get => (decimal?)TargettedRow[TableColumnNames.ExpectedMinimumBillable.ToString()]; }
 
 
-       public Decimal ExpectedTotalBillable {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.ExpectedTotalBillable.ToString()]);
-           }
-       }
+       public decimal? ExpectedTotalBillable { get => (decimal?)TargettedRow[TableColumnNames.ExpectedTotalBillable.ToString()]; }
 
 
-       public Decimal BilledAmount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.BilledAmount.ToString()]);
-           }
-       }
+       public decimal? BilledAmount { get => (decimal?)TargettedRow[TableColumnNames.BilledAmount.ToString()]; }
 
 
-       public Decimal Balance {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Balance.ToString()]);
-           }
-       }
+       public decimal? Balance { get => (decimal?)TargettedRow[TableColumnNames.Balance.ToString()]; }
 
 
-       public Int32 ClientID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.ClientID.ToString()]);
-           }
-       }
+       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()]; }
 
 
-       public Int32 RegisteredStudentCount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.RegisteredStudentCount.ToString()]);
-           }
-       }
+       public int RegisteredStudentCount { get => (int)TargettedRow[TableColumnNames.RegisteredStudentCount.ToString()]; }
 
 
-       public Int32 FullScholarshipStudentCount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.FullScholarshipStudentCount.ToString()]);
-           }
-       }
+       public int? FullScholarshipStudentCount { get => (int?)TargettedRow[TableColumnNames.FullScholarshipStudentCount.ToString()]; }
 
 
  #endregion

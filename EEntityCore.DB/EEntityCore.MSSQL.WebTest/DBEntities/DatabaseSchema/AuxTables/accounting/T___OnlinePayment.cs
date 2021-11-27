@@ -251,108 +251,43 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defPlatformChargesExplaination;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public Int32 PaymentID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PaymentID.ToString()]);
-           }
-       }
+       public int PaymentID { get => (int)TargettedRow[TableColumnNames.PaymentID.ToString()]; }
 
 
-       public NullableDateTime TransactionDate {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.TransactionDate.ToString()]);
-           }
-       }
+       public NullableDateTime TransactionDate { get => new (this.TargettedRow[TableColumnNames.TransactionDate.ToString()]); }
 
 
-       public String Channel {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Channel.ToString()]);
-           }
-       }
+       public string Channel { get => (string)TargettedRow[TableColumnNames.Channel.ToString()]; }
 
 
-       public String IpAddress {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.IpAddress.ToString()]);
-           }
-       }
+       public string IpAddress { get => (string)TargettedRow[TableColumnNames.IpAddress.ToString()]; }
 
 
-       public Decimal GatewayCharges {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.GatewayCharges.ToString()]);
-           }
-       }
+       public decimal GatewayCharges { get => (decimal)TargettedRow[TableColumnNames.GatewayCharges.ToString()]; }
 
 
-       public String GatewayLogReference {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.GatewayLogReference.ToString()]);
-           }
-       }
+       public string GatewayLogReference { get => (string)TargettedRow[TableColumnNames.GatewayLogReference.ToString()]; }
 
 
-       public String Gateway {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Gateway.ToString()]);
-           }
-       }
+       public string Gateway { get => (string)TargettedRow[TableColumnNames.Gateway.ToString()]; }
 
 
-       public Decimal PlatformCharges {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.PlatformCharges.ToString()]);
-           }
-       }
+       public decimal PlatformCharges { get => (decimal)TargettedRow[TableColumnNames.PlatformCharges.ToString()]; }
 
 
-       public Decimal GatewayAmountReceived {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.GatewayAmountReceived.ToString()]);
-           }
-       }
+       public decimal GatewayAmountReceived { get => (decimal)TargettedRow[TableColumnNames.GatewayAmountReceived.ToString()]; }
 
 
-       public Decimal PlatformAmountReceived {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.PlatformAmountReceived.ToString()]);
-           }
-       }
+       public decimal PlatformAmountReceived { get => (decimal)TargettedRow[TableColumnNames.PlatformAmountReceived.ToString()]; }
 
 
-       public String GatewayChargesExplaination {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.GatewayChargesExplaination.ToString()]);
-           }
-       }
+       public string GatewayChargesExplaination { get => (string)TargettedRow[TableColumnNames.GatewayChargesExplaination.ToString()]; }
 
 
-       public String PlatformChargesExplaination {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.PlatformChargesExplaination.ToString()]);
-           }
-       }
+       public string PlatformChargesExplaination { get => (string)TargettedRow[TableColumnNames.PlatformChargesExplaination.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
  #endregion

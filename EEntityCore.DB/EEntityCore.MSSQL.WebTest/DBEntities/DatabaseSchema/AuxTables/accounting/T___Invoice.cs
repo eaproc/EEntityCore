@@ -271,108 +271,43 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defOriginalBillID;
        public static readonly DataColumnDefinition defPaymentTransactionID;
 
-       public Int32 ClientID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.ClientID.ToString()]);
-           }
-       }
+       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()]; }
 
 
-       public String BillDefinition {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.BillDefinition.ToString()]);
-           }
-       }
+       public string BillDefinition { get => (string)TargettedRow[TableColumnNames.BillDefinition.ToString()]; }
 
 
-       public String BillDescription {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.BillDescription.ToString()]);
-           }
-       }
+       public string BillDescription { get => (string)TargettedRow[TableColumnNames.BillDescription.ToString()]; }
 
 
-       public Decimal BillAmount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.BillAmount.ToString()]);
-           }
-       }
+       public decimal BillAmount { get => (decimal)TargettedRow[TableColumnNames.BillAmount.ToString()]; }
 
 
-       public Decimal Total {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Total.ToString()]);
-           }
-       }
+       public decimal Total { get => (decimal)TargettedRow[TableColumnNames.Total.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public Int32 CreatedByID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CreatedByID.ToString()]);
-           }
-       }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
 
 
-       public Boolean CanBeDeleted {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.CanBeDeleted.ToString()]);
-           }
-       }
+       public bool CanBeDeleted { get => (bool)TargettedRow[TableColumnNames.CanBeDeleted.ToString()]; }
 
 
-       public Int32 Quantity {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.Quantity.ToString()]);
-           }
-       }
+       public int Quantity { get => (int)TargettedRow[TableColumnNames.Quantity.ToString()]; }
 
 
-       public String IpAddress {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.IpAddress.ToString()]);
-           }
-       }
+       public string IpAddress { get => (string)TargettedRow[TableColumnNames.IpAddress.ToString()]; }
 
 
-       public Int32 TermID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.TermID.ToString()]);
-           }
-       }
+       public int TermID { get => (int)TargettedRow[TableColumnNames.TermID.ToString()]; }
 
 
-       public Int32 OriginalBillID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.OriginalBillID.ToString()]);
-           }
-       }
+       public int OriginalBillID { get => (int)TargettedRow[TableColumnNames.OriginalBillID.ToString()]; }
 
 
-       public Int32 PaymentTransactionID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PaymentTransactionID.ToString()]);
-           }
-       }
+       public int? PaymentTransactionID { get => (int?)TargettedRow[TableColumnNames.PaymentTransactionID.ToString()]; }
 
 
  #endregion

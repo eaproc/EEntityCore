@@ -254,140 +254,55 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defAccountNumber;
        public static readonly DataColumnDefinition defTotalPayable;
 
-       public String CompanyName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.CompanyName.ToString()]);
-           }
-       }
+       public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public Int32 OwnerID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.OwnerID.ToString()]);
-           }
-       }
+       public int OwnerID { get => (int)TargettedRow[TableColumnNames.OwnerID.ToString()]; }
 
 
-       public String SLAFileName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.SLAFileName.ToString()]);
-           }
-       }
+       public string SLAFileName { get => (string)TargettedRow[TableColumnNames.SLAFileName.ToString()]; }
 
 
-       public String ScadwareURL {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.ScadwareURL.ToString()]);
-           }
-       }
+       public string ScadwareURL { get => (string)TargettedRow[TableColumnNames.ScadwareURL.ToString()]; }
 
 
-       public String Email {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Email.ToString()]);
-           }
-       }
+       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()]; }
 
 
-       public String Mobile {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Mobile.ToString()]);
-           }
-       }
+       public string Mobile { get => (string)TargettedRow[TableColumnNames.Mobile.ToString()]; }
 
 
-       public String WebsiteURL {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.WebsiteURL.ToString()]);
-           }
-       }
+       public string WebsiteURL { get => (string)TargettedRow[TableColumnNames.WebsiteURL.ToString()]; }
 
 
-       public String LogoFileName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.LogoFileName.ToString()]);
-           }
-       }
+       public string LogoFileName { get => (string)TargettedRow[TableColumnNames.LogoFileName.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
 
 
-       public Boolean IsActive {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsActive.ToString()]);
-           }
-       }
+       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()]; }
 
 
-       public String NameAbbreviation {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.NameAbbreviation.ToString()]);
-           }
-       }
+       public string NameAbbreviation { get => (string)TargettedRow[TableColumnNames.NameAbbreviation.ToString()]; }
 
 
-       public String Address {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Address.ToString()]);
-           }
-       }
+       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()]; }
 
 
-       public Int32 BankID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.BankID.ToString()]);
-           }
-       }
+       public int? BankID { get => (int?)TargettedRow[TableColumnNames.BankID.ToString()]; }
 
 
-       public String AccountName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.AccountName.ToString()]);
-           }
-       }
+       public string AccountName { get => (string)TargettedRow[TableColumnNames.AccountName.ToString()]; }
 
 
-       public String AccountNumber {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.AccountNumber.ToString()]);
-           }
-       }
+       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()]; }
 
 
-       public Decimal TotalPayable {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.TotalPayable.ToString()]);
-           }
-       }
+       public decimal? TotalPayable { get => (decimal?)TargettedRow[TableColumnNames.TotalPayable.ToString()]; }
 
 
  #endregion

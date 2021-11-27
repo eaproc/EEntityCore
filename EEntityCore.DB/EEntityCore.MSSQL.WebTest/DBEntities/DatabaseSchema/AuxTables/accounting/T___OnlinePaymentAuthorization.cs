@@ -239,84 +239,34 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCountryCode;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public Int32 OnlinePaymentID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.OnlinePaymentID.ToString()]);
-           }
-       }
+       public int OnlinePaymentID { get => (int)TargettedRow[TableColumnNames.OnlinePaymentID.ToString()]; }
 
 
-       public String AuthorizationCode {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.AuthorizationCode.ToString()]);
-           }
-       }
+       public string AuthorizationCode { get => (string)TargettedRow[TableColumnNames.AuthorizationCode.ToString()]; }
 
 
-       public String CardType {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.CardType.ToString()]);
-           }
-       }
+       public string CardType { get => (string)TargettedRow[TableColumnNames.CardType.ToString()]; }
 
 
-       public String BIN {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.BIN.ToString()]);
-           }
-       }
+       public string BIN { get => (string)TargettedRow[TableColumnNames.BIN.ToString()]; }
 
 
-       public String Last4Digits {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Last4Digits.ToString()]);
-           }
-       }
+       public string Last4Digits { get => (string)TargettedRow[TableColumnNames.Last4Digits.ToString()]; }
 
 
-       public Int32 ExpirationMonth {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.ExpirationMonth.ToString()]);
-           }
-       }
+       public int? ExpirationMonth { get => (int?)TargettedRow[TableColumnNames.ExpirationMonth.ToString()]; }
 
 
-       public Int32 ExpirationYear {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.ExpirationYear.ToString()]);
-           }
-       }
+       public int? ExpirationYear { get => (int?)TargettedRow[TableColumnNames.ExpirationYear.ToString()]; }
 
 
-       public String Bank {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Bank.ToString()]);
-           }
-       }
+       public string Bank { get => (string)TargettedRow[TableColumnNames.Bank.ToString()]; }
 
 
-       public String CountryCode {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.CountryCode.ToString()]);
-           }
-       }
+       public string CountryCode { get => (string)TargettedRow[TableColumnNames.CountryCode.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
  #endregion

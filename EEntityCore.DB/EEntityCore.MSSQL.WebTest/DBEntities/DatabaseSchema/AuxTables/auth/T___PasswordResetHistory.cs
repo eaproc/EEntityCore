@@ -236,60 +236,25 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defChangedByUserID;
        public static readonly DataColumnDefinition defIpAddress;
 
-       public Int32 UserID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.UserID.ToString()]);
-           }
-       }
+       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()]; }
 
 
-       public String OldPassword {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.OldPassword.ToString()]);
-           }
-       }
+       public string OldPassword { get => (string)TargettedRow[TableColumnNames.OldPassword.ToString()]; }
 
 
-       public String NewPassword {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.NewPassword.ToString()]);
-           }
-       }
+       public string NewPassword { get => (string)TargettedRow[TableColumnNames.NewPassword.ToString()]; }
 
 
-       public Int32 PasswordResetTypeID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PasswordResetTypeID.ToString()]);
-           }
-       }
+       public int PasswordResetTypeID { get => (int)TargettedRow[TableColumnNames.PasswordResetTypeID.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public Int32 ChangedByUserID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.ChangedByUserID.ToString()]);
-           }
-       }
+       public int ChangedByUserID { get => (int)TargettedRow[TableColumnNames.ChangedByUserID.ToString()]; }
 
 
-       public String IpAddress {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.IpAddress.ToString()]);
-           }
-       }
+       public string IpAddress { get => (string)TargettedRow[TableColumnNames.IpAddress.ToString()]; }
 
 
  #endregion

@@ -227,52 +227,22 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defIsSuccessful;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public Int32 CronjobID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CronjobID.ToString()]);
-           }
-       }
+       public int CronjobID { get => (int)TargettedRow[TableColumnNames.CronjobID.ToString()]; }
 
 
-       public Int32 ProceedingStatusID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.ProceedingStatusID.ToString()]);
-           }
-       }
+       public int ProceedingStatusID { get => (int)TargettedRow[TableColumnNames.ProceedingStatusID.ToString()]; }
 
 
-       public String Comments {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Comments.ToString()]);
-           }
-       }
+       public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()]; }
 
 
-       public NullableDateTime NextExpectedExecutionTime {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.NextExpectedExecutionTime.ToString()]);
-           }
-       }
+       public NullableDateTime NextExpectedExecutionTime { get => new (this.TargettedRow[TableColumnNames.NextExpectedExecutionTime.ToString()]); }
 
 
-       public Boolean IsSuccessful {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsSuccessful.ToString()]);
-           }
-       }
+       public bool IsSuccessful { get => (bool)TargettedRow[TableColumnNames.IsSuccessful.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
  #endregion

@@ -246,124 +246,49 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defCreatedByID;
        public static readonly DataColumnDefinition defUpdatedByID;
 
-       public String FirstName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.FirstName.ToString()]);
-           }
-       }
+       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()]; }
 
 
-       public String LastName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.LastName.ToString()]);
-           }
-       }
+       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()]; }
 
 
-       public String HomePhone {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.HomePhone.ToString()]);
-           }
-       }
+       public string HomePhone { get => (string)TargettedRow[TableColumnNames.HomePhone.ToString()]; }
 
 
-       public String Guardian {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Guardian.ToString()]);
-           }
-       }
+       public string Guardian { get => (string)TargettedRow[TableColumnNames.Guardian.ToString()]; }
 
 
-       public String Address {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Address.ToString()]);
-           }
-       }
+       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()]; }
 
 
-       public Int32 MonthlyDonationID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.MonthlyDonationID.ToString()]);
-           }
-       }
+       public int MonthlyDonationID { get => (int)TargettedRow[TableColumnNames.MonthlyDonationID.ToString()]; }
 
 
-       public Int32 BeneficiaryID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.BeneficiaryID.ToString()]);
-           }
-       }
+       public int BeneficiaryID { get => (int)TargettedRow[TableColumnNames.BeneficiaryID.ToString()]; }
 
 
-       public Int32 CashOutID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CashOutID.ToString()]);
-           }
-       }
+       public int? CashOutID { get => (int?)TargettedRow[TableColumnNames.CashOutID.ToString()]; }
 
 
-       public Int32 DonationYear {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.DonationYear.ToString()]);
-           }
-       }
+       public int DonationYear { get => (int)TargettedRow[TableColumnNames.DonationYear.ToString()]; }
 
 
-       public Int32 DonationMonth {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.DonationMonth.ToString()]);
-           }
-       }
+       public int DonationMonth { get => (int)TargettedRow[TableColumnNames.DonationMonth.ToString()]; }
 
 
-       public Decimal Amount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Amount.ToString()]);
-           }
-       }
+       public decimal Amount { get => (decimal)TargettedRow[TableColumnNames.Amount.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public NullableDateTime UpdatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
 
 
-       public Int32 CreatedByID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CreatedByID.ToString()]);
-           }
-       }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
 
 
-       public Int32 UpdatedByID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.UpdatedByID.ToString()]);
-           }
-       }
+       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()]; }
 
 
  #endregion

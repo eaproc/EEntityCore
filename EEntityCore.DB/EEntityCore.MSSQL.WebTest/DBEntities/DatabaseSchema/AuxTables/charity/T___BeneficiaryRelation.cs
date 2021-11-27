@@ -283,132 +283,52 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedByID;
        public static readonly DataColumnDefinition defUpdatedByID;
 
-       public Int32 BeneficiaryID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.BeneficiaryID.ToString()]);
-           }
-       }
+       public int BeneficiaryID { get => (int)TargettedRow[TableColumnNames.BeneficiaryID.ToString()]; }
 
 
-       public Int32 RelationshipTypeID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.RelationshipTypeID.ToString()]);
-           }
-       }
+       public int RelationshipTypeID { get => (int)TargettedRow[TableColumnNames.RelationshipTypeID.ToString()]; }
 
 
-       public Int32 MaritalStatusID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.MaritalStatusID.ToString()]);
-           }
-       }
+       public int MaritalStatusID { get => (int)TargettedRow[TableColumnNames.MaritalStatusID.ToString()]; }
 
 
-       public Boolean IsDeceased {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsDeceased.ToString()]);
-           }
-       }
+       public bool IsDeceased { get => (bool)TargettedRow[TableColumnNames.IsDeceased.ToString()]; }
 
 
-       public String RelationshipNarration {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.RelationshipNarration.ToString()]);
-           }
-       }
+       public string RelationshipNarration { get => (string)TargettedRow[TableColumnNames.RelationshipNarration.ToString()]; }
 
 
-       public String FullName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.FullName.ToString()]);
-           }
-       }
+       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()]; }
 
 
-       public String Occupation {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Occupation.ToString()]);
-           }
-       }
+       public string Occupation { get => (string)TargettedRow[TableColumnNames.Occupation.ToString()]; }
 
 
-       public String Address {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Address.ToString()]);
-           }
-       }
+       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()]; }
 
 
-       public String HomePhone {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.HomePhone.ToString()]);
-           }
-       }
+       public string HomePhone { get => (string)TargettedRow[TableColumnNames.HomePhone.ToString()]; }
 
 
-       public String Email {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Email.ToString()]);
-           }
-       }
+       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()]; }
 
 
-       public String DeathCertificatePath {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.DeathCertificatePath.ToString()]);
-           }
-       }
+       public string DeathCertificatePath { get => (string)TargettedRow[TableColumnNames.DeathCertificatePath.ToString()]; }
 
 
-       public String PhotoPath {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.PhotoPath.ToString()]);
-           }
-       }
+       public string PhotoPath { get => (string)TargettedRow[TableColumnNames.PhotoPath.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public NullableDateTime UpdatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
 
 
-       public Int32 CreatedByID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CreatedByID.ToString()]);
-           }
-       }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
 
 
-       public Int32 UpdatedByID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.UpdatedByID.ToString()]);
-           }
-       }
+       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()]; }
 
 
  #endregion

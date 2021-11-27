@@ -220,36 +220,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defDocumentFileName;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public Int32 PersonID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PersonID.ToString()]);
-           }
-       }
+       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
 
 
-       public Int32 PersonDocumentTypeID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PersonDocumentTypeID.ToString()]);
-           }
-       }
+       public int PersonDocumentTypeID { get => (int)TargettedRow[TableColumnNames.PersonDocumentTypeID.ToString()]; }
 
 
-       public String DocumentFileName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.DocumentFileName.ToString()]);
-           }
-       }
+       public string DocumentFileName { get => (string)TargettedRow[TableColumnNames.DocumentFileName.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
  #endregion

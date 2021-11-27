@@ -253,148 +253,58 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defPersonID;
        public static readonly DataColumnDefinition defUserID;
 
-       public String Username {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Username.ToString()]);
-           }
-       }
+       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()]; }
 
 
-       public String IdentificationNo {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.IdentificationNo.ToString()]);
-           }
-       }
+       public string IdentificationNo { get => (string)TargettedRow[TableColumnNames.IdentificationNo.ToString()]; }
 
 
-       public String FirstName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.FirstName.ToString()]);
-           }
-       }
+       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()]; }
 
 
-       public String LastName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.LastName.ToString()]);
-           }
-       }
+       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()]; }
 
 
-       public NullableDateTime LastLoginTime {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.LastLoginTime.ToString()]);
-           }
-       }
+       public NullableDateTime LastLoginTime { get => new (this.TargettedRow[TableColumnNames.LastLoginTime.ToString()]); }
 
 
-       public Int32 SessionTimeoutMins {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()]);
-           }
-       }
+       public int? SessionTimeoutMins { get => (int?)TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()]; }
 
 
-       public NullableDateTime LastActive {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.LastActive.ToString()]);
-           }
-       }
+       public NullableDateTime LastActive { get => new (this.TargettedRow[TableColumnNames.LastActive.ToString()]); }
 
 
-       public Int32 TimeSpentSecs {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.TimeSpentSecs.ToString()]);
-           }
-       }
+       public int? TimeSpentSecs { get => (int?)TargettedRow[TableColumnNames.TimeSpentSecs.ToString()]; }
 
 
-       public Int32 SecondsLeft {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.SecondsLeft.ToString()]);
-           }
-       }
+       public int? SecondsLeft { get => (int?)TargettedRow[TableColumnNames.SecondsLeft.ToString()]; }
 
 
-       public String Status {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Status.ToString()]);
-           }
-       }
+       public string Status { get => (string)TargettedRow[TableColumnNames.Status.ToString()]; }
 
 
-       public String SessionID {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.SessionID.ToString()]);
-           }
-       }
+       public string SessionID { get => (string)TargettedRow[TableColumnNames.SessionID.ToString()]; }
 
 
-       public String IPAddress {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.IPAddress.ToString()]);
-           }
-       }
+       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()]; }
 
 
-       public Boolean IsActive {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsActive.ToString()]);
-           }
-       }
+       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()]; }
 
 
-       public String ActiveSessions {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.ActiveSessions.ToString()]);
-           }
-       }
+       public string ActiveSessions { get => (string)TargettedRow[TableColumnNames.ActiveSessions.ToString()]; }
 
 
-       public NullableDateTime LoggedOutTime {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.LoggedOutTime.ToString()]);
-           }
-       }
+       public NullableDateTime LoggedOutTime { get => new (this.TargettedRow[TableColumnNames.LoggedOutTime.ToString()]); }
 
 
-       public NullableDateTime SessionIDCreatedTime {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.SessionIDCreatedTime.ToString()]);
-           }
-       }
+       public NullableDateTime SessionIDCreatedTime { get => new (this.TargettedRow[TableColumnNames.SessionIDCreatedTime.ToString()]); }
 
 
-       public Int32 PersonID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PersonID.ToString()]);
-           }
-       }
+       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
 
 
-       public Int32 UserID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.UserID.ToString()]);
-           }
-       }
+       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()]; }
 
 
  #endregion

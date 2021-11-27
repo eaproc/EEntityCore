@@ -226,60 +226,25 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defCreatedByID;
 
-       public NullableDateTime StartDate {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.StartDate.ToString()]);
-           }
-       }
+       public NullableDateTime StartDate { get => new (this.TargettedRow[TableColumnNames.StartDate.ToString()]); }
 
 
-       public NullableDateTime EndDate {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.EndDate.ToString()]);
-           }
-       }
+       public NullableDateTime EndDate { get => new (this.TargettedRow[TableColumnNames.EndDate.ToString()]); }
 
 
-       public Int32 PayrollWorkingDays {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PayrollWorkingDays.ToString()]);
-           }
-       }
+       public int PayrollWorkingDays { get => (int)TargettedRow[TableColumnNames.PayrollWorkingDays.ToString()]; }
 
 
-       public Boolean IsApproved {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsApproved.ToString()]);
-           }
-       }
+       public bool IsApproved { get => (bool)TargettedRow[TableColumnNames.IsApproved.ToString()]; }
 
 
-       public Int32 MonthWorkingDays {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.MonthWorkingDays.ToString()]);
-           }
-       }
+       public int MonthWorkingDays { get => (int)TargettedRow[TableColumnNames.MonthWorkingDays.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public Int32 CreatedByID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CreatedByID.ToString()]);
-           }
-       }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
 
 
  #endregion

@@ -197,28 +197,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defInclusivePermissionID;
        public static readonly DataColumnDefinition defInclusivePermissionDefinition;
 
-       public String Permission {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Permission.ToString()]);
-           }
-       }
+       public string Permission { get => (string)TargettedRow[TableColumnNames.Permission.ToString()]; }
 
 
-       public Int32 InclusivePermissionID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.InclusivePermissionID.ToString()]);
-           }
-       }
+       public int InclusivePermissionID { get => (int)TargettedRow[TableColumnNames.InclusivePermissionID.ToString()]; }
 
 
-       public String InclusivePermissionDefinition {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.InclusivePermissionDefinition.ToString()]);
-           }
-       }
+       public string InclusivePermissionDefinition { get => (string)TargettedRow[TableColumnNames.InclusivePermissionDefinition.ToString()]; }
 
 
  #endregion

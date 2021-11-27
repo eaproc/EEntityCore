@@ -212,20 +212,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defPayoutID;
        public static readonly DataColumnDefinition defPaymentTransactionID;
 
-       public Int32 PayoutID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PayoutID.ToString()]);
-           }
-       }
+       public int PayoutID { get => (int)TargettedRow[TableColumnNames.PayoutID.ToString()]; }
 
 
-       public Int32 PaymentTransactionID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PaymentTransactionID.ToString()]);
-           }
-       }
+       public int PaymentTransactionID { get => (int)TargettedRow[TableColumnNames.PaymentTransactionID.ToString()]; }
 
 
  #endregion

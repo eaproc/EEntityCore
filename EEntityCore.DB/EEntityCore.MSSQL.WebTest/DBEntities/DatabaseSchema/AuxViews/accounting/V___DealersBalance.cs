@@ -202,44 +202,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defWithdrawnAmount;
        public static readonly DataColumnDefinition defBalance;
 
-       public Int32 DealerID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.DealerID.ToString()]);
-           }
-       }
+       public int DealerID { get => (int)TargettedRow[TableColumnNames.DealerID.ToString()]; }
 
 
-       public Decimal EarnedAmount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.EarnedAmount.ToString()]);
-           }
-       }
+       public decimal? EarnedAmount { get => (decimal?)TargettedRow[TableColumnNames.EarnedAmount.ToString()]; }
 
 
-       public Decimal PendingAmount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.PendingAmount.ToString()]);
-           }
-       }
+       public decimal? PendingAmount { get => (decimal?)TargettedRow[TableColumnNames.PendingAmount.ToString()]; }
 
 
-       public Decimal WithdrawnAmount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.WithdrawnAmount.ToString()]);
-           }
-       }
+       public decimal? WithdrawnAmount { get => (decimal?)TargettedRow[TableColumnNames.WithdrawnAmount.ToString()]; }
 
 
-       public Decimal Balance {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Balance.ToString()]);
-           }
-       }
+       public decimal? Balance { get => (decimal?)TargettedRow[TableColumnNames.Balance.ToString()]; }
 
 
  #endregion

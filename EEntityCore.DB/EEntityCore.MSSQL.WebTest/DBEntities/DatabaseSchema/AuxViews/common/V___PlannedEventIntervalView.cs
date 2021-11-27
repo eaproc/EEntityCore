@@ -242,116 +242,46 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defClassColor;
        public static readonly DataColumnDefinition defCalendarEvent;
 
-       public Int32 PlannedEventID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PlannedEventID.ToString()]);
-           }
-       }
+       public int PlannedEventID { get => (int)TargettedRow[TableColumnNames.PlannedEventID.ToString()]; }
 
 
-       public Int32 DayOfWeekID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.DayOfWeekID.ToString()]);
-           }
-       }
+       public int DayOfWeekID { get => (int)TargettedRow[TableColumnNames.DayOfWeekID.ToString()]; }
 
 
-       public NullableDateTime StartTime {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.StartTime.ToString()]);
-           }
-       }
+       public NullableDateTime StartTime { get => new (this.TargettedRow[TableColumnNames.StartTime.ToString()]); }
 
 
-       public NullableDateTime EndTime {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.EndTime.ToString()]);
-           }
-       }
+       public NullableDateTime EndTime { get => new (this.TargettedRow[TableColumnNames.EndTime.ToString()]); }
 
 
-       public NullableDateTime IntervalDate {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.IntervalDate.ToString()]);
-           }
-       }
+       public NullableDateTime IntervalDate { get => new (this.TargettedRow[TableColumnNames.IntervalDate.ToString()]); }
 
 
-       public NullableDateTime StartDate {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.StartDate.ToString()]);
-           }
-       }
+       public NullableDateTime StartDate { get => new (this.TargettedRow[TableColumnNames.StartDate.ToString()]); }
 
 
-       public NullableDateTime EndDate {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.EndDate.ToString()]);
-           }
-       }
+       public NullableDateTime EndDate { get => new (this.TargettedRow[TableColumnNames.EndDate.ToString()]); }
 
 
-       public String Comments {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Comments.ToString()]);
-           }
-       }
+       public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()]; }
 
 
-       public String Title {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Title.ToString()]);
-           }
-       }
+       public string Title { get => (string)TargettedRow[TableColumnNames.Title.ToString()]; }
 
 
-       public Int32 CalendarEventID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CalendarEventID.ToString()]);
-           }
-       }
+       public int CalendarEventID { get => (int)TargettedRow[TableColumnNames.CalendarEventID.ToString()]; }
 
 
-       public Int32 CreatedByID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CreatedByID.ToString()]);
-           }
-       }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
 
 
-       public Boolean CanBeDeleted {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.CanBeDeleted.ToString()]);
-           }
-       }
+       public bool CanBeDeleted { get => (bool)TargettedRow[TableColumnNames.CanBeDeleted.ToString()]; }
 
 
-       public String ClassColor {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.ClassColor.ToString()]);
-           }
-       }
+       public string ClassColor { get => (string)TargettedRow[TableColumnNames.ClassColor.ToString()]; }
 
 
-       public String CalendarEvent {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.CalendarEvent.ToString()]);
-           }
-       }
+       public string CalendarEvent { get => (string)TargettedRow[TableColumnNames.CalendarEvent.ToString()]; }
 
 
  #endregion

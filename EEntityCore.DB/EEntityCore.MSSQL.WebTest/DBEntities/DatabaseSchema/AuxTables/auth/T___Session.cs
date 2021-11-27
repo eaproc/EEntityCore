@@ -238,92 +238,37 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defUpdatedAt;
 
-       public String SessionID {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.SessionID.ToString()]);
-           }
-       }
+       public string SessionID { get => (string)TargettedRow[TableColumnNames.SessionID.ToString()]; }
 
 
-       public Int32 SessionTimeoutMins {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()]);
-           }
-       }
+       public int SessionTimeoutMins { get => (int)TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()]; }
 
 
-       public Int32 UserID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.UserID.ToString()]);
-           }
-       }
+       public int? UserID { get => (int?)TargettedRow[TableColumnNames.UserID.ToString()]; }
 
 
-       public Boolean IsNewSession {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsNewSession.ToString()]);
-           }
-       }
+       public bool? IsNewSession { get => (bool?)TargettedRow[TableColumnNames.IsNewSession.ToString()]; }
 
 
-       public Boolean IsReadOnly {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsReadOnly.ToString()]);
-           }
-       }
+       public bool? IsReadOnly { get => (bool?)TargettedRow[TableColumnNames.IsReadOnly.ToString()]; }
 
 
-       public NullableDateTime LastActive {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.LastActive.ToString()]);
-           }
-       }
+       public NullableDateTime LastActive { get => new (this.TargettedRow[TableColumnNames.LastActive.ToString()]); }
 
 
-       public String IpAddress {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.IpAddress.ToString()]);
-           }
-       }
+       public string IpAddress { get => (string)TargettedRow[TableColumnNames.IpAddress.ToString()]; }
 
 
-       public String Browser {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Browser.ToString()]);
-           }
-       }
+       public string Browser { get => (string)TargettedRow[TableColumnNames.Browser.ToString()]; }
 
 
-       public String SessionVariables {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.SessionVariables.ToString()]);
-           }
-       }
+       public string SessionVariables { get => (string)TargettedRow[TableColumnNames.SessionVariables.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public NullableDateTime UpdatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
 
 
  #endregion

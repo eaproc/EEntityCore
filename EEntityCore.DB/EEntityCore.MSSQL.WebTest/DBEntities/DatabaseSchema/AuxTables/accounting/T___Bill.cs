@@ -210,36 +210,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defIsFixed;
 
-       public String Definition {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Definition.ToString()]);
-           }
-       }
+       public string Definition { get => (string)TargettedRow[TableColumnNames.Definition.ToString()]; }
 
 
-       public String Description {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Description.ToString()]);
-           }
-       }
+       public string Description { get => (string)TargettedRow[TableColumnNames.Description.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public Boolean IsFixed {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsFixed.ToString()]);
-           }
-       }
+       public bool IsFixed { get => (bool)TargettedRow[TableColumnNames.IsFixed.ToString()]; }
 
 
  #endregion

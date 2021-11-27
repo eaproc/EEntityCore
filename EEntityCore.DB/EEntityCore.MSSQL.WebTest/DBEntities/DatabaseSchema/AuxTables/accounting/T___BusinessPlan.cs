@@ -247,100 +247,40 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defUpdatedAt;
 
-       public Int32 AcademicSessionID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.AcademicSessionID.ToString()]);
-           }
-       }
+       public int AcademicSessionID { get => (int)TargettedRow[TableColumnNames.AcademicSessionID.ToString()]; }
 
 
-       public Int32 StudentPopulation {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.StudentPopulation.ToString()]);
-           }
-       }
+       public int StudentPopulation { get => (int)TargettedRow[TableColumnNames.StudentPopulation.ToString()]; }
 
 
-       public Decimal AveragePricePerStudent {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.AveragePricePerStudent.ToString()]);
-           }
-       }
+       public decimal AveragePricePerStudent { get => (decimal)TargettedRow[TableColumnNames.AveragePricePerStudent.ToString()]; }
 
 
-       public Decimal SCADWAREAccessRevenue {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.SCADWAREAccessRevenue.ToString()]);
-           }
-       }
+       public decimal SCADWAREAccessRevenue { get => (decimal)TargettedRow[TableColumnNames.SCADWAREAccessRevenue.ToString()]; }
 
 
-       public Decimal SideContractRevenue {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.SideContractRevenue.ToString()]);
-           }
-       }
+       public decimal SideContractRevenue { get => (decimal)TargettedRow[TableColumnNames.SideContractRevenue.ToString()]; }
 
 
-       public Decimal GrossRevenue {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.GrossRevenue.ToString()]);
-           }
-       }
+       public decimal GrossRevenue { get => (decimal)TargettedRow[TableColumnNames.GrossRevenue.ToString()]; }
 
 
-       public Decimal Wages {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Wages.ToString()]);
-           }
-       }
+       public decimal Wages { get => (decimal)TargettedRow[TableColumnNames.Wages.ToString()]; }
 
 
-       public Decimal Marketing {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Marketing.ToString()]);
-           }
-       }
+       public decimal Marketing { get => (decimal)TargettedRow[TableColumnNames.Marketing.ToString()]; }
 
 
-       public Decimal Charity {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Charity.ToString()]);
-           }
-       }
+       public decimal Charity { get => (decimal)TargettedRow[TableColumnNames.Charity.ToString()]; }
 
 
-       public Decimal Others {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Others.ToString()]);
-           }
-       }
+       public decimal Others { get => (decimal)TargettedRow[TableColumnNames.Others.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public NullableDateTime UpdatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
 
 
  #endregion

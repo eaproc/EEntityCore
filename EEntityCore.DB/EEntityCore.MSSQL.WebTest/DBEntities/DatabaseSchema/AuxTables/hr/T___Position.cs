@@ -207,28 +207,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defRank;
 
-       public String Definition {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Definition.ToString()]);
-           }
-       }
+       public string Definition { get => (string)TargettedRow[TableColumnNames.Definition.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public Byte Rank {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return (Byte)EShort.valueOf(this.TargettedRow[TableColumnNames.Rank.ToString()]);
-           }
-       }
+       public byte Rank { get => (byte)TargettedRow[TableColumnNames.Rank.ToString()]; }
 
 
  #endregion

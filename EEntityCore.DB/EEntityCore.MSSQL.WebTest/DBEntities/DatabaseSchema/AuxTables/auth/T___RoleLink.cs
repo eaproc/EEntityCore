@@ -220,36 +220,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defLinkPermissionID;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public Int32 RoleID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.RoleID.ToString()]);
-           }
-       }
+       public int RoleID { get => (int)TargettedRow[TableColumnNames.RoleID.ToString()]; }
 
 
-       public Int32 BaseLinkID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.BaseLinkID.ToString()]);
-           }
-       }
+       public int BaseLinkID { get => (int)TargettedRow[TableColumnNames.BaseLinkID.ToString()]; }
 
 
-       public Int32 LinkPermissionID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.LinkPermissionID.ToString()]);
-           }
-       }
+       public int LinkPermissionID { get => (int)TargettedRow[TableColumnNames.LinkPermissionID.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
  #endregion

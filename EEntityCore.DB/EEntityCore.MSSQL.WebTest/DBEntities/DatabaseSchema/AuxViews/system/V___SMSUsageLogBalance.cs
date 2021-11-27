@@ -189,20 +189,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defQuantityStocked;
        public static readonly DataColumnDefinition defQuantityUsed;
 
-       public Decimal QuantityStocked {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.QuantityStocked.ToString()]);
-           }
-       }
+       public decimal? QuantityStocked { get => (decimal?)TargettedRow[TableColumnNames.QuantityStocked.ToString()]; }
 
 
-       public Int32 QuantityUsed {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.QuantityUsed.ToString()]);
-           }
-       }
+       public int? QuantityUsed { get => (int?)TargettedRow[TableColumnNames.QuantityUsed.ToString()]; }
 
 
  #endregion

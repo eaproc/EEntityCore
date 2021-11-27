@@ -238,84 +238,34 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defIdentifier;
        public static readonly DataColumnDefinition defTargetURL;
 
-       public Int32 UserID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.UserID.ToString()]);
-           }
-       }
+       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()]; }
 
 
-       public String Title {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Title.ToString()]);
-           }
-       }
+       public string Title { get => (string)TargettedRow[TableColumnNames.Title.ToString()]; }
 
 
-       public String QuickNote {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.QuickNote.ToString()]);
-           }
-       }
+       public string QuickNote { get => (string)TargettedRow[TableColumnNames.QuickNote.ToString()]; }
 
 
-       public String Description {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Description.ToString()]);
-           }
-       }
+       public string Description { get => (string)TargettedRow[TableColumnNames.Description.ToString()]; }
 
 
-       public String IconClass {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.IconClass.ToString()]);
-           }
-       }
+       public string IconClass { get => (string)TargettedRow[TableColumnNames.IconClass.ToString()]; }
 
 
-       public String HeadingColorClass {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.HeadingColorClass.ToString()]);
-           }
-       }
+       public string HeadingColorClass { get => (string)TargettedRow[TableColumnNames.HeadingColorClass.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public NullableDateTime ReadAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.ReadAt.ToString()]);
-           }
-       }
+       public NullableDateTime ReadAt { get => new (this.TargettedRow[TableColumnNames.ReadAt.ToString()]); }
 
 
-       public String Identifier {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Identifier.ToString()]);
-           }
-       }
+       public string Identifier { get => (string)TargettedRow[TableColumnNames.Identifier.ToString()]; }
 
 
-       public String TargetURL {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.TargetURL.ToString()]);
-           }
-       }
+       public string TargetURL { get => (string)TargettedRow[TableColumnNames.TargetURL.ToString()]; }
 
 
  #endregion

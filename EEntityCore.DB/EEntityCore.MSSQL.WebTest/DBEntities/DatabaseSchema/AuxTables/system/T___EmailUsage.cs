@@ -241,100 +241,40 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defExceptionStackTrace;
        public static readonly DataColumnDefinition defGateway;
 
-       public Boolean Delivered {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.Delivered.ToString()]);
-           }
-       }
+       public bool Delivered { get => (bool)TargettedRow[TableColumnNames.Delivered.ToString()]; }
 
 
-       public String Sender {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Sender.ToString()]);
-           }
-       }
+       public string Sender { get => (string)TargettedRow[TableColumnNames.Sender.ToString()]; }
 
 
-       public String Receiver {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Receiver.ToString()]);
-           }
-       }
+       public string Receiver { get => (string)TargettedRow[TableColumnNames.Receiver.ToString()]; }
 
 
-       public String BCC {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.BCC.ToString()]);
-           }
-       }
+       public string BCC { get => (string)TargettedRow[TableColumnNames.BCC.ToString()]; }
 
 
-       public String CC {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.CC.ToString()]);
-           }
-       }
+       public string CC { get => (string)TargettedRow[TableColumnNames.CC.ToString()]; }
 
 
-       public String Subject {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Subject.ToString()]);
-           }
-       }
+       public string Subject { get => (string)TargettedRow[TableColumnNames.Subject.ToString()]; }
 
 
-       public String MessageBodyFileName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.MessageBodyFileName.ToString()]);
-           }
-       }
+       public string MessageBodyFileName { get => (string)TargettedRow[TableColumnNames.MessageBodyFileName.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public NullableDateTime UpdatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
 
 
-       public String ExceptionMessage {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.ExceptionMessage.ToString()]);
-           }
-       }
+       public string ExceptionMessage { get => (string)TargettedRow[TableColumnNames.ExceptionMessage.ToString()]; }
 
 
-       public String ExceptionStackTrace {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.ExceptionStackTrace.ToString()]);
-           }
-       }
+       public string ExceptionStackTrace { get => (string)TargettedRow[TableColumnNames.ExceptionStackTrace.ToString()]; }
 
 
-       public String Gateway {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Gateway.ToString()]);
-           }
-       }
+       public string Gateway { get => (string)TargettedRow[TableColumnNames.Gateway.ToString()]; }
 
 
  #endregion

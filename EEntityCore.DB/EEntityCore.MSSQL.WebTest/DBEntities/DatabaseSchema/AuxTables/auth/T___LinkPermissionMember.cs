@@ -216,28 +216,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defHasPermissionID;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public Int32 LinkPermissionID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.LinkPermissionID.ToString()]);
-           }
-       }
+       public int LinkPermissionID { get => (int)TargettedRow[TableColumnNames.LinkPermissionID.ToString()]; }
 
 
-       public Int32 HasPermissionID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.HasPermissionID.ToString()]);
-           }
-       }
+       public int HasPermissionID { get => (int)TargettedRow[TableColumnNames.HasPermissionID.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
  #endregion

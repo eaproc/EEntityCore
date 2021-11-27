@@ -254,84 +254,34 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defUpdatedAt;
 
-       public Int32 PersonID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PersonID.ToString()]);
-           }
-       }
+       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
 
 
-       public String Number {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Number.ToString()]);
-           }
-       }
+       public string Number { get => (string)TargettedRow[TableColumnNames.Number.ToString()]; }
 
 
-       public Int32 IdentificationTypeID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.IdentificationTypeID.ToString()]);
-           }
-       }
+       public int IdentificationTypeID { get => (int)TargettedRow[TableColumnNames.IdentificationTypeID.ToString()]; }
 
 
-       public NullableDateTime IssuedDate {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.IssuedDate.ToString()]);
-           }
-       }
+       public NullableDateTime IssuedDate { get => new (this.TargettedRow[TableColumnNames.IssuedDate.ToString()]); }
 
 
-       public Int32 IssuingCountryID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.IssuingCountryID.ToString()]);
-           }
-       }
+       public int IssuingCountryID { get => (int)TargettedRow[TableColumnNames.IssuingCountryID.ToString()]; }
 
 
-       public NullableDateTime ExpiryDate {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.ExpiryDate.ToString()]);
-           }
-       }
+       public NullableDateTime ExpiryDate { get => new (this.TargettedRow[TableColumnNames.ExpiryDate.ToString()]); }
 
 
-       public Int32 IdentificationViabilityID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.IdentificationViabilityID.ToString()]);
-           }
-       }
+       public int IdentificationViabilityID { get => (int)TargettedRow[TableColumnNames.IdentificationViabilityID.ToString()]; }
 
 
-       public String DocumentFileName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.DocumentFileName.ToString()]);
-           }
-       }
+       public string DocumentFileName { get => (string)TargettedRow[TableColumnNames.DocumentFileName.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public NullableDateTime UpdatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
 
 
  #endregion

@@ -285,196 +285,76 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defLastProceedingCreatedByID;
        public static readonly DataColumnDefinition defCashRequestProceedingID;
 
-       public String Request {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Request.ToString()]);
-           }
-       }
+       public string Request { get => (string)TargettedRow[TableColumnNames.Request.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public NullableDateTime Deadline {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.Deadline.ToString()]);
-           }
-       }
+       public NullableDateTime Deadline { get => new (this.TargettedRow[TableColumnNames.Deadline.ToString()]); }
 
 
-       public Int32 TrackingID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.TrackingID.ToString()]);
-           }
-       }
+       public int? TrackingID { get => (int?)TargettedRow[TableColumnNames.TrackingID.ToString()]; }
 
 
-       public String LastProceedingDocumentFileName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.LastProceedingDocumentFileName.ToString()]);
-           }
-       }
+       public string LastProceedingDocumentFileName { get => (string)TargettedRow[TableColumnNames.LastProceedingDocumentFileName.ToString()]; }
 
 
-       public Int32 BeneficiaryID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.BeneficiaryID.ToString()]);
-           }
-       }
+       public int BeneficiaryID { get => (int)TargettedRow[TableColumnNames.BeneficiaryID.ToString()]; }
 
 
-       public Decimal Amount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.Amount.ToString()]);
-           }
-       }
+       public decimal Amount { get => (decimal)TargettedRow[TableColumnNames.Amount.ToString()]; }
 
 
-       public String Category {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Category.ToString()]);
-           }
-       }
+       public string Category { get => (string)TargettedRow[TableColumnNames.Category.ToString()]; }
 
 
-       public String FullName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.FullName.ToString()]);
-           }
-       }
+       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()]; }
 
 
-       public String FirstName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.FirstName.ToString()]);
-           }
-       }
+       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()]; }
 
 
-       public String LastName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.LastName.ToString()]);
-           }
-       }
+       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()]; }
 
 
-       public Int32 PersonID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PersonID.ToString()]);
-           }
-       }
+       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
 
 
-       public String PictureFileName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.PictureFileName.ToString()]);
-           }
-       }
+       public string PictureFileName { get => (string)TargettedRow[TableColumnNames.PictureFileName.ToString()]; }
 
 
-       public String RequestStatus {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.RequestStatus.ToString()]);
-           }
-       }
+       public string RequestStatus { get => (string)TargettedRow[TableColumnNames.RequestStatus.ToString()]; }
 
 
-       public Int32 ExpenditureCategoryID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.ExpenditureCategoryID.ToString()]);
-           }
-       }
+       public int ExpenditureCategoryID { get => (int)TargettedRow[TableColumnNames.ExpenditureCategoryID.ToString()]; }
 
 
-       public Int32 CreatedByID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CreatedByID.ToString()]);
-           }
-       }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
 
 
-       public Decimal RevisedAmount {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EDecimal.valueOf(this.TargettedRow[TableColumnNames.RevisedAmount.ToString()]);
-           }
-       }
+       public decimal RevisedAmount { get => (decimal)TargettedRow[TableColumnNames.RevisedAmount.ToString()]; }
 
 
-       public String Title {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Title.ToString()]);
-           }
-       }
+       public string Title { get => (string)TargettedRow[TableColumnNames.Title.ToString()]; }
 
 
-       public Int32 CashRequestStatusID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CashRequestStatusID.ToString()]);
-           }
-       }
+       public int CashRequestStatusID { get => (int)TargettedRow[TableColumnNames.CashRequestStatusID.ToString()]; }
 
 
-       public String LastProceedingCreatedBy {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.LastProceedingCreatedBy.ToString()]);
-           }
-       }
+       public string LastProceedingCreatedBy { get => (string)TargettedRow[TableColumnNames.LastProceedingCreatedBy.ToString()]; }
 
 
-       public String LastResponseComments {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.LastResponseComments.ToString()]);
-           }
-       }
+       public string LastResponseComments { get => (string)TargettedRow[TableColumnNames.LastResponseComments.ToString()]; }
 
 
-       public NullableDateTime LastProceedingCreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.LastProceedingCreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime LastProceedingCreatedAt { get => new (this.TargettedRow[TableColumnNames.LastProceedingCreatedAt.ToString()]); }
 
 
-       public Int32 LastProceedingCreatedByID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.LastProceedingCreatedByID.ToString()]);
-           }
-       }
+       public int LastProceedingCreatedByID { get => (int)TargettedRow[TableColumnNames.LastProceedingCreatedByID.ToString()]; }
 
 
-       public Int32 CashRequestProceedingID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CashRequestProceedingID.ToString()]);
-           }
-       }
+       public int CashRequestProceedingID { get => (int)TargettedRow[TableColumnNames.CashRequestProceedingID.ToString()]; }
 
 
  #endregion

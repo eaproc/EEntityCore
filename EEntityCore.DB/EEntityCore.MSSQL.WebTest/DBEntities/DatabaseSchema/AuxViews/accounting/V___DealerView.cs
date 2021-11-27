@@ -271,172 +271,67 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defUsername;
        public static readonly DataColumnDefinition defUserID;
 
-       public Int32 PersonID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PersonID.ToString()]);
-           }
-       }
+       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
 
 
-       public Int32 BankID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.BankID.ToString()]);
-           }
-       }
+       public int? BankID { get => (int?)TargettedRow[TableColumnNames.BankID.ToString()]; }
 
 
-       public String AccountNumber {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.AccountNumber.ToString()]);
-           }
-       }
+       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()]; }
 
 
-       public Boolean IsActive {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsActive.ToString()]);
-           }
-       }
+       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()]; }
 
 
-       public String DealerCode {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.DealerCode.ToString()]);
-           }
-       }
+       public string DealerCode { get => (string)TargettedRow[TableColumnNames.DealerCode.ToString()]; }
 
 
-       public String CompanyName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.CompanyName.ToString()]);
-           }
-       }
+       public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()]; }
 
 
-       public String WebsiteUrl {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.WebsiteUrl.ToString()]);
-           }
-       }
+       public string WebsiteUrl { get => (string)TargettedRow[TableColumnNames.WebsiteUrl.ToString()]; }
 
 
-       public String OfficeAddress {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.OfficeAddress.ToString()]);
-           }
-       }
+       public string OfficeAddress { get => (string)TargettedRow[TableColumnNames.OfficeAddress.ToString()]; }
 
 
-       public Int32 CountryID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.CountryID.ToString()]);
-           }
-       }
+       public int CountryID { get => (int)TargettedRow[TableColumnNames.CountryID.ToString()]; }
 
 
-       public String FullName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.FullName.ToString()]);
-           }
-       }
+       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()]; }
 
 
-       public String FirstName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.FirstName.ToString()]);
-           }
-       }
+       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()]; }
 
 
-       public String LastName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.LastName.ToString()]);
-           }
-       }
+       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()]; }
 
 
-       public String PictureFileName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.PictureFileName.ToString()]);
-           }
-       }
+       public string PictureFileName { get => (string)TargettedRow[TableColumnNames.PictureFileName.ToString()]; }
 
 
-       public String HomeAddress {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.HomeAddress.ToString()]);
-           }
-       }
+       public string HomeAddress { get => (string)TargettedRow[TableColumnNames.HomeAddress.ToString()]; }
 
 
-       public String BankName {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.BankName.ToString()]);
-           }
-       }
+       public string BankName { get => (string)TargettedRow[TableColumnNames.BankName.ToString()]; }
 
 
-       public String RegisteredEmail {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.RegisteredEmail.ToString()]);
-           }
-       }
+       public string RegisteredEmail { get => (string)TargettedRow[TableColumnNames.RegisteredEmail.ToString()]; }
 
 
-       public String RegisteredMobile {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.RegisteredMobile.ToString()]);
-           }
-       }
+       public string RegisteredMobile { get => (string)TargettedRow[TableColumnNames.RegisteredMobile.ToString()]; }
 
 
-       public String Email {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Email.ToString()]);
-           }
-       }
+       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()]; }
 
 
-       public String MobileNumber {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.MobileNumber.ToString()]);
-           }
-       }
+       public string MobileNumber { get => (string)TargettedRow[TableColumnNames.MobileNumber.ToString()]; }
 
 
-       public String Username {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Username.ToString()]);
-           }
-       }
+       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()]; }
 
 
-       public Int32 UserID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.UserID.ToString()]);
-           }
-       }
+       public int? UserID { get => (int?)TargettedRow[TableColumnNames.UserID.ToString()]; }
 
 
  #endregion

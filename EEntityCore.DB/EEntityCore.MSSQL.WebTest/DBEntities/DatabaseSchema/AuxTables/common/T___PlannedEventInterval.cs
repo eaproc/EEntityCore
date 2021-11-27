@@ -223,44 +223,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defEndTime;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public Int32 PlannedEventID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PlannedEventID.ToString()]);
-           }
-       }
+       public int PlannedEventID { get => (int)TargettedRow[TableColumnNames.PlannedEventID.ToString()]; }
 
 
-       public Int32 DayOfWeekID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.DayOfWeekID.ToString()]);
-           }
-       }
+       public int DayOfWeekID { get => (int)TargettedRow[TableColumnNames.DayOfWeekID.ToString()]; }
 
 
-       public NullableDateTime StartTime {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.StartTime.ToString()]);
-           }
-       }
+       public NullableDateTime StartTime { get => new (this.TargettedRow[TableColumnNames.StartTime.ToString()]); }
 
 
-       public NullableDateTime EndTime {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.EndTime.ToString()]);
-           }
-       }
+       public NullableDateTime EndTime { get => new (this.TargettedRow[TableColumnNames.EndTime.ToString()]); }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
  #endregion

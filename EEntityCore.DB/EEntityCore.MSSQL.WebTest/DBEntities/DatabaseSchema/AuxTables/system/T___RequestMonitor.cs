@@ -234,76 +234,31 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defRequestBody;
        public static readonly DataColumnDefinition defRequestHeaders;
 
-       public String AbsoluteURL {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.AbsoluteURL.ToString()]);
-           }
-       }
+       public string AbsoluteURL { get => (string)TargettedRow[TableColumnNames.AbsoluteURL.ToString()]; }
 
 
-       public String RequestParametersJSON {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.RequestParametersJSON.ToString()]);
-           }
-       }
+       public string RequestParametersJSON { get => (string)TargettedRow[TableColumnNames.RequestParametersJSON.ToString()]; }
 
 
-       public String IPAddress {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.IPAddress.ToString()]);
-           }
-       }
+       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()]; }
 
 
-       public String SessionVariables {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.SessionVariables.ToString()]);
-           }
-       }
+       public string SessionVariables { get => (string)TargettedRow[TableColumnNames.SessionVariables.ToString()]; }
 
 
-       public String Browser {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Browser.ToString()]);
-           }
-       }
+       public string Browser { get => (string)TargettedRow[TableColumnNames.Browser.ToString()]; }
 
 
-       public Int32 UserID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.UserID.ToString()]);
-           }
-       }
+       public int? UserID { get => (int?)TargettedRow[TableColumnNames.UserID.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public String RequestBody {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.RequestBody.ToString()]);
-           }
-       }
+       public string RequestBody { get => (string)TargettedRow[TableColumnNames.RequestBody.ToString()]; }
 
 
-       public String RequestHeaders {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.RequestHeaders.ToString()]);
-           }
-       }
+       public string RequestHeaders { get => (string)TargettedRow[TableColumnNames.RequestHeaders.ToString()]; }
 
 
  #endregion

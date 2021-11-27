@@ -216,28 +216,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defPersonnelID;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public Int32 QualificationID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.QualificationID.ToString()]);
-           }
-       }
+       public int QualificationID { get => (int)TargettedRow[TableColumnNames.QualificationID.ToString()]; }
 
 
-       public Int32 PersonnelID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.PersonnelID.ToString()]);
-           }
-       }
+       public int PersonnelID { get => (int)TargettedRow[TableColumnNames.PersonnelID.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
  #endregion

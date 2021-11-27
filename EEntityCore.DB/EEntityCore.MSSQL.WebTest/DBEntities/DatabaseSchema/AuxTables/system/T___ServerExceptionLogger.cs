@@ -243,92 +243,37 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defIPAddress;
        public static readonly DataColumnDefinition defUserID;
 
-       public String TraceID {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.TraceID.ToString()]);
-           }
-       }
+       public string TraceID { get => (string)TargettedRow[TableColumnNames.TraceID.ToString()]; }
 
 
-       public String RequestParametersJSON {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.RequestParametersJSON.ToString()]);
-           }
-       }
+       public string RequestParametersJSON { get => (string)TargettedRow[TableColumnNames.RequestParametersJSON.ToString()]; }
 
 
-       public String ExceptionMessage {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.ExceptionMessage.ToString()]);
-           }
-       }
+       public string ExceptionMessage { get => (string)TargettedRow[TableColumnNames.ExceptionMessage.ToString()]; }
 
 
-       public String StackTrace {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.StackTrace.ToString()]);
-           }
-       }
+       public string StackTrace { get => (string)TargettedRow[TableColumnNames.StackTrace.ToString()]; }
 
 
-       public Boolean IsResolved {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.IsResolved.ToString()]);
-           }
-       }
+       public bool IsResolved { get => (bool)TargettedRow[TableColumnNames.IsResolved.ToString()]; }
 
 
-       public String Comments {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Comments.ToString()]);
-           }
-       }
+       public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
-       public NullableDateTime UpdatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
 
 
-       public String AbsoluteURL {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.AbsoluteURL.ToString()]);
-           }
-       }
+       public string AbsoluteURL { get => (string)TargettedRow[TableColumnNames.AbsoluteURL.ToString()]; }
 
 
-       public String IPAddress {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.IPAddress.ToString()]);
-           }
-       }
+       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()]; }
 
 
-       public Int32 UserID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.UserID.ToString()]);
-           }
-       }
+       public int? UserID { get => (int?)TargettedRow[TableColumnNames.UserID.ToString()]; }
 
 
  #endregion

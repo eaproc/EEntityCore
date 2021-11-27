@@ -214,60 +214,25 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defInclusivePermissionID;
        public static readonly DataColumnDefinition defInclusivePermissionDefinition;
 
-       public Int32 RoleID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.RoleID.ToString()]);
-           }
-       }
+       public int RoleID { get => (int)TargettedRow[TableColumnNames.RoleID.ToString()]; }
 
 
-       public Int32 BaseLinkID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.BaseLinkID.ToString()]);
-           }
-       }
+       public int BaseLinkID { get => (int)TargettedRow[TableColumnNames.BaseLinkID.ToString()]; }
 
 
-       public Int32 BaseLinkPermissionID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.BaseLinkPermissionID.ToString()]);
-           }
-       }
+       public int BaseLinkPermissionID { get => (int)TargettedRow[TableColumnNames.BaseLinkPermissionID.ToString()]; }
 
 
-       public String BaseLink {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.BaseLink.ToString()]);
-           }
-       }
+       public string BaseLink { get => (string)TargettedRow[TableColumnNames.BaseLink.ToString()]; }
 
 
-       public String Permission {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Permission.ToString()]);
-           }
-       }
+       public string Permission { get => (string)TargettedRow[TableColumnNames.Permission.ToString()]; }
 
 
-       public Int32 InclusivePermissionID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.InclusivePermissionID.ToString()]);
-           }
-       }
+       public int InclusivePermissionID { get => (int)TargettedRow[TableColumnNames.InclusivePermissionID.ToString()]; }
 
 
-       public String InclusivePermissionDefinition {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.InclusivePermissionDefinition.ToString()]);
-           }
-       }
+       public string InclusivePermissionDefinition { get => (string)TargettedRow[TableColumnNames.InclusivePermissionDefinition.ToString()]; }
 
 
  #endregion

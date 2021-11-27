@@ -239,76 +239,31 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defRoleID;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public Int32 UserID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.UserID.ToString()]);
-           }
-       }
+       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()]; }
 
 
-       public String SessionID {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.SessionID.ToString()]);
-           }
-       }
+       public string SessionID { get => (string)TargettedRow[TableColumnNames.SessionID.ToString()]; }
 
 
-       public String IPAddress {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.IPAddress.ToString()]);
-           }
-       }
+       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()]; }
 
 
-       public Boolean TimedOut {
-           get{ 
-               if (!this.IsTargettedRowValid) return false;
-               return EBoolean.valueOf(this.TargettedRow[TableColumnNames.TimedOut.ToString()]);
-           }
-       }
+       public bool TimedOut { get => (bool)TargettedRow[TableColumnNames.TimedOut.ToString()]; }
 
 
-       public String WebURL {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.WebURL.ToString()]);
-           }
-       }
+       public string WebURL { get => (string)TargettedRow[TableColumnNames.WebURL.ToString()]; }
 
 
-       public String Page {
-           get{ 
-               if (!this.IsTargettedRowValid) return String.Empty;                          
-               return EStrings.valueOf(this.TargettedRow[TableColumnNames.Page.ToString()]);
-           }
-       }
+       public string Page { get => (string)TargettedRow[TableColumnNames.Page.ToString()]; }
 
 
-       public NullableDateTime CheckedOutTime {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CheckedOutTime.ToString()]);
-           }
-       }
+       public NullableDateTime CheckedOutTime { get => new (this.TargettedRow[TableColumnNames.CheckedOutTime.ToString()]); }
 
 
-       public Int32 RoleID {
-           get{ 
-               if (!this.IsTargettedRowValid) return 0;                          
-               return EInt.valueOf(this.TargettedRow[TableColumnNames.RoleID.ToString()]);
-           }
-       }
+       public int RoleID { get => (int)TargettedRow[TableColumnNames.RoleID.ToString()]; }
 
 
-       public NullableDateTime CreatedAt {
-           get{ 
-               if (!this.IsTargettedRowValid) return NullableDateTime.NULL_TIME;                          
-               return  new NullableDateTime(this.TargettedRow[TableColumnNames.CreatedAt.ToString()]);
-           }
-       }
+       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
 
 
  #endregion
