@@ -23,19 +23,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___EmailUsage()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defDelivered = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Delivered.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSender = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Sender.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defReceiver = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Receiver.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBCC = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BCC.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCC = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CC.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSubject = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Subject.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defMessageBodyFileName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.MessageBodyFileName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defExceptionMessage = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExceptionMessage.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defExceptionStackTrace = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExceptionStackTrace.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGateway = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Gateway.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defDelivered = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Delivered.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSender = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Sender.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defReceiver = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Receiver.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBCC = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BCC.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCC = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CC.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSubject = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Subject.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defMessageBodyFileName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.MessageBodyFileName.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defExceptionMessage = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExceptionMessage.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defExceptionStackTrace = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExceptionStackTrace.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGateway = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Gateway.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -262,10 +262,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public string MessageBodyFileName { get => (string)TargettedRow[TableColumnNames.MessageBodyFileName.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
 
 
        public string ExceptionMessage { get => (string)TargettedRow[TableColumnNames.ExceptionMessage.ToString()]; }
@@ -322,279 +322,68 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            bool Delivered,
+            string Sender,
+            string Receiver,
+            string Subject,
+            string MessageBodyFileName,
+            DateTime CreatedAt,
+            string Gateway,
+            string BCC = null,
+            string CC = null,
+            DateTime? UpdatedAt = null,
+            string ExceptionMessage = null,
+            string ExceptionStackTrace = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramDelivered = new DataColumnParameter(defDelivered, defDelivered.DefaultValue);
-                DataColumnParameter paramSender = new DataColumnParameter(defSender, defSender.DefaultValue);
-                DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, defReceiver.DefaultValue);
-                DataColumnParameter paramBCC = new DataColumnParameter(defBCC, defBCC.DefaultValue);
-                DataColumnParameter paramCC = new DataColumnParameter(defCC, defCC.DefaultValue);
-                DataColumnParameter paramSubject = new DataColumnParameter(defSubject, defSubject.DefaultValue);
-                DataColumnParameter paramMessageBodyFileName = new DataColumnParameter(defMessageBodyFileName, defMessageBodyFileName.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
-                DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, defExceptionMessage.DefaultValue);
-                DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, defExceptionStackTrace.DefaultValue);
-                DataColumnParameter paramGateway = new DataColumnParameter(defGateway, defGateway.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramDelivered = new (defDelivered, Delivered);
+                DataColumnParameter paramSender = new (defSender, Sender);
+                DataColumnParameter paramReceiver = new (defReceiver, Receiver);
+                DataColumnParameter paramBCC = new (defBCC, BCC);
+                DataColumnParameter paramCC = new (defCC, CC);
+                DataColumnParameter paramSubject = new (defSubject, Subject);
+                DataColumnParameter paramMessageBodyFileName = new (defMessageBodyFileName, MessageBodyFileName);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramExceptionMessage = new (defExceptionMessage, ExceptionMessage);
+                DataColumnParameter paramExceptionStackTrace = new (defExceptionStackTrace, ExceptionStackTrace);
+                DataColumnParameter paramGateway = new (defGateway, Gateway);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramDelivered.GetSQLQuotedValueForAdd(),
-                paramSender.GetSQLQuotedValueForAdd(),
-                paramReceiver.GetSQLQuotedValueForAdd(),
-                paramBCC.GetSQLQuotedValueForAdd(),
-                paramCC.GetSQLQuotedValueForAdd(),
-                paramSubject.GetSQLQuotedValueForAdd(),
-                paramMessageBodyFileName.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                paramExceptionMessage.GetSQLQuotedValueForAdd(),
-                paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
-                paramGateway.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramDelivered.GetSQLQuotedValueForAdd(),
+                        paramSender.GetSQLQuotedValueForAdd(),
+                        paramReceiver.GetSQLQuotedValueForAdd(),
+                        paramBCC.GetSQLQuotedValueForAdd(),
+                        paramCC.GetSQLQuotedValueForAdd(),
+                        paramSubject.GetSQLQuotedValueForAdd(),
+                        paramMessageBodyFileName.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramExceptionMessage.GetSQLQuotedValueForAdd(),
+                        paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
+                        paramGateway.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(Boolean pDelivered,
-String pSender,
-String pReceiver,
-String pSubject,
-String pMessageBodyFileName,
-DateTime pCreatedAt,
-String pGateway,
-Object pBCC = null,
-Object pCC = null,
-Object pUpdatedAt = null,
-Object pExceptionMessage = null,
-Object pExceptionStackTrace = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramDelivered = new DataColumnParameter(defDelivered, pDelivered);
-                DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
-                DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
-                DataColumnParameter paramBCC = new DataColumnParameter(defBCC, pBCC);
-                DataColumnParameter paramCC = new DataColumnParameter(defCC, pCC);
-                DataColumnParameter paramSubject = new DataColumnParameter(defSubject, pSubject);
-                DataColumnParameter paramMessageBodyFileName = new DataColumnParameter(defMessageBodyFileName, pMessageBodyFileName);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-                DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
-                DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
-                DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramDelivered.GetSQLQuotedValueForAdd(),
-paramSender.GetSQLQuotedValueForAdd(),
-paramReceiver.GetSQLQuotedValueForAdd(),
-paramBCC.GetSQLQuotedValueForAdd(),
-paramCC.GetSQLQuotedValueForAdd(),
-paramSubject.GetSQLQuotedValueForAdd(),
-paramMessageBodyFileName.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramExceptionMessage.GetSQLQuotedValueForAdd(),
-paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
-paramGateway.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,Boolean pDelivered,
-String pSender,
-String pReceiver,
-String pSubject,
-String pMessageBodyFileName,
-DateTime pCreatedAt,
-String pGateway,
-Object pBCC = null,
-Object pCC = null,
-Object pUpdatedAt = null,
-Object pExceptionMessage = null,
-Object pExceptionStackTrace = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramDelivered = new DataColumnParameter(defDelivered, pDelivered);
-DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
-DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
-DataColumnParameter paramBCC = new DataColumnParameter(defBCC, pBCC);
-DataColumnParameter paramCC = new DataColumnParameter(defCC, pCC);
-DataColumnParameter paramSubject = new DataColumnParameter(defSubject, pSubject);
-DataColumnParameter paramMessageBodyFileName = new DataColumnParameter(defMessageBodyFileName, pMessageBodyFileName);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
-DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
-DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramDelivered.GetSQLQuotedValueForAdd(),
-paramSender.GetSQLQuotedValueForAdd(),
-paramReceiver.GetSQLQuotedValueForAdd(),
-paramBCC.GetSQLQuotedValueForAdd(),
-paramCC.GetSQLQuotedValueForAdd(),
-paramSubject.GetSQLQuotedValueForAdd(),
-paramMessageBodyFileName.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramExceptionMessage.GetSQLQuotedValueForAdd(),
-paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
-paramGateway.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(Boolean pDelivered,
-String pSender,
-String pReceiver,
-String pSubject,
-String pMessageBodyFileName,
-DateTime pCreatedAt,
-String pGateway,
-Object pBCC= null,
-Object pCC= null,
-Object pUpdatedAt= null,
-Object pExceptionMessage= null,
-Object pExceptionStackTrace= null){
-
-        try{
-
-DataColumnParameter paramDelivered = new DataColumnParameter(defDelivered, pDelivered);
-DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
-DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
-DataColumnParameter paramBCC = new DataColumnParameter(defBCC, pBCC);
-DataColumnParameter paramCC = new DataColumnParameter(defCC, pCC);
-DataColumnParameter paramSubject = new DataColumnParameter(defSubject, pSubject);
-DataColumnParameter paramMessageBodyFileName = new DataColumnParameter(defMessageBodyFileName, pMessageBodyFileName);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
-DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
-DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) ", TABLE_NAME,paramDelivered.GetSQLQuotedValueForAdd(),
-paramSender.GetSQLQuotedValueForAdd(),
-paramReceiver.GetSQLQuotedValueForAdd(),
-paramBCC.GetSQLQuotedValueForAdd(),
-paramCC.GetSQLQuotedValueForAdd(),
-paramSubject.GetSQLQuotedValueForAdd(),
-paramMessageBodyFileName.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramExceptionMessage.GetSQLQuotedValueForAdd(),
-paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
-paramGateway.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pDelivered = null,
-Object pSender = null,
-Object pReceiver = null,
-Object pSubject = null,
-Object pMessageBodyFileName = null,
-Object pCreatedAt = null,
-Object pGateway = null,
-Object pBCC = null,
-Object pCC = null,
-Object pUpdatedAt = null,
-Object pExceptionMessage = null,
-Object pExceptionStackTrace = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramDelivered = new DataColumnParameter(defDelivered, pDelivered);
- DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
- DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
- DataColumnParameter paramBCC = new DataColumnParameter(defBCC, pBCC);
- DataColumnParameter paramCC = new DataColumnParameter(defCC, pCC);
- DataColumnParameter paramSubject = new DataColumnParameter(defSubject, pSubject);
- DataColumnParameter paramMessageBodyFileName = new DataColumnParameter(defMessageBodyFileName, pMessageBodyFileName);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
- DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
- DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
- DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [Delivered]={2},[Sender]={3},[Receiver]={4},[BCC]={5},[CC]={6},[Subject]={7},[MessageBodyFileName]={8},[CreatedAt]={9},[UpdatedAt]={10},[ExceptionMessage]={11},[ExceptionStackTrace]={12},[Gateway]={13} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramDelivered.GetSQLQuotedValueForUpdate(),
-paramSender.GetSQLQuotedValueForUpdate(),
-paramReceiver.GetSQLQuotedValueForUpdate(),
-paramBCC.GetSQLQuotedValueForUpdate(),
-paramCC.GetSQLQuotedValueForUpdate(),
-paramSubject.GetSQLQuotedValueForUpdate(),
-paramMessageBodyFileName.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramUpdatedAt.GetSQLQuotedValueForUpdate(),
-paramExceptionMessage.GetSQLQuotedValueForUpdate(),
-paramExceptionStackTrace.GetSQLQuotedValueForUpdate(),
-paramGateway.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

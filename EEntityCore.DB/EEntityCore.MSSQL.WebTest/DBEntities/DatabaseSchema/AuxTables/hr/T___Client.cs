@@ -23,23 +23,23 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___Client()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defCompanyName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CompanyName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defOwnerID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.OwnerID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defSLAFileName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SLAFileName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defScadwareURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ScadwareURL.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defEmail = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Email.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defMobile = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Mobile.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defWebsiteURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.WebsiteURL.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defLogoFileName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LogoFileName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsActive.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defNameAbbreviation = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.NameAbbreviation.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Address.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBankID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BankID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defAccountName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAccountNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountNumber.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defCompanyName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CompanyName.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defOwnerID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.OwnerID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defSLAFileName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SLAFileName.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defScadwareURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ScadwareURL.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defEmail = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Email.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defMobile = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Mobile.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defWebsiteURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.WebsiteURL.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defLogoFileName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LogoFileName.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsActive.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defNameAbbreviation = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.NameAbbreviation.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Address.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBankID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BankID.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defAccountName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountName.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAccountNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountNumber.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -271,7 +271,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
        public int OwnerID { get => (int)TargettedRow[TableColumnNames.OwnerID.ToString()]; }
@@ -295,7 +295,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public string LogoFileName { get => (string)TargettedRow[TableColumnNames.LogoFileName.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
 
 
        public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()]; }
@@ -361,337 +361,80 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(String pCompanyName,
-Int32 pOwnerID,
-Int32 pBankID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            string CompanyName,
+            DateTime CreatedAt,
+            int OwnerID,
+            bool IsActive,
+            string NameAbbreviation,
+            string SLAFileName = null,
+            string ScadwareURL = null,
+            string Email = null,
+            string Mobile = null,
+            string WebsiteURL = null,
+            string LogoFileName = null,
+            DateTime? UpdatedAt = null,
+            string Address = null,
+            int? BankID = null,
+            string AccountName = null,
+            string AccountNumber = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramCompanyName = new DataColumnParameter(defCompanyName, pCompanyName);
-                DataColumnParameter paramOwnerID = new DataColumnParameter(defOwnerID, pOwnerID);
-                DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramSLAFileName = new DataColumnParameter(defSLAFileName, defSLAFileName.DefaultValue);
-                DataColumnParameter paramScadwareURL = new DataColumnParameter(defScadwareURL, defScadwareURL.DefaultValue);
-                DataColumnParameter paramEmail = new DataColumnParameter(defEmail, defEmail.DefaultValue);
-                DataColumnParameter paramMobile = new DataColumnParameter(defMobile, defMobile.DefaultValue);
-                DataColumnParameter paramWebsiteURL = new DataColumnParameter(defWebsiteURL, defWebsiteURL.DefaultValue);
-                DataColumnParameter paramLogoFileName = new DataColumnParameter(defLogoFileName, defLogoFileName.DefaultValue);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
-                DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, defIsActive.DefaultValue);
-                DataColumnParameter paramNameAbbreviation = new DataColumnParameter(defNameAbbreviation, defNameAbbreviation.DefaultValue);
-                DataColumnParameter paramAddress = new DataColumnParameter(defAddress, defAddress.DefaultValue);
-                DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, defAccountName.DefaultValue);
-                DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, defAccountNumber.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramCompanyName = new (defCompanyName, CompanyName);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramOwnerID = new (defOwnerID, OwnerID);
+                DataColumnParameter paramSLAFileName = new (defSLAFileName, SLAFileName);
+                DataColumnParameter paramScadwareURL = new (defScadwareURL, ScadwareURL);
+                DataColumnParameter paramEmail = new (defEmail, Email);
+                DataColumnParameter paramMobile = new (defMobile, Mobile);
+                DataColumnParameter paramWebsiteURL = new (defWebsiteURL, WebsiteURL);
+                DataColumnParameter paramLogoFileName = new (defLogoFileName, LogoFileName);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramIsActive = new (defIsActive, IsActive);
+                DataColumnParameter paramNameAbbreviation = new (defNameAbbreviation, NameAbbreviation);
+                DataColumnParameter paramAddress = new (defAddress, Address);
+                DataColumnParameter paramBankID = new (defBankID, BankID);
+                DataColumnParameter paramAccountName = new (defAccountName, AccountName);
+                DataColumnParameter paramAccountNumber = new (defAccountNumber, AccountNumber);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramCompanyName.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramOwnerID.GetSQLQuotedValueForAdd(),
-                paramSLAFileName.GetSQLQuotedValueForAdd(),
-                paramScadwareURL.GetSQLQuotedValueForAdd(),
-                paramEmail.GetSQLQuotedValueForAdd(),
-                paramMobile.GetSQLQuotedValueForAdd(),
-                paramWebsiteURL.GetSQLQuotedValueForAdd(),
-                paramLogoFileName.GetSQLQuotedValueForAdd(),
-                paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                paramIsActive.GetSQLQuotedValueForAdd(),
-                paramNameAbbreviation.GetSQLQuotedValueForAdd(),
-                paramAddress.GetSQLQuotedValueForAdd(),
-                paramBankID.GetSQLQuotedValueForAdd(),
-                paramAccountName.GetSQLQuotedValueForAdd(),
-                paramAccountNumber.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramCompanyName.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramOwnerID.GetSQLQuotedValueForAdd(),
+                        paramSLAFileName.GetSQLQuotedValueForAdd(),
+                        paramScadwareURL.GetSQLQuotedValueForAdd(),
+                        paramEmail.GetSQLQuotedValueForAdd(),
+                        paramMobile.GetSQLQuotedValueForAdd(),
+                        paramWebsiteURL.GetSQLQuotedValueForAdd(),
+                        paramLogoFileName.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramIsActive.GetSQLQuotedValueForAdd(),
+                        paramNameAbbreviation.GetSQLQuotedValueForAdd(),
+                        paramAddress.GetSQLQuotedValueForAdd(),
+                        paramBankID.GetSQLQuotedValueForAdd(),
+                        paramAccountName.GetSQLQuotedValueForAdd(),
+                        paramAccountNumber.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(String pCompanyName,
-DateTime pCreatedAt,
-Int32 pOwnerID,
-Boolean pIsActive,
-String pNameAbbreviation,
-Object pSLAFileName = null,
-Object pScadwareURL = null,
-Object pEmail = null,
-Object pMobile = null,
-Object pWebsiteURL = null,
-Object pLogoFileName = null,
-Object pUpdatedAt = null,
-Object pAddress = null,
-Object pBankID = null,
-Object pAccountName = null,
-Object pAccountNumber = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramCompanyName = new DataColumnParameter(defCompanyName, pCompanyName);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramOwnerID = new DataColumnParameter(defOwnerID, pOwnerID);
-                DataColumnParameter paramSLAFileName = new DataColumnParameter(defSLAFileName, pSLAFileName);
-                DataColumnParameter paramScadwareURL = new DataColumnParameter(defScadwareURL, pScadwareURL);
-                DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
-                DataColumnParameter paramMobile = new DataColumnParameter(defMobile, pMobile);
-                DataColumnParameter paramWebsiteURL = new DataColumnParameter(defWebsiteURL, pWebsiteURL);
-                DataColumnParameter paramLogoFileName = new DataColumnParameter(defLogoFileName, pLogoFileName);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-                DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
-                DataColumnParameter paramNameAbbreviation = new DataColumnParameter(defNameAbbreviation, pNameAbbreviation);
-                DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
-                DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
-                DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
-                DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramCompanyName.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramOwnerID.GetSQLQuotedValueForAdd(),
-paramSLAFileName.GetSQLQuotedValueForAdd(),
-paramScadwareURL.GetSQLQuotedValueForAdd(),
-paramEmail.GetSQLQuotedValueForAdd(),
-paramMobile.GetSQLQuotedValueForAdd(),
-paramWebsiteURL.GetSQLQuotedValueForAdd(),
-paramLogoFileName.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramIsActive.GetSQLQuotedValueForAdd(),
-paramNameAbbreviation.GetSQLQuotedValueForAdd(),
-paramAddress.GetSQLQuotedValueForAdd(),
-paramBankID.GetSQLQuotedValueForAdd(),
-paramAccountName.GetSQLQuotedValueForAdd(),
-paramAccountNumber.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,String pCompanyName,
-DateTime pCreatedAt,
-Int32 pOwnerID,
-Boolean pIsActive,
-String pNameAbbreviation,
-Object pSLAFileName = null,
-Object pScadwareURL = null,
-Object pEmail = null,
-Object pMobile = null,
-Object pWebsiteURL = null,
-Object pLogoFileName = null,
-Object pUpdatedAt = null,
-Object pAddress = null,
-Object pBankID = null,
-Object pAccountName = null,
-Object pAccountNumber = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramCompanyName = new DataColumnParameter(defCompanyName, pCompanyName);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramOwnerID = new DataColumnParameter(defOwnerID, pOwnerID);
-DataColumnParameter paramSLAFileName = new DataColumnParameter(defSLAFileName, pSLAFileName);
-DataColumnParameter paramScadwareURL = new DataColumnParameter(defScadwareURL, pScadwareURL);
-DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
-DataColumnParameter paramMobile = new DataColumnParameter(defMobile, pMobile);
-DataColumnParameter paramWebsiteURL = new DataColumnParameter(defWebsiteURL, pWebsiteURL);
-DataColumnParameter paramLogoFileName = new DataColumnParameter(defLogoFileName, pLogoFileName);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
-DataColumnParameter paramNameAbbreviation = new DataColumnParameter(defNameAbbreviation, pNameAbbreviation);
-DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
-DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
-DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
-DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramCompanyName.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramOwnerID.GetSQLQuotedValueForAdd(),
-paramSLAFileName.GetSQLQuotedValueForAdd(),
-paramScadwareURL.GetSQLQuotedValueForAdd(),
-paramEmail.GetSQLQuotedValueForAdd(),
-paramMobile.GetSQLQuotedValueForAdd(),
-paramWebsiteURL.GetSQLQuotedValueForAdd(),
-paramLogoFileName.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramIsActive.GetSQLQuotedValueForAdd(),
-paramNameAbbreviation.GetSQLQuotedValueForAdd(),
-paramAddress.GetSQLQuotedValueForAdd(),
-paramBankID.GetSQLQuotedValueForAdd(),
-paramAccountName.GetSQLQuotedValueForAdd(),
-paramAccountNumber.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(String pCompanyName,
-DateTime pCreatedAt,
-Int32 pOwnerID,
-Boolean pIsActive,
-String pNameAbbreviation,
-Object pSLAFileName= null,
-Object pScadwareURL= null,
-Object pEmail= null,
-Object pMobile= null,
-Object pWebsiteURL= null,
-Object pLogoFileName= null,
-Object pUpdatedAt= null,
-Object pAddress= null,
-Object pBankID= null,
-Object pAccountName= null,
-Object pAccountNumber= null){
-
-        try{
-
-DataColumnParameter paramCompanyName = new DataColumnParameter(defCompanyName, pCompanyName);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramOwnerID = new DataColumnParameter(defOwnerID, pOwnerID);
-DataColumnParameter paramSLAFileName = new DataColumnParameter(defSLAFileName, pSLAFileName);
-DataColumnParameter paramScadwareURL = new DataColumnParameter(defScadwareURL, pScadwareURL);
-DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
-DataColumnParameter paramMobile = new DataColumnParameter(defMobile, pMobile);
-DataColumnParameter paramWebsiteURL = new DataColumnParameter(defWebsiteURL, pWebsiteURL);
-DataColumnParameter paramLogoFileName = new DataColumnParameter(defLogoFileName, pLogoFileName);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
-DataColumnParameter paramNameAbbreviation = new DataColumnParameter(defNameAbbreviation, pNameAbbreviation);
-DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
-DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
-DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
-DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramCompanyName.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramOwnerID.GetSQLQuotedValueForAdd(),
-paramSLAFileName.GetSQLQuotedValueForAdd(),
-paramScadwareURL.GetSQLQuotedValueForAdd(),
-paramEmail.GetSQLQuotedValueForAdd(),
-paramMobile.GetSQLQuotedValueForAdd(),
-paramWebsiteURL.GetSQLQuotedValueForAdd(),
-paramLogoFileName.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramIsActive.GetSQLQuotedValueForAdd(),
-paramNameAbbreviation.GetSQLQuotedValueForAdd(),
-paramAddress.GetSQLQuotedValueForAdd(),
-paramBankID.GetSQLQuotedValueForAdd(),
-paramAccountName.GetSQLQuotedValueForAdd(),
-paramAccountNumber.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pCompanyName = null,
-Object pCreatedAt = null,
-Object pOwnerID = null,
-Object pIsActive = null,
-Object pNameAbbreviation = null,
-Object pSLAFileName = null,
-Object pScadwareURL = null,
-Object pEmail = null,
-Object pMobile = null,
-Object pWebsiteURL = null,
-Object pLogoFileName = null,
-Object pUpdatedAt = null,
-Object pAddress = null,
-Object pBankID = null,
-Object pAccountName = null,
-Object pAccountNumber = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramCompanyName = new DataColumnParameter(defCompanyName, pCompanyName);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramOwnerID = new DataColumnParameter(defOwnerID, pOwnerID);
- DataColumnParameter paramSLAFileName = new DataColumnParameter(defSLAFileName, pSLAFileName);
- DataColumnParameter paramScadwareURL = new DataColumnParameter(defScadwareURL, pScadwareURL);
- DataColumnParameter paramEmail = new DataColumnParameter(defEmail, pEmail);
- DataColumnParameter paramMobile = new DataColumnParameter(defMobile, pMobile);
- DataColumnParameter paramWebsiteURL = new DataColumnParameter(defWebsiteURL, pWebsiteURL);
- DataColumnParameter paramLogoFileName = new DataColumnParameter(defLogoFileName, pLogoFileName);
- DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
- DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
- DataColumnParameter paramNameAbbreviation = new DataColumnParameter(defNameAbbreviation, pNameAbbreviation);
- DataColumnParameter paramAddress = new DataColumnParameter(defAddress, pAddress);
- DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
- DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
- DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [CompanyName]={2},[CreatedAt]={3},[OwnerID]={4},[SLAFileName]={5},[ScadwareURL]={6},[Email]={7},[Mobile]={8},[WebsiteURL]={9},[LogoFileName]={10},[UpdatedAt]={11},[IsActive]={12},[NameAbbreviation]={13},[Address]={14},[BankID]={15},[AccountName]={16},[AccountNumber]={17} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramCompanyName.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramOwnerID.GetSQLQuotedValueForUpdate(),
-paramSLAFileName.GetSQLQuotedValueForUpdate(),
-paramScadwareURL.GetSQLQuotedValueForUpdate(),
-paramEmail.GetSQLQuotedValueForUpdate(),
-paramMobile.GetSQLQuotedValueForUpdate(),
-paramWebsiteURL.GetSQLQuotedValueForUpdate(),
-paramLogoFileName.GetSQLQuotedValueForUpdate(),
-paramUpdatedAt.GetSQLQuotedValueForUpdate(),
-paramIsActive.GetSQLQuotedValueForUpdate(),
-paramNameAbbreviation.GetSQLQuotedValueForUpdate(),
-paramAddress.GetSQLQuotedValueForUpdate(),
-paramBankID.GetSQLQuotedValueForUpdate(),
-paramAccountName.GetSQLQuotedValueForUpdate(),
-paramAccountNumber.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

@@ -23,21 +23,21 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___Personnel()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defPersonnelNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonnelNumber.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defPersonID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defIsActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsActive.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defEmploymentDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.EmploymentDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsSuperUser = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsSuperUser.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPositionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PositionID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defSalaryTypeID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SalaryTypeID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defSalaryAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SalaryAmount.ToString(), typeof(Decimal),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defUpdatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedByID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDuties = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Duties.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsWebVisible = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsWebVisible.ToString(), typeof(Boolean),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defPersonnelNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonnelNumber.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defPersonID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defIsActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsActive.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defEmploymentDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.EmploymentDate.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsSuperUser = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsSuperUser.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPositionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PositionID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defSalaryTypeID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SalaryTypeID.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defSalaryAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SalaryAmount.ToString(), typeof(decimal?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defUpdatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedByID.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDuties = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Duties.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsWebVisible = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsWebVisible.ToString(), typeof(bool?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -285,7 +285,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()]; }
 
 
-       public NullableDateTime EmploymentDate { get => new (this.TargettedRow[TableColumnNames.EmploymentDate.ToString()]); }
+       public DateTime EmploymentDate { get => (DateTime)TargettedRow[TableColumnNames.EmploymentDate.ToString()]; }
 
 
        public bool IsSuperUser { get => (bool)TargettedRow[TableColumnNames.IsSuperUser.ToString()]; }
@@ -306,10 +306,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public int? UpdatedByID { get => (int?)TargettedRow[TableColumnNames.UpdatedByID.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
 
 
        public string Duties { get => (string)TargettedRow[TableColumnNames.Duties.ToString()]; }
@@ -363,312 +363,74 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(String pPersonnelNumber,
-Int32 pPersonID,
-Int32 pPositionID,
-Int32 pSalaryTypeID,
-Int32 pCreatedByID,
-Int32 pUpdatedByID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            string PersonnelNumber,
+            int PersonID,
+            bool IsActive,
+            DateTime EmploymentDate,
+            bool IsSuperUser,
+            int PositionID,
+            int CreatedByID,
+            DateTime CreatedAt,
+            int? SalaryTypeID = null,
+            decimal? SalaryAmount = null,
+            int? UpdatedByID = null,
+            DateTime? UpdatedAt = null,
+            string Duties = null,
+            bool? IsWebVisible = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramPersonnelNumber = new DataColumnParameter(defPersonnelNumber, pPersonnelNumber);
-                DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-                DataColumnParameter paramPositionID = new DataColumnParameter(defPositionID, pPositionID);
-                DataColumnParameter paramSalaryTypeID = new DataColumnParameter(defSalaryTypeID, pSalaryTypeID);
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-                DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, defIsActive.DefaultValue);
-                DataColumnParameter paramEmploymentDate = new DataColumnParameter(defEmploymentDate, defEmploymentDate.DefaultValue);
-                DataColumnParameter paramIsSuperUser = new DataColumnParameter(defIsSuperUser, defIsSuperUser.DefaultValue);
-                DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, defSalaryAmount.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
-                DataColumnParameter paramDuties = new DataColumnParameter(defDuties, defDuties.DefaultValue);
-                DataColumnParameter paramIsWebVisible = new DataColumnParameter(defIsWebVisible, defIsWebVisible.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramPersonnelNumber = new (defPersonnelNumber, PersonnelNumber);
+                DataColumnParameter paramPersonID = new (defPersonID, PersonID);
+                DataColumnParameter paramIsActive = new (defIsActive, IsActive);
+                DataColumnParameter paramEmploymentDate = new (defEmploymentDate, EmploymentDate);
+                DataColumnParameter paramIsSuperUser = new (defIsSuperUser, IsSuperUser);
+                DataColumnParameter paramPositionID = new (defPositionID, PositionID);
+                DataColumnParameter paramSalaryTypeID = new (defSalaryTypeID, SalaryTypeID);
+                DataColumnParameter paramSalaryAmount = new (defSalaryAmount, SalaryAmount);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramDuties = new (defDuties, Duties);
+                DataColumnParameter paramIsWebVisible = new (defIsWebVisible, IsWebVisible);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramPersonnelNumber.GetSQLQuotedValueForAdd(),
-                paramPersonID.GetSQLQuotedValueForAdd(),
-                paramIsActive.GetSQLQuotedValueForAdd(),
-                paramEmploymentDate.GetSQLQuotedValueForAdd(),
-                paramIsSuperUser.GetSQLQuotedValueForAdd(),
-                paramPositionID.GetSQLQuotedValueForAdd(),
-                paramSalaryTypeID.GetSQLQuotedValueForAdd(),
-                paramSalaryAmount.GetSQLQuotedValueForAdd(),
-                paramCreatedByID.GetSQLQuotedValueForAdd(),
-                paramUpdatedByID.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                paramDuties.GetSQLQuotedValueForAdd(),
-                paramIsWebVisible.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramPersonnelNumber.GetSQLQuotedValueForAdd(),
+                        paramPersonID.GetSQLQuotedValueForAdd(),
+                        paramIsActive.GetSQLQuotedValueForAdd(),
+                        paramEmploymentDate.GetSQLQuotedValueForAdd(),
+                        paramIsSuperUser.GetSQLQuotedValueForAdd(),
+                        paramPositionID.GetSQLQuotedValueForAdd(),
+                        paramSalaryTypeID.GetSQLQuotedValueForAdd(),
+                        paramSalaryAmount.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramDuties.GetSQLQuotedValueForAdd(),
+                        paramIsWebVisible.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(String pPersonnelNumber,
-Int32 pPersonID,
-Boolean pIsActive,
-DateTime pEmploymentDate,
-Boolean pIsSuperUser,
-Int32 pPositionID,
-Int32 pCreatedByID,
-DateTime pCreatedAt,
-Object pSalaryTypeID = null,
-Object pSalaryAmount = null,
-Object pUpdatedByID = null,
-Object pUpdatedAt = null,
-Object pDuties = null,
-Object pIsWebVisible = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramPersonnelNumber = new DataColumnParameter(defPersonnelNumber, pPersonnelNumber);
-                DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-                DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
-                DataColumnParameter paramEmploymentDate = new DataColumnParameter(defEmploymentDate, pEmploymentDate);
-                DataColumnParameter paramIsSuperUser = new DataColumnParameter(defIsSuperUser, pIsSuperUser);
-                DataColumnParameter paramPositionID = new DataColumnParameter(defPositionID, pPositionID);
-                DataColumnParameter paramSalaryTypeID = new DataColumnParameter(defSalaryTypeID, pSalaryTypeID);
-                DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-                DataColumnParameter paramDuties = new DataColumnParameter(defDuties, pDuties);
-                DataColumnParameter paramIsWebVisible = new DataColumnParameter(defIsWebVisible, pIsWebVisible);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramPersonnelNumber.GetSQLQuotedValueForAdd(),
-paramPersonID.GetSQLQuotedValueForAdd(),
-paramIsActive.GetSQLQuotedValueForAdd(),
-paramEmploymentDate.GetSQLQuotedValueForAdd(),
-paramIsSuperUser.GetSQLQuotedValueForAdd(),
-paramPositionID.GetSQLQuotedValueForAdd(),
-paramSalaryTypeID.GetSQLQuotedValueForAdd(),
-paramSalaryAmount.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramUpdatedByID.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramDuties.GetSQLQuotedValueForAdd(),
-paramIsWebVisible.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,String pPersonnelNumber,
-Int32 pPersonID,
-Boolean pIsActive,
-DateTime pEmploymentDate,
-Boolean pIsSuperUser,
-Int32 pPositionID,
-Int32 pCreatedByID,
-DateTime pCreatedAt,
-Object pSalaryTypeID = null,
-Object pSalaryAmount = null,
-Object pUpdatedByID = null,
-Object pUpdatedAt = null,
-Object pDuties = null,
-Object pIsWebVisible = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramPersonnelNumber = new DataColumnParameter(defPersonnelNumber, pPersonnelNumber);
-DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
-DataColumnParameter paramEmploymentDate = new DataColumnParameter(defEmploymentDate, pEmploymentDate);
-DataColumnParameter paramIsSuperUser = new DataColumnParameter(defIsSuperUser, pIsSuperUser);
-DataColumnParameter paramPositionID = new DataColumnParameter(defPositionID, pPositionID);
-DataColumnParameter paramSalaryTypeID = new DataColumnParameter(defSalaryTypeID, pSalaryTypeID);
-DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramDuties = new DataColumnParameter(defDuties, pDuties);
-DataColumnParameter paramIsWebVisible = new DataColumnParameter(defIsWebVisible, pIsWebVisible);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramPersonnelNumber.GetSQLQuotedValueForAdd(),
-paramPersonID.GetSQLQuotedValueForAdd(),
-paramIsActive.GetSQLQuotedValueForAdd(),
-paramEmploymentDate.GetSQLQuotedValueForAdd(),
-paramIsSuperUser.GetSQLQuotedValueForAdd(),
-paramPositionID.GetSQLQuotedValueForAdd(),
-paramSalaryTypeID.GetSQLQuotedValueForAdd(),
-paramSalaryAmount.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramUpdatedByID.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramDuties.GetSQLQuotedValueForAdd(),
-paramIsWebVisible.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(String pPersonnelNumber,
-Int32 pPersonID,
-Boolean pIsActive,
-DateTime pEmploymentDate,
-Boolean pIsSuperUser,
-Int32 pPositionID,
-Int32 pCreatedByID,
-DateTime pCreatedAt,
-Object pSalaryTypeID= null,
-Object pSalaryAmount= null,
-Object pUpdatedByID= null,
-Object pUpdatedAt= null,
-Object pDuties= null,
-Object pIsWebVisible= null){
-
-        try{
-
-DataColumnParameter paramPersonnelNumber = new DataColumnParameter(defPersonnelNumber, pPersonnelNumber);
-DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
-DataColumnParameter paramEmploymentDate = new DataColumnParameter(defEmploymentDate, pEmploymentDate);
-DataColumnParameter paramIsSuperUser = new DataColumnParameter(defIsSuperUser, pIsSuperUser);
-DataColumnParameter paramPositionID = new DataColumnParameter(defPositionID, pPositionID);
-DataColumnParameter paramSalaryTypeID = new DataColumnParameter(defSalaryTypeID, pSalaryTypeID);
-DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramDuties = new DataColumnParameter(defDuties, pDuties);
-DataColumnParameter paramIsWebVisible = new DataColumnParameter(defIsWebVisible, pIsWebVisible);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) ", TABLE_NAME,paramPersonnelNumber.GetSQLQuotedValueForAdd(),
-paramPersonID.GetSQLQuotedValueForAdd(),
-paramIsActive.GetSQLQuotedValueForAdd(),
-paramEmploymentDate.GetSQLQuotedValueForAdd(),
-paramIsSuperUser.GetSQLQuotedValueForAdd(),
-paramPositionID.GetSQLQuotedValueForAdd(),
-paramSalaryTypeID.GetSQLQuotedValueForAdd(),
-paramSalaryAmount.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramUpdatedByID.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramDuties.GetSQLQuotedValueForAdd(),
-paramIsWebVisible.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pPersonnelNumber = null,
-Object pPersonID = null,
-Object pIsActive = null,
-Object pEmploymentDate = null,
-Object pIsSuperUser = null,
-Object pPositionID = null,
-Object pCreatedByID = null,
-Object pCreatedAt = null,
-Object pSalaryTypeID = null,
-Object pSalaryAmount = null,
-Object pUpdatedByID = null,
-Object pUpdatedAt = null,
-Object pDuties = null,
-Object pIsWebVisible = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramPersonnelNumber = new DataColumnParameter(defPersonnelNumber, pPersonnelNumber);
- DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
- DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
- DataColumnParameter paramEmploymentDate = new DataColumnParameter(defEmploymentDate, pEmploymentDate);
- DataColumnParameter paramIsSuperUser = new DataColumnParameter(defIsSuperUser, pIsSuperUser);
- DataColumnParameter paramPositionID = new DataColumnParameter(defPositionID, pPositionID);
- DataColumnParameter paramSalaryTypeID = new DataColumnParameter(defSalaryTypeID, pSalaryTypeID);
- DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
- DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
- DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
- DataColumnParameter paramDuties = new DataColumnParameter(defDuties, pDuties);
- DataColumnParameter paramIsWebVisible = new DataColumnParameter(defIsWebVisible, pIsWebVisible);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [PersonnelNumber]={2},[PersonID]={3},[IsActive]={4},[EmploymentDate]={5},[IsSuperUser]={6},[PositionID]={7},[SalaryTypeID]={8},[SalaryAmount]={9},[CreatedByID]={10},[UpdatedByID]={11},[CreatedAt]={12},[UpdatedAt]={13},[Duties]={14},[IsWebVisible]={15} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramPersonnelNumber.GetSQLQuotedValueForUpdate(),
-paramPersonID.GetSQLQuotedValueForUpdate(),
-paramIsActive.GetSQLQuotedValueForUpdate(),
-paramEmploymentDate.GetSQLQuotedValueForUpdate(),
-paramIsSuperUser.GetSQLQuotedValueForUpdate(),
-paramPositionID.GetSQLQuotedValueForUpdate(),
-paramSalaryTypeID.GetSQLQuotedValueForUpdate(),
-paramSalaryAmount.GetSQLQuotedValueForUpdate(),
-paramCreatedByID.GetSQLQuotedValueForUpdate(),
-paramUpdatedByID.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramUpdatedAt.GetSQLQuotedValueForUpdate(),
-paramDuties.GetSQLQuotedValueForUpdate(),
-paramIsWebVisible.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

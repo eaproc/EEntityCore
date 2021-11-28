@@ -23,10 +23,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___PersonnelQualification()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defQualificationID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.QualificationID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defPersonnelID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonnelID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defQualificationID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.QualificationID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defPersonnelID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonnelID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -222,7 +222,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public int PersonnelID { get => (int)TargettedRow[TableColumnNames.PersonnelID.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
  #endregion
@@ -270,154 +270,41 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(Int32 pQualificationID,
-Int32 pPersonnelID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            int QualificationID,
+            int PersonnelID,
+            DateTime CreatedAt
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramQualificationID = new DataColumnParameter(defQualificationID, pQualificationID);
-                DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramQualificationID = new (defQualificationID, QualificationID);
+                DataColumnParameter paramPersonnelID = new (defPersonnelID, PersonnelID);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[QualificationID],[PersonnelID],[CreatedAt]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramQualificationID.GetSQLQuotedValueForAdd(),
-                paramPersonnelID.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[QualificationID],[PersonnelID],[CreatedAt]) VALUES({1},{2},{3},{4})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramQualificationID.GetSQLQuotedValueForAdd(),
+                        paramPersonnelID.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(Int32 pQualificationID,
-Int32 pPersonnelID,
-DateTime pCreatedAt){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramQualificationID = new DataColumnParameter(defQualificationID, pQualificationID);
-                DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[QualificationID],[PersonnelID],[CreatedAt]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramQualificationID.GetSQLQuotedValueForAdd(),
-paramPersonnelID.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,Int32 pQualificationID,
-Int32 pPersonnelID,
-DateTime pCreatedAt){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramQualificationID = new DataColumnParameter(defQualificationID, pQualificationID);
-DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[QualificationID],[PersonnelID],[CreatedAt]) VALUES({1},{2},{3},{4}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramQualificationID.GetSQLQuotedValueForAdd(),
-paramPersonnelID.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(Int32 pQualificationID,
-Int32 pPersonnelID,
-DateTime pCreatedAt){
-
-        try{
-
-DataColumnParameter paramQualificationID = new DataColumnParameter(defQualificationID, pQualificationID);
-DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([QualificationID],[PersonnelID],[CreatedAt]) VALUES({1},{2},{3}) ", TABLE_NAME,paramQualificationID.GetSQLQuotedValueForAdd(),
-paramPersonnelID.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pQualificationID = null,
-Object pPersonnelID = null,
-Object pCreatedAt = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramQualificationID = new DataColumnParameter(defQualificationID, pQualificationID);
- DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [QualificationID]={2},[PersonnelID]={3},[CreatedAt]={4} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramQualificationID.GetSQLQuotedValueForUpdate(),
-paramPersonnelID.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

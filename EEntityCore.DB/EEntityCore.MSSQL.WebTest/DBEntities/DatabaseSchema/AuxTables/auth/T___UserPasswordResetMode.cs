@@ -23,11 +23,11 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___UserPasswordResetMode()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defPasswordResetTypeID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PasswordResetTypeID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defModeCarrier = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ModeCarrier.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defPasswordResetTypeID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PasswordResetTypeID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defModeCarrier = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ModeCarrier.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -230,7 +230,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public string ModeCarrier { get => (string)TargettedRow[TableColumnNames.ModeCarrier.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
  #endregion
@@ -278,169 +278,44 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(Int32 pPasswordResetTypeID,
-Int32 pUserID,
-String pModeCarrier){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            int PasswordResetTypeID,
+            int UserID,
+            string ModeCarrier,
+            DateTime CreatedAt
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramPasswordResetTypeID = new DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID);
-                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-                DataColumnParameter paramModeCarrier = new DataColumnParameter(defModeCarrier, pModeCarrier);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramPasswordResetTypeID = new (defPasswordResetTypeID, PasswordResetTypeID);
+                DataColumnParameter paramUserID = new (defUserID, UserID);
+                DataColumnParameter paramModeCarrier = new (defModeCarrier, ModeCarrier);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PasswordResetTypeID],[UserID],[ModeCarrier],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
-                paramUserID.GetSQLQuotedValueForAdd(),
-                paramModeCarrier.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PasswordResetTypeID],[UserID],[ModeCarrier],[CreatedAt]) VALUES({1},{2},{3},{4},{5})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
+                        paramUserID.GetSQLQuotedValueForAdd(),
+                        paramModeCarrier.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(Int32 pPasswordResetTypeID,
-Int32 pUserID,
-String pModeCarrier,
-DateTime pCreatedAt){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramPasswordResetTypeID = new DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID);
-                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-                DataColumnParameter paramModeCarrier = new DataColumnParameter(defModeCarrier, pModeCarrier);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PasswordResetTypeID],[UserID],[ModeCarrier],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
-paramUserID.GetSQLQuotedValueForAdd(),
-paramModeCarrier.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,Int32 pPasswordResetTypeID,
-Int32 pUserID,
-String pModeCarrier,
-DateTime pCreatedAt){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramPasswordResetTypeID = new DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID);
-DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-DataColumnParameter paramModeCarrier = new DataColumnParameter(defModeCarrier, pModeCarrier);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PasswordResetTypeID],[UserID],[ModeCarrier],[CreatedAt]) VALUES({1},{2},{3},{4},{5}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
-paramUserID.GetSQLQuotedValueForAdd(),
-paramModeCarrier.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(Int32 pPasswordResetTypeID,
-Int32 pUserID,
-String pModeCarrier,
-DateTime pCreatedAt){
-
-        try{
-
-DataColumnParameter paramPasswordResetTypeID = new DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID);
-DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-DataColumnParameter paramModeCarrier = new DataColumnParameter(defModeCarrier, pModeCarrier);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([PasswordResetTypeID],[UserID],[ModeCarrier],[CreatedAt]) VALUES({1},{2},{3},{4}) ", TABLE_NAME,paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
-paramUserID.GetSQLQuotedValueForAdd(),
-paramModeCarrier.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pPasswordResetTypeID = null,
-Object pUserID = null,
-Object pModeCarrier = null,
-Object pCreatedAt = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramPasswordResetTypeID = new DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID);
- DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
- DataColumnParameter paramModeCarrier = new DataColumnParameter(defModeCarrier, pModeCarrier);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [PasswordResetTypeID]={2},[UserID]={3},[ModeCarrier]={4},[CreatedAt]={5} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramPasswordResetTypeID.GetSQLQuotedValueForUpdate(),
-paramUserID.GetSQLQuotedValueForUpdate(),
-paramModeCarrier.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

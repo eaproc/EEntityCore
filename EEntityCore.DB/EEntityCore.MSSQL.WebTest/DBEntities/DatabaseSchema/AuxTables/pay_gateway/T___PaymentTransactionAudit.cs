@@ -23,19 +23,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___PaymentTransactionAudit()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defTransactionStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TransactionStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defPaymentTransactionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentTransactionID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defAccountName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBank = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Bank.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIPAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IPAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPaymentRequired = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentRequired.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Charges.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPaymentRequiredWithoutCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentRequiredWithoutCharges.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defRefundAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RefundAmount.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBalance = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Balance.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defTransactionStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TransactionStatusID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defPaymentTransactionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentTransactionID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defAccountName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountName.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBank = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Bank.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIPAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IPAddress.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPaymentRequired = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentRequired.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Charges.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPaymentRequiredWithoutCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentRequiredWithoutCharges.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defRefundAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RefundAmount.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBalance = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Balance.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -286,7 +286,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public decimal Balance { get => (decimal)TargettedRow[TableColumnNames.Balance.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
        public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
@@ -337,281 +337,68 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(Int32 pTransactionStatusID,
-Int32 pPaymentTransactionID,
-Int32 pCreatedByID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            int TransactionStatusID,
+            int PaymentTransactionID,
+            string AccountName,
+            string Bank,
+            string IPAddress,
+            decimal PaymentRequired,
+            decimal Charges,
+            decimal PaymentRequiredWithoutCharges,
+            decimal RefundAmount,
+            decimal Balance,
+            DateTime CreatedAt,
+            int CreatedByID
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramTransactionStatusID = new DataColumnParameter(defTransactionStatusID, pTransactionStatusID);
-                DataColumnParameter paramPaymentTransactionID = new DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID);
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-                DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, defAccountName.DefaultValue);
-                DataColumnParameter paramBank = new DataColumnParameter(defBank, defBank.DefaultValue);
-                DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, defIPAddress.DefaultValue);
-                DataColumnParameter paramPaymentRequired = new DataColumnParameter(defPaymentRequired, defPaymentRequired.DefaultValue);
-                DataColumnParameter paramCharges = new DataColumnParameter(defCharges, defCharges.DefaultValue);
-                DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, defPaymentRequiredWithoutCharges.DefaultValue);
-                DataColumnParameter paramRefundAmount = new DataColumnParameter(defRefundAmount, defRefundAmount.DefaultValue);
-                DataColumnParameter paramBalance = new DataColumnParameter(defBalance, defBalance.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramTransactionStatusID = new (defTransactionStatusID, TransactionStatusID);
+                DataColumnParameter paramPaymentTransactionID = new (defPaymentTransactionID, PaymentTransactionID);
+                DataColumnParameter paramAccountName = new (defAccountName, AccountName);
+                DataColumnParameter paramBank = new (defBank, Bank);
+                DataColumnParameter paramIPAddress = new (defIPAddress, IPAddress);
+                DataColumnParameter paramPaymentRequired = new (defPaymentRequired, PaymentRequired);
+                DataColumnParameter paramCharges = new (defCharges, Charges);
+                DataColumnParameter paramPaymentRequiredWithoutCharges = new (defPaymentRequiredWithoutCharges, PaymentRequiredWithoutCharges);
+                DataColumnParameter paramRefundAmount = new (defRefundAmount, RefundAmount);
+                DataColumnParameter paramBalance = new (defBalance, Balance);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[PaymentTransactionID],[AccountName],[Bank],[IPAddress],[PaymentRequired],[Charges],[PaymentRequiredWithoutCharges],[RefundAmount],[Balance],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramTransactionStatusID.GetSQLQuotedValueForAdd(),
-                paramPaymentTransactionID.GetSQLQuotedValueForAdd(),
-                paramAccountName.GetSQLQuotedValueForAdd(),
-                paramBank.GetSQLQuotedValueForAdd(),
-                paramIPAddress.GetSQLQuotedValueForAdd(),
-                paramPaymentRequired.GetSQLQuotedValueForAdd(),
-                paramCharges.GetSQLQuotedValueForAdd(),
-                paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
-                paramRefundAmount.GetSQLQuotedValueForAdd(),
-                paramBalance.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramCreatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[PaymentTransactionID],[AccountName],[Bank],[IPAddress],[PaymentRequired],[Charges],[PaymentRequiredWithoutCharges],[RefundAmount],[Balance],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramTransactionStatusID.GetSQLQuotedValueForAdd(),
+                        paramPaymentTransactionID.GetSQLQuotedValueForAdd(),
+                        paramAccountName.GetSQLQuotedValueForAdd(),
+                        paramBank.GetSQLQuotedValueForAdd(),
+                        paramIPAddress.GetSQLQuotedValueForAdd(),
+                        paramPaymentRequired.GetSQLQuotedValueForAdd(),
+                        paramCharges.GetSQLQuotedValueForAdd(),
+                        paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
+                        paramRefundAmount.GetSQLQuotedValueForAdd(),
+                        paramBalance.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(Int32 pTransactionStatusID,
-Int32 pPaymentTransactionID,
-String pAccountName,
-String pBank,
-String pIPAddress,
-Decimal pPaymentRequired,
-Decimal pCharges,
-Decimal pPaymentRequiredWithoutCharges,
-Decimal pRefundAmount,
-Decimal pBalance,
-DateTime pCreatedAt,
-Int32 pCreatedByID){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramTransactionStatusID = new DataColumnParameter(defTransactionStatusID, pTransactionStatusID);
-                DataColumnParameter paramPaymentTransactionID = new DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID);
-                DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
-                DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
-                DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
-                DataColumnParameter paramPaymentRequired = new DataColumnParameter(defPaymentRequired, pPaymentRequired);
-                DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
-                DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
-                DataColumnParameter paramRefundAmount = new DataColumnParameter(defRefundAmount, pRefundAmount);
-                DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[PaymentTransactionID],[AccountName],[Bank],[IPAddress],[PaymentRequired],[Charges],[PaymentRequiredWithoutCharges],[RefundAmount],[Balance],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramTransactionStatusID.GetSQLQuotedValueForAdd(),
-paramPaymentTransactionID.GetSQLQuotedValueForAdd(),
-paramAccountName.GetSQLQuotedValueForAdd(),
-paramBank.GetSQLQuotedValueForAdd(),
-paramIPAddress.GetSQLQuotedValueForAdd(),
-paramPaymentRequired.GetSQLQuotedValueForAdd(),
-paramCharges.GetSQLQuotedValueForAdd(),
-paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
-paramRefundAmount.GetSQLQuotedValueForAdd(),
-paramBalance.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,Int32 pTransactionStatusID,
-Int32 pPaymentTransactionID,
-String pAccountName,
-String pBank,
-String pIPAddress,
-Decimal pPaymentRequired,
-Decimal pCharges,
-Decimal pPaymentRequiredWithoutCharges,
-Decimal pRefundAmount,
-Decimal pBalance,
-DateTime pCreatedAt,
-Int32 pCreatedByID){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramTransactionStatusID = new DataColumnParameter(defTransactionStatusID, pTransactionStatusID);
-DataColumnParameter paramPaymentTransactionID = new DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID);
-DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
-DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
-DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
-DataColumnParameter paramPaymentRequired = new DataColumnParameter(defPaymentRequired, pPaymentRequired);
-DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
-DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
-DataColumnParameter paramRefundAmount = new DataColumnParameter(defRefundAmount, pRefundAmount);
-DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[PaymentTransactionID],[AccountName],[Bank],[IPAddress],[PaymentRequired],[Charges],[PaymentRequiredWithoutCharges],[RefundAmount],[Balance],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramTransactionStatusID.GetSQLQuotedValueForAdd(),
-paramPaymentTransactionID.GetSQLQuotedValueForAdd(),
-paramAccountName.GetSQLQuotedValueForAdd(),
-paramBank.GetSQLQuotedValueForAdd(),
-paramIPAddress.GetSQLQuotedValueForAdd(),
-paramPaymentRequired.GetSQLQuotedValueForAdd(),
-paramCharges.GetSQLQuotedValueForAdd(),
-paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
-paramRefundAmount.GetSQLQuotedValueForAdd(),
-paramBalance.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(Int32 pTransactionStatusID,
-Int32 pPaymentTransactionID,
-String pAccountName,
-String pBank,
-String pIPAddress,
-Decimal pPaymentRequired,
-Decimal pCharges,
-Decimal pPaymentRequiredWithoutCharges,
-Decimal pRefundAmount,
-Decimal pBalance,
-DateTime pCreatedAt,
-Int32 pCreatedByID){
-
-        try{
-
-DataColumnParameter paramTransactionStatusID = new DataColumnParameter(defTransactionStatusID, pTransactionStatusID);
-DataColumnParameter paramPaymentTransactionID = new DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID);
-DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
-DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
-DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
-DataColumnParameter paramPaymentRequired = new DataColumnParameter(defPaymentRequired, pPaymentRequired);
-DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
-DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
-DataColumnParameter paramRefundAmount = new DataColumnParameter(defRefundAmount, pRefundAmount);
-DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([TransactionStatusID],[PaymentTransactionID],[AccountName],[Bank],[IPAddress],[PaymentRequired],[Charges],[PaymentRequiredWithoutCharges],[RefundAmount],[Balance],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) ", TABLE_NAME,paramTransactionStatusID.GetSQLQuotedValueForAdd(),
-paramPaymentTransactionID.GetSQLQuotedValueForAdd(),
-paramAccountName.GetSQLQuotedValueForAdd(),
-paramBank.GetSQLQuotedValueForAdd(),
-paramIPAddress.GetSQLQuotedValueForAdd(),
-paramPaymentRequired.GetSQLQuotedValueForAdd(),
-paramCharges.GetSQLQuotedValueForAdd(),
-paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
-paramRefundAmount.GetSQLQuotedValueForAdd(),
-paramBalance.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pTransactionStatusID = null,
-Object pPaymentTransactionID = null,
-Object pAccountName = null,
-Object pBank = null,
-Object pIPAddress = null,
-Object pPaymentRequired = null,
-Object pCharges = null,
-Object pPaymentRequiredWithoutCharges = null,
-Object pRefundAmount = null,
-Object pBalance = null,
-Object pCreatedAt = null,
-Object pCreatedByID = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramTransactionStatusID = new DataColumnParameter(defTransactionStatusID, pTransactionStatusID);
- DataColumnParameter paramPaymentTransactionID = new DataColumnParameter(defPaymentTransactionID, pPaymentTransactionID);
- DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
- DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
- DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
- DataColumnParameter paramPaymentRequired = new DataColumnParameter(defPaymentRequired, pPaymentRequired);
- DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
- DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
- DataColumnParameter paramRefundAmount = new DataColumnParameter(defRefundAmount, pRefundAmount);
- DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [TransactionStatusID]={2},[PaymentTransactionID]={3},[AccountName]={4},[Bank]={5},[IPAddress]={6},[PaymentRequired]={7},[Charges]={8},[PaymentRequiredWithoutCharges]={9},[RefundAmount]={10},[Balance]={11},[CreatedAt]={12},[CreatedByID]={13} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramTransactionStatusID.GetSQLQuotedValueForUpdate(),
-paramPaymentTransactionID.GetSQLQuotedValueForUpdate(),
-paramAccountName.GetSQLQuotedValueForUpdate(),
-paramBank.GetSQLQuotedValueForUpdate(),
-paramIPAddress.GetSQLQuotedValueForUpdate(),
-paramPaymentRequired.GetSQLQuotedValueForUpdate(),
-paramCharges.GetSQLQuotedValueForUpdate(),
-paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForUpdate(),
-paramRefundAmount.GetSQLQuotedValueForUpdate(),
-paramBalance.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramCreatedByID.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

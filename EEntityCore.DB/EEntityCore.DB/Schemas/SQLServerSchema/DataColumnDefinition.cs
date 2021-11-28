@@ -9,13 +9,12 @@ namespace EEntityCore.DB.Schemas.SQLServerSchema
         public DataColumnDefinition(
             IDatabaseInit pointerDatabaseInit,
             string pColumnName, Type pDataType, 
-            bool pNullable, object pDefaultValue,
+            bool pNullable, 
             ConstraintTypes pConstraintType = ConstraintTypes.UNKNOWN
             )
         {
             this.PointerDatabaseInit = pointerDatabaseInit;
             vNullable = pNullable;
-            vDefaultValue = pDefaultValue;
             vDataType = pDataType;
             vColumnName = pColumnName;
             vConstraintType = pConstraintType;
@@ -32,7 +31,6 @@ namespace EEntityCore.DB.Schemas.SQLServerSchema
 
         private string vColumnName;
         private Type vDataType;
-        private object vDefaultValue;
 
 
         private bool vNullable;
@@ -61,7 +59,7 @@ namespace EEntityCore.DB.Schemas.SQLServerSchema
                 if (!Nullable)
                 {
                     // REM WHoop up something
-                    switch (GetTypeAllowed(DataType))
+                    switch (AllowedType)
                     {
                         case AllowedDataTypes.Bool:
                             {
@@ -87,7 +85,7 @@ namespace EEntityCore.DB.Schemas.SQLServerSchema
 
                         case AllowedDataTypes.String:
                             {
-                                return " ";              // REM Some database sees "" as NULL
+                                return string.Empty;              // REM Some database sees "" as NULL
                             }
 
                         case AllowedDataTypes.TimeSpan:
@@ -104,12 +102,7 @@ namespace EEntityCore.DB.Schemas.SQLServerSchema
                 }
                 else
                 {
-                    // REM If it is date and is not null or nothing return now
-                    // 'If DataColumnDefinition.getTypeAllowed(Me.DataType) = AllowedDataTypes.DateTime AndAlso
-                    // '    (Me.vDefaultValue IsNot Nothing OrElse Not IsDBNull(Me.vDefaultValue)) Then Return DateTime.Now
-
-
-                    return vDefaultValue;
+                    return null;
                 }
             }
         }
@@ -159,6 +152,8 @@ namespace EEntityCore.DB.Schemas.SQLServerSchema
         }
 
         #endregion
+
+        public AllowedDataTypes AllowedType => GetTypeAllowed(this.DataType);
 
 
         public static AllowedDataTypes GetTypeAllowed(Type pType)

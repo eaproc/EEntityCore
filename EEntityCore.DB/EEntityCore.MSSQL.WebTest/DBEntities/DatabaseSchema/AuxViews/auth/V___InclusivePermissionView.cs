@@ -23,10 +23,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        static V___InclusivePermissionView()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPermission = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Permission.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defInclusivePermissionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.InclusivePermissionID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defInclusivePermissionDefinition = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.InclusivePermissionDefinition.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPermission = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Permission.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defInclusivePermissionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.InclusivePermissionID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defInclusivePermissionDefinition = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.InclusivePermissionDefinition.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 

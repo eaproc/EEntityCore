@@ -23,14 +23,14 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___PasswordResetToken()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defToken = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Token.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPasswordResetTypeID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PasswordResetTypeID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defExpiryDateTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExpiryDateTime.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsUsed = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsUsed.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defToken = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Token.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPasswordResetTypeID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PasswordResetTypeID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defExpiryDateTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExpiryDateTime.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsUsed = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsUsed.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -240,16 +240,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()]; }
 
 
-       public NullableDateTime ExpiryDateTime { get => new (this.TargettedRow[TableColumnNames.ExpiryDateTime.ToString()]); }
+       public DateTime ExpiryDateTime { get => (DateTime)TargettedRow[TableColumnNames.ExpiryDateTime.ToString()]; }
 
 
        public bool IsUsed { get => (bool)TargettedRow[TableColumnNames.IsUsed.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
 
 
  #endregion
@@ -297,210 +297,53 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(Int32 pPasswordResetTypeID,
-Int32 pUserID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            string Token,
+            int PasswordResetTypeID,
+            int UserID,
+            DateTime ExpiryDateTime,
+            bool IsUsed,
+            DateTime CreatedAt,
+            DateTime? UpdatedAt = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramPasswordResetTypeID = new DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID);
-                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-                DataColumnParameter paramToken = new DataColumnParameter(defToken, defToken.DefaultValue);
-                DataColumnParameter paramExpiryDateTime = new DataColumnParameter(defExpiryDateTime, defExpiryDateTime.DefaultValue);
-                DataColumnParameter paramIsUsed = new DataColumnParameter(defIsUsed, defIsUsed.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramToken = new (defToken, Token);
+                DataColumnParameter paramPasswordResetTypeID = new (defPasswordResetTypeID, PasswordResetTypeID);
+                DataColumnParameter paramUserID = new (defUserID, UserID);
+                DataColumnParameter paramExpiryDateTime = new (defExpiryDateTime, ExpiryDateTime);
+                DataColumnParameter paramIsUsed = new (defIsUsed, IsUsed);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Token],[PasswordResetTypeID],[UserID],[ExpiryDateTime],[IsUsed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramToken.GetSQLQuotedValueForAdd(),
-                paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
-                paramUserID.GetSQLQuotedValueForAdd(),
-                paramExpiryDateTime.GetSQLQuotedValueForAdd(),
-                paramIsUsed.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Token],[PasswordResetTypeID],[UserID],[ExpiryDateTime],[IsUsed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramToken.GetSQLQuotedValueForAdd(),
+                        paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
+                        paramUserID.GetSQLQuotedValueForAdd(),
+                        paramExpiryDateTime.GetSQLQuotedValueForAdd(),
+                        paramIsUsed.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(String pToken,
-Int32 pPasswordResetTypeID,
-Int32 pUserID,
-DateTime pExpiryDateTime,
-Boolean pIsUsed,
-DateTime pCreatedAt,
-Object pUpdatedAt = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramToken = new DataColumnParameter(defToken, pToken);
-                DataColumnParameter paramPasswordResetTypeID = new DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID);
-                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-                DataColumnParameter paramExpiryDateTime = new DataColumnParameter(defExpiryDateTime, pExpiryDateTime);
-                DataColumnParameter paramIsUsed = new DataColumnParameter(defIsUsed, pIsUsed);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Token],[PasswordResetTypeID],[UserID],[ExpiryDateTime],[IsUsed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramToken.GetSQLQuotedValueForAdd(),
-paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
-paramUserID.GetSQLQuotedValueForAdd(),
-paramExpiryDateTime.GetSQLQuotedValueForAdd(),
-paramIsUsed.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,String pToken,
-Int32 pPasswordResetTypeID,
-Int32 pUserID,
-DateTime pExpiryDateTime,
-Boolean pIsUsed,
-DateTime pCreatedAt,
-Object pUpdatedAt = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramToken = new DataColumnParameter(defToken, pToken);
-DataColumnParameter paramPasswordResetTypeID = new DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID);
-DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-DataColumnParameter paramExpiryDateTime = new DataColumnParameter(defExpiryDateTime, pExpiryDateTime);
-DataColumnParameter paramIsUsed = new DataColumnParameter(defIsUsed, pIsUsed);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Token],[PasswordResetTypeID],[UserID],[ExpiryDateTime],[IsUsed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramToken.GetSQLQuotedValueForAdd(),
-paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
-paramUserID.GetSQLQuotedValueForAdd(),
-paramExpiryDateTime.GetSQLQuotedValueForAdd(),
-paramIsUsed.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(String pToken,
-Int32 pPasswordResetTypeID,
-Int32 pUserID,
-DateTime pExpiryDateTime,
-Boolean pIsUsed,
-DateTime pCreatedAt,
-Object pUpdatedAt= null){
-
-        try{
-
-DataColumnParameter paramToken = new DataColumnParameter(defToken, pToken);
-DataColumnParameter paramPasswordResetTypeID = new DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID);
-DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-DataColumnParameter paramExpiryDateTime = new DataColumnParameter(defExpiryDateTime, pExpiryDateTime);
-DataColumnParameter paramIsUsed = new DataColumnParameter(defIsUsed, pIsUsed);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([Token],[PasswordResetTypeID],[UserID],[ExpiryDateTime],[IsUsed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7}) ", TABLE_NAME,paramToken.GetSQLQuotedValueForAdd(),
-paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
-paramUserID.GetSQLQuotedValueForAdd(),
-paramExpiryDateTime.GetSQLQuotedValueForAdd(),
-paramIsUsed.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pToken = null,
-Object pPasswordResetTypeID = null,
-Object pUserID = null,
-Object pExpiryDateTime = null,
-Object pIsUsed = null,
-Object pCreatedAt = null,
-Object pUpdatedAt = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramToken = new DataColumnParameter(defToken, pToken);
- DataColumnParameter paramPasswordResetTypeID = new DataColumnParameter(defPasswordResetTypeID, pPasswordResetTypeID);
- DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
- DataColumnParameter paramExpiryDateTime = new DataColumnParameter(defExpiryDateTime, pExpiryDateTime);
- DataColumnParameter paramIsUsed = new DataColumnParameter(defIsUsed, pIsUsed);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [Token]={2},[PasswordResetTypeID]={3},[UserID]={4},[ExpiryDateTime]={5},[IsUsed]={6},[CreatedAt]={7},[UpdatedAt]={8} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramToken.GetSQLQuotedValueForUpdate(),
-paramPasswordResetTypeID.GetSQLQuotedValueForUpdate(),
-paramUserID.GetSQLQuotedValueForUpdate(),
-paramExpiryDateTime.GetSQLQuotedValueForUpdate(),
-paramIsUsed.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramUpdatedAt.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

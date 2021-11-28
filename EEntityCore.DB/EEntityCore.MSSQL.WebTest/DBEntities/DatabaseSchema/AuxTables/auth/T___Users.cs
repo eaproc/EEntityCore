@@ -23,15 +23,15 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___Users()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defUsername = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Username.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defPersonID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defUserPassword = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserPassword.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defRememberToken = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RememberToken.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsActive.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defResetModeCarrier = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ResetModeCarrier.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defUsername = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Username.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defPersonID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defUserPassword = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserPassword.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defRememberToken = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RememberToken.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsActive.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defResetModeCarrier = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ResetModeCarrier.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -247,10 +247,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
 
 
        public string ResetModeCarrier { get => (string)TargettedRow[TableColumnNames.ResetModeCarrier.ToString()]; }
@@ -301,224 +301,56 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(String pUsername,
-Int32 pPersonID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            string Username,
+            int PersonID,
+            string UserPassword,
+            bool IsActive,
+            DateTime CreatedAt,
+            string RememberToken = null,
+            DateTime? UpdatedAt = null,
+            string ResetModeCarrier = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramUsername = new DataColumnParameter(defUsername, pUsername);
-                DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-                DataColumnParameter paramUserPassword = new DataColumnParameter(defUserPassword, defUserPassword.DefaultValue);
-                DataColumnParameter paramRememberToken = new DataColumnParameter(defRememberToken, defRememberToken.DefaultValue);
-                DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, defIsActive.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
-                DataColumnParameter paramResetModeCarrier = new DataColumnParameter(defResetModeCarrier, defResetModeCarrier.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramUsername = new (defUsername, Username);
+                DataColumnParameter paramPersonID = new (defPersonID, PersonID);
+                DataColumnParameter paramUserPassword = new (defUserPassword, UserPassword);
+                DataColumnParameter paramRememberToken = new (defRememberToken, RememberToken);
+                DataColumnParameter paramIsActive = new (defIsActive, IsActive);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramResetModeCarrier = new (defResetModeCarrier, ResetModeCarrier);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramUsername.GetSQLQuotedValueForAdd(),
-                paramPersonID.GetSQLQuotedValueForAdd(),
-                paramUserPassword.GetSQLQuotedValueForAdd(),
-                paramRememberToken.GetSQLQuotedValueForAdd(),
-                paramIsActive.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                paramResetModeCarrier.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramUsername.GetSQLQuotedValueForAdd(),
+                        paramPersonID.GetSQLQuotedValueForAdd(),
+                        paramUserPassword.GetSQLQuotedValueForAdd(),
+                        paramRememberToken.GetSQLQuotedValueForAdd(),
+                        paramIsActive.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramResetModeCarrier.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(String pUsername,
-Int32 pPersonID,
-String pUserPassword,
-Boolean pIsActive,
-DateTime pCreatedAt,
-Object pRememberToken = null,
-Object pUpdatedAt = null,
-Object pResetModeCarrier = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramUsername = new DataColumnParameter(defUsername, pUsername);
-                DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-                DataColumnParameter paramUserPassword = new DataColumnParameter(defUserPassword, pUserPassword);
-                DataColumnParameter paramRememberToken = new DataColumnParameter(defRememberToken, pRememberToken);
-                DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-                DataColumnParameter paramResetModeCarrier = new DataColumnParameter(defResetModeCarrier, pResetModeCarrier);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramUsername.GetSQLQuotedValueForAdd(),
-paramPersonID.GetSQLQuotedValueForAdd(),
-paramUserPassword.GetSQLQuotedValueForAdd(),
-paramRememberToken.GetSQLQuotedValueForAdd(),
-paramIsActive.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramResetModeCarrier.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,String pUsername,
-Int32 pPersonID,
-String pUserPassword,
-Boolean pIsActive,
-DateTime pCreatedAt,
-Object pRememberToken = null,
-Object pUpdatedAt = null,
-Object pResetModeCarrier = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramUsername = new DataColumnParameter(defUsername, pUsername);
-DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-DataColumnParameter paramUserPassword = new DataColumnParameter(defUserPassword, pUserPassword);
-DataColumnParameter paramRememberToken = new DataColumnParameter(defRememberToken, pRememberToken);
-DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramResetModeCarrier = new DataColumnParameter(defResetModeCarrier, pResetModeCarrier);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramUsername.GetSQLQuotedValueForAdd(),
-paramPersonID.GetSQLQuotedValueForAdd(),
-paramUserPassword.GetSQLQuotedValueForAdd(),
-paramRememberToken.GetSQLQuotedValueForAdd(),
-paramIsActive.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramResetModeCarrier.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(String pUsername,
-Int32 pPersonID,
-String pUserPassword,
-Boolean pIsActive,
-DateTime pCreatedAt,
-Object pRememberToken= null,
-Object pUpdatedAt= null,
-Object pResetModeCarrier= null){
-
-        try{
-
-DataColumnParameter paramUsername = new DataColumnParameter(defUsername, pUsername);
-DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-DataColumnParameter paramUserPassword = new DataColumnParameter(defUserPassword, pUserPassword);
-DataColumnParameter paramRememberToken = new DataColumnParameter(defRememberToken, pRememberToken);
-DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramResetModeCarrier = new DataColumnParameter(defResetModeCarrier, pResetModeCarrier);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) ", TABLE_NAME,paramUsername.GetSQLQuotedValueForAdd(),
-paramPersonID.GetSQLQuotedValueForAdd(),
-paramUserPassword.GetSQLQuotedValueForAdd(),
-paramRememberToken.GetSQLQuotedValueForAdd(),
-paramIsActive.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramResetModeCarrier.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pUsername = null,
-Object pPersonID = null,
-Object pUserPassword = null,
-Object pIsActive = null,
-Object pCreatedAt = null,
-Object pRememberToken = null,
-Object pUpdatedAt = null,
-Object pResetModeCarrier = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramUsername = new DataColumnParameter(defUsername, pUsername);
- DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
- DataColumnParameter paramUserPassword = new DataColumnParameter(defUserPassword, pUserPassword);
- DataColumnParameter paramRememberToken = new DataColumnParameter(defRememberToken, pRememberToken);
- DataColumnParameter paramIsActive = new DataColumnParameter(defIsActive, pIsActive);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
- DataColumnParameter paramResetModeCarrier = new DataColumnParameter(defResetModeCarrier, pResetModeCarrier);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [Username]={2},[PersonID]={3},[UserPassword]={4},[RememberToken]={5},[IsActive]={6},[CreatedAt]={7},[UpdatedAt]={8},[ResetModeCarrier]={9} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramUsername.GetSQLQuotedValueForUpdate(),
-paramPersonID.GetSQLQuotedValueForUpdate(),
-paramUserPassword.GetSQLQuotedValueForUpdate(),
-paramRememberToken.GetSQLQuotedValueForUpdate(),
-paramIsActive.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramUpdatedAt.GetSQLQuotedValueForUpdate(),
-paramResetModeCarrier.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

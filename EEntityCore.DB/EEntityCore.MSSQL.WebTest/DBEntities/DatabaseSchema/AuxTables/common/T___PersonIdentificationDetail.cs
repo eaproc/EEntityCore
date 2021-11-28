@@ -23,17 +23,17 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___PersonIdentificationDetail()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defPersonID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Number.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defIdentificationTypeID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IdentificationTypeID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defIssuedDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IssuedDate.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIssuingCountryID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IssuingCountryID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defExpiryDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExpiryDate.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIdentificationViabilityID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IdentificationViabilityID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defDocumentFileName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DocumentFileName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defPersonID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Number.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defIdentificationTypeID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IdentificationTypeID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defIssuedDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IssuedDate.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIssuingCountryID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IssuingCountryID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defExpiryDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExpiryDate.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIdentificationViabilityID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IdentificationViabilityID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defDocumentFileName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DocumentFileName.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -263,13 +263,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public int IdentificationTypeID { get => (int)TargettedRow[TableColumnNames.IdentificationTypeID.ToString()]; }
 
 
-       public NullableDateTime IssuedDate { get => new (this.TargettedRow[TableColumnNames.IssuedDate.ToString()]); }
+       public DateTime? IssuedDate { get => (DateTime?)TargettedRow[TableColumnNames.IssuedDate.ToString()]; }
 
 
        public int IssuingCountryID { get => (int)TargettedRow[TableColumnNames.IssuingCountryID.ToString()]; }
 
 
-       public NullableDateTime ExpiryDate { get => new (this.TargettedRow[TableColumnNames.ExpiryDate.ToString()]); }
+       public DateTime? ExpiryDate { get => (DateTime?)TargettedRow[TableColumnNames.ExpiryDate.ToString()]; }
 
 
        public int IdentificationViabilityID { get => (int)TargettedRow[TableColumnNames.IdentificationViabilityID.ToString()]; }
@@ -278,10 +278,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public string DocumentFileName { get => (string)TargettedRow[TableColumnNames.DocumentFileName.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
 
 
  #endregion
@@ -329,255 +329,62 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(Int32 pPersonID,
-String pNumber,
-Int32 pIdentificationTypeID,
-Int32 pIssuingCountryID,
-Int32 pIdentificationViabilityID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            int PersonID,
+            string Number,
+            int IdentificationTypeID,
+            int IssuingCountryID,
+            int IdentificationViabilityID,
+            DateTime CreatedAt,
+            DateTime? IssuedDate = null,
+            DateTime? ExpiryDate = null,
+            string DocumentFileName = null,
+            DateTime? UpdatedAt = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-                DataColumnParameter paramNumber = new DataColumnParameter(defNumber, pNumber);
-                DataColumnParameter paramIdentificationTypeID = new DataColumnParameter(defIdentificationTypeID, pIdentificationTypeID);
-                DataColumnParameter paramIssuingCountryID = new DataColumnParameter(defIssuingCountryID, pIssuingCountryID);
-                DataColumnParameter paramIdentificationViabilityID = new DataColumnParameter(defIdentificationViabilityID, pIdentificationViabilityID);
-                DataColumnParameter paramIssuedDate = new DataColumnParameter(defIssuedDate, defIssuedDate.DefaultValue);
-                DataColumnParameter paramExpiryDate = new DataColumnParameter(defExpiryDate, defExpiryDate.DefaultValue);
-                DataColumnParameter paramDocumentFileName = new DataColumnParameter(defDocumentFileName, defDocumentFileName.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramPersonID = new (defPersonID, PersonID);
+                DataColumnParameter paramNumber = new (defNumber, Number);
+                DataColumnParameter paramIdentificationTypeID = new (defIdentificationTypeID, IdentificationTypeID);
+                DataColumnParameter paramIssuedDate = new (defIssuedDate, IssuedDate);
+                DataColumnParameter paramIssuingCountryID = new (defIssuingCountryID, IssuingCountryID);
+                DataColumnParameter paramExpiryDate = new (defExpiryDate, ExpiryDate);
+                DataColumnParameter paramIdentificationViabilityID = new (defIdentificationViabilityID, IdentificationViabilityID);
+                DataColumnParameter paramDocumentFileName = new (defDocumentFileName, DocumentFileName);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[Number],[IdentificationTypeID],[IssuedDate],[IssuingCountryID],[ExpiryDate],[IdentificationViabilityID],[DocumentFileName],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramPersonID.GetSQLQuotedValueForAdd(),
-                paramNumber.GetSQLQuotedValueForAdd(),
-                paramIdentificationTypeID.GetSQLQuotedValueForAdd(),
-                paramIssuedDate.GetSQLQuotedValueForAdd(),
-                paramIssuingCountryID.GetSQLQuotedValueForAdd(),
-                paramExpiryDate.GetSQLQuotedValueForAdd(),
-                paramIdentificationViabilityID.GetSQLQuotedValueForAdd(),
-                paramDocumentFileName.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[Number],[IdentificationTypeID],[IssuedDate],[IssuingCountryID],[ExpiryDate],[IdentificationViabilityID],[DocumentFileName],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramPersonID.GetSQLQuotedValueForAdd(),
+                        paramNumber.GetSQLQuotedValueForAdd(),
+                        paramIdentificationTypeID.GetSQLQuotedValueForAdd(),
+                        paramIssuedDate.GetSQLQuotedValueForAdd(),
+                        paramIssuingCountryID.GetSQLQuotedValueForAdd(),
+                        paramExpiryDate.GetSQLQuotedValueForAdd(),
+                        paramIdentificationViabilityID.GetSQLQuotedValueForAdd(),
+                        paramDocumentFileName.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(Int32 pPersonID,
-String pNumber,
-Int32 pIdentificationTypeID,
-Int32 pIssuingCountryID,
-Int32 pIdentificationViabilityID,
-DateTime pCreatedAt,
-Object pIssuedDate = null,
-Object pExpiryDate = null,
-Object pDocumentFileName = null,
-Object pUpdatedAt = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-                DataColumnParameter paramNumber = new DataColumnParameter(defNumber, pNumber);
-                DataColumnParameter paramIdentificationTypeID = new DataColumnParameter(defIdentificationTypeID, pIdentificationTypeID);
-                DataColumnParameter paramIssuedDate = new DataColumnParameter(defIssuedDate, pIssuedDate);
-                DataColumnParameter paramIssuingCountryID = new DataColumnParameter(defIssuingCountryID, pIssuingCountryID);
-                DataColumnParameter paramExpiryDate = new DataColumnParameter(defExpiryDate, pExpiryDate);
-                DataColumnParameter paramIdentificationViabilityID = new DataColumnParameter(defIdentificationViabilityID, pIdentificationViabilityID);
-                DataColumnParameter paramDocumentFileName = new DataColumnParameter(defDocumentFileName, pDocumentFileName);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[Number],[IdentificationTypeID],[IssuedDate],[IssuingCountryID],[ExpiryDate],[IdentificationViabilityID],[DocumentFileName],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramPersonID.GetSQLQuotedValueForAdd(),
-paramNumber.GetSQLQuotedValueForAdd(),
-paramIdentificationTypeID.GetSQLQuotedValueForAdd(),
-paramIssuedDate.GetSQLQuotedValueForAdd(),
-paramIssuingCountryID.GetSQLQuotedValueForAdd(),
-paramExpiryDate.GetSQLQuotedValueForAdd(),
-paramIdentificationViabilityID.GetSQLQuotedValueForAdd(),
-paramDocumentFileName.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,Int32 pPersonID,
-String pNumber,
-Int32 pIdentificationTypeID,
-Int32 pIssuingCountryID,
-Int32 pIdentificationViabilityID,
-DateTime pCreatedAt,
-Object pIssuedDate = null,
-Object pExpiryDate = null,
-Object pDocumentFileName = null,
-Object pUpdatedAt = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-DataColumnParameter paramNumber = new DataColumnParameter(defNumber, pNumber);
-DataColumnParameter paramIdentificationTypeID = new DataColumnParameter(defIdentificationTypeID, pIdentificationTypeID);
-DataColumnParameter paramIssuedDate = new DataColumnParameter(defIssuedDate, pIssuedDate);
-DataColumnParameter paramIssuingCountryID = new DataColumnParameter(defIssuingCountryID, pIssuingCountryID);
-DataColumnParameter paramExpiryDate = new DataColumnParameter(defExpiryDate, pExpiryDate);
-DataColumnParameter paramIdentificationViabilityID = new DataColumnParameter(defIdentificationViabilityID, pIdentificationViabilityID);
-DataColumnParameter paramDocumentFileName = new DataColumnParameter(defDocumentFileName, pDocumentFileName);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[Number],[IdentificationTypeID],[IssuedDate],[IssuingCountryID],[ExpiryDate],[IdentificationViabilityID],[DocumentFileName],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramPersonID.GetSQLQuotedValueForAdd(),
-paramNumber.GetSQLQuotedValueForAdd(),
-paramIdentificationTypeID.GetSQLQuotedValueForAdd(),
-paramIssuedDate.GetSQLQuotedValueForAdd(),
-paramIssuingCountryID.GetSQLQuotedValueForAdd(),
-paramExpiryDate.GetSQLQuotedValueForAdd(),
-paramIdentificationViabilityID.GetSQLQuotedValueForAdd(),
-paramDocumentFileName.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(Int32 pPersonID,
-String pNumber,
-Int32 pIdentificationTypeID,
-Int32 pIssuingCountryID,
-Int32 pIdentificationViabilityID,
-DateTime pCreatedAt,
-Object pIssuedDate= null,
-Object pExpiryDate= null,
-Object pDocumentFileName= null,
-Object pUpdatedAt= null){
-
-        try{
-
-DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-DataColumnParameter paramNumber = new DataColumnParameter(defNumber, pNumber);
-DataColumnParameter paramIdentificationTypeID = new DataColumnParameter(defIdentificationTypeID, pIdentificationTypeID);
-DataColumnParameter paramIssuedDate = new DataColumnParameter(defIssuedDate, pIssuedDate);
-DataColumnParameter paramIssuingCountryID = new DataColumnParameter(defIssuingCountryID, pIssuingCountryID);
-DataColumnParameter paramExpiryDate = new DataColumnParameter(defExpiryDate, pExpiryDate);
-DataColumnParameter paramIdentificationViabilityID = new DataColumnParameter(defIdentificationViabilityID, pIdentificationViabilityID);
-DataColumnParameter paramDocumentFileName = new DataColumnParameter(defDocumentFileName, pDocumentFileName);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([PersonID],[Number],[IdentificationTypeID],[IssuedDate],[IssuingCountryID],[ExpiryDate],[IdentificationViabilityID],[DocumentFileName],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,paramPersonID.GetSQLQuotedValueForAdd(),
-paramNumber.GetSQLQuotedValueForAdd(),
-paramIdentificationTypeID.GetSQLQuotedValueForAdd(),
-paramIssuedDate.GetSQLQuotedValueForAdd(),
-paramIssuingCountryID.GetSQLQuotedValueForAdd(),
-paramExpiryDate.GetSQLQuotedValueForAdd(),
-paramIdentificationViabilityID.GetSQLQuotedValueForAdd(),
-paramDocumentFileName.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pPersonID = null,
-Object pNumber = null,
-Object pIdentificationTypeID = null,
-Object pIssuingCountryID = null,
-Object pIdentificationViabilityID = null,
-Object pCreatedAt = null,
-Object pIssuedDate = null,
-Object pExpiryDate = null,
-Object pDocumentFileName = null,
-Object pUpdatedAt = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
- DataColumnParameter paramNumber = new DataColumnParameter(defNumber, pNumber);
- DataColumnParameter paramIdentificationTypeID = new DataColumnParameter(defIdentificationTypeID, pIdentificationTypeID);
- DataColumnParameter paramIssuedDate = new DataColumnParameter(defIssuedDate, pIssuedDate);
- DataColumnParameter paramIssuingCountryID = new DataColumnParameter(defIssuingCountryID, pIssuingCountryID);
- DataColumnParameter paramExpiryDate = new DataColumnParameter(defExpiryDate, pExpiryDate);
- DataColumnParameter paramIdentificationViabilityID = new DataColumnParameter(defIdentificationViabilityID, pIdentificationViabilityID);
- DataColumnParameter paramDocumentFileName = new DataColumnParameter(defDocumentFileName, pDocumentFileName);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [PersonID]={2},[Number]={3},[IdentificationTypeID]={4},[IssuedDate]={5},[IssuingCountryID]={6},[ExpiryDate]={7},[IdentificationViabilityID]={8},[DocumentFileName]={9},[CreatedAt]={10},[UpdatedAt]={11} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramPersonID.GetSQLQuotedValueForUpdate(),
-paramNumber.GetSQLQuotedValueForUpdate(),
-paramIdentificationTypeID.GetSQLQuotedValueForUpdate(),
-paramIssuedDate.GetSQLQuotedValueForUpdate(),
-paramIssuingCountryID.GetSQLQuotedValueForUpdate(),
-paramExpiryDate.GetSQLQuotedValueForUpdate(),
-paramIdentificationViabilityID.GetSQLQuotedValueForUpdate(),
-paramDocumentFileName.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramUpdatedAt.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

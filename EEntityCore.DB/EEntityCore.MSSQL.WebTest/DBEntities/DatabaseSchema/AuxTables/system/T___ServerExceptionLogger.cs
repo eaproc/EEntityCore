@@ -23,18 +23,18 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___ServerExceptionLogger()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defTraceID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TraceID.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defRequestParametersJSON = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RequestParametersJSON.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defExceptionMessage = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExceptionMessage.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defStackTrace = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.StackTrace.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsResolved = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsResolved.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defComments = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Comments.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAbsoluteURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AbsoluteURL.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIPAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IPAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defTraceID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TraceID.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defRequestParametersJSON = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RequestParametersJSON.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defExceptionMessage = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExceptionMessage.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defStackTrace = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.StackTrace.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsResolved = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsResolved.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defComments = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Comments.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAbsoluteURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AbsoluteURL.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIPAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IPAddress.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserID.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.FOREIGN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -261,10 +261,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
 
 
        public string AbsoluteURL { get => (string)TargettedRow[TableColumnNames.AbsoluteURL.ToString()]; }
@@ -321,266 +321,65 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(String pTraceID,
-Int32 pUserID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            string TraceID,
+            string ExceptionMessage,
+            bool IsResolved,
+            DateTime CreatedAt,
+            string AbsoluteURL,
+            string IPAddress,
+            string RequestParametersJSON = null,
+            string StackTrace = null,
+            string Comments = null,
+            DateTime? UpdatedAt = null,
+            int? UserID = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramTraceID = new DataColumnParameter(defTraceID, pTraceID);
-                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-                DataColumnParameter paramRequestParametersJSON = new DataColumnParameter(defRequestParametersJSON, defRequestParametersJSON.DefaultValue);
-                DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, defExceptionMessage.DefaultValue);
-                DataColumnParameter paramStackTrace = new DataColumnParameter(defStackTrace, defStackTrace.DefaultValue);
-                DataColumnParameter paramIsResolved = new DataColumnParameter(defIsResolved, defIsResolved.DefaultValue);
-                DataColumnParameter paramComments = new DataColumnParameter(defComments, defComments.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
-                DataColumnParameter paramAbsoluteURL = new DataColumnParameter(defAbsoluteURL, defAbsoluteURL.DefaultValue);
-                DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, defIPAddress.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramTraceID = new (defTraceID, TraceID);
+                DataColumnParameter paramRequestParametersJSON = new (defRequestParametersJSON, RequestParametersJSON);
+                DataColumnParameter paramExceptionMessage = new (defExceptionMessage, ExceptionMessage);
+                DataColumnParameter paramStackTrace = new (defStackTrace, StackTrace);
+                DataColumnParameter paramIsResolved = new (defIsResolved, IsResolved);
+                DataColumnParameter paramComments = new (defComments, Comments);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramAbsoluteURL = new (defAbsoluteURL, AbsoluteURL);
+                DataColumnParameter paramIPAddress = new (defIPAddress, IPAddress);
+                DataColumnParameter paramUserID = new (defUserID, UserID);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TraceID],[RequestParametersJSON],[ExceptionMessage],[StackTrace],[IsResolved],[Comments],[CreatedAt],[UpdatedAt],[AbsoluteURL],[IPAddress],[UserID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramTraceID.GetSQLQuotedValueForAdd(),
-                paramRequestParametersJSON.GetSQLQuotedValueForAdd(),
-                paramExceptionMessage.GetSQLQuotedValueForAdd(),
-                paramStackTrace.GetSQLQuotedValueForAdd(),
-                paramIsResolved.GetSQLQuotedValueForAdd(),
-                paramComments.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                paramAbsoluteURL.GetSQLQuotedValueForAdd(),
-                paramIPAddress.GetSQLQuotedValueForAdd(),
-                paramUserID.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TraceID],[RequestParametersJSON],[ExceptionMessage],[StackTrace],[IsResolved],[Comments],[CreatedAt],[UpdatedAt],[AbsoluteURL],[IPAddress],[UserID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramTraceID.GetSQLQuotedValueForAdd(),
+                        paramRequestParametersJSON.GetSQLQuotedValueForAdd(),
+                        paramExceptionMessage.GetSQLQuotedValueForAdd(),
+                        paramStackTrace.GetSQLQuotedValueForAdd(),
+                        paramIsResolved.GetSQLQuotedValueForAdd(),
+                        paramComments.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramAbsoluteURL.GetSQLQuotedValueForAdd(),
+                        paramIPAddress.GetSQLQuotedValueForAdd(),
+                        paramUserID.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(String pTraceID,
-String pExceptionMessage,
-Boolean pIsResolved,
-DateTime pCreatedAt,
-String pAbsoluteURL,
-String pIPAddress,
-Object pRequestParametersJSON = null,
-Object pStackTrace = null,
-Object pComments = null,
-Object pUpdatedAt = null,
-Object pUserID = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramTraceID = new DataColumnParameter(defTraceID, pTraceID);
-                DataColumnParameter paramRequestParametersJSON = new DataColumnParameter(defRequestParametersJSON, pRequestParametersJSON);
-                DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
-                DataColumnParameter paramStackTrace = new DataColumnParameter(defStackTrace, pStackTrace);
-                DataColumnParameter paramIsResolved = new DataColumnParameter(defIsResolved, pIsResolved);
-                DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-                DataColumnParameter paramAbsoluteURL = new DataColumnParameter(defAbsoluteURL, pAbsoluteURL);
-                DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
-                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TraceID],[RequestParametersJSON],[ExceptionMessage],[StackTrace],[IsResolved],[Comments],[CreatedAt],[UpdatedAt],[AbsoluteURL],[IPAddress],[UserID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramTraceID.GetSQLQuotedValueForAdd(),
-paramRequestParametersJSON.GetSQLQuotedValueForAdd(),
-paramExceptionMessage.GetSQLQuotedValueForAdd(),
-paramStackTrace.GetSQLQuotedValueForAdd(),
-paramIsResolved.GetSQLQuotedValueForAdd(),
-paramComments.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramAbsoluteURL.GetSQLQuotedValueForAdd(),
-paramIPAddress.GetSQLQuotedValueForAdd(),
-paramUserID.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,String pTraceID,
-String pExceptionMessage,
-Boolean pIsResolved,
-DateTime pCreatedAt,
-String pAbsoluteURL,
-String pIPAddress,
-Object pRequestParametersJSON = null,
-Object pStackTrace = null,
-Object pComments = null,
-Object pUpdatedAt = null,
-Object pUserID = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramTraceID = new DataColumnParameter(defTraceID, pTraceID);
-DataColumnParameter paramRequestParametersJSON = new DataColumnParameter(defRequestParametersJSON, pRequestParametersJSON);
-DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
-DataColumnParameter paramStackTrace = new DataColumnParameter(defStackTrace, pStackTrace);
-DataColumnParameter paramIsResolved = new DataColumnParameter(defIsResolved, pIsResolved);
-DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramAbsoluteURL = new DataColumnParameter(defAbsoluteURL, pAbsoluteURL);
-DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
-DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TraceID],[RequestParametersJSON],[ExceptionMessage],[StackTrace],[IsResolved],[Comments],[CreatedAt],[UpdatedAt],[AbsoluteURL],[IPAddress],[UserID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramTraceID.GetSQLQuotedValueForAdd(),
-paramRequestParametersJSON.GetSQLQuotedValueForAdd(),
-paramExceptionMessage.GetSQLQuotedValueForAdd(),
-paramStackTrace.GetSQLQuotedValueForAdd(),
-paramIsResolved.GetSQLQuotedValueForAdd(),
-paramComments.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramAbsoluteURL.GetSQLQuotedValueForAdd(),
-paramIPAddress.GetSQLQuotedValueForAdd(),
-paramUserID.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(String pTraceID,
-String pExceptionMessage,
-Boolean pIsResolved,
-DateTime pCreatedAt,
-String pAbsoluteURL,
-String pIPAddress,
-Object pRequestParametersJSON= null,
-Object pStackTrace= null,
-Object pComments= null,
-Object pUpdatedAt= null,
-Object pUserID= null){
-
-        try{
-
-DataColumnParameter paramTraceID = new DataColumnParameter(defTraceID, pTraceID);
-DataColumnParameter paramRequestParametersJSON = new DataColumnParameter(defRequestParametersJSON, pRequestParametersJSON);
-DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
-DataColumnParameter paramStackTrace = new DataColumnParameter(defStackTrace, pStackTrace);
-DataColumnParameter paramIsResolved = new DataColumnParameter(defIsResolved, pIsResolved);
-DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramAbsoluteURL = new DataColumnParameter(defAbsoluteURL, pAbsoluteURL);
-DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
-DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([TraceID],[RequestParametersJSON],[ExceptionMessage],[StackTrace],[IsResolved],[Comments],[CreatedAt],[UpdatedAt],[AbsoluteURL],[IPAddress],[UserID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) ", TABLE_NAME,paramTraceID.GetSQLQuotedValueForAdd(),
-paramRequestParametersJSON.GetSQLQuotedValueForAdd(),
-paramExceptionMessage.GetSQLQuotedValueForAdd(),
-paramStackTrace.GetSQLQuotedValueForAdd(),
-paramIsResolved.GetSQLQuotedValueForAdd(),
-paramComments.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramAbsoluteURL.GetSQLQuotedValueForAdd(),
-paramIPAddress.GetSQLQuotedValueForAdd(),
-paramUserID.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pTraceID = null,
-Object pExceptionMessage = null,
-Object pIsResolved = null,
-Object pCreatedAt = null,
-Object pAbsoluteURL = null,
-Object pIPAddress = null,
-Object pRequestParametersJSON = null,
-Object pStackTrace = null,
-Object pComments = null,
-Object pUpdatedAt = null,
-Object pUserID = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramTraceID = new DataColumnParameter(defTraceID, pTraceID);
- DataColumnParameter paramRequestParametersJSON = new DataColumnParameter(defRequestParametersJSON, pRequestParametersJSON);
- DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
- DataColumnParameter paramStackTrace = new DataColumnParameter(defStackTrace, pStackTrace);
- DataColumnParameter paramIsResolved = new DataColumnParameter(defIsResolved, pIsResolved);
- DataColumnParameter paramComments = new DataColumnParameter(defComments, pComments);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
- DataColumnParameter paramAbsoluteURL = new DataColumnParameter(defAbsoluteURL, pAbsoluteURL);
- DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
- DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [TraceID]={2},[RequestParametersJSON]={3},[ExceptionMessage]={4},[StackTrace]={5},[IsResolved]={6},[Comments]={7},[CreatedAt]={8},[UpdatedAt]={9},[AbsoluteURL]={10},[IPAddress]={11},[UserID]={12} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramTraceID.GetSQLQuotedValueForUpdate(),
-paramRequestParametersJSON.GetSQLQuotedValueForUpdate(),
-paramExceptionMessage.GetSQLQuotedValueForUpdate(),
-paramStackTrace.GetSQLQuotedValueForUpdate(),
-paramIsResolved.GetSQLQuotedValueForUpdate(),
-paramComments.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramUpdatedAt.GetSQLQuotedValueForUpdate(),
-paramAbsoluteURL.GetSQLQuotedValueForUpdate(),
-paramIPAddress.GetSQLQuotedValueForUpdate(),
-paramUserID.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

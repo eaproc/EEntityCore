@@ -23,20 +23,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___PaystackLog()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defPaymentGatewayStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentGatewayStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defIsFinalized = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsFinalized.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defInitializedByUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.InitializedByUserID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defReference = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Reference.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAccessCode = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccessCode.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defInitialLizeURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.InitialLizeURL.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPaymentURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentURL.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defVerifiyURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.VerifiyURL.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAmountKobo = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AmountKobo.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defVerifyResponseJSON = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.VerifyResponseJSON.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defVerifiedByUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.VerifiedByUserID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defPaymentGatewayStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentGatewayStatusID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defIsFinalized = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsFinalized.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defInitializedByUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.InitializedByUserID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defReference = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Reference.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAccessCode = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccessCode.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defInitialLizeURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.InitialLizeURL.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPaymentURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentURL.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defVerifiyURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.VerifiyURL.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAmountKobo = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AmountKobo.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defVerifyResponseJSON = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.VerifyResponseJSON.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defVerifiedByUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.VerifiedByUserID.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -293,10 +293,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public int? VerifiedByUserID { get => (int?)TargettedRow[TableColumnNames.VerifiedByUserID.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
 
 
  #endregion
@@ -344,295 +344,71 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(Int32 pPaymentGatewayStatusID,
-Int32 pInitializedByUserID,
-Int32 pVerifiedByUserID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            int PaymentGatewayStatusID,
+            bool IsFinalized,
+            int InitializedByUserID,
+            string InitialLizeURL,
+            int AmountKobo,
+            DateTime CreatedAt,
+            string Reference = null,
+            string AccessCode = null,
+            string PaymentURL = null,
+            string VerifiyURL = null,
+            string VerifyResponseJSON = null,
+            int? VerifiedByUserID = null,
+            DateTime? UpdatedAt = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramPaymentGatewayStatusID = new DataColumnParameter(defPaymentGatewayStatusID, pPaymentGatewayStatusID);
-                DataColumnParameter paramInitializedByUserID = new DataColumnParameter(defInitializedByUserID, pInitializedByUserID);
-                DataColumnParameter paramVerifiedByUserID = new DataColumnParameter(defVerifiedByUserID, pVerifiedByUserID);
-                DataColumnParameter paramIsFinalized = new DataColumnParameter(defIsFinalized, defIsFinalized.DefaultValue);
-                DataColumnParameter paramReference = new DataColumnParameter(defReference, defReference.DefaultValue);
-                DataColumnParameter paramAccessCode = new DataColumnParameter(defAccessCode, defAccessCode.DefaultValue);
-                DataColumnParameter paramInitialLizeURL = new DataColumnParameter(defInitialLizeURL, defInitialLizeURL.DefaultValue);
-                DataColumnParameter paramPaymentURL = new DataColumnParameter(defPaymentURL, defPaymentURL.DefaultValue);
-                DataColumnParameter paramVerifiyURL = new DataColumnParameter(defVerifiyURL, defVerifiyURL.DefaultValue);
-                DataColumnParameter paramAmountKobo = new DataColumnParameter(defAmountKobo, defAmountKobo.DefaultValue);
-                DataColumnParameter paramVerifyResponseJSON = new DataColumnParameter(defVerifyResponseJSON, defVerifyResponseJSON.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramPaymentGatewayStatusID = new (defPaymentGatewayStatusID, PaymentGatewayStatusID);
+                DataColumnParameter paramIsFinalized = new (defIsFinalized, IsFinalized);
+                DataColumnParameter paramInitializedByUserID = new (defInitializedByUserID, InitializedByUserID);
+                DataColumnParameter paramReference = new (defReference, Reference);
+                DataColumnParameter paramAccessCode = new (defAccessCode, AccessCode);
+                DataColumnParameter paramInitialLizeURL = new (defInitialLizeURL, InitialLizeURL);
+                DataColumnParameter paramPaymentURL = new (defPaymentURL, PaymentURL);
+                DataColumnParameter paramVerifiyURL = new (defVerifiyURL, VerifiyURL);
+                DataColumnParameter paramAmountKobo = new (defAmountKobo, AmountKobo);
+                DataColumnParameter paramVerifyResponseJSON = new (defVerifyResponseJSON, VerifyResponseJSON);
+                DataColumnParameter paramVerifiedByUserID = new (defVerifiedByUserID, VerifiedByUserID);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentGatewayStatusID],[IsFinalized],[InitializedByUserID],[Reference],[AccessCode],[InitialLizeURL],[PaymentURL],[VerifiyURL],[AmountKobo],[VerifyResponseJSON],[VerifiedByUserID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramPaymentGatewayStatusID.GetSQLQuotedValueForAdd(),
-                paramIsFinalized.GetSQLQuotedValueForAdd(),
-                paramInitializedByUserID.GetSQLQuotedValueForAdd(),
-                paramReference.GetSQLQuotedValueForAdd(),
-                paramAccessCode.GetSQLQuotedValueForAdd(),
-                paramInitialLizeURL.GetSQLQuotedValueForAdd(),
-                paramPaymentURL.GetSQLQuotedValueForAdd(),
-                paramVerifiyURL.GetSQLQuotedValueForAdd(),
-                paramAmountKobo.GetSQLQuotedValueForAdd(),
-                paramVerifyResponseJSON.GetSQLQuotedValueForAdd(),
-                paramVerifiedByUserID.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentGatewayStatusID],[IsFinalized],[InitializedByUserID],[Reference],[AccessCode],[InitialLizeURL],[PaymentURL],[VerifiyURL],[AmountKobo],[VerifyResponseJSON],[VerifiedByUserID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramPaymentGatewayStatusID.GetSQLQuotedValueForAdd(),
+                        paramIsFinalized.GetSQLQuotedValueForAdd(),
+                        paramInitializedByUserID.GetSQLQuotedValueForAdd(),
+                        paramReference.GetSQLQuotedValueForAdd(),
+                        paramAccessCode.GetSQLQuotedValueForAdd(),
+                        paramInitialLizeURL.GetSQLQuotedValueForAdd(),
+                        paramPaymentURL.GetSQLQuotedValueForAdd(),
+                        paramVerifiyURL.GetSQLQuotedValueForAdd(),
+                        paramAmountKobo.GetSQLQuotedValueForAdd(),
+                        paramVerifyResponseJSON.GetSQLQuotedValueForAdd(),
+                        paramVerifiedByUserID.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(Int32 pPaymentGatewayStatusID,
-Boolean pIsFinalized,
-Int32 pInitializedByUserID,
-String pInitialLizeURL,
-Int32 pAmountKobo,
-DateTime pCreatedAt,
-Object pReference = null,
-Object pAccessCode = null,
-Object pPaymentURL = null,
-Object pVerifiyURL = null,
-Object pVerifyResponseJSON = null,
-Object pVerifiedByUserID = null,
-Object pUpdatedAt = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramPaymentGatewayStatusID = new DataColumnParameter(defPaymentGatewayStatusID, pPaymentGatewayStatusID);
-                DataColumnParameter paramIsFinalized = new DataColumnParameter(defIsFinalized, pIsFinalized);
-                DataColumnParameter paramInitializedByUserID = new DataColumnParameter(defInitializedByUserID, pInitializedByUserID);
-                DataColumnParameter paramReference = new DataColumnParameter(defReference, pReference);
-                DataColumnParameter paramAccessCode = new DataColumnParameter(defAccessCode, pAccessCode);
-                DataColumnParameter paramInitialLizeURL = new DataColumnParameter(defInitialLizeURL, pInitialLizeURL);
-                DataColumnParameter paramPaymentURL = new DataColumnParameter(defPaymentURL, pPaymentURL);
-                DataColumnParameter paramVerifiyURL = new DataColumnParameter(defVerifiyURL, pVerifiyURL);
-                DataColumnParameter paramAmountKobo = new DataColumnParameter(defAmountKobo, pAmountKobo);
-                DataColumnParameter paramVerifyResponseJSON = new DataColumnParameter(defVerifyResponseJSON, pVerifyResponseJSON);
-                DataColumnParameter paramVerifiedByUserID = new DataColumnParameter(defVerifiedByUserID, pVerifiedByUserID);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentGatewayStatusID],[IsFinalized],[InitializedByUserID],[Reference],[AccessCode],[InitialLizeURL],[PaymentURL],[VerifiyURL],[AmountKobo],[VerifyResponseJSON],[VerifiedByUserID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramPaymentGatewayStatusID.GetSQLQuotedValueForAdd(),
-paramIsFinalized.GetSQLQuotedValueForAdd(),
-paramInitializedByUserID.GetSQLQuotedValueForAdd(),
-paramReference.GetSQLQuotedValueForAdd(),
-paramAccessCode.GetSQLQuotedValueForAdd(),
-paramInitialLizeURL.GetSQLQuotedValueForAdd(),
-paramPaymentURL.GetSQLQuotedValueForAdd(),
-paramVerifiyURL.GetSQLQuotedValueForAdd(),
-paramAmountKobo.GetSQLQuotedValueForAdd(),
-paramVerifyResponseJSON.GetSQLQuotedValueForAdd(),
-paramVerifiedByUserID.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,Int32 pPaymentGatewayStatusID,
-Boolean pIsFinalized,
-Int32 pInitializedByUserID,
-String pInitialLizeURL,
-Int32 pAmountKobo,
-DateTime pCreatedAt,
-Object pReference = null,
-Object pAccessCode = null,
-Object pPaymentURL = null,
-Object pVerifiyURL = null,
-Object pVerifyResponseJSON = null,
-Object pVerifiedByUserID = null,
-Object pUpdatedAt = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramPaymentGatewayStatusID = new DataColumnParameter(defPaymentGatewayStatusID, pPaymentGatewayStatusID);
-DataColumnParameter paramIsFinalized = new DataColumnParameter(defIsFinalized, pIsFinalized);
-DataColumnParameter paramInitializedByUserID = new DataColumnParameter(defInitializedByUserID, pInitializedByUserID);
-DataColumnParameter paramReference = new DataColumnParameter(defReference, pReference);
-DataColumnParameter paramAccessCode = new DataColumnParameter(defAccessCode, pAccessCode);
-DataColumnParameter paramInitialLizeURL = new DataColumnParameter(defInitialLizeURL, pInitialLizeURL);
-DataColumnParameter paramPaymentURL = new DataColumnParameter(defPaymentURL, pPaymentURL);
-DataColumnParameter paramVerifiyURL = new DataColumnParameter(defVerifiyURL, pVerifiyURL);
-DataColumnParameter paramAmountKobo = new DataColumnParameter(defAmountKobo, pAmountKobo);
-DataColumnParameter paramVerifyResponseJSON = new DataColumnParameter(defVerifyResponseJSON, pVerifyResponseJSON);
-DataColumnParameter paramVerifiedByUserID = new DataColumnParameter(defVerifiedByUserID, pVerifiedByUserID);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentGatewayStatusID],[IsFinalized],[InitializedByUserID],[Reference],[AccessCode],[InitialLizeURL],[PaymentURL],[VerifiyURL],[AmountKobo],[VerifyResponseJSON],[VerifiedByUserID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramPaymentGatewayStatusID.GetSQLQuotedValueForAdd(),
-paramIsFinalized.GetSQLQuotedValueForAdd(),
-paramInitializedByUserID.GetSQLQuotedValueForAdd(),
-paramReference.GetSQLQuotedValueForAdd(),
-paramAccessCode.GetSQLQuotedValueForAdd(),
-paramInitialLizeURL.GetSQLQuotedValueForAdd(),
-paramPaymentURL.GetSQLQuotedValueForAdd(),
-paramVerifiyURL.GetSQLQuotedValueForAdd(),
-paramAmountKobo.GetSQLQuotedValueForAdd(),
-paramVerifyResponseJSON.GetSQLQuotedValueForAdd(),
-paramVerifiedByUserID.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(Int32 pPaymentGatewayStatusID,
-Boolean pIsFinalized,
-Int32 pInitializedByUserID,
-String pInitialLizeURL,
-Int32 pAmountKobo,
-DateTime pCreatedAt,
-Object pReference= null,
-Object pAccessCode= null,
-Object pPaymentURL= null,
-Object pVerifiyURL= null,
-Object pVerifyResponseJSON= null,
-Object pVerifiedByUserID= null,
-Object pUpdatedAt= null){
-
-        try{
-
-DataColumnParameter paramPaymentGatewayStatusID = new DataColumnParameter(defPaymentGatewayStatusID, pPaymentGatewayStatusID);
-DataColumnParameter paramIsFinalized = new DataColumnParameter(defIsFinalized, pIsFinalized);
-DataColumnParameter paramInitializedByUserID = new DataColumnParameter(defInitializedByUserID, pInitializedByUserID);
-DataColumnParameter paramReference = new DataColumnParameter(defReference, pReference);
-DataColumnParameter paramAccessCode = new DataColumnParameter(defAccessCode, pAccessCode);
-DataColumnParameter paramInitialLizeURL = new DataColumnParameter(defInitialLizeURL, pInitialLizeURL);
-DataColumnParameter paramPaymentURL = new DataColumnParameter(defPaymentURL, pPaymentURL);
-DataColumnParameter paramVerifiyURL = new DataColumnParameter(defVerifiyURL, pVerifiyURL);
-DataColumnParameter paramAmountKobo = new DataColumnParameter(defAmountKobo, pAmountKobo);
-DataColumnParameter paramVerifyResponseJSON = new DataColumnParameter(defVerifyResponseJSON, pVerifyResponseJSON);
-DataColumnParameter paramVerifiedByUserID = new DataColumnParameter(defVerifiedByUserID, pVerifiedByUserID);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([PaymentGatewayStatusID],[IsFinalized],[InitializedByUserID],[Reference],[AccessCode],[InitialLizeURL],[PaymentURL],[VerifiyURL],[AmountKobo],[VerifyResponseJSON],[VerifiedByUserID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramPaymentGatewayStatusID.GetSQLQuotedValueForAdd(),
-paramIsFinalized.GetSQLQuotedValueForAdd(),
-paramInitializedByUserID.GetSQLQuotedValueForAdd(),
-paramReference.GetSQLQuotedValueForAdd(),
-paramAccessCode.GetSQLQuotedValueForAdd(),
-paramInitialLizeURL.GetSQLQuotedValueForAdd(),
-paramPaymentURL.GetSQLQuotedValueForAdd(),
-paramVerifiyURL.GetSQLQuotedValueForAdd(),
-paramAmountKobo.GetSQLQuotedValueForAdd(),
-paramVerifyResponseJSON.GetSQLQuotedValueForAdd(),
-paramVerifiedByUserID.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pPaymentGatewayStatusID = null,
-Object pIsFinalized = null,
-Object pInitializedByUserID = null,
-Object pInitialLizeURL = null,
-Object pAmountKobo = null,
-Object pCreatedAt = null,
-Object pReference = null,
-Object pAccessCode = null,
-Object pPaymentURL = null,
-Object pVerifiyURL = null,
-Object pVerifyResponseJSON = null,
-Object pVerifiedByUserID = null,
-Object pUpdatedAt = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramPaymentGatewayStatusID = new DataColumnParameter(defPaymentGatewayStatusID, pPaymentGatewayStatusID);
- DataColumnParameter paramIsFinalized = new DataColumnParameter(defIsFinalized, pIsFinalized);
- DataColumnParameter paramInitializedByUserID = new DataColumnParameter(defInitializedByUserID, pInitializedByUserID);
- DataColumnParameter paramReference = new DataColumnParameter(defReference, pReference);
- DataColumnParameter paramAccessCode = new DataColumnParameter(defAccessCode, pAccessCode);
- DataColumnParameter paramInitialLizeURL = new DataColumnParameter(defInitialLizeURL, pInitialLizeURL);
- DataColumnParameter paramPaymentURL = new DataColumnParameter(defPaymentURL, pPaymentURL);
- DataColumnParameter paramVerifiyURL = new DataColumnParameter(defVerifiyURL, pVerifiyURL);
- DataColumnParameter paramAmountKobo = new DataColumnParameter(defAmountKobo, pAmountKobo);
- DataColumnParameter paramVerifyResponseJSON = new DataColumnParameter(defVerifyResponseJSON, pVerifyResponseJSON);
- DataColumnParameter paramVerifiedByUserID = new DataColumnParameter(defVerifiedByUserID, pVerifiedByUserID);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [PaymentGatewayStatusID]={2},[IsFinalized]={3},[InitializedByUserID]={4},[Reference]={5},[AccessCode]={6},[InitialLizeURL]={7},[PaymentURL]={8},[VerifiyURL]={9},[AmountKobo]={10},[VerifyResponseJSON]={11},[VerifiedByUserID]={12},[CreatedAt]={13},[UpdatedAt]={14} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramPaymentGatewayStatusID.GetSQLQuotedValueForUpdate(),
-paramIsFinalized.GetSQLQuotedValueForUpdate(),
-paramInitializedByUserID.GetSQLQuotedValueForUpdate(),
-paramReference.GetSQLQuotedValueForUpdate(),
-paramAccessCode.GetSQLQuotedValueForUpdate(),
-paramInitialLizeURL.GetSQLQuotedValueForUpdate(),
-paramPaymentURL.GetSQLQuotedValueForUpdate(),
-paramVerifiyURL.GetSQLQuotedValueForUpdate(),
-paramAmountKobo.GetSQLQuotedValueForUpdate(),
-paramVerifyResponseJSON.GetSQLQuotedValueForUpdate(),
-paramVerifiedByUserID.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramUpdatedAt.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

@@ -23,24 +23,24 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        static V___PersonLoginPlus1()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defUsername = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Username.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIdentificationNo = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IdentificationNo.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFirstName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FirstName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defLastName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LastName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defLastLoginTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LastLoginTime.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSessionTimeoutMins = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionTimeoutMins.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defLastActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LastActive.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTimeSpentSecs = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TimeSpentSecs.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSecondsLeft = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SecondsLeft.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defStatus = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Status.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSessionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionID.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIPAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IPAddress.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsActive.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defActiveSessions = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ActiveSessions.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defLoggedOutTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LoggedOutTime.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSessionIDCreatedTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionIDCreatedTime.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPersonID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUsername = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Username.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIdentificationNo = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IdentificationNo.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFirstName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FirstName.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defLastName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LastName.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defLastLoginTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LastLoginTime.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSessionTimeoutMins = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionTimeoutMins.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defLastActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LastActive.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTimeSpentSecs = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TimeSpentSecs.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSecondsLeft = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SecondsLeft.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defStatus = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Status.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSessionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionID.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIPAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IPAddress.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsActive.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defActiveSessions = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ActiveSessions.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defLoggedOutTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LoggedOutTime.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSessionIDCreatedTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionIDCreatedTime.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPersonID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defUsername.ColumnName, defUsername); 
@@ -265,13 +265,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()]; }
 
 
-       public NullableDateTime LastLoginTime { get => new (this.TargettedRow[TableColumnNames.LastLoginTime.ToString()]); }
+       public DateTime? LastLoginTime { get => (DateTime?)TargettedRow[TableColumnNames.LastLoginTime.ToString()]; }
 
 
        public int? SessionTimeoutMins { get => (int?)TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()]; }
 
 
-       public NullableDateTime LastActive { get => new (this.TargettedRow[TableColumnNames.LastActive.ToString()]); }
+       public DateTime? LastActive { get => (DateTime?)TargettedRow[TableColumnNames.LastActive.ToString()]; }
 
 
        public int? TimeSpentSecs { get => (int?)TargettedRow[TableColumnNames.TimeSpentSecs.ToString()]; }
@@ -295,10 +295,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public string ActiveSessions { get => (string)TargettedRow[TableColumnNames.ActiveSessions.ToString()]; }
 
 
-       public NullableDateTime LoggedOutTime { get => new (this.TargettedRow[TableColumnNames.LoggedOutTime.ToString()]); }
+       public DateTime? LoggedOutTime { get => (DateTime?)TargettedRow[TableColumnNames.LoggedOutTime.ToString()]; }
 
 
-       public NullableDateTime SessionIDCreatedTime { get => new (this.TargettedRow[TableColumnNames.SessionIDCreatedTime.ToString()]); }
+       public DateTime? SessionIDCreatedTime { get => (DateTime?)TargettedRow[TableColumnNames.SessionIDCreatedTime.ToString()]; }
 
 
        public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }

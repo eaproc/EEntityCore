@@ -23,23 +23,23 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___PayrollPersonnel()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defPayrollID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PayrollID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defPersonnelID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonnelID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defAttendanceCount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AttendanceCount.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSalaryAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SalaryAmount.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defRatePerDay = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RatePerDay.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCalculatedAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CalculatedAmount.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsDisbursed = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsDisbursed.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defHRComments = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.HRComments.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defApprovedAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ApprovedAmount.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBursarComments = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BursarComments.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDisbursedAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DisbursedAmount.ToString(), typeof(Decimal),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defDisbursedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DisbursedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedByID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defPayrollID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PayrollID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defPersonnelID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonnelID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defAttendanceCount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AttendanceCount.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSalaryAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SalaryAmount.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defRatePerDay = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RatePerDay.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCalculatedAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CalculatedAmount.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsDisbursed = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsDisbursed.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defHRComments = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.HRComments.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defApprovedAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ApprovedAmount.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBursarComments = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BursarComments.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDisbursedAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DisbursedAmount.ToString(), typeof(decimal?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defDisbursedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DisbursedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedByID.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.FOREIGN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -311,16 +311,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public decimal? DisbursedAmount { get => (decimal?)TargettedRow[TableColumnNames.DisbursedAmount.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
        public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
 
 
-       public NullableDateTime DisbursedAt { get => new (this.TargettedRow[TableColumnNames.DisbursedAt.ToString()]); }
+       public DateTime? DisbursedAt { get => (DateTime?)TargettedRow[TableColumnNames.DisbursedAt.ToString()]; }
 
 
        public int? UpdatedByID { get => (int?)TargettedRow[TableColumnNames.UpdatedByID.ToString()]; }
@@ -371,338 +371,80 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(Int32 pPayrollID,
-Int32 pPersonnelID,
-Int32 pCreatedByID,
-Int32 pUpdatedByID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            int PayrollID,
+            int PersonnelID,
+            int AttendanceCount,
+            decimal SalaryAmount,
+            decimal RatePerDay,
+            decimal CalculatedAmount,
+            bool IsDisbursed,
+            decimal ApprovedAmount,
+            DateTime CreatedAt,
+            int CreatedByID,
+            string HRComments = null,
+            string BursarComments = null,
+            decimal? DisbursedAmount = null,
+            DateTime? UpdatedAt = null,
+            DateTime? DisbursedAt = null,
+            int? UpdatedByID = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramPayrollID = new DataColumnParameter(defPayrollID, pPayrollID);
-                DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-                DataColumnParameter paramAttendanceCount = new DataColumnParameter(defAttendanceCount, defAttendanceCount.DefaultValue);
-                DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, defSalaryAmount.DefaultValue);
-                DataColumnParameter paramRatePerDay = new DataColumnParameter(defRatePerDay, defRatePerDay.DefaultValue);
-                DataColumnParameter paramCalculatedAmount = new DataColumnParameter(defCalculatedAmount, defCalculatedAmount.DefaultValue);
-                DataColumnParameter paramIsDisbursed = new DataColumnParameter(defIsDisbursed, defIsDisbursed.DefaultValue);
-                DataColumnParameter paramHRComments = new DataColumnParameter(defHRComments, defHRComments.DefaultValue);
-                DataColumnParameter paramApprovedAmount = new DataColumnParameter(defApprovedAmount, defApprovedAmount.DefaultValue);
-                DataColumnParameter paramBursarComments = new DataColumnParameter(defBursarComments, defBursarComments.DefaultValue);
-                DataColumnParameter paramDisbursedAmount = new DataColumnParameter(defDisbursedAmount, defDisbursedAmount.DefaultValue);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramDisbursedAt = new DataColumnParameter(defDisbursedAt, defDisbursedAt.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramPayrollID = new (defPayrollID, PayrollID);
+                DataColumnParameter paramPersonnelID = new (defPersonnelID, PersonnelID);
+                DataColumnParameter paramAttendanceCount = new (defAttendanceCount, AttendanceCount);
+                DataColumnParameter paramSalaryAmount = new (defSalaryAmount, SalaryAmount);
+                DataColumnParameter paramRatePerDay = new (defRatePerDay, RatePerDay);
+                DataColumnParameter paramCalculatedAmount = new (defCalculatedAmount, CalculatedAmount);
+                DataColumnParameter paramIsDisbursed = new (defIsDisbursed, IsDisbursed);
+                DataColumnParameter paramHRComments = new (defHRComments, HRComments);
+                DataColumnParameter paramApprovedAmount = new (defApprovedAmount, ApprovedAmount);
+                DataColumnParameter paramBursarComments = new (defBursarComments, BursarComments);
+                DataColumnParameter paramDisbursedAmount = new (defDisbursedAmount, DisbursedAmount);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramDisbursedAt = new (defDisbursedAt, DisbursedAt);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramPayrollID.GetSQLQuotedValueForAdd(),
-                paramPersonnelID.GetSQLQuotedValueForAdd(),
-                paramAttendanceCount.GetSQLQuotedValueForAdd(),
-                paramSalaryAmount.GetSQLQuotedValueForAdd(),
-                paramRatePerDay.GetSQLQuotedValueForAdd(),
-                paramCalculatedAmount.GetSQLQuotedValueForAdd(),
-                paramIsDisbursed.GetSQLQuotedValueForAdd(),
-                paramHRComments.GetSQLQuotedValueForAdd(),
-                paramApprovedAmount.GetSQLQuotedValueForAdd(),
-                paramBursarComments.GetSQLQuotedValueForAdd(),
-                paramDisbursedAmount.GetSQLQuotedValueForAdd(),
-                paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramCreatedByID.GetSQLQuotedValueForAdd(),
-                paramDisbursedAt.GetSQLQuotedValueForAdd(),
-                paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramPayrollID.GetSQLQuotedValueForAdd(),
+                        paramPersonnelID.GetSQLQuotedValueForAdd(),
+                        paramAttendanceCount.GetSQLQuotedValueForAdd(),
+                        paramSalaryAmount.GetSQLQuotedValueForAdd(),
+                        paramRatePerDay.GetSQLQuotedValueForAdd(),
+                        paramCalculatedAmount.GetSQLQuotedValueForAdd(),
+                        paramIsDisbursed.GetSQLQuotedValueForAdd(),
+                        paramHRComments.GetSQLQuotedValueForAdd(),
+                        paramApprovedAmount.GetSQLQuotedValueForAdd(),
+                        paramBursarComments.GetSQLQuotedValueForAdd(),
+                        paramDisbursedAmount.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramDisbursedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(Int32 pPayrollID,
-Int32 pPersonnelID,
-Int32 pAttendanceCount,
-Decimal pSalaryAmount,
-Decimal pRatePerDay,
-Decimal pCalculatedAmount,
-Boolean pIsDisbursed,
-Decimal pApprovedAmount,
-DateTime pCreatedAt,
-Int32 pCreatedByID,
-Object pHRComments = null,
-Object pBursarComments = null,
-Object pDisbursedAmount = null,
-Object pUpdatedAt = null,
-Object pDisbursedAt = null,
-Object pUpdatedByID = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramPayrollID = new DataColumnParameter(defPayrollID, pPayrollID);
-                DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
-                DataColumnParameter paramAttendanceCount = new DataColumnParameter(defAttendanceCount, pAttendanceCount);
-                DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
-                DataColumnParameter paramRatePerDay = new DataColumnParameter(defRatePerDay, pRatePerDay);
-                DataColumnParameter paramCalculatedAmount = new DataColumnParameter(defCalculatedAmount, pCalculatedAmount);
-                DataColumnParameter paramIsDisbursed = new DataColumnParameter(defIsDisbursed, pIsDisbursed);
-                DataColumnParameter paramHRComments = new DataColumnParameter(defHRComments, pHRComments);
-                DataColumnParameter paramApprovedAmount = new DataColumnParameter(defApprovedAmount, pApprovedAmount);
-                DataColumnParameter paramBursarComments = new DataColumnParameter(defBursarComments, pBursarComments);
-                DataColumnParameter paramDisbursedAmount = new DataColumnParameter(defDisbursedAmount, pDisbursedAmount);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-                DataColumnParameter paramDisbursedAt = new DataColumnParameter(defDisbursedAt, pDisbursedAt);
-                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramPayrollID.GetSQLQuotedValueForAdd(),
-paramPersonnelID.GetSQLQuotedValueForAdd(),
-paramAttendanceCount.GetSQLQuotedValueForAdd(),
-paramSalaryAmount.GetSQLQuotedValueForAdd(),
-paramRatePerDay.GetSQLQuotedValueForAdd(),
-paramCalculatedAmount.GetSQLQuotedValueForAdd(),
-paramIsDisbursed.GetSQLQuotedValueForAdd(),
-paramHRComments.GetSQLQuotedValueForAdd(),
-paramApprovedAmount.GetSQLQuotedValueForAdd(),
-paramBursarComments.GetSQLQuotedValueForAdd(),
-paramDisbursedAmount.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramDisbursedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,Int32 pPayrollID,
-Int32 pPersonnelID,
-Int32 pAttendanceCount,
-Decimal pSalaryAmount,
-Decimal pRatePerDay,
-Decimal pCalculatedAmount,
-Boolean pIsDisbursed,
-Decimal pApprovedAmount,
-DateTime pCreatedAt,
-Int32 pCreatedByID,
-Object pHRComments = null,
-Object pBursarComments = null,
-Object pDisbursedAmount = null,
-Object pUpdatedAt = null,
-Object pDisbursedAt = null,
-Object pUpdatedByID = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramPayrollID = new DataColumnParameter(defPayrollID, pPayrollID);
-DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
-DataColumnParameter paramAttendanceCount = new DataColumnParameter(defAttendanceCount, pAttendanceCount);
-DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
-DataColumnParameter paramRatePerDay = new DataColumnParameter(defRatePerDay, pRatePerDay);
-DataColumnParameter paramCalculatedAmount = new DataColumnParameter(defCalculatedAmount, pCalculatedAmount);
-DataColumnParameter paramIsDisbursed = new DataColumnParameter(defIsDisbursed, pIsDisbursed);
-DataColumnParameter paramHRComments = new DataColumnParameter(defHRComments, pHRComments);
-DataColumnParameter paramApprovedAmount = new DataColumnParameter(defApprovedAmount, pApprovedAmount);
-DataColumnParameter paramBursarComments = new DataColumnParameter(defBursarComments, pBursarComments);
-DataColumnParameter paramDisbursedAmount = new DataColumnParameter(defDisbursedAmount, pDisbursedAmount);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-DataColumnParameter paramDisbursedAt = new DataColumnParameter(defDisbursedAt, pDisbursedAt);
-DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramPayrollID.GetSQLQuotedValueForAdd(),
-paramPersonnelID.GetSQLQuotedValueForAdd(),
-paramAttendanceCount.GetSQLQuotedValueForAdd(),
-paramSalaryAmount.GetSQLQuotedValueForAdd(),
-paramRatePerDay.GetSQLQuotedValueForAdd(),
-paramCalculatedAmount.GetSQLQuotedValueForAdd(),
-paramIsDisbursed.GetSQLQuotedValueForAdd(),
-paramHRComments.GetSQLQuotedValueForAdd(),
-paramApprovedAmount.GetSQLQuotedValueForAdd(),
-paramBursarComments.GetSQLQuotedValueForAdd(),
-paramDisbursedAmount.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramDisbursedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(Int32 pPayrollID,
-Int32 pPersonnelID,
-Int32 pAttendanceCount,
-Decimal pSalaryAmount,
-Decimal pRatePerDay,
-Decimal pCalculatedAmount,
-Boolean pIsDisbursed,
-Decimal pApprovedAmount,
-DateTime pCreatedAt,
-Int32 pCreatedByID,
-Object pHRComments= null,
-Object pBursarComments= null,
-Object pDisbursedAmount= null,
-Object pUpdatedAt= null,
-Object pDisbursedAt= null,
-Object pUpdatedByID= null){
-
-        try{
-
-DataColumnParameter paramPayrollID = new DataColumnParameter(defPayrollID, pPayrollID);
-DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
-DataColumnParameter paramAttendanceCount = new DataColumnParameter(defAttendanceCount, pAttendanceCount);
-DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
-DataColumnParameter paramRatePerDay = new DataColumnParameter(defRatePerDay, pRatePerDay);
-DataColumnParameter paramCalculatedAmount = new DataColumnParameter(defCalculatedAmount, pCalculatedAmount);
-DataColumnParameter paramIsDisbursed = new DataColumnParameter(defIsDisbursed, pIsDisbursed);
-DataColumnParameter paramHRComments = new DataColumnParameter(defHRComments, pHRComments);
-DataColumnParameter paramApprovedAmount = new DataColumnParameter(defApprovedAmount, pApprovedAmount);
-DataColumnParameter paramBursarComments = new DataColumnParameter(defBursarComments, pBursarComments);
-DataColumnParameter paramDisbursedAmount = new DataColumnParameter(defDisbursedAmount, pDisbursedAmount);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-DataColumnParameter paramDisbursedAt = new DataColumnParameter(defDisbursedAt, pDisbursedAt);
-DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramPayrollID.GetSQLQuotedValueForAdd(),
-paramPersonnelID.GetSQLQuotedValueForAdd(),
-paramAttendanceCount.GetSQLQuotedValueForAdd(),
-paramSalaryAmount.GetSQLQuotedValueForAdd(),
-paramRatePerDay.GetSQLQuotedValueForAdd(),
-paramCalculatedAmount.GetSQLQuotedValueForAdd(),
-paramIsDisbursed.GetSQLQuotedValueForAdd(),
-paramHRComments.GetSQLQuotedValueForAdd(),
-paramApprovedAmount.GetSQLQuotedValueForAdd(),
-paramBursarComments.GetSQLQuotedValueForAdd(),
-paramDisbursedAmount.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramDisbursedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pPayrollID = null,
-Object pPersonnelID = null,
-Object pAttendanceCount = null,
-Object pSalaryAmount = null,
-Object pRatePerDay = null,
-Object pCalculatedAmount = null,
-Object pIsDisbursed = null,
-Object pApprovedAmount = null,
-Object pCreatedAt = null,
-Object pCreatedByID = null,
-Object pHRComments = null,
-Object pBursarComments = null,
-Object pDisbursedAmount = null,
-Object pUpdatedAt = null,
-Object pDisbursedAt = null,
-Object pUpdatedByID = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramPayrollID = new DataColumnParameter(defPayrollID, pPayrollID);
- DataColumnParameter paramPersonnelID = new DataColumnParameter(defPersonnelID, pPersonnelID);
- DataColumnParameter paramAttendanceCount = new DataColumnParameter(defAttendanceCount, pAttendanceCount);
- DataColumnParameter paramSalaryAmount = new DataColumnParameter(defSalaryAmount, pSalaryAmount);
- DataColumnParameter paramRatePerDay = new DataColumnParameter(defRatePerDay, pRatePerDay);
- DataColumnParameter paramCalculatedAmount = new DataColumnParameter(defCalculatedAmount, pCalculatedAmount);
- DataColumnParameter paramIsDisbursed = new DataColumnParameter(defIsDisbursed, pIsDisbursed);
- DataColumnParameter paramHRComments = new DataColumnParameter(defHRComments, pHRComments);
- DataColumnParameter paramApprovedAmount = new DataColumnParameter(defApprovedAmount, pApprovedAmount);
- DataColumnParameter paramBursarComments = new DataColumnParameter(defBursarComments, pBursarComments);
- DataColumnParameter paramDisbursedAmount = new DataColumnParameter(defDisbursedAmount, pDisbursedAmount);
- DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
- DataColumnParameter paramDisbursedAt = new DataColumnParameter(defDisbursedAt, pDisbursedAt);
- DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [PayrollID]={2},[PersonnelID]={3},[AttendanceCount]={4},[SalaryAmount]={5},[RatePerDay]={6},[CalculatedAmount]={7},[IsDisbursed]={8},[HRComments]={9},[ApprovedAmount]={10},[BursarComments]={11},[DisbursedAmount]={12},[UpdatedAt]={13},[CreatedAt]={14},[CreatedByID]={15},[DisbursedAt]={16},[UpdatedByID]={17} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramPayrollID.GetSQLQuotedValueForUpdate(),
-paramPersonnelID.GetSQLQuotedValueForUpdate(),
-paramAttendanceCount.GetSQLQuotedValueForUpdate(),
-paramSalaryAmount.GetSQLQuotedValueForUpdate(),
-paramRatePerDay.GetSQLQuotedValueForUpdate(),
-paramCalculatedAmount.GetSQLQuotedValueForUpdate(),
-paramIsDisbursed.GetSQLQuotedValueForUpdate(),
-paramHRComments.GetSQLQuotedValueForUpdate(),
-paramApprovedAmount.GetSQLQuotedValueForUpdate(),
-paramBursarComments.GetSQLQuotedValueForUpdate(),
-paramDisbursedAmount.GetSQLQuotedValueForUpdate(),
-paramUpdatedAt.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramCreatedByID.GetSQLQuotedValueForUpdate(),
-paramDisbursedAt.GetSQLQuotedValueForUpdate(),
-paramUpdatedByID.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

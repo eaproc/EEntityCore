@@ -23,17 +23,17 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___Expenditure()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defTermID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defIpAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IpAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defCashRequestID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CashRequestID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defTotal = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Total.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDataMonitorID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DataMonitorID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Charges.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSpentAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SpentAmount.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defChargesComments = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ChargesComments.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defTermID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defIpAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IpAddress.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defCashRequestID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CashRequestID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defTotal = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Total.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDataMonitorID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DataMonitorID.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Charges.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSpentAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SpentAmount.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defChargesComments = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ChargesComments.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -260,7 +260,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public string IpAddress { get => (string)TargettedRow[TableColumnNames.IpAddress.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
        public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
@@ -329,254 +329,62 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(Int32 pTermID,
-Int32 pCreatedByID,
-Int32 pCashRequestID,
-Int32 pDataMonitorID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            int TermID,
+            string IpAddress,
+            DateTime CreatedAt,
+            int CreatedByID,
+            int CashRequestID,
+            decimal Total,
+            decimal Charges,
+            decimal SpentAmount,
+            int? DataMonitorID = null,
+            string ChargesComments = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-                DataColumnParameter paramCashRequestID = new DataColumnParameter(defCashRequestID, pCashRequestID);
-                DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
-                DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, defIpAddress.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramTotal = new DataColumnParameter(defTotal, defTotal.DefaultValue);
-                DataColumnParameter paramCharges = new DataColumnParameter(defCharges, defCharges.DefaultValue);
-                DataColumnParameter paramSpentAmount = new DataColumnParameter(defSpentAmount, defSpentAmount.DefaultValue);
-                DataColumnParameter paramChargesComments = new DataColumnParameter(defChargesComments, defChargesComments.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramTermID = new (defTermID, TermID);
+                DataColumnParameter paramIpAddress = new (defIpAddress, IpAddress);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramCashRequestID = new (defCashRequestID, CashRequestID);
+                DataColumnParameter paramTotal = new (defTotal, Total);
+                DataColumnParameter paramDataMonitorID = new (defDataMonitorID, DataMonitorID);
+                DataColumnParameter paramCharges = new (defCharges, Charges);
+                DataColumnParameter paramSpentAmount = new (defSpentAmount, SpentAmount);
+                DataColumnParameter paramChargesComments = new (defChargesComments, ChargesComments);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[IpAddress],[CreatedAt],[CreatedByID],[CashRequestID],[Total],[DataMonitorID],[Charges],[SpentAmount],[ChargesComments]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramTermID.GetSQLQuotedValueForAdd(),
-                paramIpAddress.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramCreatedByID.GetSQLQuotedValueForAdd(),
-                paramCashRequestID.GetSQLQuotedValueForAdd(),
-                paramTotal.GetSQLQuotedValueForAdd(),
-                paramDataMonitorID.GetSQLQuotedValueForAdd(),
-                paramCharges.GetSQLQuotedValueForAdd(),
-                paramSpentAmount.GetSQLQuotedValueForAdd(),
-                paramChargesComments.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[IpAddress],[CreatedAt],[CreatedByID],[CashRequestID],[Total],[DataMonitorID],[Charges],[SpentAmount],[ChargesComments]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramTermID.GetSQLQuotedValueForAdd(),
+                        paramIpAddress.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramCashRequestID.GetSQLQuotedValueForAdd(),
+                        paramTotal.GetSQLQuotedValueForAdd(),
+                        paramDataMonitorID.GetSQLQuotedValueForAdd(),
+                        paramCharges.GetSQLQuotedValueForAdd(),
+                        paramSpentAmount.GetSQLQuotedValueForAdd(),
+                        paramChargesComments.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(Int32 pTermID,
-String pIpAddress,
-DateTime pCreatedAt,
-Int32 pCreatedByID,
-Int32 pCashRequestID,
-Decimal pTotal,
-Decimal pCharges,
-Decimal pSpentAmount,
-Object pDataMonitorID = null,
-Object pChargesComments = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
-                DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-                DataColumnParameter paramCashRequestID = new DataColumnParameter(defCashRequestID, pCashRequestID);
-                DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
-                DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
-                DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
-                DataColumnParameter paramSpentAmount = new DataColumnParameter(defSpentAmount, pSpentAmount);
-                DataColumnParameter paramChargesComments = new DataColumnParameter(defChargesComments, pChargesComments);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[IpAddress],[CreatedAt],[CreatedByID],[CashRequestID],[Total],[DataMonitorID],[Charges],[SpentAmount],[ChargesComments]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramTermID.GetSQLQuotedValueForAdd(),
-paramIpAddress.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramCashRequestID.GetSQLQuotedValueForAdd(),
-paramTotal.GetSQLQuotedValueForAdd(),
-paramDataMonitorID.GetSQLQuotedValueForAdd(),
-paramCharges.GetSQLQuotedValueForAdd(),
-paramSpentAmount.GetSQLQuotedValueForAdd(),
-paramChargesComments.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,Int32 pTermID,
-String pIpAddress,
-DateTime pCreatedAt,
-Int32 pCreatedByID,
-Int32 pCashRequestID,
-Decimal pTotal,
-Decimal pCharges,
-Decimal pSpentAmount,
-Object pDataMonitorID = null,
-Object pChargesComments = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
-DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-DataColumnParameter paramCashRequestID = new DataColumnParameter(defCashRequestID, pCashRequestID);
-DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
-DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
-DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
-DataColumnParameter paramSpentAmount = new DataColumnParameter(defSpentAmount, pSpentAmount);
-DataColumnParameter paramChargesComments = new DataColumnParameter(defChargesComments, pChargesComments);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[IpAddress],[CreatedAt],[CreatedByID],[CashRequestID],[Total],[DataMonitorID],[Charges],[SpentAmount],[ChargesComments]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramTermID.GetSQLQuotedValueForAdd(),
-paramIpAddress.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramCashRequestID.GetSQLQuotedValueForAdd(),
-paramTotal.GetSQLQuotedValueForAdd(),
-paramDataMonitorID.GetSQLQuotedValueForAdd(),
-paramCharges.GetSQLQuotedValueForAdd(),
-paramSpentAmount.GetSQLQuotedValueForAdd(),
-paramChargesComments.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(Int32 pTermID,
-String pIpAddress,
-DateTime pCreatedAt,
-Int32 pCreatedByID,
-Int32 pCashRequestID,
-Decimal pTotal,
-Decimal pCharges,
-Decimal pSpentAmount,
-Object pDataMonitorID= null,
-Object pChargesComments= null){
-
-        try{
-
-DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
-DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-DataColumnParameter paramCashRequestID = new DataColumnParameter(defCashRequestID, pCashRequestID);
-DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
-DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
-DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
-DataColumnParameter paramSpentAmount = new DataColumnParameter(defSpentAmount, pSpentAmount);
-DataColumnParameter paramChargesComments = new DataColumnParameter(defChargesComments, pChargesComments);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([TermID],[IpAddress],[CreatedAt],[CreatedByID],[CashRequestID],[Total],[DataMonitorID],[Charges],[SpentAmount],[ChargesComments]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,paramTermID.GetSQLQuotedValueForAdd(),
-paramIpAddress.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramCashRequestID.GetSQLQuotedValueForAdd(),
-paramTotal.GetSQLQuotedValueForAdd(),
-paramDataMonitorID.GetSQLQuotedValueForAdd(),
-paramCharges.GetSQLQuotedValueForAdd(),
-paramSpentAmount.GetSQLQuotedValueForAdd(),
-paramChargesComments.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pTermID = null,
-Object pIpAddress = null,
-Object pCreatedAt = null,
-Object pCreatedByID = null,
-Object pCashRequestID = null,
-Object pTotal = null,
-Object pCharges = null,
-Object pSpentAmount = null,
-Object pDataMonitorID = null,
-Object pChargesComments = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramTermID = new DataColumnParameter(defTermID, pTermID);
- DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
- DataColumnParameter paramCashRequestID = new DataColumnParameter(defCashRequestID, pCashRequestID);
- DataColumnParameter paramTotal = new DataColumnParameter(defTotal, pTotal);
- DataColumnParameter paramDataMonitorID = new DataColumnParameter(defDataMonitorID, pDataMonitorID);
- DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
- DataColumnParameter paramSpentAmount = new DataColumnParameter(defSpentAmount, pSpentAmount);
- DataColumnParameter paramChargesComments = new DataColumnParameter(defChargesComments, pChargesComments);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [TermID]={2},[IpAddress]={3},[CreatedAt]={4},[CreatedByID]={5},[CashRequestID]={6},[Total]={7},[DataMonitorID]={8},[Charges]={9},[SpentAmount]={10},[ChargesComments]={11} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramTermID.GetSQLQuotedValueForUpdate(),
-paramIpAddress.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramCreatedByID.GetSQLQuotedValueForUpdate(),
-paramCashRequestID.GetSQLQuotedValueForUpdate(),
-paramTotal.GetSQLQuotedValueForUpdate(),
-paramDataMonitorID.GetSQLQuotedValueForUpdate(),
-paramCharges.GetSQLQuotedValueForUpdate(),
-paramSpentAmount.GetSQLQuotedValueForUpdate(),
-paramChargesComments.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

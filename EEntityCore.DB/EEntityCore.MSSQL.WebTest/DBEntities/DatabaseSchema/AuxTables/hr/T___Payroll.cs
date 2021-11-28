@@ -23,14 +23,14 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___Payroll()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defStartDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.StartDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defEndDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.EndDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPayrollWorkingDays = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PayrollWorkingDays.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsApproved = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsApproved.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defMonthWorkingDays = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.MonthWorkingDays.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defStartDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.StartDate.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defEndDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.EndDate.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPayrollWorkingDays = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PayrollWorkingDays.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsApproved = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsApproved.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defMonthWorkingDays = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.MonthWorkingDays.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -226,10 +226,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defCreatedByID;
 
-       public NullableDateTime StartDate { get => new (this.TargettedRow[TableColumnNames.StartDate.ToString()]); }
+       public DateTime StartDate { get => (DateTime)TargettedRow[TableColumnNames.StartDate.ToString()]; }
 
 
-       public NullableDateTime EndDate { get => new (this.TargettedRow[TableColumnNames.EndDate.ToString()]); }
+       public DateTime EndDate { get => (DateTime)TargettedRow[TableColumnNames.EndDate.ToString()]; }
 
 
        public int PayrollWorkingDays { get => (int)TargettedRow[TableColumnNames.PayrollWorkingDays.ToString()]; }
@@ -241,7 +241,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public int MonthWorkingDays { get => (int)TargettedRow[TableColumnNames.MonthWorkingDays.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
        public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
@@ -292,209 +292,53 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(Int32 pCreatedByID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            DateTime StartDate,
+            DateTime EndDate,
+            int PayrollWorkingDays,
+            bool IsApproved,
+            int MonthWorkingDays,
+            DateTime CreatedAt,
+            int CreatedByID
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-                DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, defStartDate.DefaultValue);
-                DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, defEndDate.DefaultValue);
-                DataColumnParameter paramPayrollWorkingDays = new DataColumnParameter(defPayrollWorkingDays, defPayrollWorkingDays.DefaultValue);
-                DataColumnParameter paramIsApproved = new DataColumnParameter(defIsApproved, defIsApproved.DefaultValue);
-                DataColumnParameter paramMonthWorkingDays = new DataColumnParameter(defMonthWorkingDays, defMonthWorkingDays.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramStartDate = new (defStartDate, StartDate);
+                DataColumnParameter paramEndDate = new (defEndDate, EndDate);
+                DataColumnParameter paramPayrollWorkingDays = new (defPayrollWorkingDays, PayrollWorkingDays);
+                DataColumnParameter paramIsApproved = new (defIsApproved, IsApproved);
+                DataColumnParameter paramMonthWorkingDays = new (defMonthWorkingDays, MonthWorkingDays);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[StartDate],[EndDate],[PayrollWorkingDays],[IsApproved],[MonthWorkingDays],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramStartDate.GetSQLQuotedValueForAdd(),
-                paramEndDate.GetSQLQuotedValueForAdd(),
-                paramPayrollWorkingDays.GetSQLQuotedValueForAdd(),
-                paramIsApproved.GetSQLQuotedValueForAdd(),
-                paramMonthWorkingDays.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramCreatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[StartDate],[EndDate],[PayrollWorkingDays],[IsApproved],[MonthWorkingDays],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramStartDate.GetSQLQuotedValueForAdd(),
+                        paramEndDate.GetSQLQuotedValueForAdd(),
+                        paramPayrollWorkingDays.GetSQLQuotedValueForAdd(),
+                        paramIsApproved.GetSQLQuotedValueForAdd(),
+                        paramMonthWorkingDays.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(DateTime pStartDate,
-DateTime pEndDate,
-Int32 pPayrollWorkingDays,
-Boolean pIsApproved,
-Int32 pMonthWorkingDays,
-DateTime pCreatedAt,
-Int32 pCreatedByID){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
-                DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
-                DataColumnParameter paramPayrollWorkingDays = new DataColumnParameter(defPayrollWorkingDays, pPayrollWorkingDays);
-                DataColumnParameter paramIsApproved = new DataColumnParameter(defIsApproved, pIsApproved);
-                DataColumnParameter paramMonthWorkingDays = new DataColumnParameter(defMonthWorkingDays, pMonthWorkingDays);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[StartDate],[EndDate],[PayrollWorkingDays],[IsApproved],[MonthWorkingDays],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramStartDate.GetSQLQuotedValueForAdd(),
-paramEndDate.GetSQLQuotedValueForAdd(),
-paramPayrollWorkingDays.GetSQLQuotedValueForAdd(),
-paramIsApproved.GetSQLQuotedValueForAdd(),
-paramMonthWorkingDays.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,DateTime pStartDate,
-DateTime pEndDate,
-Int32 pPayrollWorkingDays,
-Boolean pIsApproved,
-Int32 pMonthWorkingDays,
-DateTime pCreatedAt,
-Int32 pCreatedByID){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
-DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
-DataColumnParameter paramPayrollWorkingDays = new DataColumnParameter(defPayrollWorkingDays, pPayrollWorkingDays);
-DataColumnParameter paramIsApproved = new DataColumnParameter(defIsApproved, pIsApproved);
-DataColumnParameter paramMonthWorkingDays = new DataColumnParameter(defMonthWorkingDays, pMonthWorkingDays);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[StartDate],[EndDate],[PayrollWorkingDays],[IsApproved],[MonthWorkingDays],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramStartDate.GetSQLQuotedValueForAdd(),
-paramEndDate.GetSQLQuotedValueForAdd(),
-paramPayrollWorkingDays.GetSQLQuotedValueForAdd(),
-paramIsApproved.GetSQLQuotedValueForAdd(),
-paramMonthWorkingDays.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(DateTime pStartDate,
-DateTime pEndDate,
-Int32 pPayrollWorkingDays,
-Boolean pIsApproved,
-Int32 pMonthWorkingDays,
-DateTime pCreatedAt,
-Int32 pCreatedByID){
-
-        try{
-
-DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
-DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
-DataColumnParameter paramPayrollWorkingDays = new DataColumnParameter(defPayrollWorkingDays, pPayrollWorkingDays);
-DataColumnParameter paramIsApproved = new DataColumnParameter(defIsApproved, pIsApproved);
-DataColumnParameter paramMonthWorkingDays = new DataColumnParameter(defMonthWorkingDays, pMonthWorkingDays);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([StartDate],[EndDate],[PayrollWorkingDays],[IsApproved],[MonthWorkingDays],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7}) ", TABLE_NAME,paramStartDate.GetSQLQuotedValueForAdd(),
-paramEndDate.GetSQLQuotedValueForAdd(),
-paramPayrollWorkingDays.GetSQLQuotedValueForAdd(),
-paramIsApproved.GetSQLQuotedValueForAdd(),
-paramMonthWorkingDays.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pStartDate = null,
-Object pEndDate = null,
-Object pPayrollWorkingDays = null,
-Object pIsApproved = null,
-Object pMonthWorkingDays = null,
-Object pCreatedAt = null,
-Object pCreatedByID = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramStartDate = new DataColumnParameter(defStartDate, pStartDate);
- DataColumnParameter paramEndDate = new DataColumnParameter(defEndDate, pEndDate);
- DataColumnParameter paramPayrollWorkingDays = new DataColumnParameter(defPayrollWorkingDays, pPayrollWorkingDays);
- DataColumnParameter paramIsApproved = new DataColumnParameter(defIsApproved, pIsApproved);
- DataColumnParameter paramMonthWorkingDays = new DataColumnParameter(defMonthWorkingDays, pMonthWorkingDays);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [StartDate]={2},[EndDate]={3},[PayrollWorkingDays]={4},[IsApproved]={5},[MonthWorkingDays]={6},[CreatedAt]={7},[CreatedByID]={8} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramStartDate.GetSQLQuotedValueForUpdate(),
-paramEndDate.GetSQLQuotedValueForUpdate(),
-paramPayrollWorkingDays.GetSQLQuotedValueForUpdate(),
-paramIsApproved.GetSQLQuotedValueForUpdate(),
-paramMonthWorkingDays.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramCreatedByID.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

@@ -215,9 +215,9 @@ Public MustInherit Class Server
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Overridable Function getSQLConnection() As SqlClient.SqlConnection
+    Public Overridable Function GetSQLConnection() As SqlClient.SqlConnection
 
-        Return Me.getSQLConnection(Me.CurrentDBInUse)
+        Return Me.GetSQLConnection(Me.CurrentDBInUse)
 
     End Function
 
@@ -226,7 +226,8 @@ Public MustInherit Class Server
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public MustOverride Function getSQLConnection(ByVal InitialCatalog As String) As SqlClient.SqlConnection
+    Public MustOverride Function GetSQLConnection(ByVal InitialCatalog As String) As SqlClient.SqlConnection
+
 
 
 
@@ -235,13 +236,11 @@ Public MustInherit Class Server
     ''' </summary>
     ''' <param name="SQLParameters"></param>
     ''' <remarks></remarks>
-    Public Overloads Function dbExec(ByVal StoredProcedure As String,
-                                ByVal ParamArray SQLParameters() As SqlClient.SqlParameter) As Boolean
+    Public Overloads Function DbExec(ByVal StoredProcedure As String, ByVal SQLParameters() As SqlParameter) As Boolean
 
 
 
-        Dim sqlDBCon As New SqlClient.SqlConnection
-        sqlDBCon = getSQLConnection()
+        Dim sqlDBCon = GetSQLConnection()
         If basExtensions.IsNothing(sqlDBCon) Then Return False
 
 
@@ -287,7 +286,7 @@ Public MustInherit Class Server
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Overrides Function DbExec(ByVal SQL As String) As Boolean
-        Return Me.dbExec(SQL, Me.CurrentDBInUse)
+        Return Me.DbExec(SQL, Me.CurrentDBInUse)
     End Function
 
 
@@ -297,7 +296,39 @@ Public MustInherit Class Server
     ''' <param name="SQL"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Overloads Function dbExec(ByVal SQL As String,
+    Public Overloads Function DbExec(ByVal SQL As String,
+                                     ByVal Connection As SqlConnection) As Boolean
+        Try
+
+
+            Dim sqlCommand As New SqlClient.SqlCommand
+            Using sqlCommand
+                sqlCommand.Connection = Connection
+                sqlCommand.CommandType = CommandType.Text
+                sqlCommand.CommandTimeout = 0  ' no time out here
+                sqlCommand.CommandText = SQL
+
+                sqlCommand.ExecuteNonQuery()
+
+            End Using
+
+        Catch ex As Exception
+
+            Dim ex2 = New SQLCodeException(SQL, ex)
+            Throw ex2
+
+        End Try
+
+        Return True
+    End Function
+
+    ''' <summary>
+    ''' Specify database to use
+    ''' </summary>
+    ''' <param name="SQL"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Overloads Function DbExec(ByVal SQL As String,
                                      ByVal UsingDatabase As String) As Boolean
 
 
@@ -305,9 +336,7 @@ Public MustInherit Class Server
         '
         '   Be careful because tracking works on the database name passed in
         '
-
-        Dim sqlDBCon As New SqlClient.SqlConnection
-        sqlDBCon = getSQLConnection(UsingDatabase)
+        Dim sqlDBCon = GetSQLConnection(UsingDatabase)
         If basExtensions.IsNothing(sqlDBCon) Then Return False
 
 
@@ -361,6 +390,36 @@ Public MustInherit Class Server
         Return Me.GetRS(SQL, Me.CurrentDBInUse)
     End Function
 
+    ''' <summary>
+    ''' Get RS using Specific DB. Throws Exception.
+    ''' Returns DataSet or throws Exception
+    ''' </summary>
+    ''' <param name="SQL"></param>
+    ''' <returns></returns>
+    ''' <exception cref="Exception"></exception>
+    ''' <remarks></remarks>
+    Public Overloads Function GetScopeIdentity(ByVal Connection As SqlConnection) As String
+
+        Try
+
+            Dim sqlCommand As New SqlClient.SqlCommand
+            Using sqlCommand
+                sqlCommand.Connection = Connection
+                sqlCommand.CommandType = CommandType.Text
+                sqlCommand.CommandTimeout = 0  ' no time out here
+
+                sqlCommand.CommandText = "SELECT SCOPE_IDENTITY()"
+
+                Return sqlCommand.ExecuteScalar()
+
+            End Using
+
+        Catch ex As Exception
+            Throw
+        End Try
+
+    End Function
+
 
     ''' <summary>
     ''' Get RS using Specific DB. Throws Exception.
@@ -379,8 +438,7 @@ Public MustInherit Class Server
 
         Dim srs As New DataSet()
 
-        Dim sqlDBCon As New SqlClient.SqlConnection
-        sqlDBCon = getSQLConnection(UsingDatabase)
+        Dim sqlDBCon = GetSQLConnection(UsingDatabase)
         If basExtensions.IsNothing(sqlDBCon) Then Return Nothing
 
 
@@ -435,7 +493,7 @@ Public MustInherit Class Server
         Dim srs As New DataSet()
 
         Dim sqlDBCon As New SqlClient.SqlConnection
-        sqlDBCon = getSQLConnection()
+        sqlDBCon = GetSQLConnection()
         If basExtensions.IsNothing(sqlDBCon) Then Return Nothing
 
         Try
@@ -516,7 +574,7 @@ Public MustInherit Class Server
     Public Overloads Function CanConnect(ByVal Silent As Boolean) As Boolean
 
 
-        Dim aCon As SqlConnection = Me.getSQLConnection()
+        Dim aCon As SqlConnection = Me.GetSQLConnection()
 
         Try
             If Not basExtensions.IsNothing(aCon) Then Return True
@@ -560,7 +618,7 @@ Public MustInherit Class Server
                                          ByVal ColumnID As Long,
                                          Optional ByVal ImageToSave As Byte() = Nothing) As Boolean
 
-        Dim Con As SqlClient.SqlConnection = Me.getSQLConnection()
+        Dim Con As SqlClient.SqlConnection = Me.GetSQLConnection()
         If Con Is Nothing Then Return False
 
         Try
@@ -626,7 +684,7 @@ Public MustInherit Class Server
                                          ByVal ColumnID As Long) As Byte()
 
 
-        Dim Con As SqlClient.SqlConnection = Me.getSQLConnection()
+        Dim Con As SqlClient.SqlConnection = Me.GetSQLConnection()
         If Con Is Nothing Then Return Nothing
 
         Try
@@ -678,7 +736,7 @@ Public MustInherit Class Server
                                          ByVal ColumnIDValue As Long,
                                          Optional ByVal pContents As Byte() = Nothing) As Boolean
 
-        Dim Con As SqlClient.SqlConnection = Me.getSQLConnection()
+        Dim Con As SqlClient.SqlConnection = Me.GetSQLConnection()
         If Con Is Nothing Then Return False
 
         Try
@@ -746,7 +804,7 @@ SaveAsNull:
                                          Optional ByVal ColumnIDName As String = "ID",
                                          Optional ByVal FilePath As String = Nothing) As Boolean
 
-        Dim Con As SqlClient.SqlConnection = Me.getSQLConnection()
+        Dim Con As SqlClient.SqlConnection = Me.GetSQLConnection()
         If Con Is Nothing Then Return False
 
         Try
@@ -817,7 +875,7 @@ SaveAsNull:
                                          Optional ByVal ColumnIDName As String = "ID",
                                          Optional ByVal FilePath As String = Nothing) As Boolean
 
-        Dim Con As SqlClient.SqlConnection = Me.getSQLConnection()
+        Dim Con As SqlClient.SqlConnection = Me.GetSQLConnection()
         If Con Is Nothing Then Return False
 
         Try
@@ -887,7 +945,7 @@ SaveAsNull:
                                          ByVal ColumnIDValue As Long,
                                          Optional ByVal ColumnIDName As String = "ID") As Byte()
 
-        Dim Con As SqlClient.SqlConnection = Me.getSQLConnection()
+        Dim Con As SqlClient.SqlConnection = Me.GetSQLConnection()
         If Con Is Nothing Then Return Nothing
 
 
@@ -939,7 +997,7 @@ SaveAsNull:
                                          ByVal ColumnIDValue As String,
                                          Optional ByVal ColumnIDName As String = "ID") As Byte()
 
-        Dim Con As SqlClient.SqlConnection = Me.getSQLConnection()
+        Dim Con As SqlClient.SqlConnection = Me.GetSQLConnection()
         If Con Is Nothing Then Return Nothing
 
 
@@ -1076,7 +1134,7 @@ SaveAsNull:
     Public Overrides Function FillMyTables(ByRef MyDataSet As DataSet) As Boolean
 
 
-        Dim Con As SqlClient.SqlConnection = Me.getSQLConnection()
+        Dim Con As SqlClient.SqlConnection = Me.GetSQLConnection()
         If Con Is Nothing Then Return False
 
         Try
@@ -1126,7 +1184,7 @@ SaveAsNull:
     Public Overrides Function FillMyTable(ByRef OneTable As DataTable) As Boolean
 
 
-        Dim Con As SqlClient.SqlConnection = Me.getSQLConnection()
+        Dim Con As SqlClient.SqlConnection = Me.GetSQLConnection()
         If Con Is Nothing Then Return False
 
         Try
@@ -1194,7 +1252,7 @@ SaveAsNull:
         End If
 
 
-        Dim Con As SqlClient.SqlConnection = Me.getSQLConnection()
+        Dim Con As SqlClient.SqlConnection = Me.GetSQLConnection()
         If Con Is Nothing Then Return False
 
 
@@ -1241,7 +1299,7 @@ SaveAsNull:
     ''' <remarks></remarks>
     Public Overrides Function FillMyTable(ByVal SQL As String, ByRef OneTable As System.Data.DataTable) As Boolean
 
-        Dim Con As SqlClient.SqlConnection = Me.getSQLConnection()
+        Dim Con As SqlClient.SqlConnection = Me.GetSQLConnection()
         If Con Is Nothing Then Return False
 
 
@@ -1290,7 +1348,7 @@ SaveAsNull:
                                 ByVal ParamArray SQLParameters() As SqlClient.SqlParameter) As Boolean
 
         Dim sqlDBCon As New SqlClient.SqlConnection
-        sqlDBCon = getSQLConnection()
+        sqlDBCon = GetSQLConnection()
         If basExtensions.IsNothing(sqlDBCon) Then Return Nothing
 
 
@@ -1676,7 +1734,7 @@ CleanUP:
             Logger.Log(
                     String.Format(
                         "Connection to Database: {0} ",
-                                getSQLConnection().State
+                                GetSQLConnection().State
                         )
                     )
             '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -1745,7 +1803,7 @@ CleanUP:
 
 
 
-        If Not dbExec(
+        If Not DbExec(
 "CREATE TABLE [dbo].[DBInfo] ( " &
   "[Version] decimal(19, 2) DEFAULT 0 NOT NULL, " &
   "[ID] int IDENTITY(1, 1) NOT FOR REPLICATION NOT NULL " &
@@ -1753,7 +1811,7 @@ CleanUP:
 "ON [PRIMARY]", DatabaseName
 ) Then Return False REM I expect by now this table shouldnt be on db
 
-        Return dbExec(
+        Return DbExec(
        String.Format(
            "INSERT INTO DBInfo (Version ) " &
         "VALUES({0})", 0

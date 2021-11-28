@@ -23,28 +23,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        static V___TermInvoiceGuide()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTermID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defClientID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClientID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCompanyName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CompanyName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defOriginalBillID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.OriginalBillID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBillDefinition = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BillDefinition.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBillDescription = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BillDescription.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTermStartDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermStartDate.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCurrentWeek = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CurrentWeek.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFirstBillDeadline = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FirstBillDeadline.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTermEndDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermEndDate.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSecondBillDeadline = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SecondBillDeadline.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defRatePerStudent = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RatePerStudent.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBilledRatePerStudent = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BilledRatePerStudent.ToString(), typeof(Decimal),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defRegisteredStudentCount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RegisteredStudentCount.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFullScholarshipStudentCount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FullScholarshipStudentCount.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBillableStudentCount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BillableStudentCount.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defExpectedMinimumBillable = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExpectedMinimumBillable.ToString(), typeof(Decimal),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defExpectedTotalBillable = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExpectedTotalBillable.ToString(), typeof(Decimal),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBilledAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BilledAmount.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBalance = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Balance.ToString(), typeof(Decimal),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBalanceDue = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BalanceDue.ToString(), typeof(Decimal),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTermID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defClientID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClientID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCompanyName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CompanyName.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defOriginalBillID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.OriginalBillID.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBillDefinition = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BillDefinition.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBillDescription = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BillDescription.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTermStartDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermStartDate.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCurrentWeek = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CurrentWeek.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFirstBillDeadline = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FirstBillDeadline.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTermEndDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermEndDate.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSecondBillDeadline = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SecondBillDeadline.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defRatePerStudent = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RatePerStudent.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBilledRatePerStudent = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BilledRatePerStudent.ToString(), typeof(decimal?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defRegisteredStudentCount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RegisteredStudentCount.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFullScholarshipStudentCount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FullScholarshipStudentCount.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBillableStudentCount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BillableStudentCount.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defExpectedMinimumBillable = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExpectedMinimumBillable.ToString(), typeof(decimal?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defExpectedTotalBillable = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExpectedTotalBillable.ToString(), typeof(decimal?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBilledAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BilledAmount.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBalance = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Balance.ToString(), typeof(decimal?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBalanceDue = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BalanceDue.ToString(), typeof(decimal?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -290,19 +290,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public string BillDescription { get => (string)TargettedRow[TableColumnNames.BillDescription.ToString()]; }
 
 
-       public NullableDateTime TermStartDate { get => new (this.TargettedRow[TableColumnNames.TermStartDate.ToString()]); }
+       public DateTime? TermStartDate { get => (DateTime?)TargettedRow[TableColumnNames.TermStartDate.ToString()]; }
 
 
        public int? CurrentWeek { get => (int?)TargettedRow[TableColumnNames.CurrentWeek.ToString()]; }
 
 
-       public NullableDateTime FirstBillDeadline { get => new (this.TargettedRow[TableColumnNames.FirstBillDeadline.ToString()]); }
+       public DateTime? FirstBillDeadline { get => (DateTime?)TargettedRow[TableColumnNames.FirstBillDeadline.ToString()]; }
 
 
-       public NullableDateTime TermEndDate { get => new (this.TargettedRow[TableColumnNames.TermEndDate.ToString()]); }
+       public DateTime? TermEndDate { get => (DateTime?)TargettedRow[TableColumnNames.TermEndDate.ToString()]; }
 
 
-       public NullableDateTime SecondBillDeadline { get => new (this.TargettedRow[TableColumnNames.SecondBillDeadline.ToString()]); }
+       public DateTime? SecondBillDeadline { get => (DateTime?)TargettedRow[TableColumnNames.SecondBillDeadline.ToString()]; }
 
 
        public decimal RatePerStudent { get => (decimal)TargettedRow[TableColumnNames.RatePerStudent.ToString()]; }

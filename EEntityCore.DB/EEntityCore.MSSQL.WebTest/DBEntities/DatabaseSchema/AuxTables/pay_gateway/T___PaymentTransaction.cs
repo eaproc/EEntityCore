@@ -23,33 +23,33 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___PaymentTransaction()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defTransactionStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TransactionStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defClientID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClientID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defStudentNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.StudentNumber.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFirstName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FirstName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defLastName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LastName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAccountName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountName.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAccountNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountNumber.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBank = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Bank.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defChannel = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Channel.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIPAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IPAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSchoolDiscountGiven = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SchoolDiscountGiven.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPaymentRequired = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentRequired.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Charges.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defRefundAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RefundAmount.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBalance = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Balance.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defConfirmationThreshold = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ConfirmationThreshold.ToString(), typeof(Decimal),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defConfirmationDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ConfirmationDate.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAwaitingDisbursement = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AwaitingDisbursement.ToString(), typeof(Boolean),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defUpdatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defConfirmedExplanation = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ConfirmedExplanation.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defChargesBilledToClient = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ChargesBilledToClient.ToString(), typeof(Boolean),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPaymentRequiredWithoutCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentRequiredWithoutCharges.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsMultiTarget = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsMultiTarget.ToString(), typeof(Boolean),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defTransactionStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TransactionStatusID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defClientID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClientID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defStudentNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.StudentNumber.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFirstName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FirstName.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defLastName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LastName.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAccountName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountName.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAccountNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountNumber.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBank = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Bank.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defChannel = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Channel.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIPAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IPAddress.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSchoolDiscountGiven = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SchoolDiscountGiven.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPaymentRequired = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentRequired.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Charges.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defRefundAmount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RefundAmount.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBalance = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Balance.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defConfirmationThreshold = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ConfirmationThreshold.ToString(), typeof(decimal?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defConfirmationDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ConfirmationDate.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAwaitingDisbursement = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AwaitingDisbursement.ToString(), typeof(bool?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defUpdatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedByID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defConfirmedExplanation = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ConfirmedExplanation.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defChargesBilledToClient = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ChargesBilledToClient.ToString(), typeof(bool?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPaymentRequiredWithoutCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentRequiredWithoutCharges.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsMultiTarget = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsMultiTarget.ToString(), typeof(bool?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -365,16 +365,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public decimal? ConfirmationThreshold { get => (decimal?)TargettedRow[TableColumnNames.ConfirmationThreshold.ToString()]; }
 
 
-       public NullableDateTime ConfirmationDate { get => new (this.TargettedRow[TableColumnNames.ConfirmationDate.ToString()]); }
+       public DateTime? ConfirmationDate { get => (DateTime?)TargettedRow[TableColumnNames.ConfirmationDate.ToString()]; }
 
 
        public bool? AwaitingDisbursement { get => (bool?)TargettedRow[TableColumnNames.AwaitingDisbursement.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
 
 
        public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
@@ -440,478 +440,110 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(Int32 pTransactionStatusID,
-Int32 pClientID,
-Int32 pCreatedByID,
-Int32 pUpdatedByID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            int TransactionStatusID,
+            int ClientID,
+            string StudentNumber,
+            string FirstName,
+            string LastName,
+            string AccountName,
+            string AccountNumber,
+            string Bank,
+            string Channel,
+            string IPAddress,
+            decimal SchoolDiscountGiven,
+            decimal PaymentRequired,
+            decimal Charges,
+            decimal RefundAmount,
+            decimal Balance,
+            DateTime CreatedAt,
+            int CreatedByID,
+            int UpdatedByID,
+            decimal PaymentRequiredWithoutCharges,
+            decimal? ConfirmationThreshold = null,
+            DateTime? ConfirmationDate = null,
+            bool? AwaitingDisbursement = null,
+            DateTime? UpdatedAt = null,
+            string ConfirmedExplanation = null,
+            bool? ChargesBilledToClient = null,
+            bool? IsMultiTarget = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramTransactionStatusID = new DataColumnParameter(defTransactionStatusID, pTransactionStatusID);
-                DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-                DataColumnParameter paramStudentNumber = new DataColumnParameter(defStudentNumber, defStudentNumber.DefaultValue);
-                DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, defFirstName.DefaultValue);
-                DataColumnParameter paramLastName = new DataColumnParameter(defLastName, defLastName.DefaultValue);
-                DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, defAccountName.DefaultValue);
-                DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, defAccountNumber.DefaultValue);
-                DataColumnParameter paramBank = new DataColumnParameter(defBank, defBank.DefaultValue);
-                DataColumnParameter paramChannel = new DataColumnParameter(defChannel, defChannel.DefaultValue);
-                DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, defIPAddress.DefaultValue);
-                DataColumnParameter paramSchoolDiscountGiven = new DataColumnParameter(defSchoolDiscountGiven, defSchoolDiscountGiven.DefaultValue);
-                DataColumnParameter paramPaymentRequired = new DataColumnParameter(defPaymentRequired, defPaymentRequired.DefaultValue);
-                DataColumnParameter paramCharges = new DataColumnParameter(defCharges, defCharges.DefaultValue);
-                DataColumnParameter paramRefundAmount = new DataColumnParameter(defRefundAmount, defRefundAmount.DefaultValue);
-                DataColumnParameter paramBalance = new DataColumnParameter(defBalance, defBalance.DefaultValue);
-                DataColumnParameter paramConfirmationThreshold = new DataColumnParameter(defConfirmationThreshold, defConfirmationThreshold.DefaultValue);
-                DataColumnParameter paramConfirmationDate = new DataColumnParameter(defConfirmationDate, defConfirmationDate.DefaultValue);
-                DataColumnParameter paramAwaitingDisbursement = new DataColumnParameter(defAwaitingDisbursement, defAwaitingDisbursement.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
-                DataColumnParameter paramConfirmedExplanation = new DataColumnParameter(defConfirmedExplanation, defConfirmedExplanation.DefaultValue);
-                DataColumnParameter paramChargesBilledToClient = new DataColumnParameter(defChargesBilledToClient, defChargesBilledToClient.DefaultValue);
-                DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, defPaymentRequiredWithoutCharges.DefaultValue);
-                DataColumnParameter paramIsMultiTarget = new DataColumnParameter(defIsMultiTarget, defIsMultiTarget.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramTransactionStatusID = new (defTransactionStatusID, TransactionStatusID);
+                DataColumnParameter paramClientID = new (defClientID, ClientID);
+                DataColumnParameter paramStudentNumber = new (defStudentNumber, StudentNumber);
+                DataColumnParameter paramFirstName = new (defFirstName, FirstName);
+                DataColumnParameter paramLastName = new (defLastName, LastName);
+                DataColumnParameter paramAccountName = new (defAccountName, AccountName);
+                DataColumnParameter paramAccountNumber = new (defAccountNumber, AccountNumber);
+                DataColumnParameter paramBank = new (defBank, Bank);
+                DataColumnParameter paramChannel = new (defChannel, Channel);
+                DataColumnParameter paramIPAddress = new (defIPAddress, IPAddress);
+                DataColumnParameter paramSchoolDiscountGiven = new (defSchoolDiscountGiven, SchoolDiscountGiven);
+                DataColumnParameter paramPaymentRequired = new (defPaymentRequired, PaymentRequired);
+                DataColumnParameter paramCharges = new (defCharges, Charges);
+                DataColumnParameter paramRefundAmount = new (defRefundAmount, RefundAmount);
+                DataColumnParameter paramBalance = new (defBalance, Balance);
+                DataColumnParameter paramConfirmationThreshold = new (defConfirmationThreshold, ConfirmationThreshold);
+                DataColumnParameter paramConfirmationDate = new (defConfirmationDate, ConfirmationDate);
+                DataColumnParameter paramAwaitingDisbursement = new (defAwaitingDisbursement, AwaitingDisbursement);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+                DataColumnParameter paramConfirmedExplanation = new (defConfirmedExplanation, ConfirmedExplanation);
+                DataColumnParameter paramChargesBilledToClient = new (defChargesBilledToClient, ChargesBilledToClient);
+                DataColumnParameter paramPaymentRequiredWithoutCharges = new (defPaymentRequiredWithoutCharges, PaymentRequiredWithoutCharges);
+                DataColumnParameter paramIsMultiTarget = new (defIsMultiTarget, IsMultiTarget);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramTransactionStatusID.GetSQLQuotedValueForAdd(),
-                paramClientID.GetSQLQuotedValueForAdd(),
-                paramStudentNumber.GetSQLQuotedValueForAdd(),
-                paramFirstName.GetSQLQuotedValueForAdd(),
-                paramLastName.GetSQLQuotedValueForAdd(),
-                paramAccountName.GetSQLQuotedValueForAdd(),
-                paramAccountNumber.GetSQLQuotedValueForAdd(),
-                paramBank.GetSQLQuotedValueForAdd(),
-                paramChannel.GetSQLQuotedValueForAdd(),
-                paramIPAddress.GetSQLQuotedValueForAdd(),
-                paramSchoolDiscountGiven.GetSQLQuotedValueForAdd(),
-                paramPaymentRequired.GetSQLQuotedValueForAdd(),
-                paramCharges.GetSQLQuotedValueForAdd(),
-                paramRefundAmount.GetSQLQuotedValueForAdd(),
-                paramBalance.GetSQLQuotedValueForAdd(),
-                paramConfirmationThreshold.GetSQLQuotedValueForAdd(),
-                paramConfirmationDate.GetSQLQuotedValueForAdd(),
-                paramAwaitingDisbursement.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                paramCreatedByID.GetSQLQuotedValueForAdd(),
-                paramUpdatedByID.GetSQLQuotedValueForAdd(),
-                paramConfirmedExplanation.GetSQLQuotedValueForAdd(),
-                paramChargesBilledToClient.GetSQLQuotedValueForAdd(),
-                paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
-                paramIsMultiTarget.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramTransactionStatusID.GetSQLQuotedValueForAdd(),
+                        paramClientID.GetSQLQuotedValueForAdd(),
+                        paramStudentNumber.GetSQLQuotedValueForAdd(),
+                        paramFirstName.GetSQLQuotedValueForAdd(),
+                        paramLastName.GetSQLQuotedValueForAdd(),
+                        paramAccountName.GetSQLQuotedValueForAdd(),
+                        paramAccountNumber.GetSQLQuotedValueForAdd(),
+                        paramBank.GetSQLQuotedValueForAdd(),
+                        paramChannel.GetSQLQuotedValueForAdd(),
+                        paramIPAddress.GetSQLQuotedValueForAdd(),
+                        paramSchoolDiscountGiven.GetSQLQuotedValueForAdd(),
+                        paramPaymentRequired.GetSQLQuotedValueForAdd(),
+                        paramCharges.GetSQLQuotedValueForAdd(),
+                        paramRefundAmount.GetSQLQuotedValueForAdd(),
+                        paramBalance.GetSQLQuotedValueForAdd(),
+                        paramConfirmationThreshold.GetSQLQuotedValueForAdd(),
+                        paramConfirmationDate.GetSQLQuotedValueForAdd(),
+                        paramAwaitingDisbursement.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd(),
+                        paramConfirmedExplanation.GetSQLQuotedValueForAdd(),
+                        paramChargesBilledToClient.GetSQLQuotedValueForAdd(),
+                        paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
+                        paramIsMultiTarget.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(Int32 pTransactionStatusID,
-Int32 pClientID,
-String pStudentNumber,
-String pFirstName,
-String pLastName,
-String pAccountName,
-String pAccountNumber,
-String pBank,
-String pChannel,
-String pIPAddress,
-Decimal pSchoolDiscountGiven,
-Decimal pPaymentRequired,
-Decimal pCharges,
-Decimal pRefundAmount,
-Decimal pBalance,
-DateTime pCreatedAt,
-Int32 pCreatedByID,
-Int32 pUpdatedByID,
-Decimal pPaymentRequiredWithoutCharges,
-Object pConfirmationThreshold = null,
-Object pConfirmationDate = null,
-Object pAwaitingDisbursement = null,
-Object pUpdatedAt = null,
-Object pConfirmedExplanation = null,
-Object pChargesBilledToClient = null,
-Object pIsMultiTarget = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramTransactionStatusID = new DataColumnParameter(defTransactionStatusID, pTransactionStatusID);
-                DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
-                DataColumnParameter paramStudentNumber = new DataColumnParameter(defStudentNumber, pStudentNumber);
-                DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
-                DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
-                DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
-                DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
-                DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
-                DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
-                DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
-                DataColumnParameter paramSchoolDiscountGiven = new DataColumnParameter(defSchoolDiscountGiven, pSchoolDiscountGiven);
-                DataColumnParameter paramPaymentRequired = new DataColumnParameter(defPaymentRequired, pPaymentRequired);
-                DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
-                DataColumnParameter paramRefundAmount = new DataColumnParameter(defRefundAmount, pRefundAmount);
-                DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
-                DataColumnParameter paramConfirmationThreshold = new DataColumnParameter(defConfirmationThreshold, pConfirmationThreshold);
-                DataColumnParameter paramConfirmationDate = new DataColumnParameter(defConfirmationDate, pConfirmationDate);
-                DataColumnParameter paramAwaitingDisbursement = new DataColumnParameter(defAwaitingDisbursement, pAwaitingDisbursement);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-                DataColumnParameter paramConfirmedExplanation = new DataColumnParameter(defConfirmedExplanation, pConfirmedExplanation);
-                DataColumnParameter paramChargesBilledToClient = new DataColumnParameter(defChargesBilledToClient, pChargesBilledToClient);
-                DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
-                DataColumnParameter paramIsMultiTarget = new DataColumnParameter(defIsMultiTarget, pIsMultiTarget);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramTransactionStatusID.GetSQLQuotedValueForAdd(),
-paramClientID.GetSQLQuotedValueForAdd(),
-paramStudentNumber.GetSQLQuotedValueForAdd(),
-paramFirstName.GetSQLQuotedValueForAdd(),
-paramLastName.GetSQLQuotedValueForAdd(),
-paramAccountName.GetSQLQuotedValueForAdd(),
-paramAccountNumber.GetSQLQuotedValueForAdd(),
-paramBank.GetSQLQuotedValueForAdd(),
-paramChannel.GetSQLQuotedValueForAdd(),
-paramIPAddress.GetSQLQuotedValueForAdd(),
-paramSchoolDiscountGiven.GetSQLQuotedValueForAdd(),
-paramPaymentRequired.GetSQLQuotedValueForAdd(),
-paramCharges.GetSQLQuotedValueForAdd(),
-paramRefundAmount.GetSQLQuotedValueForAdd(),
-paramBalance.GetSQLQuotedValueForAdd(),
-paramConfirmationThreshold.GetSQLQuotedValueForAdd(),
-paramConfirmationDate.GetSQLQuotedValueForAdd(),
-paramAwaitingDisbursement.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramUpdatedByID.GetSQLQuotedValueForAdd(),
-paramConfirmedExplanation.GetSQLQuotedValueForAdd(),
-paramChargesBilledToClient.GetSQLQuotedValueForAdd(),
-paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
-paramIsMultiTarget.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,Int32 pTransactionStatusID,
-Int32 pClientID,
-String pStudentNumber,
-String pFirstName,
-String pLastName,
-String pAccountName,
-String pAccountNumber,
-String pBank,
-String pChannel,
-String pIPAddress,
-Decimal pSchoolDiscountGiven,
-Decimal pPaymentRequired,
-Decimal pCharges,
-Decimal pRefundAmount,
-Decimal pBalance,
-DateTime pCreatedAt,
-Int32 pCreatedByID,
-Int32 pUpdatedByID,
-Decimal pPaymentRequiredWithoutCharges,
-Object pConfirmationThreshold = null,
-Object pConfirmationDate = null,
-Object pAwaitingDisbursement = null,
-Object pUpdatedAt = null,
-Object pConfirmedExplanation = null,
-Object pChargesBilledToClient = null,
-Object pIsMultiTarget = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramTransactionStatusID = new DataColumnParameter(defTransactionStatusID, pTransactionStatusID);
-DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
-DataColumnParameter paramStudentNumber = new DataColumnParameter(defStudentNumber, pStudentNumber);
-DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
-DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
-DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
-DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
-DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
-DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
-DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
-DataColumnParameter paramSchoolDiscountGiven = new DataColumnParameter(defSchoolDiscountGiven, pSchoolDiscountGiven);
-DataColumnParameter paramPaymentRequired = new DataColumnParameter(defPaymentRequired, pPaymentRequired);
-DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
-DataColumnParameter paramRefundAmount = new DataColumnParameter(defRefundAmount, pRefundAmount);
-DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
-DataColumnParameter paramConfirmationThreshold = new DataColumnParameter(defConfirmationThreshold, pConfirmationThreshold);
-DataColumnParameter paramConfirmationDate = new DataColumnParameter(defConfirmationDate, pConfirmationDate);
-DataColumnParameter paramAwaitingDisbursement = new DataColumnParameter(defAwaitingDisbursement, pAwaitingDisbursement);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-DataColumnParameter paramConfirmedExplanation = new DataColumnParameter(defConfirmedExplanation, pConfirmedExplanation);
-DataColumnParameter paramChargesBilledToClient = new DataColumnParameter(defChargesBilledToClient, pChargesBilledToClient);
-DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
-DataColumnParameter paramIsMultiTarget = new DataColumnParameter(defIsMultiTarget, pIsMultiTarget);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramTransactionStatusID.GetSQLQuotedValueForAdd(),
-paramClientID.GetSQLQuotedValueForAdd(),
-paramStudentNumber.GetSQLQuotedValueForAdd(),
-paramFirstName.GetSQLQuotedValueForAdd(),
-paramLastName.GetSQLQuotedValueForAdd(),
-paramAccountName.GetSQLQuotedValueForAdd(),
-paramAccountNumber.GetSQLQuotedValueForAdd(),
-paramBank.GetSQLQuotedValueForAdd(),
-paramChannel.GetSQLQuotedValueForAdd(),
-paramIPAddress.GetSQLQuotedValueForAdd(),
-paramSchoolDiscountGiven.GetSQLQuotedValueForAdd(),
-paramPaymentRequired.GetSQLQuotedValueForAdd(),
-paramCharges.GetSQLQuotedValueForAdd(),
-paramRefundAmount.GetSQLQuotedValueForAdd(),
-paramBalance.GetSQLQuotedValueForAdd(),
-paramConfirmationThreshold.GetSQLQuotedValueForAdd(),
-paramConfirmationDate.GetSQLQuotedValueForAdd(),
-paramAwaitingDisbursement.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramUpdatedByID.GetSQLQuotedValueForAdd(),
-paramConfirmedExplanation.GetSQLQuotedValueForAdd(),
-paramChargesBilledToClient.GetSQLQuotedValueForAdd(),
-paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
-paramIsMultiTarget.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(Int32 pTransactionStatusID,
-Int32 pClientID,
-String pStudentNumber,
-String pFirstName,
-String pLastName,
-String pAccountName,
-String pAccountNumber,
-String pBank,
-String pChannel,
-String pIPAddress,
-Decimal pSchoolDiscountGiven,
-Decimal pPaymentRequired,
-Decimal pCharges,
-Decimal pRefundAmount,
-Decimal pBalance,
-DateTime pCreatedAt,
-Int32 pCreatedByID,
-Int32 pUpdatedByID,
-Decimal pPaymentRequiredWithoutCharges,
-Object pConfirmationThreshold= null,
-Object pConfirmationDate= null,
-Object pAwaitingDisbursement= null,
-Object pUpdatedAt= null,
-Object pConfirmedExplanation= null,
-Object pChargesBilledToClient= null,
-Object pIsMultiTarget= null){
-
-        try{
-
-DataColumnParameter paramTransactionStatusID = new DataColumnParameter(defTransactionStatusID, pTransactionStatusID);
-DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
-DataColumnParameter paramStudentNumber = new DataColumnParameter(defStudentNumber, pStudentNumber);
-DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
-DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
-DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
-DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
-DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
-DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
-DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
-DataColumnParameter paramSchoolDiscountGiven = new DataColumnParameter(defSchoolDiscountGiven, pSchoolDiscountGiven);
-DataColumnParameter paramPaymentRequired = new DataColumnParameter(defPaymentRequired, pPaymentRequired);
-DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
-DataColumnParameter paramRefundAmount = new DataColumnParameter(defRefundAmount, pRefundAmount);
-DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
-DataColumnParameter paramConfirmationThreshold = new DataColumnParameter(defConfirmationThreshold, pConfirmationThreshold);
-DataColumnParameter paramConfirmationDate = new DataColumnParameter(defConfirmationDate, pConfirmationDate);
-DataColumnParameter paramAwaitingDisbursement = new DataColumnParameter(defAwaitingDisbursement, pAwaitingDisbursement);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-DataColumnParameter paramConfirmedExplanation = new DataColumnParameter(defConfirmedExplanation, pConfirmedExplanation);
-DataColumnParameter paramChargesBilledToClient = new DataColumnParameter(defChargesBilledToClient, pChargesBilledToClient);
-DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
-DataColumnParameter paramIsMultiTarget = new DataColumnParameter(defIsMultiTarget, pIsMultiTarget);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26}) ", TABLE_NAME,paramTransactionStatusID.GetSQLQuotedValueForAdd(),
-paramClientID.GetSQLQuotedValueForAdd(),
-paramStudentNumber.GetSQLQuotedValueForAdd(),
-paramFirstName.GetSQLQuotedValueForAdd(),
-paramLastName.GetSQLQuotedValueForAdd(),
-paramAccountName.GetSQLQuotedValueForAdd(),
-paramAccountNumber.GetSQLQuotedValueForAdd(),
-paramBank.GetSQLQuotedValueForAdd(),
-paramChannel.GetSQLQuotedValueForAdd(),
-paramIPAddress.GetSQLQuotedValueForAdd(),
-paramSchoolDiscountGiven.GetSQLQuotedValueForAdd(),
-paramPaymentRequired.GetSQLQuotedValueForAdd(),
-paramCharges.GetSQLQuotedValueForAdd(),
-paramRefundAmount.GetSQLQuotedValueForAdd(),
-paramBalance.GetSQLQuotedValueForAdd(),
-paramConfirmationThreshold.GetSQLQuotedValueForAdd(),
-paramConfirmationDate.GetSQLQuotedValueForAdd(),
-paramAwaitingDisbursement.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramUpdatedByID.GetSQLQuotedValueForAdd(),
-paramConfirmedExplanation.GetSQLQuotedValueForAdd(),
-paramChargesBilledToClient.GetSQLQuotedValueForAdd(),
-paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
-paramIsMultiTarget.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pTransactionStatusID = null,
-Object pClientID = null,
-Object pStudentNumber = null,
-Object pFirstName = null,
-Object pLastName = null,
-Object pAccountName = null,
-Object pAccountNumber = null,
-Object pBank = null,
-Object pChannel = null,
-Object pIPAddress = null,
-Object pSchoolDiscountGiven = null,
-Object pPaymentRequired = null,
-Object pCharges = null,
-Object pRefundAmount = null,
-Object pBalance = null,
-Object pCreatedAt = null,
-Object pCreatedByID = null,
-Object pUpdatedByID = null,
-Object pPaymentRequiredWithoutCharges = null,
-Object pConfirmationThreshold = null,
-Object pConfirmationDate = null,
-Object pAwaitingDisbursement = null,
-Object pUpdatedAt = null,
-Object pConfirmedExplanation = null,
-Object pChargesBilledToClient = null,
-Object pIsMultiTarget = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramTransactionStatusID = new DataColumnParameter(defTransactionStatusID, pTransactionStatusID);
- DataColumnParameter paramClientID = new DataColumnParameter(defClientID, pClientID);
- DataColumnParameter paramStudentNumber = new DataColumnParameter(defStudentNumber, pStudentNumber);
- DataColumnParameter paramFirstName = new DataColumnParameter(defFirstName, pFirstName);
- DataColumnParameter paramLastName = new DataColumnParameter(defLastName, pLastName);
- DataColumnParameter paramAccountName = new DataColumnParameter(defAccountName, pAccountName);
- DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
- DataColumnParameter paramBank = new DataColumnParameter(defBank, pBank);
- DataColumnParameter paramChannel = new DataColumnParameter(defChannel, pChannel);
- DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
- DataColumnParameter paramSchoolDiscountGiven = new DataColumnParameter(defSchoolDiscountGiven, pSchoolDiscountGiven);
- DataColumnParameter paramPaymentRequired = new DataColumnParameter(defPaymentRequired, pPaymentRequired);
- DataColumnParameter paramCharges = new DataColumnParameter(defCharges, pCharges);
- DataColumnParameter paramRefundAmount = new DataColumnParameter(defRefundAmount, pRefundAmount);
- DataColumnParameter paramBalance = new DataColumnParameter(defBalance, pBalance);
- DataColumnParameter paramConfirmationThreshold = new DataColumnParameter(defConfirmationThreshold, pConfirmationThreshold);
- DataColumnParameter paramConfirmationDate = new DataColumnParameter(defConfirmationDate, pConfirmationDate);
- DataColumnParameter paramAwaitingDisbursement = new DataColumnParameter(defAwaitingDisbursement, pAwaitingDisbursement);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
- DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
- DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
- DataColumnParameter paramConfirmedExplanation = new DataColumnParameter(defConfirmedExplanation, pConfirmedExplanation);
- DataColumnParameter paramChargesBilledToClient = new DataColumnParameter(defChargesBilledToClient, pChargesBilledToClient);
- DataColumnParameter paramPaymentRequiredWithoutCharges = new DataColumnParameter(defPaymentRequiredWithoutCharges, pPaymentRequiredWithoutCharges);
- DataColumnParameter paramIsMultiTarget = new DataColumnParameter(defIsMultiTarget, pIsMultiTarget);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [TransactionStatusID]={2},[ClientID]={3},[StudentNumber]={4},[FirstName]={5},[LastName]={6},[AccountName]={7},[AccountNumber]={8},[Bank]={9},[Channel]={10},[IPAddress]={11},[SchoolDiscountGiven]={12},[PaymentRequired]={13},[Charges]={14},[RefundAmount]={15},[Balance]={16},[ConfirmationThreshold]={17},[ConfirmationDate]={18},[AwaitingDisbursement]={19},[CreatedAt]={20},[UpdatedAt]={21},[CreatedByID]={22},[UpdatedByID]={23},[ConfirmedExplanation]={24},[ChargesBilledToClient]={25},[PaymentRequiredWithoutCharges]={26},[IsMultiTarget]={27} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramTransactionStatusID.GetSQLQuotedValueForUpdate(),
-paramClientID.GetSQLQuotedValueForUpdate(),
-paramStudentNumber.GetSQLQuotedValueForUpdate(),
-paramFirstName.GetSQLQuotedValueForUpdate(),
-paramLastName.GetSQLQuotedValueForUpdate(),
-paramAccountName.GetSQLQuotedValueForUpdate(),
-paramAccountNumber.GetSQLQuotedValueForUpdate(),
-paramBank.GetSQLQuotedValueForUpdate(),
-paramChannel.GetSQLQuotedValueForUpdate(),
-paramIPAddress.GetSQLQuotedValueForUpdate(),
-paramSchoolDiscountGiven.GetSQLQuotedValueForUpdate(),
-paramPaymentRequired.GetSQLQuotedValueForUpdate(),
-paramCharges.GetSQLQuotedValueForUpdate(),
-paramRefundAmount.GetSQLQuotedValueForUpdate(),
-paramBalance.GetSQLQuotedValueForUpdate(),
-paramConfirmationThreshold.GetSQLQuotedValueForUpdate(),
-paramConfirmationDate.GetSQLQuotedValueForUpdate(),
-paramAwaitingDisbursement.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramUpdatedAt.GetSQLQuotedValueForUpdate(),
-paramCreatedByID.GetSQLQuotedValueForUpdate(),
-paramUpdatedByID.GetSQLQuotedValueForUpdate(),
-paramConfirmedExplanation.GetSQLQuotedValueForUpdate(),
-paramChargesBilledToClient.GetSQLQuotedValueForUpdate(),
-paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForUpdate(),
-paramIsMultiTarget.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

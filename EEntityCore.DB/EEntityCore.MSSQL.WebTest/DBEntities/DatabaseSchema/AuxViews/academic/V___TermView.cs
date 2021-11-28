@@ -23,18 +23,18 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        static V___TermView()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Name.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTermOrder = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermOrder.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAcademicSession = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AcademicSession.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsActive.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAcademicSessionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AcademicSessionID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTermStartDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermStartDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTermEndDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermEndDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSessionStartDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionStartDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSessionEndDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionEndDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTermOrderID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermOrderID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDescription = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Description.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Name.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTermOrder = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermOrder.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAcademicSession = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AcademicSession.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsActive.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAcademicSessionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AcademicSessionID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTermStartDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermStartDate.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTermEndDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermEndDate.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSessionStartDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionStartDate.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSessionEndDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionEndDate.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTermOrderID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermOrderID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDescription = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Description.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defName.ColumnName, defName); 
@@ -245,16 +245,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public int AcademicSessionID { get => (int)TargettedRow[TableColumnNames.AcademicSessionID.ToString()]; }
 
 
-       public NullableDateTime TermStartDate { get => new (this.TargettedRow[TableColumnNames.TermStartDate.ToString()]); }
+       public DateTime TermStartDate { get => (DateTime)TargettedRow[TableColumnNames.TermStartDate.ToString()]; }
 
 
-       public NullableDateTime TermEndDate { get => new (this.TargettedRow[TableColumnNames.TermEndDate.ToString()]); }
+       public DateTime TermEndDate { get => (DateTime)TargettedRow[TableColumnNames.TermEndDate.ToString()]; }
 
 
-       public NullableDateTime SessionStartDate { get => new (this.TargettedRow[TableColumnNames.SessionStartDate.ToString()]); }
+       public DateTime SessionStartDate { get => (DateTime)TargettedRow[TableColumnNames.SessionStartDate.ToString()]; }
 
 
-       public NullableDateTime SessionEndDate { get => new (this.TargettedRow[TableColumnNames.SessionEndDate.ToString()]); }
+       public DateTime SessionEndDate { get => (DateTime)TargettedRow[TableColumnNames.SessionEndDate.ToString()]; }
 
 
        public int TermOrderID { get => (int)TargettedRow[TableColumnNames.TermOrderID.ToString()]; }

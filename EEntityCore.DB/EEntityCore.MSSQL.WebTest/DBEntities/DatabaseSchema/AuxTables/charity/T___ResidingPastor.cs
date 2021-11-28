@@ -23,18 +23,18 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___ResidingPastor()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defCenterID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CenterID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defBankID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BankID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defAccountNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountNumber.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPersonID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defActivatedOn = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ActivatedOn.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDeactivatedOn = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DeactivatedOn.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defUpdatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defIdPictureStoredPath = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IdPictureStoredPath.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defCenterID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CenterID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defBankID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BankID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defAccountNumber = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccountNumber.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPersonID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PersonID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defActivatedOn = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ActivatedOn.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDeactivatedOn = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DeactivatedOn.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defUpdatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedByID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defIdPictureStoredPath = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IdPictureStoredPath.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -274,16 +274,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
 
 
-       public NullableDateTime ActivatedOn { get => new (this.TargettedRow[TableColumnNames.ActivatedOn.ToString()]); }
+       public DateTime ActivatedOn { get => (DateTime)TargettedRow[TableColumnNames.ActivatedOn.ToString()]; }
 
 
-       public NullableDateTime DeactivatedOn { get => new (this.TargettedRow[TableColumnNames.DeactivatedOn.ToString()]); }
+       public DateTime? DeactivatedOn { get => (DateTime?)TargettedRow[TableColumnNames.DeactivatedOn.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
+       public DateTime UpdatedAt { get => (DateTime)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
 
 
        public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
@@ -340,269 +340,65 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(Int32 pCenterID,
-Int32 pBankID,
-Int32 pPersonID,
-Int32 pCreatedByID,
-Int32 pUpdatedByID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            int CenterID,
+            int BankID,
+            string AccountNumber,
+            int PersonID,
+            DateTime ActivatedOn,
+            DateTime CreatedAt,
+            DateTime UpdatedAt,
+            int CreatedByID,
+            int UpdatedByID,
+            DateTime? DeactivatedOn = null,
+            string IdPictureStoredPath = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramCenterID = new DataColumnParameter(defCenterID, pCenterID);
-                DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
-                DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-                DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, defAccountNumber.DefaultValue);
-                DataColumnParameter paramActivatedOn = new DataColumnParameter(defActivatedOn, defActivatedOn.DefaultValue);
-                DataColumnParameter paramDeactivatedOn = new DataColumnParameter(defDeactivatedOn, defDeactivatedOn.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
-                DataColumnParameter paramIdPictureStoredPath = new DataColumnParameter(defIdPictureStoredPath, defIdPictureStoredPath.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramCenterID = new (defCenterID, CenterID);
+                DataColumnParameter paramBankID = new (defBankID, BankID);
+                DataColumnParameter paramAccountNumber = new (defAccountNumber, AccountNumber);
+                DataColumnParameter paramPersonID = new (defPersonID, PersonID);
+                DataColumnParameter paramActivatedOn = new (defActivatedOn, ActivatedOn);
+                DataColumnParameter paramDeactivatedOn = new (defDeactivatedOn, DeactivatedOn);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+                DataColumnParameter paramIdPictureStoredPath = new (defIdPictureStoredPath, IdPictureStoredPath);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BankID],[AccountNumber],[PersonID],[ActivatedOn],[DeactivatedOn],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[IdPictureStoredPath]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramCenterID.GetSQLQuotedValueForAdd(),
-                paramBankID.GetSQLQuotedValueForAdd(),
-                paramAccountNumber.GetSQLQuotedValueForAdd(),
-                paramPersonID.GetSQLQuotedValueForAdd(),
-                paramActivatedOn.GetSQLQuotedValueForAdd(),
-                paramDeactivatedOn.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                paramCreatedByID.GetSQLQuotedValueForAdd(),
-                paramUpdatedByID.GetSQLQuotedValueForAdd(),
-                paramIdPictureStoredPath.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BankID],[AccountNumber],[PersonID],[ActivatedOn],[DeactivatedOn],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[IdPictureStoredPath]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramCenterID.GetSQLQuotedValueForAdd(),
+                        paramBankID.GetSQLQuotedValueForAdd(),
+                        paramAccountNumber.GetSQLQuotedValueForAdd(),
+                        paramPersonID.GetSQLQuotedValueForAdd(),
+                        paramActivatedOn.GetSQLQuotedValueForAdd(),
+                        paramDeactivatedOn.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd(),
+                        paramIdPictureStoredPath.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(Int32 pCenterID,
-Int32 pBankID,
-String pAccountNumber,
-Int32 pPersonID,
-DateTime pActivatedOn,
-DateTime pCreatedAt,
-DateTime pUpdatedAt,
-Int32 pCreatedByID,
-Int32 pUpdatedByID,
-Object pDeactivatedOn = null,
-Object pIdPictureStoredPath = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramCenterID = new DataColumnParameter(defCenterID, pCenterID);
-                DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
-                DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
-                DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-                DataColumnParameter paramActivatedOn = new DataColumnParameter(defActivatedOn, pActivatedOn);
-                DataColumnParameter paramDeactivatedOn = new DataColumnParameter(defDeactivatedOn, pDeactivatedOn);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-                DataColumnParameter paramIdPictureStoredPath = new DataColumnParameter(defIdPictureStoredPath, pIdPictureStoredPath);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BankID],[AccountNumber],[PersonID],[ActivatedOn],[DeactivatedOn],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[IdPictureStoredPath]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramCenterID.GetSQLQuotedValueForAdd(),
-paramBankID.GetSQLQuotedValueForAdd(),
-paramAccountNumber.GetSQLQuotedValueForAdd(),
-paramPersonID.GetSQLQuotedValueForAdd(),
-paramActivatedOn.GetSQLQuotedValueForAdd(),
-paramDeactivatedOn.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramUpdatedByID.GetSQLQuotedValueForAdd(),
-paramIdPictureStoredPath.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,Int32 pCenterID,
-Int32 pBankID,
-String pAccountNumber,
-Int32 pPersonID,
-DateTime pActivatedOn,
-DateTime pCreatedAt,
-DateTime pUpdatedAt,
-Int32 pCreatedByID,
-Int32 pUpdatedByID,
-Object pDeactivatedOn = null,
-Object pIdPictureStoredPath = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramCenterID = new DataColumnParameter(defCenterID, pCenterID);
-DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
-DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
-DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-DataColumnParameter paramActivatedOn = new DataColumnParameter(defActivatedOn, pActivatedOn);
-DataColumnParameter paramDeactivatedOn = new DataColumnParameter(defDeactivatedOn, pDeactivatedOn);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-DataColumnParameter paramIdPictureStoredPath = new DataColumnParameter(defIdPictureStoredPath, pIdPictureStoredPath);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BankID],[AccountNumber],[PersonID],[ActivatedOn],[DeactivatedOn],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[IdPictureStoredPath]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramCenterID.GetSQLQuotedValueForAdd(),
-paramBankID.GetSQLQuotedValueForAdd(),
-paramAccountNumber.GetSQLQuotedValueForAdd(),
-paramPersonID.GetSQLQuotedValueForAdd(),
-paramActivatedOn.GetSQLQuotedValueForAdd(),
-paramDeactivatedOn.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramUpdatedByID.GetSQLQuotedValueForAdd(),
-paramIdPictureStoredPath.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(Int32 pCenterID,
-Int32 pBankID,
-String pAccountNumber,
-Int32 pPersonID,
-DateTime pActivatedOn,
-DateTime pCreatedAt,
-DateTime pUpdatedAt,
-Int32 pCreatedByID,
-Int32 pUpdatedByID,
-Object pDeactivatedOn= null,
-Object pIdPictureStoredPath= null){
-
-        try{
-
-DataColumnParameter paramCenterID = new DataColumnParameter(defCenterID, pCenterID);
-DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
-DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
-DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
-DataColumnParameter paramActivatedOn = new DataColumnParameter(defActivatedOn, pActivatedOn);
-DataColumnParameter paramDeactivatedOn = new DataColumnParameter(defDeactivatedOn, pDeactivatedOn);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-DataColumnParameter paramIdPictureStoredPath = new DataColumnParameter(defIdPictureStoredPath, pIdPictureStoredPath);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([CenterID],[BankID],[AccountNumber],[PersonID],[ActivatedOn],[DeactivatedOn],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[IdPictureStoredPath]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) ", TABLE_NAME,paramCenterID.GetSQLQuotedValueForAdd(),
-paramBankID.GetSQLQuotedValueForAdd(),
-paramAccountNumber.GetSQLQuotedValueForAdd(),
-paramPersonID.GetSQLQuotedValueForAdd(),
-paramActivatedOn.GetSQLQuotedValueForAdd(),
-paramDeactivatedOn.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramUpdatedByID.GetSQLQuotedValueForAdd(),
-paramIdPictureStoredPath.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pCenterID = null,
-Object pBankID = null,
-Object pAccountNumber = null,
-Object pPersonID = null,
-Object pActivatedOn = null,
-Object pCreatedAt = null,
-Object pUpdatedAt = null,
-Object pCreatedByID = null,
-Object pUpdatedByID = null,
-Object pDeactivatedOn = null,
-Object pIdPictureStoredPath = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramCenterID = new DataColumnParameter(defCenterID, pCenterID);
- DataColumnParameter paramBankID = new DataColumnParameter(defBankID, pBankID);
- DataColumnParameter paramAccountNumber = new DataColumnParameter(defAccountNumber, pAccountNumber);
- DataColumnParameter paramPersonID = new DataColumnParameter(defPersonID, pPersonID);
- DataColumnParameter paramActivatedOn = new DataColumnParameter(defActivatedOn, pActivatedOn);
- DataColumnParameter paramDeactivatedOn = new DataColumnParameter(defDeactivatedOn, pDeactivatedOn);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
- DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
- DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
- DataColumnParameter paramIdPictureStoredPath = new DataColumnParameter(defIdPictureStoredPath, pIdPictureStoredPath);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [CenterID]={2},[BankID]={3},[AccountNumber]={4},[PersonID]={5},[ActivatedOn]={6},[DeactivatedOn]={7},[CreatedAt]={8},[UpdatedAt]={9},[CreatedByID]={10},[UpdatedByID]={11},[IdPictureStoredPath]={12} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramCenterID.GetSQLQuotedValueForUpdate(),
-paramBankID.GetSQLQuotedValueForUpdate(),
-paramAccountNumber.GetSQLQuotedValueForUpdate(),
-paramPersonID.GetSQLQuotedValueForUpdate(),
-paramActivatedOn.GetSQLQuotedValueForUpdate(),
-paramDeactivatedOn.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramUpdatedAt.GetSQLQuotedValueForUpdate(),
-paramCreatedByID.GetSQLQuotedValueForUpdate(),
-paramUpdatedByID.GetSQLQuotedValueForUpdate(),
-paramIdPictureStoredPath.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

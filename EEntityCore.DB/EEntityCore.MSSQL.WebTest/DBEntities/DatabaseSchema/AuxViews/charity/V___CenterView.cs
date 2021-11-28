@@ -23,19 +23,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        static V___CenterView()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Name.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Address.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPastorName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PastorName.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPastorEmail = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PastorEmail.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPastorPhone = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PastorPhone.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPastorAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PastorAddress.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPastorID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PastorID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPastorPersonID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PastorPersonID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBeneficiaryCount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BeneficiaryCount.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defChurchCapacity = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ChurchCapacity.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCenterStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CenterStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCenterStatus = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CenterStatus.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Name.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Address.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPastorName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PastorName.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPastorEmail = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PastorEmail.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPastorPhone = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PastorPhone.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPastorAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PastorAddress.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPastorID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PastorID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPastorPersonID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PastorPersonID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBeneficiaryCount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BeneficiaryCount.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defChurchCapacity = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ChurchCapacity.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCenterStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CenterStatusID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCenterStatus = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CenterStatus.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defName.ColumnName, defName); 

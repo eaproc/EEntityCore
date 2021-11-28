@@ -23,20 +23,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___SMSUsage()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defSMSDeliveryStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SMSDeliveryStatusID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defSender = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Sender.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defReceiver = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Receiver.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defMessage = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Message.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UID.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAPICreateResponse = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.APICreateResponse.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAPIUpdateResponse = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.APIUpdateResponse.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSMSCostNaira = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SMSCostNaira.ToString(), typeof(Decimal),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defExceptionMessage = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExceptionMessage.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defExceptionStackTrace = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExceptionStackTrace.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGateway = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Gateway.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defSMSDeliveryStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SMSDeliveryStatusID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defSender = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Sender.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defReceiver = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Receiver.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defMessage = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Message.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UID.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAPICreateResponse = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.APICreateResponse.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAPIUpdateResponse = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.APIUpdateResponse.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSMSCostNaira = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SMSCostNaira.ToString(), typeof(decimal?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defExceptionMessage = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExceptionMessage.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defExceptionStackTrace = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExceptionStackTrace.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGateway = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Gateway.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -274,10 +274,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public decimal? SMSCostNaira { get => (decimal?)TargettedRow[TableColumnNames.SMSCostNaira.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
 
 
        public string ExceptionMessage { get => (string)TargettedRow[TableColumnNames.ExceptionMessage.ToString()]; }
@@ -334,293 +334,71 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(Int32 pSMSDeliveryStatusID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            int SMSDeliveryStatusID,
+            string Sender,
+            string Receiver,
+            string Message,
+            DateTime CreatedAt,
+            string Gateway,
+            string UID = null,
+            string APICreateResponse = null,
+            string APIUpdateResponse = null,
+            decimal? SMSCostNaira = null,
+            DateTime? UpdatedAt = null,
+            string ExceptionMessage = null,
+            string ExceptionStackTrace = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramSMSDeliveryStatusID = new DataColumnParameter(defSMSDeliveryStatusID, pSMSDeliveryStatusID);
-                DataColumnParameter paramSender = new DataColumnParameter(defSender, defSender.DefaultValue);
-                DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, defReceiver.DefaultValue);
-                DataColumnParameter paramMessage = new DataColumnParameter(defMessage, defMessage.DefaultValue);
-                DataColumnParameter paramUID = new DataColumnParameter(defUID, defUID.DefaultValue);
-                DataColumnParameter paramAPICreateResponse = new DataColumnParameter(defAPICreateResponse, defAPICreateResponse.DefaultValue);
-                DataColumnParameter paramAPIUpdateResponse = new DataColumnParameter(defAPIUpdateResponse, defAPIUpdateResponse.DefaultValue);
-                DataColumnParameter paramSMSCostNaira = new DataColumnParameter(defSMSCostNaira, defSMSCostNaira.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
-                DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, defExceptionMessage.DefaultValue);
-                DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, defExceptionStackTrace.DefaultValue);
-                DataColumnParameter paramGateway = new DataColumnParameter(defGateway, defGateway.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramSMSDeliveryStatusID = new (defSMSDeliveryStatusID, SMSDeliveryStatusID);
+                DataColumnParameter paramSender = new (defSender, Sender);
+                DataColumnParameter paramReceiver = new (defReceiver, Receiver);
+                DataColumnParameter paramMessage = new (defMessage, Message);
+                DataColumnParameter paramUID = new (defUID, UID);
+                DataColumnParameter paramAPICreateResponse = new (defAPICreateResponse, APICreateResponse);
+                DataColumnParameter paramAPIUpdateResponse = new (defAPIUpdateResponse, APIUpdateResponse);
+                DataColumnParameter paramSMSCostNaira = new (defSMSCostNaira, SMSCostNaira);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramExceptionMessage = new (defExceptionMessage, ExceptionMessage);
+                DataColumnParameter paramExceptionStackTrace = new (defExceptionStackTrace, ExceptionStackTrace);
+                DataColumnParameter paramGateway = new (defGateway, Gateway);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramSMSDeliveryStatusID.GetSQLQuotedValueForAdd(),
-                paramSender.GetSQLQuotedValueForAdd(),
-                paramReceiver.GetSQLQuotedValueForAdd(),
-                paramMessage.GetSQLQuotedValueForAdd(),
-                paramUID.GetSQLQuotedValueForAdd(),
-                paramAPICreateResponse.GetSQLQuotedValueForAdd(),
-                paramAPIUpdateResponse.GetSQLQuotedValueForAdd(),
-                paramSMSCostNaira.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                paramExceptionMessage.GetSQLQuotedValueForAdd(),
-                paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
-                paramGateway.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramSMSDeliveryStatusID.GetSQLQuotedValueForAdd(),
+                        paramSender.GetSQLQuotedValueForAdd(),
+                        paramReceiver.GetSQLQuotedValueForAdd(),
+                        paramMessage.GetSQLQuotedValueForAdd(),
+                        paramUID.GetSQLQuotedValueForAdd(),
+                        paramAPICreateResponse.GetSQLQuotedValueForAdd(),
+                        paramAPIUpdateResponse.GetSQLQuotedValueForAdd(),
+                        paramSMSCostNaira.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramExceptionMessage.GetSQLQuotedValueForAdd(),
+                        paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
+                        paramGateway.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(Int32 pSMSDeliveryStatusID,
-String pSender,
-String pReceiver,
-String pMessage,
-DateTime pCreatedAt,
-String pGateway,
-Object pUID = null,
-Object pAPICreateResponse = null,
-Object pAPIUpdateResponse = null,
-Object pSMSCostNaira = null,
-Object pUpdatedAt = null,
-Object pExceptionMessage = null,
-Object pExceptionStackTrace = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramSMSDeliveryStatusID = new DataColumnParameter(defSMSDeliveryStatusID, pSMSDeliveryStatusID);
-                DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
-                DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
-                DataColumnParameter paramMessage = new DataColumnParameter(defMessage, pMessage);
-                DataColumnParameter paramUID = new DataColumnParameter(defUID, pUID);
-                DataColumnParameter paramAPICreateResponse = new DataColumnParameter(defAPICreateResponse, pAPICreateResponse);
-                DataColumnParameter paramAPIUpdateResponse = new DataColumnParameter(defAPIUpdateResponse, pAPIUpdateResponse);
-                DataColumnParameter paramSMSCostNaira = new DataColumnParameter(defSMSCostNaira, pSMSCostNaira);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-                DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
-                DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
-                DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramSMSDeliveryStatusID.GetSQLQuotedValueForAdd(),
-paramSender.GetSQLQuotedValueForAdd(),
-paramReceiver.GetSQLQuotedValueForAdd(),
-paramMessage.GetSQLQuotedValueForAdd(),
-paramUID.GetSQLQuotedValueForAdd(),
-paramAPICreateResponse.GetSQLQuotedValueForAdd(),
-paramAPIUpdateResponse.GetSQLQuotedValueForAdd(),
-paramSMSCostNaira.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramExceptionMessage.GetSQLQuotedValueForAdd(),
-paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
-paramGateway.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,Int32 pSMSDeliveryStatusID,
-String pSender,
-String pReceiver,
-String pMessage,
-DateTime pCreatedAt,
-String pGateway,
-Object pUID = null,
-Object pAPICreateResponse = null,
-Object pAPIUpdateResponse = null,
-Object pSMSCostNaira = null,
-Object pUpdatedAt = null,
-Object pExceptionMessage = null,
-Object pExceptionStackTrace = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramSMSDeliveryStatusID = new DataColumnParameter(defSMSDeliveryStatusID, pSMSDeliveryStatusID);
-DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
-DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
-DataColumnParameter paramMessage = new DataColumnParameter(defMessage, pMessage);
-DataColumnParameter paramUID = new DataColumnParameter(defUID, pUID);
-DataColumnParameter paramAPICreateResponse = new DataColumnParameter(defAPICreateResponse, pAPICreateResponse);
-DataColumnParameter paramAPIUpdateResponse = new DataColumnParameter(defAPIUpdateResponse, pAPIUpdateResponse);
-DataColumnParameter paramSMSCostNaira = new DataColumnParameter(defSMSCostNaira, pSMSCostNaira);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
-DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
-DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramSMSDeliveryStatusID.GetSQLQuotedValueForAdd(),
-paramSender.GetSQLQuotedValueForAdd(),
-paramReceiver.GetSQLQuotedValueForAdd(),
-paramMessage.GetSQLQuotedValueForAdd(),
-paramUID.GetSQLQuotedValueForAdd(),
-paramAPICreateResponse.GetSQLQuotedValueForAdd(),
-paramAPIUpdateResponse.GetSQLQuotedValueForAdd(),
-paramSMSCostNaira.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramExceptionMessage.GetSQLQuotedValueForAdd(),
-paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
-paramGateway.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(Int32 pSMSDeliveryStatusID,
-String pSender,
-String pReceiver,
-String pMessage,
-DateTime pCreatedAt,
-String pGateway,
-Object pUID= null,
-Object pAPICreateResponse= null,
-Object pAPIUpdateResponse= null,
-Object pSMSCostNaira= null,
-Object pUpdatedAt= null,
-Object pExceptionMessage= null,
-Object pExceptionStackTrace= null){
-
-        try{
-
-DataColumnParameter paramSMSDeliveryStatusID = new DataColumnParameter(defSMSDeliveryStatusID, pSMSDeliveryStatusID);
-DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
-DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
-DataColumnParameter paramMessage = new DataColumnParameter(defMessage, pMessage);
-DataColumnParameter paramUID = new DataColumnParameter(defUID, pUID);
-DataColumnParameter paramAPICreateResponse = new DataColumnParameter(defAPICreateResponse, pAPICreateResponse);
-DataColumnParameter paramAPIUpdateResponse = new DataColumnParameter(defAPIUpdateResponse, pAPIUpdateResponse);
-DataColumnParameter paramSMSCostNaira = new DataColumnParameter(defSMSCostNaira, pSMSCostNaira);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
-DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
-DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}) ", TABLE_NAME,paramSMSDeliveryStatusID.GetSQLQuotedValueForAdd(),
-paramSender.GetSQLQuotedValueForAdd(),
-paramReceiver.GetSQLQuotedValueForAdd(),
-paramMessage.GetSQLQuotedValueForAdd(),
-paramUID.GetSQLQuotedValueForAdd(),
-paramAPICreateResponse.GetSQLQuotedValueForAdd(),
-paramAPIUpdateResponse.GetSQLQuotedValueForAdd(),
-paramSMSCostNaira.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramExceptionMessage.GetSQLQuotedValueForAdd(),
-paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
-paramGateway.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pSMSDeliveryStatusID = null,
-Object pSender = null,
-Object pReceiver = null,
-Object pMessage = null,
-Object pCreatedAt = null,
-Object pGateway = null,
-Object pUID = null,
-Object pAPICreateResponse = null,
-Object pAPIUpdateResponse = null,
-Object pSMSCostNaira = null,
-Object pUpdatedAt = null,
-Object pExceptionMessage = null,
-Object pExceptionStackTrace = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramSMSDeliveryStatusID = new DataColumnParameter(defSMSDeliveryStatusID, pSMSDeliveryStatusID);
- DataColumnParameter paramSender = new DataColumnParameter(defSender, pSender);
- DataColumnParameter paramReceiver = new DataColumnParameter(defReceiver, pReceiver);
- DataColumnParameter paramMessage = new DataColumnParameter(defMessage, pMessage);
- DataColumnParameter paramUID = new DataColumnParameter(defUID, pUID);
- DataColumnParameter paramAPICreateResponse = new DataColumnParameter(defAPICreateResponse, pAPICreateResponse);
- DataColumnParameter paramAPIUpdateResponse = new DataColumnParameter(defAPIUpdateResponse, pAPIUpdateResponse);
- DataColumnParameter paramSMSCostNaira = new DataColumnParameter(defSMSCostNaira, pSMSCostNaira);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
- DataColumnParameter paramExceptionMessage = new DataColumnParameter(defExceptionMessage, pExceptionMessage);
- DataColumnParameter paramExceptionStackTrace = new DataColumnParameter(defExceptionStackTrace, pExceptionStackTrace);
- DataColumnParameter paramGateway = new DataColumnParameter(defGateway, pGateway);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [SMSDeliveryStatusID]={2},[Sender]={3},[Receiver]={4},[Message]={5},[UID]={6},[APICreateResponse]={7},[APIUpdateResponse]={8},[SMSCostNaira]={9},[CreatedAt]={10},[UpdatedAt]={11},[ExceptionMessage]={12},[ExceptionStackTrace]={13},[Gateway]={14} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramSMSDeliveryStatusID.GetSQLQuotedValueForUpdate(),
-paramSender.GetSQLQuotedValueForUpdate(),
-paramReceiver.GetSQLQuotedValueForUpdate(),
-paramMessage.GetSQLQuotedValueForUpdate(),
-paramUID.GetSQLQuotedValueForUpdate(),
-paramAPICreateResponse.GetSQLQuotedValueForUpdate(),
-paramAPIUpdateResponse.GetSQLQuotedValueForUpdate(),
-paramSMSCostNaira.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramUpdatedAt.GetSQLQuotedValueForUpdate(),
-paramExceptionMessage.GetSQLQuotedValueForUpdate(),
-paramExceptionStackTrace.GetSQLQuotedValueForUpdate(),
-paramGateway.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

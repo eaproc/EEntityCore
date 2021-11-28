@@ -23,8 +23,8 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        static V___SMSUsageLogBalance()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defQuantityStocked = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.QuantityStocked.ToString(), typeof(Decimal),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defQuantityUsed = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.QuantityUsed.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defQuantityStocked = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.QuantityStocked.ToString(), typeof(decimal?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defQuantityUsed = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.QuantityUsed.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defQuantityStocked.ColumnName, defQuantityStocked); 

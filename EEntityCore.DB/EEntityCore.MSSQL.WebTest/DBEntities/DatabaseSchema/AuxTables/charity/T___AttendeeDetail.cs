@@ -23,23 +23,23 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___AttendeeDetail()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defCenterVisitationID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CenterVisitationID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defBeneficiaryID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BeneficiaryID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defIsPresent = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsPresent.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPictureStoredPath = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PictureStoredPath.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defEducation = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Education.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defEmotion = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Emotion.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defHealth = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Health.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSpiritual = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Spiritual.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSocial = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Social.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTalent = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Talent.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defObservations = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Observations.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defChristSmilesFeedBack = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ChristSmilesFeedBack.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defUpdatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defCenterVisitationID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CenterVisitationID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defBeneficiaryID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BeneficiaryID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defIsPresent = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsPresent.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPictureStoredPath = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PictureStoredPath.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defEducation = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Education.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defEmotion = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Emotion.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defHealth = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Health.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSpiritual = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Spiritual.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSocial = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Social.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTalent = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Talent.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defObservations = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Observations.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defChristSmilesFeedBack = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ChristSmilesFeedBack.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defUpdatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedByID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -314,10 +314,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public string ChristSmilesFeedBack { get => (string)TargettedRow[TableColumnNames.ChristSmilesFeedBack.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
+       public DateTime UpdatedAt { get => (DateTime)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
 
 
        public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
@@ -371,338 +371,80 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(Int32 pCenterVisitationID,
-Int32 pBeneficiaryID,
-Int32 pCreatedByID,
-Int32 pUpdatedByID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            int CenterVisitationID,
+            int BeneficiaryID,
+            bool IsPresent,
+            DateTime CreatedAt,
+            DateTime UpdatedAt,
+            int CreatedByID,
+            int UpdatedByID,
+            string PictureStoredPath = null,
+            string Education = null,
+            string Emotion = null,
+            string Health = null,
+            string Spiritual = null,
+            string Social = null,
+            string Talent = null,
+            string Observations = null,
+            string ChristSmilesFeedBack = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramCenterVisitationID = new DataColumnParameter(defCenterVisitationID, pCenterVisitationID);
-                DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-                DataColumnParameter paramIsPresent = new DataColumnParameter(defIsPresent, defIsPresent.DefaultValue);
-                DataColumnParameter paramPictureStoredPath = new DataColumnParameter(defPictureStoredPath, defPictureStoredPath.DefaultValue);
-                DataColumnParameter paramEducation = new DataColumnParameter(defEducation, defEducation.DefaultValue);
-                DataColumnParameter paramEmotion = new DataColumnParameter(defEmotion, defEmotion.DefaultValue);
-                DataColumnParameter paramHealth = new DataColumnParameter(defHealth, defHealth.DefaultValue);
-                DataColumnParameter paramSpiritual = new DataColumnParameter(defSpiritual, defSpiritual.DefaultValue);
-                DataColumnParameter paramSocial = new DataColumnParameter(defSocial, defSocial.DefaultValue);
-                DataColumnParameter paramTalent = new DataColumnParameter(defTalent, defTalent.DefaultValue);
-                DataColumnParameter paramObservations = new DataColumnParameter(defObservations, defObservations.DefaultValue);
-                DataColumnParameter paramChristSmilesFeedBack = new DataColumnParameter(defChristSmilesFeedBack, defChristSmilesFeedBack.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramCenterVisitationID = new (defCenterVisitationID, CenterVisitationID);
+                DataColumnParameter paramBeneficiaryID = new (defBeneficiaryID, BeneficiaryID);
+                DataColumnParameter paramIsPresent = new (defIsPresent, IsPresent);
+                DataColumnParameter paramPictureStoredPath = new (defPictureStoredPath, PictureStoredPath);
+                DataColumnParameter paramEducation = new (defEducation, Education);
+                DataColumnParameter paramEmotion = new (defEmotion, Emotion);
+                DataColumnParameter paramHealth = new (defHealth, Health);
+                DataColumnParameter paramSpiritual = new (defSpiritual, Spiritual);
+                DataColumnParameter paramSocial = new (defSocial, Social);
+                DataColumnParameter paramTalent = new (defTalent, Talent);
+                DataColumnParameter paramObservations = new (defObservations, Observations);
+                DataColumnParameter paramChristSmilesFeedBack = new (defChristSmilesFeedBack, ChristSmilesFeedBack);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterVisitationID],[BeneficiaryID],[IsPresent],[PictureStoredPath],[Education],[Emotion],[Health],[Spiritual],[Social],[Talent],[Observations],[ChristSmilesFeedBack],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramCenterVisitationID.GetSQLQuotedValueForAdd(),
-                paramBeneficiaryID.GetSQLQuotedValueForAdd(),
-                paramIsPresent.GetSQLQuotedValueForAdd(),
-                paramPictureStoredPath.GetSQLQuotedValueForAdd(),
-                paramEducation.GetSQLQuotedValueForAdd(),
-                paramEmotion.GetSQLQuotedValueForAdd(),
-                paramHealth.GetSQLQuotedValueForAdd(),
-                paramSpiritual.GetSQLQuotedValueForAdd(),
-                paramSocial.GetSQLQuotedValueForAdd(),
-                paramTalent.GetSQLQuotedValueForAdd(),
-                paramObservations.GetSQLQuotedValueForAdd(),
-                paramChristSmilesFeedBack.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                paramCreatedByID.GetSQLQuotedValueForAdd(),
-                paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterVisitationID],[BeneficiaryID],[IsPresent],[PictureStoredPath],[Education],[Emotion],[Health],[Spiritual],[Social],[Talent],[Observations],[ChristSmilesFeedBack],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramCenterVisitationID.GetSQLQuotedValueForAdd(),
+                        paramBeneficiaryID.GetSQLQuotedValueForAdd(),
+                        paramIsPresent.GetSQLQuotedValueForAdd(),
+                        paramPictureStoredPath.GetSQLQuotedValueForAdd(),
+                        paramEducation.GetSQLQuotedValueForAdd(),
+                        paramEmotion.GetSQLQuotedValueForAdd(),
+                        paramHealth.GetSQLQuotedValueForAdd(),
+                        paramSpiritual.GetSQLQuotedValueForAdd(),
+                        paramSocial.GetSQLQuotedValueForAdd(),
+                        paramTalent.GetSQLQuotedValueForAdd(),
+                        paramObservations.GetSQLQuotedValueForAdd(),
+                        paramChristSmilesFeedBack.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(Int32 pCenterVisitationID,
-Int32 pBeneficiaryID,
-Boolean pIsPresent,
-DateTime pCreatedAt,
-DateTime pUpdatedAt,
-Int32 pCreatedByID,
-Int32 pUpdatedByID,
-Object pPictureStoredPath = null,
-Object pEducation = null,
-Object pEmotion = null,
-Object pHealth = null,
-Object pSpiritual = null,
-Object pSocial = null,
-Object pTalent = null,
-Object pObservations = null,
-Object pChristSmilesFeedBack = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramCenterVisitationID = new DataColumnParameter(defCenterVisitationID, pCenterVisitationID);
-                DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
-                DataColumnParameter paramIsPresent = new DataColumnParameter(defIsPresent, pIsPresent);
-                DataColumnParameter paramPictureStoredPath = new DataColumnParameter(defPictureStoredPath, pPictureStoredPath);
-                DataColumnParameter paramEducation = new DataColumnParameter(defEducation, pEducation);
-                DataColumnParameter paramEmotion = new DataColumnParameter(defEmotion, pEmotion);
-                DataColumnParameter paramHealth = new DataColumnParameter(defHealth, pHealth);
-                DataColumnParameter paramSpiritual = new DataColumnParameter(defSpiritual, pSpiritual);
-                DataColumnParameter paramSocial = new DataColumnParameter(defSocial, pSocial);
-                DataColumnParameter paramTalent = new DataColumnParameter(defTalent, pTalent);
-                DataColumnParameter paramObservations = new DataColumnParameter(defObservations, pObservations);
-                DataColumnParameter paramChristSmilesFeedBack = new DataColumnParameter(defChristSmilesFeedBack, pChristSmilesFeedBack);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-                DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-                DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterVisitationID],[BeneficiaryID],[IsPresent],[PictureStoredPath],[Education],[Emotion],[Health],[Spiritual],[Social],[Talent],[Observations],[ChristSmilesFeedBack],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramCenterVisitationID.GetSQLQuotedValueForAdd(),
-paramBeneficiaryID.GetSQLQuotedValueForAdd(),
-paramIsPresent.GetSQLQuotedValueForAdd(),
-paramPictureStoredPath.GetSQLQuotedValueForAdd(),
-paramEducation.GetSQLQuotedValueForAdd(),
-paramEmotion.GetSQLQuotedValueForAdd(),
-paramHealth.GetSQLQuotedValueForAdd(),
-paramSpiritual.GetSQLQuotedValueForAdd(),
-paramSocial.GetSQLQuotedValueForAdd(),
-paramTalent.GetSQLQuotedValueForAdd(),
-paramObservations.GetSQLQuotedValueForAdd(),
-paramChristSmilesFeedBack.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,Int32 pCenterVisitationID,
-Int32 pBeneficiaryID,
-Boolean pIsPresent,
-DateTime pCreatedAt,
-DateTime pUpdatedAt,
-Int32 pCreatedByID,
-Int32 pUpdatedByID,
-Object pPictureStoredPath = null,
-Object pEducation = null,
-Object pEmotion = null,
-Object pHealth = null,
-Object pSpiritual = null,
-Object pSocial = null,
-Object pTalent = null,
-Object pObservations = null,
-Object pChristSmilesFeedBack = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramCenterVisitationID = new DataColumnParameter(defCenterVisitationID, pCenterVisitationID);
-DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
-DataColumnParameter paramIsPresent = new DataColumnParameter(defIsPresent, pIsPresent);
-DataColumnParameter paramPictureStoredPath = new DataColumnParameter(defPictureStoredPath, pPictureStoredPath);
-DataColumnParameter paramEducation = new DataColumnParameter(defEducation, pEducation);
-DataColumnParameter paramEmotion = new DataColumnParameter(defEmotion, pEmotion);
-DataColumnParameter paramHealth = new DataColumnParameter(defHealth, pHealth);
-DataColumnParameter paramSpiritual = new DataColumnParameter(defSpiritual, pSpiritual);
-DataColumnParameter paramSocial = new DataColumnParameter(defSocial, pSocial);
-DataColumnParameter paramTalent = new DataColumnParameter(defTalent, pTalent);
-DataColumnParameter paramObservations = new DataColumnParameter(defObservations, pObservations);
-DataColumnParameter paramChristSmilesFeedBack = new DataColumnParameter(defChristSmilesFeedBack, pChristSmilesFeedBack);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterVisitationID],[BeneficiaryID],[IsPresent],[PictureStoredPath],[Education],[Emotion],[Health],[Spiritual],[Social],[Talent],[Observations],[ChristSmilesFeedBack],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramCenterVisitationID.GetSQLQuotedValueForAdd(),
-paramBeneficiaryID.GetSQLQuotedValueForAdd(),
-paramIsPresent.GetSQLQuotedValueForAdd(),
-paramPictureStoredPath.GetSQLQuotedValueForAdd(),
-paramEducation.GetSQLQuotedValueForAdd(),
-paramEmotion.GetSQLQuotedValueForAdd(),
-paramHealth.GetSQLQuotedValueForAdd(),
-paramSpiritual.GetSQLQuotedValueForAdd(),
-paramSocial.GetSQLQuotedValueForAdd(),
-paramTalent.GetSQLQuotedValueForAdd(),
-paramObservations.GetSQLQuotedValueForAdd(),
-paramChristSmilesFeedBack.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(Int32 pCenterVisitationID,
-Int32 pBeneficiaryID,
-Boolean pIsPresent,
-DateTime pCreatedAt,
-DateTime pUpdatedAt,
-Int32 pCreatedByID,
-Int32 pUpdatedByID,
-Object pPictureStoredPath= null,
-Object pEducation= null,
-Object pEmotion= null,
-Object pHealth= null,
-Object pSpiritual= null,
-Object pSocial= null,
-Object pTalent= null,
-Object pObservations= null,
-Object pChristSmilesFeedBack= null){
-
-        try{
-
-DataColumnParameter paramCenterVisitationID = new DataColumnParameter(defCenterVisitationID, pCenterVisitationID);
-DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
-DataColumnParameter paramIsPresent = new DataColumnParameter(defIsPresent, pIsPresent);
-DataColumnParameter paramPictureStoredPath = new DataColumnParameter(defPictureStoredPath, pPictureStoredPath);
-DataColumnParameter paramEducation = new DataColumnParameter(defEducation, pEducation);
-DataColumnParameter paramEmotion = new DataColumnParameter(defEmotion, pEmotion);
-DataColumnParameter paramHealth = new DataColumnParameter(defHealth, pHealth);
-DataColumnParameter paramSpiritual = new DataColumnParameter(defSpiritual, pSpiritual);
-DataColumnParameter paramSocial = new DataColumnParameter(defSocial, pSocial);
-DataColumnParameter paramTalent = new DataColumnParameter(defTalent, pTalent);
-DataColumnParameter paramObservations = new DataColumnParameter(defObservations, pObservations);
-DataColumnParameter paramChristSmilesFeedBack = new DataColumnParameter(defChristSmilesFeedBack, pChristSmilesFeedBack);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
-DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([CenterVisitationID],[BeneficiaryID],[IsPresent],[PictureStoredPath],[Education],[Emotion],[Health],[Spiritual],[Social],[Talent],[Observations],[ChristSmilesFeedBack],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}) ", TABLE_NAME,paramCenterVisitationID.GetSQLQuotedValueForAdd(),
-paramBeneficiaryID.GetSQLQuotedValueForAdd(),
-paramIsPresent.GetSQLQuotedValueForAdd(),
-paramPictureStoredPath.GetSQLQuotedValueForAdd(),
-paramEducation.GetSQLQuotedValueForAdd(),
-paramEmotion.GetSQLQuotedValueForAdd(),
-paramHealth.GetSQLQuotedValueForAdd(),
-paramSpiritual.GetSQLQuotedValueForAdd(),
-paramSocial.GetSQLQuotedValueForAdd(),
-paramTalent.GetSQLQuotedValueForAdd(),
-paramObservations.GetSQLQuotedValueForAdd(),
-paramChristSmilesFeedBack.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd(),
-paramCreatedByID.GetSQLQuotedValueForAdd(),
-paramUpdatedByID.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pCenterVisitationID = null,
-Object pBeneficiaryID = null,
-Object pIsPresent = null,
-Object pCreatedAt = null,
-Object pUpdatedAt = null,
-Object pCreatedByID = null,
-Object pUpdatedByID = null,
-Object pPictureStoredPath = null,
-Object pEducation = null,
-Object pEmotion = null,
-Object pHealth = null,
-Object pSpiritual = null,
-Object pSocial = null,
-Object pTalent = null,
-Object pObservations = null,
-Object pChristSmilesFeedBack = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramCenterVisitationID = new DataColumnParameter(defCenterVisitationID, pCenterVisitationID);
- DataColumnParameter paramBeneficiaryID = new DataColumnParameter(defBeneficiaryID, pBeneficiaryID);
- DataColumnParameter paramIsPresent = new DataColumnParameter(defIsPresent, pIsPresent);
- DataColumnParameter paramPictureStoredPath = new DataColumnParameter(defPictureStoredPath, pPictureStoredPath);
- DataColumnParameter paramEducation = new DataColumnParameter(defEducation, pEducation);
- DataColumnParameter paramEmotion = new DataColumnParameter(defEmotion, pEmotion);
- DataColumnParameter paramHealth = new DataColumnParameter(defHealth, pHealth);
- DataColumnParameter paramSpiritual = new DataColumnParameter(defSpiritual, pSpiritual);
- DataColumnParameter paramSocial = new DataColumnParameter(defSocial, pSocial);
- DataColumnParameter paramTalent = new DataColumnParameter(defTalent, pTalent);
- DataColumnParameter paramObservations = new DataColumnParameter(defObservations, pObservations);
- DataColumnParameter paramChristSmilesFeedBack = new DataColumnParameter(defChristSmilesFeedBack, pChristSmilesFeedBack);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
- DataColumnParameter paramCreatedByID = new DataColumnParameter(defCreatedByID, pCreatedByID);
- DataColumnParameter paramUpdatedByID = new DataColumnParameter(defUpdatedByID, pUpdatedByID);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [CenterVisitationID]={2},[BeneficiaryID]={3},[IsPresent]={4},[PictureStoredPath]={5},[Education]={6},[Emotion]={7},[Health]={8},[Spiritual]={9},[Social]={10},[Talent]={11},[Observations]={12},[ChristSmilesFeedBack]={13},[CreatedAt]={14},[UpdatedAt]={15},[CreatedByID]={16},[UpdatedByID]={17} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramCenterVisitationID.GetSQLQuotedValueForUpdate(),
-paramBeneficiaryID.GetSQLQuotedValueForUpdate(),
-paramIsPresent.GetSQLQuotedValueForUpdate(),
-paramPictureStoredPath.GetSQLQuotedValueForUpdate(),
-paramEducation.GetSQLQuotedValueForUpdate(),
-paramEmotion.GetSQLQuotedValueForUpdate(),
-paramHealth.GetSQLQuotedValueForUpdate(),
-paramSpiritual.GetSQLQuotedValueForUpdate(),
-paramSocial.GetSQLQuotedValueForUpdate(),
-paramTalent.GetSQLQuotedValueForUpdate(),
-paramObservations.GetSQLQuotedValueForUpdate(),
-paramChristSmilesFeedBack.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramUpdatedAt.GetSQLQuotedValueForUpdate(),
-paramCreatedByID.GetSQLQuotedValueForUpdate(),
-paramUpdatedByID.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

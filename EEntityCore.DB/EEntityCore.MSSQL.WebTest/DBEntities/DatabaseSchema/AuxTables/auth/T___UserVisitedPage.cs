@@ -23,16 +23,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___UserVisitedPage()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defSessionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionID.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIPAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IPAddress.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTimedOut = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TimedOut.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defWebURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.WebURL.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPage = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Page.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCheckedOutTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CheckedOutTime.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defRoleID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RoleID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defSessionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionID.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIPAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IPAddress.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTimedOut = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TimedOut.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defWebURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.WebURL.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPage = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Page.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCheckedOutTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CheckedOutTime.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defRoleID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RoleID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -257,13 +257,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public string Page { get => (string)TargettedRow[TableColumnNames.Page.ToString()]; }
 
 
-       public NullableDateTime CheckedOutTime { get => new (this.TargettedRow[TableColumnNames.CheckedOutTime.ToString()]); }
+       public DateTime? CheckedOutTime { get => (DateTime?)TargettedRow[TableColumnNames.CheckedOutTime.ToString()]; }
 
 
        public int RoleID { get => (int)TargettedRow[TableColumnNames.RoleID.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
  #endregion
@@ -311,238 +311,59 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(Int32 pUserID,
-Int32 pRoleID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            int UserID,
+            string SessionID,
+            string IPAddress,
+            bool TimedOut,
+            string WebURL,
+            string Page,
+            int RoleID,
+            DateTime CreatedAt,
+            DateTime? CheckedOutTime = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-                DataColumnParameter paramRoleID = new DataColumnParameter(defRoleID, pRoleID);
-                DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, defSessionID.DefaultValue);
-                DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, defIPAddress.DefaultValue);
-                DataColumnParameter paramTimedOut = new DataColumnParameter(defTimedOut, defTimedOut.DefaultValue);
-                DataColumnParameter paramWebURL = new DataColumnParameter(defWebURL, defWebURL.DefaultValue);
-                DataColumnParameter paramPage = new DataColumnParameter(defPage, defPage.DefaultValue);
-                DataColumnParameter paramCheckedOutTime = new DataColumnParameter(defCheckedOutTime, defCheckedOutTime.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramUserID = new (defUserID, UserID);
+                DataColumnParameter paramSessionID = new (defSessionID, SessionID);
+                DataColumnParameter paramIPAddress = new (defIPAddress, IPAddress);
+                DataColumnParameter paramTimedOut = new (defTimedOut, TimedOut);
+                DataColumnParameter paramWebURL = new (defWebURL, WebURL);
+                DataColumnParameter paramPage = new (defPage, Page);
+                DataColumnParameter paramCheckedOutTime = new (defCheckedOutTime, CheckedOutTime);
+                DataColumnParameter paramRoleID = new (defRoleID, RoleID);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[SessionID],[IPAddress],[TimedOut],[WebURL],[Page],[CheckedOutTime],[RoleID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramUserID.GetSQLQuotedValueForAdd(),
-                paramSessionID.GetSQLQuotedValueForAdd(),
-                paramIPAddress.GetSQLQuotedValueForAdd(),
-                paramTimedOut.GetSQLQuotedValueForAdd(),
-                paramWebURL.GetSQLQuotedValueForAdd(),
-                paramPage.GetSQLQuotedValueForAdd(),
-                paramCheckedOutTime.GetSQLQuotedValueForAdd(),
-                paramRoleID.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[SessionID],[IPAddress],[TimedOut],[WebURL],[Page],[CheckedOutTime],[RoleID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramUserID.GetSQLQuotedValueForAdd(),
+                        paramSessionID.GetSQLQuotedValueForAdd(),
+                        paramIPAddress.GetSQLQuotedValueForAdd(),
+                        paramTimedOut.GetSQLQuotedValueForAdd(),
+                        paramWebURL.GetSQLQuotedValueForAdd(),
+                        paramPage.GetSQLQuotedValueForAdd(),
+                        paramCheckedOutTime.GetSQLQuotedValueForAdd(),
+                        paramRoleID.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(Int32 pUserID,
-String pSessionID,
-String pIPAddress,
-Boolean pTimedOut,
-String pWebURL,
-String pPage,
-Int32 pRoleID,
-DateTime pCreatedAt,
-Object pCheckedOutTime = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-                DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
-                DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
-                DataColumnParameter paramTimedOut = new DataColumnParameter(defTimedOut, pTimedOut);
-                DataColumnParameter paramWebURL = new DataColumnParameter(defWebURL, pWebURL);
-                DataColumnParameter paramPage = new DataColumnParameter(defPage, pPage);
-                DataColumnParameter paramCheckedOutTime = new DataColumnParameter(defCheckedOutTime, pCheckedOutTime);
-                DataColumnParameter paramRoleID = new DataColumnParameter(defRoleID, pRoleID);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[SessionID],[IPAddress],[TimedOut],[WebURL],[Page],[CheckedOutTime],[RoleID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramUserID.GetSQLQuotedValueForAdd(),
-paramSessionID.GetSQLQuotedValueForAdd(),
-paramIPAddress.GetSQLQuotedValueForAdd(),
-paramTimedOut.GetSQLQuotedValueForAdd(),
-paramWebURL.GetSQLQuotedValueForAdd(),
-paramPage.GetSQLQuotedValueForAdd(),
-paramCheckedOutTime.GetSQLQuotedValueForAdd(),
-paramRoleID.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,Int32 pUserID,
-String pSessionID,
-String pIPAddress,
-Boolean pTimedOut,
-String pWebURL,
-String pPage,
-Int32 pRoleID,
-DateTime pCreatedAt,
-Object pCheckedOutTime = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
-DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
-DataColumnParameter paramTimedOut = new DataColumnParameter(defTimedOut, pTimedOut);
-DataColumnParameter paramWebURL = new DataColumnParameter(defWebURL, pWebURL);
-DataColumnParameter paramPage = new DataColumnParameter(defPage, pPage);
-DataColumnParameter paramCheckedOutTime = new DataColumnParameter(defCheckedOutTime, pCheckedOutTime);
-DataColumnParameter paramRoleID = new DataColumnParameter(defRoleID, pRoleID);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[SessionID],[IPAddress],[TimedOut],[WebURL],[Page],[CheckedOutTime],[RoleID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramUserID.GetSQLQuotedValueForAdd(),
-paramSessionID.GetSQLQuotedValueForAdd(),
-paramIPAddress.GetSQLQuotedValueForAdd(),
-paramTimedOut.GetSQLQuotedValueForAdd(),
-paramWebURL.GetSQLQuotedValueForAdd(),
-paramPage.GetSQLQuotedValueForAdd(),
-paramCheckedOutTime.GetSQLQuotedValueForAdd(),
-paramRoleID.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(Int32 pUserID,
-String pSessionID,
-String pIPAddress,
-Boolean pTimedOut,
-String pWebURL,
-String pPage,
-Int32 pRoleID,
-DateTime pCreatedAt,
-Object pCheckedOutTime= null){
-
-        try{
-
-DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
-DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
-DataColumnParameter paramTimedOut = new DataColumnParameter(defTimedOut, pTimedOut);
-DataColumnParameter paramWebURL = new DataColumnParameter(defWebURL, pWebURL);
-DataColumnParameter paramPage = new DataColumnParameter(defPage, pPage);
-DataColumnParameter paramCheckedOutTime = new DataColumnParameter(defCheckedOutTime, pCheckedOutTime);
-DataColumnParameter paramRoleID = new DataColumnParameter(defRoleID, pRoleID);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([UserID],[SessionID],[IPAddress],[TimedOut],[WebURL],[Page],[CheckedOutTime],[RoleID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramUserID.GetSQLQuotedValueForAdd(),
-paramSessionID.GetSQLQuotedValueForAdd(),
-paramIPAddress.GetSQLQuotedValueForAdd(),
-paramTimedOut.GetSQLQuotedValueForAdd(),
-paramWebURL.GetSQLQuotedValueForAdd(),
-paramPage.GetSQLQuotedValueForAdd(),
-paramCheckedOutTime.GetSQLQuotedValueForAdd(),
-paramRoleID.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pUserID = null,
-Object pSessionID = null,
-Object pIPAddress = null,
-Object pTimedOut = null,
-Object pWebURL = null,
-Object pPage = null,
-Object pRoleID = null,
-Object pCreatedAt = null,
-Object pCheckedOutTime = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
- DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
- DataColumnParameter paramIPAddress = new DataColumnParameter(defIPAddress, pIPAddress);
- DataColumnParameter paramTimedOut = new DataColumnParameter(defTimedOut, pTimedOut);
- DataColumnParameter paramWebURL = new DataColumnParameter(defWebURL, pWebURL);
- DataColumnParameter paramPage = new DataColumnParameter(defPage, pPage);
- DataColumnParameter paramCheckedOutTime = new DataColumnParameter(defCheckedOutTime, pCheckedOutTime);
- DataColumnParameter paramRoleID = new DataColumnParameter(defRoleID, pRoleID);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [UserID]={2},[SessionID]={3},[IPAddress]={4},[TimedOut]={5},[WebURL]={6},[Page]={7},[CheckedOutTime]={8},[RoleID]={9},[CreatedAt]={10} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramUserID.GetSQLQuotedValueForUpdate(),
-paramSessionID.GetSQLQuotedValueForUpdate(),
-paramIPAddress.GetSQLQuotedValueForUpdate(),
-paramTimedOut.GetSQLQuotedValueForUpdate(),
-paramWebURL.GetSQLQuotedValueForUpdate(),
-paramPage.GetSQLQuotedValueForUpdate(),
-paramCheckedOutTime.GetSQLQuotedValueForUpdate(),
-paramRoleID.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

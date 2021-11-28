@@ -81,7 +81,7 @@ Public Class Client
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Overrides Function getSQLConnection(ByVal InitialCatalog As String) As SqlClient.SqlConnection
+    Public Overrides Function GetSQLConnection(ByVal InitialCatalog As String) As SqlClient.SqlConnection
 
         Dim sCon As SqlClient.SqlConnection
 

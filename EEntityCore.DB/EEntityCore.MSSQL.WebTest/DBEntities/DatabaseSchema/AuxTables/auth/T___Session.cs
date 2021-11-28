@@ -23,18 +23,18 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___Session()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defSessionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionID.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defSessionTimeoutMins = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionTimeoutMins.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsNewSession = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsNewSession.ToString(), typeof(Boolean),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIsReadOnly = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsReadOnly.ToString(), typeof(Boolean),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defLastActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LastActive.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIpAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IpAddress.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBrowser = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Browser.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSessionVariables = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionVariables.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defSessionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionID.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defSessionTimeoutMins = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionTimeoutMins.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UserID.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsNewSession = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsNewSession.ToString(), typeof(bool?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIsReadOnly = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsReadOnly.ToString(), typeof(bool?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defLastActive = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LastActive.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIpAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IpAddress.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBrowser = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Browser.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSessionVariables = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SessionVariables.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -253,7 +253,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public bool? IsReadOnly { get => (bool?)TargettedRow[TableColumnNames.IsReadOnly.ToString()]; }
 
 
-       public NullableDateTime LastActive { get => new (this.TargettedRow[TableColumnNames.LastActive.ToString()]); }
+       public DateTime? LastActive { get => (DateTime?)TargettedRow[TableColumnNames.LastActive.ToString()]; }
 
 
        public string IpAddress { get => (string)TargettedRow[TableColumnNames.IpAddress.ToString()]; }
@@ -265,10 +265,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public string SessionVariables { get => (string)TargettedRow[TableColumnNames.SessionVariables.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
 
 
  #endregion
@@ -316,265 +316,65 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(String pSessionID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            string SessionID,
+            int SessionTimeoutMins,
+            DateTime CreatedAt,
+            int? UserID = null,
+            bool? IsNewSession = null,
+            bool? IsReadOnly = null,
+            DateTime? LastActive = null,
+            string IpAddress = null,
+            string Browser = null,
+            string SessionVariables = null,
+            DateTime? UpdatedAt = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
-                DataColumnParameter paramSessionTimeoutMins = new DataColumnParameter(defSessionTimeoutMins, defSessionTimeoutMins.DefaultValue);
-                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, defUserID.DefaultValue);
-                DataColumnParameter paramIsNewSession = new DataColumnParameter(defIsNewSession, defIsNewSession.DefaultValue);
-                DataColumnParameter paramIsReadOnly = new DataColumnParameter(defIsReadOnly, defIsReadOnly.DefaultValue);
-                DataColumnParameter paramLastActive = new DataColumnParameter(defLastActive, defLastActive.DefaultValue);
-                DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, defIpAddress.DefaultValue);
-                DataColumnParameter paramBrowser = new DataColumnParameter(defBrowser, defBrowser.DefaultValue);
-                DataColumnParameter paramSessionVariables = new DataColumnParameter(defSessionVariables, defSessionVariables.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramSessionID = new (defSessionID, SessionID);
+                DataColumnParameter paramSessionTimeoutMins = new (defSessionTimeoutMins, SessionTimeoutMins);
+                DataColumnParameter paramUserID = new (defUserID, UserID);
+                DataColumnParameter paramIsNewSession = new (defIsNewSession, IsNewSession);
+                DataColumnParameter paramIsReadOnly = new (defIsReadOnly, IsReadOnly);
+                DataColumnParameter paramLastActive = new (defLastActive, LastActive);
+                DataColumnParameter paramIpAddress = new (defIpAddress, IpAddress);
+                DataColumnParameter paramBrowser = new (defBrowser, Browser);
+                DataColumnParameter paramSessionVariables = new (defSessionVariables, SessionVariables);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SessionID],[SessionTimeoutMins],[UserID],[IsNewSession],[IsReadOnly],[LastActive],[IpAddress],[Browser],[SessionVariables],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramSessionID.GetSQLQuotedValueForAdd(),
-                paramSessionTimeoutMins.GetSQLQuotedValueForAdd(),
-                paramUserID.GetSQLQuotedValueForAdd(),
-                paramIsNewSession.GetSQLQuotedValueForAdd(),
-                paramIsReadOnly.GetSQLQuotedValueForAdd(),
-                paramLastActive.GetSQLQuotedValueForAdd(),
-                paramIpAddress.GetSQLQuotedValueForAdd(),
-                paramBrowser.GetSQLQuotedValueForAdd(),
-                paramSessionVariables.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SessionID],[SessionTimeoutMins],[UserID],[IsNewSession],[IsReadOnly],[LastActive],[IpAddress],[Browser],[SessionVariables],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramSessionID.GetSQLQuotedValueForAdd(),
+                        paramSessionTimeoutMins.GetSQLQuotedValueForAdd(),
+                        paramUserID.GetSQLQuotedValueForAdd(),
+                        paramIsNewSession.GetSQLQuotedValueForAdd(),
+                        paramIsReadOnly.GetSQLQuotedValueForAdd(),
+                        paramLastActive.GetSQLQuotedValueForAdd(),
+                        paramIpAddress.GetSQLQuotedValueForAdd(),
+                        paramBrowser.GetSQLQuotedValueForAdd(),
+                        paramSessionVariables.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(String pSessionID,
-Int32 pSessionTimeoutMins,
-DateTime pCreatedAt,
-Object pUserID = null,
-Object pIsNewSession = null,
-Object pIsReadOnly = null,
-Object pLastActive = null,
-Object pIpAddress = null,
-Object pBrowser = null,
-Object pSessionVariables = null,
-Object pUpdatedAt = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
-                DataColumnParameter paramSessionTimeoutMins = new DataColumnParameter(defSessionTimeoutMins, pSessionTimeoutMins);
-                DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-                DataColumnParameter paramIsNewSession = new DataColumnParameter(defIsNewSession, pIsNewSession);
-                DataColumnParameter paramIsReadOnly = new DataColumnParameter(defIsReadOnly, pIsReadOnly);
-                DataColumnParameter paramLastActive = new DataColumnParameter(defLastActive, pLastActive);
-                DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
-                DataColumnParameter paramBrowser = new DataColumnParameter(defBrowser, pBrowser);
-                DataColumnParameter paramSessionVariables = new DataColumnParameter(defSessionVariables, pSessionVariables);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SessionID],[SessionTimeoutMins],[UserID],[IsNewSession],[IsReadOnly],[LastActive],[IpAddress],[Browser],[SessionVariables],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramSessionID.GetSQLQuotedValueForAdd(),
-paramSessionTimeoutMins.GetSQLQuotedValueForAdd(),
-paramUserID.GetSQLQuotedValueForAdd(),
-paramIsNewSession.GetSQLQuotedValueForAdd(),
-paramIsReadOnly.GetSQLQuotedValueForAdd(),
-paramLastActive.GetSQLQuotedValueForAdd(),
-paramIpAddress.GetSQLQuotedValueForAdd(),
-paramBrowser.GetSQLQuotedValueForAdd(),
-paramSessionVariables.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,String pSessionID,
-Int32 pSessionTimeoutMins,
-DateTime pCreatedAt,
-Object pUserID = null,
-Object pIsNewSession = null,
-Object pIsReadOnly = null,
-Object pLastActive = null,
-Object pIpAddress = null,
-Object pBrowser = null,
-Object pSessionVariables = null,
-Object pUpdatedAt = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
-DataColumnParameter paramSessionTimeoutMins = new DataColumnParameter(defSessionTimeoutMins, pSessionTimeoutMins);
-DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-DataColumnParameter paramIsNewSession = new DataColumnParameter(defIsNewSession, pIsNewSession);
-DataColumnParameter paramIsReadOnly = new DataColumnParameter(defIsReadOnly, pIsReadOnly);
-DataColumnParameter paramLastActive = new DataColumnParameter(defLastActive, pLastActive);
-DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
-DataColumnParameter paramBrowser = new DataColumnParameter(defBrowser, pBrowser);
-DataColumnParameter paramSessionVariables = new DataColumnParameter(defSessionVariables, pSessionVariables);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SessionID],[SessionTimeoutMins],[UserID],[IsNewSession],[IsReadOnly],[LastActive],[IpAddress],[Browser],[SessionVariables],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramSessionID.GetSQLQuotedValueForAdd(),
-paramSessionTimeoutMins.GetSQLQuotedValueForAdd(),
-paramUserID.GetSQLQuotedValueForAdd(),
-paramIsNewSession.GetSQLQuotedValueForAdd(),
-paramIsReadOnly.GetSQLQuotedValueForAdd(),
-paramLastActive.GetSQLQuotedValueForAdd(),
-paramIpAddress.GetSQLQuotedValueForAdd(),
-paramBrowser.GetSQLQuotedValueForAdd(),
-paramSessionVariables.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(String pSessionID,
-Int32 pSessionTimeoutMins,
-DateTime pCreatedAt,
-Object pUserID= null,
-Object pIsNewSession= null,
-Object pIsReadOnly= null,
-Object pLastActive= null,
-Object pIpAddress= null,
-Object pBrowser= null,
-Object pSessionVariables= null,
-Object pUpdatedAt= null){
-
-        try{
-
-DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
-DataColumnParameter paramSessionTimeoutMins = new DataColumnParameter(defSessionTimeoutMins, pSessionTimeoutMins);
-DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
-DataColumnParameter paramIsNewSession = new DataColumnParameter(defIsNewSession, pIsNewSession);
-DataColumnParameter paramIsReadOnly = new DataColumnParameter(defIsReadOnly, pIsReadOnly);
-DataColumnParameter paramLastActive = new DataColumnParameter(defLastActive, pLastActive);
-DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
-DataColumnParameter paramBrowser = new DataColumnParameter(defBrowser, pBrowser);
-DataColumnParameter paramSessionVariables = new DataColumnParameter(defSessionVariables, pSessionVariables);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([SessionID],[SessionTimeoutMins],[UserID],[IsNewSession],[IsReadOnly],[LastActive],[IpAddress],[Browser],[SessionVariables],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) ", TABLE_NAME,paramSessionID.GetSQLQuotedValueForAdd(),
-paramSessionTimeoutMins.GetSQLQuotedValueForAdd(),
-paramUserID.GetSQLQuotedValueForAdd(),
-paramIsNewSession.GetSQLQuotedValueForAdd(),
-paramIsReadOnly.GetSQLQuotedValueForAdd(),
-paramLastActive.GetSQLQuotedValueForAdd(),
-paramIpAddress.GetSQLQuotedValueForAdd(),
-paramBrowser.GetSQLQuotedValueForAdd(),
-paramSessionVariables.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pSessionID = null,
-Object pSessionTimeoutMins = null,
-Object pCreatedAt = null,
-Object pUserID = null,
-Object pIsNewSession = null,
-Object pIsReadOnly = null,
-Object pLastActive = null,
-Object pIpAddress = null,
-Object pBrowser = null,
-Object pSessionVariables = null,
-Object pUpdatedAt = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramSessionID = new DataColumnParameter(defSessionID, pSessionID);
- DataColumnParameter paramSessionTimeoutMins = new DataColumnParameter(defSessionTimeoutMins, pSessionTimeoutMins);
- DataColumnParameter paramUserID = new DataColumnParameter(defUserID, pUserID);
- DataColumnParameter paramIsNewSession = new DataColumnParameter(defIsNewSession, pIsNewSession);
- DataColumnParameter paramIsReadOnly = new DataColumnParameter(defIsReadOnly, pIsReadOnly);
- DataColumnParameter paramLastActive = new DataColumnParameter(defLastActive, pLastActive);
- DataColumnParameter paramIpAddress = new DataColumnParameter(defIpAddress, pIpAddress);
- DataColumnParameter paramBrowser = new DataColumnParameter(defBrowser, pBrowser);
- DataColumnParameter paramSessionVariables = new DataColumnParameter(defSessionVariables, pSessionVariables);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [SessionID]={2},[SessionTimeoutMins]={3},[UserID]={4},[IsNewSession]={5},[IsReadOnly]={6},[LastActive]={7},[IpAddress]={8},[Browser]={9},[SessionVariables]={10},[CreatedAt]={11},[UpdatedAt]={12} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramSessionID.GetSQLQuotedValueForUpdate(),
-paramSessionTimeoutMins.GetSQLQuotedValueForUpdate(),
-paramUserID.GetSQLQuotedValueForUpdate(),
-paramIsNewSession.GetSQLQuotedValueForUpdate(),
-paramIsReadOnly.GetSQLQuotedValueForUpdate(),
-paramLastActive.GetSQLQuotedValueForUpdate(),
-paramIpAddress.GetSQLQuotedValueForUpdate(),
-paramBrowser.GetSQLQuotedValueForUpdate(),
-paramSessionVariables.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramUpdatedAt.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

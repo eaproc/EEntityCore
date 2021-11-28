@@ -23,21 +23,21 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        static V___PlannedEventIntervalView()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defPlannedEventID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PlannedEventID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDayOfWeekID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DayOfWeekID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defStartTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.StartTime.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defEndTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.EndTime.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIntervalDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IntervalDate.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defStartDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.StartDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defEndDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.EndDate.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defComments = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Comments.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTitle = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Title.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCalendarEventID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CalendarEventID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCanBeDeleted = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CanBeDeleted.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defClassColor = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClassColor.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCalendarEvent = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CalendarEvent.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPlannedEventID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PlannedEventID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDayOfWeekID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DayOfWeekID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defStartTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.StartTime.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defEndTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.EndTime.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIntervalDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IntervalDate.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defStartDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.StartDate.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defEndDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.EndDate.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defComments = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Comments.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTitle = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Title.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCalendarEventID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CalendarEventID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedByID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedByID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCanBeDeleted = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CanBeDeleted.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defClassColor = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClassColor.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCalendarEvent = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CalendarEvent.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defPlannedEventID.ColumnName, defPlannedEventID); 
@@ -248,19 +248,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public int DayOfWeekID { get => (int)TargettedRow[TableColumnNames.DayOfWeekID.ToString()]; }
 
 
-       public NullableDateTime StartTime { get => new (this.TargettedRow[TableColumnNames.StartTime.ToString()]); }
+       public DateTime StartTime { get => (DateTime)TargettedRow[TableColumnNames.StartTime.ToString()]; }
 
 
-       public NullableDateTime EndTime { get => new (this.TargettedRow[TableColumnNames.EndTime.ToString()]); }
+       public DateTime EndTime { get => (DateTime)TargettedRow[TableColumnNames.EndTime.ToString()]; }
 
 
-       public NullableDateTime IntervalDate { get => new (this.TargettedRow[TableColumnNames.IntervalDate.ToString()]); }
+       public DateTime? IntervalDate { get => (DateTime?)TargettedRow[TableColumnNames.IntervalDate.ToString()]; }
 
 
-       public NullableDateTime StartDate { get => new (this.TargettedRow[TableColumnNames.StartDate.ToString()]); }
+       public DateTime StartDate { get => (DateTime)TargettedRow[TableColumnNames.StartDate.ToString()]; }
 
 
-       public NullableDateTime EndDate { get => new (this.TargettedRow[TableColumnNames.EndDate.ToString()]); }
+       public DateTime EndDate { get => (DateTime)TargettedRow[TableColumnNames.EndDate.ToString()]; }
 
 
        public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()]; }

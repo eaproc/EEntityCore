@@ -23,16 +23,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___Link()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defAppModuleID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AppModuleID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Name.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defLink = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Link.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defLinkPermissionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LinkPermissionID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defLinkParentID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LinkParentID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defOwnedByRoleID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.OwnedByRoleID.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defDescription = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Description.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defAppModuleID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AppModuleID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defName = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Name.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defLink = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Link.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defLinkPermissionID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LinkPermissionID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defLinkParentID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.LinkParentID.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defOwnedByRoleID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.OwnedByRoleID.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defDescription = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Description.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -271,10 +271,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public string Description { get => (string)TargettedRow[TableColumnNames.Description.ToString()]; }
 
 
-       public NullableDateTime CreatedAt { get => new (this.TargettedRow[TableColumnNames.CreatedAt.ToString()]); }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
 
 
-       public NullableDateTime UpdatedAt { get => new (this.TargettedRow[TableColumnNames.UpdatedAt.ToString()]); }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
 
 
  #endregion
@@ -322,241 +322,59 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(Int32 pAppModuleID,
-String pLink,
-Int32 pLinkPermissionID,
-Int32 pLinkParentID,
-Int32 pOwnedByRoleID){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            int AppModuleID,
+            string Name,
+            string Link,
+            int LinkPermissionID,
+            DateTime CreatedAt,
+            int? LinkParentID = null,
+            int? OwnedByRoleID = null,
+            string Description = null,
+            DateTime? UpdatedAt = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramAppModuleID = new DataColumnParameter(defAppModuleID, pAppModuleID);
-                DataColumnParameter paramLink = new DataColumnParameter(defLink, pLink);
-                DataColumnParameter paramLinkPermissionID = new DataColumnParameter(defLinkPermissionID, pLinkPermissionID);
-                DataColumnParameter paramLinkParentID = new DataColumnParameter(defLinkParentID, pLinkParentID);
-                DataColumnParameter paramOwnedByRoleID = new DataColumnParameter(defOwnedByRoleID, pOwnedByRoleID);
-                DataColumnParameter paramName = new DataColumnParameter(defName, defName.DefaultValue);
-                DataColumnParameter paramDescription = new DataColumnParameter(defDescription, defDescription.DefaultValue);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, defCreatedAt.DefaultValue);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, defUpdatedAt.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramAppModuleID = new (defAppModuleID, AppModuleID);
+                DataColumnParameter paramName = new (defName, Name);
+                DataColumnParameter paramLink = new (defLink, Link);
+                DataColumnParameter paramLinkPermissionID = new (defLinkPermissionID, LinkPermissionID);
+                DataColumnParameter paramLinkParentID = new (defLinkParentID, LinkParentID);
+                DataColumnParameter paramOwnedByRoleID = new (defOwnedByRoleID, OwnedByRoleID);
+                DataColumnParameter paramDescription = new (defDescription, Description);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AppModuleID],[Name],[Link],[LinkPermissionID],[LinkParentID],[OwnedByRoleID],[Description],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramAppModuleID.GetSQLQuotedValueForAdd(),
-                paramName.GetSQLQuotedValueForAdd(),
-                paramLink.GetSQLQuotedValueForAdd(),
-                paramLinkPermissionID.GetSQLQuotedValueForAdd(),
-                paramLinkParentID.GetSQLQuotedValueForAdd(),
-                paramOwnedByRoleID.GetSQLQuotedValueForAdd(),
-                paramDescription.GetSQLQuotedValueForAdd(),
-                paramCreatedAt.GetSQLQuotedValueForAdd(),
-                paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AppModuleID],[Name],[Link],[LinkPermissionID],[LinkParentID],[OwnedByRoleID],[Description],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramAppModuleID.GetSQLQuotedValueForAdd(),
+                        paramName.GetSQLQuotedValueForAdd(),
+                        paramLink.GetSQLQuotedValueForAdd(),
+                        paramLinkPermissionID.GetSQLQuotedValueForAdd(),
+                        paramLinkParentID.GetSQLQuotedValueForAdd(),
+                        paramOwnedByRoleID.GetSQLQuotedValueForAdd(),
+                        paramDescription.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(Int32 pAppModuleID,
-String pName,
-String pLink,
-Int32 pLinkPermissionID,
-DateTime pCreatedAt,
-Object pLinkParentID = null,
-Object pOwnedByRoleID = null,
-Object pDescription = null,
-Object pUpdatedAt = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramAppModuleID = new DataColumnParameter(defAppModuleID, pAppModuleID);
-                DataColumnParameter paramName = new DataColumnParameter(defName, pName);
-                DataColumnParameter paramLink = new DataColumnParameter(defLink, pLink);
-                DataColumnParameter paramLinkPermissionID = new DataColumnParameter(defLinkPermissionID, pLinkPermissionID);
-                DataColumnParameter paramLinkParentID = new DataColumnParameter(defLinkParentID, pLinkParentID);
-                DataColumnParameter paramOwnedByRoleID = new DataColumnParameter(defOwnedByRoleID, pOwnedByRoleID);
-                DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
-                DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-                DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AppModuleID],[Name],[Link],[LinkPermissionID],[LinkParentID],[OwnedByRoleID],[Description],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramAppModuleID.GetSQLQuotedValueForAdd(),
-paramName.GetSQLQuotedValueForAdd(),
-paramLink.GetSQLQuotedValueForAdd(),
-paramLinkPermissionID.GetSQLQuotedValueForAdd(),
-paramLinkParentID.GetSQLQuotedValueForAdd(),
-paramOwnedByRoleID.GetSQLQuotedValueForAdd(),
-paramDescription.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
-
-
-        public static int  AddWithParseID(Int32 pParseID ,Int32 pAppModuleID,
-String pName,
-String pLink,
-Int32 pLinkPermissionID,
-DateTime pCreatedAt,
-Object pLinkParentID = null,
-Object pOwnedByRoleID = null,
-Object pDescription = null,
-Object pUpdatedAt = null){
-
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramAppModuleID = new DataColumnParameter(defAppModuleID, pAppModuleID);
-DataColumnParameter paramName = new DataColumnParameter(defName, pName);
-DataColumnParameter paramLink = new DataColumnParameter(defLink, pLink);
-DataColumnParameter paramLinkPermissionID = new DataColumnParameter(defLinkPermissionID, pLinkPermissionID);
-DataColumnParameter paramLinkParentID = new DataColumnParameter(defLinkParentID, pLinkParentID);
-DataColumnParameter paramOwnedByRoleID = new DataColumnParameter(defOwnedByRoleID, pOwnedByRoleID);
-DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AppModuleID],[Name],[Link],[LinkPermissionID],[LinkParentID],[OwnedByRoleID],[Description],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramAppModuleID.GetSQLQuotedValueForAdd(),
-paramName.GetSQLQuotedValueForAdd(),
-paramLink.GetSQLQuotedValueForAdd(),
-paramLinkPermissionID.GetSQLQuotedValueForAdd(),
-paramLinkParentID.GetSQLQuotedValueForAdd(),
-paramOwnedByRoleID.GetSQLQuotedValueForAdd(),
-paramDescription.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-
-
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(Int32 pAppModuleID,
-String pName,
-String pLink,
-Int32 pLinkPermissionID,
-DateTime pCreatedAt,
-Object pLinkParentID= null,
-Object pOwnedByRoleID= null,
-Object pDescription= null,
-Object pUpdatedAt= null){
-
-        try{
-
-DataColumnParameter paramAppModuleID = new DataColumnParameter(defAppModuleID, pAppModuleID);
-DataColumnParameter paramName = new DataColumnParameter(defName, pName);
-DataColumnParameter paramLink = new DataColumnParameter(defLink, pLink);
-DataColumnParameter paramLinkPermissionID = new DataColumnParameter(defLinkPermissionID, pLinkPermissionID);
-DataColumnParameter paramLinkParentID = new DataColumnParameter(defLinkParentID, pLinkParentID);
-DataColumnParameter paramOwnedByRoleID = new DataColumnParameter(defOwnedByRoleID, pOwnedByRoleID);
-DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
-DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
-DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([AppModuleID],[Name],[Link],[LinkPermissionID],[LinkParentID],[OwnedByRoleID],[Description],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9}) ", TABLE_NAME,paramAppModuleID.GetSQLQuotedValueForAdd(),
-paramName.GetSQLQuotedValueForAdd(),
-paramLink.GetSQLQuotedValueForAdd(),
-paramLinkPermissionID.GetSQLQuotedValueForAdd(),
-paramLinkParentID.GetSQLQuotedValueForAdd(),
-paramOwnedByRoleID.GetSQLQuotedValueForAdd(),
-paramDescription.GetSQLQuotedValueForAdd(),
-paramCreatedAt.GetSQLQuotedValueForAdd(),
-paramUpdatedAt.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pAppModuleID = null,
-Object pName = null,
-Object pLink = null,
-Object pLinkPermissionID = null,
-Object pCreatedAt = null,
-Object pLinkParentID = null,
-Object pOwnedByRoleID = null,
-Object pDescription = null,
-Object pUpdatedAt = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramAppModuleID = new DataColumnParameter(defAppModuleID, pAppModuleID);
- DataColumnParameter paramName = new DataColumnParameter(defName, pName);
- DataColumnParameter paramLink = new DataColumnParameter(defLink, pLink);
- DataColumnParameter paramLinkPermissionID = new DataColumnParameter(defLinkPermissionID, pLinkPermissionID);
- DataColumnParameter paramLinkParentID = new DataColumnParameter(defLinkParentID, pLinkParentID);
- DataColumnParameter paramOwnedByRoleID = new DataColumnParameter(defOwnedByRoleID, pOwnedByRoleID);
- DataColumnParameter paramDescription = new DataColumnParameter(defDescription, pDescription);
- DataColumnParameter paramCreatedAt = new DataColumnParameter(defCreatedAt, pCreatedAt);
- DataColumnParameter paramUpdatedAt = new DataColumnParameter(defUpdatedAt, pUpdatedAt);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [AppModuleID]={2},[Name]={3},[Link]={4},[LinkPermissionID]={5},[LinkParentID]={6},[OwnedByRoleID]={7},[Description]={8},[CreatedAt]={9},[UpdatedAt]={10} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramAppModuleID.GetSQLQuotedValueForUpdate(),
-paramName.GetSQLQuotedValueForUpdate(),
-paramLink.GetSQLQuotedValueForUpdate(),
-paramLinkPermissionID.GetSQLQuotedValueForUpdate(),
-paramLinkParentID.GetSQLQuotedValueForUpdate(),
-paramOwnedByRoleID.GetSQLQuotedValueForUpdate(),
-paramDescription.GetSQLQuotedValueForUpdate(),
-paramCreatedAt.GetSQLQuotedValueForUpdate(),
-paramUpdatedAt.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
+            }                  
+        }                  
 
 
                   

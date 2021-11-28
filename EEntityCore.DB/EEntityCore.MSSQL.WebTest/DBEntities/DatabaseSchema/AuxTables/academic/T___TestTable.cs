@@ -23,17 +23,17 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___TestTable()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defTestString = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestString.ToString(), typeof(String),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestStringNull = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestStringNull.ToString(), typeof(String),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestInt32 = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestInt32.ToString(), typeof(Int32),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestInt32Null = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestInt32Null.ToString(), typeof(Int32),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestBool = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestBool.ToString(), typeof(Boolean),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestBoolNull = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestBoolNull.ToString(), typeof(Boolean),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestDecimal = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestDecimal.ToString(), typeof(Decimal),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestDecimalNull = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestDecimalNull.ToString(), typeof(Decimal),true, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestDateTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestDateTime.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestDateTimeNull = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestDateTimeNull.ToString(), typeof(DateTime),false, null,DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defTestString = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestString.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestStringNull = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestStringNull.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestInt32 = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestInt32.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestInt32Null = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestInt32Null.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestBool = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestBool.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestBoolNull = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestBoolNull.ToString(), typeof(bool?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestDecimal = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestDecimal.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestDecimalNull = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestDecimalNull.ToString(), typeof(decimal?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestDateTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestDateTime.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestDateTimeNull = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestDateTimeNull.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 
@@ -257,10 +257,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public decimal? TestDecimalNull { get => (decimal?)TargettedRow[TableColumnNames.TestDecimalNull.ToString()]; }
 
 
-       public NullableDateTime TestDateTime { get => new (this.TargettedRow[TableColumnNames.TestDateTime.ToString()]); }
+       public DateTime TestDateTime { get => (DateTime)TargettedRow[TableColumnNames.TestDateTime.ToString()]; }
 
 
-       public NullableDateTime TestDateTimeNull { get => new (this.TargettedRow[TableColumnNames.TestDateTimeNull.ToString()]); }
+       public DateTime? TestDateTimeNull { get => (DateTime?)TargettedRow[TableColumnNames.TestDateTimeNull.ToString()]; }
 
 
  #endregion
@@ -308,255 +308,130 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
 
-        public static int AddNewDefault(){
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ID,
+            string TestString,
+            int TestInt32,
+            bool TestBool,
+            decimal TestDecimal,
+            DateTime TestDateTime,
+            string TestStringNull = null,
+            int? TestInt32Null = null,
+            bool? TestBoolNull = null,
+            decimal? TestDecimalNull = null,
+            DateTime? TestDateTimeNull = null
+          ){
 
             try{
 
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramTestString = new DataColumnParameter(defTestString, defTestString.DefaultValue);
-                DataColumnParameter paramTestStringNull = new DataColumnParameter(defTestStringNull, defTestStringNull.DefaultValue);
-                DataColumnParameter paramTestInt32 = new DataColumnParameter(defTestInt32, defTestInt32.DefaultValue);
-                DataColumnParameter paramTestInt32Null = new DataColumnParameter(defTestInt32Null, defTestInt32Null.DefaultValue);
-                DataColumnParameter paramTestBool = new DataColumnParameter(defTestBool, defTestBool.DefaultValue);
-                DataColumnParameter paramTestBoolNull = new DataColumnParameter(defTestBoolNull, defTestBoolNull.DefaultValue);
-                DataColumnParameter paramTestDecimal = new DataColumnParameter(defTestDecimal, defTestDecimal.DefaultValue);
-                DataColumnParameter paramTestDecimalNull = new DataColumnParameter(defTestDecimalNull, defTestDecimalNull.DefaultValue);
-                DataColumnParameter paramTestDateTime = new DataColumnParameter(defTestDateTime, defTestDateTime.DefaultValue);
-                DataColumnParameter paramTestDateTimeNull = new DataColumnParameter(defTestDateTimeNull, defTestDateTimeNull.DefaultValue);
+                DataColumnParameter paramID = new (defID, ID);
+                DataColumnParameter paramTestString = new (defTestString, TestString);
+                DataColumnParameter paramTestStringNull = new (defTestStringNull, TestStringNull);
+                DataColumnParameter paramTestInt32 = new (defTestInt32, TestInt32);
+                DataColumnParameter paramTestInt32Null = new (defTestInt32Null, TestInt32Null);
+                DataColumnParameter paramTestBool = new (defTestBool, TestBool);
+                DataColumnParameter paramTestBoolNull = new (defTestBoolNull, TestBoolNull);
+                DataColumnParameter paramTestDecimal = new (defTestDecimal, TestDecimal);
+                DataColumnParameter paramTestDecimalNull = new (defTestDecimalNull, TestDecimalNull);
+                DataColumnParameter paramTestDateTime = new (defTestDateTime, TestDateTime);
+                DataColumnParameter paramTestDateTimeNull = new (defTestDateTimeNull, TestDateTimeNull);
 
 
-                DBConnectInterface.GetDBConn().DbExec(
-                     String.Format("SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TestString],[TestStringNull],[TestInt32],[TestInt32Null],[TestBool],[TestBoolNull],[TestDecimal],[TestDecimalNull],[TestDateTime],[TestDateTimeNull]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,                paramID.GetSQLQuotedValueForAdd(),
-                paramTestString.GetSQLQuotedValueForAdd(),
-                paramTestStringNull.GetSQLQuotedValueForAdd(),
-                paramTestInt32.GetSQLQuotedValueForAdd(),
-                paramTestInt32Null.GetSQLQuotedValueForAdd(),
-                paramTestBool.GetSQLQuotedValueForAdd(),
-                paramTestBoolNull.GetSQLQuotedValueForAdd(),
-                paramTestDecimal.GetSQLQuotedValueForAdd(),
-                paramTestDecimalNull.GetSQLQuotedValueForAdd(),
-                paramTestDateTime.GetSQLQuotedValueForAdd(),
-                paramTestDateTimeNull.GetSQLQuotedValueForAdd()  ), true);
-
-
+                return DBConnectInterface.GetDBConn().DbExec(
+     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TestString],[TestStringNull],[TestInt32],[TestInt32Null],[TestBool],[TestBoolNull],[TestDecimal],[TestDecimalNull],[TestDateTime],[TestDateTimeNull]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                        paramID.GetSQLQuotedValueForAdd(),
+                        paramTestString.GetSQLQuotedValueForAdd(),
+                        paramTestStringNull.GetSQLQuotedValueForAdd(),
+                        paramTestInt32.GetSQLQuotedValueForAdd(),
+                        paramTestInt32Null.GetSQLQuotedValueForAdd(),
+                        paramTestBool.GetSQLQuotedValueForAdd(),
+                        paramTestBoolNull.GetSQLQuotedValueForAdd(),
+                        paramTestDecimal.GetSQLQuotedValueForAdd(),
+                        paramTestDecimalNull.GetSQLQuotedValueForAdd(),
+                        paramTestDateTime.GetSQLQuotedValueForAdd(),
+                        paramTestDateTimeNull.GetSQLQuotedValueForAdd()                        ) 
+                      );
 
 
                   
-                return EInt.valueOf(paramID.Value);                   
-            }catch (Exception){                   
+                  
+            }catch (Exception){                  
                 throw;                   
-            }                   
-        }                   
-
-
-        public static int AddWithID(String pTestString,
-Int32 pTestInt32,
-Boolean pTestBool,
-Decimal pTestDecimal,
-DateTime pTestDateTime,
-DateTime pTestDateTimeNull,
-Object pTestStringNull = null,
-Object pTestInt32Null = null,
-Object pTestBoolNull = null,
-Object pTestDecimalNull = null){
-
-
-            try{
-
-                DataColumnParameter paramID = new DataColumnParameter(defID, DatabaseInit.DBConnectInterface.GetDBConn().GETNewID(TABLE_NAME));
-                DataColumnParameter paramTestString = new DataColumnParameter(defTestString, pTestString);
-                DataColumnParameter paramTestStringNull = new DataColumnParameter(defTestStringNull, pTestStringNull);
-                DataColumnParameter paramTestInt32 = new DataColumnParameter(defTestInt32, pTestInt32);
-                DataColumnParameter paramTestInt32Null = new DataColumnParameter(defTestInt32Null, pTestInt32Null);
-                DataColumnParameter paramTestBool = new DataColumnParameter(defTestBool, pTestBool);
-                DataColumnParameter paramTestBoolNull = new DataColumnParameter(defTestBoolNull, pTestBoolNull);
-                DataColumnParameter paramTestDecimal = new DataColumnParameter(defTestDecimal, pTestDecimal);
-                DataColumnParameter paramTestDecimalNull = new DataColumnParameter(defTestDecimalNull, pTestDecimalNull);
-                DataColumnParameter paramTestDateTime = new DataColumnParameter(defTestDateTime, pTestDateTime);
-                DataColumnParameter paramTestDateTimeNull = new DataColumnParameter(defTestDateTimeNull, pTestDateTimeNull);
-
-
-                DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TestString],[TestStringNull],[TestInt32],[TestInt32Null],[TestBool],[TestBoolNull],[TestDecimal],[TestDecimalNull],[TestDateTime],[TestDateTimeNull]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramTestString.GetSQLQuotedValueForAdd(),
-paramTestStringNull.GetSQLQuotedValueForAdd(),
-paramTestInt32.GetSQLQuotedValueForAdd(),
-paramTestInt32Null.GetSQLQuotedValueForAdd(),
-paramTestBool.GetSQLQuotedValueForAdd(),
-paramTestBoolNull.GetSQLQuotedValueForAdd(),
-paramTestDecimal.GetSQLQuotedValueForAdd(),
-paramTestDecimalNull.GetSQLQuotedValueForAdd(),
-paramTestDateTime.GetSQLQuotedValueForAdd(),
-paramTestDateTimeNull.GetSQLQuotedValueForAdd()  ), true);
+            }                  
+        }
 
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static string InsertGetID(
+            string TestString,
+            int TestInt32,
+            bool TestBool,
+            decimal TestDecimal,
+            DateTime TestDateTime,
+            string TestStringNull = null,
+            int? TestInt32Null = null,
+            bool? TestBoolNull = null,
+            decimal? TestDecimalNull = null,
+            DateTime? TestDateTimeNull = null
+          )
+        {
 
-                return EInt.valueOf(paramID.Value);                                     
-            }catch (Exception){                                     
-                throw;                                     
-            }                         
-       }                         
+            try
+            {
+                using (var conn = DBConnectInterface.GetDBConn().GetSQLConnection())
+                {
+                    DataColumnParameter paramTestString = new(defTestString, TestString);
+                    DataColumnParameter paramTestStringNull = new(defTestStringNull, TestStringNull);
+                    DataColumnParameter paramTestInt32 = new(defTestInt32, TestInt32);
+                    DataColumnParameter paramTestInt32Null = new(defTestInt32Null, TestInt32Null);
+                    DataColumnParameter paramTestBool = new(defTestBool, TestBool);
+                    DataColumnParameter paramTestBoolNull = new(defTestBoolNull, TestBoolNull);
+                    DataColumnParameter paramTestDecimal = new(defTestDecimal, TestDecimal);
+                    DataColumnParameter paramTestDecimalNull = new(defTestDecimalNull, TestDecimalNull);
+                    DataColumnParameter paramTestDateTime = new(defTestDateTime, TestDateTime);
+                    DataColumnParameter paramTestDateTimeNull = new(defTestDateTimeNull, TestDateTimeNull);
 
 
-        public static int  AddWithParseID(Int32 pParseID ,String pTestString,
-Int32 pTestInt32,
-Boolean pTestBool,
-Decimal pTestDecimal,
-DateTime pTestDateTime,
-DateTime pTestDateTimeNull,
-Object pTestStringNull = null,
-Object pTestInt32Null = null,
-Object pTestBoolNull = null,
-Object pTestDecimalNull = null){
+                    var r1 = server.DbExec(
+          string.Format(" INSERT INTO {0}([TestString],[TestStringNull],[TestInt32],[TestInt32Null],[TestBool],[TestBoolNull],[TestDecimal],[TestDecimalNull],[TestDateTime],[TestDateTimeNull]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,
+                             paramTestString.GetSQLQuotedValueForAdd(),
+                             paramTestStringNull.GetSQLQuotedValueForAdd(),
+                             paramTestInt32.GetSQLQuotedValueForAdd(),
+                             paramTestInt32Null.GetSQLQuotedValueForAdd(),
+                             paramTestBool.GetSQLQuotedValueForAdd(),
+                             paramTestBoolNull.GetSQLQuotedValueForAdd(),
+                             paramTestDecimal.GetSQLQuotedValueForAdd(),
+                             paramTestDecimalNull.GetSQLQuotedValueForAdd(),
+                             paramTestDateTime.GetSQLQuotedValueForAdd(),
+                             paramTestDateTimeNull.GetSQLQuotedValueForAdd()),
+                             conn
+                           );
 
-        try{
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pParseID );
-DataColumnParameter paramTestString = new DataColumnParameter(defTestString, pTestString);
-DataColumnParameter paramTestStringNull = new DataColumnParameter(defTestStringNull, pTestStringNull);
-DataColumnParameter paramTestInt32 = new DataColumnParameter(defTestInt32, pTestInt32);
-DataColumnParameter paramTestInt32Null = new DataColumnParameter(defTestInt32Null, pTestInt32Null);
-DataColumnParameter paramTestBool = new DataColumnParameter(defTestBool, pTestBool);
-DataColumnParameter paramTestBoolNull = new DataColumnParameter(defTestBoolNull, pTestBoolNull);
-DataColumnParameter paramTestDecimal = new DataColumnParameter(defTestDecimal, pTestDecimal);
-DataColumnParameter paramTestDecimalNull = new DataColumnParameter(defTestDecimalNull, pTestDecimalNull);
-DataColumnParameter paramTestDateTime = new DataColumnParameter(defTestDateTime, pTestDateTime);
-DataColumnParameter paramTestDateTimeNull = new DataColumnParameter(defTestDateTimeNull, pTestDateTimeNull);
+                    var r2 = server.GetScopeIdentity(conn);
 
 
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TestString],[TestStringNull],[TestInt32],[TestInt32Null],[TestBool],[TestBoolNull],[TestDecimal],[TestDecimalNull],[TestDateTime],[TestDateTimeNull]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}) SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,paramID.GetSQLQuotedValueForAdd(),
-paramTestString.GetSQLQuotedValueForAdd(),
-paramTestStringNull.GetSQLQuotedValueForAdd(),
-paramTestInt32.GetSQLQuotedValueForAdd(),
-paramTestInt32Null.GetSQLQuotedValueForAdd(),
-paramTestBool.GetSQLQuotedValueForAdd(),
-paramTestBoolNull.GetSQLQuotedValueForAdd(),
-paramTestDecimal.GetSQLQuotedValueForAdd(),
-paramTestDecimalNull.GetSQLQuotedValueForAdd(),
-paramTestDateTime.GetSQLQuotedValueForAdd(),
-paramTestDateTimeNull.GetSQLQuotedValueForAdd()  ), true);
+                    return r2;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
 
 
 
-            return EInt.valueOf(paramID.Value); 
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// You can not save image with this method 
-/// </summary> 
-/// <returns>Boolean</returns> /// <remarks></remarks> 
-        public static bool Add(String pTestString,
-Int32 pTestInt32,
-Boolean pTestBool,
-Decimal pTestDecimal,
-DateTime pTestDateTime,
-DateTime pTestDateTimeNull,
-Object pTestStringNull= null,
-Object pTestInt32Null= null,
-Object pTestBoolNull= null,
-Object pTestDecimalNull= null){
-
-        try{
-
-DataColumnParameter paramTestString = new DataColumnParameter(defTestString, pTestString);
-DataColumnParameter paramTestStringNull = new DataColumnParameter(defTestStringNull, pTestStringNull);
-DataColumnParameter paramTestInt32 = new DataColumnParameter(defTestInt32, pTestInt32);
-DataColumnParameter paramTestInt32Null = new DataColumnParameter(defTestInt32Null, pTestInt32Null);
-DataColumnParameter paramTestBool = new DataColumnParameter(defTestBool, pTestBool);
-DataColumnParameter paramTestBoolNull = new DataColumnParameter(defTestBoolNull, pTestBoolNull);
-DataColumnParameter paramTestDecimal = new DataColumnParameter(defTestDecimal, pTestDecimal);
-DataColumnParameter paramTestDecimalNull = new DataColumnParameter(defTestDecimalNull, pTestDecimalNull);
-DataColumnParameter paramTestDateTime = new DataColumnParameter(defTestDateTime, pTestDateTime);
-DataColumnParameter paramTestDateTimeNull = new DataColumnParameter(defTestDateTimeNull, pTestDateTimeNull);
-
-
-return DBConnectInterface.GetDBConn().DbExec(
-     String.Format("INSERT INTO {0}([TestString],[TestStringNull],[TestInt32],[TestInt32Null],[TestBool],[TestBoolNull],[TestDecimal],[TestDecimalNull],[TestDateTime],[TestDateTimeNull]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,paramTestString.GetSQLQuotedValueForAdd(),
-paramTestStringNull.GetSQLQuotedValueForAdd(),
-paramTestInt32.GetSQLQuotedValueForAdd(),
-paramTestInt32Null.GetSQLQuotedValueForAdd(),
-paramTestBool.GetSQLQuotedValueForAdd(),
-paramTestBoolNull.GetSQLQuotedValueForAdd(),
-paramTestDecimal.GetSQLQuotedValueForAdd(),
-paramTestDecimalNull.GetSQLQuotedValueForAdd(),
-paramTestDateTime.GetSQLQuotedValueForAdd(),
-paramTestDateTimeNull.GetSQLQuotedValueForAdd()  ), true);
-
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-/// <summary> 
-/// Leave a column as nothing to skip and a Nullable Column as Null to actually Null it 
-/// </summary> 
-/// <returns>Boolean</returns> 
-/// <remarks></remarks>                            
-        public static bool Update(Int64 pID  ,
-Object pTestString = null,
-Object pTestInt32 = null,
-Object pTestBool = null,
-Object pTestDecimal = null,
-Object pTestDateTime = null,
-Object pTestDateTimeNull = null,
-Object pTestStringNull = null,
-Object pTestInt32Null = null,
-Object pTestBoolNull = null,
-Object pTestDecimalNull = null){
-
-try{
-
-
- DataColumnParameter paramID = new DataColumnParameter(defID, pID);
- DataColumnParameter paramTestString = new DataColumnParameter(defTestString, pTestString);
- DataColumnParameter paramTestStringNull = new DataColumnParameter(defTestStringNull, pTestStringNull);
- DataColumnParameter paramTestInt32 = new DataColumnParameter(defTestInt32, pTestInt32);
- DataColumnParameter paramTestInt32Null = new DataColumnParameter(defTestInt32Null, pTestInt32Null);
- DataColumnParameter paramTestBool = new DataColumnParameter(defTestBool, pTestBool);
- DataColumnParameter paramTestBoolNull = new DataColumnParameter(defTestBoolNull, pTestBoolNull);
- DataColumnParameter paramTestDecimal = new DataColumnParameter(defTestDecimal, pTestDecimal);
- DataColumnParameter paramTestDecimalNull = new DataColumnParameter(defTestDecimalNull, pTestDecimalNull);
- DataColumnParameter paramTestDateTime = new DataColumnParameter(defTestDateTime, pTestDateTime);
- DataColumnParameter paramTestDateTimeNull = new DataColumnParameter(defTestDateTimeNull, pTestDateTimeNull);
-
-
-DBConnectInterface.GetDBConn().DbExec(
-     String.Format("UPDATE {0} SET [TestString]={2},[TestStringNull]={3},[TestInt32]={4},[TestInt32Null]={5},[TestBool]={6},[TestBoolNull]={7},[TestDecimal]={8},[TestDecimalNull]={9},[TestDateTime]={10},[TestDateTimeNull]={11} WHERE ID={1} ", TABLE_NAME, paramID.GetSQLQuotedValueForUpdate(),paramTestString.GetSQLQuotedValueForUpdate(),
-paramTestStringNull.GetSQLQuotedValueForUpdate(),
-paramTestInt32.GetSQLQuotedValueForUpdate(),
-paramTestInt32Null.GetSQLQuotedValueForUpdate(),
-paramTestBool.GetSQLQuotedValueForUpdate(),
-paramTestBoolNull.GetSQLQuotedValueForUpdate(),
-paramTestDecimal.GetSQLQuotedValueForUpdate(),
-paramTestDecimalNull.GetSQLQuotedValueForUpdate(),
-paramTestDateTime.GetSQLQuotedValueForUpdate(),
-paramTestDateTimeNull.GetSQLQuotedValueForUpdate()  ), true);
-
-
-                       // Nothing means ignore but null means clear
-                               return true;
-
-}catch (Exception){
-throw; 
-}
-}
-
-
-
-                  
-                  
         public static bool DeleteItemRow(long pID)                                    
         {                  
             return DeleteRow(DBConnectInterface.GetDBConn(), pID: pID, pTableName: TABLE_NAME);                  
