@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -382,7 +384,84 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int CreatedByID,
+            int ClientID,
+            decimal PaidInAmount,
+            decimal PaidInCharges,
+            decimal PayoutAmount,
+            decimal PayoutCharge,
+            decimal Balance,
+            DateTime TransactionStartDate,
+            DateTime TransactionEndDate,
+            DateTime CreatedAt,
+            int BankID,
+            string AccountName,
+            string AccountNumber,
+            int? UpdatedByID = null,
+            bool? AwaitingPayout = null,
+            bool? Synced = null,
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+                DataColumnParameter paramClientID = new (defClientID, ClientID);
+                DataColumnParameter paramPaidInAmount = new (defPaidInAmount, PaidInAmount);
+                DataColumnParameter paramPaidInCharges = new (defPaidInCharges, PaidInCharges);
+                DataColumnParameter paramPayoutAmount = new (defPayoutAmount, PayoutAmount);
+                DataColumnParameter paramPayoutCharge = new (defPayoutCharge, PayoutCharge);
+                DataColumnParameter paramBalance = new (defBalance, Balance);
+                DataColumnParameter paramTransactionStartDate = new (defTransactionStartDate, TransactionStartDate);
+                DataColumnParameter paramTransactionEndDate = new (defTransactionEndDate, TransactionEndDate);
+                DataColumnParameter paramAwaitingPayout = new (defAwaitingPayout, AwaitingPayout);
+                DataColumnParameter paramSynced = new (defSynced, Synced);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramBankID = new (defBankID, BankID);
+                DataColumnParameter paramAccountName = new (defAccountName, AccountName);
+                DataColumnParameter paramAccountNumber = new (defAccountNumber, AccountNumber);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([CreatedByID],[UpdatedByID],[ClientID],[PaidInAmount],[PaidInCharges],[PayoutAmount],[PayoutCharge],[Balance],[TransactionStartDate],[TransactionEndDate],[AwaitingPayout],[Synced],[CreatedAt],[UpdatedAt],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17})  ", TABLE_NAME,
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd(),
+                        paramClientID.GetSQLQuotedValueForAdd(),
+                        paramPaidInAmount.GetSQLQuotedValueForAdd(),
+                        paramPaidInCharges.GetSQLQuotedValueForAdd(),
+                        paramPayoutAmount.GetSQLQuotedValueForAdd(),
+                        paramPayoutCharge.GetSQLQuotedValueForAdd(),
+                        paramBalance.GetSQLQuotedValueForAdd(),
+                        paramTransactionStartDate.GetSQLQuotedValueForAdd(),
+                        paramTransactionEndDate.GetSQLQuotedValueForAdd(),
+                        paramAwaitingPayout.GetSQLQuotedValueForAdd(),
+                        paramSynced.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramBankID.GetSQLQuotedValueForAdd(),
+                        paramAccountName.GetSQLQuotedValueForAdd(),
+                        paramAccountNumber.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int CreatedByID,
             int ClientID,
@@ -400,10 +479,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             int? UpdatedByID = null,
             bool? AwaitingPayout = null,
             bool? Synced = null,
-            DateTime? UpdatedAt = null
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
@@ -424,9 +502,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramAccountName = new (defAccountName, AccountName);
                 DataColumnParameter paramAccountNumber = new (defAccountNumber, AccountNumber);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CreatedByID],[UpdatedByID],[ClientID],[PaidInAmount],[PaidInCharges],[PayoutAmount],[PayoutCharge],[Balance],[TransactionStartDate],[TransactionEndDate],[AwaitingPayout],[Synced],[CreatedAt],[UpdatedAt],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CreatedByID],[UpdatedByID],[ClientID],[PaidInAmount],[PaidInCharges],[PayoutAmount],[PayoutCharge],[Balance],[TransactionStartDate],[TransactionEndDate],[AwaitingPayout],[Synced],[CreatedAt],[UpdatedAt],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramCreatedByID.GetSQLQuotedValueForAdd(),
                         paramUpdatedByID.GetSQLQuotedValueForAdd(),
@@ -444,16 +526,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramUpdatedAt.GetSQLQuotedValueForAdd(),
                         paramBankID.GetSQLQuotedValueForAdd(),
                         paramAccountName.GetSQLQuotedValueForAdd(),
-                        paramAccountNumber.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramAccountNumber.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

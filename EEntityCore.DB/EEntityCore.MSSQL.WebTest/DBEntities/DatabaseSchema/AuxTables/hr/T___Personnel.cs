@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -368,7 +370,75 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            string PersonnelNumber,
+            int PersonID,
+            bool IsActive,
+            DateTime EmploymentDate,
+            bool IsSuperUser,
+            int PositionID,
+            int CreatedByID,
+            DateTime CreatedAt,
+            int? SalaryTypeID = null,
+            decimal? SalaryAmount = null,
+            int? UpdatedByID = null,
+            DateTime? UpdatedAt = null,
+            string Duties = null,
+            bool? IsWebVisible = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramPersonnelNumber = new (defPersonnelNumber, PersonnelNumber);
+                DataColumnParameter paramPersonID = new (defPersonID, PersonID);
+                DataColumnParameter paramIsActive = new (defIsActive, IsActive);
+                DataColumnParameter paramEmploymentDate = new (defEmploymentDate, EmploymentDate);
+                DataColumnParameter paramIsSuperUser = new (defIsSuperUser, IsSuperUser);
+                DataColumnParameter paramPositionID = new (defPositionID, PositionID);
+                DataColumnParameter paramSalaryTypeID = new (defSalaryTypeID, SalaryTypeID);
+                DataColumnParameter paramSalaryAmount = new (defSalaryAmount, SalaryAmount);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramDuties = new (defDuties, Duties);
+                DataColumnParameter paramIsWebVisible = new (defIsWebVisible, IsWebVisible);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  ", TABLE_NAME,
+                        paramPersonnelNumber.GetSQLQuotedValueForAdd(),
+                        paramPersonID.GetSQLQuotedValueForAdd(),
+                        paramIsActive.GetSQLQuotedValueForAdd(),
+                        paramEmploymentDate.GetSQLQuotedValueForAdd(),
+                        paramIsSuperUser.GetSQLQuotedValueForAdd(),
+                        paramPositionID.GetSQLQuotedValueForAdd(),
+                        paramSalaryTypeID.GetSQLQuotedValueForAdd(),
+                        paramSalaryAmount.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramDuties.GetSQLQuotedValueForAdd(),
+                        paramIsWebVisible.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             string PersonnelNumber,
             int PersonID,
@@ -383,10 +453,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             int? UpdatedByID = null,
             DateTime? UpdatedAt = null,
             string Duties = null,
-            bool? IsWebVisible = null
+            bool? IsWebVisible = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramPersonnelNumber = new (defPersonnelNumber, PersonnelNumber);
@@ -404,9 +473,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramDuties = new (defDuties, Duties);
                 DataColumnParameter paramIsWebVisible = new (defIsWebVisible, IsWebVisible);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramPersonnelNumber.GetSQLQuotedValueForAdd(),
                         paramPersonID.GetSQLQuotedValueForAdd(),
@@ -421,16 +494,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramCreatedAt.GetSQLQuotedValueForAdd(),
                         paramUpdatedAt.GetSQLQuotedValueForAdd(),
                         paramDuties.GetSQLQuotedValueForAdd(),
-                        paramIsWebVisible.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramIsWebVisible.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

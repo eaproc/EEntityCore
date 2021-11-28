@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -282,15 +284,52 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int PersonID,
+            int PhoneTypeID,
+            string PhoneNumber,
+            DateTime CreatedAt,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramPersonID = new (defPersonID, PersonID);
+                DataColumnParameter paramPhoneTypeID = new (defPhoneTypeID, PhoneTypeID);
+                DataColumnParameter paramPhoneNumber = new (defPhoneNumber, PhoneNumber);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([PersonID],[PhoneTypeID],[PhoneNumber],[CreatedAt]) VALUES({1},{2},{3},{4})  ", TABLE_NAME,
+                        paramPersonID.GetSQLQuotedValueForAdd(),
+                        paramPhoneTypeID.GetSQLQuotedValueForAdd(),
+                        paramPhoneNumber.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int PersonID,
             int PhoneTypeID,
             string PhoneNumber,
-            DateTime CreatedAt
+            DateTime CreatedAt,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramPersonID = new (defPersonID, PersonID);
@@ -298,23 +337,23 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramPhoneNumber = new (defPhoneNumber, PhoneNumber);
                 DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[PhoneTypeID],[PhoneNumber],[CreatedAt]) VALUES({1},{2},{3},{4},{5})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonID],[PhoneTypeID],[PhoneNumber],[CreatedAt]) VALUES({1},{2},{3},{4},{5})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramPersonID.GetSQLQuotedValueForAdd(),
                         paramPhoneTypeID.GetSQLQuotedValueForAdd(),
                         paramPhoneNumber.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

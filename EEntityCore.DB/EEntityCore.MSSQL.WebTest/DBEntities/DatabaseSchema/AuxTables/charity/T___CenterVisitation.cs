@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -339,7 +341,63 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            DateTime VisitationDay,
+            int CenterID,
+            int ResidingPastorID,
+            int StatusID,
+            int Attendees,
+            DateTime CreatedAt,
+            DateTime UpdatedAt,
+            int CreatedByID,
+            int UpdatedByID,
+            string PictureStoredPath = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramVisitationDay = new (defVisitationDay, VisitationDay);
+                DataColumnParameter paramCenterID = new (defCenterID, CenterID);
+                DataColumnParameter paramResidingPastorID = new (defResidingPastorID, ResidingPastorID);
+                DataColumnParameter paramStatusID = new (defStatusID, StatusID);
+                DataColumnParameter paramAttendees = new (defAttendees, Attendees);
+                DataColumnParameter paramPictureStoredPath = new (defPictureStoredPath, PictureStoredPath);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([VisitationDay],[CenterID],[ResidingPastorID],[StatusID],[Attendees],[PictureStoredPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  ", TABLE_NAME,
+                        paramVisitationDay.GetSQLQuotedValueForAdd(),
+                        paramCenterID.GetSQLQuotedValueForAdd(),
+                        paramResidingPastorID.GetSQLQuotedValueForAdd(),
+                        paramStatusID.GetSQLQuotedValueForAdd(),
+                        paramAttendees.GetSQLQuotedValueForAdd(),
+                        paramPictureStoredPath.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             DateTime VisitationDay,
             int CenterID,
@@ -350,10 +408,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             DateTime UpdatedAt,
             int CreatedByID,
             int UpdatedByID,
-            string PictureStoredPath = null
+            string PictureStoredPath = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramVisitationDay = new (defVisitationDay, VisitationDay);
@@ -367,9 +424,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
                 DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[VisitationDay],[CenterID],[ResidingPastorID],[StatusID],[Attendees],[PictureStoredPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[VisitationDay],[CenterID],[ResidingPastorID],[StatusID],[Attendees],[PictureStoredPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramVisitationDay.GetSQLQuotedValueForAdd(),
                         paramCenterID.GetSQLQuotedValueForAdd(),
@@ -380,16 +441,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramCreatedAt.GetSQLQuotedValueForAdd(),
                         paramUpdatedAt.GetSQLQuotedValueForAdd(),
                         paramCreatedByID.GetSQLQuotedValueForAdd(),
-                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

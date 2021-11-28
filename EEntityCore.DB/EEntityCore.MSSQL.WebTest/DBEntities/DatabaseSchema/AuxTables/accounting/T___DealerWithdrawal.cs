@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -350,7 +352,66 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int DealerID,
+            decimal Amount,
+            int WithdrawalStatusID,
+            int CreatedByID,
+            DateTime CreatedAt,
+            int BankID,
+            string AccountNumber,
+            int TermID,
+            string Comments = null,
+            int? UpdatedByID = null,
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramDealerID = new (defDealerID, DealerID);
+                DataColumnParameter paramAmount = new (defAmount, Amount);
+                DataColumnParameter paramWithdrawalStatusID = new (defWithdrawalStatusID, WithdrawalStatusID);
+                DataColumnParameter paramComments = new (defComments, Comments);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramBankID = new (defBankID, BankID);
+                DataColumnParameter paramAccountNumber = new (defAccountNumber, AccountNumber);
+                DataColumnParameter paramTermID = new (defTermID, TermID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([DealerID],[Amount],[WithdrawalStatusID],[Comments],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt],[BankID],[AccountNumber],[TermID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  ", TABLE_NAME,
+                        paramDealerID.GetSQLQuotedValueForAdd(),
+                        paramAmount.GetSQLQuotedValueForAdd(),
+                        paramWithdrawalStatusID.GetSQLQuotedValueForAdd(),
+                        paramComments.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramBankID.GetSQLQuotedValueForAdd(),
+                        paramAccountNumber.GetSQLQuotedValueForAdd(),
+                        paramTermID.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int DealerID,
             decimal Amount,
@@ -362,10 +423,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             int TermID,
             string Comments = null,
             int? UpdatedByID = null,
-            DateTime? UpdatedAt = null
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramDealerID = new (defDealerID, DealerID);
@@ -380,9 +440,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramAccountNumber = new (defAccountNumber, AccountNumber);
                 DataColumnParameter paramTermID = new (defTermID, TermID);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DealerID],[Amount],[WithdrawalStatusID],[Comments],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt],[BankID],[AccountNumber],[TermID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DealerID],[Amount],[WithdrawalStatusID],[Comments],[CreatedByID],[CreatedAt],[UpdatedByID],[UpdatedAt],[BankID],[AccountNumber],[TermID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramDealerID.GetSQLQuotedValueForAdd(),
                         paramAmount.GetSQLQuotedValueForAdd(),
@@ -394,16 +458,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramUpdatedAt.GetSQLQuotedValueForAdd(),
                         paramBankID.GetSQLQuotedValueForAdd(),
                         paramAccountNumber.GetSQLQuotedValueForAdd(),
-                        paramTermID.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramTermID.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

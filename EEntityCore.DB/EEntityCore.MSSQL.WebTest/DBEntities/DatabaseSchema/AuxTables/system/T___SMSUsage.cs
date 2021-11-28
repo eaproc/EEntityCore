@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -339,7 +341,72 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int SMSDeliveryStatusID,
+            string Sender,
+            string Receiver,
+            string Message,
+            DateTime CreatedAt,
+            string Gateway,
+            string UID = null,
+            string APICreateResponse = null,
+            string APIUpdateResponse = null,
+            decimal? SMSCostNaira = null,
+            DateTime? UpdatedAt = null,
+            string ExceptionMessage = null,
+            string ExceptionStackTrace = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramSMSDeliveryStatusID = new (defSMSDeliveryStatusID, SMSDeliveryStatusID);
+                DataColumnParameter paramSender = new (defSender, Sender);
+                DataColumnParameter paramReceiver = new (defReceiver, Receiver);
+                DataColumnParameter paramMessage = new (defMessage, Message);
+                DataColumnParameter paramUID = new (defUID, UID);
+                DataColumnParameter paramAPICreateResponse = new (defAPICreateResponse, APICreateResponse);
+                DataColumnParameter paramAPIUpdateResponse = new (defAPIUpdateResponse, APIUpdateResponse);
+                DataColumnParameter paramSMSCostNaira = new (defSMSCostNaira, SMSCostNaira);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramExceptionMessage = new (defExceptionMessage, ExceptionMessage);
+                DataColumnParameter paramExceptionStackTrace = new (defExceptionStackTrace, ExceptionStackTrace);
+                DataColumnParameter paramGateway = new (defGateway, Gateway);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  ", TABLE_NAME,
+                        paramSMSDeliveryStatusID.GetSQLQuotedValueForAdd(),
+                        paramSender.GetSQLQuotedValueForAdd(),
+                        paramReceiver.GetSQLQuotedValueForAdd(),
+                        paramMessage.GetSQLQuotedValueForAdd(),
+                        paramUID.GetSQLQuotedValueForAdd(),
+                        paramAPICreateResponse.GetSQLQuotedValueForAdd(),
+                        paramAPIUpdateResponse.GetSQLQuotedValueForAdd(),
+                        paramSMSCostNaira.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramExceptionMessage.GetSQLQuotedValueForAdd(),
+                        paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
+                        paramGateway.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int SMSDeliveryStatusID,
             string Sender,
@@ -353,10 +420,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             decimal? SMSCostNaira = null,
             DateTime? UpdatedAt = null,
             string ExceptionMessage = null,
-            string ExceptionStackTrace = null
+            string ExceptionStackTrace = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramSMSDeliveryStatusID = new (defSMSDeliveryStatusID, SMSDeliveryStatusID);
@@ -373,9 +439,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramExceptionStackTrace = new (defExceptionStackTrace, ExceptionStackTrace);
                 DataColumnParameter paramGateway = new (defGateway, Gateway);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramSMSDeliveryStatusID.GetSQLQuotedValueForAdd(),
                         paramSender.GetSQLQuotedValueForAdd(),
@@ -389,16 +459,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramUpdatedAt.GetSQLQuotedValueForAdd(),
                         paramExceptionMessage.GetSQLQuotedValueForAdd(),
                         paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
-                        paramGateway.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramGateway.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

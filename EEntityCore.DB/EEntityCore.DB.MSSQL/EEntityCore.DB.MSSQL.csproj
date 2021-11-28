@@ -1,22 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>EEntityCore.DB.MSSQL</RootNamespace>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Schemas\**" />
-    <EmbeddedResource Remove="Schemas\**" />
-    <None Remove="Schemas\**" />
+    <Compile Remove="Client\ConfigurableClient.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Interfaces\ISQLServerDBPointer.vb" />
+    <None Remove="Client\Client.vb" />
+    <None Remove="Client\ConfigurableClient.vb" />
+    <None Remove="Exceptions\SQLServerConnectionException.vb" />
+    <None Remove="Interfaces\IDBTableDefinitionPlugIn.vb" />
+    <None Remove="Interfaces\IDBViewDefinitionPlugIn.vb" />
+    <None Remove="Interfaces\ISQLServerDBPointer.vb" />
+    <None Remove="Server\Server.vb" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="3.0.1" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>

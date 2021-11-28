@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -302,7 +304,54 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            string Token,
+            int PasswordResetTypeID,
+            int UserID,
+            DateTime ExpiryDateTime,
+            bool IsUsed,
+            DateTime CreatedAt,
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramToken = new (defToken, Token);
+                DataColumnParameter paramPasswordResetTypeID = new (defPasswordResetTypeID, PasswordResetTypeID);
+                DataColumnParameter paramUserID = new (defUserID, UserID);
+                DataColumnParameter paramExpiryDateTime = new (defExpiryDateTime, ExpiryDateTime);
+                DataColumnParameter paramIsUsed = new (defIsUsed, IsUsed);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([Token],[PasswordResetTypeID],[UserID],[ExpiryDateTime],[IsUsed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7})  ", TABLE_NAME,
+                        paramToken.GetSQLQuotedValueForAdd(),
+                        paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
+                        paramUserID.GetSQLQuotedValueForAdd(),
+                        paramExpiryDateTime.GetSQLQuotedValueForAdd(),
+                        paramIsUsed.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             string Token,
             int PasswordResetTypeID,
@@ -310,10 +359,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             DateTime ExpiryDateTime,
             bool IsUsed,
             DateTime CreatedAt,
-            DateTime? UpdatedAt = null
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramToken = new (defToken, Token);
@@ -324,9 +372,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
                 DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Token],[PasswordResetTypeID],[UserID],[ExpiryDateTime],[IsUsed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Token],[PasswordResetTypeID],[UserID],[ExpiryDateTime],[IsUsed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramToken.GetSQLQuotedValueForAdd(),
                         paramPasswordResetTypeID.GetSQLQuotedValueForAdd(),
@@ -334,16 +386,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramExpiryDateTime.GetSQLQuotedValueForAdd(),
                         paramIsUsed.GetSQLQuotedValueForAdd(),
                         paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

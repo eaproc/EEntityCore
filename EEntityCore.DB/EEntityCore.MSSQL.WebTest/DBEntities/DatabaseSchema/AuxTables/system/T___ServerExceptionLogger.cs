@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -326,7 +328,66 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            string TraceID,
+            string ExceptionMessage,
+            bool IsResolved,
+            DateTime CreatedAt,
+            string AbsoluteURL,
+            string IPAddress,
+            string RequestParametersJSON = null,
+            string StackTrace = null,
+            string Comments = null,
+            DateTime? UpdatedAt = null,
+            int? UserID = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramTraceID = new (defTraceID, TraceID);
+                DataColumnParameter paramRequestParametersJSON = new (defRequestParametersJSON, RequestParametersJSON);
+                DataColumnParameter paramExceptionMessage = new (defExceptionMessage, ExceptionMessage);
+                DataColumnParameter paramStackTrace = new (defStackTrace, StackTrace);
+                DataColumnParameter paramIsResolved = new (defIsResolved, IsResolved);
+                DataColumnParameter paramComments = new (defComments, Comments);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramAbsoluteURL = new (defAbsoluteURL, AbsoluteURL);
+                DataColumnParameter paramIPAddress = new (defIPAddress, IPAddress);
+                DataColumnParameter paramUserID = new (defUserID, UserID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([TraceID],[RequestParametersJSON],[ExceptionMessage],[StackTrace],[IsResolved],[Comments],[CreatedAt],[UpdatedAt],[AbsoluteURL],[IPAddress],[UserID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  ", TABLE_NAME,
+                        paramTraceID.GetSQLQuotedValueForAdd(),
+                        paramRequestParametersJSON.GetSQLQuotedValueForAdd(),
+                        paramExceptionMessage.GetSQLQuotedValueForAdd(),
+                        paramStackTrace.GetSQLQuotedValueForAdd(),
+                        paramIsResolved.GetSQLQuotedValueForAdd(),
+                        paramComments.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramAbsoluteURL.GetSQLQuotedValueForAdd(),
+                        paramIPAddress.GetSQLQuotedValueForAdd(),
+                        paramUserID.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             string TraceID,
             string ExceptionMessage,
@@ -338,10 +399,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             string StackTrace = null,
             string Comments = null,
             DateTime? UpdatedAt = null,
-            int? UserID = null
+            int? UserID = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramTraceID = new (defTraceID, TraceID);
@@ -356,9 +416,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramIPAddress = new (defIPAddress, IPAddress);
                 DataColumnParameter paramUserID = new (defUserID, UserID);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TraceID],[RequestParametersJSON],[ExceptionMessage],[StackTrace],[IsResolved],[Comments],[CreatedAt],[UpdatedAt],[AbsoluteURL],[IPAddress],[UserID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TraceID],[RequestParametersJSON],[ExceptionMessage],[StackTrace],[IsResolved],[Comments],[CreatedAt],[UpdatedAt],[AbsoluteURL],[IPAddress],[UserID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramTraceID.GetSQLQuotedValueForAdd(),
                         paramRequestParametersJSON.GetSQLQuotedValueForAdd(),
@@ -370,16 +434,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramUpdatedAt.GetSQLQuotedValueForAdd(),
                         paramAbsoluteURL.GetSQLQuotedValueForAdd(),
                         paramIPAddress.GetSQLQuotedValueForAdd(),
-                        paramUserID.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramUserID.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

@@ -240,7 +240,7 @@ namespace EEntityCore.DB.Abstracts
             {
                 if (!IsTargettedRowValid)
                     return 0L;
-                return ELong.valueOf(TargettedRow[NumericPrimaryKeyName]);
+                return ELong.ValueOf(TargettedRow[NumericPrimaryKeyName]);
             }
         }
 
@@ -276,7 +276,7 @@ namespace EEntityCore.DB.Abstracts
         {
             get
             {
-                return (EStrings.valueOf(NumericPrimaryKeyName) ?? "") != (string.Empty ?? "");
+                return (EStrings.ValueOf(NumericPrimaryKeyName) ?? "") != (string.Empty ?? "");
             }
         }
 
@@ -415,7 +415,7 @@ namespace EEntityCore.DB.Abstracts
                 if (IsTableValid() && pTargettedRowID != DO__NOT____TARGET__ANY_ROWID && HasNumericPrimaryKeyColumn && RawTable.Columns.Contains(NumericPrimaryKeyName))
                 {
                     var pMatch = from d in AllRows
-                                 where ELong.valueOf(d[NumericPrimaryKeyName]) == pTargettedRowID
+                                 where ELong.ValueOf(d[NumericPrimaryKeyName]) == pTargettedRowID
                                  select d;
                     if (pMatch.Count() > 0)
                         TargettedRow_Cached = pMatch.ElementAtOrDefault(0);
@@ -528,7 +528,7 @@ namespace EEntityCore.DB.Abstracts
             {
                 if (pDBConn is null)
                     throw new Exception("DbConn Is NOT VALID: ");
-                return pDBConn.DbExec(string.Format("DELETE FROM {0} WHERE ID={1} ", pTableName, pID));
+                return pDBConn.DbExec(string.Format("DELETE FROM {0} WHERE ID={1} ", pTableName, pID)) >= 1;
             }
             catch (Exception )
             {

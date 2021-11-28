@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -323,7 +325,63 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int DataMonitorID,
+            int ImportStatusID,
+            string Request,
+            DateTime DisbursedDate,
+            string Category,
+            string Beneficiary,
+            decimal Total,
+            string ImportComment,
+            DateTime CreatedAt,
+            string Notes = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramDataMonitorID = new (defDataMonitorID, DataMonitorID);
+                DataColumnParameter paramImportStatusID = new (defImportStatusID, ImportStatusID);
+                DataColumnParameter paramRequest = new (defRequest, Request);
+                DataColumnParameter paramDisbursedDate = new (defDisbursedDate, DisbursedDate);
+                DataColumnParameter paramCategory = new (defCategory, Category);
+                DataColumnParameter paramBeneficiary = new (defBeneficiary, Beneficiary);
+                DataColumnParameter paramNotes = new (defNotes, Notes);
+                DataColumnParameter paramTotal = new (defTotal, Total);
+                DataColumnParameter paramImportComment = new (defImportComment, ImportComment);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([DataMonitorID],[ImportStatusID],[Request],[DisbursedDate],[Category],[Beneficiary],[Notes],[Total],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  ", TABLE_NAME,
+                        paramDataMonitorID.GetSQLQuotedValueForAdd(),
+                        paramImportStatusID.GetSQLQuotedValueForAdd(),
+                        paramRequest.GetSQLQuotedValueForAdd(),
+                        paramDisbursedDate.GetSQLQuotedValueForAdd(),
+                        paramCategory.GetSQLQuotedValueForAdd(),
+                        paramBeneficiary.GetSQLQuotedValueForAdd(),
+                        paramNotes.GetSQLQuotedValueForAdd(),
+                        paramTotal.GetSQLQuotedValueForAdd(),
+                        paramImportComment.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int DataMonitorID,
             int ImportStatusID,
@@ -334,10 +392,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             decimal Total,
             string ImportComment,
             DateTime CreatedAt,
-            string Notes = null
+            string Notes = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramDataMonitorID = new (defDataMonitorID, DataMonitorID);
@@ -351,9 +408,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramImportComment = new (defImportComment, ImportComment);
                 DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[Request],[DisbursedDate],[Category],[Beneficiary],[Notes],[Total],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[Request],[DisbursedDate],[Category],[Beneficiary],[Notes],[Total],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramDataMonitorID.GetSQLQuotedValueForAdd(),
                         paramImportStatusID.GetSQLQuotedValueForAdd(),
@@ -364,16 +425,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramNotes.GetSQLQuotedValueForAdd(),
                         paramTotal.GetSQLQuotedValueForAdd(),
                         paramImportComment.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

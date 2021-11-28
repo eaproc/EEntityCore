@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -334,7 +336,63 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int TermID,
+            string IpAddress,
+            DateTime CreatedAt,
+            int CreatedByID,
+            int CashRequestID,
+            decimal Total,
+            decimal Charges,
+            decimal SpentAmount,
+            int? DataMonitorID = null,
+            string ChargesComments = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramTermID = new (defTermID, TermID);
+                DataColumnParameter paramIpAddress = new (defIpAddress, IpAddress);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramCashRequestID = new (defCashRequestID, CashRequestID);
+                DataColumnParameter paramTotal = new (defTotal, Total);
+                DataColumnParameter paramDataMonitorID = new (defDataMonitorID, DataMonitorID);
+                DataColumnParameter paramCharges = new (defCharges, Charges);
+                DataColumnParameter paramSpentAmount = new (defSpentAmount, SpentAmount);
+                DataColumnParameter paramChargesComments = new (defChargesComments, ChargesComments);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([TermID],[IpAddress],[CreatedAt],[CreatedByID],[CashRequestID],[Total],[DataMonitorID],[Charges],[SpentAmount],[ChargesComments]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  ", TABLE_NAME,
+                        paramTermID.GetSQLQuotedValueForAdd(),
+                        paramIpAddress.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramCashRequestID.GetSQLQuotedValueForAdd(),
+                        paramTotal.GetSQLQuotedValueForAdd(),
+                        paramDataMonitorID.GetSQLQuotedValueForAdd(),
+                        paramCharges.GetSQLQuotedValueForAdd(),
+                        paramSpentAmount.GetSQLQuotedValueForAdd(),
+                        paramChargesComments.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int TermID,
             string IpAddress,
@@ -345,10 +403,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             decimal Charges,
             decimal SpentAmount,
             int? DataMonitorID = null,
-            string ChargesComments = null
+            string ChargesComments = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramTermID = new (defTermID, TermID);
@@ -362,9 +419,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramSpentAmount = new (defSpentAmount, SpentAmount);
                 DataColumnParameter paramChargesComments = new (defChargesComments, ChargesComments);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[IpAddress],[CreatedAt],[CreatedByID],[CashRequestID],[Total],[DataMonitorID],[Charges],[SpentAmount],[ChargesComments]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[IpAddress],[CreatedAt],[CreatedByID],[CashRequestID],[Total],[DataMonitorID],[Charges],[SpentAmount],[ChargesComments]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramTermID.GetSQLQuotedValueForAdd(),
                         paramIpAddress.GetSQLQuotedValueForAdd(),
@@ -375,16 +436,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramDataMonitorID.GetSQLQuotedValueForAdd(),
                         paramCharges.GetSQLQuotedValueForAdd(),
                         paramSpentAmount.GetSQLQuotedValueForAdd(),
-                        paramChargesComments.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramChargesComments.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

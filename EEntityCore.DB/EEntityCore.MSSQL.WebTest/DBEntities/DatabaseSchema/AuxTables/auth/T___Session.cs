@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -321,7 +323,66 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            string SessionID,
+            int SessionTimeoutMins,
+            DateTime CreatedAt,
+            int? UserID = null,
+            bool? IsNewSession = null,
+            bool? IsReadOnly = null,
+            DateTime? LastActive = null,
+            string IpAddress = null,
+            string Browser = null,
+            string SessionVariables = null,
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramSessionID = new (defSessionID, SessionID);
+                DataColumnParameter paramSessionTimeoutMins = new (defSessionTimeoutMins, SessionTimeoutMins);
+                DataColumnParameter paramUserID = new (defUserID, UserID);
+                DataColumnParameter paramIsNewSession = new (defIsNewSession, IsNewSession);
+                DataColumnParameter paramIsReadOnly = new (defIsReadOnly, IsReadOnly);
+                DataColumnParameter paramLastActive = new (defLastActive, LastActive);
+                DataColumnParameter paramIpAddress = new (defIpAddress, IpAddress);
+                DataColumnParameter paramBrowser = new (defBrowser, Browser);
+                DataColumnParameter paramSessionVariables = new (defSessionVariables, SessionVariables);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([SessionID],[SessionTimeoutMins],[UserID],[IsNewSession],[IsReadOnly],[LastActive],[IpAddress],[Browser],[SessionVariables],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  ", TABLE_NAME,
+                        paramSessionID.GetSQLQuotedValueForAdd(),
+                        paramSessionTimeoutMins.GetSQLQuotedValueForAdd(),
+                        paramUserID.GetSQLQuotedValueForAdd(),
+                        paramIsNewSession.GetSQLQuotedValueForAdd(),
+                        paramIsReadOnly.GetSQLQuotedValueForAdd(),
+                        paramLastActive.GetSQLQuotedValueForAdd(),
+                        paramIpAddress.GetSQLQuotedValueForAdd(),
+                        paramBrowser.GetSQLQuotedValueForAdd(),
+                        paramSessionVariables.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             string SessionID,
             int SessionTimeoutMins,
@@ -333,10 +394,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             string IpAddress = null,
             string Browser = null,
             string SessionVariables = null,
-            DateTime? UpdatedAt = null
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramSessionID = new (defSessionID, SessionID);
@@ -351,9 +411,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
                 DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SessionID],[SessionTimeoutMins],[UserID],[IsNewSession],[IsReadOnly],[LastActive],[IpAddress],[Browser],[SessionVariables],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SessionID],[SessionTimeoutMins],[UserID],[IsNewSession],[IsReadOnly],[LastActive],[IpAddress],[Browser],[SessionVariables],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramSessionID.GetSQLQuotedValueForAdd(),
                         paramSessionTimeoutMins.GetSQLQuotedValueForAdd(),
@@ -365,16 +429,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramBrowser.GetSQLQuotedValueForAdd(),
                         paramSessionVariables.GetSQLQuotedValueForAdd(),
                         paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

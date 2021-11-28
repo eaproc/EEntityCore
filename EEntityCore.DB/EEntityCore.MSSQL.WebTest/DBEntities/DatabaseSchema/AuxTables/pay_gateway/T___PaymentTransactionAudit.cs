@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -342,7 +344,69 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int TransactionStatusID,
+            int PaymentTransactionID,
+            string AccountName,
+            string Bank,
+            string IPAddress,
+            decimal PaymentRequired,
+            decimal Charges,
+            decimal PaymentRequiredWithoutCharges,
+            decimal RefundAmount,
+            decimal Balance,
+            DateTime CreatedAt,
+            int CreatedByID,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramTransactionStatusID = new (defTransactionStatusID, TransactionStatusID);
+                DataColumnParameter paramPaymentTransactionID = new (defPaymentTransactionID, PaymentTransactionID);
+                DataColumnParameter paramAccountName = new (defAccountName, AccountName);
+                DataColumnParameter paramBank = new (defBank, Bank);
+                DataColumnParameter paramIPAddress = new (defIPAddress, IPAddress);
+                DataColumnParameter paramPaymentRequired = new (defPaymentRequired, PaymentRequired);
+                DataColumnParameter paramCharges = new (defCharges, Charges);
+                DataColumnParameter paramPaymentRequiredWithoutCharges = new (defPaymentRequiredWithoutCharges, PaymentRequiredWithoutCharges);
+                DataColumnParameter paramRefundAmount = new (defRefundAmount, RefundAmount);
+                DataColumnParameter paramBalance = new (defBalance, Balance);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([TransactionStatusID],[PaymentTransactionID],[AccountName],[Bank],[IPAddress],[PaymentRequired],[Charges],[PaymentRequiredWithoutCharges],[RefundAmount],[Balance],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  ", TABLE_NAME,
+                        paramTransactionStatusID.GetSQLQuotedValueForAdd(),
+                        paramPaymentTransactionID.GetSQLQuotedValueForAdd(),
+                        paramAccountName.GetSQLQuotedValueForAdd(),
+                        paramBank.GetSQLQuotedValueForAdd(),
+                        paramIPAddress.GetSQLQuotedValueForAdd(),
+                        paramPaymentRequired.GetSQLQuotedValueForAdd(),
+                        paramCharges.GetSQLQuotedValueForAdd(),
+                        paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
+                        paramRefundAmount.GetSQLQuotedValueForAdd(),
+                        paramBalance.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int TransactionStatusID,
             int PaymentTransactionID,
@@ -355,10 +419,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             decimal RefundAmount,
             decimal Balance,
             DateTime CreatedAt,
-            int CreatedByID
+            int CreatedByID,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramTransactionStatusID = new (defTransactionStatusID, TransactionStatusID);
@@ -374,9 +437,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
                 DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[PaymentTransactionID],[AccountName],[Bank],[IPAddress],[PaymentRequired],[Charges],[PaymentRequiredWithoutCharges],[RefundAmount],[Balance],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[PaymentTransactionID],[AccountName],[Bank],[IPAddress],[PaymentRequired],[Charges],[PaymentRequiredWithoutCharges],[RefundAmount],[Balance],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramTransactionStatusID.GetSQLQuotedValueForAdd(),
                         paramPaymentTransactionID.GetSQLQuotedValueForAdd(),
@@ -389,16 +456,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramRefundAmount.GetSQLQuotedValueForAdd(),
                         paramBalance.GetSQLQuotedValueForAdd(),
                         paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramCreatedByID.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

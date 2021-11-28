@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -445,7 +447,111 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int TransactionStatusID,
+            int ClientID,
+            string StudentNumber,
+            string FirstName,
+            string LastName,
+            string AccountName,
+            string AccountNumber,
+            string Bank,
+            string Channel,
+            string IPAddress,
+            decimal SchoolDiscountGiven,
+            decimal PaymentRequired,
+            decimal Charges,
+            decimal RefundAmount,
+            decimal Balance,
+            DateTime CreatedAt,
+            int CreatedByID,
+            int UpdatedByID,
+            decimal PaymentRequiredWithoutCharges,
+            decimal? ConfirmationThreshold = null,
+            DateTime? ConfirmationDate = null,
+            bool? AwaitingDisbursement = null,
+            DateTime? UpdatedAt = null,
+            string ConfirmedExplanation = null,
+            bool? ChargesBilledToClient = null,
+            bool? IsMultiTarget = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramTransactionStatusID = new (defTransactionStatusID, TransactionStatusID);
+                DataColumnParameter paramClientID = new (defClientID, ClientID);
+                DataColumnParameter paramStudentNumber = new (defStudentNumber, StudentNumber);
+                DataColumnParameter paramFirstName = new (defFirstName, FirstName);
+                DataColumnParameter paramLastName = new (defLastName, LastName);
+                DataColumnParameter paramAccountName = new (defAccountName, AccountName);
+                DataColumnParameter paramAccountNumber = new (defAccountNumber, AccountNumber);
+                DataColumnParameter paramBank = new (defBank, Bank);
+                DataColumnParameter paramChannel = new (defChannel, Channel);
+                DataColumnParameter paramIPAddress = new (defIPAddress, IPAddress);
+                DataColumnParameter paramSchoolDiscountGiven = new (defSchoolDiscountGiven, SchoolDiscountGiven);
+                DataColumnParameter paramPaymentRequired = new (defPaymentRequired, PaymentRequired);
+                DataColumnParameter paramCharges = new (defCharges, Charges);
+                DataColumnParameter paramRefundAmount = new (defRefundAmount, RefundAmount);
+                DataColumnParameter paramBalance = new (defBalance, Balance);
+                DataColumnParameter paramConfirmationThreshold = new (defConfirmationThreshold, ConfirmationThreshold);
+                DataColumnParameter paramConfirmationDate = new (defConfirmationDate, ConfirmationDate);
+                DataColumnParameter paramAwaitingDisbursement = new (defAwaitingDisbursement, AwaitingDisbursement);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+                DataColumnParameter paramConfirmedExplanation = new (defConfirmedExplanation, ConfirmedExplanation);
+                DataColumnParameter paramChargesBilledToClient = new (defChargesBilledToClient, ChargesBilledToClient);
+                DataColumnParameter paramPaymentRequiredWithoutCharges = new (defPaymentRequiredWithoutCharges, PaymentRequiredWithoutCharges);
+                DataColumnParameter paramIsMultiTarget = new (defIsMultiTarget, IsMultiTarget);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26})  ", TABLE_NAME,
+                        paramTransactionStatusID.GetSQLQuotedValueForAdd(),
+                        paramClientID.GetSQLQuotedValueForAdd(),
+                        paramStudentNumber.GetSQLQuotedValueForAdd(),
+                        paramFirstName.GetSQLQuotedValueForAdd(),
+                        paramLastName.GetSQLQuotedValueForAdd(),
+                        paramAccountName.GetSQLQuotedValueForAdd(),
+                        paramAccountNumber.GetSQLQuotedValueForAdd(),
+                        paramBank.GetSQLQuotedValueForAdd(),
+                        paramChannel.GetSQLQuotedValueForAdd(),
+                        paramIPAddress.GetSQLQuotedValueForAdd(),
+                        paramSchoolDiscountGiven.GetSQLQuotedValueForAdd(),
+                        paramPaymentRequired.GetSQLQuotedValueForAdd(),
+                        paramCharges.GetSQLQuotedValueForAdd(),
+                        paramRefundAmount.GetSQLQuotedValueForAdd(),
+                        paramBalance.GetSQLQuotedValueForAdd(),
+                        paramConfirmationThreshold.GetSQLQuotedValueForAdd(),
+                        paramConfirmationDate.GetSQLQuotedValueForAdd(),
+                        paramAwaitingDisbursement.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd(),
+                        paramConfirmedExplanation.GetSQLQuotedValueForAdd(),
+                        paramChargesBilledToClient.GetSQLQuotedValueForAdd(),
+                        paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
+                        paramIsMultiTarget.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int TransactionStatusID,
             int ClientID,
@@ -472,10 +578,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             DateTime? UpdatedAt = null,
             string ConfirmedExplanation = null,
             bool? ChargesBilledToClient = null,
-            bool? IsMultiTarget = null
+            bool? IsMultiTarget = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramTransactionStatusID = new (defTransactionStatusID, TransactionStatusID);
@@ -505,9 +610,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramPaymentRequiredWithoutCharges = new (defPaymentRequiredWithoutCharges, PaymentRequiredWithoutCharges);
                 DataColumnParameter paramIsMultiTarget = new (defIsMultiTarget, IsMultiTarget);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramTransactionStatusID.GetSQLQuotedValueForAdd(),
                         paramClientID.GetSQLQuotedValueForAdd(),
@@ -534,16 +643,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramConfirmedExplanation.GetSQLQuotedValueForAdd(),
                         paramChargesBilledToClient.GetSQLQuotedValueForAdd(),
                         paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
-                        paramIsMultiTarget.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramIsMultiTarget.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

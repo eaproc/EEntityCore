@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -429,7 +431,102 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int CenterID,
+            int BeneficiaryStatusID,
+            string FirstName,
+            string LastName,
+            string Address,
+            int GenderID,
+            DateTime DateOfBirth,
+            DateTime CreatedAt,
+            DateTime UpdatedAt,
+            int CreatedByID,
+            int UpdatedByID,
+            string City = null,
+            string State = null,
+            string ZipCode = null,
+            string SchoolName = null,
+            string SchoolAddress = null,
+            string ClassOnEnrollment = null,
+            string HomePhone = null,
+            string AlternatePhone = null,
+            string Email = null,
+            string Vocation = null,
+            string BirthCertificatePath = null,
+            string PhotoPath = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramCenterID = new (defCenterID, CenterID);
+                DataColumnParameter paramBeneficiaryStatusID = new (defBeneficiaryStatusID, BeneficiaryStatusID);
+                DataColumnParameter paramFirstName = new (defFirstName, FirstName);
+                DataColumnParameter paramLastName = new (defLastName, LastName);
+                DataColumnParameter paramAddress = new (defAddress, Address);
+                DataColumnParameter paramCity = new (defCity, City);
+                DataColumnParameter paramState = new (defState, State);
+                DataColumnParameter paramZipCode = new (defZipCode, ZipCode);
+                DataColumnParameter paramSchoolName = new (defSchoolName, SchoolName);
+                DataColumnParameter paramSchoolAddress = new (defSchoolAddress, SchoolAddress);
+                DataColumnParameter paramClassOnEnrollment = new (defClassOnEnrollment, ClassOnEnrollment);
+                DataColumnParameter paramHomePhone = new (defHomePhone, HomePhone);
+                DataColumnParameter paramAlternatePhone = new (defAlternatePhone, AlternatePhone);
+                DataColumnParameter paramEmail = new (defEmail, Email);
+                DataColumnParameter paramGenderID = new (defGenderID, GenderID);
+                DataColumnParameter paramDateOfBirth = new (defDateOfBirth, DateOfBirth);
+                DataColumnParameter paramVocation = new (defVocation, Vocation);
+                DataColumnParameter paramBirthCertificatePath = new (defBirthCertificatePath, BirthCertificatePath);
+                DataColumnParameter paramPhotoPath = new (defPhotoPath, PhotoPath);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23})  ", TABLE_NAME,
+                        paramCenterID.GetSQLQuotedValueForAdd(),
+                        paramBeneficiaryStatusID.GetSQLQuotedValueForAdd(),
+                        paramFirstName.GetSQLQuotedValueForAdd(),
+                        paramLastName.GetSQLQuotedValueForAdd(),
+                        paramAddress.GetSQLQuotedValueForAdd(),
+                        paramCity.GetSQLQuotedValueForAdd(),
+                        paramState.GetSQLQuotedValueForAdd(),
+                        paramZipCode.GetSQLQuotedValueForAdd(),
+                        paramSchoolName.GetSQLQuotedValueForAdd(),
+                        paramSchoolAddress.GetSQLQuotedValueForAdd(),
+                        paramClassOnEnrollment.GetSQLQuotedValueForAdd(),
+                        paramHomePhone.GetSQLQuotedValueForAdd(),
+                        paramAlternatePhone.GetSQLQuotedValueForAdd(),
+                        paramEmail.GetSQLQuotedValueForAdd(),
+                        paramGenderID.GetSQLQuotedValueForAdd(),
+                        paramDateOfBirth.GetSQLQuotedValueForAdd(),
+                        paramVocation.GetSQLQuotedValueForAdd(),
+                        paramBirthCertificatePath.GetSQLQuotedValueForAdd(),
+                        paramPhotoPath.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int CenterID,
             int BeneficiaryStatusID,
@@ -453,10 +550,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             string Email = null,
             string Vocation = null,
             string BirthCertificatePath = null,
-            string PhotoPath = null
+            string PhotoPath = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramCenterID = new (defCenterID, CenterID);
@@ -483,9 +579,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
                 DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramCenterID.GetSQLQuotedValueForAdd(),
                         paramBeneficiaryStatusID.GetSQLQuotedValueForAdd(),
@@ -509,16 +609,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramCreatedAt.GetSQLQuotedValueForAdd(),
                         paramUpdatedAt.GetSQLQuotedValueForAdd(),
                         paramCreatedByID.GetSQLQuotedValueForAdd(),
-                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

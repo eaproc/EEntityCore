@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -313,7 +315,63 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            string TestString,
+            int TestInt32,
+            bool TestBool,
+            decimal TestDecimal,
+            DateTime TestDateTime,
+            string TestStringNull = null,
+            int? TestInt32Null = null,
+            bool? TestBoolNull = null,
+            decimal? TestDecimalNull = null,
+            DateTime? TestDateTimeNull = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramTestString = new (defTestString, TestString);
+                DataColumnParameter paramTestStringNull = new (defTestStringNull, TestStringNull);
+                DataColumnParameter paramTestInt32 = new (defTestInt32, TestInt32);
+                DataColumnParameter paramTestInt32Null = new (defTestInt32Null, TestInt32Null);
+                DataColumnParameter paramTestBool = new (defTestBool, TestBool);
+                DataColumnParameter paramTestBoolNull = new (defTestBoolNull, TestBoolNull);
+                DataColumnParameter paramTestDecimal = new (defTestDecimal, TestDecimal);
+                DataColumnParameter paramTestDecimalNull = new (defTestDecimalNull, TestDecimalNull);
+                DataColumnParameter paramTestDateTime = new (defTestDateTime, TestDateTime);
+                DataColumnParameter paramTestDateTimeNull = new (defTestDateTimeNull, TestDateTimeNull);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([TestString],[TestStringNull],[TestInt32],[TestInt32Null],[TestBool],[TestBoolNull],[TestDecimal],[TestDecimalNull],[TestDateTime],[TestDateTimeNull]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  ", TABLE_NAME,
+                        paramTestString.GetSQLQuotedValueForAdd(),
+                        paramTestStringNull.GetSQLQuotedValueForAdd(),
+                        paramTestInt32.GetSQLQuotedValueForAdd(),
+                        paramTestInt32Null.GetSQLQuotedValueForAdd(),
+                        paramTestBool.GetSQLQuotedValueForAdd(),
+                        paramTestBoolNull.GetSQLQuotedValueForAdd(),
+                        paramTestDecimal.GetSQLQuotedValueForAdd(),
+                        paramTestDecimalNull.GetSQLQuotedValueForAdd(),
+                        paramTestDateTime.GetSQLQuotedValueForAdd(),
+                        paramTestDateTimeNull.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             string TestString,
             int TestInt32,
@@ -324,10 +382,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             int? TestInt32Null = null,
             bool? TestBoolNull = null,
             decimal? TestDecimalNull = null,
-            DateTime? TestDateTimeNull = null
+            DateTime? TestDateTimeNull = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramTestString = new (defTestString, TestString);
@@ -341,9 +398,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramTestDateTime = new (defTestDateTime, TestDateTime);
                 DataColumnParameter paramTestDateTimeNull = new (defTestDateTimeNull, TestDateTimeNull);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TestString],[TestStringNull],[TestInt32],[TestInt32Null],[TestBool],[TestBoolNull],[TestDecimal],[TestDecimalNull],[TestDateTime],[TestDateTimeNull]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TestString],[TestStringNull],[TestInt32],[TestInt32Null],[TestBool],[TestBoolNull],[TestDecimal],[TestDecimalNull],[TestDateTime],[TestDateTimeNull]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramTestString.GetSQLQuotedValueForAdd(),
                         paramTestStringNull.GetSQLQuotedValueForAdd(),
@@ -354,84 +415,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramTestDecimal.GetSQLQuotedValueForAdd(),
                         paramTestDecimalNull.GetSQLQuotedValueForAdd(),
                         paramTestDateTime.GetSQLQuotedValueForAdd(),
-                        paramTestDateTimeNull.GetSQLQuotedValueForAdd()                        ) 
-                      );
+                        paramTestDateTimeNull.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
+        }                  
+
+
 
 
                   
                   
-            }catch (Exception){                  
-                throw;                   
-            }                  
-        }
-
-
-
-        /// <summary> 
-        /// You can not save image with this method 
-        /// </summary> 
-        /// <returns>Boolean</returns> 
-        /// <remarks></remarks> 
-        public static string InsertGetID(
-            string TestString,
-            int TestInt32,
-            bool TestBool,
-            decimal TestDecimal,
-            DateTime TestDateTime,
-            string TestStringNull = null,
-            int? TestInt32Null = null,
-            bool? TestBoolNull = null,
-            decimal? TestDecimalNull = null,
-            DateTime? TestDateTimeNull = null
-          )
-        {
-
-            try
-            {
-                using (var conn = DBConnectInterface.GetDBConn().GetSQLConnection())
-                {
-                    DataColumnParameter paramTestString = new(defTestString, TestString);
-                    DataColumnParameter paramTestStringNull = new(defTestStringNull, TestStringNull);
-                    DataColumnParameter paramTestInt32 = new(defTestInt32, TestInt32);
-                    DataColumnParameter paramTestInt32Null = new(defTestInt32Null, TestInt32Null);
-                    DataColumnParameter paramTestBool = new(defTestBool, TestBool);
-                    DataColumnParameter paramTestBoolNull = new(defTestBoolNull, TestBoolNull);
-                    DataColumnParameter paramTestDecimal = new(defTestDecimal, TestDecimal);
-                    DataColumnParameter paramTestDecimalNull = new(defTestDecimalNull, TestDecimalNull);
-                    DataColumnParameter paramTestDateTime = new(defTestDateTime, TestDateTime);
-                    DataColumnParameter paramTestDateTimeNull = new(defTestDateTimeNull, TestDateTimeNull);
-
-
-                    var r1 = server.DbExec(
-          string.Format(" INSERT INTO {0}([TestString],[TestStringNull],[TestInt32],[TestInt32Null],[TestBool],[TestBoolNull],[TestDecimal],[TestDecimalNull],[TestDateTime],[TestDateTimeNull]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10}) ", TABLE_NAME,
-                             paramTestString.GetSQLQuotedValueForAdd(),
-                             paramTestStringNull.GetSQLQuotedValueForAdd(),
-                             paramTestInt32.GetSQLQuotedValueForAdd(),
-                             paramTestInt32Null.GetSQLQuotedValueForAdd(),
-                             paramTestBool.GetSQLQuotedValueForAdd(),
-                             paramTestBoolNull.GetSQLQuotedValueForAdd(),
-                             paramTestDecimal.GetSQLQuotedValueForAdd(),
-                             paramTestDecimalNull.GetSQLQuotedValueForAdd(),
-                             paramTestDateTime.GetSQLQuotedValueForAdd(),
-                             paramTestDateTimeNull.GetSQLQuotedValueForAdd()),
-                             conn
-                           );
-
-                    var r2 = server.GetScopeIdentity(conn);
-
-
-                    return r2;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-
-
-
         public static bool DeleteItemRow(long pID)                                    
         {                  
             return DeleteRow(DBConnectInterface.GetDBConn(), pID: pID, pTableName: TABLE_NAME);                  

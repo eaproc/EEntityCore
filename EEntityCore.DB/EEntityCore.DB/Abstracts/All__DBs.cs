@@ -81,7 +81,7 @@ namespace EEntityCore.DB.Abstracts
                 var dts = GetRS(string.Format("Select {0} From {1} Order By {0} Desc", IDHolderColumn, TableName));
                 if (IsDataSetValid(dts))
                 {
-                    GenNumber = ELong.valueOf(dts.Tables[0].Rows[0][0].ToString());
+                    GenNumber = ELong.ValueOf(dts.Tables[0].Rows[0][0].ToString());
                 }
             }
             catch (Exception )
@@ -263,7 +263,7 @@ namespace EEntityCore.DB.Abstracts
                 string result = Constants.vbNullString;
                 foreach (DataRow dRow in DataSetRows)
                 {
-                    result += EStrings.valueOf(dRow[ColIndex]);
+                    result += EStrings.ValueOf(dRow[ColIndex]);
                     if (DataSetRows.IndexOf(dRow) != DataSetRows.Count - 1)
                         result += Delimiter;
                 }
@@ -360,7 +360,7 @@ namespace EEntityCore.DB.Abstracts
         /// <param name="SQL"></param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public abstract bool DbExec(string SQL);
+        public abstract int DbExec(string SQL);
 
         /// <summary>
         /// Makes sure the apostrophe issue is corrected in the strings. 
@@ -370,7 +370,7 @@ namespace EEntityCore.DB.Abstracts
         /// <param name="Address_Apostrophe_Issue">Confirmed this is encoded SQL String</param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public virtual bool DbExec(string SQL, bool Address_Apostrophe_Issue)
+        public virtual int DbExec(string SQL, bool Address_Apostrophe_Issue)
         {
             if (!Address_Apostrophe_Issue)
                 return DbExec(SQL);

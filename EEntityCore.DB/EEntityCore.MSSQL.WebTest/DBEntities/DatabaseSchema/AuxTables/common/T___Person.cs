@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -408,7 +410,90 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            string IdentificationNo,
+            string FirstName,
+            string LastName,
+            int CountryID,
+            DateTime DateOfBirth,
+            int GenderID,
+            bool IsSuperUser,
+            int MaritalStatusID,
+            bool CanBeUpdated,
+            bool CanBeDeleted,
+            DateTime CreatedAt,
+            string HomeAddress = null,
+            string Email = null,
+            int? PersonTitleID = null,
+            int? BloodTypeID = null,
+            string BirthPlace = null,
+            string PictureFileName = null,
+            DateTime? UpdatedAt = null,
+            int? DataMonitorID = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramIdentificationNo = new (defIdentificationNo, IdentificationNo);
+                DataColumnParameter paramFirstName = new (defFirstName, FirstName);
+                DataColumnParameter paramLastName = new (defLastName, LastName);
+                DataColumnParameter paramCountryID = new (defCountryID, CountryID);
+                DataColumnParameter paramDateOfBirth = new (defDateOfBirth, DateOfBirth);
+                DataColumnParameter paramGenderID = new (defGenderID, GenderID);
+                DataColumnParameter paramHomeAddress = new (defHomeAddress, HomeAddress);
+                DataColumnParameter paramEmail = new (defEmail, Email);
+                DataColumnParameter paramPersonTitleID = new (defPersonTitleID, PersonTitleID);
+                DataColumnParameter paramIsSuperUser = new (defIsSuperUser, IsSuperUser);
+                DataColumnParameter paramBloodTypeID = new (defBloodTypeID, BloodTypeID);
+                DataColumnParameter paramBirthPlace = new (defBirthPlace, BirthPlace);
+                DataColumnParameter paramPictureFileName = new (defPictureFileName, PictureFileName);
+                DataColumnParameter paramMaritalStatusID = new (defMaritalStatusID, MaritalStatusID);
+                DataColumnParameter paramCanBeUpdated = new (defCanBeUpdated, CanBeUpdated);
+                DataColumnParameter paramCanBeDeleted = new (defCanBeDeleted, CanBeDeleted);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramDataMonitorID = new (defDataMonitorID, DataMonitorID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19})  ", TABLE_NAME,
+                        paramIdentificationNo.GetSQLQuotedValueForAdd(),
+                        paramFirstName.GetSQLQuotedValueForAdd(),
+                        paramLastName.GetSQLQuotedValueForAdd(),
+                        paramCountryID.GetSQLQuotedValueForAdd(),
+                        paramDateOfBirth.GetSQLQuotedValueForAdd(),
+                        paramGenderID.GetSQLQuotedValueForAdd(),
+                        paramHomeAddress.GetSQLQuotedValueForAdd(),
+                        paramEmail.GetSQLQuotedValueForAdd(),
+                        paramPersonTitleID.GetSQLQuotedValueForAdd(),
+                        paramIsSuperUser.GetSQLQuotedValueForAdd(),
+                        paramBloodTypeID.GetSQLQuotedValueForAdd(),
+                        paramBirthPlace.GetSQLQuotedValueForAdd(),
+                        paramPictureFileName.GetSQLQuotedValueForAdd(),
+                        paramMaritalStatusID.GetSQLQuotedValueForAdd(),
+                        paramCanBeUpdated.GetSQLQuotedValueForAdd(),
+                        paramCanBeDeleted.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramDataMonitorID.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             string IdentificationNo,
             string FirstName,
@@ -428,10 +513,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             string BirthPlace = null,
             string PictureFileName = null,
             DateTime? UpdatedAt = null,
-            int? DataMonitorID = null
+            int? DataMonitorID = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramIdentificationNo = new (defIdentificationNo, IdentificationNo);
@@ -454,9 +538,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
                 DataColumnParameter paramDataMonitorID = new (defDataMonitorID, DataMonitorID);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramIdentificationNo.GetSQLQuotedValueForAdd(),
                         paramFirstName.GetSQLQuotedValueForAdd(),
@@ -476,16 +564,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramCanBeDeleted.GetSQLQuotedValueForAdd(),
                         paramCreatedAt.GetSQLQuotedValueForAdd(),
                         paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramDataMonitorID.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramDataMonitorID.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -365,7 +367,81 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int DataMonitorID,
+            int ImportStatusID,
+            string IdentificationNo,
+            string PersonTitle,
+            string FirstName,
+            string LastName,
+            string Country,
+            DateTime DateOfBirth,
+            string Gender,
+            string ImportComment,
+            DateTime CreatedAt,
+            string HomeAddress = null,
+            string Email = null,
+            string BirthPlace = null,
+            string MobileAreaCode = null,
+            string MobileNumber = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramDataMonitorID = new (defDataMonitorID, DataMonitorID);
+                DataColumnParameter paramImportStatusID = new (defImportStatusID, ImportStatusID);
+                DataColumnParameter paramIdentificationNo = new (defIdentificationNo, IdentificationNo);
+                DataColumnParameter paramPersonTitle = new (defPersonTitle, PersonTitle);
+                DataColumnParameter paramFirstName = new (defFirstName, FirstName);
+                DataColumnParameter paramLastName = new (defLastName, LastName);
+                DataColumnParameter paramCountry = new (defCountry, Country);
+                DataColumnParameter paramDateOfBirth = new (defDateOfBirth, DateOfBirth);
+                DataColumnParameter paramGender = new (defGender, Gender);
+                DataColumnParameter paramHomeAddress = new (defHomeAddress, HomeAddress);
+                DataColumnParameter paramEmail = new (defEmail, Email);
+                DataColumnParameter paramBirthPlace = new (defBirthPlace, BirthPlace);
+                DataColumnParameter paramMobileAreaCode = new (defMobileAreaCode, MobileAreaCode);
+                DataColumnParameter paramMobileNumber = new (defMobileNumber, MobileNumber);
+                DataColumnParameter paramImportComment = new (defImportComment, ImportComment);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16})  ", TABLE_NAME,
+                        paramDataMonitorID.GetSQLQuotedValueForAdd(),
+                        paramImportStatusID.GetSQLQuotedValueForAdd(),
+                        paramIdentificationNo.GetSQLQuotedValueForAdd(),
+                        paramPersonTitle.GetSQLQuotedValueForAdd(),
+                        paramFirstName.GetSQLQuotedValueForAdd(),
+                        paramLastName.GetSQLQuotedValueForAdd(),
+                        paramCountry.GetSQLQuotedValueForAdd(),
+                        paramDateOfBirth.GetSQLQuotedValueForAdd(),
+                        paramGender.GetSQLQuotedValueForAdd(),
+                        paramHomeAddress.GetSQLQuotedValueForAdd(),
+                        paramEmail.GetSQLQuotedValueForAdd(),
+                        paramBirthPlace.GetSQLQuotedValueForAdd(),
+                        paramMobileAreaCode.GetSQLQuotedValueForAdd(),
+                        paramMobileNumber.GetSQLQuotedValueForAdd(),
+                        paramImportComment.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int DataMonitorID,
             int ImportStatusID,
@@ -382,10 +458,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             string Email = null,
             string BirthPlace = null,
             string MobileAreaCode = null,
-            string MobileNumber = null
+            string MobileNumber = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramDataMonitorID = new (defDataMonitorID, DataMonitorID);
@@ -405,9 +480,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramImportComment = new (defImportComment, ImportComment);
                 DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramDataMonitorID.GetSQLQuotedValueForAdd(),
                         paramImportStatusID.GetSQLQuotedValueForAdd(),
@@ -424,16 +503,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramMobileAreaCode.GetSQLQuotedValueForAdd(),
                         paramMobileNumber.GetSQLQuotedValueForAdd(),
                         paramImportComment.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

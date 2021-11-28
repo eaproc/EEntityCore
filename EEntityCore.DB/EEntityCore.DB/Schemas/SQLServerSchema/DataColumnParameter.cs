@@ -108,7 +108,7 @@ namespace EEntityCore.DB.Schemas.SQLServerSchema
                     {
                         // REM Format to English Culture, Since Database Saves in English
                         // REM Use Culture to reformat it
-                        return EDouble.valueOf(Value).ToString(new System.Globalization.CultureInfo(1033));   // USA
+                        return EDouble.ValueOf(Value).ToString(new System.Globalization.CultureInfo(1033));   // USA
                     }
 
                 case DataColumnDefinition.AllowedDataTypes.Int:

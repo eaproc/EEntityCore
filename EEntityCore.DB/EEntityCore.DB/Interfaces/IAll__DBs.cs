@@ -33,7 +33,7 @@ namespace EEntityCore.DB.Interfaces
         /// <param name="SQL"></param>
         /// <returns></returns>
         /// <remarks></remarks>
-        bool DbExec(string SQL);
+        int DbExec(string SQL);
 
 
         /// <summary>

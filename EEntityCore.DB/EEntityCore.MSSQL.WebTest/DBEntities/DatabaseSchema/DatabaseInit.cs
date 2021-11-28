@@ -2,6 +2,7 @@ using EEntityCore.DB.Interfaces;
 using EEntityCore.DB.MSSQL;
 using EEntityCore.DB.Schemas.SQLServerSchema;
 using System;
+using System.Data;
 
 namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
 {
@@ -13,6 +14,39 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
     /// <remarks></remarks>
     public class DatabaseInit : IDatabaseInit
     {
+
+        public class TransactionRunner : IDisposable
+        {
+            private bool AllowDispose;
+            private DBTransaction Transaction;
+
+            public TransactionRunner(DBTransaction trans = null)
+            {
+                Transaction = trans ?? CreateTransaction();
+                AllowDispose = trans == null;
+            }
+
+            public T Run<T>(Func<DBTransaction, T> action)
+            {
+                var r = action(this.Transaction);
+
+                // Dispose immediately if no need to hold for long
+                if (AllowDispose) this.Dispose();
+
+                return r;
+            }
+
+            public void Dispose()
+            {
+                if (AllowDispose && Transaction != null)
+                {
+                    Transaction.Dispose();
+                    Transaction = null;
+                }
+            }
+        }
+
+
 
         #region Constructors
 
@@ -89,6 +123,23 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
         {
             return new Client(ServerIPAddressOrName(), ServerPort(), DBUserName(), DBUserPassword(), DBName());
         }
+
+        //public int Execute(string Query, DBTransaction transaction = null)
+        //{
+        //    if (transaction != null) return transaction.ExecuteTransactionQuery(Query);
+        //    return GetDBConn().DbExec(Query);
+        //}
+
+        public static DBTransaction CreateTransaction()
+        {
+            return new DBTransaction(DBConnectInterface.GetDBConn().GetSQLConnection());
+        }
+
+        //public DataSet Fetch(string Query, DBTransaction transaction = null)
+        //{
+        //    if (transaction != null) return transaction.Fetch(Query);
+        //    return GetDBConn().GetRS(Query);
+        //}
 
         public string DBName()
         {

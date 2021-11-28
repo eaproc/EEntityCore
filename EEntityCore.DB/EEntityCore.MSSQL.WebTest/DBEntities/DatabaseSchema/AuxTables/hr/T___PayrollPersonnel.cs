@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -376,7 +378,81 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int PayrollID,
+            int PersonnelID,
+            int AttendanceCount,
+            decimal SalaryAmount,
+            decimal RatePerDay,
+            decimal CalculatedAmount,
+            bool IsDisbursed,
+            decimal ApprovedAmount,
+            DateTime CreatedAt,
+            int CreatedByID,
+            string HRComments = null,
+            string BursarComments = null,
+            decimal? DisbursedAmount = null,
+            DateTime? UpdatedAt = null,
+            DateTime? DisbursedAt = null,
+            int? UpdatedByID = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramPayrollID = new (defPayrollID, PayrollID);
+                DataColumnParameter paramPersonnelID = new (defPersonnelID, PersonnelID);
+                DataColumnParameter paramAttendanceCount = new (defAttendanceCount, AttendanceCount);
+                DataColumnParameter paramSalaryAmount = new (defSalaryAmount, SalaryAmount);
+                DataColumnParameter paramRatePerDay = new (defRatePerDay, RatePerDay);
+                DataColumnParameter paramCalculatedAmount = new (defCalculatedAmount, CalculatedAmount);
+                DataColumnParameter paramIsDisbursed = new (defIsDisbursed, IsDisbursed);
+                DataColumnParameter paramHRComments = new (defHRComments, HRComments);
+                DataColumnParameter paramApprovedAmount = new (defApprovedAmount, ApprovedAmount);
+                DataColumnParameter paramBursarComments = new (defBursarComments, BursarComments);
+                DataColumnParameter paramDisbursedAmount = new (defDisbursedAmount, DisbursedAmount);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramDisbursedAt = new (defDisbursedAt, DisbursedAt);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16})  ", TABLE_NAME,
+                        paramPayrollID.GetSQLQuotedValueForAdd(),
+                        paramPersonnelID.GetSQLQuotedValueForAdd(),
+                        paramAttendanceCount.GetSQLQuotedValueForAdd(),
+                        paramSalaryAmount.GetSQLQuotedValueForAdd(),
+                        paramRatePerDay.GetSQLQuotedValueForAdd(),
+                        paramCalculatedAmount.GetSQLQuotedValueForAdd(),
+                        paramIsDisbursed.GetSQLQuotedValueForAdd(),
+                        paramHRComments.GetSQLQuotedValueForAdd(),
+                        paramApprovedAmount.GetSQLQuotedValueForAdd(),
+                        paramBursarComments.GetSQLQuotedValueForAdd(),
+                        paramDisbursedAmount.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramDisbursedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int PayrollID,
             int PersonnelID,
@@ -393,10 +469,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             decimal? DisbursedAmount = null,
             DateTime? UpdatedAt = null,
             DateTime? DisbursedAt = null,
-            int? UpdatedByID = null
+            int? UpdatedByID = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramPayrollID = new (defPayrollID, PayrollID);
@@ -416,9 +491,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramDisbursedAt = new (defDisbursedAt, DisbursedAt);
                 DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramPayrollID.GetSQLQuotedValueForAdd(),
                         paramPersonnelID.GetSQLQuotedValueForAdd(),
@@ -435,16 +514,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramCreatedAt.GetSQLQuotedValueForAdd(),
                         paramCreatedByID.GetSQLQuotedValueForAdd(),
                         paramDisbursedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -293,7 +295,54 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            string Name,
+            bool CanBeUpdated,
+            bool CanBeDeleted,
+            DateTime CreatedAt,
+            byte Rank,
+            string Description = null,
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramName = new (defName, Name);
+                DataColumnParameter paramDescription = new (defDescription, Description);
+                DataColumnParameter paramCanBeUpdated = new (defCanBeUpdated, CanBeUpdated);
+                DataColumnParameter paramCanBeDeleted = new (defCanBeDeleted, CanBeDeleted);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramRank = new (defRank, Rank);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([Name],[Description],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[Rank]) VALUES({1},{2},{3},{4},{5},{6},{7})  ", TABLE_NAME,
+                        paramName.GetSQLQuotedValueForAdd(),
+                        paramDescription.GetSQLQuotedValueForAdd(),
+                        paramCanBeUpdated.GetSQLQuotedValueForAdd(),
+                        paramCanBeDeleted.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramRank.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             string Name,
             bool CanBeUpdated,
@@ -301,10 +350,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             DateTime CreatedAt,
             byte Rank,
             string Description = null,
-            DateTime? UpdatedAt = null
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramName = new (defName, Name);
@@ -315,9 +363,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
                 DataColumnParameter paramRank = new (defRank, Rank);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[Rank]) VALUES({1},{2},{3},{4},{5},{6},{7},{8})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[Rank]) VALUES({1},{2},{3},{4},{5},{6},{7},{8})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramName.GetSQLQuotedValueForAdd(),
                         paramDescription.GetSQLQuotedValueForAdd(),
@@ -325,16 +377,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramCanBeDeleted.GetSQLQuotedValueForAdd(),
                         paramCreatedAt.GetSQLQuotedValueForAdd(),
                         paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramRank.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramRank.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

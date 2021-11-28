@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -376,7 +378,81 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int CenterVisitationID,
+            int BeneficiaryID,
+            bool IsPresent,
+            DateTime CreatedAt,
+            DateTime UpdatedAt,
+            int CreatedByID,
+            int UpdatedByID,
+            string PictureStoredPath = null,
+            string Education = null,
+            string Emotion = null,
+            string Health = null,
+            string Spiritual = null,
+            string Social = null,
+            string Talent = null,
+            string Observations = null,
+            string ChristSmilesFeedBack = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramCenterVisitationID = new (defCenterVisitationID, CenterVisitationID);
+                DataColumnParameter paramBeneficiaryID = new (defBeneficiaryID, BeneficiaryID);
+                DataColumnParameter paramIsPresent = new (defIsPresent, IsPresent);
+                DataColumnParameter paramPictureStoredPath = new (defPictureStoredPath, PictureStoredPath);
+                DataColumnParameter paramEducation = new (defEducation, Education);
+                DataColumnParameter paramEmotion = new (defEmotion, Emotion);
+                DataColumnParameter paramHealth = new (defHealth, Health);
+                DataColumnParameter paramSpiritual = new (defSpiritual, Spiritual);
+                DataColumnParameter paramSocial = new (defSocial, Social);
+                DataColumnParameter paramTalent = new (defTalent, Talent);
+                DataColumnParameter paramObservations = new (defObservations, Observations);
+                DataColumnParameter paramChristSmilesFeedBack = new (defChristSmilesFeedBack, ChristSmilesFeedBack);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([CenterVisitationID],[BeneficiaryID],[IsPresent],[PictureStoredPath],[Education],[Emotion],[Health],[Spiritual],[Social],[Talent],[Observations],[ChristSmilesFeedBack],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16})  ", TABLE_NAME,
+                        paramCenterVisitationID.GetSQLQuotedValueForAdd(),
+                        paramBeneficiaryID.GetSQLQuotedValueForAdd(),
+                        paramIsPresent.GetSQLQuotedValueForAdd(),
+                        paramPictureStoredPath.GetSQLQuotedValueForAdd(),
+                        paramEducation.GetSQLQuotedValueForAdd(),
+                        paramEmotion.GetSQLQuotedValueForAdd(),
+                        paramHealth.GetSQLQuotedValueForAdd(),
+                        paramSpiritual.GetSQLQuotedValueForAdd(),
+                        paramSocial.GetSQLQuotedValueForAdd(),
+                        paramTalent.GetSQLQuotedValueForAdd(),
+                        paramObservations.GetSQLQuotedValueForAdd(),
+                        paramChristSmilesFeedBack.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int CenterVisitationID,
             int BeneficiaryID,
@@ -393,10 +469,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             string Social = null,
             string Talent = null,
             string Observations = null,
-            string ChristSmilesFeedBack = null
+            string ChristSmilesFeedBack = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramCenterVisitationID = new (defCenterVisitationID, CenterVisitationID);
@@ -416,9 +491,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
                 DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterVisitationID],[BeneficiaryID],[IsPresent],[PictureStoredPath],[Education],[Emotion],[Health],[Spiritual],[Social],[Talent],[Observations],[ChristSmilesFeedBack],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterVisitationID],[BeneficiaryID],[IsPresent],[PictureStoredPath],[Education],[Emotion],[Health],[Spiritual],[Social],[Talent],[Observations],[ChristSmilesFeedBack],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramCenterVisitationID.GetSQLQuotedValueForAdd(),
                         paramBeneficiaryID.GetSQLQuotedValueForAdd(),
@@ -435,16 +514,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramCreatedAt.GetSQLQuotedValueForAdd(),
                         paramUpdatedAt.GetSQLQuotedValueForAdd(),
                         paramCreatedByID.GetSQLQuotedValueForAdd(),
-                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

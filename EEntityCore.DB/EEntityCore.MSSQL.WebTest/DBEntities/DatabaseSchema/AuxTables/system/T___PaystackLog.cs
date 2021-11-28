@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -349,7 +351,72 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int PaymentGatewayStatusID,
+            bool IsFinalized,
+            int InitializedByUserID,
+            string InitialLizeURL,
+            int AmountKobo,
+            DateTime CreatedAt,
+            string Reference = null,
+            string AccessCode = null,
+            string PaymentURL = null,
+            string VerifiyURL = null,
+            string VerifyResponseJSON = null,
+            int? VerifiedByUserID = null,
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramPaymentGatewayStatusID = new (defPaymentGatewayStatusID, PaymentGatewayStatusID);
+                DataColumnParameter paramIsFinalized = new (defIsFinalized, IsFinalized);
+                DataColumnParameter paramInitializedByUserID = new (defInitializedByUserID, InitializedByUserID);
+                DataColumnParameter paramReference = new (defReference, Reference);
+                DataColumnParameter paramAccessCode = new (defAccessCode, AccessCode);
+                DataColumnParameter paramInitialLizeURL = new (defInitialLizeURL, InitialLizeURL);
+                DataColumnParameter paramPaymentURL = new (defPaymentURL, PaymentURL);
+                DataColumnParameter paramVerifiyURL = new (defVerifiyURL, VerifiyURL);
+                DataColumnParameter paramAmountKobo = new (defAmountKobo, AmountKobo);
+                DataColumnParameter paramVerifyResponseJSON = new (defVerifyResponseJSON, VerifyResponseJSON);
+                DataColumnParameter paramVerifiedByUserID = new (defVerifiedByUserID, VerifiedByUserID);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([PaymentGatewayStatusID],[IsFinalized],[InitializedByUserID],[Reference],[AccessCode],[InitialLizeURL],[PaymentURL],[VerifiyURL],[AmountKobo],[VerifyResponseJSON],[VerifiedByUserID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  ", TABLE_NAME,
+                        paramPaymentGatewayStatusID.GetSQLQuotedValueForAdd(),
+                        paramIsFinalized.GetSQLQuotedValueForAdd(),
+                        paramInitializedByUserID.GetSQLQuotedValueForAdd(),
+                        paramReference.GetSQLQuotedValueForAdd(),
+                        paramAccessCode.GetSQLQuotedValueForAdd(),
+                        paramInitialLizeURL.GetSQLQuotedValueForAdd(),
+                        paramPaymentURL.GetSQLQuotedValueForAdd(),
+                        paramVerifiyURL.GetSQLQuotedValueForAdd(),
+                        paramAmountKobo.GetSQLQuotedValueForAdd(),
+                        paramVerifyResponseJSON.GetSQLQuotedValueForAdd(),
+                        paramVerifiedByUserID.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int PaymentGatewayStatusID,
             bool IsFinalized,
@@ -363,10 +430,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             string VerifiyURL = null,
             string VerifyResponseJSON = null,
             int? VerifiedByUserID = null,
-            DateTime? UpdatedAt = null
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramPaymentGatewayStatusID = new (defPaymentGatewayStatusID, PaymentGatewayStatusID);
@@ -383,9 +449,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
                 DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentGatewayStatusID],[IsFinalized],[InitializedByUserID],[Reference],[AccessCode],[InitialLizeURL],[PaymentURL],[VerifiyURL],[AmountKobo],[VerifyResponseJSON],[VerifiedByUserID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentGatewayStatusID],[IsFinalized],[InitializedByUserID],[Reference],[AccessCode],[InitialLizeURL],[PaymentURL],[VerifiyURL],[AmountKobo],[VerifyResponseJSON],[VerifiedByUserID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramPaymentGatewayStatusID.GetSQLQuotedValueForAdd(),
                         paramIsFinalized.GetSQLQuotedValueForAdd(),
@@ -399,16 +469,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramVerifyResponseJSON.GetSQLQuotedValueForAdd(),
                         paramVerifiedByUserID.GetSQLQuotedValueForAdd(),
                         paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

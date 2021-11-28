@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -319,7 +321,63 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int OnlinePaymentID,
+            DateTime CreatedAt,
+            string AuthorizationCode = null,
+            string CardType = null,
+            string BIN = null,
+            string Last4Digits = null,
+            int? ExpirationMonth = null,
+            int? ExpirationYear = null,
+            string Bank = null,
+            string CountryCode = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramOnlinePaymentID = new (defOnlinePaymentID, OnlinePaymentID);
+                DataColumnParameter paramAuthorizationCode = new (defAuthorizationCode, AuthorizationCode);
+                DataColumnParameter paramCardType = new (defCardType, CardType);
+                DataColumnParameter paramBIN = new (defBIN, BIN);
+                DataColumnParameter paramLast4Digits = new (defLast4Digits, Last4Digits);
+                DataColumnParameter paramExpirationMonth = new (defExpirationMonth, ExpirationMonth);
+                DataColumnParameter paramExpirationYear = new (defExpirationYear, ExpirationYear);
+                DataColumnParameter paramBank = new (defBank, Bank);
+                DataColumnParameter paramCountryCode = new (defCountryCode, CountryCode);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  ", TABLE_NAME,
+                        paramOnlinePaymentID.GetSQLQuotedValueForAdd(),
+                        paramAuthorizationCode.GetSQLQuotedValueForAdd(),
+                        paramCardType.GetSQLQuotedValueForAdd(),
+                        paramBIN.GetSQLQuotedValueForAdd(),
+                        paramLast4Digits.GetSQLQuotedValueForAdd(),
+                        paramExpirationMonth.GetSQLQuotedValueForAdd(),
+                        paramExpirationYear.GetSQLQuotedValueForAdd(),
+                        paramBank.GetSQLQuotedValueForAdd(),
+                        paramCountryCode.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int OnlinePaymentID,
             DateTime CreatedAt,
@@ -330,10 +388,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             int? ExpirationMonth = null,
             int? ExpirationYear = null,
             string Bank = null,
-            string CountryCode = null
+            string CountryCode = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramOnlinePaymentID = new (defOnlinePaymentID, OnlinePaymentID);
@@ -347,9 +404,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramCountryCode = new (defCountryCode, CountryCode);
                 DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramOnlinePaymentID.GetSQLQuotedValueForAdd(),
                         paramAuthorizationCode.GetSQLQuotedValueForAdd(),
@@ -360,16 +421,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramExpirationYear.GetSQLQuotedValueForAdd(),
                         paramBank.GetSQLQuotedValueForAdd(),
                         paramCountryCode.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

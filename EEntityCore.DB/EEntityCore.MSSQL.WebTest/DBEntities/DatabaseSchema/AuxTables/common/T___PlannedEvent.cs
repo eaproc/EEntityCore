@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -321,7 +323,60 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int CalendarEventID,
+            string Title,
+            DateTime StartDate,
+            DateTime EndDate,
+            DateTime CreatedAt,
+            int CreatedByID,
+            int AcademicSessionID,
+            string Comments = null,
+            int? TrackID = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramCalendarEventID = new (defCalendarEventID, CalendarEventID);
+                DataColumnParameter paramTitle = new (defTitle, Title);
+                DataColumnParameter paramStartDate = new (defStartDate, StartDate);
+                DataColumnParameter paramEndDate = new (defEndDate, EndDate);
+                DataColumnParameter paramComments = new (defComments, Comments);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramTrackID = new (defTrackID, TrackID);
+                DataColumnParameter paramAcademicSessionID = new (defAcademicSessionID, AcademicSessionID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([CalendarEventID],[Title],[StartDate],[EndDate],[Comments],[CreatedAt],[CreatedByID],[TrackID],[AcademicSessionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9})  ", TABLE_NAME,
+                        paramCalendarEventID.GetSQLQuotedValueForAdd(),
+                        paramTitle.GetSQLQuotedValueForAdd(),
+                        paramStartDate.GetSQLQuotedValueForAdd(),
+                        paramEndDate.GetSQLQuotedValueForAdd(),
+                        paramComments.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramTrackID.GetSQLQuotedValueForAdd(),
+                        paramAcademicSessionID.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int CalendarEventID,
             string Title,
@@ -331,10 +386,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             int CreatedByID,
             int AcademicSessionID,
             string Comments = null,
-            int? TrackID = null
+            int? TrackID = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramCalendarEventID = new (defCalendarEventID, CalendarEventID);
@@ -347,9 +401,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramTrackID = new (defTrackID, TrackID);
                 DataColumnParameter paramAcademicSessionID = new (defAcademicSessionID, AcademicSessionID);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CalendarEventID],[Title],[StartDate],[EndDate],[Comments],[CreatedAt],[CreatedByID],[TrackID],[AcademicSessionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CalendarEventID],[Title],[StartDate],[EndDate],[Comments],[CreatedAt],[CreatedByID],[TrackID],[AcademicSessionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramCalendarEventID.GetSQLQuotedValueForAdd(),
                         paramTitle.GetSQLQuotedValueForAdd(),
@@ -359,16 +417,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramCreatedAt.GetSQLQuotedValueForAdd(),
                         paramCreatedByID.GetSQLQuotedValueForAdd(),
                         paramTrackID.GetSQLQuotedValueForAdd(),
-                        paramAcademicSessionID.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramAcademicSessionID.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

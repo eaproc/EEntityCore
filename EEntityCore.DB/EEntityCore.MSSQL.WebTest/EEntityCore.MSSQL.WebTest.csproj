@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EEntityCore.DB.MSSQL\EEntityCore.DB.MSSQL.vbproj" />
+    <ProjectReference Include="..\EEntityCore.DB.MSSQL\EEntityCore.DB.MSSQL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

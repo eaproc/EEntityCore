@@ -1,4 +1,5 @@
-﻿using EEntityCore.MSSQL.WebTest.DBEntities;
+﻿using EEntityCore.DB.MSSQL;
+using EEntityCore.MSSQL.WebTest.DBEntities;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTables.academic;
 using Newtonsoft.Json;
@@ -16,19 +17,19 @@ namespace EEntityCore.MSSQL.WebTest
                 DatabaseInit.DBConnectInterface = new DatabaseInit("SalesSCADWARE", "sa", "netEPRO@2017", 51391, @"localhost\SQLSERVER2016");
 
 
-                //TestAdd();
+                //TestAddWithID();
 
-                TestInsertGetID();
-
-
-                T___AcademicSession academicSession = T___AcademicSession.GetFullTable();
+                //TestInsertGetID();
 
 
-                Console.WriteLine(JsonConvert.SerializeObject(
-                        academicSession.GetFirstRow().TargettedRow.ItemArray, 
-                        formatting: Formatting.Indented
-                        )
-                    );
+                //T___AcademicSession academicSession = T___AcademicSession.GetFullTable();
+
+
+                //Console.WriteLine(JsonConvert.SerializeObject(
+                //        academicSession.GetFirstRow().TargettedRow.ItemArray, 
+                //        formatting: Formatting.Indented
+                //        )
+                //    );
 
             }
             catch (Exception ex)
@@ -38,15 +39,16 @@ namespace EEntityCore.MSSQL.WebTest
             }
         }
 
-        private static void TestAdd()
+        private static void TestAddWithID()
         {
-           bool result =   T___TestTable.Add(2, "Funny", 400, true, (decimal)10.244, DateTime.Now);
+           bool result =   T___TestTable.AddWithID(2, "Funny", 400, true, (decimal)10.244, DateTime.Now);
            Console.WriteLine("Result was {0}", result);
         }
 
         private static void TestInsertGetID()
         {
-            string result = T___TestTable.InsertGetID("Funny", 400, true, (decimal)10.244, DateTime.Now);
+            //using var transaction = new DBTransaction( DatabaseInit.DBConnectInterface.GetDBConn().GetSQLConnection());
+            long result = T___TestTable.InsertGetID("Funny", 400, true, (decimal)10.244, DateTime.Now, transaction: null);
             Console.WriteLine("Result was {0}", result);
         }
     }

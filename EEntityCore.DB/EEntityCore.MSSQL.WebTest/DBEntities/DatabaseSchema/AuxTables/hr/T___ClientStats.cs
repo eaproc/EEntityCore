@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -372,7 +374,84 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int ClientID,
+            int TermID,
+            int RegisteredStudentCount,
+            int AssignedStudentCount,
+            int SCADWAREAccessCount,
+            decimal SCADWAREAccessThreshold,
+            decimal AverageTermBill,
+            decimal RatePerStudent,
+            decimal BilledPerStudent,
+            decimal TotalReceivedOnSCADWAREBill,
+            decimal MinimumExpectedOnSCADWAREBill,
+            decimal ExpectedOnSCADWAREBill,
+            string IPAddress,
+            DateTime CreatedAt,
+            int? FullScholarshipStudentCount = null,
+            DateTime? TermStartDate = null,
+            DateTime? TermEndDate = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramClientID = new (defClientID, ClientID);
+                DataColumnParameter paramTermID = new (defTermID, TermID);
+                DataColumnParameter paramRegisteredStudentCount = new (defRegisteredStudentCount, RegisteredStudentCount);
+                DataColumnParameter paramAssignedStudentCount = new (defAssignedStudentCount, AssignedStudentCount);
+                DataColumnParameter paramSCADWAREAccessCount = new (defSCADWAREAccessCount, SCADWAREAccessCount);
+                DataColumnParameter paramSCADWAREAccessThreshold = new (defSCADWAREAccessThreshold, SCADWAREAccessThreshold);
+                DataColumnParameter paramAverageTermBill = new (defAverageTermBill, AverageTermBill);
+                DataColumnParameter paramRatePerStudent = new (defRatePerStudent, RatePerStudent);
+                DataColumnParameter paramBilledPerStudent = new (defBilledPerStudent, BilledPerStudent);
+                DataColumnParameter paramTotalReceivedOnSCADWAREBill = new (defTotalReceivedOnSCADWAREBill, TotalReceivedOnSCADWAREBill);
+                DataColumnParameter paramMinimumExpectedOnSCADWAREBill = new (defMinimumExpectedOnSCADWAREBill, MinimumExpectedOnSCADWAREBill);
+                DataColumnParameter paramExpectedOnSCADWAREBill = new (defExpectedOnSCADWAREBill, ExpectedOnSCADWAREBill);
+                DataColumnParameter paramIPAddress = new (defIPAddress, IPAddress);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramFullScholarshipStudentCount = new (defFullScholarshipStudentCount, FullScholarshipStudentCount);
+                DataColumnParameter paramTermStartDate = new (defTermStartDate, TermStartDate);
+                DataColumnParameter paramTermEndDate = new (defTermEndDate, TermEndDate);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([ClientID],[TermID],[RegisteredStudentCount],[AssignedStudentCount],[SCADWAREAccessCount],[SCADWAREAccessThreshold],[AverageTermBill],[RatePerStudent],[BilledPerStudent],[TotalReceivedOnSCADWAREBill],[MinimumExpectedOnSCADWAREBill],[ExpectedOnSCADWAREBill],[IPAddress],[CreatedAt],[FullScholarshipStudentCount],[TermStartDate],[TermEndDate]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17})  ", TABLE_NAME,
+                        paramClientID.GetSQLQuotedValueForAdd(),
+                        paramTermID.GetSQLQuotedValueForAdd(),
+                        paramRegisteredStudentCount.GetSQLQuotedValueForAdd(),
+                        paramAssignedStudentCount.GetSQLQuotedValueForAdd(),
+                        paramSCADWAREAccessCount.GetSQLQuotedValueForAdd(),
+                        paramSCADWAREAccessThreshold.GetSQLQuotedValueForAdd(),
+                        paramAverageTermBill.GetSQLQuotedValueForAdd(),
+                        paramRatePerStudent.GetSQLQuotedValueForAdd(),
+                        paramBilledPerStudent.GetSQLQuotedValueForAdd(),
+                        paramTotalReceivedOnSCADWAREBill.GetSQLQuotedValueForAdd(),
+                        paramMinimumExpectedOnSCADWAREBill.GetSQLQuotedValueForAdd(),
+                        paramExpectedOnSCADWAREBill.GetSQLQuotedValueForAdd(),
+                        paramIPAddress.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramFullScholarshipStudentCount.GetSQLQuotedValueForAdd(),
+                        paramTermStartDate.GetSQLQuotedValueForAdd(),
+                        paramTermEndDate.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int ClientID,
             int TermID,
@@ -390,10 +469,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             DateTime CreatedAt,
             int? FullScholarshipStudentCount = null,
             DateTime? TermStartDate = null,
-            DateTime? TermEndDate = null
+            DateTime? TermEndDate = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramClientID = new (defClientID, ClientID);
@@ -414,9 +492,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramTermStartDate = new (defTermStartDate, TermStartDate);
                 DataColumnParameter paramTermEndDate = new (defTermEndDate, TermEndDate);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[TermID],[RegisteredStudentCount],[AssignedStudentCount],[SCADWAREAccessCount],[SCADWAREAccessThreshold],[AverageTermBill],[RatePerStudent],[BilledPerStudent],[TotalReceivedOnSCADWAREBill],[MinimumExpectedOnSCADWAREBill],[ExpectedOnSCADWAREBill],[IPAddress],[CreatedAt],[FullScholarshipStudentCount],[TermStartDate],[TermEndDate]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[TermID],[RegisteredStudentCount],[AssignedStudentCount],[SCADWAREAccessCount],[SCADWAREAccessThreshold],[AverageTermBill],[RatePerStudent],[BilledPerStudent],[TotalReceivedOnSCADWAREBill],[MinimumExpectedOnSCADWAREBill],[ExpectedOnSCADWAREBill],[IPAddress],[CreatedAt],[FullScholarshipStudentCount],[TermStartDate],[TermEndDate]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramClientID.GetSQLQuotedValueForAdd(),
                         paramTermID.GetSQLQuotedValueForAdd(),
@@ -434,16 +516,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramCreatedAt.GetSQLQuotedValueForAdd(),
                         paramFullScholarshipStudentCount.GetSQLQuotedValueForAdd(),
                         paramTermStartDate.GetSQLQuotedValueForAdd(),
-                        paramTermEndDate.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramTermEndDate.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

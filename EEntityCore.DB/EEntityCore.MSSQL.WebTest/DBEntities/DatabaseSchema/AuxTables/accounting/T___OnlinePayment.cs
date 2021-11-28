@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -340,7 +342,72 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int PaymentID,
+            DateTime TransactionDate,
+            string Channel,
+            string IpAddress,
+            decimal GatewayCharges,
+            string GatewayLogReference,
+            string Gateway,
+            decimal PlatformCharges,
+            decimal GatewayAmountReceived,
+            decimal PlatformAmountReceived,
+            DateTime CreatedAt,
+            string GatewayChargesExplaination = null,
+            string PlatformChargesExplaination = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramPaymentID = new (defPaymentID, PaymentID);
+                DataColumnParameter paramTransactionDate = new (defTransactionDate, TransactionDate);
+                DataColumnParameter paramChannel = new (defChannel, Channel);
+                DataColumnParameter paramIpAddress = new (defIpAddress, IpAddress);
+                DataColumnParameter paramGatewayCharges = new (defGatewayCharges, GatewayCharges);
+                DataColumnParameter paramGatewayLogReference = new (defGatewayLogReference, GatewayLogReference);
+                DataColumnParameter paramGateway = new (defGateway, Gateway);
+                DataColumnParameter paramPlatformCharges = new (defPlatformCharges, PlatformCharges);
+                DataColumnParameter paramGatewayAmountReceived = new (defGatewayAmountReceived, GatewayAmountReceived);
+                DataColumnParameter paramPlatformAmountReceived = new (defPlatformAmountReceived, PlatformAmountReceived);
+                DataColumnParameter paramGatewayChargesExplaination = new (defGatewayChargesExplaination, GatewayChargesExplaination);
+                DataColumnParameter paramPlatformChargesExplaination = new (defPlatformChargesExplaination, PlatformChargesExplaination);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  ", TABLE_NAME,
+                        paramPaymentID.GetSQLQuotedValueForAdd(),
+                        paramTransactionDate.GetSQLQuotedValueForAdd(),
+                        paramChannel.GetSQLQuotedValueForAdd(),
+                        paramIpAddress.GetSQLQuotedValueForAdd(),
+                        paramGatewayCharges.GetSQLQuotedValueForAdd(),
+                        paramGatewayLogReference.GetSQLQuotedValueForAdd(),
+                        paramGateway.GetSQLQuotedValueForAdd(),
+                        paramPlatformCharges.GetSQLQuotedValueForAdd(),
+                        paramGatewayAmountReceived.GetSQLQuotedValueForAdd(),
+                        paramPlatformAmountReceived.GetSQLQuotedValueForAdd(),
+                        paramGatewayChargesExplaination.GetSQLQuotedValueForAdd(),
+                        paramPlatformChargesExplaination.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int PaymentID,
             DateTime TransactionDate,
@@ -354,10 +421,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             decimal PlatformAmountReceived,
             DateTime CreatedAt,
             string GatewayChargesExplaination = null,
-            string PlatformChargesExplaination = null
+            string PlatformChargesExplaination = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramPaymentID = new (defPaymentID, PaymentID);
@@ -374,9 +440,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramPlatformChargesExplaination = new (defPlatformChargesExplaination, PlatformChargesExplaination);
                 DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramPaymentID.GetSQLQuotedValueForAdd(),
                         paramTransactionDate.GetSQLQuotedValueForAdd(),
@@ -390,16 +460,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramPlatformAmountReceived.GetSQLQuotedValueForAdd(),
                         paramGatewayChargesExplaination.GetSQLQuotedValueForAdd(),
                         paramPlatformChargesExplaination.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

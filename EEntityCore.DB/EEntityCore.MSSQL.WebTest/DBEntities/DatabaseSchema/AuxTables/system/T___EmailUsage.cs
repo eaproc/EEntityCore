@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -327,7 +329,69 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            bool Delivered,
+            string Sender,
+            string Receiver,
+            string Subject,
+            string MessageBodyFileName,
+            DateTime CreatedAt,
+            string Gateway,
+            string BCC = null,
+            string CC = null,
+            DateTime? UpdatedAt = null,
+            string ExceptionMessage = null,
+            string ExceptionStackTrace = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramDelivered = new (defDelivered, Delivered);
+                DataColumnParameter paramSender = new (defSender, Sender);
+                DataColumnParameter paramReceiver = new (defReceiver, Receiver);
+                DataColumnParameter paramBCC = new (defBCC, BCC);
+                DataColumnParameter paramCC = new (defCC, CC);
+                DataColumnParameter paramSubject = new (defSubject, Subject);
+                DataColumnParameter paramMessageBodyFileName = new (defMessageBodyFileName, MessageBodyFileName);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramExceptionMessage = new (defExceptionMessage, ExceptionMessage);
+                DataColumnParameter paramExceptionStackTrace = new (defExceptionStackTrace, ExceptionStackTrace);
+                DataColumnParameter paramGateway = new (defGateway, Gateway);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  ", TABLE_NAME,
+                        paramDelivered.GetSQLQuotedValueForAdd(),
+                        paramSender.GetSQLQuotedValueForAdd(),
+                        paramReceiver.GetSQLQuotedValueForAdd(),
+                        paramBCC.GetSQLQuotedValueForAdd(),
+                        paramCC.GetSQLQuotedValueForAdd(),
+                        paramSubject.GetSQLQuotedValueForAdd(),
+                        paramMessageBodyFileName.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramExceptionMessage.GetSQLQuotedValueForAdd(),
+                        paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
+                        paramGateway.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             bool Delivered,
             string Sender,
@@ -340,10 +404,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             string CC = null,
             DateTime? UpdatedAt = null,
             string ExceptionMessage = null,
-            string ExceptionStackTrace = null
+            string ExceptionStackTrace = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramDelivered = new (defDelivered, Delivered);
@@ -359,9 +422,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramExceptionStackTrace = new (defExceptionStackTrace, ExceptionStackTrace);
                 DataColumnParameter paramGateway = new (defGateway, Gateway);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Delivered],[Sender],[Receiver],[BCC],[CC],[Subject],[MessageBodyFileName],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramDelivered.GetSQLQuotedValueForAdd(),
                         paramSender.GetSQLQuotedValueForAdd(),
@@ -374,16 +441,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramUpdatedAt.GetSQLQuotedValueForAdd(),
                         paramExceptionMessage.GetSQLQuotedValueForAdd(),
                         paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
-                        paramGateway.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramGateway.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

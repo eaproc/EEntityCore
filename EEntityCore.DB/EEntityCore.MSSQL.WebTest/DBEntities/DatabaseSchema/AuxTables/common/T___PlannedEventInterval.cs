@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -288,16 +290,56 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int PlannedEventID,
+            int DayOfWeekID,
+            DateTime StartTime,
+            DateTime EndTime,
+            DateTime CreatedAt,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramPlannedEventID = new (defPlannedEventID, PlannedEventID);
+                DataColumnParameter paramDayOfWeekID = new (defDayOfWeekID, DayOfWeekID);
+                DataColumnParameter paramStartTime = new (defStartTime, StartTime);
+                DataColumnParameter paramEndTime = new (defEndTime, EndTime);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([PlannedEventID],[DayOfWeekID],[StartTime],[EndTime],[CreatedAt]) VALUES({1},{2},{3},{4},{5})  ", TABLE_NAME,
+                        paramPlannedEventID.GetSQLQuotedValueForAdd(),
+                        paramDayOfWeekID.GetSQLQuotedValueForAdd(),
+                        paramStartTime.GetSQLQuotedValueForAdd(),
+                        paramEndTime.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int PlannedEventID,
             int DayOfWeekID,
             DateTime StartTime,
             DateTime EndTime,
-            DateTime CreatedAt
+            DateTime CreatedAt,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramPlannedEventID = new (defPlannedEventID, PlannedEventID);
@@ -306,24 +348,24 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramEndTime = new (defEndTime, EndTime);
                 DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PlannedEventID],[DayOfWeekID],[StartTime],[EndTime],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PlannedEventID],[DayOfWeekID],[StartTime],[EndTime],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramPlannedEventID.GetSQLQuotedValueForAdd(),
                         paramDayOfWeekID.GetSQLQuotedValueForAdd(),
                         paramStartTime.GetSQLQuotedValueForAdd(),
                         paramEndTime.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

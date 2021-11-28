@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -318,7 +320,63 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int UserID,
+            string Title,
+            DateTime CreatedAt,
+            string TargetURL,
+            string QuickNote = null,
+            string Description = null,
+            string IconClass = null,
+            string HeadingColorClass = null,
+            DateTime? ReadAt = null,
+            string Identifier = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramUserID = new (defUserID, UserID);
+                DataColumnParameter paramTitle = new (defTitle, Title);
+                DataColumnParameter paramQuickNote = new (defQuickNote, QuickNote);
+                DataColumnParameter paramDescription = new (defDescription, Description);
+                DataColumnParameter paramIconClass = new (defIconClass, IconClass);
+                DataColumnParameter paramHeadingColorClass = new (defHeadingColorClass, HeadingColorClass);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramReadAt = new (defReadAt, ReadAt);
+                DataColumnParameter paramIdentifier = new (defIdentifier, Identifier);
+                DataColumnParameter paramTargetURL = new (defTargetURL, TargetURL);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([UserID],[Title],[QuickNote],[Description],[IconClass],[HeadingColorClass],[CreatedAt],[ReadAt],[Identifier],[TargetURL]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  ", TABLE_NAME,
+                        paramUserID.GetSQLQuotedValueForAdd(),
+                        paramTitle.GetSQLQuotedValueForAdd(),
+                        paramQuickNote.GetSQLQuotedValueForAdd(),
+                        paramDescription.GetSQLQuotedValueForAdd(),
+                        paramIconClass.GetSQLQuotedValueForAdd(),
+                        paramHeadingColorClass.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramReadAt.GetSQLQuotedValueForAdd(),
+                        paramIdentifier.GetSQLQuotedValueForAdd(),
+                        paramTargetURL.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int UserID,
             string Title,
@@ -329,10 +387,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             string IconClass = null,
             string HeadingColorClass = null,
             DateTime? ReadAt = null,
-            string Identifier = null
+            string Identifier = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramUserID = new (defUserID, UserID);
@@ -346,9 +403,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramIdentifier = new (defIdentifier, Identifier);
                 DataColumnParameter paramTargetURL = new (defTargetURL, TargetURL);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[Title],[QuickNote],[Description],[IconClass],[HeadingColorClass],[CreatedAt],[ReadAt],[Identifier],[TargetURL]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[Title],[QuickNote],[Description],[IconClass],[HeadingColorClass],[CreatedAt],[ReadAt],[Identifier],[TargetURL]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramUserID.GetSQLQuotedValueForAdd(),
                         paramTitle.GetSQLQuotedValueForAdd(),
@@ -359,16 +420,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramCreatedAt.GetSQLQuotedValueForAdd(),
                         paramReadAt.GetSQLQuotedValueForAdd(),
                         paramIdentifier.GetSQLQuotedValueForAdd(),
-                        paramTargetURL.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramTargetURL.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

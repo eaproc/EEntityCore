@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -360,7 +362,72 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int ClientID,
+            string BillDefinition,
+            decimal BillAmount,
+            decimal Total,
+            DateTime CreatedAt,
+            int CreatedByID,
+            bool CanBeDeleted,
+            int Quantity,
+            string IpAddress,
+            int TermID,
+            int OriginalBillID,
+            string BillDescription = null,
+            int? PaymentTransactionID = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramClientID = new (defClientID, ClientID);
+                DataColumnParameter paramBillDefinition = new (defBillDefinition, BillDefinition);
+                DataColumnParameter paramBillDescription = new (defBillDescription, BillDescription);
+                DataColumnParameter paramBillAmount = new (defBillAmount, BillAmount);
+                DataColumnParameter paramTotal = new (defTotal, Total);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramCanBeDeleted = new (defCanBeDeleted, CanBeDeleted);
+                DataColumnParameter paramQuantity = new (defQuantity, Quantity);
+                DataColumnParameter paramIpAddress = new (defIpAddress, IpAddress);
+                DataColumnParameter paramTermID = new (defTermID, TermID);
+                DataColumnParameter paramOriginalBillID = new (defOriginalBillID, OriginalBillID);
+                DataColumnParameter paramPaymentTransactionID = new (defPaymentTransactionID, PaymentTransactionID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  ", TABLE_NAME,
+                        paramClientID.GetSQLQuotedValueForAdd(),
+                        paramBillDefinition.GetSQLQuotedValueForAdd(),
+                        paramBillDescription.GetSQLQuotedValueForAdd(),
+                        paramBillAmount.GetSQLQuotedValueForAdd(),
+                        paramTotal.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramCanBeDeleted.GetSQLQuotedValueForAdd(),
+                        paramQuantity.GetSQLQuotedValueForAdd(),
+                        paramIpAddress.GetSQLQuotedValueForAdd(),
+                        paramTermID.GetSQLQuotedValueForAdd(),
+                        paramOriginalBillID.GetSQLQuotedValueForAdd(),
+                        paramPaymentTransactionID.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int ClientID,
             string BillDefinition,
@@ -374,10 +441,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             int TermID,
             int OriginalBillID,
             string BillDescription = null,
-            int? PaymentTransactionID = null
+            int? PaymentTransactionID = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramClientID = new (defClientID, ClientID);
@@ -394,9 +460,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramOriginalBillID = new (defOriginalBillID, OriginalBillID);
                 DataColumnParameter paramPaymentTransactionID = new (defPaymentTransactionID, PaymentTransactionID);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[BillDefinition],[BillDescription],[BillAmount],[Total],[CreatedAt],[CreatedByID],[CanBeDeleted],[Quantity],[IpAddress],[TermID],[OriginalBillID],[PaymentTransactionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramClientID.GetSQLQuotedValueForAdd(),
                         paramBillDefinition.GetSQLQuotedValueForAdd(),
@@ -410,16 +480,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramIpAddress.GetSQLQuotedValueForAdd(),
                         paramTermID.GetSQLQuotedValueForAdd(),
                         paramOriginalBillID.GetSQLQuotedValueForAdd(),
-                        paramPaymentTransactionID.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramPaymentTransactionID.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   

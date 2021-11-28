@@ -6,7 +6,9 @@ using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.MSSQL.Interfaces;                  
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
+using ELibrary.Standard.VB.Modules;                  
 using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
@@ -359,7 +361,72 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// </summary> 
         /// <returns>Boolean</returns> 
         /// <remarks></remarks> 
-        public static bool Add(
+        public static long InsertGetID(
+            int TermID,
+            decimal AmountCharged,
+            decimal DiscountGiven,
+            decimal DiscountRateApplied,
+            int PaymentChannelID,
+            int PaymentEntryModeID,
+            DateTime CreatedAt,
+            int CreatedByID,
+            string IpAddress,
+            decimal Total,
+            int ClientID,
+            string Comments = null,
+            string TransactionFileName = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramTermID = new (defTermID, TermID);
+                DataColumnParameter paramAmountCharged = new (defAmountCharged, AmountCharged);
+                DataColumnParameter paramDiscountGiven = new (defDiscountGiven, DiscountGiven);
+                DataColumnParameter paramDiscountRateApplied = new (defDiscountRateApplied, DiscountRateApplied);
+                DataColumnParameter paramPaymentChannelID = new (defPaymentChannelID, PaymentChannelID);
+                DataColumnParameter paramPaymentEntryModeID = new (defPaymentEntryModeID, PaymentEntryModeID);
+                DataColumnParameter paramComments = new (defComments, Comments);
+                DataColumnParameter paramTransactionFileName = new (defTransactionFileName, TransactionFileName);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramIpAddress = new (defIpAddress, IpAddress);
+                DataColumnParameter paramTotal = new (defTotal, Total);
+                DataColumnParameter paramClientID = new (defClientID, ClientID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+            {                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([TermID],[AmountCharged],[DiscountGiven],[DiscountRateApplied],[PaymentChannelID],[PaymentEntryModeID],[Comments],[TransactionFileName],[CreatedAt],[CreatedByID],[IpAddress],[Total],[ClientID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  ", TABLE_NAME,
+                        paramTermID.GetSQLQuotedValueForAdd(),
+                        paramAmountCharged.GetSQLQuotedValueForAdd(),
+                        paramDiscountGiven.GetSQLQuotedValueForAdd(),
+                        paramDiscountRateApplied.GetSQLQuotedValueForAdd(),
+                        paramPaymentChannelID.GetSQLQuotedValueForAdd(),
+                        paramPaymentEntryModeID.GetSQLQuotedValueForAdd(),
+                        paramComments.GetSQLQuotedValueForAdd(),
+                        paramTransactionFileName.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramIpAddress.GetSQLQuotedValueForAdd(),
+                        paramTotal.GetSQLQuotedValueForAdd(),
+                        paramClientID.GetSQLQuotedValueForAdd()                        )
+                    );
+                         
+                return conn.GetScopeIdentity().ToLong();
+            });
+
+        }                  
+
+
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool AddWithID(
             int ID,
             int TermID,
             decimal AmountCharged,
@@ -373,10 +440,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             decimal Total,
             int ClientID,
             string Comments = null,
-            string TransactionFileName = null
+            string TransactionFileName = null,
+            DBTransaction transaction = null
           ){
-
-            try{
 
                 DataColumnParameter paramID = new (defID, ID);
                 DataColumnParameter paramTermID = new (defTermID, TermID);
@@ -393,9 +459,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 DataColumnParameter paramTotal = new (defTotal, Total);
                 DataColumnParameter paramClientID = new (defClientID, ClientID);
 
-
-                return DBConnectInterface.GetDBConn().DbExec(
-     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[AmountCharged],[DiscountGiven],[DiscountRateApplied],[PaymentChannelID],[PaymentEntryModeID],[Comments],[TransactionFileName],[CreatedAt],[CreatedByID],[IpAddress],[Total],[ClientID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) =>                   
+                      conn.ExecuteTransactionQuery(                  
+                    string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TermID],[AmountCharged],[DiscountGiven],[DiscountRateApplied],[PaymentChannelID],[PaymentEntryModeID],[Comments],[TransactionFileName],[CreatedAt],[CreatedByID],[IpAddress],[Total],[ClientID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
                         paramID.GetSQLQuotedValueForAdd(),
                         paramTermID.GetSQLQuotedValueForAdd(),
                         paramAmountCharged.GetSQLQuotedValueForAdd(),
@@ -409,16 +479,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                         paramCreatedByID.GetSQLQuotedValueForAdd(),
                         paramIpAddress.GetSQLQuotedValueForAdd(),
                         paramTotal.GetSQLQuotedValueForAdd(),
-                        paramClientID.GetSQLQuotedValueForAdd()                        ) 
-                      );
-
-
-                  
-                  
-            }catch (Exception){                  
-                throw;                   
-            }                  
+                        paramClientID.GetSQLQuotedValueForAdd()                        )
+                    ).ToBoolean() 
+               );
         }                  
+
+
 
 
                   
