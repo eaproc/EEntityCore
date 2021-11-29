@@ -7,7 +7,7 @@ using EEntityCore.DB.MSSQL.Interfaces;
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
 using ELibrary.Standard.VB.Modules;                  
-using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL.Schemas;                  
 using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
@@ -25,24 +25,24 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___ClientStats()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defClientID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClientID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defTermID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defRegisteredStudentCount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RegisteredStudentCount.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAssignedStudentCount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AssignedStudentCount.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSCADWAREAccessCount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SCADWAREAccessCount.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defSCADWAREAccessThreshold = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.SCADWAREAccessThreshold.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAverageTermBill = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AverageTermBill.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defRatePerStudent = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.RatePerStudent.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defBilledPerStudent = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.BilledPerStudent.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTotalReceivedOnSCADWAREBill = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TotalReceivedOnSCADWAREBill.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defMinimumExpectedOnSCADWAREBill = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.MinimumExpectedOnSCADWAREBill.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defExpectedOnSCADWAREBill = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ExpectedOnSCADWAREBill.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIPAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IPAddress.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFullScholarshipStudentCount = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FullScholarshipStudentCount.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTermStartDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermStartDate.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTermEndDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TermEndDate.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defClientID = new DataColumnDefinition(TableColumnNames.ClientID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defTermID = new DataColumnDefinition(TableColumnNames.TermID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defRegisteredStudentCount = new DataColumnDefinition(TableColumnNames.RegisteredStudentCount.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAssignedStudentCount = new DataColumnDefinition(TableColumnNames.AssignedStudentCount.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSCADWAREAccessCount = new DataColumnDefinition(TableColumnNames.SCADWAREAccessCount.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defSCADWAREAccessThreshold = new DataColumnDefinition(TableColumnNames.SCADWAREAccessThreshold.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAverageTermBill = new DataColumnDefinition(TableColumnNames.AverageTermBill.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defRatePerStudent = new DataColumnDefinition(TableColumnNames.RatePerStudent.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defBilledPerStudent = new DataColumnDefinition(TableColumnNames.BilledPerStudent.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTotalReceivedOnSCADWAREBill = new DataColumnDefinition(TableColumnNames.TotalReceivedOnSCADWAREBill.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defMinimumExpectedOnSCADWAREBill = new DataColumnDefinition(TableColumnNames.MinimumExpectedOnSCADWAREBill.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defExpectedOnSCADWAREBill = new DataColumnDefinition(TableColumnNames.ExpectedOnSCADWAREBill.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIPAddress = new DataColumnDefinition(TableColumnNames.IPAddress.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFullScholarshipStudentCount = new DataColumnDefinition(TableColumnNames.FullScholarshipStudentCount.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTermStartDate = new DataColumnDefinition(TableColumnNames.TermStartDate.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTermEndDate = new DataColumnDefinition(TableColumnNames.TermEndDate.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 

@@ -7,7 +7,7 @@ using EEntityCore.DB.MSSQL.Interfaces;
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
 using ELibrary.Standard.VB.Modules;                  
-using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL.Schemas;                  
 using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
@@ -25,20 +25,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___OnlinePayment()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defPaymentID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defTransactionDate = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TransactionDate.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defChannel = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Channel.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defIpAddress = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IpAddress.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGatewayCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.GatewayCharges.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGatewayLogReference = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.GatewayLogReference.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGateway = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Gateway.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPlatformCharges = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PlatformCharges.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGatewayAmountReceived = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.GatewayAmountReceived.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPlatformAmountReceived = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PlatformAmountReceived.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defGatewayChargesExplaination = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.GatewayChargesExplaination.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPlatformChargesExplaination = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PlatformChargesExplaination.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defPaymentID = new DataColumnDefinition(TableColumnNames.PaymentID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defTransactionDate = new DataColumnDefinition(TableColumnNames.TransactionDate.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defChannel = new DataColumnDefinition(TableColumnNames.Channel.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defIpAddress = new DataColumnDefinition(TableColumnNames.IpAddress.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGatewayCharges = new DataColumnDefinition(TableColumnNames.GatewayCharges.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGatewayLogReference = new DataColumnDefinition(TableColumnNames.GatewayLogReference.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGateway = new DataColumnDefinition(TableColumnNames.Gateway.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPlatformCharges = new DataColumnDefinition(TableColumnNames.PlatformCharges.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGatewayAmountReceived = new DataColumnDefinition(TableColumnNames.GatewayAmountReceived.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPlatformAmountReceived = new DataColumnDefinition(TableColumnNames.PlatformAmountReceived.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defGatewayChargesExplaination = new DataColumnDefinition(TableColumnNames.GatewayChargesExplaination.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPlatformChargesExplaination = new DataColumnDefinition(TableColumnNames.PlatformChargesExplaination.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 

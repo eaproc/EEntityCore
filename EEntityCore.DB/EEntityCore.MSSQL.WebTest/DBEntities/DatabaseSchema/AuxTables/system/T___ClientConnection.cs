@@ -7,7 +7,7 @@ using EEntityCore.DB.MSSQL.Interfaces;
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
 using ELibrary.Standard.VB.Modules;                  
-using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL.Schemas;                  
 using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
@@ -25,22 +25,22 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___ClientConnection()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defClientID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClientID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
-          defFileServerUrl = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FileServerUrl.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFileServerAccessKey = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FileServerAccessKey.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFileServerSecretKey = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FileServerSecretKey.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFileServerBucket = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FileServerBucket.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defClientAPIID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClientAPIID.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defClientAPIUrl = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ClientAPIUrl.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDB_HOST = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DB_HOST.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDB_DATABASE = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DB_DATABASE.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDB_USERNAME = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DB_USERNAME.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDB_PASSWORD = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DB_PASSWORD.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defDB_PORT = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.DB_PORT.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defFileServerUrlHttps = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.FileServerUrlHttps.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defClientID = new DataColumnDefinition(TableColumnNames.ClientID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNIQUE);
+          defFileServerUrl = new DataColumnDefinition(TableColumnNames.FileServerUrl.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFileServerAccessKey = new DataColumnDefinition(TableColumnNames.FileServerAccessKey.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFileServerSecretKey = new DataColumnDefinition(TableColumnNames.FileServerSecretKey.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFileServerBucket = new DataColumnDefinition(TableColumnNames.FileServerBucket.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defClientAPIID = new DataColumnDefinition(TableColumnNames.ClientAPIID.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defClientAPIUrl = new DataColumnDefinition(TableColumnNames.ClientAPIUrl.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDB_HOST = new DataColumnDefinition(TableColumnNames.DB_HOST.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDB_DATABASE = new DataColumnDefinition(TableColumnNames.DB_DATABASE.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDB_USERNAME = new DataColumnDefinition(TableColumnNames.DB_USERNAME.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDB_PASSWORD = new DataColumnDefinition(TableColumnNames.DB_PASSWORD.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defDB_PORT = new DataColumnDefinition(TableColumnNames.DB_PORT.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defFileServerUrlHttps = new DataColumnDefinition(TableColumnNames.FileServerUrlHttps.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 

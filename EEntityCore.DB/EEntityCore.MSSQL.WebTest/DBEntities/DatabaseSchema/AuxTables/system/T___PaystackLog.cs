@@ -7,7 +7,7 @@ using EEntityCore.DB.MSSQL.Interfaces;
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
 using ELibrary.Standard.VB.Modules;                  
-using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL.Schemas;                  
 using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
@@ -25,20 +25,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___PaystackLog()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defPaymentGatewayStatusID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentGatewayStatusID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defIsFinalized = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.IsFinalized.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defInitializedByUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.InitializedByUserID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defReference = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.Reference.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAccessCode = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AccessCode.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defInitialLizeURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.InitialLizeURL.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defPaymentURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.PaymentURL.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defVerifiyURL = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.VerifiyURL.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defAmountKobo = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.AmountKobo.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defVerifyResponseJSON = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.VerifyResponseJSON.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defVerifiedByUserID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.VerifiedByUserID.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.FOREIGN);
-          defCreatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defUpdatedAt = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defPaymentGatewayStatusID = new DataColumnDefinition(TableColumnNames.PaymentGatewayStatusID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defIsFinalized = new DataColumnDefinition(TableColumnNames.IsFinalized.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defInitializedByUserID = new DataColumnDefinition(TableColumnNames.InitializedByUserID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defReference = new DataColumnDefinition(TableColumnNames.Reference.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAccessCode = new DataColumnDefinition(TableColumnNames.AccessCode.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defInitialLizeURL = new DataColumnDefinition(TableColumnNames.InitialLizeURL.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defPaymentURL = new DataColumnDefinition(TableColumnNames.PaymentURL.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defVerifiyURL = new DataColumnDefinition(TableColumnNames.VerifiyURL.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defAmountKobo = new DataColumnDefinition(TableColumnNames.AmountKobo.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defVerifyResponseJSON = new DataColumnDefinition(TableColumnNames.VerifyResponseJSON.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defVerifiedByUserID = new DataColumnDefinition(TableColumnNames.VerifiedByUserID.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.FOREIGN);
+          defCreatedAt = new DataColumnDefinition(TableColumnNames.CreatedAt.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defUpdatedAt = new DataColumnDefinition(TableColumnNames.UpdatedAt.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 

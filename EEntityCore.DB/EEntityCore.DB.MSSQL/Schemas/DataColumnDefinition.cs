@@ -1,19 +1,19 @@
 using System;
 
-namespace EEntityCore.DB.Schemas.SQLServerSchema
+namespace EEntityCore.DB.MSSQL.Schemas
 {
     public class DataColumnDefinition
     {
 
         #region Constructors
         public DataColumnDefinition(
-            IDatabaseInit pointerDatabaseInit,
+            //IDatabaseInit pointerDatabaseInit,
             string pColumnName, Type pDataType, 
             bool pNullable, 
             ConstraintTypes pConstraintType = ConstraintTypes.UNKNOWN
             )
         {
-            this.PointerDatabaseInit = pointerDatabaseInit;
+            //this.PointerDatabaseInit = pointerDatabaseInit;
             vNullable = pNullable;
             vDataType = pDataType;
             vColumnName = pColumnName;
@@ -25,9 +25,9 @@ namespace EEntityCore.DB.Schemas.SQLServerSchema
 
         #region Properties
 
-        // This part should adjust after it has been moved to MSSQL
-        private IDatabaseInit PointerDatabaseInit { get; }
-        public IDatabaseInit DatabaseInit { get { return PointerDatabaseInit.GetDatabaseInit(); } }
+        //// This part should adjust after it has been moved to MSSQL
+        //private IDatabaseInit PointerDatabaseInit { get; }
+        //public IDatabaseInit DatabaseInit { get { return PointerDatabaseInit.GetDatabaseInit(); } }
 
         private string vColumnName;
         private Type vDataType;

@@ -1,8 +1,6 @@
-using EEntityCore.DB.Interfaces;
 using EEntityCore.DB.MSSQL;
-using EEntityCore.DB.Schemas.SQLServerSchema;
+using EEntityCore.DB.MSSQL.Schemas;
 using System;
-using System.Data;
 
 namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
 {
@@ -114,14 +112,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
         /// Returns new connection on each call
         /// </summary>
         /// <returns></returns>
-        public Server GetDBConn()
+        public MsSQLDB GetDBConn()
         {
-            return (Server)this.GetAllDBConn();
-        }
-
-        public IAll__DBs GetAllDBConn()
-        {
-            return new Client(ServerIPAddressOrName(), ServerPort(), DBUserName(), DBUserPassword(), DBName());
+            return new MsSQLDB(ServerIPAddressOrName(), ServerPort(), DBUserName(), DBUserPassword(), DBName());
         }
 
         //public int Execute(string Query, DBTransaction transaction = null)

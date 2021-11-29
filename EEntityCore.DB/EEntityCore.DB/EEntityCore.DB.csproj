@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Schemas\**" />
+    <EmbeddedResource Remove="Schemas\**" />
+    <None Remove="Schemas\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Abstracts\All__DBs.vb" />
     <None Remove="Abstracts\Sample__Table.vb" />
     <None Remove="Abstracts\SimpleTablePlugIn.vb" />

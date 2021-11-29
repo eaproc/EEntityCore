@@ -3,7 +3,7 @@ using ELibrary.Standard.VB.Modules;
 using ELibrary.Standard.VB.Objects;
 using ELibrary.Standard.VB.Types;
 
-namespace EEntityCore.DB.Schemas.SQLServerSchema
+namespace EEntityCore.DB.MSSQL.Schemas
 {
 
     /// <summary>

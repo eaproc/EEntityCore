@@ -7,7 +7,7 @@ using EEntityCore.DB.MSSQL.Interfaces;
 using ELibrary.Standard.VB.Objects;                  
 using ELibrary.Standard.VB.Types;                  
 using ELibrary.Standard.VB.Modules;                  
-using EEntityCore.DB.Schemas.SQLServerSchema;                  
+using EEntityCore.DB.MSSQL.Schemas;                  
 using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
 using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
@@ -25,17 +25,17 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        static T___TestTable()                  
         {                  
           ColumnDefns = new Dictionary<string, DataColumnDefinition>();                  
-          defID = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
-          defTestString = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestString.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestStringNull = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestStringNull.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestInt32 = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestInt32.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestInt32Null = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestInt32Null.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestBool = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestBool.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestBoolNull = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestBoolNull.ToString(), typeof(bool?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestDecimal = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestDecimal.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestDecimalNull = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestDecimalNull.ToString(), typeof(decimal?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestDateTime = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestDateTime.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
-          defTestDateTimeNull = new DataColumnDefinition(new DatabaseInit(),TableColumnNames.TestDateTimeNull.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defID = new DataColumnDefinition(TableColumnNames.ID.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.PRIMARY);
+          defTestString = new DataColumnDefinition(TableColumnNames.TestString.ToString(), typeof(string),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestStringNull = new DataColumnDefinition(TableColumnNames.TestStringNull.ToString(), typeof(string),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestInt32 = new DataColumnDefinition(TableColumnNames.TestInt32.ToString(), typeof(int),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestInt32Null = new DataColumnDefinition(TableColumnNames.TestInt32Null.ToString(), typeof(int?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestBool = new DataColumnDefinition(TableColumnNames.TestBool.ToString(), typeof(bool),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestBoolNull = new DataColumnDefinition(TableColumnNames.TestBoolNull.ToString(), typeof(bool?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestDecimal = new DataColumnDefinition(TableColumnNames.TestDecimal.ToString(), typeof(decimal),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestDecimalNull = new DataColumnDefinition(TableColumnNames.TestDecimalNull.ToString(), typeof(decimal?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestDateTime = new DataColumnDefinition(TableColumnNames.TestDateTime.ToString(), typeof(DateTime),false, DataColumnDefinition.ConstraintTypes.UNKNOWN);
+          defTestDateTimeNull = new DataColumnDefinition(TableColumnNames.TestDateTimeNull.ToString(), typeof(DateTime?),true, DataColumnDefinition.ConstraintTypes.UNKNOWN);
 
 
           ColumnDefns.Add(defID.ColumnName, defID); 

@@ -1,21 +1,29 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Client\ConfigurableClient.cs" />
+    <Compile Remove="Client\**" />
+    <Compile Remove="Server\**" />
+    <EmbeddedResource Remove="Client\**" />
+    <EmbeddedResource Remove="Server\**" />
+    <None Remove="Client\**" />
+    <None Remove="Server\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Client\Client.vb" />
-    <None Remove="Client\ConfigurableClient.vb" />
+    <Compile Remove="Interfaces\ISQLServerDBPointer.cs" />
+    <Compile Remove="Program.cs" />
+    <Compile Remove="Schemas\ISQLServerDBPointer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Exceptions\SQLServerConnectionException.vb" />
     <None Remove="Interfaces\IDBTableDefinitionPlugIn.vb" />
     <None Remove="Interfaces\IDBViewDefinitionPlugIn.vb" />
     <None Remove="Interfaces\ISQLServerDBPointer.vb" />
-    <None Remove="Server\Server.vb" />
   </ItemGroup>
 
   <ItemGroup>

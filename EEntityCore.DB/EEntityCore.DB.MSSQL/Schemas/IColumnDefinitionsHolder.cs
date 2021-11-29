@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace EEntityCore.DB.Schemas.SQLServerSchema
+namespace EEntityCore.DB.MSSQL.Schemas
 {
     public interface IDataColumnDefinitionsHolder
     {

@@ -6,6 +6,7 @@ using System.Text;
 using CODERiT.Logger.Standard.VB.Exceptions;
 using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.Exceptions;
+using EEntityCore.DB.MSSQL.Exceptions;
 using ELibrary.Standard.VB;
 using ELibrary.Standard.VB.Modules;
 using ELibrary.Standard.VB.Objects;
@@ -21,7 +22,7 @@ namespace EEntityCore.DB.MSSQL
     /// Contains Basic Operations to perform when using MS SQL Server [2008] in your project as a Server/Standlone
     /// </summary>
     /// <remarks>I assume this is Local. On Local Connections</remarks>
-    public abstract partial class Server : All__DBs, IDisposable
+    public class MsSQLDB : All__DBs, IDisposable
     {
 
 
@@ -129,7 +130,7 @@ namespace EEntityCore.DB.MSSQL
         /// <param name="useDatabase"></param>
         /// <param name="pSQLServerFullAddress">Enter full instance name like pcName\SqlExpress2014</param>
         /// <remarks></remarks>
-        public Server(string useDatabase, string pSQLServerFullAddress)
+        public MsSQLDB(string useDatabase, string pSQLServerFullAddress)
         {
             CurrentDBInUse = useDatabase;
             __SQLServerAddress = pSQLServerFullAddress;
@@ -141,10 +142,25 @@ namespace EEntityCore.DB.MSSQL
         /// </summary>
         /// <param name="useDatabase">Database on MyPC\sqlexpress</param>
         /// <remarks></remarks>
-        public Server(string useDatabase) : this(useDatabase, @"localhost\sqlexpress")
+        public MsSQLDB(string useDatabase) : this(useDatabase, @"localhost\sqlexpress")
         {
         }
 
+
+        /// <summary>
+        /// Initialize Class With Necessary Parameters. It tries to connect immediately on constructor
+        /// </summary>
+        /// <param name="sAddress">IP or Name of Host PC on Network full instance name. like db.ciu.edu or 192.163.334.222\sqlexpress2014</param>
+        /// <param name="sUserName"></param>
+        /// <param name="sPassword"></param>
+        /// <remarks></remarks>
+        public MsSQLDB(string sAddress, int sPort, string sUserName, string sPassword, string sDatabase) : this(sDatabase)
+        {
+            __SQLServerAddress = sAddress;
+            __SQLServerUserName = sUserName;
+            __SQLServerPassword = sPassword;
+            __SQLServerPort = sPort;
+        }
 
 
         #endregion
@@ -229,14 +245,48 @@ namespace EEntityCore.DB.MSSQL
 
         #region dbExec and getRS
 
+        /// <summary>
+        /// Using SQL Default Path 
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        public SqlConnection GetSQLConnection()
+        {
+            Microsoft.Data.SqlClient.SqlConnection sCon;
+            try
+            {
+                // 'sCon = New SqlClient.SqlConnection(
+                // '    "Data Source=" & svrServer & ";Initial Catalog=" & dbName &
+                // '    ";Integrated Security=True;User ID=" & strUser & ";Password=" & strPassword)
+
+
+                sCon = new SqlConnection(GetConnectionString());
+                sCon.Open();
+            }
+
+            // sCon.Close()
+
+            catch (Exception ex)
+            {
+                throw new SQLServerConnectionException("Error Connecting to MS SQL Server From Client", GetConnectionString(), ex);
+            }
+
+            return sCon;
+        }
+
+
 
         /// <summary>
         /// Using SQL Default Path and DB 
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
-        public abstract Microsoft.Data.SqlClient.SqlConnection GetSQLConnection();
-       
+        public string GetConnectionString()
+        {
+            return string.Format("Data Source={0},{1};Integrated Security=False;Initial Catalog={2};TrustServerCertificate=True;User ID={3};Password={4};",
+                SQLServerAddress, SQLServerPort, CurrentDBInUse, SQLServerUserName, SQLServerPassword);
+        }
+
 
 
         /// <summary>
@@ -1316,6 +1366,10 @@ namespace EEntityCore.DB.MSSQL
 
         #endregion
 
+        public override bool ExecuteSQLFile(string SQLFileName, bool TerminateOnError = false, string StatementDelimiter = "GO;")
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }
