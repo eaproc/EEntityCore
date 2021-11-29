@@ -195,8 +195,8 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
  #region Consts and Enums                       
 
        public const string TABLE_NAME = "accounting.ActiveTermInvoiceGuide";
-       public const string ActiveTermInvoiceGuide__NO__BINARY___SQL_FILL_QUERY = "SELECT [CompanyName], [TermStartDate], [CurrentWeek], [FirstBillDeadline], [SecondBillDeadline], [TermEndDate], [RatePerStudent], [BilledRatePerStudent], [BillableStudentCount], [ExpectedMinimumBillable], [ExpectedTotalBillable], [BilledAmount], [Balance], [ClientID], [RegisteredStudentCount], [FullScholarshipStudentCount] FROM ActiveTermInvoiceGuide";
-       public const string ActiveTermInvoiceGuide__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [CompanyName], [TermStartDate], [CurrentWeek], [FirstBillDeadline], [SecondBillDeadline], [TermEndDate], [RatePerStudent], [BilledRatePerStudent], [BillableStudentCount], [ExpectedMinimumBillable], [ExpectedTotalBillable], [BilledAmount], [Balance], [ClientID], [RegisteredStudentCount], [FullScholarshipStudentCount] FROM ActiveTermInvoiceGuide";
+       public const string ActiveTermInvoiceGuide__NO__BINARY___SQL_FILL_QUERY = "SELECT [CompanyName], [TermStartDate], [CurrentWeek], [FirstBillDeadline], [SecondBillDeadline], [TermEndDate], [RatePerStudent], [BilledRatePerStudent], [BillableStudentCount], [ExpectedMinimumBillable], [ExpectedTotalBillable], [BilledAmount], [Balance], [ClientID], [RegisteredStudentCount], [FullScholarshipStudentCount] FROM accounting.ActiveTermInvoiceGuide";
+       public const string ActiveTermInvoiceGuide__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [CompanyName], [TermStartDate], [CurrentWeek], [FirstBillDeadline], [SecondBillDeadline], [TermEndDate], [RatePerStudent], [BilledRatePerStudent], [BillableStudentCount], [ExpectedMinimumBillable], [ExpectedTotalBillable], [BilledAmount], [Balance], [ClientID], [RegisteredStudentCount], [FullScholarshipStudentCount] FROM accounting.ActiveTermInvoiceGuide";
 
 
        public enum TableColumnNames
@@ -300,32 +300,41 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
  #endregion
 
- #region Methods                                    
-                                    
+ #region Methods                                                      
                                                       
-        /// <summary>                                                                                           
-        /// Returns null on failure                                                                                           
-        /// </summary>                                                                                           
-        /// <returns></returns>                                                                                           
-        /// <remarks></remarks>                                                      
-        public V___ActiveTermInvoiceGuide GetFirstRow()                                                      
-        {                                                      
-            if (this.HasRows())                                                      
-                return new (AllRows.First());                                                      
-            return null;                                                      
-        }                                                      
+                                                                        
+        /// <summary>                                                                                                             
+        /// Returns null on failure                                                                                                             
+        /// </summary>                                                                                                             
+        /// <returns></returns>                                                                                                             
+        /// <remarks></remarks>                                                                        
+        public V___ActiveTermInvoiceGuide GetFirstRow()                                                                        
+        {                                                                        
+            if (this.HasRows())                                                                        
+                return new (AllRows.First());                                                                        
+            return null;                                                                        
+        }                                                                        
+                                                                        
+        public static V___ActiveTermInvoiceGuide GetFullTable(DBTransaction transaction = null) =>                   
+            TransactionRunner.InvokeRun( (conn) =>                  
+                new V___ActiveTermInvoiceGuide(conn.Fetch(ActiveTermInvoiceGuide__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                transaction                  
+                );                                                      
                                                       
-        public static V___ActiveTermInvoiceGuide GetFullTable() => new(DBConnectInterface.GetDBConn());                                    
-                                    
-        public static V___ActiveTermInvoiceGuide GetRowWhereIDUsingSQL(int pID)                                                      
-        {                                                      
-            return new V___ActiveTermInvoiceGuide(DBConnectInterface.GetDBConn(), string.Format("SELECT * FROM {0} WHERE ID={1}", pID, TABLE_NAME)).GetFirstRow();                                                      
-        }                                                      
+        public static V___ActiveTermInvoiceGuide GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        {                  
+            return TransactionRunner.InvokeRun(                  
+                (conn) =>                   
+                new V___ActiveTermInvoiceGuide( conn.Fetch($"SELECT * FROM {TABLE_NAME} WHERE ID={pID}" ).FirstTable(), pID ),                  
+                transaction                  
+                );                  
+        }                                                                        
+                                                                        
+        public V___ActiveTermInvoiceGuide GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
                                                       
-        public V___ActiveTermInvoiceGuide GetRowWhereID(int pID) => new(this.RawTable, pID);                                    
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
+                                            
                                     
-        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                           
-                          
                   
         public virtual string GetFillSQL() => ActiveTermInvoiceGuide__NO__BINARY___SQL_FILL_QUERY;
                   

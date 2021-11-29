@@ -206,8 +206,8 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
  #region Consts and Enums                       
 
        public const string TABLE_NAME = "hr.PersonnelView";
-       public const string PersonnelView__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [PersonnelNumber], [PersonID], [IsActive], [EmploymentDate], [IsSuperUser], [PositionID], [SalaryTypeID], [SalaryAmount], [CreatedByID], [UpdatedByID], [CreatedAt], [UpdatedAt], [Duties], [IsWebVisible], [FullName], [FirstName], [LastName], [PictureFileName], [BankName], [BankID], [AccountNumber] FROM PersonnelView";
-       public const string PersonnelView__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [ID], [PersonnelNumber], [PersonID], [IsActive], [EmploymentDate], [IsSuperUser], [PositionID], [SalaryTypeID], [SalaryAmount], [CreatedByID], [UpdatedByID], [CreatedAt], [UpdatedAt], [Duties], [IsWebVisible], [FullName], [FirstName], [LastName], [PictureFileName], [BankName], [BankID], [AccountNumber] FROM PersonnelView";
+       public const string PersonnelView__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [PersonnelNumber], [PersonID], [IsActive], [EmploymentDate], [IsSuperUser], [PositionID], [SalaryTypeID], [SalaryAmount], [CreatedByID], [UpdatedByID], [CreatedAt], [UpdatedAt], [Duties], [IsWebVisible], [FullName], [FirstName], [LastName], [PictureFileName], [BankName], [BankID], [AccountNumber] FROM hr.PersonnelView";
+       public const string PersonnelView__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [ID], [PersonnelNumber], [PersonID], [IsActive], [EmploymentDate], [IsSuperUser], [PositionID], [SalaryTypeID], [SalaryAmount], [CreatedByID], [UpdatedByID], [CreatedAt], [UpdatedAt], [Duties], [IsWebVisible], [FullName], [FirstName], [LastName], [PictureFileName], [BankName], [BankID], [AccountNumber] FROM hr.PersonnelView";
 
 
        public enum TableColumnNames
@@ -338,32 +338,41 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
  #endregion
 
- #region Methods                                    
-                                    
+ #region Methods                                                      
                                                       
-        /// <summary>                                                                                           
-        /// Returns null on failure                                                                                           
-        /// </summary>                                                                                           
-        /// <returns></returns>                                                                                           
-        /// <remarks></remarks>                                                      
-        public V___PersonnelView GetFirstRow()                                                      
-        {                                                      
-            if (this.HasRows())                                                      
-                return new (AllRows.First());                                                      
-            return null;                                                      
-        }                                                      
+                                                                        
+        /// <summary>                                                                                                             
+        /// Returns null on failure                                                                                                             
+        /// </summary>                                                                                                             
+        /// <returns></returns>                                                                                                             
+        /// <remarks></remarks>                                                                        
+        public V___PersonnelView GetFirstRow()                                                                        
+        {                                                                        
+            if (this.HasRows())                                                                        
+                return new (AllRows.First());                                                                        
+            return null;                                                                        
+        }                                                                        
+                                                                        
+        public static V___PersonnelView GetFullTable(DBTransaction transaction = null) =>                   
+            TransactionRunner.InvokeRun( (conn) =>                  
+                new V___PersonnelView(conn.Fetch(PersonnelView__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                transaction                  
+                );                                                      
                                                       
-        public static V___PersonnelView GetFullTable() => new(DBConnectInterface.GetDBConn());                                    
-                                    
-        public static V___PersonnelView GetRowWhereIDUsingSQL(int pID)                                                      
-        {                                                      
-            return new V___PersonnelView(DBConnectInterface.GetDBConn(), string.Format("SELECT * FROM {0} WHERE ID={1}", pID, TABLE_NAME)).GetFirstRow();                                                      
-        }                                                      
+        public static V___PersonnelView GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        {                  
+            return TransactionRunner.InvokeRun(                  
+                (conn) =>                   
+                new V___PersonnelView( conn.Fetch($"SELECT * FROM {TABLE_NAME} WHERE ID={pID}" ).FirstTable(), pID ),                  
+                transaction                  
+                );                  
+        }                                                                        
+                                                                        
+        public V___PersonnelView GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
                                                       
-        public V___PersonnelView GetRowWhereID(int pID) => new(this.RawTable, pID);                                    
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
+                                            
                                     
-        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                           
-                          
                   
         public virtual string GetFillSQL() => PersonnelView__NO__BINARY___SQL_FILL_QUERY;
                   

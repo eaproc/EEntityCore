@@ -196,8 +196,8 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
  #region Consts and Enums                       
 
        public const string TABLE_NAME = "auth.PersonLoginPlus1";
-       public const string PersonLoginPlus1__NO__BINARY___SQL_FILL_QUERY = "SELECT [Username], [IdentificationNo], [FirstName], [LastName], [LastLoginTime], [SessionTimeoutMins], [LastActive], [TimeSpentSecs], [SecondsLeft], [Status], [SessionID], [IPAddress], [IsActive], [ActiveSessions], [LoggedOutTime], [SessionIDCreatedTime], [PersonID], [UserID] FROM PersonLoginPlus1";
-       public const string PersonLoginPlus1__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [Username], [IdentificationNo], [FirstName], [LastName], [LastLoginTime], [SessionTimeoutMins], [LastActive], [TimeSpentSecs], [SecondsLeft], [Status], [SessionID], [IPAddress], [IsActive], [ActiveSessions], [LoggedOutTime], [SessionIDCreatedTime], [PersonID], [UserID] FROM PersonLoginPlus1";
+       public const string PersonLoginPlus1__NO__BINARY___SQL_FILL_QUERY = "SELECT [Username], [IdentificationNo], [FirstName], [LastName], [LastLoginTime], [SessionTimeoutMins], [LastActive], [TimeSpentSecs], [SecondsLeft], [Status], [SessionID], [IPAddress], [IsActive], [ActiveSessions], [LoggedOutTime], [SessionIDCreatedTime], [PersonID], [UserID] FROM auth.PersonLoginPlus1";
+       public const string PersonLoginPlus1__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [Username], [IdentificationNo], [FirstName], [LastName], [LastLoginTime], [SessionTimeoutMins], [LastActive], [TimeSpentSecs], [SecondsLeft], [Status], [SessionID], [IPAddress], [IsActive], [ActiveSessions], [LoggedOutTime], [SessionIDCreatedTime], [PersonID], [UserID] FROM auth.PersonLoginPlus1";
 
 
        public enum TableColumnNames
@@ -311,32 +311,41 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
  #endregion
 
- #region Methods                                    
-                                    
+ #region Methods                                                      
                                                       
-        /// <summary>                                                                                           
-        /// Returns null on failure                                                                                           
-        /// </summary>                                                                                           
-        /// <returns></returns>                                                                                           
-        /// <remarks></remarks>                                                      
-        public V___PersonLoginPlus1 GetFirstRow()                                                      
-        {                                                      
-            if (this.HasRows())                                                      
-                return new (AllRows.First());                                                      
-            return null;                                                      
-        }                                                      
+                                                                        
+        /// <summary>                                                                                                             
+        /// Returns null on failure                                                                                                             
+        /// </summary>                                                                                                             
+        /// <returns></returns>                                                                                                             
+        /// <remarks></remarks>                                                                        
+        public V___PersonLoginPlus1 GetFirstRow()                                                                        
+        {                                                                        
+            if (this.HasRows())                                                                        
+                return new (AllRows.First());                                                                        
+            return null;                                                                        
+        }                                                                        
+                                                                        
+        public static V___PersonLoginPlus1 GetFullTable(DBTransaction transaction = null) =>                   
+            TransactionRunner.InvokeRun( (conn) =>                  
+                new V___PersonLoginPlus1(conn.Fetch(PersonLoginPlus1__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                transaction                  
+                );                                                      
                                                       
-        public static V___PersonLoginPlus1 GetFullTable() => new(DBConnectInterface.GetDBConn());                                    
-                                    
-        public static V___PersonLoginPlus1 GetRowWhereIDUsingSQL(int pID)                                                      
-        {                                                      
-            return new V___PersonLoginPlus1(DBConnectInterface.GetDBConn(), string.Format("SELECT * FROM {0} WHERE ID={1}", pID, TABLE_NAME)).GetFirstRow();                                                      
-        }                                                      
+        public static V___PersonLoginPlus1 GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        {                  
+            return TransactionRunner.InvokeRun(                  
+                (conn) =>                   
+                new V___PersonLoginPlus1( conn.Fetch($"SELECT * FROM {TABLE_NAME} WHERE ID={pID}" ).FirstTable(), pID ),                  
+                transaction                  
+                );                  
+        }                                                                        
+                                                                        
+        public V___PersonLoginPlus1 GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
                                                       
-        public V___PersonLoginPlus1 GetRowWhereID(int pID) => new(this.RawTable, pID);                                    
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
+                                            
                                     
-        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                           
-                          
                   
         public virtual string GetFillSQL() => PersonLoginPlus1__NO__BINARY___SQL_FILL_QUERY;
                   

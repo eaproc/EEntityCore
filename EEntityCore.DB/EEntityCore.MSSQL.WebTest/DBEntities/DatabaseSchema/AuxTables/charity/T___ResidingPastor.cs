@@ -205,8 +205,8 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #region Consts and Enums                       
 
        public const string TABLE_NAME = "charity.ResidingPastor";
-       public const string ResidingPastor__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [CenterID], [BankID], [AccountNumber], [PersonID], [ActivatedOn], [DeactivatedOn], [CreatedAt], [UpdatedAt], [CreatedByID], [UpdatedByID], [IdPictureStoredPath] FROM ResidingPastor";
-       public const string ResidingPastor__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [ID], [CenterID], [BankID], [AccountNumber], [PersonID], [ActivatedOn], [DeactivatedOn], [CreatedAt], [UpdatedAt], [CreatedByID], [UpdatedByID], [IdPictureStoredPath] FROM ResidingPastor";
+       public const string ResidingPastor__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [CenterID], [BankID], [AccountNumber], [PersonID], [ActivatedOn], [DeactivatedOn], [CreatedAt], [UpdatedAt], [CreatedByID], [UpdatedByID], [IdPictureStoredPath] FROM charity.ResidingPastor";
+       public const string ResidingPastor__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [ID], [CenterID], [BankID], [AccountNumber], [PersonID], [ActivatedOn], [DeactivatedOn], [CreatedAt], [UpdatedAt], [CreatedByID], [UpdatedByID], [IdPictureStoredPath] FROM charity.ResidingPastor";
 
 
        public enum TableColumnNames
@@ -299,32 +299,41 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
  #endregion
 
- #region Methods                                    
-                                    
+ #region Methods                                                      
                                                       
-        /// <summary>                                                                                           
-        /// Returns null on failure                                                                                           
-        /// </summary>                                                                                           
-        /// <returns></returns>                                                                                           
-        /// <remarks></remarks>                                                      
-        public T___ResidingPastor GetFirstRow()                                                      
-        {                                                      
-            if (this.HasRows())                                                      
-                return new (AllRows.First());                                                      
-            return null;                                                      
-        }                                                      
+                                                                        
+        /// <summary>                                                                                                             
+        /// Returns null on failure                                                                                                             
+        /// </summary>                                                                                                             
+        /// <returns></returns>                                                                                                             
+        /// <remarks></remarks>                                                                        
+        public T___ResidingPastor GetFirstRow()                                                                        
+        {                                                                        
+            if (this.HasRows())                                                                        
+                return new (AllRows.First());                                                                        
+            return null;                                                                        
+        }                                                                        
+                                                                        
+        public static T___ResidingPastor GetFullTable(DBTransaction transaction = null) =>                   
+            TransactionRunner.InvokeRun( (conn) =>                  
+                new T___ResidingPastor(conn.Fetch(ResidingPastor__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                transaction                  
+                );                                                      
                                                       
-        public static T___ResidingPastor GetFullTable() => new(DBConnectInterface.GetDBConn());                                    
-                                    
-        public static T___ResidingPastor GetRowWhereIDUsingSQL(int pID)                                                      
-        {                                                      
-            return new T___ResidingPastor(DBConnectInterface.GetDBConn(), string.Format("SELECT * FROM {0} WHERE ID={1}", pID, TABLE_NAME)).GetFirstRow();                                                      
-        }                                                      
+        public static T___ResidingPastor GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        {                  
+            return TransactionRunner.InvokeRun(                  
+                (conn) =>                   
+                new T___ResidingPastor( conn.Fetch($"SELECT * FROM {TABLE_NAME} WHERE ID={pID}" ).FirstTable(), pID ),                  
+                transaction                  
+                );                  
+        }                                                                        
+                                                                        
+        public T___ResidingPastor GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
                                                       
-        public T___ResidingPastor GetRowWhereID(int pID) => new(this.RawTable, pID);                                    
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
+                                            
                                     
-        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                           
-                          
                   
         public virtual string GetFillSQL() => ResidingPastor__NO__BINARY___SQL_FILL_QUERY;
                   
@@ -463,10 +472,24 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
                   
                   
-        public static bool DeleteItemRow(long pID)                                    
+        /// <summary>                  
+        /// Deletes with an option to pass in transaction                  
+        /// </summary>                  
+        /// <returns></returns>                  
+        /// <remarks></remarks>                  
+        public bool DeleteRow(DBTransaction transaction = null)                  
         {                  
-            return DeleteRow(DBConnectInterface.GetDBConn(), pID: pID, pTableName: TABLE_NAME);                  
-        }                                    
+            return DeleteItemRow(ID, transaction);                  
+        }                  
+                  
+        public static bool DeleteItemRow(long pID, DBTransaction transaction = null)                                                      
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => conn.ExecuteTransactionQuery($"DELETE FROM {TABLE_NAME} WHERE ID={pID} ").ToBoolean(),                  
+               transaction                  
+               );                  
+        }                  
+
 
 
    }

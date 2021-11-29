@@ -34,6 +34,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema
                 return r;
             }
 
+            public static T InvokeRun<T>(Func<DBTransaction, T> action, DBTransaction trans = null)
+            {
+                using var r = new TransactionRunner(trans);
+                return r.Run(action);
+            }
+
             public void Dispose()
             {
                 if (AllowDispose && Transaction != null)

@@ -173,8 +173,8 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #region Consts and Enums                       
 
        public const string TABLE_NAME = "pay_gateway.PaymentRecognitionTrail";
-       public const string PaymentRecognitionTrail__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [Trail], [CreatedAt], [AlertTransactionID] FROM PaymentRecognitionTrail";
-       public const string PaymentRecognitionTrail__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [ID], [Trail], [CreatedAt], [AlertTransactionID] FROM PaymentRecognitionTrail";
+       public const string PaymentRecognitionTrail__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [Trail], [CreatedAt], [AlertTransactionID] FROM pay_gateway.PaymentRecognitionTrail";
+       public const string PaymentRecognitionTrail__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [ID], [Trail], [CreatedAt], [AlertTransactionID] FROM pay_gateway.PaymentRecognitionTrail";
 
 
        public enum TableColumnNames
@@ -223,32 +223,41 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
  #endregion
 
- #region Methods                                    
-                                    
+ #region Methods                                                      
                                                       
-        /// <summary>                                                                                           
-        /// Returns null on failure                                                                                           
-        /// </summary>                                                                                           
-        /// <returns></returns>                                                                                           
-        /// <remarks></remarks>                                                      
-        public T___PaymentRecognitionTrail GetFirstRow()                                                      
-        {                                                      
-            if (this.HasRows())                                                      
-                return new (AllRows.First());                                                      
-            return null;                                                      
-        }                                                      
+                                                                        
+        /// <summary>                                                                                                             
+        /// Returns null on failure                                                                                                             
+        /// </summary>                                                                                                             
+        /// <returns></returns>                                                                                                             
+        /// <remarks></remarks>                                                                        
+        public T___PaymentRecognitionTrail GetFirstRow()                                                                        
+        {                                                                        
+            if (this.HasRows())                                                                        
+                return new (AllRows.First());                                                                        
+            return null;                                                                        
+        }                                                                        
+                                                                        
+        public static T___PaymentRecognitionTrail GetFullTable(DBTransaction transaction = null) =>                   
+            TransactionRunner.InvokeRun( (conn) =>                  
+                new T___PaymentRecognitionTrail(conn.Fetch(PaymentRecognitionTrail__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                transaction                  
+                );                                                      
                                                       
-        public static T___PaymentRecognitionTrail GetFullTable() => new(DBConnectInterface.GetDBConn());                                    
-                                    
-        public static T___PaymentRecognitionTrail GetRowWhereIDUsingSQL(int pID)                                                      
-        {                                                      
-            return new T___PaymentRecognitionTrail(DBConnectInterface.GetDBConn(), string.Format("SELECT * FROM {0} WHERE ID={1}", pID, TABLE_NAME)).GetFirstRow();                                                      
-        }                                                      
+        public static T___PaymentRecognitionTrail GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        {                  
+            return TransactionRunner.InvokeRun(                  
+                (conn) =>                   
+                new T___PaymentRecognitionTrail( conn.Fetch($"SELECT * FROM {TABLE_NAME} WHERE ID={pID}" ).FirstTable(), pID ),                  
+                transaction                  
+                );                  
+        }                                                                        
+                                                                        
+        public T___PaymentRecognitionTrail GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
                                                       
-        public T___PaymentRecognitionTrail GetRowWhereID(int pID) => new(this.RawTable, pID);                                    
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
+                                            
                                     
-        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                           
-                          
                   
         public virtual string GetFillSQL() => PaymentRecognitionTrail__NO__BINARY___SQL_FILL_QUERY;
                   
@@ -339,10 +348,24 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
                   
                   
-        public static bool DeleteItemRow(long pID)                                    
+        /// <summary>                  
+        /// Deletes with an option to pass in transaction                  
+        /// </summary>                  
+        /// <returns></returns>                  
+        /// <remarks></remarks>                  
+        public bool DeleteRow(DBTransaction transaction = null)                  
         {                  
-            return DeleteRow(DBConnectInterface.GetDBConn(), pID: pID, pTableName: TABLE_NAME);                  
-        }                                    
+            return DeleteItemRow(ID, transaction);                  
+        }                  
+                  
+        public static bool DeleteItemRow(long pID, DBTransaction transaction = null)                                                      
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => conn.ExecuteTransactionQuery($"DELETE FROM {TABLE_NAME} WHERE ID={pID} ").ToBoolean(),                  
+               transaction                  
+               );                  
+        }                  
+
 
 
    }

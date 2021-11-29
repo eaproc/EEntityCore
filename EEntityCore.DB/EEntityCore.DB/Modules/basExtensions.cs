@@ -115,5 +115,15 @@ namespace EEntityCore.DB.Modules
                 throw new Exception("This table doesnt contain a numeric primary key");
             return pObj.GetLastRowIDASC().ID + 1L;
         }
+
+        /// <summary>
+        /// gets net ID from the rows loaded using linq
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        public static DataTable FirstTable(this DataSet pObj)
+        {
+            return pObj==null || pObj.Tables.Count == 0 ? null : pObj.Tables[0];
+        }
     }
 }

@@ -183,8 +183,8 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #region Consts and Enums                       
 
        public const string TABLE_NAME = "academic.TestTable";
-       public const string TestTable__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [TestString], [TestStringNull], [TestInt32], [TestInt32Null], [TestBool], [TestBoolNull], [TestDecimal], [TestDecimalNull], [TestDateTime], [TestDateTimeNull] FROM TestTable";
-       public const string TestTable__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [ID], [TestString], [TestStringNull], [TestInt32], [TestInt32Null], [TestBool], [TestBoolNull], [TestDecimal], [TestDecimalNull], [TestDateTime], [TestDateTimeNull] FROM TestTable";
+       public const string TestTable__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [TestString], [TestStringNull], [TestInt32], [TestInt32Null], [TestBool], [TestBoolNull], [TestDecimal], [TestDecimalNull], [TestDateTime], [TestDateTimeNull] FROM academic.TestTable";
+       public const string TestTable__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [ID], [TestString], [TestStringNull], [TestInt32], [TestInt32Null], [TestBool], [TestBoolNull], [TestDecimal], [TestDecimalNull], [TestDateTime], [TestDateTimeNull] FROM academic.TestTable";
 
 
        public enum TableColumnNames
@@ -267,32 +267,41 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
  #endregion
 
- #region Methods                                    
-                                    
+ #region Methods                                                      
                                                       
-        /// <summary>                                                                                           
-        /// Returns null on failure                                                                                           
-        /// </summary>                                                                                           
-        /// <returns></returns>                                                                                           
-        /// <remarks></remarks>                                                      
-        public T___TestTable GetFirstRow()                                                      
-        {                                                      
-            if (this.HasRows())                                                      
-                return new (AllRows.First());                                                      
-            return null;                                                      
-        }                                                      
+                                                                        
+        /// <summary>                                                                                                             
+        /// Returns null on failure                                                                                                             
+        /// </summary>                                                                                                             
+        /// <returns></returns>                                                                                                             
+        /// <remarks></remarks>                                                                        
+        public T___TestTable GetFirstRow()                                                                        
+        {                                                                        
+            if (this.HasRows())                                                                        
+                return new (AllRows.First());                                                                        
+            return null;                                                                        
+        }                                                                        
+                                                                        
+        public static T___TestTable GetFullTable(DBTransaction transaction = null) =>                   
+            TransactionRunner.InvokeRun( (conn) =>                  
+                new T___TestTable(conn.Fetch(TestTable__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                transaction                  
+                );                                                      
                                                       
-        public static T___TestTable GetFullTable() => new(DBConnectInterface.GetDBConn());                                    
-                                    
-        public static T___TestTable GetRowWhereIDUsingSQL(int pID)                                                      
-        {                                                      
-            return new T___TestTable(DBConnectInterface.GetDBConn(), string.Format("SELECT * FROM {0} WHERE ID={1}", pID, TABLE_NAME)).GetFirstRow();                                                      
-        }                                                      
+        public static T___TestTable GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        {                  
+            return TransactionRunner.InvokeRun(                  
+                (conn) =>                   
+                new T___TestTable( conn.Fetch($"SELECT * FROM {TABLE_NAME} WHERE ID={pID}" ).FirstTable(), pID ),                  
+                transaction                  
+                );                  
+        }                                                                        
+                                                                        
+        public T___TestTable GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
                                                       
-        public T___TestTable GetRowWhereID(int pID) => new(this.RawTable, pID);                                    
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
+                                            
                                     
-        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                           
-                          
                   
         public virtual string GetFillSQL() => TestTable__NO__BINARY___SQL_FILL_QUERY;
                   
@@ -425,10 +434,24 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
                   
                   
-        public static bool DeleteItemRow(long pID)                                    
+        /// <summary>                  
+        /// Deletes with an option to pass in transaction                  
+        /// </summary>                  
+        /// <returns></returns>                  
+        /// <remarks></remarks>                  
+        public bool DeleteRow(DBTransaction transaction = null)                  
         {                  
-            return DeleteRow(DBConnectInterface.GetDBConn(), pID: pID, pTableName: TABLE_NAME);                  
-        }                                    
+            return DeleteItemRow(ID, transaction);                  
+        }                  
+                  
+        public static bool DeleteItemRow(long pID, DBTransaction transaction = null)                                                      
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => conn.ExecuteTransactionQuery($"DELETE FROM {TABLE_NAME} WHERE ID={pID} ").ToBoolean(),                  
+               transaction                  
+               );                  
+        }                  
+
 
 
    }

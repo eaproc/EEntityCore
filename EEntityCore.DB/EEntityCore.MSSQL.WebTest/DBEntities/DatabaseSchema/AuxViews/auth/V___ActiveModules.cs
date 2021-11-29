@@ -163,8 +163,8 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
  #region Consts and Enums                       
 
        public const string TABLE_NAME = "auth.ActiveModules";
-       public const string ActiveModules__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [Definition] FROM ActiveModules";
-       public const string ActiveModules__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [ID], [Definition] FROM ActiveModules";
+       public const string ActiveModules__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [Definition] FROM auth.ActiveModules";
+       public const string ActiveModules__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [ID], [Definition] FROM auth.ActiveModules";
 
 
        public enum TableColumnNames
@@ -195,32 +195,41 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
  #endregion
 
- #region Methods                                    
-                                    
+ #region Methods                                                      
                                                       
-        /// <summary>                                                                                           
-        /// Returns null on failure                                                                                           
-        /// </summary>                                                                                           
-        /// <returns></returns>                                                                                           
-        /// <remarks></remarks>                                                      
-        public V___ActiveModules GetFirstRow()                                                      
-        {                                                      
-            if (this.HasRows())                                                      
-                return new (AllRows.First());                                                      
-            return null;                                                      
-        }                                                      
+                                                                        
+        /// <summary>                                                                                                             
+        /// Returns null on failure                                                                                                             
+        /// </summary>                                                                                                             
+        /// <returns></returns>                                                                                                             
+        /// <remarks></remarks>                                                                        
+        public V___ActiveModules GetFirstRow()                                                                        
+        {                                                                        
+            if (this.HasRows())                                                                        
+                return new (AllRows.First());                                                                        
+            return null;                                                                        
+        }                                                                        
+                                                                        
+        public static V___ActiveModules GetFullTable(DBTransaction transaction = null) =>                   
+            TransactionRunner.InvokeRun( (conn) =>                  
+                new V___ActiveModules(conn.Fetch(ActiveModules__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                transaction                  
+                );                                                      
                                                       
-        public static V___ActiveModules GetFullTable() => new(DBConnectInterface.GetDBConn());                                    
-                                    
-        public static V___ActiveModules GetRowWhereIDUsingSQL(int pID)                                                      
-        {                                                      
-            return new V___ActiveModules(DBConnectInterface.GetDBConn(), string.Format("SELECT * FROM {0} WHERE ID={1}", pID, TABLE_NAME)).GetFirstRow();                                                      
-        }                                                      
+        public static V___ActiveModules GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        {                  
+            return TransactionRunner.InvokeRun(                  
+                (conn) =>                   
+                new V___ActiveModules( conn.Fetch($"SELECT * FROM {TABLE_NAME} WHERE ID={pID}" ).FirstTable(), pID ),                  
+                transaction                  
+                );                  
+        }                                                                        
+                                                                        
+        public V___ActiveModules GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
                                                       
-        public V___ActiveModules GetRowWhereID(int pID) => new(this.RawTable, pID);                                    
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
+                                            
                                     
-        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                           
-                          
                   
         public virtual string GetFillSQL() => ActiveModules__NO__BINARY___SQL_FILL_QUERY;
                   

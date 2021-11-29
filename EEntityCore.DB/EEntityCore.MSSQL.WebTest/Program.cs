@@ -16,6 +16,9 @@ namespace EEntityCore.MSSQL.WebTest
 
                 DatabaseInit.DBConnectInterface = new DatabaseInit("SalesSCADWARE", "sa", "netEPRO@2017", 51391, @"localhost\SQLSERVER2016");
 
+                TestFetch();
+
+                //TestDelete();
 
                 //TestAddWithID();
 
@@ -34,10 +37,30 @@ namespace EEntityCore.MSSQL.WebTest
             }
             catch (Exception ex)
             {
-
                 Console.Error.WriteLine(ex);
             }
         }
+
+        private static void TestFetch()
+        {
+            T___TestTable result = T___TestTable.GetFullTable();
+            Console.WriteLine("Result was {0}", result.RowCount);
+
+            result = T___TestTable.GetRowWhereIDUsingSQL(1);
+            Console.WriteLine("Result was {0}", result.TestInt32);
+
+        }
+
+        private static void TestDelete()
+        {
+            T___TestTable result = T___TestTable.GetRowWhereIDUsingSQL(3);
+            Console.WriteLine("Result was {0}", result.TestInt32);
+
+            var r = result.DeleteRow();
+            Console.WriteLine("Result was {0}", r);
+
+        }
+
 
         private static void TestAddWithID()
         {

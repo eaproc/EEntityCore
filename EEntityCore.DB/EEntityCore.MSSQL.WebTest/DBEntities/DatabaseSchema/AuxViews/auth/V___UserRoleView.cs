@@ -170,8 +170,8 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
  #region Consts and Enums                       
 
        public const string TABLE_NAME = "auth.UserRoleView";
-       public const string UserRoleView__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [RoleID], [UserID], [Role], [RoleRank] FROM UserRoleView";
-       public const string UserRoleView__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [ID], [RoleID], [UserID], [Role], [RoleRank] FROM UserRoleView";
+       public const string UserRoleView__NO__BINARY___SQL_FILL_QUERY = "SELECT [ID], [RoleID], [UserID], [Role], [RoleRank] FROM auth.UserRoleView";
+       public const string UserRoleView__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [ID], [RoleID], [UserID], [Role], [RoleRank] FROM auth.UserRoleView";
 
 
        public enum TableColumnNames
@@ -217,32 +217,41 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
  #endregion
 
- #region Methods                                    
-                                    
+ #region Methods                                                      
                                                       
-        /// <summary>                                                                                           
-        /// Returns null on failure                                                                                           
-        /// </summary>                                                                                           
-        /// <returns></returns>                                                                                           
-        /// <remarks></remarks>                                                      
-        public V___UserRoleView GetFirstRow()                                                      
-        {                                                      
-            if (this.HasRows())                                                      
-                return new (AllRows.First());                                                      
-            return null;                                                      
-        }                                                      
+                                                                        
+        /// <summary>                                                                                                             
+        /// Returns null on failure                                                                                                             
+        /// </summary>                                                                                                             
+        /// <returns></returns>                                                                                                             
+        /// <remarks></remarks>                                                                        
+        public V___UserRoleView GetFirstRow()                                                                        
+        {                                                                        
+            if (this.HasRows())                                                                        
+                return new (AllRows.First());                                                                        
+            return null;                                                                        
+        }                                                                        
+                                                                        
+        public static V___UserRoleView GetFullTable(DBTransaction transaction = null) =>                   
+            TransactionRunner.InvokeRun( (conn) =>                  
+                new V___UserRoleView(conn.Fetch(UserRoleView__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                transaction                  
+                );                                                      
                                                       
-        public static V___UserRoleView GetFullTable() => new(DBConnectInterface.GetDBConn());                                    
-                                    
-        public static V___UserRoleView GetRowWhereIDUsingSQL(int pID)                                                      
-        {                                                      
-            return new V___UserRoleView(DBConnectInterface.GetDBConn(), string.Format("SELECT * FROM {0} WHERE ID={1}", pID, TABLE_NAME)).GetFirstRow();                                                      
-        }                                                      
+        public static V___UserRoleView GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        {                  
+            return TransactionRunner.InvokeRun(                  
+                (conn) =>                   
+                new V___UserRoleView( conn.Fetch($"SELECT * FROM {TABLE_NAME} WHERE ID={pID}" ).FirstTable(), pID ),                  
+                transaction                  
+                );                  
+        }                                                                        
+                                                                        
+        public V___UserRoleView GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
                                                       
-        public V___UserRoleView GetRowWhereID(int pID) => new(this.RawTable, pID);                                    
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
+                                            
                                     
-        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                           
-                          
                   
         public virtual string GetFillSQL() => UserRoleView__NO__BINARY___SQL_FILL_QUERY;
                   

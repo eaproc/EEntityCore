@@ -183,8 +183,8 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
  #region Consts and Enums                       
 
        public const string TABLE_NAME = "auth.UserPermittedLink";
-       public const string UserPermittedLink__NO__BINARY___SQL_FILL_QUERY = "SELECT [FirstName], [LastName], [MobileNumber], [Email], [PersonID], [Username], [Role], [LinkID], [Link], [UserID] FROM UserPermittedLink";
-       public const string UserPermittedLink__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [FirstName], [LastName], [MobileNumber], [Email], [PersonID], [Username], [Role], [LinkID], [Link], [UserID] FROM UserPermittedLink";
+       public const string UserPermittedLink__NO__BINARY___SQL_FILL_QUERY = "SELECT [FirstName], [LastName], [MobileNumber], [Email], [PersonID], [Username], [Role], [LinkID], [Link], [UserID] FROM auth.UserPermittedLink";
+       public const string UserPermittedLink__ALL_COLUMNS___SQL_FILL_QUERY = "SELECT [FirstName], [LastName], [MobileNumber], [Email], [PersonID], [Username], [Role], [LinkID], [Link], [UserID] FROM auth.UserPermittedLink";
 
 
        public enum TableColumnNames
@@ -258,32 +258,41 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
 
  #endregion
 
- #region Methods                                    
-                                    
+ #region Methods                                                      
                                                       
-        /// <summary>                                                                                           
-        /// Returns null on failure                                                                                           
-        /// </summary>                                                                                           
-        /// <returns></returns>                                                                                           
-        /// <remarks></remarks>                                                      
-        public V___UserPermittedLink GetFirstRow()                                                      
-        {                                                      
-            if (this.HasRows())                                                      
-                return new (AllRows.First());                                                      
-            return null;                                                      
-        }                                                      
+                                                                        
+        /// <summary>                                                                                                             
+        /// Returns null on failure                                                                                                             
+        /// </summary>                                                                                                             
+        /// <returns></returns>                                                                                                             
+        /// <remarks></remarks>                                                                        
+        public V___UserPermittedLink GetFirstRow()                                                                        
+        {                                                                        
+            if (this.HasRows())                                                                        
+                return new (AllRows.First());                                                                        
+            return null;                                                                        
+        }                                                                        
+                                                                        
+        public static V___UserPermittedLink GetFullTable(DBTransaction transaction = null) =>                   
+            TransactionRunner.InvokeRun( (conn) =>                  
+                new V___UserPermittedLink(conn.Fetch(UserPermittedLink__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                transaction                  
+                );                                                      
                                                       
-        public static V___UserPermittedLink GetFullTable() => new(DBConnectInterface.GetDBConn());                                    
-                                    
-        public static V___UserPermittedLink GetRowWhereIDUsingSQL(int pID)                                                      
-        {                                                      
-            return new V___UserPermittedLink(DBConnectInterface.GetDBConn(), string.Format("SELECT * FROM {0} WHERE ID={1}", pID, TABLE_NAME)).GetFirstRow();                                                      
-        }                                                      
+        public static V___UserPermittedLink GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        {                  
+            return TransactionRunner.InvokeRun(                  
+                (conn) =>                   
+                new V___UserPermittedLink( conn.Fetch($"SELECT * FROM {TABLE_NAME} WHERE ID={pID}" ).FirstTable(), pID ),                  
+                transaction                  
+                );                  
+        }                                                                        
+                                                                        
+        public V___UserPermittedLink GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
                                                       
-        public V___UserPermittedLink GetRowWhereID(int pID) => new(this.RawTable, pID);                                    
+        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
+                                            
                                     
-        public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                           
-                          
                   
         public virtual string GetFillSQL() => UserPermittedLink__NO__BINARY___SQL_FILL_QUERY;
                   
