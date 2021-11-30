@@ -209,13 +209,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defInclusivePermissionID;
        public static readonly DataColumnDefinition defInclusivePermissionDefinition;
 
-       public string Permission { get => (string)TargettedRow[TableColumnNames.Permission.ToString()]; }
+       public string Permission { get => (string)TargettedRow[TableColumnNames.Permission.ToString()];  set => TargettedRow[TableColumnNames.Permission.ToString()] = value; }
 
 
-       public int InclusivePermissionID { get => (int)TargettedRow[TableColumnNames.InclusivePermissionID.ToString()]; }
+       public int InclusivePermissionID { get => (int)TargettedRow[TableColumnNames.InclusivePermissionID.ToString()];  set => TargettedRow[TableColumnNames.InclusivePermissionID.ToString()] = value; }
 
 
-       public string InclusivePermissionDefinition { get => (string)TargettedRow[TableColumnNames.InclusivePermissionDefinition.ToString()]; }
+       public string InclusivePermissionDefinition { get => (string)TargettedRow[TableColumnNames.InclusivePermissionDefinition.ToString()];  set => TargettedRow[TableColumnNames.InclusivePermissionDefinition.ToString()] = value; }
 
 
  #endregion

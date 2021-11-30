@@ -246,31 +246,31 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defRequestBody;
        public static readonly DataColumnDefinition defRequestHeaders;
 
-       public string AbsoluteURL { get => (string)TargettedRow[TableColumnNames.AbsoluteURL.ToString()]; }
+       public string AbsoluteURL { get => (string)TargettedRow[TableColumnNames.AbsoluteURL.ToString()];  set => TargettedRow[TableColumnNames.AbsoluteURL.ToString()] = value; }
 
 
-       public string RequestParametersJSON { get => (string)TargettedRow[TableColumnNames.RequestParametersJSON.ToString()]; }
+       public string RequestParametersJSON { get => (string)TargettedRow[TableColumnNames.RequestParametersJSON.ToString()];  set => TargettedRow[TableColumnNames.RequestParametersJSON.ToString()] = value; }
 
 
-       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()]; }
+       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()];  set => TargettedRow[TableColumnNames.IPAddress.ToString()] = value; }
 
 
-       public string SessionVariables { get => (string)TargettedRow[TableColumnNames.SessionVariables.ToString()]; }
+       public string SessionVariables { get => (string)TargettedRow[TableColumnNames.SessionVariables.ToString()];  set => TargettedRow[TableColumnNames.SessionVariables.ToString()] = value; }
 
 
-       public string Browser { get => (string)TargettedRow[TableColumnNames.Browser.ToString()]; }
+       public string Browser { get => (string)TargettedRow[TableColumnNames.Browser.ToString()];  set => TargettedRow[TableColumnNames.Browser.ToString()] = value; }
 
 
-       public int? UserID { get => (int?)TargettedRow[TableColumnNames.UserID.ToString()]; }
+       public int? UserID { get => (int?)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public string RequestBody { get => (string)TargettedRow[TableColumnNames.RequestBody.ToString()]; }
+       public string RequestBody { get => (string)TargettedRow[TableColumnNames.RequestBody.ToString()];  set => TargettedRow[TableColumnNames.RequestBody.ToString()] = value; }
 
 
-       public string RequestHeaders { get => (string)TargettedRow[TableColumnNames.RequestHeaders.ToString()]; }
+       public string RequestHeaders { get => (string)TargettedRow[TableColumnNames.RequestHeaders.ToString()];  set => TargettedRow[TableColumnNames.RequestHeaders.ToString()] = value; }
 
 
  #endregion
@@ -323,6 +323,119 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamAbsoluteURL;
+            private DataColumnParameter ParamRequestParametersJSON;
+            private DataColumnParameter ParamIPAddress;
+            private DataColumnParameter ParamSessionVariables;
+            private DataColumnParameter ParamBrowser;
+            private DataColumnParameter ParamUserID;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamRequestBody;
+            private DataColumnParameter ParamRequestHeaders;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetAbsoluteURL(string v)                  
+            {                  
+                ParamAbsoluteURL = new(defAbsoluteURL, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetRequestParametersJSON(string v)                  
+            {                  
+                ParamRequestParametersJSON = new(defRequestParametersJSON, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIPAddress(string v)                  
+            {                  
+                ParamIPAddress = new(defIPAddress, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSessionVariables(string v)                  
+            {                  
+                ParamSessionVariables = new(defSessionVariables, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBrowser(string v)                  
+            {                  
+                ParamBrowser = new(defBrowser, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUserID(int? v)                  
+            {                  
+                ParamUserID = new(defUserID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetRequestBody(string v)                  
+            {                  
+                ParamRequestBody = new(defRequestBody, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetRequestHeaders(string v)                  
+            {                  
+                ParamRequestHeaders = new(defRequestHeaders, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

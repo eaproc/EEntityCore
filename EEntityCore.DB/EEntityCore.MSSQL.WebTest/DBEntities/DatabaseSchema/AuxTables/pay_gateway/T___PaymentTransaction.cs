@@ -329,82 +329,82 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defPaymentRequiredWithoutCharges;
        public static readonly DataColumnDefinition defIsMultiTarget;
 
-       public int TransactionStatusID { get => (int)TargettedRow[TableColumnNames.TransactionStatusID.ToString()]; }
+       public int TransactionStatusID { get => (int)TargettedRow[TableColumnNames.TransactionStatusID.ToString()];  set => TargettedRow[TableColumnNames.TransactionStatusID.ToString()] = value; }
 
 
-       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()]; }
+       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()];  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
 
 
-       public string StudentNumber { get => (string)TargettedRow[TableColumnNames.StudentNumber.ToString()]; }
+       public string StudentNumber { get => (string)TargettedRow[TableColumnNames.StudentNumber.ToString()];  set => TargettedRow[TableColumnNames.StudentNumber.ToString()] = value; }
 
 
-       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()]; }
+       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()];  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
 
 
-       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()]; }
+       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()];  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
 
 
-       public string AccountName { get => (string)TargettedRow[TableColumnNames.AccountName.ToString()]; }
+       public string AccountName { get => (string)TargettedRow[TableColumnNames.AccountName.ToString()];  set => TargettedRow[TableColumnNames.AccountName.ToString()] = value; }
 
 
-       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()]; }
+       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()];  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
 
 
-       public string Bank { get => (string)TargettedRow[TableColumnNames.Bank.ToString()]; }
+       public string Bank { get => (string)TargettedRow[TableColumnNames.Bank.ToString()];  set => TargettedRow[TableColumnNames.Bank.ToString()] = value; }
 
 
-       public string Channel { get => (string)TargettedRow[TableColumnNames.Channel.ToString()]; }
+       public string Channel { get => (string)TargettedRow[TableColumnNames.Channel.ToString()];  set => TargettedRow[TableColumnNames.Channel.ToString()] = value; }
 
 
-       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()]; }
+       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()];  set => TargettedRow[TableColumnNames.IPAddress.ToString()] = value; }
 
 
-       public decimal SchoolDiscountGiven { get => (decimal)TargettedRow[TableColumnNames.SchoolDiscountGiven.ToString()]; }
+       public decimal SchoolDiscountGiven { get => (decimal)TargettedRow[TableColumnNames.SchoolDiscountGiven.ToString()];  set => TargettedRow[TableColumnNames.SchoolDiscountGiven.ToString()] = value; }
 
 
-       public decimal PaymentRequired { get => (decimal)TargettedRow[TableColumnNames.PaymentRequired.ToString()]; }
+       public decimal PaymentRequired { get => (decimal)TargettedRow[TableColumnNames.PaymentRequired.ToString()];  set => TargettedRow[TableColumnNames.PaymentRequired.ToString()] = value; }
 
 
-       public decimal Charges { get => (decimal)TargettedRow[TableColumnNames.Charges.ToString()]; }
+       public decimal Charges { get => (decimal)TargettedRow[TableColumnNames.Charges.ToString()];  set => TargettedRow[TableColumnNames.Charges.ToString()] = value; }
 
 
-       public decimal RefundAmount { get => (decimal)TargettedRow[TableColumnNames.RefundAmount.ToString()]; }
+       public decimal RefundAmount { get => (decimal)TargettedRow[TableColumnNames.RefundAmount.ToString()];  set => TargettedRow[TableColumnNames.RefundAmount.ToString()] = value; }
 
 
-       public decimal Balance { get => (decimal)TargettedRow[TableColumnNames.Balance.ToString()]; }
+       public decimal Balance { get => (decimal)TargettedRow[TableColumnNames.Balance.ToString()];  set => TargettedRow[TableColumnNames.Balance.ToString()] = value; }
 
 
-       public decimal? ConfirmationThreshold { get => (decimal?)TargettedRow[TableColumnNames.ConfirmationThreshold.ToString()]; }
+       public decimal? ConfirmationThreshold { get => (decimal?)TargettedRow[TableColumnNames.ConfirmationThreshold.ToString()];  set => TargettedRow[TableColumnNames.ConfirmationThreshold.ToString()] = value; }
 
 
-       public DateTime? ConfirmationDate { get => (DateTime?)TargettedRow[TableColumnNames.ConfirmationDate.ToString()]; }
+       public DateTime? ConfirmationDate { get => (DateTime?)TargettedRow[TableColumnNames.ConfirmationDate.ToString()];  set => TargettedRow[TableColumnNames.ConfirmationDate.ToString()] = value; }
 
 
-       public bool? AwaitingDisbursement { get => (bool?)TargettedRow[TableColumnNames.AwaitingDisbursement.ToString()]; }
+       public bool? AwaitingDisbursement { get => (bool?)TargettedRow[TableColumnNames.AwaitingDisbursement.ToString()];  set => TargettedRow[TableColumnNames.AwaitingDisbursement.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()]; }
+       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()];  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
 
 
-       public string ConfirmedExplanation { get => (string)TargettedRow[TableColumnNames.ConfirmedExplanation.ToString()]; }
+       public string ConfirmedExplanation { get => (string)TargettedRow[TableColumnNames.ConfirmedExplanation.ToString()];  set => TargettedRow[TableColumnNames.ConfirmedExplanation.ToString()] = value; }
 
 
-       public bool? ChargesBilledToClient { get => (bool?)TargettedRow[TableColumnNames.ChargesBilledToClient.ToString()]; }
+       public bool? ChargesBilledToClient { get => (bool?)TargettedRow[TableColumnNames.ChargesBilledToClient.ToString()];  set => TargettedRow[TableColumnNames.ChargesBilledToClient.ToString()] = value; }
 
 
-       public decimal PaymentRequiredWithoutCharges { get => (decimal)TargettedRow[TableColumnNames.PaymentRequiredWithoutCharges.ToString()]; }
+       public decimal PaymentRequiredWithoutCharges { get => (decimal)TargettedRow[TableColumnNames.PaymentRequiredWithoutCharges.ToString()];  set => TargettedRow[TableColumnNames.PaymentRequiredWithoutCharges.ToString()] = value; }
 
 
-       public bool? IsMultiTarget { get => (bool?)TargettedRow[TableColumnNames.IsMultiTarget.ToString()]; }
+       public bool? IsMultiTarget { get => (bool?)TargettedRow[TableColumnNames.IsMultiTarget.ToString()];  set => TargettedRow[TableColumnNames.IsMultiTarget.ToString()] = value; }
 
 
  #endregion
@@ -457,6 +457,238 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamTransactionStatusID;
+            private DataColumnParameter ParamClientID;
+            private DataColumnParameter ParamStudentNumber;
+            private DataColumnParameter ParamFirstName;
+            private DataColumnParameter ParamLastName;
+            private DataColumnParameter ParamAccountName;
+            private DataColumnParameter ParamAccountNumber;
+            private DataColumnParameter ParamBank;
+            private DataColumnParameter ParamChannel;
+            private DataColumnParameter ParamIPAddress;
+            private DataColumnParameter ParamSchoolDiscountGiven;
+            private DataColumnParameter ParamPaymentRequired;
+            private DataColumnParameter ParamCharges;
+            private DataColumnParameter ParamRefundAmount;
+            private DataColumnParameter ParamBalance;
+            private DataColumnParameter ParamConfirmationThreshold;
+            private DataColumnParameter ParamConfirmationDate;
+            private DataColumnParameter ParamAwaitingDisbursement;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedAt;
+            private DataColumnParameter ParamCreatedByID;
+            private DataColumnParameter ParamUpdatedByID;
+            private DataColumnParameter ParamConfirmedExplanation;
+            private DataColumnParameter ParamChargesBilledToClient;
+            private DataColumnParameter ParamPaymentRequiredWithoutCharges;
+            private DataColumnParameter ParamIsMultiTarget;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetTransactionStatusID(int v)                  
+            {                  
+                ParamTransactionStatusID = new(defTransactionStatusID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetClientID(int v)                  
+            {                  
+                ParamClientID = new(defClientID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetStudentNumber(string v)                  
+            {                  
+                ParamStudentNumber = new(defStudentNumber, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetFirstName(string v)                  
+            {                  
+                ParamFirstName = new(defFirstName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetLastName(string v)                  
+            {                  
+                ParamLastName = new(defLastName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAccountName(string v)                  
+            {                  
+                ParamAccountName = new(defAccountName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAccountNumber(string v)                  
+            {                  
+                ParamAccountNumber = new(defAccountNumber, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBank(string v)                  
+            {                  
+                ParamBank = new(defBank, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetChannel(string v)                  
+            {                  
+                ParamChannel = new(defChannel, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIPAddress(string v)                  
+            {                  
+                ParamIPAddress = new(defIPAddress, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSchoolDiscountGiven(decimal v)                  
+            {                  
+                ParamSchoolDiscountGiven = new(defSchoolDiscountGiven, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPaymentRequired(decimal v)                  
+            {                  
+                ParamPaymentRequired = new(defPaymentRequired, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCharges(decimal v)                  
+            {                  
+                ParamCharges = new(defCharges, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetRefundAmount(decimal v)                  
+            {                  
+                ParamRefundAmount = new(defRefundAmount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBalance(decimal v)                  
+            {                  
+                ParamBalance = new(defBalance, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetConfirmationThreshold(decimal? v)                  
+            {                  
+                ParamConfirmationThreshold = new(defConfirmationThreshold, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetConfirmationDate(DateTime? v)                  
+            {                  
+                ParamConfirmationDate = new(defConfirmationDate, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAwaitingDisbursement(bool? v)                  
+            {                  
+                ParamAwaitingDisbursement = new(defAwaitingDisbursement, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime? v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedByID(int v)                  
+            {                  
+                ParamCreatedByID = new(defCreatedByID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedByID(int v)                  
+            {                  
+                ParamUpdatedByID = new(defUpdatedByID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetConfirmedExplanation(string v)                  
+            {                  
+                ParamConfirmedExplanation = new(defConfirmedExplanation, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetChargesBilledToClient(bool? v)                  
+            {                  
+                ParamChargesBilledToClient = new(defChargesBilledToClient, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPaymentRequiredWithoutCharges(decimal v)                  
+            {                  
+                ParamPaymentRequiredWithoutCharges = new(defPaymentRequiredWithoutCharges, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIsMultiTarget(bool? v)                  
+            {                  
+                ParamIsMultiTarget = new(defIsMultiTarget, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

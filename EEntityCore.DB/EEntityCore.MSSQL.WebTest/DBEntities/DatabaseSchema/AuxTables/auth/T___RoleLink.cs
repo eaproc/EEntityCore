@@ -232,16 +232,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defLinkPermissionID;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public int RoleID { get => (int)TargettedRow[TableColumnNames.RoleID.ToString()]; }
+       public int RoleID { get => (int)TargettedRow[TableColumnNames.RoleID.ToString()];  set => TargettedRow[TableColumnNames.RoleID.ToString()] = value; }
 
 
-       public int BaseLinkID { get => (int)TargettedRow[TableColumnNames.BaseLinkID.ToString()]; }
+       public int BaseLinkID { get => (int)TargettedRow[TableColumnNames.BaseLinkID.ToString()];  set => TargettedRow[TableColumnNames.BaseLinkID.ToString()] = value; }
 
 
-       public int LinkPermissionID { get => (int)TargettedRow[TableColumnNames.LinkPermissionID.ToString()]; }
+       public int LinkPermissionID { get => (int)TargettedRow[TableColumnNames.LinkPermissionID.ToString()];  set => TargettedRow[TableColumnNames.LinkPermissionID.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
  #endregion
@@ -294,6 +294,84 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamRoleID;
+            private DataColumnParameter ParamBaseLinkID;
+            private DataColumnParameter ParamLinkPermissionID;
+            private DataColumnParameter ParamCreatedAt;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetRoleID(int v)                  
+            {                  
+                ParamRoleID = new(defRoleID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBaseLinkID(int v)                  
+            {                  
+                ParamBaseLinkID = new(defBaseLinkID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetLinkPermissionID(int v)                  
+            {                  
+                ParamLinkPermissionID = new(defLinkPermissionID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

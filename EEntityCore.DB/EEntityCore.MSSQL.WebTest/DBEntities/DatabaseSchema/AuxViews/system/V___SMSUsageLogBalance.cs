@@ -201,10 +201,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defQuantityStocked;
        public static readonly DataColumnDefinition defQuantityUsed;
 
-       public decimal? QuantityStocked { get => (decimal?)TargettedRow[TableColumnNames.QuantityStocked.ToString()]; }
+       public decimal? QuantityStocked { get => (decimal?)TargettedRow[TableColumnNames.QuantityStocked.ToString()];  set => TargettedRow[TableColumnNames.QuantityStocked.ToString()] = value; }
 
 
-       public int? QuantityUsed { get => (int?)TargettedRow[TableColumnNames.QuantityUsed.ToString()]; }
+       public int? QuantityUsed { get => (int?)TargettedRow[TableColumnNames.QuantityUsed.ToString()];  set => TargettedRow[TableColumnNames.QuantityUsed.ToString()] = value; }
 
 
  #endregion

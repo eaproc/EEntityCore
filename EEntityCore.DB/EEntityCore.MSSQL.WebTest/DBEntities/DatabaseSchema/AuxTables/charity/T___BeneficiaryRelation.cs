@@ -295,52 +295,52 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedByID;
        public static readonly DataColumnDefinition defUpdatedByID;
 
-       public int BeneficiaryID { get => (int)TargettedRow[TableColumnNames.BeneficiaryID.ToString()]; }
+       public int BeneficiaryID { get => (int)TargettedRow[TableColumnNames.BeneficiaryID.ToString()];  set => TargettedRow[TableColumnNames.BeneficiaryID.ToString()] = value; }
 
 
-       public int RelationshipTypeID { get => (int)TargettedRow[TableColumnNames.RelationshipTypeID.ToString()]; }
+       public int RelationshipTypeID { get => (int)TargettedRow[TableColumnNames.RelationshipTypeID.ToString()];  set => TargettedRow[TableColumnNames.RelationshipTypeID.ToString()] = value; }
 
 
-       public int MaritalStatusID { get => (int)TargettedRow[TableColumnNames.MaritalStatusID.ToString()]; }
+       public int MaritalStatusID { get => (int)TargettedRow[TableColumnNames.MaritalStatusID.ToString()];  set => TargettedRow[TableColumnNames.MaritalStatusID.ToString()] = value; }
 
 
-       public bool IsDeceased { get => (bool)TargettedRow[TableColumnNames.IsDeceased.ToString()]; }
+       public bool IsDeceased { get => (bool)TargettedRow[TableColumnNames.IsDeceased.ToString()];  set => TargettedRow[TableColumnNames.IsDeceased.ToString()] = value; }
 
 
-       public string RelationshipNarration { get => (string)TargettedRow[TableColumnNames.RelationshipNarration.ToString()]; }
+       public string RelationshipNarration { get => (string)TargettedRow[TableColumnNames.RelationshipNarration.ToString()];  set => TargettedRow[TableColumnNames.RelationshipNarration.ToString()] = value; }
 
 
-       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()]; }
+       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()];  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
 
 
-       public string Occupation { get => (string)TargettedRow[TableColumnNames.Occupation.ToString()]; }
+       public string Occupation { get => (string)TargettedRow[TableColumnNames.Occupation.ToString()];  set => TargettedRow[TableColumnNames.Occupation.ToString()] = value; }
 
 
-       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()]; }
+       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()];  set => TargettedRow[TableColumnNames.Address.ToString()] = value; }
 
 
-       public string HomePhone { get => (string)TargettedRow[TableColumnNames.HomePhone.ToString()]; }
+       public string HomePhone { get => (string)TargettedRow[TableColumnNames.HomePhone.ToString()];  set => TargettedRow[TableColumnNames.HomePhone.ToString()] = value; }
 
 
-       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()]; }
+       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()];  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
 
 
-       public string DeathCertificatePath { get => (string)TargettedRow[TableColumnNames.DeathCertificatePath.ToString()]; }
+       public string DeathCertificatePath { get => (string)TargettedRow[TableColumnNames.DeathCertificatePath.ToString()];  set => TargettedRow[TableColumnNames.DeathCertificatePath.ToString()] = value; }
 
 
-       public string PhotoPath { get => (string)TargettedRow[TableColumnNames.PhotoPath.ToString()]; }
+       public string PhotoPath { get => (string)TargettedRow[TableColumnNames.PhotoPath.ToString()];  set => TargettedRow[TableColumnNames.PhotoPath.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime UpdatedAt { get => (DateTime)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime UpdatedAt { get => (DateTime)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()]; }
+       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()];  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
 
 
  #endregion
@@ -393,6 +393,168 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamBeneficiaryID;
+            private DataColumnParameter ParamRelationshipTypeID;
+            private DataColumnParameter ParamMaritalStatusID;
+            private DataColumnParameter ParamIsDeceased;
+            private DataColumnParameter ParamRelationshipNarration;
+            private DataColumnParameter ParamFullName;
+            private DataColumnParameter ParamOccupation;
+            private DataColumnParameter ParamAddress;
+            private DataColumnParameter ParamHomePhone;
+            private DataColumnParameter ParamEmail;
+            private DataColumnParameter ParamDeathCertificatePath;
+            private DataColumnParameter ParamPhotoPath;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedAt;
+            private DataColumnParameter ParamCreatedByID;
+            private DataColumnParameter ParamUpdatedByID;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetBeneficiaryID(int v)                  
+            {                  
+                ParamBeneficiaryID = new(defBeneficiaryID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetRelationshipTypeID(int v)                  
+            {                  
+                ParamRelationshipTypeID = new(defRelationshipTypeID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetMaritalStatusID(int v)                  
+            {                  
+                ParamMaritalStatusID = new(defMaritalStatusID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIsDeceased(bool v)                  
+            {                  
+                ParamIsDeceased = new(defIsDeceased, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetRelationshipNarration(string v)                  
+            {                  
+                ParamRelationshipNarration = new(defRelationshipNarration, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetFullName(string v)                  
+            {                  
+                ParamFullName = new(defFullName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetOccupation(string v)                  
+            {                  
+                ParamOccupation = new(defOccupation, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAddress(string v)                  
+            {                  
+                ParamAddress = new(defAddress, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetHomePhone(string v)                  
+            {                  
+                ParamHomePhone = new(defHomePhone, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetEmail(string v)                  
+            {                  
+                ParamEmail = new(defEmail, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDeathCertificatePath(string v)                  
+            {                  
+                ParamDeathCertificatePath = new(defDeathCertificatePath, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPhotoPath(string v)                  
+            {                  
+                ParamPhotoPath = new(defPhotoPath, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedByID(int v)                  
+            {                  
+                ParamCreatedByID = new(defCreatedByID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedByID(int v)                  
+            {                  
+                ParamUpdatedByID = new(defUpdatedByID, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

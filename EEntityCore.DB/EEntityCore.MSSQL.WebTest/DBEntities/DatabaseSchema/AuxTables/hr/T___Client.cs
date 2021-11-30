@@ -280,52 +280,52 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defAccountName;
        public static readonly DataColumnDefinition defAccountNumber;
 
-       public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()]; }
+       public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()];  set => TargettedRow[TableColumnNames.CompanyName.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public int OwnerID { get => (int)TargettedRow[TableColumnNames.OwnerID.ToString()]; }
+       public int OwnerID { get => (int)TargettedRow[TableColumnNames.OwnerID.ToString()];  set => TargettedRow[TableColumnNames.OwnerID.ToString()] = value; }
 
 
-       public string SLAFileName { get => (string)TargettedRow[TableColumnNames.SLAFileName.ToString()]; }
+       public string SLAFileName { get => (string)TargettedRow[TableColumnNames.SLAFileName.ToString()];  set => TargettedRow[TableColumnNames.SLAFileName.ToString()] = value; }
 
 
-       public string ScadwareURL { get => (string)TargettedRow[TableColumnNames.ScadwareURL.ToString()]; }
+       public string ScadwareURL { get => (string)TargettedRow[TableColumnNames.ScadwareURL.ToString()];  set => TargettedRow[TableColumnNames.ScadwareURL.ToString()] = value; }
 
 
-       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()]; }
+       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()];  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
 
 
-       public string Mobile { get => (string)TargettedRow[TableColumnNames.Mobile.ToString()]; }
+       public string Mobile { get => (string)TargettedRow[TableColumnNames.Mobile.ToString()];  set => TargettedRow[TableColumnNames.Mobile.ToString()] = value; }
 
 
-       public string WebsiteURL { get => (string)TargettedRow[TableColumnNames.WebsiteURL.ToString()]; }
+       public string WebsiteURL { get => (string)TargettedRow[TableColumnNames.WebsiteURL.ToString()];  set => TargettedRow[TableColumnNames.WebsiteURL.ToString()] = value; }
 
 
-       public string LogoFileName { get => (string)TargettedRow[TableColumnNames.LogoFileName.ToString()]; }
+       public string LogoFileName { get => (string)TargettedRow[TableColumnNames.LogoFileName.ToString()];  set => TargettedRow[TableColumnNames.LogoFileName.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()]; }
+       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()];  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
 
 
-       public string NameAbbreviation { get => (string)TargettedRow[TableColumnNames.NameAbbreviation.ToString()]; }
+       public string NameAbbreviation { get => (string)TargettedRow[TableColumnNames.NameAbbreviation.ToString()];  set => TargettedRow[TableColumnNames.NameAbbreviation.ToString()] = value; }
 
 
-       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()]; }
+       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()];  set => TargettedRow[TableColumnNames.Address.ToString()] = value; }
 
 
-       public int? BankID { get => (int?)TargettedRow[TableColumnNames.BankID.ToString()]; }
+       public int? BankID { get => (int?)TargettedRow[TableColumnNames.BankID.ToString()];  set => TargettedRow[TableColumnNames.BankID.ToString()] = value; }
 
 
-       public string AccountName { get => (string)TargettedRow[TableColumnNames.AccountName.ToString()]; }
+       public string AccountName { get => (string)TargettedRow[TableColumnNames.AccountName.ToString()];  set => TargettedRow[TableColumnNames.AccountName.ToString()] = value; }
 
 
-       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()]; }
+       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()];  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
 
 
  #endregion
@@ -378,6 +378,168 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamCompanyName;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamOwnerID;
+            private DataColumnParameter ParamSLAFileName;
+            private DataColumnParameter ParamScadwareURL;
+            private DataColumnParameter ParamEmail;
+            private DataColumnParameter ParamMobile;
+            private DataColumnParameter ParamWebsiteURL;
+            private DataColumnParameter ParamLogoFileName;
+            private DataColumnParameter ParamUpdatedAt;
+            private DataColumnParameter ParamIsActive;
+            private DataColumnParameter ParamNameAbbreviation;
+            private DataColumnParameter ParamAddress;
+            private DataColumnParameter ParamBankID;
+            private DataColumnParameter ParamAccountName;
+            private DataColumnParameter ParamAccountNumber;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetCompanyName(string v)                  
+            {                  
+                ParamCompanyName = new(defCompanyName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetOwnerID(int v)                  
+            {                  
+                ParamOwnerID = new(defOwnerID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSLAFileName(string v)                  
+            {                  
+                ParamSLAFileName = new(defSLAFileName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetScadwareURL(string v)                  
+            {                  
+                ParamScadwareURL = new(defScadwareURL, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetEmail(string v)                  
+            {                  
+                ParamEmail = new(defEmail, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetMobile(string v)                  
+            {                  
+                ParamMobile = new(defMobile, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetWebsiteURL(string v)                  
+            {                  
+                ParamWebsiteURL = new(defWebsiteURL, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetLogoFileName(string v)                  
+            {                  
+                ParamLogoFileName = new(defLogoFileName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime? v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIsActive(bool v)                  
+            {                  
+                ParamIsActive = new(defIsActive, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetNameAbbreviation(string v)                  
+            {                  
+                ParamNameAbbreviation = new(defNameAbbreviation, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAddress(string v)                  
+            {                  
+                ParamAddress = new(defAddress, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBankID(int? v)                  
+            {                  
+                ParamBankID = new(defBankID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAccountName(string v)                  
+            {                  
+                ParamAccountName = new(defAccountName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAccountNumber(string v)                  
+            {                  
+                ParamAccountNumber = new(defAccountNumber, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

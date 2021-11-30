@@ -271,34 +271,34 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedByID;
        public static readonly DataColumnDefinition defUpdatedByID;
 
-       public int MonthlyDonationID { get => (int)TargettedRow[TableColumnNames.MonthlyDonationID.ToString()]; }
+       public int MonthlyDonationID { get => (int)TargettedRow[TableColumnNames.MonthlyDonationID.ToString()];  set => TargettedRow[TableColumnNames.MonthlyDonationID.ToString()] = value; }
 
 
-       public int BeneficiaryID { get => (int)TargettedRow[TableColumnNames.BeneficiaryID.ToString()]; }
+       public int BeneficiaryID { get => (int)TargettedRow[TableColumnNames.BeneficiaryID.ToString()];  set => TargettedRow[TableColumnNames.BeneficiaryID.ToString()] = value; }
 
 
-       public int? CashOutID { get => (int?)TargettedRow[TableColumnNames.CashOutID.ToString()]; }
+       public int? CashOutID { get => (int?)TargettedRow[TableColumnNames.CashOutID.ToString()];  set => TargettedRow[TableColumnNames.CashOutID.ToString()] = value; }
 
 
-       public int DonationYear { get => (int)TargettedRow[TableColumnNames.DonationYear.ToString()]; }
+       public int DonationYear { get => (int)TargettedRow[TableColumnNames.DonationYear.ToString()];  set => TargettedRow[TableColumnNames.DonationYear.ToString()] = value; }
 
 
-       public int DonationMonth { get => (int)TargettedRow[TableColumnNames.DonationMonth.ToString()]; }
+       public int DonationMonth { get => (int)TargettedRow[TableColumnNames.DonationMonth.ToString()];  set => TargettedRow[TableColumnNames.DonationMonth.ToString()] = value; }
 
 
-       public decimal Amount { get => (decimal)TargettedRow[TableColumnNames.Amount.ToString()]; }
+       public decimal Amount { get => (decimal)TargettedRow[TableColumnNames.Amount.ToString()];  set => TargettedRow[TableColumnNames.Amount.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime UpdatedAt { get => (DateTime)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime UpdatedAt { get => (DateTime)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()]; }
+       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()];  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
 
 
  #endregion
@@ -351,6 +351,126 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamMonthlyDonationID;
+            private DataColumnParameter ParamBeneficiaryID;
+            private DataColumnParameter ParamCashOutID;
+            private DataColumnParameter ParamDonationYear;
+            private DataColumnParameter ParamDonationMonth;
+            private DataColumnParameter ParamAmount;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedAt;
+            private DataColumnParameter ParamCreatedByID;
+            private DataColumnParameter ParamUpdatedByID;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetMonthlyDonationID(int v)                  
+            {                  
+                ParamMonthlyDonationID = new(defMonthlyDonationID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBeneficiaryID(int v)                  
+            {                  
+                ParamBeneficiaryID = new(defBeneficiaryID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCashOutID(int? v)                  
+            {                  
+                ParamCashOutID = new(defCashOutID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDonationYear(int v)                  
+            {                  
+                ParamDonationYear = new(defDonationYear, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDonationMonth(int v)                  
+            {                  
+                ParamDonationMonth = new(defDonationMonth, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAmount(decimal v)                  
+            {                  
+                ParamAmount = new(defAmount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedByID(int v)                  
+            {                  
+                ParamCreatedByID = new(defCreatedByID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedByID(int v)                  
+            {                  
+                ParamUpdatedByID = new(defUpdatedByID, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

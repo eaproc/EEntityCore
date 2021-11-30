@@ -285,67 +285,67 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defCreatedByID;
        public static readonly DataColumnDefinition defUpdatedByID;
 
-       public int DonationYear { get => (int)TargettedRow[TableColumnNames.DonationYear.ToString()]; }
+       public int DonationYear { get => (int)TargettedRow[TableColumnNames.DonationYear.ToString()];  set => TargettedRow[TableColumnNames.DonationYear.ToString()] = value; }
 
 
-       public int DonationMonth { get => (int)TargettedRow[TableColumnNames.DonationMonth.ToString()]; }
+       public int DonationMonth { get => (int)TargettedRow[TableColumnNames.DonationMonth.ToString()];  set => TargettedRow[TableColumnNames.DonationMonth.ToString()] = value; }
 
 
-       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()]; }
+       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()];  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
 
 
-       public bool IsApproved { get => (bool)TargettedRow[TableColumnNames.IsApproved.ToString()]; }
+       public bool IsApproved { get => (bool)TargettedRow[TableColumnNames.IsApproved.ToString()];  set => TargettedRow[TableColumnNames.IsApproved.ToString()] = value; }
 
 
-       public bool IsDisbursed { get => (bool)TargettedRow[TableColumnNames.IsDisbursed.ToString()]; }
+       public bool IsDisbursed { get => (bool)TargettedRow[TableColumnNames.IsDisbursed.ToString()];  set => TargettedRow[TableColumnNames.IsDisbursed.ToString()] = value; }
 
 
-       public decimal TotalAmount { get => (decimal)TargettedRow[TableColumnNames.TotalAmount.ToString()]; }
+       public decimal TotalAmount { get => (decimal)TargettedRow[TableColumnNames.TotalAmount.ToString()];  set => TargettedRow[TableColumnNames.TotalAmount.ToString()] = value; }
 
 
-       public int TotalBeneficiaries { get => (int)TargettedRow[TableColumnNames.TotalBeneficiaries.ToString()]; }
+       public int TotalBeneficiaries { get => (int)TargettedRow[TableColumnNames.TotalBeneficiaries.ToString()];  set => TargettedRow[TableColumnNames.TotalBeneficiaries.ToString()] = value; }
 
 
-       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()]; }
+       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()];  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
 
 
-       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()]; }
+       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()];  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
 
 
-       public string MobilePhone { get => (string)TargettedRow[TableColumnNames.MobilePhone.ToString()]; }
+       public string MobilePhone { get => (string)TargettedRow[TableColumnNames.MobilePhone.ToString()];  set => TargettedRow[TableColumnNames.MobilePhone.ToString()] = value; }
 
 
-       public int ResidingPastorPersonID { get => (int)TargettedRow[TableColumnNames.ResidingPastorPersonID.ToString()]; }
+       public int ResidingPastorPersonID { get => (int)TargettedRow[TableColumnNames.ResidingPastorPersonID.ToString()];  set => TargettedRow[TableColumnNames.ResidingPastorPersonID.ToString()] = value; }
 
 
-       public string BankName { get => (string)TargettedRow[TableColumnNames.BankName.ToString()]; }
+       public string BankName { get => (string)TargettedRow[TableColumnNames.BankName.ToString()];  set => TargettedRow[TableColumnNames.BankName.ToString()] = value; }
 
 
-       public string CenterName { get => (string)TargettedRow[TableColumnNames.CenterName.ToString()]; }
+       public string CenterName { get => (string)TargettedRow[TableColumnNames.CenterName.ToString()];  set => TargettedRow[TableColumnNames.CenterName.ToString()] = value; }
 
 
-       public string CenterAddress { get => (string)TargettedRow[TableColumnNames.CenterAddress.ToString()]; }
+       public string CenterAddress { get => (string)TargettedRow[TableColumnNames.CenterAddress.ToString()];  set => TargettedRow[TableColumnNames.CenterAddress.ToString()] = value; }
 
 
-       public int CenterID { get => (int)TargettedRow[TableColumnNames.CenterID.ToString()]; }
+       public int CenterID { get => (int)TargettedRow[TableColumnNames.CenterID.ToString()];  set => TargettedRow[TableColumnNames.CenterID.ToString()] = value; }
 
 
-       public int ResidingPastorID { get => (int)TargettedRow[TableColumnNames.ResidingPastorID.ToString()]; }
+       public int ResidingPastorID { get => (int)TargettedRow[TableColumnNames.ResidingPastorID.ToString()];  set => TargettedRow[TableColumnNames.ResidingPastorID.ToString()] = value; }
 
 
-       public int BankID { get => (int)TargettedRow[TableColumnNames.BankID.ToString()]; }
+       public int BankID { get => (int)TargettedRow[TableColumnNames.BankID.ToString()];  set => TargettedRow[TableColumnNames.BankID.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime UpdatedAt { get => (DateTime)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime UpdatedAt { get => (DateTime)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()]; }
+       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()];  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
 
 
  #endregion

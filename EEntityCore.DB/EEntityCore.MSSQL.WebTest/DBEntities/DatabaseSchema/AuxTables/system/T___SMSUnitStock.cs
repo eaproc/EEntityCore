@@ -221,16 +221,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defComments;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public decimal StockAmountNaira { get => (decimal)TargettedRow[TableColumnNames.StockAmountNaira.ToString()]; }
+       public decimal StockAmountNaira { get => (decimal)TargettedRow[TableColumnNames.StockAmountNaira.ToString()];  set => TargettedRow[TableColumnNames.StockAmountNaira.ToString()] = value; }
 
 
-       public decimal Quantity { get => (decimal)TargettedRow[TableColumnNames.Quantity.ToString()]; }
+       public decimal Quantity { get => (decimal)TargettedRow[TableColumnNames.Quantity.ToString()];  set => TargettedRow[TableColumnNames.Quantity.ToString()] = value; }
 
 
-       public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()]; }
+       public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()];  set => TargettedRow[TableColumnNames.Comments.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
  #endregion
@@ -283,6 +283,84 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamStockAmountNaira;
+            private DataColumnParameter ParamQuantity;
+            private DataColumnParameter ParamComments;
+            private DataColumnParameter ParamCreatedAt;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetStockAmountNaira(decimal v)                  
+            {                  
+                ParamStockAmountNaira = new(defStockAmountNaira, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetQuantity(decimal v)                  
+            {                  
+                ParamQuantity = new(defQuantity, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetComments(string v)                  
+            {                  
+                ParamComments = new(defComments, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

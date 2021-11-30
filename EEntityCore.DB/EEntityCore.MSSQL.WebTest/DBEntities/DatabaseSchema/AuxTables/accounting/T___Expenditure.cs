@@ -266,34 +266,34 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defSpentAmount;
        public static readonly DataColumnDefinition defChargesComments;
 
-       public int TermID { get => (int)TargettedRow[TableColumnNames.TermID.ToString()]; }
+       public int TermID { get => (int)TargettedRow[TableColumnNames.TermID.ToString()];  set => TargettedRow[TableColumnNames.TermID.ToString()] = value; }
 
 
-       public string IpAddress { get => (string)TargettedRow[TableColumnNames.IpAddress.ToString()]; }
+       public string IpAddress { get => (string)TargettedRow[TableColumnNames.IpAddress.ToString()];  set => TargettedRow[TableColumnNames.IpAddress.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public int CashRequestID { get => (int)TargettedRow[TableColumnNames.CashRequestID.ToString()]; }
+       public int CashRequestID { get => (int)TargettedRow[TableColumnNames.CashRequestID.ToString()];  set => TargettedRow[TableColumnNames.CashRequestID.ToString()] = value; }
 
 
-       public decimal Total { get => (decimal)TargettedRow[TableColumnNames.Total.ToString()]; }
+       public decimal Total { get => (decimal)TargettedRow[TableColumnNames.Total.ToString()];  set => TargettedRow[TableColumnNames.Total.ToString()] = value; }
 
 
-       public int? DataMonitorID { get => (int?)TargettedRow[TableColumnNames.DataMonitorID.ToString()]; }
+       public int? DataMonitorID { get => (int?)TargettedRow[TableColumnNames.DataMonitorID.ToString()];  set => TargettedRow[TableColumnNames.DataMonitorID.ToString()] = value; }
 
 
-       public decimal Charges { get => (decimal)TargettedRow[TableColumnNames.Charges.ToString()]; }
+       public decimal Charges { get => (decimal)TargettedRow[TableColumnNames.Charges.ToString()];  set => TargettedRow[TableColumnNames.Charges.ToString()] = value; }
 
 
-       public decimal SpentAmount { get => (decimal)TargettedRow[TableColumnNames.SpentAmount.ToString()]; }
+       public decimal SpentAmount { get => (decimal)TargettedRow[TableColumnNames.SpentAmount.ToString()];  set => TargettedRow[TableColumnNames.SpentAmount.ToString()] = value; }
 
 
-       public string ChargesComments { get => (string)TargettedRow[TableColumnNames.ChargesComments.ToString()]; }
+       public string ChargesComments { get => (string)TargettedRow[TableColumnNames.ChargesComments.ToString()];  set => TargettedRow[TableColumnNames.ChargesComments.ToString()] = value; }
 
 
  #endregion
@@ -346,6 +346,126 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamTermID;
+            private DataColumnParameter ParamIpAddress;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamCreatedByID;
+            private DataColumnParameter ParamCashRequestID;
+            private DataColumnParameter ParamTotal;
+            private DataColumnParameter ParamDataMonitorID;
+            private DataColumnParameter ParamCharges;
+            private DataColumnParameter ParamSpentAmount;
+            private DataColumnParameter ParamChargesComments;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetTermID(int v)                  
+            {                  
+                ParamTermID = new(defTermID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIpAddress(string v)                  
+            {                  
+                ParamIpAddress = new(defIpAddress, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedByID(int v)                  
+            {                  
+                ParamCreatedByID = new(defCreatedByID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCashRequestID(int v)                  
+            {                  
+                ParamCashRequestID = new(defCashRequestID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTotal(decimal v)                  
+            {                  
+                ParamTotal = new(defTotal, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDataMonitorID(int? v)                  
+            {                  
+                ParamDataMonitorID = new(defDataMonitorID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCharges(decimal v)                  
+            {                  
+                ParamCharges = new(defCharges, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSpentAmount(decimal v)                  
+            {                  
+                ParamSpentAmount = new(defSpentAmount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetChargesComments(string v)                  
+            {                  
+                ParamChargesComments = new(defChargesComments, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

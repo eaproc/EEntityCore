@@ -271,49 +271,49 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defUpdatedAt;
        public static readonly DataColumnDefinition defFileServerUrlHttps;
 
-       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()]; }
+       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()];  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
 
 
-       public string FileServerUrl { get => (string)TargettedRow[TableColumnNames.FileServerUrl.ToString()]; }
+       public string FileServerUrl { get => (string)TargettedRow[TableColumnNames.FileServerUrl.ToString()];  set => TargettedRow[TableColumnNames.FileServerUrl.ToString()] = value; }
 
 
-       public string FileServerAccessKey { get => (string)TargettedRow[TableColumnNames.FileServerAccessKey.ToString()]; }
+       public string FileServerAccessKey { get => (string)TargettedRow[TableColumnNames.FileServerAccessKey.ToString()];  set => TargettedRow[TableColumnNames.FileServerAccessKey.ToString()] = value; }
 
 
-       public string FileServerSecretKey { get => (string)TargettedRow[TableColumnNames.FileServerSecretKey.ToString()]; }
+       public string FileServerSecretKey { get => (string)TargettedRow[TableColumnNames.FileServerSecretKey.ToString()];  set => TargettedRow[TableColumnNames.FileServerSecretKey.ToString()] = value; }
 
 
-       public string FileServerBucket { get => (string)TargettedRow[TableColumnNames.FileServerBucket.ToString()]; }
+       public string FileServerBucket { get => (string)TargettedRow[TableColumnNames.FileServerBucket.ToString()];  set => TargettedRow[TableColumnNames.FileServerBucket.ToString()] = value; }
 
 
-       public string ClientAPIID { get => (string)TargettedRow[TableColumnNames.ClientAPIID.ToString()]; }
+       public string ClientAPIID { get => (string)TargettedRow[TableColumnNames.ClientAPIID.ToString()];  set => TargettedRow[TableColumnNames.ClientAPIID.ToString()] = value; }
 
 
-       public string ClientAPIUrl { get => (string)TargettedRow[TableColumnNames.ClientAPIUrl.ToString()]; }
+       public string ClientAPIUrl { get => (string)TargettedRow[TableColumnNames.ClientAPIUrl.ToString()];  set => TargettedRow[TableColumnNames.ClientAPIUrl.ToString()] = value; }
 
 
-       public string DB_HOST { get => (string)TargettedRow[TableColumnNames.DB_HOST.ToString()]; }
+       public string DB_HOST { get => (string)TargettedRow[TableColumnNames.DB_HOST.ToString()];  set => TargettedRow[TableColumnNames.DB_HOST.ToString()] = value; }
 
 
-       public string DB_DATABASE { get => (string)TargettedRow[TableColumnNames.DB_DATABASE.ToString()]; }
+       public string DB_DATABASE { get => (string)TargettedRow[TableColumnNames.DB_DATABASE.ToString()];  set => TargettedRow[TableColumnNames.DB_DATABASE.ToString()] = value; }
 
 
-       public string DB_USERNAME { get => (string)TargettedRow[TableColumnNames.DB_USERNAME.ToString()]; }
+       public string DB_USERNAME { get => (string)TargettedRow[TableColumnNames.DB_USERNAME.ToString()];  set => TargettedRow[TableColumnNames.DB_USERNAME.ToString()] = value; }
 
 
-       public string DB_PASSWORD { get => (string)TargettedRow[TableColumnNames.DB_PASSWORD.ToString()]; }
+       public string DB_PASSWORD { get => (string)TargettedRow[TableColumnNames.DB_PASSWORD.ToString()];  set => TargettedRow[TableColumnNames.DB_PASSWORD.ToString()] = value; }
 
 
-       public int DB_PORT { get => (int)TargettedRow[TableColumnNames.DB_PORT.ToString()]; }
+       public int DB_PORT { get => (int)TargettedRow[TableColumnNames.DB_PORT.ToString()];  set => TargettedRow[TableColumnNames.DB_PORT.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public string FileServerUrlHttps { get => (string)TargettedRow[TableColumnNames.FileServerUrlHttps.ToString()]; }
+       public string FileServerUrlHttps { get => (string)TargettedRow[TableColumnNames.FileServerUrlHttps.ToString()];  set => TargettedRow[TableColumnNames.FileServerUrlHttps.ToString()] = value; }
 
 
  #endregion
@@ -366,6 +366,161 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamClientID;
+            private DataColumnParameter ParamFileServerUrl;
+            private DataColumnParameter ParamFileServerAccessKey;
+            private DataColumnParameter ParamFileServerSecretKey;
+            private DataColumnParameter ParamFileServerBucket;
+            private DataColumnParameter ParamClientAPIID;
+            private DataColumnParameter ParamClientAPIUrl;
+            private DataColumnParameter ParamDB_HOST;
+            private DataColumnParameter ParamDB_DATABASE;
+            private DataColumnParameter ParamDB_USERNAME;
+            private DataColumnParameter ParamDB_PASSWORD;
+            private DataColumnParameter ParamDB_PORT;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedAt;
+            private DataColumnParameter ParamFileServerUrlHttps;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetClientID(int v)                  
+            {                  
+                ParamClientID = new(defClientID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetFileServerUrl(string v)                  
+            {                  
+                ParamFileServerUrl = new(defFileServerUrl, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetFileServerAccessKey(string v)                  
+            {                  
+                ParamFileServerAccessKey = new(defFileServerAccessKey, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetFileServerSecretKey(string v)                  
+            {                  
+                ParamFileServerSecretKey = new(defFileServerSecretKey, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetFileServerBucket(string v)                  
+            {                  
+                ParamFileServerBucket = new(defFileServerBucket, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetClientAPIID(string v)                  
+            {                  
+                ParamClientAPIID = new(defClientAPIID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetClientAPIUrl(string v)                  
+            {                  
+                ParamClientAPIUrl = new(defClientAPIUrl, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDB_HOST(string v)                  
+            {                  
+                ParamDB_HOST = new(defDB_HOST, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDB_DATABASE(string v)                  
+            {                  
+                ParamDB_DATABASE = new(defDB_DATABASE, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDB_USERNAME(string v)                  
+            {                  
+                ParamDB_USERNAME = new(defDB_USERNAME, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDB_PASSWORD(string v)                  
+            {                  
+                ParamDB_PASSWORD = new(defDB_PASSWORD, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDB_PORT(int v)                  
+            {                  
+                ParamDB_PORT = new(defDB_PORT, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime? v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetFileServerUrlHttps(string v)                  
+            {                  
+                ParamFileServerUrlHttps = new(defFileServerUrlHttps, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

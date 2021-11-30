@@ -259,40 +259,40 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defUpdatedAt;
 
-       public int AcademicSessionID { get => (int)TargettedRow[TableColumnNames.AcademicSessionID.ToString()]; }
+       public int AcademicSessionID { get => (int)TargettedRow[TableColumnNames.AcademicSessionID.ToString()];  set => TargettedRow[TableColumnNames.AcademicSessionID.ToString()] = value; }
 
 
-       public int StudentPopulation { get => (int)TargettedRow[TableColumnNames.StudentPopulation.ToString()]; }
+       public int StudentPopulation { get => (int)TargettedRow[TableColumnNames.StudentPopulation.ToString()];  set => TargettedRow[TableColumnNames.StudentPopulation.ToString()] = value; }
 
 
-       public decimal AveragePricePerStudent { get => (decimal)TargettedRow[TableColumnNames.AveragePricePerStudent.ToString()]; }
+       public decimal AveragePricePerStudent { get => (decimal)TargettedRow[TableColumnNames.AveragePricePerStudent.ToString()];  set => TargettedRow[TableColumnNames.AveragePricePerStudent.ToString()] = value; }
 
 
-       public decimal SCADWAREAccessRevenue { get => (decimal)TargettedRow[TableColumnNames.SCADWAREAccessRevenue.ToString()]; }
+       public decimal SCADWAREAccessRevenue { get => (decimal)TargettedRow[TableColumnNames.SCADWAREAccessRevenue.ToString()];  set => TargettedRow[TableColumnNames.SCADWAREAccessRevenue.ToString()] = value; }
 
 
-       public decimal SideContractRevenue { get => (decimal)TargettedRow[TableColumnNames.SideContractRevenue.ToString()]; }
+       public decimal SideContractRevenue { get => (decimal)TargettedRow[TableColumnNames.SideContractRevenue.ToString()];  set => TargettedRow[TableColumnNames.SideContractRevenue.ToString()] = value; }
 
 
-       public decimal GrossRevenue { get => (decimal)TargettedRow[TableColumnNames.GrossRevenue.ToString()]; }
+       public decimal GrossRevenue { get => (decimal)TargettedRow[TableColumnNames.GrossRevenue.ToString()];  set => TargettedRow[TableColumnNames.GrossRevenue.ToString()] = value; }
 
 
-       public decimal Wages { get => (decimal)TargettedRow[TableColumnNames.Wages.ToString()]; }
+       public decimal Wages { get => (decimal)TargettedRow[TableColumnNames.Wages.ToString()];  set => TargettedRow[TableColumnNames.Wages.ToString()] = value; }
 
 
-       public decimal Marketing { get => (decimal)TargettedRow[TableColumnNames.Marketing.ToString()]; }
+       public decimal Marketing { get => (decimal)TargettedRow[TableColumnNames.Marketing.ToString()];  set => TargettedRow[TableColumnNames.Marketing.ToString()] = value; }
 
 
-       public decimal Charity { get => (decimal)TargettedRow[TableColumnNames.Charity.ToString()]; }
+       public decimal Charity { get => (decimal)TargettedRow[TableColumnNames.Charity.ToString()];  set => TargettedRow[TableColumnNames.Charity.ToString()] = value; }
 
 
-       public decimal Others { get => (decimal)TargettedRow[TableColumnNames.Others.ToString()]; }
+       public decimal Others { get => (decimal)TargettedRow[TableColumnNames.Others.ToString()];  set => TargettedRow[TableColumnNames.Others.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
  #endregion
@@ -345,6 +345,140 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamAcademicSessionID;
+            private DataColumnParameter ParamStudentPopulation;
+            private DataColumnParameter ParamAveragePricePerStudent;
+            private DataColumnParameter ParamSCADWAREAccessRevenue;
+            private DataColumnParameter ParamSideContractRevenue;
+            private DataColumnParameter ParamGrossRevenue;
+            private DataColumnParameter ParamWages;
+            private DataColumnParameter ParamMarketing;
+            private DataColumnParameter ParamCharity;
+            private DataColumnParameter ParamOthers;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedAt;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetAcademicSessionID(int v)                  
+            {                  
+                ParamAcademicSessionID = new(defAcademicSessionID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetStudentPopulation(int v)                  
+            {                  
+                ParamStudentPopulation = new(defStudentPopulation, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAveragePricePerStudent(decimal v)                  
+            {                  
+                ParamAveragePricePerStudent = new(defAveragePricePerStudent, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSCADWAREAccessRevenue(decimal v)                  
+            {                  
+                ParamSCADWAREAccessRevenue = new(defSCADWAREAccessRevenue, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSideContractRevenue(decimal v)                  
+            {                  
+                ParamSideContractRevenue = new(defSideContractRevenue, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetGrossRevenue(decimal v)                  
+            {                  
+                ParamGrossRevenue = new(defGrossRevenue, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetWages(decimal v)                  
+            {                  
+                ParamWages = new(defWages, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetMarketing(decimal v)                  
+            {                  
+                ParamMarketing = new(defMarketing, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCharity(decimal v)                  
+            {                  
+                ParamCharity = new(defCharity, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetOthers(decimal v)                  
+            {                  
+                ParamOthers = new(defOthers, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime? v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

@@ -283,67 +283,67 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defUsername;
        public static readonly DataColumnDefinition defUserID;
 
-       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
+       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()];  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
 
 
-       public int? BankID { get => (int?)TargettedRow[TableColumnNames.BankID.ToString()]; }
+       public int? BankID { get => (int?)TargettedRow[TableColumnNames.BankID.ToString()];  set => TargettedRow[TableColumnNames.BankID.ToString()] = value; }
 
 
-       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()]; }
+       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()];  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
 
 
-       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()]; }
+       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()];  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
 
 
-       public string DealerCode { get => (string)TargettedRow[TableColumnNames.DealerCode.ToString()]; }
+       public string DealerCode { get => (string)TargettedRow[TableColumnNames.DealerCode.ToString()];  set => TargettedRow[TableColumnNames.DealerCode.ToString()] = value; }
 
 
-       public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()]; }
+       public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()];  set => TargettedRow[TableColumnNames.CompanyName.ToString()] = value; }
 
 
-       public string WebsiteUrl { get => (string)TargettedRow[TableColumnNames.WebsiteUrl.ToString()]; }
+       public string WebsiteUrl { get => (string)TargettedRow[TableColumnNames.WebsiteUrl.ToString()];  set => TargettedRow[TableColumnNames.WebsiteUrl.ToString()] = value; }
 
 
-       public string OfficeAddress { get => (string)TargettedRow[TableColumnNames.OfficeAddress.ToString()]; }
+       public string OfficeAddress { get => (string)TargettedRow[TableColumnNames.OfficeAddress.ToString()];  set => TargettedRow[TableColumnNames.OfficeAddress.ToString()] = value; }
 
 
-       public int CountryID { get => (int)TargettedRow[TableColumnNames.CountryID.ToString()]; }
+       public int CountryID { get => (int)TargettedRow[TableColumnNames.CountryID.ToString()];  set => TargettedRow[TableColumnNames.CountryID.ToString()] = value; }
 
 
-       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()]; }
+       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()];  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
 
 
-       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()]; }
+       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()];  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
 
 
-       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()]; }
+       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()];  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
 
 
-       public string PictureFileName { get => (string)TargettedRow[TableColumnNames.PictureFileName.ToString()]; }
+       public string PictureFileName { get => (string)TargettedRow[TableColumnNames.PictureFileName.ToString()];  set => TargettedRow[TableColumnNames.PictureFileName.ToString()] = value; }
 
 
-       public string HomeAddress { get => (string)TargettedRow[TableColumnNames.HomeAddress.ToString()]; }
+       public string HomeAddress { get => (string)TargettedRow[TableColumnNames.HomeAddress.ToString()];  set => TargettedRow[TableColumnNames.HomeAddress.ToString()] = value; }
 
 
-       public string BankName { get => (string)TargettedRow[TableColumnNames.BankName.ToString()]; }
+       public string BankName { get => (string)TargettedRow[TableColumnNames.BankName.ToString()];  set => TargettedRow[TableColumnNames.BankName.ToString()] = value; }
 
 
-       public string RegisteredEmail { get => (string)TargettedRow[TableColumnNames.RegisteredEmail.ToString()]; }
+       public string RegisteredEmail { get => (string)TargettedRow[TableColumnNames.RegisteredEmail.ToString()];  set => TargettedRow[TableColumnNames.RegisteredEmail.ToString()] = value; }
 
 
-       public string RegisteredMobile { get => (string)TargettedRow[TableColumnNames.RegisteredMobile.ToString()]; }
+       public string RegisteredMobile { get => (string)TargettedRow[TableColumnNames.RegisteredMobile.ToString()];  set => TargettedRow[TableColumnNames.RegisteredMobile.ToString()] = value; }
 
 
-       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()]; }
+       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()];  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
 
 
-       public string MobileNumber { get => (string)TargettedRow[TableColumnNames.MobileNumber.ToString()]; }
+       public string MobileNumber { get => (string)TargettedRow[TableColumnNames.MobileNumber.ToString()];  set => TargettedRow[TableColumnNames.MobileNumber.ToString()] = value; }
 
 
-       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()]; }
+       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()];  set => TargettedRow[TableColumnNames.Username.ToString()] = value; }
 
 
-       public int? UserID { get => (int?)TargettedRow[TableColumnNames.UserID.ToString()]; }
+       public int? UserID { get => (int?)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
  #endregion

@@ -251,34 +251,34 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCountryCode;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public int OnlinePaymentID { get => (int)TargettedRow[TableColumnNames.OnlinePaymentID.ToString()]; }
+       public int OnlinePaymentID { get => (int)TargettedRow[TableColumnNames.OnlinePaymentID.ToString()];  set => TargettedRow[TableColumnNames.OnlinePaymentID.ToString()] = value; }
 
 
-       public string AuthorizationCode { get => (string)TargettedRow[TableColumnNames.AuthorizationCode.ToString()]; }
+       public string AuthorizationCode { get => (string)TargettedRow[TableColumnNames.AuthorizationCode.ToString()];  set => TargettedRow[TableColumnNames.AuthorizationCode.ToString()] = value; }
 
 
-       public string CardType { get => (string)TargettedRow[TableColumnNames.CardType.ToString()]; }
+       public string CardType { get => (string)TargettedRow[TableColumnNames.CardType.ToString()];  set => TargettedRow[TableColumnNames.CardType.ToString()] = value; }
 
 
-       public string BIN { get => (string)TargettedRow[TableColumnNames.BIN.ToString()]; }
+       public string BIN { get => (string)TargettedRow[TableColumnNames.BIN.ToString()];  set => TargettedRow[TableColumnNames.BIN.ToString()] = value; }
 
 
-       public string Last4Digits { get => (string)TargettedRow[TableColumnNames.Last4Digits.ToString()]; }
+       public string Last4Digits { get => (string)TargettedRow[TableColumnNames.Last4Digits.ToString()];  set => TargettedRow[TableColumnNames.Last4Digits.ToString()] = value; }
 
 
-       public int? ExpirationMonth { get => (int?)TargettedRow[TableColumnNames.ExpirationMonth.ToString()]; }
+       public int? ExpirationMonth { get => (int?)TargettedRow[TableColumnNames.ExpirationMonth.ToString()];  set => TargettedRow[TableColumnNames.ExpirationMonth.ToString()] = value; }
 
 
-       public int? ExpirationYear { get => (int?)TargettedRow[TableColumnNames.ExpirationYear.ToString()]; }
+       public int? ExpirationYear { get => (int?)TargettedRow[TableColumnNames.ExpirationYear.ToString()];  set => TargettedRow[TableColumnNames.ExpirationYear.ToString()] = value; }
 
 
-       public string Bank { get => (string)TargettedRow[TableColumnNames.Bank.ToString()]; }
+       public string Bank { get => (string)TargettedRow[TableColumnNames.Bank.ToString()];  set => TargettedRow[TableColumnNames.Bank.ToString()] = value; }
 
 
-       public string CountryCode { get => (string)TargettedRow[TableColumnNames.CountryCode.ToString()]; }
+       public string CountryCode { get => (string)TargettedRow[TableColumnNames.CountryCode.ToString()];  set => TargettedRow[TableColumnNames.CountryCode.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
  #endregion
@@ -331,6 +331,126 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamOnlinePaymentID;
+            private DataColumnParameter ParamAuthorizationCode;
+            private DataColumnParameter ParamCardType;
+            private DataColumnParameter ParamBIN;
+            private DataColumnParameter ParamLast4Digits;
+            private DataColumnParameter ParamExpirationMonth;
+            private DataColumnParameter ParamExpirationYear;
+            private DataColumnParameter ParamBank;
+            private DataColumnParameter ParamCountryCode;
+            private DataColumnParameter ParamCreatedAt;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetOnlinePaymentID(int v)                  
+            {                  
+                ParamOnlinePaymentID = new(defOnlinePaymentID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAuthorizationCode(string v)                  
+            {                  
+                ParamAuthorizationCode = new(defAuthorizationCode, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCardType(string v)                  
+            {                  
+                ParamCardType = new(defCardType, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBIN(string v)                  
+            {                  
+                ParamBIN = new(defBIN, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetLast4Digits(string v)                  
+            {                  
+                ParamLast4Digits = new(defLast4Digits, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetExpirationMonth(int? v)                  
+            {                  
+                ParamExpirationMonth = new(defExpirationMonth, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetExpirationYear(int? v)                  
+            {                  
+                ParamExpirationYear = new(defExpirationYear, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBank(string v)                  
+            {                  
+                ParamBank = new(defBank, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCountryCode(string v)                  
+            {                  
+                ParamCountryCode = new(defCountryCode, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

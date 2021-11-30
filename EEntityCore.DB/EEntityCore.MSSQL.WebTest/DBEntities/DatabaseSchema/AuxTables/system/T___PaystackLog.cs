@@ -272,43 +272,43 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defUpdatedAt;
 
-       public int PaymentGatewayStatusID { get => (int)TargettedRow[TableColumnNames.PaymentGatewayStatusID.ToString()]; }
+       public int PaymentGatewayStatusID { get => (int)TargettedRow[TableColumnNames.PaymentGatewayStatusID.ToString()];  set => TargettedRow[TableColumnNames.PaymentGatewayStatusID.ToString()] = value; }
 
 
-       public bool IsFinalized { get => (bool)TargettedRow[TableColumnNames.IsFinalized.ToString()]; }
+       public bool IsFinalized { get => (bool)TargettedRow[TableColumnNames.IsFinalized.ToString()];  set => TargettedRow[TableColumnNames.IsFinalized.ToString()] = value; }
 
 
-       public int InitializedByUserID { get => (int)TargettedRow[TableColumnNames.InitializedByUserID.ToString()]; }
+       public int InitializedByUserID { get => (int)TargettedRow[TableColumnNames.InitializedByUserID.ToString()];  set => TargettedRow[TableColumnNames.InitializedByUserID.ToString()] = value; }
 
 
-       public string Reference { get => (string)TargettedRow[TableColumnNames.Reference.ToString()]; }
+       public string Reference { get => (string)TargettedRow[TableColumnNames.Reference.ToString()];  set => TargettedRow[TableColumnNames.Reference.ToString()] = value; }
 
 
-       public string AccessCode { get => (string)TargettedRow[TableColumnNames.AccessCode.ToString()]; }
+       public string AccessCode { get => (string)TargettedRow[TableColumnNames.AccessCode.ToString()];  set => TargettedRow[TableColumnNames.AccessCode.ToString()] = value; }
 
 
-       public string InitialLizeURL { get => (string)TargettedRow[TableColumnNames.InitialLizeURL.ToString()]; }
+       public string InitialLizeURL { get => (string)TargettedRow[TableColumnNames.InitialLizeURL.ToString()];  set => TargettedRow[TableColumnNames.InitialLizeURL.ToString()] = value; }
 
 
-       public string PaymentURL { get => (string)TargettedRow[TableColumnNames.PaymentURL.ToString()]; }
+       public string PaymentURL { get => (string)TargettedRow[TableColumnNames.PaymentURL.ToString()];  set => TargettedRow[TableColumnNames.PaymentURL.ToString()] = value; }
 
 
-       public string VerifiyURL { get => (string)TargettedRow[TableColumnNames.VerifiyURL.ToString()]; }
+       public string VerifiyURL { get => (string)TargettedRow[TableColumnNames.VerifiyURL.ToString()];  set => TargettedRow[TableColumnNames.VerifiyURL.ToString()] = value; }
 
 
-       public int AmountKobo { get => (int)TargettedRow[TableColumnNames.AmountKobo.ToString()]; }
+       public int AmountKobo { get => (int)TargettedRow[TableColumnNames.AmountKobo.ToString()];  set => TargettedRow[TableColumnNames.AmountKobo.ToString()] = value; }
 
 
-       public string VerifyResponseJSON { get => (string)TargettedRow[TableColumnNames.VerifyResponseJSON.ToString()]; }
+       public string VerifyResponseJSON { get => (string)TargettedRow[TableColumnNames.VerifyResponseJSON.ToString()];  set => TargettedRow[TableColumnNames.VerifyResponseJSON.ToString()] = value; }
 
 
-       public int? VerifiedByUserID { get => (int?)TargettedRow[TableColumnNames.VerifiedByUserID.ToString()]; }
+       public int? VerifiedByUserID { get => (int?)TargettedRow[TableColumnNames.VerifiedByUserID.ToString()];  set => TargettedRow[TableColumnNames.VerifiedByUserID.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
  #endregion
@@ -361,6 +361,147 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamPaymentGatewayStatusID;
+            private DataColumnParameter ParamIsFinalized;
+            private DataColumnParameter ParamInitializedByUserID;
+            private DataColumnParameter ParamReference;
+            private DataColumnParameter ParamAccessCode;
+            private DataColumnParameter ParamInitialLizeURL;
+            private DataColumnParameter ParamPaymentURL;
+            private DataColumnParameter ParamVerifiyURL;
+            private DataColumnParameter ParamAmountKobo;
+            private DataColumnParameter ParamVerifyResponseJSON;
+            private DataColumnParameter ParamVerifiedByUserID;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedAt;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetPaymentGatewayStatusID(int v)                  
+            {                  
+                ParamPaymentGatewayStatusID = new(defPaymentGatewayStatusID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIsFinalized(bool v)                  
+            {                  
+                ParamIsFinalized = new(defIsFinalized, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetInitializedByUserID(int v)                  
+            {                  
+                ParamInitializedByUserID = new(defInitializedByUserID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetReference(string v)                  
+            {                  
+                ParamReference = new(defReference, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAccessCode(string v)                  
+            {                  
+                ParamAccessCode = new(defAccessCode, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetInitialLizeURL(string v)                  
+            {                  
+                ParamInitialLizeURL = new(defInitialLizeURL, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPaymentURL(string v)                  
+            {                  
+                ParamPaymentURL = new(defPaymentURL, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetVerifiyURL(string v)                  
+            {                  
+                ParamVerifiyURL = new(defVerifiyURL, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAmountKobo(int v)                  
+            {                  
+                ParamAmountKobo = new(defAmountKobo, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetVerifyResponseJSON(string v)                  
+            {                  
+                ParamVerifyResponseJSON = new(defVerifyResponseJSON, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetVerifiedByUserID(int? v)                  
+            {                  
+                ParamVerifiedByUserID = new(defVerifiedByUserID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime? v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

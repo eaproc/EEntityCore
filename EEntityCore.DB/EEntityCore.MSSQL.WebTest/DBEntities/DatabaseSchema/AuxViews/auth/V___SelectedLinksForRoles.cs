@@ -239,34 +239,34 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defUpdatedAt;
        public static readonly DataColumnDefinition defRoleID;
 
-       public int AppModuleID { get => (int)TargettedRow[TableColumnNames.AppModuleID.ToString()]; }
+       public int AppModuleID { get => (int)TargettedRow[TableColumnNames.AppModuleID.ToString()];  set => TargettedRow[TableColumnNames.AppModuleID.ToString()] = value; }
 
 
-       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()]; }
+       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()];  set => TargettedRow[TableColumnNames.Name.ToString()] = value; }
 
 
-       public string Link { get => (string)TargettedRow[TableColumnNames.Link.ToString()]; }
+       public string Link { get => (string)TargettedRow[TableColumnNames.Link.ToString()];  set => TargettedRow[TableColumnNames.Link.ToString()] = value; }
 
 
-       public int LinkPermissionID { get => (int)TargettedRow[TableColumnNames.LinkPermissionID.ToString()]; }
+       public int LinkPermissionID { get => (int)TargettedRow[TableColumnNames.LinkPermissionID.ToString()];  set => TargettedRow[TableColumnNames.LinkPermissionID.ToString()] = value; }
 
 
-       public int? LinkParentID { get => (int?)TargettedRow[TableColumnNames.LinkParentID.ToString()]; }
+       public int? LinkParentID { get => (int?)TargettedRow[TableColumnNames.LinkParentID.ToString()];  set => TargettedRow[TableColumnNames.LinkParentID.ToString()] = value; }
 
 
-       public int? OwnedByRoleID { get => (int?)TargettedRow[TableColumnNames.OwnedByRoleID.ToString()]; }
+       public int? OwnedByRoleID { get => (int?)TargettedRow[TableColumnNames.OwnedByRoleID.ToString()];  set => TargettedRow[TableColumnNames.OwnedByRoleID.ToString()] = value; }
 
 
-       public string Description { get => (string)TargettedRow[TableColumnNames.Description.ToString()]; }
+       public string Description { get => (string)TargettedRow[TableColumnNames.Description.ToString()];  set => TargettedRow[TableColumnNames.Description.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public int RoleID { get => (int)TargettedRow[TableColumnNames.RoleID.ToString()]; }
+       public int RoleID { get => (int)TargettedRow[TableColumnNames.RoleID.ToString()];  set => TargettedRow[TableColumnNames.RoleID.ToString()] = value; }
 
 
  #endregion

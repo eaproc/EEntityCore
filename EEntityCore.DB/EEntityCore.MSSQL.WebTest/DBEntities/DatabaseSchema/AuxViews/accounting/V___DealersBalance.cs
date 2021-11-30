@@ -214,19 +214,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defWithdrawnAmount;
        public static readonly DataColumnDefinition defBalance;
 
-       public int DealerID { get => (int)TargettedRow[TableColumnNames.DealerID.ToString()]; }
+       public int DealerID { get => (int)TargettedRow[TableColumnNames.DealerID.ToString()];  set => TargettedRow[TableColumnNames.DealerID.ToString()] = value; }
 
 
-       public decimal? EarnedAmount { get => (decimal?)TargettedRow[TableColumnNames.EarnedAmount.ToString()]; }
+       public decimal? EarnedAmount { get => (decimal?)TargettedRow[TableColumnNames.EarnedAmount.ToString()];  set => TargettedRow[TableColumnNames.EarnedAmount.ToString()] = value; }
 
 
-       public decimal? PendingAmount { get => (decimal?)TargettedRow[TableColumnNames.PendingAmount.ToString()]; }
+       public decimal? PendingAmount { get => (decimal?)TargettedRow[TableColumnNames.PendingAmount.ToString()];  set => TargettedRow[TableColumnNames.PendingAmount.ToString()] = value; }
 
 
-       public decimal? WithdrawnAmount { get => (decimal?)TargettedRow[TableColumnNames.WithdrawnAmount.ToString()]; }
+       public decimal? WithdrawnAmount { get => (decimal?)TargettedRow[TableColumnNames.WithdrawnAmount.ToString()];  set => TargettedRow[TableColumnNames.WithdrawnAmount.ToString()] = value; }
 
 
-       public decimal? Balance { get => (decimal?)TargettedRow[TableColumnNames.Balance.ToString()]; }
+       public decimal? Balance { get => (decimal?)TargettedRow[TableColumnNames.Balance.ToString()];  set => TargettedRow[TableColumnNames.Balance.ToString()] = value; }
 
 
  #endregion

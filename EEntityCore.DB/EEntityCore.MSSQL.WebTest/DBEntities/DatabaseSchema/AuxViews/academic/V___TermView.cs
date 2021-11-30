@@ -242,37 +242,37 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defID;
        public static readonly DataColumnDefinition defDescription;
 
-       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()]; }
+       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()];  set => TargettedRow[TableColumnNames.Name.ToString()] = value; }
 
 
-       public string TermOrder { get => (string)TargettedRow[TableColumnNames.TermOrder.ToString()]; }
+       public string TermOrder { get => (string)TargettedRow[TableColumnNames.TermOrder.ToString()];  set => TargettedRow[TableColumnNames.TermOrder.ToString()] = value; }
 
 
-       public string AcademicSession { get => (string)TargettedRow[TableColumnNames.AcademicSession.ToString()]; }
+       public string AcademicSession { get => (string)TargettedRow[TableColumnNames.AcademicSession.ToString()];  set => TargettedRow[TableColumnNames.AcademicSession.ToString()] = value; }
 
 
-       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()]; }
+       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()];  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
 
 
-       public int AcademicSessionID { get => (int)TargettedRow[TableColumnNames.AcademicSessionID.ToString()]; }
+       public int AcademicSessionID { get => (int)TargettedRow[TableColumnNames.AcademicSessionID.ToString()];  set => TargettedRow[TableColumnNames.AcademicSessionID.ToString()] = value; }
 
 
-       public DateTime TermStartDate { get => (DateTime)TargettedRow[TableColumnNames.TermStartDate.ToString()]; }
+       public DateTime TermStartDate { get => (DateTime)TargettedRow[TableColumnNames.TermStartDate.ToString()];  set => TargettedRow[TableColumnNames.TermStartDate.ToString()] = value; }
 
 
-       public DateTime TermEndDate { get => (DateTime)TargettedRow[TableColumnNames.TermEndDate.ToString()]; }
+       public DateTime TermEndDate { get => (DateTime)TargettedRow[TableColumnNames.TermEndDate.ToString()];  set => TargettedRow[TableColumnNames.TermEndDate.ToString()] = value; }
 
 
-       public DateTime SessionStartDate { get => (DateTime)TargettedRow[TableColumnNames.SessionStartDate.ToString()]; }
+       public DateTime SessionStartDate { get => (DateTime)TargettedRow[TableColumnNames.SessionStartDate.ToString()];  set => TargettedRow[TableColumnNames.SessionStartDate.ToString()] = value; }
 
 
-       public DateTime SessionEndDate { get => (DateTime)TargettedRow[TableColumnNames.SessionEndDate.ToString()]; }
+       public DateTime SessionEndDate { get => (DateTime)TargettedRow[TableColumnNames.SessionEndDate.ToString()];  set => TargettedRow[TableColumnNames.SessionEndDate.ToString()] = value; }
 
 
-       public int TermOrderID { get => (int)TargettedRow[TableColumnNames.TermOrderID.ToString()]; }
+       public int TermOrderID { get => (int)TargettedRow[TableColumnNames.TermOrderID.ToString()];  set => TargettedRow[TableColumnNames.TermOrderID.ToString()] = value; }
 
 
-       public string Description { get => (string)TargettedRow[TableColumnNames.Description.ToString()]; }
+       public string Description { get => (string)TargettedRow[TableColumnNames.Description.ToString()];  set => TargettedRow[TableColumnNames.Description.ToString()] = value; }
 
 
  #endregion

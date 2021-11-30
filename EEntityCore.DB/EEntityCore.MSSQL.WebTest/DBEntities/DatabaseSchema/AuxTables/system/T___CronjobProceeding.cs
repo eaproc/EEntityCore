@@ -239,22 +239,22 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defIsSuccessful;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public int CronjobID { get => (int)TargettedRow[TableColumnNames.CronjobID.ToString()]; }
+       public int CronjobID { get => (int)TargettedRow[TableColumnNames.CronjobID.ToString()];  set => TargettedRow[TableColumnNames.CronjobID.ToString()] = value; }
 
 
-       public int ProceedingStatusID { get => (int)TargettedRow[TableColumnNames.ProceedingStatusID.ToString()]; }
+       public int ProceedingStatusID { get => (int)TargettedRow[TableColumnNames.ProceedingStatusID.ToString()];  set => TargettedRow[TableColumnNames.ProceedingStatusID.ToString()] = value; }
 
 
-       public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()]; }
+       public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()];  set => TargettedRow[TableColumnNames.Comments.ToString()] = value; }
 
 
-       public DateTime? NextExpectedExecutionTime { get => (DateTime?)TargettedRow[TableColumnNames.NextExpectedExecutionTime.ToString()]; }
+       public DateTime? NextExpectedExecutionTime { get => (DateTime?)TargettedRow[TableColumnNames.NextExpectedExecutionTime.ToString()];  set => TargettedRow[TableColumnNames.NextExpectedExecutionTime.ToString()] = value; }
 
 
-       public bool IsSuccessful { get => (bool)TargettedRow[TableColumnNames.IsSuccessful.ToString()]; }
+       public bool IsSuccessful { get => (bool)TargettedRow[TableColumnNames.IsSuccessful.ToString()];  set => TargettedRow[TableColumnNames.IsSuccessful.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
  #endregion
@@ -307,6 +307,98 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamCronjobID;
+            private DataColumnParameter ParamProceedingStatusID;
+            private DataColumnParameter ParamComments;
+            private DataColumnParameter ParamNextExpectedExecutionTime;
+            private DataColumnParameter ParamIsSuccessful;
+            private DataColumnParameter ParamCreatedAt;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetCronjobID(int v)                  
+            {                  
+                ParamCronjobID = new(defCronjobID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetProceedingStatusID(int v)                  
+            {                  
+                ParamProceedingStatusID = new(defProceedingStatusID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetComments(string v)                  
+            {                  
+                ParamComments = new(defComments, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetNextExpectedExecutionTime(DateTime? v)                  
+            {                  
+                ParamNextExpectedExecutionTime = new(defNextExpectedExecutionTime, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIsSuccessful(bool v)                  
+            {                  
+                ParamIsSuccessful = new(defIsSuccessful, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

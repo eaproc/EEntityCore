@@ -200,7 +200,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defID;
        public static readonly DataColumnDefinition defDefinition;
 
-       public string Definition { get => (string)TargettedRow[TableColumnNames.Definition.ToString()]; }
+       public string Definition { get => (string)TargettedRow[TableColumnNames.Definition.ToString()];  set => TargettedRow[TableColumnNames.Definition.ToString()] = value; }
 
 
  #endregion

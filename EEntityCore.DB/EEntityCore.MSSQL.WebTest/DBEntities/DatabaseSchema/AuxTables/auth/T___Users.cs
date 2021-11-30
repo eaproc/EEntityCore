@@ -244,28 +244,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defUpdatedAt;
        public static readonly DataColumnDefinition defResetModeCarrier;
 
-       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()]; }
+       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()];  set => TargettedRow[TableColumnNames.Username.ToString()] = value; }
 
 
-       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
+       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()];  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
 
 
-       public string UserPassword { get => (string)TargettedRow[TableColumnNames.UserPassword.ToString()]; }
+       public string UserPassword { get => (string)TargettedRow[TableColumnNames.UserPassword.ToString()];  set => TargettedRow[TableColumnNames.UserPassword.ToString()] = value; }
 
 
-       public string RememberToken { get => (string)TargettedRow[TableColumnNames.RememberToken.ToString()]; }
+       public string RememberToken { get => (string)TargettedRow[TableColumnNames.RememberToken.ToString()];  set => TargettedRow[TableColumnNames.RememberToken.ToString()] = value; }
 
 
-       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()]; }
+       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()];  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public string ResetModeCarrier { get => (string)TargettedRow[TableColumnNames.ResetModeCarrier.ToString()]; }
+       public string ResetModeCarrier { get => (string)TargettedRow[TableColumnNames.ResetModeCarrier.ToString()];  set => TargettedRow[TableColumnNames.ResetModeCarrier.ToString()] = value; }
 
 
  #endregion
@@ -318,6 +318,112 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamUsername;
+            private DataColumnParameter ParamPersonID;
+            private DataColumnParameter ParamUserPassword;
+            private DataColumnParameter ParamRememberToken;
+            private DataColumnParameter ParamIsActive;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedAt;
+            private DataColumnParameter ParamResetModeCarrier;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetUsername(string v)                  
+            {                  
+                ParamUsername = new(defUsername, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPersonID(int v)                  
+            {                  
+                ParamPersonID = new(defPersonID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUserPassword(string v)                  
+            {                  
+                ParamUserPassword = new(defUserPassword, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetRememberToken(string v)                  
+            {                  
+                ParamRememberToken = new(defRememberToken, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIsActive(bool v)                  
+            {                  
+                ParamIsActive = new(defIsActive, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime? v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetResetModeCarrier(string v)                  
+            {                  
+                ParamResetModeCarrier = new(defResetModeCarrier, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

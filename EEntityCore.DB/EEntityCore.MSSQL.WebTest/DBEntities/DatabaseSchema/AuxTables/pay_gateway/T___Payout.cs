@@ -293,55 +293,55 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defAccountName;
        public static readonly DataColumnDefinition defAccountNumber;
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public int? UpdatedByID { get => (int?)TargettedRow[TableColumnNames.UpdatedByID.ToString()]; }
+       public int? UpdatedByID { get => (int?)TargettedRow[TableColumnNames.UpdatedByID.ToString()];  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
 
 
-       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()]; }
+       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()];  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
 
 
-       public decimal PaidInAmount { get => (decimal)TargettedRow[TableColumnNames.PaidInAmount.ToString()]; }
+       public decimal PaidInAmount { get => (decimal)TargettedRow[TableColumnNames.PaidInAmount.ToString()];  set => TargettedRow[TableColumnNames.PaidInAmount.ToString()] = value; }
 
 
-       public decimal PaidInCharges { get => (decimal)TargettedRow[TableColumnNames.PaidInCharges.ToString()]; }
+       public decimal PaidInCharges { get => (decimal)TargettedRow[TableColumnNames.PaidInCharges.ToString()];  set => TargettedRow[TableColumnNames.PaidInCharges.ToString()] = value; }
 
 
-       public decimal PayoutAmount { get => (decimal)TargettedRow[TableColumnNames.PayoutAmount.ToString()]; }
+       public decimal PayoutAmount { get => (decimal)TargettedRow[TableColumnNames.PayoutAmount.ToString()];  set => TargettedRow[TableColumnNames.PayoutAmount.ToString()] = value; }
 
 
-       public decimal PayoutCharge { get => (decimal)TargettedRow[TableColumnNames.PayoutCharge.ToString()]; }
+       public decimal PayoutCharge { get => (decimal)TargettedRow[TableColumnNames.PayoutCharge.ToString()];  set => TargettedRow[TableColumnNames.PayoutCharge.ToString()] = value; }
 
 
-       public decimal Balance { get => (decimal)TargettedRow[TableColumnNames.Balance.ToString()]; }
+       public decimal Balance { get => (decimal)TargettedRow[TableColumnNames.Balance.ToString()];  set => TargettedRow[TableColumnNames.Balance.ToString()] = value; }
 
 
-       public DateTime TransactionStartDate { get => (DateTime)TargettedRow[TableColumnNames.TransactionStartDate.ToString()]; }
+       public DateTime TransactionStartDate { get => (DateTime)TargettedRow[TableColumnNames.TransactionStartDate.ToString()];  set => TargettedRow[TableColumnNames.TransactionStartDate.ToString()] = value; }
 
 
-       public DateTime TransactionEndDate { get => (DateTime)TargettedRow[TableColumnNames.TransactionEndDate.ToString()]; }
+       public DateTime TransactionEndDate { get => (DateTime)TargettedRow[TableColumnNames.TransactionEndDate.ToString()];  set => TargettedRow[TableColumnNames.TransactionEndDate.ToString()] = value; }
 
 
-       public bool? AwaitingPayout { get => (bool?)TargettedRow[TableColumnNames.AwaitingPayout.ToString()]; }
+       public bool? AwaitingPayout { get => (bool?)TargettedRow[TableColumnNames.AwaitingPayout.ToString()];  set => TargettedRow[TableColumnNames.AwaitingPayout.ToString()] = value; }
 
 
-       public bool? Synced { get => (bool?)TargettedRow[TableColumnNames.Synced.ToString()]; }
+       public bool? Synced { get => (bool?)TargettedRow[TableColumnNames.Synced.ToString()];  set => TargettedRow[TableColumnNames.Synced.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public int BankID { get => (int)TargettedRow[TableColumnNames.BankID.ToString()]; }
+       public int BankID { get => (int)TargettedRow[TableColumnNames.BankID.ToString()];  set => TargettedRow[TableColumnNames.BankID.ToString()] = value; }
 
 
-       public string AccountName { get => (string)TargettedRow[TableColumnNames.AccountName.ToString()]; }
+       public string AccountName { get => (string)TargettedRow[TableColumnNames.AccountName.ToString()];  set => TargettedRow[TableColumnNames.AccountName.ToString()] = value; }
 
 
-       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()]; }
+       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()];  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
 
 
  #endregion
@@ -394,6 +394,175 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamCreatedByID;
+            private DataColumnParameter ParamUpdatedByID;
+            private DataColumnParameter ParamClientID;
+            private DataColumnParameter ParamPaidInAmount;
+            private DataColumnParameter ParamPaidInCharges;
+            private DataColumnParameter ParamPayoutAmount;
+            private DataColumnParameter ParamPayoutCharge;
+            private DataColumnParameter ParamBalance;
+            private DataColumnParameter ParamTransactionStartDate;
+            private DataColumnParameter ParamTransactionEndDate;
+            private DataColumnParameter ParamAwaitingPayout;
+            private DataColumnParameter ParamSynced;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedAt;
+            private DataColumnParameter ParamBankID;
+            private DataColumnParameter ParamAccountName;
+            private DataColumnParameter ParamAccountNumber;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetCreatedByID(int v)                  
+            {                  
+                ParamCreatedByID = new(defCreatedByID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedByID(int? v)                  
+            {                  
+                ParamUpdatedByID = new(defUpdatedByID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetClientID(int v)                  
+            {                  
+                ParamClientID = new(defClientID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPaidInAmount(decimal v)                  
+            {                  
+                ParamPaidInAmount = new(defPaidInAmount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPaidInCharges(decimal v)                  
+            {                  
+                ParamPaidInCharges = new(defPaidInCharges, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPayoutAmount(decimal v)                  
+            {                  
+                ParamPayoutAmount = new(defPayoutAmount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPayoutCharge(decimal v)                  
+            {                  
+                ParamPayoutCharge = new(defPayoutCharge, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBalance(decimal v)                  
+            {                  
+                ParamBalance = new(defBalance, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTransactionStartDate(DateTime v)                  
+            {                  
+                ParamTransactionStartDate = new(defTransactionStartDate, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTransactionEndDate(DateTime v)                  
+            {                  
+                ParamTransactionEndDate = new(defTransactionEndDate, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAwaitingPayout(bool? v)                  
+            {                  
+                ParamAwaitingPayout = new(defAwaitingPayout, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSynced(bool? v)                  
+            {                  
+                ParamSynced = new(defSynced, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime? v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBankID(int v)                  
+            {                  
+                ParamBankID = new(defBankID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAccountName(string v)                  
+            {                  
+                ParamAccountName = new(defAccountName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAccountNumber(string v)                  
+            {                  
+                ParamAccountNumber = new(defAccountNumber, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

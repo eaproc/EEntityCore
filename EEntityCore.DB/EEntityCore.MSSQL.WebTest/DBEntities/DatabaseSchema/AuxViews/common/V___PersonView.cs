@@ -303,79 +303,79 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defMaritalStatus;
        public static readonly DataColumnDefinition defBloodType;
 
-       public string IdentificationNo { get => (string)TargettedRow[TableColumnNames.IdentificationNo.ToString()]; }
+       public string IdentificationNo { get => (string)TargettedRow[TableColumnNames.IdentificationNo.ToString()];  set => TargettedRow[TableColumnNames.IdentificationNo.ToString()] = value; }
 
 
-       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()]; }
+       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()];  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
 
 
-       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()]; }
+       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()];  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
 
 
-       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()]; }
+       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()];  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
 
 
-       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()]; }
+       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()];  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
 
 
-       public string MobilePhone { get => (string)TargettedRow[TableColumnNames.MobilePhone.ToString()]; }
+       public string MobilePhone { get => (string)TargettedRow[TableColumnNames.MobilePhone.ToString()];  set => TargettedRow[TableColumnNames.MobilePhone.ToString()] = value; }
 
 
-       public string Gender { get => (string)TargettedRow[TableColumnNames.Gender.ToString()]; }
+       public string Gender { get => (string)TargettedRow[TableColumnNames.Gender.ToString()];  set => TargettedRow[TableColumnNames.Gender.ToString()] = value; }
 
 
-       public string Country { get => (string)TargettedRow[TableColumnNames.Country.ToString()]; }
+       public string Country { get => (string)TargettedRow[TableColumnNames.Country.ToString()];  set => TargettedRow[TableColumnNames.Country.ToString()] = value; }
 
 
-       public int CountryID { get => (int)TargettedRow[TableColumnNames.CountryID.ToString()]; }
+       public int CountryID { get => (int)TargettedRow[TableColumnNames.CountryID.ToString()];  set => TargettedRow[TableColumnNames.CountryID.ToString()] = value; }
 
 
-       public int GenderID { get => (int)TargettedRow[TableColumnNames.GenderID.ToString()]; }
+       public int GenderID { get => (int)TargettedRow[TableColumnNames.GenderID.ToString()];  set => TargettedRow[TableColumnNames.GenderID.ToString()] = value; }
 
 
-       public DateTime DateOfBirth { get => (DateTime)TargettedRow[TableColumnNames.DateOfBirth.ToString()]; }
+       public DateTime DateOfBirth { get => (DateTime)TargettedRow[TableColumnNames.DateOfBirth.ToString()];  set => TargettedRow[TableColumnNames.DateOfBirth.ToString()] = value; }
 
 
-       public string HomeAddress { get => (string)TargettedRow[TableColumnNames.HomeAddress.ToString()]; }
+       public string HomeAddress { get => (string)TargettedRow[TableColumnNames.HomeAddress.ToString()];  set => TargettedRow[TableColumnNames.HomeAddress.ToString()] = value; }
 
 
-       public string HomePhone { get => (string)TargettedRow[TableColumnNames.HomePhone.ToString()]; }
+       public string HomePhone { get => (string)TargettedRow[TableColumnNames.HomePhone.ToString()];  set => TargettedRow[TableColumnNames.HomePhone.ToString()] = value; }
 
 
-       public int? PersonTitleID { get => (int?)TargettedRow[TableColumnNames.PersonTitleID.ToString()]; }
+       public int? PersonTitleID { get => (int?)TargettedRow[TableColumnNames.PersonTitleID.ToString()];  set => TargettedRow[TableColumnNames.PersonTitleID.ToString()] = value; }
 
 
-       public int? BloodTypeID { get => (int?)TargettedRow[TableColumnNames.BloodTypeID.ToString()]; }
+       public int? BloodTypeID { get => (int?)TargettedRow[TableColumnNames.BloodTypeID.ToString()];  set => TargettedRow[TableColumnNames.BloodTypeID.ToString()] = value; }
 
 
-       public string PictureFileName { get => (string)TargettedRow[TableColumnNames.PictureFileName.ToString()]; }
+       public string PictureFileName { get => (string)TargettedRow[TableColumnNames.PictureFileName.ToString()];  set => TargettedRow[TableColumnNames.PictureFileName.ToString()] = value; }
 
 
-       public int MaritalStatusID { get => (int)TargettedRow[TableColumnNames.MaritalStatusID.ToString()]; }
+       public int MaritalStatusID { get => (int)TargettedRow[TableColumnNames.MaritalStatusID.ToString()];  set => TargettedRow[TableColumnNames.MaritalStatusID.ToString()] = value; }
 
 
-       public bool IsSuperUser { get => (bool)TargettedRow[TableColumnNames.IsSuperUser.ToString()]; }
+       public bool IsSuperUser { get => (bool)TargettedRow[TableColumnNames.IsSuperUser.ToString()];  set => TargettedRow[TableColumnNames.IsSuperUser.ToString()] = value; }
 
 
-       public int? UserID { get => (int?)TargettedRow[TableColumnNames.UserID.ToString()]; }
+       public int? UserID { get => (int?)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
-       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()]; }
+       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()];  set => TargettedRow[TableColumnNames.Username.ToString()] = value; }
 
 
-       public bool? IsActive { get => (bool?)TargettedRow[TableColumnNames.IsActive.ToString()]; }
+       public bool? IsActive { get => (bool?)TargettedRow[TableColumnNames.IsActive.ToString()];  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
 
 
-       public string BirthPlace { get => (string)TargettedRow[TableColumnNames.BirthPlace.ToString()]; }
+       public string BirthPlace { get => (string)TargettedRow[TableColumnNames.BirthPlace.ToString()];  set => TargettedRow[TableColumnNames.BirthPlace.ToString()] = value; }
 
 
-       public string PersonTitle { get => (string)TargettedRow[TableColumnNames.PersonTitle.ToString()]; }
+       public string PersonTitle { get => (string)TargettedRow[TableColumnNames.PersonTitle.ToString()];  set => TargettedRow[TableColumnNames.PersonTitle.ToString()] = value; }
 
 
-       public string MaritalStatus { get => (string)TargettedRow[TableColumnNames.MaritalStatus.ToString()]; }
+       public string MaritalStatus { get => (string)TargettedRow[TableColumnNames.MaritalStatus.ToString()];  set => TargettedRow[TableColumnNames.MaritalStatus.ToString()] = value; }
 
 
-       public string BloodType { get => (string)TargettedRow[TableColumnNames.BloodType.ToString()]; }
+       public string BloodType { get => (string)TargettedRow[TableColumnNames.BloodType.ToString()];  set => TargettedRow[TableColumnNames.BloodType.ToString()] = value; }
 
 
  #endregion

@@ -266,34 +266,34 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defUpdatedAt;
 
-       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
+       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()];  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
 
 
-       public string Number { get => (string)TargettedRow[TableColumnNames.Number.ToString()]; }
+       public string Number { get => (string)TargettedRow[TableColumnNames.Number.ToString()];  set => TargettedRow[TableColumnNames.Number.ToString()] = value; }
 
 
-       public int IdentificationTypeID { get => (int)TargettedRow[TableColumnNames.IdentificationTypeID.ToString()]; }
+       public int IdentificationTypeID { get => (int)TargettedRow[TableColumnNames.IdentificationTypeID.ToString()];  set => TargettedRow[TableColumnNames.IdentificationTypeID.ToString()] = value; }
 
 
-       public DateTime? IssuedDate { get => (DateTime?)TargettedRow[TableColumnNames.IssuedDate.ToString()]; }
+       public DateTime? IssuedDate { get => (DateTime?)TargettedRow[TableColumnNames.IssuedDate.ToString()];  set => TargettedRow[TableColumnNames.IssuedDate.ToString()] = value; }
 
 
-       public int IssuingCountryID { get => (int)TargettedRow[TableColumnNames.IssuingCountryID.ToString()]; }
+       public int IssuingCountryID { get => (int)TargettedRow[TableColumnNames.IssuingCountryID.ToString()];  set => TargettedRow[TableColumnNames.IssuingCountryID.ToString()] = value; }
 
 
-       public DateTime? ExpiryDate { get => (DateTime?)TargettedRow[TableColumnNames.ExpiryDate.ToString()]; }
+       public DateTime? ExpiryDate { get => (DateTime?)TargettedRow[TableColumnNames.ExpiryDate.ToString()];  set => TargettedRow[TableColumnNames.ExpiryDate.ToString()] = value; }
 
 
-       public int IdentificationViabilityID { get => (int)TargettedRow[TableColumnNames.IdentificationViabilityID.ToString()]; }
+       public int IdentificationViabilityID { get => (int)TargettedRow[TableColumnNames.IdentificationViabilityID.ToString()];  set => TargettedRow[TableColumnNames.IdentificationViabilityID.ToString()] = value; }
 
 
-       public string DocumentFileName { get => (string)TargettedRow[TableColumnNames.DocumentFileName.ToString()]; }
+       public string DocumentFileName { get => (string)TargettedRow[TableColumnNames.DocumentFileName.ToString()];  set => TargettedRow[TableColumnNames.DocumentFileName.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
  #endregion
@@ -346,6 +346,126 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamPersonID;
+            private DataColumnParameter ParamNumber;
+            private DataColumnParameter ParamIdentificationTypeID;
+            private DataColumnParameter ParamIssuedDate;
+            private DataColumnParameter ParamIssuingCountryID;
+            private DataColumnParameter ParamExpiryDate;
+            private DataColumnParameter ParamIdentificationViabilityID;
+            private DataColumnParameter ParamDocumentFileName;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedAt;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetPersonID(int v)                  
+            {                  
+                ParamPersonID = new(defPersonID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetNumber(string v)                  
+            {                  
+                ParamNumber = new(defNumber, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIdentificationTypeID(int v)                  
+            {                  
+                ParamIdentificationTypeID = new(defIdentificationTypeID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIssuedDate(DateTime? v)                  
+            {                  
+                ParamIssuedDate = new(defIssuedDate, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIssuingCountryID(int v)                  
+            {                  
+                ParamIssuingCountryID = new(defIssuingCountryID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetExpiryDate(DateTime? v)                  
+            {                  
+                ParamExpiryDate = new(defExpiryDate, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIdentificationViabilityID(int v)                  
+            {                  
+                ParamIdentificationViabilityID = new(defIdentificationViabilityID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDocumentFileName(string v)                  
+            {                  
+                ParamDocumentFileName = new(defDocumentFileName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime? v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

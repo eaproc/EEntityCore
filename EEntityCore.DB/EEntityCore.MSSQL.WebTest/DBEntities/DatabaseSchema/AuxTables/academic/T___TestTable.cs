@@ -245,34 +245,34 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defTestDateTime;
        public static readonly DataColumnDefinition defTestDateTimeNull;
 
-       public string TestString { get => (string)TargettedRow[TableColumnNames.TestString.ToString()]; }
+       public string TestString { get => (string)TargettedRow[TableColumnNames.TestString.ToString()];  set => TargettedRow[TableColumnNames.TestString.ToString()] = value; }
 
 
-       public string TestStringNull { get => (string)TargettedRow[TableColumnNames.TestStringNull.ToString()]; }
+       public string TestStringNull { get => (string)TargettedRow[TableColumnNames.TestStringNull.ToString()];  set => TargettedRow[TableColumnNames.TestStringNull.ToString()] = value; }
 
 
-       public int TestInt32 { get => (int)TargettedRow[TableColumnNames.TestInt32.ToString()]; }
+       public int TestInt32 { get => (int)TargettedRow[TableColumnNames.TestInt32.ToString()];  set => TargettedRow[TableColumnNames.TestInt32.ToString()] = value; }
 
 
-       public int? TestInt32Null { get => (int?)TargettedRow[TableColumnNames.TestInt32Null.ToString()]; }
+       public int? TestInt32Null { get => (int?)TargettedRow[TableColumnNames.TestInt32Null.ToString()];  set => TargettedRow[TableColumnNames.TestInt32Null.ToString()] = value; }
 
 
-       public bool TestBool { get => (bool)TargettedRow[TableColumnNames.TestBool.ToString()]; }
+       public bool TestBool { get => (bool)TargettedRow[TableColumnNames.TestBool.ToString()];  set => TargettedRow[TableColumnNames.TestBool.ToString()] = value; }
 
 
-       public bool? TestBoolNull { get => (bool?)TargettedRow[TableColumnNames.TestBoolNull.ToString()]; }
+       public bool? TestBoolNull { get => (bool?)TargettedRow[TableColumnNames.TestBoolNull.ToString()];  set => TargettedRow[TableColumnNames.TestBoolNull.ToString()] = value; }
 
 
-       public decimal TestDecimal { get => (decimal)TargettedRow[TableColumnNames.TestDecimal.ToString()]; }
+       public decimal TestDecimal { get => (decimal)TargettedRow[TableColumnNames.TestDecimal.ToString()];  set => TargettedRow[TableColumnNames.TestDecimal.ToString()] = value; }
 
 
-       public decimal? TestDecimalNull { get => (decimal?)TargettedRow[TableColumnNames.TestDecimalNull.ToString()]; }
+       public decimal? TestDecimalNull { get => (decimal?)TargettedRow[TableColumnNames.TestDecimalNull.ToString()];  set => TargettedRow[TableColumnNames.TestDecimalNull.ToString()] = value; }
 
 
-       public DateTime TestDateTime { get => (DateTime)TargettedRow[TableColumnNames.TestDateTime.ToString()]; }
+       public DateTime TestDateTime { get => (DateTime)TargettedRow[TableColumnNames.TestDateTime.ToString()];  set => TargettedRow[TableColumnNames.TestDateTime.ToString()] = value; }
 
 
-       public DateTime? TestDateTimeNull { get => (DateTime?)TargettedRow[TableColumnNames.TestDateTimeNull.ToString()]; }
+       public DateTime? TestDateTimeNull { get => (DateTime?)TargettedRow[TableColumnNames.TestDateTimeNull.ToString()];  set => TargettedRow[TableColumnNames.TestDateTimeNull.ToString()] = value; }
 
 
  #endregion
@@ -325,6 +325,126 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamTestString;
+            private DataColumnParameter ParamTestStringNull;
+            private DataColumnParameter ParamTestInt32;
+            private DataColumnParameter ParamTestInt32Null;
+            private DataColumnParameter ParamTestBool;
+            private DataColumnParameter ParamTestBoolNull;
+            private DataColumnParameter ParamTestDecimal;
+            private DataColumnParameter ParamTestDecimalNull;
+            private DataColumnParameter ParamTestDateTime;
+            private DataColumnParameter ParamTestDateTimeNull;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetTestString(string v)                  
+            {                  
+                ParamTestString = new(defTestString, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTestStringNull(string v)                  
+            {                  
+                ParamTestStringNull = new(defTestStringNull, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTestInt32(int v)                  
+            {                  
+                ParamTestInt32 = new(defTestInt32, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTestInt32Null(int? v)                  
+            {                  
+                ParamTestInt32Null = new(defTestInt32Null, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTestBool(bool v)                  
+            {                  
+                ParamTestBool = new(defTestBool, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTestBoolNull(bool? v)                  
+            {                  
+                ParamTestBoolNull = new(defTestBoolNull, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTestDecimal(decimal v)                  
+            {                  
+                ParamTestDecimal = new(defTestDecimal, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTestDecimalNull(decimal? v)                  
+            {                  
+                ParamTestDecimalNull = new(defTestDecimalNull, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTestDateTime(DateTime v)                  
+            {                  
+                ParamTestDateTime = new(defTestDateTime, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTestDateTimeNull(DateTime? v)                  
+            {                  
+                ParamTestDateTimeNull = new(defTestDateTimeNull, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

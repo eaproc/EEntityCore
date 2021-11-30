@@ -250,34 +250,34 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defIdentifier;
        public static readonly DataColumnDefinition defTargetURL;
 
-       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()]; }
+       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
-       public string Title { get => (string)TargettedRow[TableColumnNames.Title.ToString()]; }
+       public string Title { get => (string)TargettedRow[TableColumnNames.Title.ToString()];  set => TargettedRow[TableColumnNames.Title.ToString()] = value; }
 
 
-       public string QuickNote { get => (string)TargettedRow[TableColumnNames.QuickNote.ToString()]; }
+       public string QuickNote { get => (string)TargettedRow[TableColumnNames.QuickNote.ToString()];  set => TargettedRow[TableColumnNames.QuickNote.ToString()] = value; }
 
 
-       public string Description { get => (string)TargettedRow[TableColumnNames.Description.ToString()]; }
+       public string Description { get => (string)TargettedRow[TableColumnNames.Description.ToString()];  set => TargettedRow[TableColumnNames.Description.ToString()] = value; }
 
 
-       public string IconClass { get => (string)TargettedRow[TableColumnNames.IconClass.ToString()]; }
+       public string IconClass { get => (string)TargettedRow[TableColumnNames.IconClass.ToString()];  set => TargettedRow[TableColumnNames.IconClass.ToString()] = value; }
 
 
-       public string HeadingColorClass { get => (string)TargettedRow[TableColumnNames.HeadingColorClass.ToString()]; }
+       public string HeadingColorClass { get => (string)TargettedRow[TableColumnNames.HeadingColorClass.ToString()];  set => TargettedRow[TableColumnNames.HeadingColorClass.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? ReadAt { get => (DateTime?)TargettedRow[TableColumnNames.ReadAt.ToString()]; }
+       public DateTime? ReadAt { get => (DateTime?)TargettedRow[TableColumnNames.ReadAt.ToString()];  set => TargettedRow[TableColumnNames.ReadAt.ToString()] = value; }
 
 
-       public string Identifier { get => (string)TargettedRow[TableColumnNames.Identifier.ToString()]; }
+       public string Identifier { get => (string)TargettedRow[TableColumnNames.Identifier.ToString()];  set => TargettedRow[TableColumnNames.Identifier.ToString()] = value; }
 
 
-       public string TargetURL { get => (string)TargettedRow[TableColumnNames.TargetURL.ToString()]; }
+       public string TargetURL { get => (string)TargettedRow[TableColumnNames.TargetURL.ToString()];  set => TargettedRow[TableColumnNames.TargetURL.ToString()] = value; }
 
 
  #endregion
@@ -330,6 +330,126 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamUserID;
+            private DataColumnParameter ParamTitle;
+            private DataColumnParameter ParamQuickNote;
+            private DataColumnParameter ParamDescription;
+            private DataColumnParameter ParamIconClass;
+            private DataColumnParameter ParamHeadingColorClass;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamReadAt;
+            private DataColumnParameter ParamIdentifier;
+            private DataColumnParameter ParamTargetURL;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetUserID(int v)                  
+            {                  
+                ParamUserID = new(defUserID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTitle(string v)                  
+            {                  
+                ParamTitle = new(defTitle, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetQuickNote(string v)                  
+            {                  
+                ParamQuickNote = new(defQuickNote, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDescription(string v)                  
+            {                  
+                ParamDescription = new(defDescription, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIconClass(string v)                  
+            {                  
+                ParamIconClass = new(defIconClass, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetHeadingColorClass(string v)                  
+            {                  
+                ParamHeadingColorClass = new(defHeadingColorClass, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetReadAt(DateTime? v)                  
+            {                  
+                ParamReadAt = new(defReadAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIdentifier(string v)                  
+            {                  
+                ParamIdentifier = new(defIdentifier, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTargetURL(string v)                  
+            {                  
+                ParamTargetURL = new(defTargetURL, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

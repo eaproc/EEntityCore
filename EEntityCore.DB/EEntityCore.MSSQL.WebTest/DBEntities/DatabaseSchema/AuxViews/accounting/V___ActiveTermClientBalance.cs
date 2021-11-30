@@ -244,40 +244,40 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defBalanceDue;
        public static readonly DataColumnDefinition defSurplus;
 
-       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()]; }
+       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()];  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
 
 
-       public int TermID { get => (int)TargettedRow[TableColumnNames.TermID.ToString()]; }
+       public int TermID { get => (int)TargettedRow[TableColumnNames.TermID.ToString()];  set => TargettedRow[TableColumnNames.TermID.ToString()] = value; }
 
 
-       public string Term { get => (string)TargettedRow[TableColumnNames.Term.ToString()]; }
+       public string Term { get => (string)TargettedRow[TableColumnNames.Term.ToString()];  set => TargettedRow[TableColumnNames.Term.ToString()] = value; }
 
 
-       public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()]; }
+       public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()];  set => TargettedRow[TableColumnNames.CompanyName.ToString()] = value; }
 
 
-       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()]; }
+       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()];  set => TargettedRow[TableColumnNames.Name.ToString()] = value; }
 
 
-       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()]; }
+       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()];  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
 
 
-       public decimal? BillTotal { get => (decimal?)TargettedRow[TableColumnNames.BillTotal.ToString()]; }
+       public decimal? BillTotal { get => (decimal?)TargettedRow[TableColumnNames.BillTotal.ToString()];  set => TargettedRow[TableColumnNames.BillTotal.ToString()] = value; }
 
 
-       public decimal? Arrears { get => (decimal?)TargettedRow[TableColumnNames.Arrears.ToString()]; }
+       public decimal? Arrears { get => (decimal?)TargettedRow[TableColumnNames.Arrears.ToString()];  set => TargettedRow[TableColumnNames.Arrears.ToString()] = value; }
 
 
-       public decimal? PaymentMade { get => (decimal?)TargettedRow[TableColumnNames.PaymentMade.ToString()]; }
+       public decimal? PaymentMade { get => (decimal?)TargettedRow[TableColumnNames.PaymentMade.ToString()];  set => TargettedRow[TableColumnNames.PaymentMade.ToString()] = value; }
 
 
-       public decimal? Discount { get => (decimal?)TargettedRow[TableColumnNames.Discount.ToString()]; }
+       public decimal? Discount { get => (decimal?)TargettedRow[TableColumnNames.Discount.ToString()];  set => TargettedRow[TableColumnNames.Discount.ToString()] = value; }
 
 
-       public decimal? BalanceDue { get => (decimal?)TargettedRow[TableColumnNames.BalanceDue.ToString()]; }
+       public decimal? BalanceDue { get => (decimal?)TargettedRow[TableColumnNames.BalanceDue.ToString()];  set => TargettedRow[TableColumnNames.BalanceDue.ToString()] = value; }
 
 
-       public decimal? Surplus { get => (decimal?)TargettedRow[TableColumnNames.Surplus.ToString()]; }
+       public decimal? Surplus { get => (decimal?)TargettedRow[TableColumnNames.Surplus.ToString()];  set => TargettedRow[TableColumnNames.Surplus.ToString()] = value; }
 
 
  #endregion

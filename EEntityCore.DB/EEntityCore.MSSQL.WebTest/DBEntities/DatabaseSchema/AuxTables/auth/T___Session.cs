@@ -250,37 +250,37 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defUpdatedAt;
 
-       public string SessionID { get => (string)TargettedRow[TableColumnNames.SessionID.ToString()]; }
+       public string SessionID { get => (string)TargettedRow[TableColumnNames.SessionID.ToString()];  set => TargettedRow[TableColumnNames.SessionID.ToString()] = value; }
 
 
-       public int SessionTimeoutMins { get => (int)TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()]; }
+       public int SessionTimeoutMins { get => (int)TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()];  set => TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()] = value; }
 
 
-       public int? UserID { get => (int?)TargettedRow[TableColumnNames.UserID.ToString()]; }
+       public int? UserID { get => (int?)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
-       public bool? IsNewSession { get => (bool?)TargettedRow[TableColumnNames.IsNewSession.ToString()]; }
+       public bool? IsNewSession { get => (bool?)TargettedRow[TableColumnNames.IsNewSession.ToString()];  set => TargettedRow[TableColumnNames.IsNewSession.ToString()] = value; }
 
 
-       public bool? IsReadOnly { get => (bool?)TargettedRow[TableColumnNames.IsReadOnly.ToString()]; }
+       public bool? IsReadOnly { get => (bool?)TargettedRow[TableColumnNames.IsReadOnly.ToString()];  set => TargettedRow[TableColumnNames.IsReadOnly.ToString()] = value; }
 
 
-       public DateTime? LastActive { get => (DateTime?)TargettedRow[TableColumnNames.LastActive.ToString()]; }
+       public DateTime? LastActive { get => (DateTime?)TargettedRow[TableColumnNames.LastActive.ToString()];  set => TargettedRow[TableColumnNames.LastActive.ToString()] = value; }
 
 
-       public string IpAddress { get => (string)TargettedRow[TableColumnNames.IpAddress.ToString()]; }
+       public string IpAddress { get => (string)TargettedRow[TableColumnNames.IpAddress.ToString()];  set => TargettedRow[TableColumnNames.IpAddress.ToString()] = value; }
 
 
-       public string Browser { get => (string)TargettedRow[TableColumnNames.Browser.ToString()]; }
+       public string Browser { get => (string)TargettedRow[TableColumnNames.Browser.ToString()];  set => TargettedRow[TableColumnNames.Browser.ToString()] = value; }
 
 
-       public string SessionVariables { get => (string)TargettedRow[TableColumnNames.SessionVariables.ToString()]; }
+       public string SessionVariables { get => (string)TargettedRow[TableColumnNames.SessionVariables.ToString()];  set => TargettedRow[TableColumnNames.SessionVariables.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
  #endregion
@@ -333,6 +333,133 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamSessionID;
+            private DataColumnParameter ParamSessionTimeoutMins;
+            private DataColumnParameter ParamUserID;
+            private DataColumnParameter ParamIsNewSession;
+            private DataColumnParameter ParamIsReadOnly;
+            private DataColumnParameter ParamLastActive;
+            private DataColumnParameter ParamIpAddress;
+            private DataColumnParameter ParamBrowser;
+            private DataColumnParameter ParamSessionVariables;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedAt;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetSessionID(string v)                  
+            {                  
+                ParamSessionID = new(defSessionID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSessionTimeoutMins(int v)                  
+            {                  
+                ParamSessionTimeoutMins = new(defSessionTimeoutMins, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUserID(int? v)                  
+            {                  
+                ParamUserID = new(defUserID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIsNewSession(bool? v)                  
+            {                  
+                ParamIsNewSession = new(defIsNewSession, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIsReadOnly(bool? v)                  
+            {                  
+                ParamIsReadOnly = new(defIsReadOnly, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetLastActive(DateTime? v)                  
+            {                  
+                ParamLastActive = new(defLastActive, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIpAddress(string v)                  
+            {                  
+                ParamIpAddress = new(defIpAddress, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBrowser(string v)                  
+            {                  
+                ParamBrowser = new(defBrowser, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSessionVariables(string v)                  
+            {                  
+                ParamSessionVariables = new(defSessionVariables, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime? v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

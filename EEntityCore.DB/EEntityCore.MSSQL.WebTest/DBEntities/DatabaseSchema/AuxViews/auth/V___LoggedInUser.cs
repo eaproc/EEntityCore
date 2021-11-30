@@ -234,31 +234,31 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defPictureFileName;
        public static readonly DataColumnDefinition defFullName;
 
-       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()]; }
+       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()];  set => TargettedRow[TableColumnNames.Username.ToString()] = value; }
 
 
-       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
+       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()];  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
 
 
-       public string RememberToken { get => (string)TargettedRow[TableColumnNames.RememberToken.ToString()]; }
+       public string RememberToken { get => (string)TargettedRow[TableColumnNames.RememberToken.ToString()];  set => TargettedRow[TableColumnNames.RememberToken.ToString()] = value; }
 
 
-       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()]; }
+       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()];  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
 
 
-       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()]; }
+       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()];  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
 
 
-       public string VerifiedMobileNumber { get => (string)TargettedRow[TableColumnNames.VerifiedMobileNumber.ToString()]; }
+       public string VerifiedMobileNumber { get => (string)TargettedRow[TableColumnNames.VerifiedMobileNumber.ToString()];  set => TargettedRow[TableColumnNames.VerifiedMobileNumber.ToString()] = value; }
 
 
-       public string VerifiedEmail { get => (string)TargettedRow[TableColumnNames.VerifiedEmail.ToString()]; }
+       public string VerifiedEmail { get => (string)TargettedRow[TableColumnNames.VerifiedEmail.ToString()];  set => TargettedRow[TableColumnNames.VerifiedEmail.ToString()] = value; }
 
 
-       public string PictureFileName { get => (string)TargettedRow[TableColumnNames.PictureFileName.ToString()]; }
+       public string PictureFileName { get => (string)TargettedRow[TableColumnNames.PictureFileName.ToString()];  set => TargettedRow[TableColumnNames.PictureFileName.ToString()] = value; }
 
 
-       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()]; }
+       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()];  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
 
 
  #endregion

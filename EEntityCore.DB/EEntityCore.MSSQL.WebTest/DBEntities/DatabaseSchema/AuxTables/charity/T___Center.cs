@@ -268,40 +268,40 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedByID;
        public static readonly DataColumnDefinition defUpdatedByID;
 
-       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()]; }
+       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()];  set => TargettedRow[TableColumnNames.Name.ToString()] = value; }
 
 
-       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()]; }
+       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()];  set => TargettedRow[TableColumnNames.Address.ToString()] = value; }
 
 
-       public int BeneficiariesAvailableOnRegistration { get => (int)TargettedRow[TableColumnNames.BeneficiariesAvailableOnRegistration.ToString()]; }
+       public int BeneficiariesAvailableOnRegistration { get => (int)TargettedRow[TableColumnNames.BeneficiariesAvailableOnRegistration.ToString()];  set => TargettedRow[TableColumnNames.BeneficiariesAvailableOnRegistration.ToString()] = value; }
 
 
-       public int CenterStatusID { get => (int)TargettedRow[TableColumnNames.CenterStatusID.ToString()]; }
+       public int CenterStatusID { get => (int)TargettedRow[TableColumnNames.CenterStatusID.ToString()];  set => TargettedRow[TableColumnNames.CenterStatusID.ToString()] = value; }
 
 
-       public int YearFounded { get => (int)TargettedRow[TableColumnNames.YearFounded.ToString()]; }
+       public int YearFounded { get => (int)TargettedRow[TableColumnNames.YearFounded.ToString()];  set => TargettedRow[TableColumnNames.YearFounded.ToString()] = value; }
 
 
-       public int ChurchCapacity { get => (int)TargettedRow[TableColumnNames.ChurchCapacity.ToString()]; }
+       public int ChurchCapacity { get => (int)TargettedRow[TableColumnNames.ChurchCapacity.ToString()];  set => TargettedRow[TableColumnNames.ChurchCapacity.ToString()] = value; }
 
 
-       public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()]; }
+       public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()];  set => TargettedRow[TableColumnNames.Comments.ToString()] = value; }
 
 
-       public string PictureStoredPath { get => (string)TargettedRow[TableColumnNames.PictureStoredPath.ToString()]; }
+       public string PictureStoredPath { get => (string)TargettedRow[TableColumnNames.PictureStoredPath.ToString()];  set => TargettedRow[TableColumnNames.PictureStoredPath.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime UpdatedAt { get => (DateTime)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime UpdatedAt { get => (DateTime)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()]; }
+       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()];  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
 
 
  #endregion
@@ -354,6 +354,140 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamName;
+            private DataColumnParameter ParamAddress;
+            private DataColumnParameter ParamBeneficiariesAvailableOnRegistration;
+            private DataColumnParameter ParamCenterStatusID;
+            private DataColumnParameter ParamYearFounded;
+            private DataColumnParameter ParamChurchCapacity;
+            private DataColumnParameter ParamComments;
+            private DataColumnParameter ParamPictureStoredPath;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedAt;
+            private DataColumnParameter ParamCreatedByID;
+            private DataColumnParameter ParamUpdatedByID;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetName(string v)                  
+            {                  
+                ParamName = new(defName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAddress(string v)                  
+            {                  
+                ParamAddress = new(defAddress, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBeneficiariesAvailableOnRegistration(int v)                  
+            {                  
+                ParamBeneficiariesAvailableOnRegistration = new(defBeneficiariesAvailableOnRegistration, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCenterStatusID(int v)                  
+            {                  
+                ParamCenterStatusID = new(defCenterStatusID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetYearFounded(int v)                  
+            {                  
+                ParamYearFounded = new(defYearFounded, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetChurchCapacity(int v)                  
+            {                  
+                ParamChurchCapacity = new(defChurchCapacity, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetComments(string v)                  
+            {                  
+                ParamComments = new(defComments, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPictureStoredPath(string v)                  
+            {                  
+                ParamPictureStoredPath = new(defPictureStoredPath, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedByID(int v)                  
+            {                  
+                ParamCreatedByID = new(defCreatedByID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedByID(int v)                  
+            {                  
+                ParamUpdatedByID = new(defUpdatedByID, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

@@ -213,16 +213,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defRole;
        public static readonly DataColumnDefinition defRoleRank;
 
-       public int RoleID { get => (int)TargettedRow[TableColumnNames.RoleID.ToString()]; }
+       public int RoleID { get => (int)TargettedRow[TableColumnNames.RoleID.ToString()];  set => TargettedRow[TableColumnNames.RoleID.ToString()] = value; }
 
 
-       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()]; }
+       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
-       public string Role { get => (string)TargettedRow[TableColumnNames.Role.ToString()]; }
+       public string Role { get => (string)TargettedRow[TableColumnNames.Role.ToString()];  set => TargettedRow[TableColumnNames.Role.ToString()] = value; }
 
 
-       public byte RoleRank { get => (byte)TargettedRow[TableColumnNames.RoleRank.ToString()]; }
+       public byte RoleRank { get => (byte)TargettedRow[TableColumnNames.RoleRank.ToString()];  set => TargettedRow[TableColumnNames.RoleRank.ToString()] = value; }
 
 
  #endregion

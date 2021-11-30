@@ -290,52 +290,52 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defDisbursedAt;
        public static readonly DataColumnDefinition defUpdatedByID;
 
-       public int PayrollID { get => (int)TargettedRow[TableColumnNames.PayrollID.ToString()]; }
+       public int PayrollID { get => (int)TargettedRow[TableColumnNames.PayrollID.ToString()];  set => TargettedRow[TableColumnNames.PayrollID.ToString()] = value; }
 
 
-       public int PersonnelID { get => (int)TargettedRow[TableColumnNames.PersonnelID.ToString()]; }
+       public int PersonnelID { get => (int)TargettedRow[TableColumnNames.PersonnelID.ToString()];  set => TargettedRow[TableColumnNames.PersonnelID.ToString()] = value; }
 
 
-       public int AttendanceCount { get => (int)TargettedRow[TableColumnNames.AttendanceCount.ToString()]; }
+       public int AttendanceCount { get => (int)TargettedRow[TableColumnNames.AttendanceCount.ToString()];  set => TargettedRow[TableColumnNames.AttendanceCount.ToString()] = value; }
 
 
-       public decimal SalaryAmount { get => (decimal)TargettedRow[TableColumnNames.SalaryAmount.ToString()]; }
+       public decimal SalaryAmount { get => (decimal)TargettedRow[TableColumnNames.SalaryAmount.ToString()];  set => TargettedRow[TableColumnNames.SalaryAmount.ToString()] = value; }
 
 
-       public decimal RatePerDay { get => (decimal)TargettedRow[TableColumnNames.RatePerDay.ToString()]; }
+       public decimal RatePerDay { get => (decimal)TargettedRow[TableColumnNames.RatePerDay.ToString()];  set => TargettedRow[TableColumnNames.RatePerDay.ToString()] = value; }
 
 
-       public decimal CalculatedAmount { get => (decimal)TargettedRow[TableColumnNames.CalculatedAmount.ToString()]; }
+       public decimal CalculatedAmount { get => (decimal)TargettedRow[TableColumnNames.CalculatedAmount.ToString()];  set => TargettedRow[TableColumnNames.CalculatedAmount.ToString()] = value; }
 
 
-       public bool IsDisbursed { get => (bool)TargettedRow[TableColumnNames.IsDisbursed.ToString()]; }
+       public bool IsDisbursed { get => (bool)TargettedRow[TableColumnNames.IsDisbursed.ToString()];  set => TargettedRow[TableColumnNames.IsDisbursed.ToString()] = value; }
 
 
-       public string HRComments { get => (string)TargettedRow[TableColumnNames.HRComments.ToString()]; }
+       public string HRComments { get => (string)TargettedRow[TableColumnNames.HRComments.ToString()];  set => TargettedRow[TableColumnNames.HRComments.ToString()] = value; }
 
 
-       public decimal ApprovedAmount { get => (decimal)TargettedRow[TableColumnNames.ApprovedAmount.ToString()]; }
+       public decimal ApprovedAmount { get => (decimal)TargettedRow[TableColumnNames.ApprovedAmount.ToString()];  set => TargettedRow[TableColumnNames.ApprovedAmount.ToString()] = value; }
 
 
-       public string BursarComments { get => (string)TargettedRow[TableColumnNames.BursarComments.ToString()]; }
+       public string BursarComments { get => (string)TargettedRow[TableColumnNames.BursarComments.ToString()];  set => TargettedRow[TableColumnNames.BursarComments.ToString()] = value; }
 
 
-       public decimal? DisbursedAmount { get => (decimal?)TargettedRow[TableColumnNames.DisbursedAmount.ToString()]; }
+       public decimal? DisbursedAmount { get => (decimal?)TargettedRow[TableColumnNames.DisbursedAmount.ToString()];  set => TargettedRow[TableColumnNames.DisbursedAmount.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public DateTime? DisbursedAt { get => (DateTime?)TargettedRow[TableColumnNames.DisbursedAt.ToString()]; }
+       public DateTime? DisbursedAt { get => (DateTime?)TargettedRow[TableColumnNames.DisbursedAt.ToString()];  set => TargettedRow[TableColumnNames.DisbursedAt.ToString()] = value; }
 
 
-       public int? UpdatedByID { get => (int?)TargettedRow[TableColumnNames.UpdatedByID.ToString()]; }
+       public int? UpdatedByID { get => (int?)TargettedRow[TableColumnNames.UpdatedByID.ToString()];  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
 
 
  #endregion
@@ -388,6 +388,168 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamPayrollID;
+            private DataColumnParameter ParamPersonnelID;
+            private DataColumnParameter ParamAttendanceCount;
+            private DataColumnParameter ParamSalaryAmount;
+            private DataColumnParameter ParamRatePerDay;
+            private DataColumnParameter ParamCalculatedAmount;
+            private DataColumnParameter ParamIsDisbursed;
+            private DataColumnParameter ParamHRComments;
+            private DataColumnParameter ParamApprovedAmount;
+            private DataColumnParameter ParamBursarComments;
+            private DataColumnParameter ParamDisbursedAmount;
+            private DataColumnParameter ParamUpdatedAt;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamCreatedByID;
+            private DataColumnParameter ParamDisbursedAt;
+            private DataColumnParameter ParamUpdatedByID;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetPayrollID(int v)                  
+            {                  
+                ParamPayrollID = new(defPayrollID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPersonnelID(int v)                  
+            {                  
+                ParamPersonnelID = new(defPersonnelID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAttendanceCount(int v)                  
+            {                  
+                ParamAttendanceCount = new(defAttendanceCount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSalaryAmount(decimal v)                  
+            {                  
+                ParamSalaryAmount = new(defSalaryAmount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetRatePerDay(decimal v)                  
+            {                  
+                ParamRatePerDay = new(defRatePerDay, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCalculatedAmount(decimal v)                  
+            {                  
+                ParamCalculatedAmount = new(defCalculatedAmount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIsDisbursed(bool v)                  
+            {                  
+                ParamIsDisbursed = new(defIsDisbursed, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetHRComments(string v)                  
+            {                  
+                ParamHRComments = new(defHRComments, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetApprovedAmount(decimal v)                  
+            {                  
+                ParamApprovedAmount = new(defApprovedAmount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBursarComments(string v)                  
+            {                  
+                ParamBursarComments = new(defBursarComments, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDisbursedAmount(decimal? v)                  
+            {                  
+                ParamDisbursedAmount = new(defDisbursedAmount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime? v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedByID(int v)                  
+            {                  
+                ParamCreatedByID = new(defCreatedByID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDisbursedAt(DateTime? v)                  
+            {                  
+                ParamDisbursedAt = new(defDisbursedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedByID(int? v)                  
+            {                  
+                ParamUpdatedByID = new(defUpdatedByID, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

@@ -262,43 +262,43 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defExceptionStackTrace;
        public static readonly DataColumnDefinition defGateway;
 
-       public int SMSDeliveryStatusID { get => (int)TargettedRow[TableColumnNames.SMSDeliveryStatusID.ToString()]; }
+       public int SMSDeliveryStatusID { get => (int)TargettedRow[TableColumnNames.SMSDeliveryStatusID.ToString()];  set => TargettedRow[TableColumnNames.SMSDeliveryStatusID.ToString()] = value; }
 
 
-       public string Sender { get => (string)TargettedRow[TableColumnNames.Sender.ToString()]; }
+       public string Sender { get => (string)TargettedRow[TableColumnNames.Sender.ToString()];  set => TargettedRow[TableColumnNames.Sender.ToString()] = value; }
 
 
-       public string Receiver { get => (string)TargettedRow[TableColumnNames.Receiver.ToString()]; }
+       public string Receiver { get => (string)TargettedRow[TableColumnNames.Receiver.ToString()];  set => TargettedRow[TableColumnNames.Receiver.ToString()] = value; }
 
 
-       public string Message { get => (string)TargettedRow[TableColumnNames.Message.ToString()]; }
+       public string Message { get => (string)TargettedRow[TableColumnNames.Message.ToString()];  set => TargettedRow[TableColumnNames.Message.ToString()] = value; }
 
 
-       public string UID { get => (string)TargettedRow[TableColumnNames.UID.ToString()]; }
+       public string UID { get => (string)TargettedRow[TableColumnNames.UID.ToString()];  set => TargettedRow[TableColumnNames.UID.ToString()] = value; }
 
 
-       public string APICreateResponse { get => (string)TargettedRow[TableColumnNames.APICreateResponse.ToString()]; }
+       public string APICreateResponse { get => (string)TargettedRow[TableColumnNames.APICreateResponse.ToString()];  set => TargettedRow[TableColumnNames.APICreateResponse.ToString()] = value; }
 
 
-       public string APIUpdateResponse { get => (string)TargettedRow[TableColumnNames.APIUpdateResponse.ToString()]; }
+       public string APIUpdateResponse { get => (string)TargettedRow[TableColumnNames.APIUpdateResponse.ToString()];  set => TargettedRow[TableColumnNames.APIUpdateResponse.ToString()] = value; }
 
 
-       public decimal? SMSCostNaira { get => (decimal?)TargettedRow[TableColumnNames.SMSCostNaira.ToString()]; }
+       public decimal? SMSCostNaira { get => (decimal?)TargettedRow[TableColumnNames.SMSCostNaira.ToString()];  set => TargettedRow[TableColumnNames.SMSCostNaira.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public string ExceptionMessage { get => (string)TargettedRow[TableColumnNames.ExceptionMessage.ToString()]; }
+       public string ExceptionMessage { get => (string)TargettedRow[TableColumnNames.ExceptionMessage.ToString()];  set => TargettedRow[TableColumnNames.ExceptionMessage.ToString()] = value; }
 
 
-       public string ExceptionStackTrace { get => (string)TargettedRow[TableColumnNames.ExceptionStackTrace.ToString()]; }
+       public string ExceptionStackTrace { get => (string)TargettedRow[TableColumnNames.ExceptionStackTrace.ToString()];  set => TargettedRow[TableColumnNames.ExceptionStackTrace.ToString()] = value; }
 
 
-       public string Gateway { get => (string)TargettedRow[TableColumnNames.Gateway.ToString()]; }
+       public string Gateway { get => (string)TargettedRow[TableColumnNames.Gateway.ToString()];  set => TargettedRow[TableColumnNames.Gateway.ToString()] = value; }
 
 
  #endregion
@@ -351,6 +351,147 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamSMSDeliveryStatusID;
+            private DataColumnParameter ParamSender;
+            private DataColumnParameter ParamReceiver;
+            private DataColumnParameter ParamMessage;
+            private DataColumnParameter ParamUID;
+            private DataColumnParameter ParamAPICreateResponse;
+            private DataColumnParameter ParamAPIUpdateResponse;
+            private DataColumnParameter ParamSMSCostNaira;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedAt;
+            private DataColumnParameter ParamExceptionMessage;
+            private DataColumnParameter ParamExceptionStackTrace;
+            private DataColumnParameter ParamGateway;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetSMSDeliveryStatusID(int v)                  
+            {                  
+                ParamSMSDeliveryStatusID = new(defSMSDeliveryStatusID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSender(string v)                  
+            {                  
+                ParamSender = new(defSender, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetReceiver(string v)                  
+            {                  
+                ParamReceiver = new(defReceiver, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetMessage(string v)                  
+            {                  
+                ParamMessage = new(defMessage, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUID(string v)                  
+            {                  
+                ParamUID = new(defUID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAPICreateResponse(string v)                  
+            {                  
+                ParamAPICreateResponse = new(defAPICreateResponse, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAPIUpdateResponse(string v)                  
+            {                  
+                ParamAPIUpdateResponse = new(defAPIUpdateResponse, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSMSCostNaira(decimal? v)                  
+            {                  
+                ParamSMSCostNaira = new(defSMSCostNaira, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime? v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetExceptionMessage(string v)                  
+            {                  
+                ParamExceptionMessage = new(defExceptionMessage, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetExceptionStackTrace(string v)                  
+            {                  
+                ParamExceptionStackTrace = new(defExceptionStackTrace, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetGateway(string v)                  
+            {                  
+                ParamGateway = new(defGateway, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

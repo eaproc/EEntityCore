@@ -263,43 +263,43 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defPlatformChargesExplaination;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public int PaymentID { get => (int)TargettedRow[TableColumnNames.PaymentID.ToString()]; }
+       public int PaymentID { get => (int)TargettedRow[TableColumnNames.PaymentID.ToString()];  set => TargettedRow[TableColumnNames.PaymentID.ToString()] = value; }
 
 
-       public DateTime TransactionDate { get => (DateTime)TargettedRow[TableColumnNames.TransactionDate.ToString()]; }
+       public DateTime TransactionDate { get => (DateTime)TargettedRow[TableColumnNames.TransactionDate.ToString()];  set => TargettedRow[TableColumnNames.TransactionDate.ToString()] = value; }
 
 
-       public string Channel { get => (string)TargettedRow[TableColumnNames.Channel.ToString()]; }
+       public string Channel { get => (string)TargettedRow[TableColumnNames.Channel.ToString()];  set => TargettedRow[TableColumnNames.Channel.ToString()] = value; }
 
 
-       public string IpAddress { get => (string)TargettedRow[TableColumnNames.IpAddress.ToString()]; }
+       public string IpAddress { get => (string)TargettedRow[TableColumnNames.IpAddress.ToString()];  set => TargettedRow[TableColumnNames.IpAddress.ToString()] = value; }
 
 
-       public decimal GatewayCharges { get => (decimal)TargettedRow[TableColumnNames.GatewayCharges.ToString()]; }
+       public decimal GatewayCharges { get => (decimal)TargettedRow[TableColumnNames.GatewayCharges.ToString()];  set => TargettedRow[TableColumnNames.GatewayCharges.ToString()] = value; }
 
 
-       public string GatewayLogReference { get => (string)TargettedRow[TableColumnNames.GatewayLogReference.ToString()]; }
+       public string GatewayLogReference { get => (string)TargettedRow[TableColumnNames.GatewayLogReference.ToString()];  set => TargettedRow[TableColumnNames.GatewayLogReference.ToString()] = value; }
 
 
-       public string Gateway { get => (string)TargettedRow[TableColumnNames.Gateway.ToString()]; }
+       public string Gateway { get => (string)TargettedRow[TableColumnNames.Gateway.ToString()];  set => TargettedRow[TableColumnNames.Gateway.ToString()] = value; }
 
 
-       public decimal PlatformCharges { get => (decimal)TargettedRow[TableColumnNames.PlatformCharges.ToString()]; }
+       public decimal PlatformCharges { get => (decimal)TargettedRow[TableColumnNames.PlatformCharges.ToString()];  set => TargettedRow[TableColumnNames.PlatformCharges.ToString()] = value; }
 
 
-       public decimal GatewayAmountReceived { get => (decimal)TargettedRow[TableColumnNames.GatewayAmountReceived.ToString()]; }
+       public decimal GatewayAmountReceived { get => (decimal)TargettedRow[TableColumnNames.GatewayAmountReceived.ToString()];  set => TargettedRow[TableColumnNames.GatewayAmountReceived.ToString()] = value; }
 
 
-       public decimal PlatformAmountReceived { get => (decimal)TargettedRow[TableColumnNames.PlatformAmountReceived.ToString()]; }
+       public decimal PlatformAmountReceived { get => (decimal)TargettedRow[TableColumnNames.PlatformAmountReceived.ToString()];  set => TargettedRow[TableColumnNames.PlatformAmountReceived.ToString()] = value; }
 
 
-       public string GatewayChargesExplaination { get => (string)TargettedRow[TableColumnNames.GatewayChargesExplaination.ToString()]; }
+       public string GatewayChargesExplaination { get => (string)TargettedRow[TableColumnNames.GatewayChargesExplaination.ToString()];  set => TargettedRow[TableColumnNames.GatewayChargesExplaination.ToString()] = value; }
 
 
-       public string PlatformChargesExplaination { get => (string)TargettedRow[TableColumnNames.PlatformChargesExplaination.ToString()]; }
+       public string PlatformChargesExplaination { get => (string)TargettedRow[TableColumnNames.PlatformChargesExplaination.ToString()];  set => TargettedRow[TableColumnNames.PlatformChargesExplaination.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
  #endregion
@@ -352,6 +352,147 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamPaymentID;
+            private DataColumnParameter ParamTransactionDate;
+            private DataColumnParameter ParamChannel;
+            private DataColumnParameter ParamIpAddress;
+            private DataColumnParameter ParamGatewayCharges;
+            private DataColumnParameter ParamGatewayLogReference;
+            private DataColumnParameter ParamGateway;
+            private DataColumnParameter ParamPlatformCharges;
+            private DataColumnParameter ParamGatewayAmountReceived;
+            private DataColumnParameter ParamPlatformAmountReceived;
+            private DataColumnParameter ParamGatewayChargesExplaination;
+            private DataColumnParameter ParamPlatformChargesExplaination;
+            private DataColumnParameter ParamCreatedAt;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetPaymentID(int v)                  
+            {                  
+                ParamPaymentID = new(defPaymentID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTransactionDate(DateTime v)                  
+            {                  
+                ParamTransactionDate = new(defTransactionDate, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetChannel(string v)                  
+            {                  
+                ParamChannel = new(defChannel, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIpAddress(string v)                  
+            {                  
+                ParamIpAddress = new(defIpAddress, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetGatewayCharges(decimal v)                  
+            {                  
+                ParamGatewayCharges = new(defGatewayCharges, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetGatewayLogReference(string v)                  
+            {                  
+                ParamGatewayLogReference = new(defGatewayLogReference, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetGateway(string v)                  
+            {                  
+                ParamGateway = new(defGateway, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPlatformCharges(decimal v)                  
+            {                  
+                ParamPlatformCharges = new(defPlatformCharges, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetGatewayAmountReceived(decimal v)                  
+            {                  
+                ParamGatewayAmountReceived = new(defGatewayAmountReceived, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPlatformAmountReceived(decimal v)                  
+            {                  
+                ParamPlatformAmountReceived = new(defPlatformAmountReceived, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetGatewayChargesExplaination(string v)                  
+            {                  
+                ParamGatewayChargesExplaination = new(defGatewayChargesExplaination, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPlatformChargesExplaination(string v)                  
+            {                  
+                ParamPlatformChargesExplaination = new(defPlatformChargesExplaination, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

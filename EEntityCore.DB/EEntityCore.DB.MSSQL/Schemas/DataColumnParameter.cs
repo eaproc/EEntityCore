@@ -33,7 +33,10 @@ namespace EEntityCore.DB.MSSQL.Schemas
         public const string DATETIME_FORMAT = DATE_FORMAT + " " + TIME_FORMAT;
 
         public DataColumnDefinition ColumnDefinition { private set; get; }
-
+        
+        /// <summary>
+        /// Eliminate this
+        /// </summary>
         public object Value { private set; get; }
 
         //public bool IsNullButNotEqualsNothing
@@ -113,7 +116,7 @@ namespace EEntityCore.DB.MSSQL.Schemas
 
                 case DataColumnDefinition.AllowedDataTypes.Int:
                     {
-                        return (int)Value;
+                        return Convert.ChangeType( Value, typeof(int));
                     }
 
                 case DataColumnDefinition.AllowedDataTypes.Long:
@@ -140,7 +143,7 @@ namespace EEntityCore.DB.MSSQL.Schemas
         }
 
         /// <summary>
-        /// For add, nothing is treated as null and nullval, else real value is returned
+        /// This should always return string
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>

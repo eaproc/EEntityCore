@@ -283,55 +283,55 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defTermStartDate;
        public static readonly DataColumnDefinition defTermEndDate;
 
-       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()]; }
+       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()];  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
 
 
-       public int TermID { get => (int)TargettedRow[TableColumnNames.TermID.ToString()]; }
+       public int TermID { get => (int)TargettedRow[TableColumnNames.TermID.ToString()];  set => TargettedRow[TableColumnNames.TermID.ToString()] = value; }
 
 
-       public int RegisteredStudentCount { get => (int)TargettedRow[TableColumnNames.RegisteredStudentCount.ToString()]; }
+       public int RegisteredStudentCount { get => (int)TargettedRow[TableColumnNames.RegisteredStudentCount.ToString()];  set => TargettedRow[TableColumnNames.RegisteredStudentCount.ToString()] = value; }
 
 
-       public int AssignedStudentCount { get => (int)TargettedRow[TableColumnNames.AssignedStudentCount.ToString()]; }
+       public int AssignedStudentCount { get => (int)TargettedRow[TableColumnNames.AssignedStudentCount.ToString()];  set => TargettedRow[TableColumnNames.AssignedStudentCount.ToString()] = value; }
 
 
-       public int SCADWAREAccessCount { get => (int)TargettedRow[TableColumnNames.SCADWAREAccessCount.ToString()]; }
+       public int SCADWAREAccessCount { get => (int)TargettedRow[TableColumnNames.SCADWAREAccessCount.ToString()];  set => TargettedRow[TableColumnNames.SCADWAREAccessCount.ToString()] = value; }
 
 
-       public decimal SCADWAREAccessThreshold { get => (decimal)TargettedRow[TableColumnNames.SCADWAREAccessThreshold.ToString()]; }
+       public decimal SCADWAREAccessThreshold { get => (decimal)TargettedRow[TableColumnNames.SCADWAREAccessThreshold.ToString()];  set => TargettedRow[TableColumnNames.SCADWAREAccessThreshold.ToString()] = value; }
 
 
-       public decimal AverageTermBill { get => (decimal)TargettedRow[TableColumnNames.AverageTermBill.ToString()]; }
+       public decimal AverageTermBill { get => (decimal)TargettedRow[TableColumnNames.AverageTermBill.ToString()];  set => TargettedRow[TableColumnNames.AverageTermBill.ToString()] = value; }
 
 
-       public decimal RatePerStudent { get => (decimal)TargettedRow[TableColumnNames.RatePerStudent.ToString()]; }
+       public decimal RatePerStudent { get => (decimal)TargettedRow[TableColumnNames.RatePerStudent.ToString()];  set => TargettedRow[TableColumnNames.RatePerStudent.ToString()] = value; }
 
 
-       public decimal BilledPerStudent { get => (decimal)TargettedRow[TableColumnNames.BilledPerStudent.ToString()]; }
+       public decimal BilledPerStudent { get => (decimal)TargettedRow[TableColumnNames.BilledPerStudent.ToString()];  set => TargettedRow[TableColumnNames.BilledPerStudent.ToString()] = value; }
 
 
-       public decimal TotalReceivedOnSCADWAREBill { get => (decimal)TargettedRow[TableColumnNames.TotalReceivedOnSCADWAREBill.ToString()]; }
+       public decimal TotalReceivedOnSCADWAREBill { get => (decimal)TargettedRow[TableColumnNames.TotalReceivedOnSCADWAREBill.ToString()];  set => TargettedRow[TableColumnNames.TotalReceivedOnSCADWAREBill.ToString()] = value; }
 
 
-       public decimal MinimumExpectedOnSCADWAREBill { get => (decimal)TargettedRow[TableColumnNames.MinimumExpectedOnSCADWAREBill.ToString()]; }
+       public decimal MinimumExpectedOnSCADWAREBill { get => (decimal)TargettedRow[TableColumnNames.MinimumExpectedOnSCADWAREBill.ToString()];  set => TargettedRow[TableColumnNames.MinimumExpectedOnSCADWAREBill.ToString()] = value; }
 
 
-       public decimal ExpectedOnSCADWAREBill { get => (decimal)TargettedRow[TableColumnNames.ExpectedOnSCADWAREBill.ToString()]; }
+       public decimal ExpectedOnSCADWAREBill { get => (decimal)TargettedRow[TableColumnNames.ExpectedOnSCADWAREBill.ToString()];  set => TargettedRow[TableColumnNames.ExpectedOnSCADWAREBill.ToString()] = value; }
 
 
-       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()]; }
+       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()];  set => TargettedRow[TableColumnNames.IPAddress.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public int? FullScholarshipStudentCount { get => (int?)TargettedRow[TableColumnNames.FullScholarshipStudentCount.ToString()]; }
+       public int? FullScholarshipStudentCount { get => (int?)TargettedRow[TableColumnNames.FullScholarshipStudentCount.ToString()];  set => TargettedRow[TableColumnNames.FullScholarshipStudentCount.ToString()] = value; }
 
 
-       public DateTime? TermStartDate { get => (DateTime?)TargettedRow[TableColumnNames.TermStartDate.ToString()]; }
+       public DateTime? TermStartDate { get => (DateTime?)TargettedRow[TableColumnNames.TermStartDate.ToString()];  set => TargettedRow[TableColumnNames.TermStartDate.ToString()] = value; }
 
 
-       public DateTime? TermEndDate { get => (DateTime?)TargettedRow[TableColumnNames.TermEndDate.ToString()]; }
+       public DateTime? TermEndDate { get => (DateTime?)TargettedRow[TableColumnNames.TermEndDate.ToString()];  set => TargettedRow[TableColumnNames.TermEndDate.ToString()] = value; }
 
 
  #endregion
@@ -384,6 +384,175 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamClientID;
+            private DataColumnParameter ParamTermID;
+            private DataColumnParameter ParamRegisteredStudentCount;
+            private DataColumnParameter ParamAssignedStudentCount;
+            private DataColumnParameter ParamSCADWAREAccessCount;
+            private DataColumnParameter ParamSCADWAREAccessThreshold;
+            private DataColumnParameter ParamAverageTermBill;
+            private DataColumnParameter ParamRatePerStudent;
+            private DataColumnParameter ParamBilledPerStudent;
+            private DataColumnParameter ParamTotalReceivedOnSCADWAREBill;
+            private DataColumnParameter ParamMinimumExpectedOnSCADWAREBill;
+            private DataColumnParameter ParamExpectedOnSCADWAREBill;
+            private DataColumnParameter ParamIPAddress;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamFullScholarshipStudentCount;
+            private DataColumnParameter ParamTermStartDate;
+            private DataColumnParameter ParamTermEndDate;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetClientID(int v)                  
+            {                  
+                ParamClientID = new(defClientID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTermID(int v)                  
+            {                  
+                ParamTermID = new(defTermID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetRegisteredStudentCount(int v)                  
+            {                  
+                ParamRegisteredStudentCount = new(defRegisteredStudentCount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAssignedStudentCount(int v)                  
+            {                  
+                ParamAssignedStudentCount = new(defAssignedStudentCount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSCADWAREAccessCount(int v)                  
+            {                  
+                ParamSCADWAREAccessCount = new(defSCADWAREAccessCount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSCADWAREAccessThreshold(decimal v)                  
+            {                  
+                ParamSCADWAREAccessThreshold = new(defSCADWAREAccessThreshold, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAverageTermBill(decimal v)                  
+            {                  
+                ParamAverageTermBill = new(defAverageTermBill, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetRatePerStudent(decimal v)                  
+            {                  
+                ParamRatePerStudent = new(defRatePerStudent, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBilledPerStudent(decimal v)                  
+            {                  
+                ParamBilledPerStudent = new(defBilledPerStudent, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTotalReceivedOnSCADWAREBill(decimal v)                  
+            {                  
+                ParamTotalReceivedOnSCADWAREBill = new(defTotalReceivedOnSCADWAREBill, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetMinimumExpectedOnSCADWAREBill(decimal v)                  
+            {                  
+                ParamMinimumExpectedOnSCADWAREBill = new(defMinimumExpectedOnSCADWAREBill, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetExpectedOnSCADWAREBill(decimal v)                  
+            {                  
+                ParamExpectedOnSCADWAREBill = new(defExpectedOnSCADWAREBill, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIPAddress(string v)                  
+            {                  
+                ParamIPAddress = new(defIPAddress, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetFullScholarshipStudentCount(int? v)                  
+            {                  
+                ParamFullScholarshipStudentCount = new(defFullScholarshipStudentCount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTermStartDate(DateTime? v)                  
+            {                  
+                ParamTermStartDate = new(defTermStartDate, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTermEndDate(DateTime? v)                  
+            {                  
+                ParamTermEndDate = new(defTermEndDate, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

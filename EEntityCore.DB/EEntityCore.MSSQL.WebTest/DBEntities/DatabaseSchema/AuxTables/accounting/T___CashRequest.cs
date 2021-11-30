@@ -261,31 +261,31 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defTrackingID;
        public static readonly DataColumnDefinition defDataMonitorID;
 
-       public string Request { get => (string)TargettedRow[TableColumnNames.Request.ToString()]; }
+       public string Request { get => (string)TargettedRow[TableColumnNames.Request.ToString()];  set => TargettedRow[TableColumnNames.Request.ToString()] = value; }
 
 
-       public int ExpenditureCategoryID { get => (int)TargettedRow[TableColumnNames.ExpenditureCategoryID.ToString()]; }
+       public int ExpenditureCategoryID { get => (int)TargettedRow[TableColumnNames.ExpenditureCategoryID.ToString()];  set => TargettedRow[TableColumnNames.ExpenditureCategoryID.ToString()] = value; }
 
 
-       public decimal Amount { get => (decimal)TargettedRow[TableColumnNames.Amount.ToString()]; }
+       public decimal Amount { get => (decimal)TargettedRow[TableColumnNames.Amount.ToString()];  set => TargettedRow[TableColumnNames.Amount.ToString()] = value; }
 
 
-       public DateTime Deadline { get => (DateTime)TargettedRow[TableColumnNames.Deadline.ToString()]; }
+       public DateTime Deadline { get => (DateTime)TargettedRow[TableColumnNames.Deadline.ToString()];  set => TargettedRow[TableColumnNames.Deadline.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public int BeneficiaryID { get => (int)TargettedRow[TableColumnNames.BeneficiaryID.ToString()]; }
+       public int BeneficiaryID { get => (int)TargettedRow[TableColumnNames.BeneficiaryID.ToString()];  set => TargettedRow[TableColumnNames.BeneficiaryID.ToString()] = value; }
 
 
-       public int? TrackingID { get => (int?)TargettedRow[TableColumnNames.TrackingID.ToString()]; }
+       public int? TrackingID { get => (int?)TargettedRow[TableColumnNames.TrackingID.ToString()];  set => TargettedRow[TableColumnNames.TrackingID.ToString()] = value; }
 
 
-       public int? DataMonitorID { get => (int?)TargettedRow[TableColumnNames.DataMonitorID.ToString()]; }
+       public int? DataMonitorID { get => (int?)TargettedRow[TableColumnNames.DataMonitorID.ToString()];  set => TargettedRow[TableColumnNames.DataMonitorID.ToString()] = value; }
 
 
  #endregion
@@ -338,6 +338,119 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamRequest;
+            private DataColumnParameter ParamExpenditureCategoryID;
+            private DataColumnParameter ParamAmount;
+            private DataColumnParameter ParamDeadline;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamCreatedByID;
+            private DataColumnParameter ParamBeneficiaryID;
+            private DataColumnParameter ParamTrackingID;
+            private DataColumnParameter ParamDataMonitorID;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetRequest(string v)                  
+            {                  
+                ParamRequest = new(defRequest, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetExpenditureCategoryID(int v)                  
+            {                  
+                ParamExpenditureCategoryID = new(defExpenditureCategoryID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAmount(decimal v)                  
+            {                  
+                ParamAmount = new(defAmount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDeadline(DateTime v)                  
+            {                  
+                ParamDeadline = new(defDeadline, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedByID(int v)                  
+            {                  
+                ParamCreatedByID = new(defCreatedByID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBeneficiaryID(int v)                  
+            {                  
+                ParamBeneficiaryID = new(defBeneficiaryID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTrackingID(int? v)                  
+            {                  
+                ParamTrackingID = new(defTrackingID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDataMonitorID(int? v)                  
+            {                  
+                ParamDataMonitorID = new(defDataMonitorID, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

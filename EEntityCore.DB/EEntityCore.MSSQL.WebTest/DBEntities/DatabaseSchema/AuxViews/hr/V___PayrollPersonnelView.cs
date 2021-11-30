@@ -305,82 +305,82 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defBankID;
        public static readonly DataColumnDefinition defAccountNumber;
 
-       public string PersonnelNumber { get => (string)TargettedRow[TableColumnNames.PersonnelNumber.ToString()]; }
+       public string PersonnelNumber { get => (string)TargettedRow[TableColumnNames.PersonnelNumber.ToString()];  set => TargettedRow[TableColumnNames.PersonnelNumber.ToString()] = value; }
 
 
-       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()]; }
+       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()];  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
 
 
-       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()]; }
+       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()];  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
 
 
-       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()]; }
+       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()];  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
 
 
-       public int AttendanceCount { get => (int)TargettedRow[TableColumnNames.AttendanceCount.ToString()]; }
+       public int AttendanceCount { get => (int)TargettedRow[TableColumnNames.AttendanceCount.ToString()];  set => TargettedRow[TableColumnNames.AttendanceCount.ToString()] = value; }
 
 
-       public decimal SalaryAmount { get => (decimal)TargettedRow[TableColumnNames.SalaryAmount.ToString()]; }
+       public decimal SalaryAmount { get => (decimal)TargettedRow[TableColumnNames.SalaryAmount.ToString()];  set => TargettedRow[TableColumnNames.SalaryAmount.ToString()] = value; }
 
 
-       public decimal RatePerDay { get => (decimal)TargettedRow[TableColumnNames.RatePerDay.ToString()]; }
+       public decimal RatePerDay { get => (decimal)TargettedRow[TableColumnNames.RatePerDay.ToString()];  set => TargettedRow[TableColumnNames.RatePerDay.ToString()] = value; }
 
 
-       public decimal ApprovedAmount { get => (decimal)TargettedRow[TableColumnNames.ApprovedAmount.ToString()]; }
+       public decimal ApprovedAmount { get => (decimal)TargettedRow[TableColumnNames.ApprovedAmount.ToString()];  set => TargettedRow[TableColumnNames.ApprovedAmount.ToString()] = value; }
 
 
-       public bool IsDisbursed { get => (bool)TargettedRow[TableColumnNames.IsDisbursed.ToString()]; }
+       public bool IsDisbursed { get => (bool)TargettedRow[TableColumnNames.IsDisbursed.ToString()];  set => TargettedRow[TableColumnNames.IsDisbursed.ToString()] = value; }
 
 
-       public int PersonnelID { get => (int)TargettedRow[TableColumnNames.PersonnelID.ToString()]; }
+       public int PersonnelID { get => (int)TargettedRow[TableColumnNames.PersonnelID.ToString()];  set => TargettedRow[TableColumnNames.PersonnelID.ToString()] = value; }
 
 
-       public int PayrollID { get => (int)TargettedRow[TableColumnNames.PayrollID.ToString()]; }
+       public int PayrollID { get => (int)TargettedRow[TableColumnNames.PayrollID.ToString()];  set => TargettedRow[TableColumnNames.PayrollID.ToString()] = value; }
 
 
-       public string BursarComments { get => (string)TargettedRow[TableColumnNames.BursarComments.ToString()]; }
+       public string BursarComments { get => (string)TargettedRow[TableColumnNames.BursarComments.ToString()];  set => TargettedRow[TableColumnNames.BursarComments.ToString()] = value; }
 
 
-       public decimal CalculatedAmount { get => (decimal)TargettedRow[TableColumnNames.CalculatedAmount.ToString()]; }
+       public decimal CalculatedAmount { get => (decimal)TargettedRow[TableColumnNames.CalculatedAmount.ToString()];  set => TargettedRow[TableColumnNames.CalculatedAmount.ToString()] = value; }
 
 
-       public decimal? DisbursedAmount { get => (decimal?)TargettedRow[TableColumnNames.DisbursedAmount.ToString()]; }
+       public decimal? DisbursedAmount { get => (decimal?)TargettedRow[TableColumnNames.DisbursedAmount.ToString()];  set => TargettedRow[TableColumnNames.DisbursedAmount.ToString()] = value; }
 
 
-       public string HRComments { get => (string)TargettedRow[TableColumnNames.HRComments.ToString()]; }
+       public string HRComments { get => (string)TargettedRow[TableColumnNames.HRComments.ToString()];  set => TargettedRow[TableColumnNames.HRComments.ToString()] = value; }
 
 
-       public DateTime? DisbursedAt { get => (DateTime?)TargettedRow[TableColumnNames.DisbursedAt.ToString()]; }
+       public DateTime? DisbursedAt { get => (DateTime?)TargettedRow[TableColumnNames.DisbursedAt.ToString()];  set => TargettedRow[TableColumnNames.DisbursedAt.ToString()] = value; }
 
 
-       public string PictureFileName { get => (string)TargettedRow[TableColumnNames.PictureFileName.ToString()]; }
+       public string PictureFileName { get => (string)TargettedRow[TableColumnNames.PictureFileName.ToString()];  set => TargettedRow[TableColumnNames.PictureFileName.ToString()] = value; }
 
 
-       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
+       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()];  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
 
 
-       public DateTime StartDate { get => (DateTime)TargettedRow[TableColumnNames.StartDate.ToString()]; }
+       public DateTime StartDate { get => (DateTime)TargettedRow[TableColumnNames.StartDate.ToString()];  set => TargettedRow[TableColumnNames.StartDate.ToString()] = value; }
 
 
-       public DateTime EndDate { get => (DateTime)TargettedRow[TableColumnNames.EndDate.ToString()]; }
+       public DateTime EndDate { get => (DateTime)TargettedRow[TableColumnNames.EndDate.ToString()];  set => TargettedRow[TableColumnNames.EndDate.ToString()] = value; }
 
 
-       public bool IsApproved { get => (bool)TargettedRow[TableColumnNames.IsApproved.ToString()]; }
+       public bool IsApproved { get => (bool)TargettedRow[TableColumnNames.IsApproved.ToString()];  set => TargettedRow[TableColumnNames.IsApproved.ToString()] = value; }
 
 
-       public int PayrollWorkingDays { get => (int)TargettedRow[TableColumnNames.PayrollWorkingDays.ToString()]; }
+       public int PayrollWorkingDays { get => (int)TargettedRow[TableColumnNames.PayrollWorkingDays.ToString()];  set => TargettedRow[TableColumnNames.PayrollWorkingDays.ToString()] = value; }
 
 
-       public int MonthWorkingDays { get => (int)TargettedRow[TableColumnNames.MonthWorkingDays.ToString()]; }
+       public int MonthWorkingDays { get => (int)TargettedRow[TableColumnNames.MonthWorkingDays.ToString()];  set => TargettedRow[TableColumnNames.MonthWorkingDays.ToString()] = value; }
 
 
-       public string BankName { get => (string)TargettedRow[TableColumnNames.BankName.ToString()]; }
+       public string BankName { get => (string)TargettedRow[TableColumnNames.BankName.ToString()];  set => TargettedRow[TableColumnNames.BankName.ToString()] = value; }
 
 
-       public int? BankID { get => (int?)TargettedRow[TableColumnNames.BankID.ToString()]; }
+       public int? BankID { get => (int?)TargettedRow[TableColumnNames.BankID.ToString()];  set => TargettedRow[TableColumnNames.BankID.ToString()] = value; }
 
 
-       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()]; }
+       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()];  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
 
 
  #endregion

@@ -266,37 +266,37 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defUpdatedAt;
 
-       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
+       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()];  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
 
 
-       public int? BankID { get => (int?)TargettedRow[TableColumnNames.BankID.ToString()]; }
+       public int? BankID { get => (int?)TargettedRow[TableColumnNames.BankID.ToString()];  set => TargettedRow[TableColumnNames.BankID.ToString()] = value; }
 
 
-       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()]; }
+       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()];  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
 
 
-       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()]; }
+       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()];  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
 
 
-       public string DealerCode { get => (string)TargettedRow[TableColumnNames.DealerCode.ToString()]; }
+       public string DealerCode { get => (string)TargettedRow[TableColumnNames.DealerCode.ToString()];  set => TargettedRow[TableColumnNames.DealerCode.ToString()] = value; }
 
 
-       public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()]; }
+       public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()];  set => TargettedRow[TableColumnNames.CompanyName.ToString()] = value; }
 
 
-       public string WebsiteUrl { get => (string)TargettedRow[TableColumnNames.WebsiteUrl.ToString()]; }
+       public string WebsiteUrl { get => (string)TargettedRow[TableColumnNames.WebsiteUrl.ToString()];  set => TargettedRow[TableColumnNames.WebsiteUrl.ToString()] = value; }
 
 
-       public string OfficeAddress { get => (string)TargettedRow[TableColumnNames.OfficeAddress.ToString()]; }
+       public string OfficeAddress { get => (string)TargettedRow[TableColumnNames.OfficeAddress.ToString()];  set => TargettedRow[TableColumnNames.OfficeAddress.ToString()] = value; }
 
 
-       public int CountryID { get => (int)TargettedRow[TableColumnNames.CountryID.ToString()]; }
+       public int CountryID { get => (int)TargettedRow[TableColumnNames.CountryID.ToString()];  set => TargettedRow[TableColumnNames.CountryID.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
  #endregion
@@ -349,6 +349,133 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamPersonID;
+            private DataColumnParameter ParamBankID;
+            private DataColumnParameter ParamAccountNumber;
+            private DataColumnParameter ParamIsActive;
+            private DataColumnParameter ParamDealerCode;
+            private DataColumnParameter ParamCompanyName;
+            private DataColumnParameter ParamWebsiteUrl;
+            private DataColumnParameter ParamOfficeAddress;
+            private DataColumnParameter ParamCountryID;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedAt;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetPersonID(int v)                  
+            {                  
+                ParamPersonID = new(defPersonID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBankID(int? v)                  
+            {                  
+                ParamBankID = new(defBankID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetAccountNumber(string v)                  
+            {                  
+                ParamAccountNumber = new(defAccountNumber, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIsActive(bool v)                  
+            {                  
+                ParamIsActive = new(defIsActive, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDealerCode(string v)                  
+            {                  
+                ParamDealerCode = new(defDealerCode, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCompanyName(string v)                  
+            {                  
+                ParamCompanyName = new(defCompanyName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetWebsiteUrl(string v)                  
+            {                  
+                ParamWebsiteUrl = new(defWebsiteUrl, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetOfficeAddress(string v)                  
+            {                  
+                ParamOfficeAddress = new(defOfficeAddress, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCountryID(int v)                  
+            {                  
+                ParamCountryID = new(defCountryID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime? v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

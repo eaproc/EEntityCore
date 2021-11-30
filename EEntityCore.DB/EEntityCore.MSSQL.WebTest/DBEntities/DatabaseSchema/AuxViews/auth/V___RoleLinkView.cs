@@ -226,25 +226,25 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defInclusivePermissionID;
        public static readonly DataColumnDefinition defInclusivePermissionDefinition;
 
-       public int RoleID { get => (int)TargettedRow[TableColumnNames.RoleID.ToString()]; }
+       public int RoleID { get => (int)TargettedRow[TableColumnNames.RoleID.ToString()];  set => TargettedRow[TableColumnNames.RoleID.ToString()] = value; }
 
 
-       public int BaseLinkID { get => (int)TargettedRow[TableColumnNames.BaseLinkID.ToString()]; }
+       public int BaseLinkID { get => (int)TargettedRow[TableColumnNames.BaseLinkID.ToString()];  set => TargettedRow[TableColumnNames.BaseLinkID.ToString()] = value; }
 
 
-       public int BaseLinkPermissionID { get => (int)TargettedRow[TableColumnNames.BaseLinkPermissionID.ToString()]; }
+       public int BaseLinkPermissionID { get => (int)TargettedRow[TableColumnNames.BaseLinkPermissionID.ToString()];  set => TargettedRow[TableColumnNames.BaseLinkPermissionID.ToString()] = value; }
 
 
-       public string BaseLink { get => (string)TargettedRow[TableColumnNames.BaseLink.ToString()]; }
+       public string BaseLink { get => (string)TargettedRow[TableColumnNames.BaseLink.ToString()];  set => TargettedRow[TableColumnNames.BaseLink.ToString()] = value; }
 
 
-       public string Permission { get => (string)TargettedRow[TableColumnNames.Permission.ToString()]; }
+       public string Permission { get => (string)TargettedRow[TableColumnNames.Permission.ToString()];  set => TargettedRow[TableColumnNames.Permission.ToString()] = value; }
 
 
-       public int InclusivePermissionID { get => (int)TargettedRow[TableColumnNames.InclusivePermissionID.ToString()]; }
+       public int InclusivePermissionID { get => (int)TargettedRow[TableColumnNames.InclusivePermissionID.ToString()];  set => TargettedRow[TableColumnNames.InclusivePermissionID.ToString()] = value; }
 
 
-       public string InclusivePermissionDefinition { get => (string)TargettedRow[TableColumnNames.InclusivePermissionDefinition.ToString()]; }
+       public string InclusivePermissionDefinition { get => (string)TargettedRow[TableColumnNames.InclusivePermissionDefinition.ToString()];  set => TargettedRow[TableColumnNames.InclusivePermissionDefinition.ToString()] = value; }
 
 
  #endregion

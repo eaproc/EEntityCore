@@ -265,58 +265,58 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defPersonID;
        public static readonly DataColumnDefinition defUserID;
 
-       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()]; }
+       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()];  set => TargettedRow[TableColumnNames.Username.ToString()] = value; }
 
 
-       public string IdentificationNo { get => (string)TargettedRow[TableColumnNames.IdentificationNo.ToString()]; }
+       public string IdentificationNo { get => (string)TargettedRow[TableColumnNames.IdentificationNo.ToString()];  set => TargettedRow[TableColumnNames.IdentificationNo.ToString()] = value; }
 
 
-       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()]; }
+       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()];  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
 
 
-       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()]; }
+       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()];  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
 
 
-       public DateTime? LastLoginTime { get => (DateTime?)TargettedRow[TableColumnNames.LastLoginTime.ToString()]; }
+       public DateTime? LastLoginTime { get => (DateTime?)TargettedRow[TableColumnNames.LastLoginTime.ToString()];  set => TargettedRow[TableColumnNames.LastLoginTime.ToString()] = value; }
 
 
-       public int? SessionTimeoutMins { get => (int?)TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()]; }
+       public int? SessionTimeoutMins { get => (int?)TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()];  set => TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()] = value; }
 
 
-       public DateTime? LastActive { get => (DateTime?)TargettedRow[TableColumnNames.LastActive.ToString()]; }
+       public DateTime? LastActive { get => (DateTime?)TargettedRow[TableColumnNames.LastActive.ToString()];  set => TargettedRow[TableColumnNames.LastActive.ToString()] = value; }
 
 
-       public int? TimeSpentSecs { get => (int?)TargettedRow[TableColumnNames.TimeSpentSecs.ToString()]; }
+       public int? TimeSpentSecs { get => (int?)TargettedRow[TableColumnNames.TimeSpentSecs.ToString()];  set => TargettedRow[TableColumnNames.TimeSpentSecs.ToString()] = value; }
 
 
-       public int? SecondsLeft { get => (int?)TargettedRow[TableColumnNames.SecondsLeft.ToString()]; }
+       public int? SecondsLeft { get => (int?)TargettedRow[TableColumnNames.SecondsLeft.ToString()];  set => TargettedRow[TableColumnNames.SecondsLeft.ToString()] = value; }
 
 
-       public string Status { get => (string)TargettedRow[TableColumnNames.Status.ToString()]; }
+       public string Status { get => (string)TargettedRow[TableColumnNames.Status.ToString()];  set => TargettedRow[TableColumnNames.Status.ToString()] = value; }
 
 
-       public string SessionID { get => (string)TargettedRow[TableColumnNames.SessionID.ToString()]; }
+       public string SessionID { get => (string)TargettedRow[TableColumnNames.SessionID.ToString()];  set => TargettedRow[TableColumnNames.SessionID.ToString()] = value; }
 
 
-       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()]; }
+       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()];  set => TargettedRow[TableColumnNames.IPAddress.ToString()] = value; }
 
 
-       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()]; }
+       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()];  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
 
 
-       public string ActiveSessions { get => (string)TargettedRow[TableColumnNames.ActiveSessions.ToString()]; }
+       public string ActiveSessions { get => (string)TargettedRow[TableColumnNames.ActiveSessions.ToString()];  set => TargettedRow[TableColumnNames.ActiveSessions.ToString()] = value; }
 
 
-       public DateTime? LoggedOutTime { get => (DateTime?)TargettedRow[TableColumnNames.LoggedOutTime.ToString()]; }
+       public DateTime? LoggedOutTime { get => (DateTime?)TargettedRow[TableColumnNames.LoggedOutTime.ToString()];  set => TargettedRow[TableColumnNames.LoggedOutTime.ToString()] = value; }
 
 
-       public DateTime? SessionIDCreatedTime { get => (DateTime?)TargettedRow[TableColumnNames.SessionIDCreatedTime.ToString()]; }
+       public DateTime? SessionIDCreatedTime { get => (DateTime?)TargettedRow[TableColumnNames.SessionIDCreatedTime.ToString()];  set => TargettedRow[TableColumnNames.SessionIDCreatedTime.ToString()] = value; }
 
 
-       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
+       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()];  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
 
 
-       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()]; }
+       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
  #endregion

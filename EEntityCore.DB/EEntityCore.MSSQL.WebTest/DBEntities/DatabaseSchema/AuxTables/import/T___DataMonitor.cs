@@ -253,28 +253,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defUpdatedByID;
        public static readonly DataColumnDefinition defUpdatedAt;
 
-       public int ImportTypeID { get => (int)TargettedRow[TableColumnNames.ImportTypeID.ToString()]; }
+       public int ImportTypeID { get => (int)TargettedRow[TableColumnNames.ImportTypeID.ToString()];  set => TargettedRow[TableColumnNames.ImportTypeID.ToString()] = value; }
 
 
-       public string ImportedFileName { get => (string)TargettedRow[TableColumnNames.ImportedFileName.ToString()]; }
+       public string ImportedFileName { get => (string)TargettedRow[TableColumnNames.ImportedFileName.ToString()];  set => TargettedRow[TableColumnNames.ImportedFileName.ToString()] = value; }
 
 
-       public int FileSizeBytes { get => (int)TargettedRow[TableColumnNames.FileSizeBytes.ToString()]; }
+       public int FileSizeBytes { get => (int)TargettedRow[TableColumnNames.FileSizeBytes.ToString()];  set => TargettedRow[TableColumnNames.FileSizeBytes.ToString()] = value; }
 
 
-       public int TotalRowsRead { get => (int)TargettedRow[TableColumnNames.TotalRowsRead.ToString()]; }
+       public int TotalRowsRead { get => (int)TargettedRow[TableColumnNames.TotalRowsRead.ToString()];  set => TargettedRow[TableColumnNames.TotalRowsRead.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public int? UpdatedByID { get => (int?)TargettedRow[TableColumnNames.UpdatedByID.ToString()]; }
+       public int? UpdatedByID { get => (int?)TargettedRow[TableColumnNames.UpdatedByID.ToString()];  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
  #endregion
@@ -327,6 +327,112 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamImportTypeID;
+            private DataColumnParameter ParamImportedFileName;
+            private DataColumnParameter ParamFileSizeBytes;
+            private DataColumnParameter ParamTotalRowsRead;
+            private DataColumnParameter ParamCreatedByID;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedByID;
+            private DataColumnParameter ParamUpdatedAt;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetImportTypeID(int v)                  
+            {                  
+                ParamImportTypeID = new(defImportTypeID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetImportedFileName(string v)                  
+            {                  
+                ParamImportedFileName = new(defImportedFileName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetFileSizeBytes(int v)                  
+            {                  
+                ParamFileSizeBytes = new(defFileSizeBytes, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetTotalRowsRead(int v)                  
+            {                  
+                ParamTotalRowsRead = new(defTotalRowsRead, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedByID(int v)                  
+            {                  
+                ParamCreatedByID = new(defCreatedByID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedByID(int? v)                  
+            {                  
+                ParamUpdatedByID = new(defUpdatedByID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime? v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

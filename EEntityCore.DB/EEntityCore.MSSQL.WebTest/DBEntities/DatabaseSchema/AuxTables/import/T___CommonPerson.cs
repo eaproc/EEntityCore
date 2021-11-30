@@ -279,52 +279,52 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defImportComment;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public int DataMonitorID { get => (int)TargettedRow[TableColumnNames.DataMonitorID.ToString()]; }
+       public int DataMonitorID { get => (int)TargettedRow[TableColumnNames.DataMonitorID.ToString()];  set => TargettedRow[TableColumnNames.DataMonitorID.ToString()] = value; }
 
 
-       public int ImportStatusID { get => (int)TargettedRow[TableColumnNames.ImportStatusID.ToString()]; }
+       public int ImportStatusID { get => (int)TargettedRow[TableColumnNames.ImportStatusID.ToString()];  set => TargettedRow[TableColumnNames.ImportStatusID.ToString()] = value; }
 
 
-       public string IdentificationNo { get => (string)TargettedRow[TableColumnNames.IdentificationNo.ToString()]; }
+       public string IdentificationNo { get => (string)TargettedRow[TableColumnNames.IdentificationNo.ToString()];  set => TargettedRow[TableColumnNames.IdentificationNo.ToString()] = value; }
 
 
-       public string PersonTitle { get => (string)TargettedRow[TableColumnNames.PersonTitle.ToString()]; }
+       public string PersonTitle { get => (string)TargettedRow[TableColumnNames.PersonTitle.ToString()];  set => TargettedRow[TableColumnNames.PersonTitle.ToString()] = value; }
 
 
-       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()]; }
+       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()];  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
 
 
-       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()]; }
+       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()];  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
 
 
-       public string Country { get => (string)TargettedRow[TableColumnNames.Country.ToString()]; }
+       public string Country { get => (string)TargettedRow[TableColumnNames.Country.ToString()];  set => TargettedRow[TableColumnNames.Country.ToString()] = value; }
 
 
-       public DateTime DateOfBirth { get => (DateTime)TargettedRow[TableColumnNames.DateOfBirth.ToString()]; }
+       public DateTime DateOfBirth { get => (DateTime)TargettedRow[TableColumnNames.DateOfBirth.ToString()];  set => TargettedRow[TableColumnNames.DateOfBirth.ToString()] = value; }
 
 
-       public string Gender { get => (string)TargettedRow[TableColumnNames.Gender.ToString()]; }
+       public string Gender { get => (string)TargettedRow[TableColumnNames.Gender.ToString()];  set => TargettedRow[TableColumnNames.Gender.ToString()] = value; }
 
 
-       public string HomeAddress { get => (string)TargettedRow[TableColumnNames.HomeAddress.ToString()]; }
+       public string HomeAddress { get => (string)TargettedRow[TableColumnNames.HomeAddress.ToString()];  set => TargettedRow[TableColumnNames.HomeAddress.ToString()] = value; }
 
 
-       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()]; }
+       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()];  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
 
 
-       public string BirthPlace { get => (string)TargettedRow[TableColumnNames.BirthPlace.ToString()]; }
+       public string BirthPlace { get => (string)TargettedRow[TableColumnNames.BirthPlace.ToString()];  set => TargettedRow[TableColumnNames.BirthPlace.ToString()] = value; }
 
 
-       public string MobileAreaCode { get => (string)TargettedRow[TableColumnNames.MobileAreaCode.ToString()]; }
+       public string MobileAreaCode { get => (string)TargettedRow[TableColumnNames.MobileAreaCode.ToString()];  set => TargettedRow[TableColumnNames.MobileAreaCode.ToString()] = value; }
 
 
-       public string MobileNumber { get => (string)TargettedRow[TableColumnNames.MobileNumber.ToString()]; }
+       public string MobileNumber { get => (string)TargettedRow[TableColumnNames.MobileNumber.ToString()];  set => TargettedRow[TableColumnNames.MobileNumber.ToString()] = value; }
 
 
-       public string ImportComment { get => (string)TargettedRow[TableColumnNames.ImportComment.ToString()]; }
+       public string ImportComment { get => (string)TargettedRow[TableColumnNames.ImportComment.ToString()];  set => TargettedRow[TableColumnNames.ImportComment.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
  #endregion
@@ -377,6 +377,168 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamDataMonitorID;
+            private DataColumnParameter ParamImportStatusID;
+            private DataColumnParameter ParamIdentificationNo;
+            private DataColumnParameter ParamPersonTitle;
+            private DataColumnParameter ParamFirstName;
+            private DataColumnParameter ParamLastName;
+            private DataColumnParameter ParamCountry;
+            private DataColumnParameter ParamDateOfBirth;
+            private DataColumnParameter ParamGender;
+            private DataColumnParameter ParamHomeAddress;
+            private DataColumnParameter ParamEmail;
+            private DataColumnParameter ParamBirthPlace;
+            private DataColumnParameter ParamMobileAreaCode;
+            private DataColumnParameter ParamMobileNumber;
+            private DataColumnParameter ParamImportComment;
+            private DataColumnParameter ParamCreatedAt;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetDataMonitorID(int v)                  
+            {                  
+                ParamDataMonitorID = new(defDataMonitorID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetImportStatusID(int v)                  
+            {                  
+                ParamImportStatusID = new(defImportStatusID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIdentificationNo(string v)                  
+            {                  
+                ParamIdentificationNo = new(defIdentificationNo, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPersonTitle(string v)                  
+            {                  
+                ParamPersonTitle = new(defPersonTitle, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetFirstName(string v)                  
+            {                  
+                ParamFirstName = new(defFirstName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetLastName(string v)                  
+            {                  
+                ParamLastName = new(defLastName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCountry(string v)                  
+            {                  
+                ParamCountry = new(defCountry, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDateOfBirth(DateTime v)                  
+            {                  
+                ParamDateOfBirth = new(defDateOfBirth, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetGender(string v)                  
+            {                  
+                ParamGender = new(defGender, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetHomeAddress(string v)                  
+            {                  
+                ParamHomeAddress = new(defHomeAddress, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetEmail(string v)                  
+            {                  
+                ParamEmail = new(defEmail, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBirthPlace(string v)                  
+            {                  
+                ParamBirthPlace = new(defBirthPlace, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetMobileAreaCode(string v)                  
+            {                  
+                ParamMobileAreaCode = new(defMobileAreaCode, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetMobileNumber(string v)                  
+            {                  
+                ParamMobileNumber = new(defMobileNumber, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetImportComment(string v)                  
+            {                  
+                ParamImportComment = new(defImportComment, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

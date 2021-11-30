@@ -16,13 +16,15 @@ namespace EEntityCore.MSSQL.WebTest
 
                 DatabaseInit.DBConnectInterface = new DatabaseInit("SalesSCADWARE", "sa", "netEPRO@2017", 51391, @"localhost\SQLSERVER2016");
 
-                TestFetch();
+                TestUpdate();
+
+                //TestFetch();
 
                 //TestDelete();
 
                 //TestAddWithID();
 
-                TestAdd();
+                //TestAdd();
 
                 //TestInsertGetID();
 
@@ -50,8 +52,26 @@ namespace EEntityCore.MSSQL.WebTest
 
             result = T___TestTable.GetRowWhereIDUsingSQL(1);
             Console.WriteLine("Result was {0}", result.TestInt32);
+        }
+
+
+        private static void TestUpdate()
+        {
+            T___TestTable result = T___TestTable.GetRowWhereIDUsingSQL(1);
+            Console.WriteLine("Result was {0}", result.TestInt32);
+
+            // Testing Mutilators
+            result.TestString = "What is happening";
+            Console.WriteLine("Result was {0}", result.TestString);
+
+
+            T___TestTable.UpdateQueryBuilder builder = new T___TestTable.UpdateQueryBuilder(result.ID);
+            builder.SetTestString("This is getting hilarious").SetTestBool(true).SetTestInt32(5500);
+
+            Console.WriteLine("Result was [{0}]", builder.BuildSQL());
 
         }
+
 
         private static void TestDelete()
         {

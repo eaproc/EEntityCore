@@ -236,34 +236,34 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defLink;
        public static readonly DataColumnDefinition defUserID;
 
-       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()]; }
+       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()];  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
 
 
-       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()]; }
+       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()];  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
 
 
-       public string MobileNumber { get => (string)TargettedRow[TableColumnNames.MobileNumber.ToString()]; }
+       public string MobileNumber { get => (string)TargettedRow[TableColumnNames.MobileNumber.ToString()];  set => TargettedRow[TableColumnNames.MobileNumber.ToString()] = value; }
 
 
-       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()]; }
+       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()];  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
 
 
-       public int? PersonID { get => (int?)TargettedRow[TableColumnNames.PersonID.ToString()]; }
+       public int? PersonID { get => (int?)TargettedRow[TableColumnNames.PersonID.ToString()];  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
 
 
-       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()]; }
+       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()];  set => TargettedRow[TableColumnNames.Username.ToString()] = value; }
 
 
-       public string Role { get => (string)TargettedRow[TableColumnNames.Role.ToString()]; }
+       public string Role { get => (string)TargettedRow[TableColumnNames.Role.ToString()];  set => TargettedRow[TableColumnNames.Role.ToString()] = value; }
 
 
-       public int LinkID { get => (int)TargettedRow[TableColumnNames.LinkID.ToString()]; }
+       public int LinkID { get => (int)TargettedRow[TableColumnNames.LinkID.ToString()];  set => TargettedRow[TableColumnNames.LinkID.ToString()] = value; }
 
 
-       public string Link { get => (string)TargettedRow[TableColumnNames.Link.ToString()]; }
+       public string Link { get => (string)TargettedRow[TableColumnNames.Link.ToString()];  set => TargettedRow[TableColumnNames.Link.ToString()] = value; }
 
 
-       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()]; }
+       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
  #endregion

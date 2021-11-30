@@ -248,40 +248,40 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defCenterStatusID;
        public static readonly DataColumnDefinition defCenterStatus;
 
-       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()]; }
+       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()];  set => TargettedRow[TableColumnNames.Name.ToString()] = value; }
 
 
-       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()]; }
+       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()];  set => TargettedRow[TableColumnNames.Address.ToString()] = value; }
 
 
-       public string PastorName { get => (string)TargettedRow[TableColumnNames.PastorName.ToString()]; }
+       public string PastorName { get => (string)TargettedRow[TableColumnNames.PastorName.ToString()];  set => TargettedRow[TableColumnNames.PastorName.ToString()] = value; }
 
 
-       public string PastorEmail { get => (string)TargettedRow[TableColumnNames.PastorEmail.ToString()]; }
+       public string PastorEmail { get => (string)TargettedRow[TableColumnNames.PastorEmail.ToString()];  set => TargettedRow[TableColumnNames.PastorEmail.ToString()] = value; }
 
 
-       public string PastorPhone { get => (string)TargettedRow[TableColumnNames.PastorPhone.ToString()]; }
+       public string PastorPhone { get => (string)TargettedRow[TableColumnNames.PastorPhone.ToString()];  set => TargettedRow[TableColumnNames.PastorPhone.ToString()] = value; }
 
 
-       public string PastorAddress { get => (string)TargettedRow[TableColumnNames.PastorAddress.ToString()]; }
+       public string PastorAddress { get => (string)TargettedRow[TableColumnNames.PastorAddress.ToString()];  set => TargettedRow[TableColumnNames.PastorAddress.ToString()] = value; }
 
 
-       public int PastorID { get => (int)TargettedRow[TableColumnNames.PastorID.ToString()]; }
+       public int PastorID { get => (int)TargettedRow[TableColumnNames.PastorID.ToString()];  set => TargettedRow[TableColumnNames.PastorID.ToString()] = value; }
 
 
-       public int PastorPersonID { get => (int)TargettedRow[TableColumnNames.PastorPersonID.ToString()]; }
+       public int PastorPersonID { get => (int)TargettedRow[TableColumnNames.PastorPersonID.ToString()];  set => TargettedRow[TableColumnNames.PastorPersonID.ToString()] = value; }
 
 
-       public int? BeneficiaryCount { get => (int?)TargettedRow[TableColumnNames.BeneficiaryCount.ToString()]; }
+       public int? BeneficiaryCount { get => (int?)TargettedRow[TableColumnNames.BeneficiaryCount.ToString()];  set => TargettedRow[TableColumnNames.BeneficiaryCount.ToString()] = value; }
 
 
-       public int ChurchCapacity { get => (int)TargettedRow[TableColumnNames.ChurchCapacity.ToString()]; }
+       public int ChurchCapacity { get => (int)TargettedRow[TableColumnNames.ChurchCapacity.ToString()];  set => TargettedRow[TableColumnNames.ChurchCapacity.ToString()] = value; }
 
 
-       public int CenterStatusID { get => (int)TargettedRow[TableColumnNames.CenterStatusID.ToString()]; }
+       public int CenterStatusID { get => (int)TargettedRow[TableColumnNames.CenterStatusID.ToString()];  set => TargettedRow[TableColumnNames.CenterStatusID.ToString()] = value; }
 
 
-       public string CenterStatus { get => (string)TargettedRow[TableColumnNames.CenterStatus.ToString()]; }
+       public string CenterStatus { get => (string)TargettedRow[TableColumnNames.CenterStatus.ToString()];  set => TargettedRow[TableColumnNames.CenterStatus.ToString()] = value; }
 
 
  #endregion

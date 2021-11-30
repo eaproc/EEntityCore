@@ -253,40 +253,40 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defExceptionStackTrace;
        public static readonly DataColumnDefinition defGateway;
 
-       public bool Delivered { get => (bool)TargettedRow[TableColumnNames.Delivered.ToString()]; }
+       public bool Delivered { get => (bool)TargettedRow[TableColumnNames.Delivered.ToString()];  set => TargettedRow[TableColumnNames.Delivered.ToString()] = value; }
 
 
-       public string Sender { get => (string)TargettedRow[TableColumnNames.Sender.ToString()]; }
+       public string Sender { get => (string)TargettedRow[TableColumnNames.Sender.ToString()];  set => TargettedRow[TableColumnNames.Sender.ToString()] = value; }
 
 
-       public string Receiver { get => (string)TargettedRow[TableColumnNames.Receiver.ToString()]; }
+       public string Receiver { get => (string)TargettedRow[TableColumnNames.Receiver.ToString()];  set => TargettedRow[TableColumnNames.Receiver.ToString()] = value; }
 
 
-       public string BCC { get => (string)TargettedRow[TableColumnNames.BCC.ToString()]; }
+       public string BCC { get => (string)TargettedRow[TableColumnNames.BCC.ToString()];  set => TargettedRow[TableColumnNames.BCC.ToString()] = value; }
 
 
-       public string CC { get => (string)TargettedRow[TableColumnNames.CC.ToString()]; }
+       public string CC { get => (string)TargettedRow[TableColumnNames.CC.ToString()];  set => TargettedRow[TableColumnNames.CC.ToString()] = value; }
 
 
-       public string Subject { get => (string)TargettedRow[TableColumnNames.Subject.ToString()]; }
+       public string Subject { get => (string)TargettedRow[TableColumnNames.Subject.ToString()];  set => TargettedRow[TableColumnNames.Subject.ToString()] = value; }
 
 
-       public string MessageBodyFileName { get => (string)TargettedRow[TableColumnNames.MessageBodyFileName.ToString()]; }
+       public string MessageBodyFileName { get => (string)TargettedRow[TableColumnNames.MessageBodyFileName.ToString()];  set => TargettedRow[TableColumnNames.MessageBodyFileName.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public string ExceptionMessage { get => (string)TargettedRow[TableColumnNames.ExceptionMessage.ToString()]; }
+       public string ExceptionMessage { get => (string)TargettedRow[TableColumnNames.ExceptionMessage.ToString()];  set => TargettedRow[TableColumnNames.ExceptionMessage.ToString()] = value; }
 
 
-       public string ExceptionStackTrace { get => (string)TargettedRow[TableColumnNames.ExceptionStackTrace.ToString()]; }
+       public string ExceptionStackTrace { get => (string)TargettedRow[TableColumnNames.ExceptionStackTrace.ToString()];  set => TargettedRow[TableColumnNames.ExceptionStackTrace.ToString()] = value; }
 
 
-       public string Gateway { get => (string)TargettedRow[TableColumnNames.Gateway.ToString()]; }
+       public string Gateway { get => (string)TargettedRow[TableColumnNames.Gateway.ToString()];  set => TargettedRow[TableColumnNames.Gateway.ToString()] = value; }
 
 
  #endregion
@@ -339,6 +339,140 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamDelivered;
+            private DataColumnParameter ParamSender;
+            private DataColumnParameter ParamReceiver;
+            private DataColumnParameter ParamBCC;
+            private DataColumnParameter ParamCC;
+            private DataColumnParameter ParamSubject;
+            private DataColumnParameter ParamMessageBodyFileName;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedAt;
+            private DataColumnParameter ParamExceptionMessage;
+            private DataColumnParameter ParamExceptionStackTrace;
+            private DataColumnParameter ParamGateway;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetDelivered(bool v)                  
+            {                  
+                ParamDelivered = new(defDelivered, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSender(string v)                  
+            {                  
+                ParamSender = new(defSender, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetReceiver(string v)                  
+            {                  
+                ParamReceiver = new(defReceiver, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetBCC(string v)                  
+            {                  
+                ParamBCC = new(defBCC, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCC(string v)                  
+            {                  
+                ParamCC = new(defCC, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSubject(string v)                  
+            {                  
+                ParamSubject = new(defSubject, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetMessageBodyFileName(string v)                  
+            {                  
+                ParamMessageBodyFileName = new(defMessageBodyFileName, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime? v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetExceptionMessage(string v)                  
+            {                  
+                ParamExceptionMessage = new(defExceptionMessage, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetExceptionStackTrace(string v)                  
+            {                  
+                ParamExceptionStackTrace = new(defExceptionStackTrace, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetGateway(string v)                  
+            {                  
+                ParamGateway = new(defGateway, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 

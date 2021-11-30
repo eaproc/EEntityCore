@@ -288,46 +288,46 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defDuties;
        public static readonly DataColumnDefinition defIsWebVisible;
 
-       public string PersonnelNumber { get => (string)TargettedRow[TableColumnNames.PersonnelNumber.ToString()]; }
+       public string PersonnelNumber { get => (string)TargettedRow[TableColumnNames.PersonnelNumber.ToString()];  set => TargettedRow[TableColumnNames.PersonnelNumber.ToString()] = value; }
 
 
-       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()]; }
+       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()];  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
 
 
-       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()]; }
+       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()];  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
 
 
-       public DateTime EmploymentDate { get => (DateTime)TargettedRow[TableColumnNames.EmploymentDate.ToString()]; }
+       public DateTime EmploymentDate { get => (DateTime)TargettedRow[TableColumnNames.EmploymentDate.ToString()];  set => TargettedRow[TableColumnNames.EmploymentDate.ToString()] = value; }
 
 
-       public bool IsSuperUser { get => (bool)TargettedRow[TableColumnNames.IsSuperUser.ToString()]; }
+       public bool IsSuperUser { get => (bool)TargettedRow[TableColumnNames.IsSuperUser.ToString()];  set => TargettedRow[TableColumnNames.IsSuperUser.ToString()] = value; }
 
 
-       public int PositionID { get => (int)TargettedRow[TableColumnNames.PositionID.ToString()]; }
+       public int PositionID { get => (int)TargettedRow[TableColumnNames.PositionID.ToString()];  set => TargettedRow[TableColumnNames.PositionID.ToString()] = value; }
 
 
-       public int? SalaryTypeID { get => (int?)TargettedRow[TableColumnNames.SalaryTypeID.ToString()]; }
+       public int? SalaryTypeID { get => (int?)TargettedRow[TableColumnNames.SalaryTypeID.ToString()];  set => TargettedRow[TableColumnNames.SalaryTypeID.ToString()] = value; }
 
 
-       public decimal? SalaryAmount { get => (decimal?)TargettedRow[TableColumnNames.SalaryAmount.ToString()]; }
+       public decimal? SalaryAmount { get => (decimal?)TargettedRow[TableColumnNames.SalaryAmount.ToString()];  set => TargettedRow[TableColumnNames.SalaryAmount.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()]; }
+       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public int? UpdatedByID { get => (int?)TargettedRow[TableColumnNames.UpdatedByID.ToString()]; }
+       public int? UpdatedByID { get => (int?)TargettedRow[TableColumnNames.UpdatedByID.ToString()];  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()]; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()]; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public string Duties { get => (string)TargettedRow[TableColumnNames.Duties.ToString()]; }
+       public string Duties { get => (string)TargettedRow[TableColumnNames.Duties.ToString()];  set => TargettedRow[TableColumnNames.Duties.ToString()] = value; }
 
 
-       public bool? IsWebVisible { get => (bool?)TargettedRow[TableColumnNames.IsWebVisible.ToString()]; }
+       public bool? IsWebVisible { get => (bool?)TargettedRow[TableColumnNames.IsWebVisible.ToString()];  set => TargettedRow[TableColumnNames.IsWebVisible.ToString()] = value; }
 
 
  #endregion
@@ -380,6 +380,154 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
  #endregion                  
                   
                   
+
+        #region Update Builder                  
+                  
+        public class UpdateQueryBuilder                  
+        {                  
+            private DataColumnParameter ParamID { get; }                  
+            private DataColumnParameter ParamPersonnelNumber;
+            private DataColumnParameter ParamPersonID;
+            private DataColumnParameter ParamIsActive;
+            private DataColumnParameter ParamEmploymentDate;
+            private DataColumnParameter ParamIsSuperUser;
+            private DataColumnParameter ParamPositionID;
+            private DataColumnParameter ParamSalaryTypeID;
+            private DataColumnParameter ParamSalaryAmount;
+            private DataColumnParameter ParamCreatedByID;
+            private DataColumnParameter ParamUpdatedByID;
+            private DataColumnParameter ParamCreatedAt;
+            private DataColumnParameter ParamUpdatedAt;
+            private DataColumnParameter ParamDuties;
+            private DataColumnParameter ParamIsWebVisible;
+
+                  
+            public UpdateQueryBuilder(long ID)                  
+            {                  
+                ParamID = new(defID, ID);                  
+            }                  
+
+                  
+            public UpdateQueryBuilder SetPersonnelNumber(string v)                  
+            {                  
+                ParamPersonnelNumber = new(defPersonnelNumber, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPersonID(int v)                  
+            {                  
+                ParamPersonID = new(defPersonID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIsActive(bool v)                  
+            {                  
+                ParamIsActive = new(defIsActive, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetEmploymentDate(DateTime v)                  
+            {                  
+                ParamEmploymentDate = new(defEmploymentDate, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIsSuperUser(bool v)                  
+            {                  
+                ParamIsSuperUser = new(defIsSuperUser, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetPositionID(int v)                  
+            {                  
+                ParamPositionID = new(defPositionID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSalaryTypeID(int? v)                  
+            {                  
+                ParamSalaryTypeID = new(defSalaryTypeID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetSalaryAmount(decimal? v)                  
+            {                  
+                ParamSalaryAmount = new(defSalaryAmount, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedByID(int v)                  
+            {                  
+                ParamCreatedByID = new(defCreatedByID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedByID(int? v)                  
+            {                  
+                ParamUpdatedByID = new(defUpdatedByID, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetCreatedAt(DateTime v)                  
+            {                  
+                ParamCreatedAt = new(defCreatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetUpdatedAt(DateTime? v)                  
+            {                  
+                ParamUpdatedAt = new(defUpdatedAt, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetDuties(string v)                  
+            {                  
+                ParamDuties = new(defDuties, v);                  
+                return this;                  
+            }                  
+                  
+            public UpdateQueryBuilder SetIsWebVisible(bool? v)                  
+            {                  
+                ParamIsWebVisible = new(defIsWebVisible, v);                  
+                return this;                  
+            }                  
+
+                  
+            public string BuildSQL()                  
+            {                  
+                if (!this.CanUpdate()) throw new InvalidOperationException("Please, set at least a parameter to update.");                  
+                  
+                var p = this.GetTouchedColumns();                  
+                System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
+                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                  
+                builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
+                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                  
+                return builder.ToString();                  
+            }                  
+                  
+            public bool CanUpdate() => GetTouchedColumns().Count > 0;                  
+                  
+            private List<DataColumnParameter> GetTouchedColumns()                  
+            {                  
+                return this.GetType().GetFields(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)                  
+                    .Where(x => x.GetValue(this) is DataColumnParameter)                  
+                    .Select(x => (DataColumnParameter)x.GetValue(this))                  
+                    .Where(x => !x.Equals(ParamID))                  
+                    .ToList();                  
+            }                  
+                  
+            public int Execute(DBTransaction trans)                  
+            {                  
+                return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
+            }                  
+        }                  
+                  
+        #endregion                  
+                  
+
 
 
 
