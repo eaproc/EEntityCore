@@ -175,6 +175,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___Client(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___Client(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -337,7 +347,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___Client GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___Client(conn.Fetch(Client__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___Client(conn.Fetch(Client__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -519,6 +529,76 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            string CompanyName,
+            DateTime CreatedAt,
+            int OwnerID,
+            bool IsActive,
+            string NameAbbreviation,
+            string SLAFileName = null,
+            string ScadwareURL = null,
+            string Email = null,
+            string Mobile = null,
+            string WebsiteURL = null,
+            string LogoFileName = null,
+            DateTime? UpdatedAt = null,
+            string Address = null,
+            int? BankID = null,
+            string AccountName = null,
+            string AccountNumber = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramCompanyName = new (defCompanyName, CompanyName);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramOwnerID = new (defOwnerID, OwnerID);
+                DataColumnParameter paramSLAFileName = new (defSLAFileName, SLAFileName);
+                DataColumnParameter paramScadwareURL = new (defScadwareURL, ScadwareURL);
+                DataColumnParameter paramEmail = new (defEmail, Email);
+                DataColumnParameter paramMobile = new (defMobile, Mobile);
+                DataColumnParameter paramWebsiteURL = new (defWebsiteURL, WebsiteURL);
+                DataColumnParameter paramLogoFileName = new (defLogoFileName, LogoFileName);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramIsActive = new (defIsActive, IsActive);
+                DataColumnParameter paramNameAbbreviation = new (defNameAbbreviation, NameAbbreviation);
+                DataColumnParameter paramAddress = new (defAddress, Address);
+                DataColumnParameter paramBankID = new (defBankID, BankID);
+                DataColumnParameter paramAccountName = new (defAccountName, AccountName);
+                DataColumnParameter paramAccountNumber = new (defAccountNumber, AccountNumber);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([CompanyName],[CreatedAt],[OwnerID],[SLAFileName],[ScadwareURL],[Email],[Mobile],[WebsiteURL],[LogoFileName],[UpdatedAt],[IsActive],[NameAbbreviation],[Address],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16})  ", TABLE_NAME,
+                        paramCompanyName.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramOwnerID.GetSQLQuotedValueForAdd(),
+                        paramSLAFileName.GetSQLQuotedValueForAdd(),
+                        paramScadwareURL.GetSQLQuotedValueForAdd(),
+                        paramEmail.GetSQLQuotedValueForAdd(),
+                        paramMobile.GetSQLQuotedValueForAdd(),
+                        paramWebsiteURL.GetSQLQuotedValueForAdd(),
+                        paramLogoFileName.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramIsActive.GetSQLQuotedValueForAdd(),
+                        paramNameAbbreviation.GetSQLQuotedValueForAdd(),
+                        paramAddress.GetSQLQuotedValueForAdd(),
+                        paramBankID.GetSQLQuotedValueForAdd(),
+                        paramAccountName.GetSQLQuotedValueForAdd(),
+                        paramAccountNumber.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

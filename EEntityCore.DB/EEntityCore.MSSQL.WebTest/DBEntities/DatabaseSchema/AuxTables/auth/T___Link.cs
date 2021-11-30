@@ -169,6 +169,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___Link(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___Link(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -298,7 +308,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___Link GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___Link(conn.Fetch(Link__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___Link(conn.Fetch(Link__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -438,6 +448,55 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int AppModuleID,
+            string Name,
+            string Link,
+            int LinkPermissionID,
+            DateTime CreatedAt,
+            int? LinkParentID = null,
+            int? OwnedByRoleID = null,
+            string Description = null,
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramAppModuleID = new (defAppModuleID, AppModuleID);
+                DataColumnParameter paramName = new (defName, Name);
+                DataColumnParameter paramLink = new (defLink, Link);
+                DataColumnParameter paramLinkPermissionID = new (defLinkPermissionID, LinkPermissionID);
+                DataColumnParameter paramLinkParentID = new (defLinkParentID, LinkParentID);
+                DataColumnParameter paramOwnedByRoleID = new (defOwnedByRoleID, OwnedByRoleID);
+                DataColumnParameter paramDescription = new (defDescription, Description);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([AppModuleID],[Name],[Link],[LinkPermissionID],[LinkParentID],[OwnedByRoleID],[Description],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9})  ", TABLE_NAME,
+                        paramAppModuleID.GetSQLQuotedValueForAdd(),
+                        paramName.GetSQLQuotedValueForAdd(),
+                        paramLink.GetSQLQuotedValueForAdd(),
+                        paramLinkPermissionID.GetSQLQuotedValueForAdd(),
+                        paramLinkParentID.GetSQLQuotedValueForAdd(),
+                        paramOwnedByRoleID.GetSQLQuotedValueForAdd(),
+                        paramDescription.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

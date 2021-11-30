@@ -153,6 +153,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___AlertTransaction(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___AlertTransaction(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -278,7 +288,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___AlertTransaction GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___AlertTransaction(conn.Fetch(AlertTransaction__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___AlertTransaction(conn.Fetch(AlertTransaction__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -418,6 +428,55 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            DateTime TransactionDate,
+            string TransactionReference,
+            string Description,
+            string Channel,
+            decimal Total,
+            bool Confirmed,
+            bool Processed,
+            DateTime CreatedAt,
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramTransactionDate = new (defTransactionDate, TransactionDate);
+                DataColumnParameter paramTransactionReference = new (defTransactionReference, TransactionReference);
+                DataColumnParameter paramDescription = new (defDescription, Description);
+                DataColumnParameter paramChannel = new (defChannel, Channel);
+                DataColumnParameter paramTotal = new (defTotal, Total);
+                DataColumnParameter paramConfirmed = new (defConfirmed, Confirmed);
+                DataColumnParameter paramProcessed = new (defProcessed, Processed);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([TransactionDate],[TransactionReference],[Description],[Channel],[Total],[Confirmed],[Processed],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9})  ", TABLE_NAME,
+                        paramTransactionDate.GetSQLQuotedValueForAdd(),
+                        paramTransactionReference.GetSQLQuotedValueForAdd(),
+                        paramDescription.GetSQLQuotedValueForAdd(),
+                        paramChannel.GetSQLQuotedValueForAdd(),
+                        paramTotal.GetSQLQuotedValueForAdd(),
+                        paramConfirmed.GetSQLQuotedValueForAdd(),
+                        paramProcessed.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

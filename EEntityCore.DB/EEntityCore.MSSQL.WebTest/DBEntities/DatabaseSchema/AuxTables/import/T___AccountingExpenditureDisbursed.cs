@@ -163,6 +163,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___AccountingExpenditureDisbursed(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___AccountingExpenditureDisbursed(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -294,7 +304,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___AccountingExpenditureDisbursed GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___AccountingExpenditureDisbursed(conn.Fetch(AccountingExpenditureDisbursed__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___AccountingExpenditureDisbursed(conn.Fetch(AccountingExpenditureDisbursed__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -440,6 +450,58 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int DataMonitorID,
+            int ImportStatusID,
+            string Request,
+            DateTime DisbursedDate,
+            string Category,
+            string Beneficiary,
+            decimal Total,
+            string ImportComment,
+            DateTime CreatedAt,
+            string Notes = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramDataMonitorID = new (defDataMonitorID, DataMonitorID);
+                DataColumnParameter paramImportStatusID = new (defImportStatusID, ImportStatusID);
+                DataColumnParameter paramRequest = new (defRequest, Request);
+                DataColumnParameter paramDisbursedDate = new (defDisbursedDate, DisbursedDate);
+                DataColumnParameter paramCategory = new (defCategory, Category);
+                DataColumnParameter paramBeneficiary = new (defBeneficiary, Beneficiary);
+                DataColumnParameter paramNotes = new (defNotes, Notes);
+                DataColumnParameter paramTotal = new (defTotal, Total);
+                DataColumnParameter paramImportComment = new (defImportComment, ImportComment);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([DataMonitorID],[ImportStatusID],[Request],[DisbursedDate],[Category],[Beneficiary],[Notes],[Total],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  ", TABLE_NAME,
+                        paramDataMonitorID.GetSQLQuotedValueForAdd(),
+                        paramImportStatusID.GetSQLQuotedValueForAdd(),
+                        paramRequest.GetSQLQuotedValueForAdd(),
+                        paramDisbursedDate.GetSQLQuotedValueForAdd(),
+                        paramCategory.GetSQLQuotedValueForAdd(),
+                        paramBeneficiary.GetSQLQuotedValueForAdd(),
+                        paramNotes.GetSQLQuotedValueForAdd(),
+                        paramTotal.GetSQLQuotedValueForAdd(),
+                        paramImportComment.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

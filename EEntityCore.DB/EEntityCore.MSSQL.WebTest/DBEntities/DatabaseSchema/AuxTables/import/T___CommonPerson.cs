@@ -175,6 +175,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___CommonPerson(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___CommonPerson(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -336,7 +346,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___CommonPerson GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___CommonPerson(conn.Fetch(CommonPerson__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___CommonPerson(conn.Fetch(CommonPerson__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -518,6 +528,76 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int DataMonitorID,
+            int ImportStatusID,
+            string IdentificationNo,
+            string PersonTitle,
+            string FirstName,
+            string LastName,
+            string Country,
+            DateTime DateOfBirth,
+            string Gender,
+            string ImportComment,
+            DateTime CreatedAt,
+            string HomeAddress = null,
+            string Email = null,
+            string BirthPlace = null,
+            string MobileAreaCode = null,
+            string MobileNumber = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramDataMonitorID = new (defDataMonitorID, DataMonitorID);
+                DataColumnParameter paramImportStatusID = new (defImportStatusID, ImportStatusID);
+                DataColumnParameter paramIdentificationNo = new (defIdentificationNo, IdentificationNo);
+                DataColumnParameter paramPersonTitle = new (defPersonTitle, PersonTitle);
+                DataColumnParameter paramFirstName = new (defFirstName, FirstName);
+                DataColumnParameter paramLastName = new (defLastName, LastName);
+                DataColumnParameter paramCountry = new (defCountry, Country);
+                DataColumnParameter paramDateOfBirth = new (defDateOfBirth, DateOfBirth);
+                DataColumnParameter paramGender = new (defGender, Gender);
+                DataColumnParameter paramHomeAddress = new (defHomeAddress, HomeAddress);
+                DataColumnParameter paramEmail = new (defEmail, Email);
+                DataColumnParameter paramBirthPlace = new (defBirthPlace, BirthPlace);
+                DataColumnParameter paramMobileAreaCode = new (defMobileAreaCode, MobileAreaCode);
+                DataColumnParameter paramMobileNumber = new (defMobileNumber, MobileNumber);
+                DataColumnParameter paramImportComment = new (defImportComment, ImportComment);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([DataMonitorID],[ImportStatusID],[IdentificationNo],[PersonTitle],[FirstName],[LastName],[Country],[DateOfBirth],[Gender],[HomeAddress],[Email],[BirthPlace],[MobileAreaCode],[MobileNumber],[ImportComment],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16})  ", TABLE_NAME,
+                        paramDataMonitorID.GetSQLQuotedValueForAdd(),
+                        paramImportStatusID.GetSQLQuotedValueForAdd(),
+                        paramIdentificationNo.GetSQLQuotedValueForAdd(),
+                        paramPersonTitle.GetSQLQuotedValueForAdd(),
+                        paramFirstName.GetSQLQuotedValueForAdd(),
+                        paramLastName.GetSQLQuotedValueForAdd(),
+                        paramCountry.GetSQLQuotedValueForAdd(),
+                        paramDateOfBirth.GetSQLQuotedValueForAdd(),
+                        paramGender.GetSQLQuotedValueForAdd(),
+                        paramHomeAddress.GetSQLQuotedValueForAdd(),
+                        paramEmail.GetSQLQuotedValueForAdd(),
+                        paramBirthPlace.GetSQLQuotedValueForAdd(),
+                        paramMobileAreaCode.GetSQLQuotedValueForAdd(),
+                        paramMobileNumber.GetSQLQuotedValueForAdd(),
+                        paramImportComment.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

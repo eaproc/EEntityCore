@@ -163,6 +163,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___BusinessPlan(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___BusinessPlan(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -304,7 +314,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___BusinessPlan GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___BusinessPlan(conn.Fetch(BusinessPlan__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___BusinessPlan(conn.Fetch(BusinessPlan__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -462,6 +472,64 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int AcademicSessionID,
+            int StudentPopulation,
+            decimal AveragePricePerStudent,
+            decimal SCADWAREAccessRevenue,
+            decimal SideContractRevenue,
+            decimal GrossRevenue,
+            decimal Wages,
+            decimal Marketing,
+            decimal Charity,
+            decimal Others,
+            DateTime CreatedAt,
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramAcademicSessionID = new (defAcademicSessionID, AcademicSessionID);
+                DataColumnParameter paramStudentPopulation = new (defStudentPopulation, StudentPopulation);
+                DataColumnParameter paramAveragePricePerStudent = new (defAveragePricePerStudent, AveragePricePerStudent);
+                DataColumnParameter paramSCADWAREAccessRevenue = new (defSCADWAREAccessRevenue, SCADWAREAccessRevenue);
+                DataColumnParameter paramSideContractRevenue = new (defSideContractRevenue, SideContractRevenue);
+                DataColumnParameter paramGrossRevenue = new (defGrossRevenue, GrossRevenue);
+                DataColumnParameter paramWages = new (defWages, Wages);
+                DataColumnParameter paramMarketing = new (defMarketing, Marketing);
+                DataColumnParameter paramCharity = new (defCharity, Charity);
+                DataColumnParameter paramOthers = new (defOthers, Others);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([AcademicSessionID],[StudentPopulation],[AveragePricePerStudent],[SCADWAREAccessRevenue],[SideContractRevenue],[GrossRevenue],[Wages],[Marketing],[Charity],[Others],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  ", TABLE_NAME,
+                        paramAcademicSessionID.GetSQLQuotedValueForAdd(),
+                        paramStudentPopulation.GetSQLQuotedValueForAdd(),
+                        paramAveragePricePerStudent.GetSQLQuotedValueForAdd(),
+                        paramSCADWAREAccessRevenue.GetSQLQuotedValueForAdd(),
+                        paramSideContractRevenue.GetSQLQuotedValueForAdd(),
+                        paramGrossRevenue.GetSQLQuotedValueForAdd(),
+                        paramWages.GetSQLQuotedValueForAdd(),
+                        paramMarketing.GetSQLQuotedValueForAdd(),
+                        paramCharity.GetSQLQuotedValueForAdd(),
+                        paramOthers.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

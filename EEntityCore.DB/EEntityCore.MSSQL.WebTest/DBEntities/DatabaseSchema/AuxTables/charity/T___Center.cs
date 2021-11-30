@@ -171,6 +171,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___Center(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___Center(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -313,7 +323,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___Center GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___Center(conn.Fetch(Center__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___Center(conn.Fetch(Center__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -471,6 +481,64 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int BeneficiariesAvailableOnRegistration,
+            int CenterStatusID,
+            int YearFounded,
+            int ChurchCapacity,
+            DateTime CreatedAt,
+            DateTime UpdatedAt,
+            int CreatedByID,
+            int UpdatedByID,
+            string Name = null,
+            string Address = null,
+            string Comments = null,
+            string PictureStoredPath = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramName = new (defName, Name);
+                DataColumnParameter paramAddress = new (defAddress, Address);
+                DataColumnParameter paramBeneficiariesAvailableOnRegistration = new (defBeneficiariesAvailableOnRegistration, BeneficiariesAvailableOnRegistration);
+                DataColumnParameter paramCenterStatusID = new (defCenterStatusID, CenterStatusID);
+                DataColumnParameter paramYearFounded = new (defYearFounded, YearFounded);
+                DataColumnParameter paramChurchCapacity = new (defChurchCapacity, ChurchCapacity);
+                DataColumnParameter paramComments = new (defComments, Comments);
+                DataColumnParameter paramPictureStoredPath = new (defPictureStoredPath, PictureStoredPath);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([Name],[Address],[BeneficiariesAvailableOnRegistration],[CenterStatusID],[YearFounded],[ChurchCapacity],[Comments],[PictureStoredPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  ", TABLE_NAME,
+                        paramName.GetSQLQuotedValueForAdd(),
+                        paramAddress.GetSQLQuotedValueForAdd(),
+                        paramBeneficiariesAvailableOnRegistration.GetSQLQuotedValueForAdd(),
+                        paramCenterStatusID.GetSQLQuotedValueForAdd(),
+                        paramYearFounded.GetSQLQuotedValueForAdd(),
+                        paramChurchCapacity.GetSQLQuotedValueForAdd(),
+                        paramComments.GetSQLQuotedValueForAdd(),
+                        paramPictureStoredPath.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

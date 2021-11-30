@@ -151,6 +151,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___PersonDocument(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___PersonDocument(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -253,7 +263,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___PersonDocument GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___PersonDocument(conn.Fetch(PersonDocument__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___PersonDocument(conn.Fetch(PersonDocument__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -363,6 +373,40 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int PersonID,
+            int PersonDocumentTypeID,
+            string DocumentFileName,
+            DateTime CreatedAt,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramPersonID = new (defPersonID, PersonID);
+                DataColumnParameter paramPersonDocumentTypeID = new (defPersonDocumentTypeID, PersonDocumentTypeID);
+                DataColumnParameter paramDocumentFileName = new (defDocumentFileName, DocumentFileName);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([PersonID],[PersonDocumentTypeID],[DocumentFileName],[CreatedAt]) VALUES({1},{2},{3},{4})  ", TABLE_NAME,
+                        paramPersonID.GetSQLQuotedValueForAdd(),
+                        paramPersonDocumentTypeID.GetSQLQuotedValueForAdd(),
+                        paramDocumentFileName.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

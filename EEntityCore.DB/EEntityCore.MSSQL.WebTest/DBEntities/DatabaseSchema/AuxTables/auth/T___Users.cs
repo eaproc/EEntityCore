@@ -155,6 +155,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___Users(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___Users(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -277,7 +287,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___Users GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___Users(conn.Fetch(Users__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___Users(conn.Fetch(Users__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -411,6 +421,52 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            string Username,
+            int PersonID,
+            string UserPassword,
+            bool IsActive,
+            DateTime CreatedAt,
+            string RememberToken = null,
+            DateTime? UpdatedAt = null,
+            string ResetModeCarrier = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramUsername = new (defUsername, Username);
+                DataColumnParameter paramPersonID = new (defPersonID, PersonID);
+                DataColumnParameter paramUserPassword = new (defUserPassword, UserPassword);
+                DataColumnParameter paramRememberToken = new (defRememberToken, RememberToken);
+                DataColumnParameter paramIsActive = new (defIsActive, IsActive);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramResetModeCarrier = new (defResetModeCarrier, ResetModeCarrier);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([Username],[PersonID],[UserPassword],[RememberToken],[IsActive],[CreatedAt],[UpdatedAt],[ResetModeCarrier]) VALUES({1},{2},{3},{4},{5},{6},{7},{8})  ", TABLE_NAME,
+                        paramUsername.GetSQLQuotedValueForAdd(),
+                        paramPersonID.GetSQLQuotedValueForAdd(),
+                        paramUserPassword.GetSQLQuotedValueForAdd(),
+                        paramRememberToken.GetSQLQuotedValueForAdd(),
+                        paramIsActive.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramResetModeCarrier.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

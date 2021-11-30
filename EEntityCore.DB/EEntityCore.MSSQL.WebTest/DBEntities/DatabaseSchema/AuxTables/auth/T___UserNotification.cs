@@ -159,6 +159,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___UserNotification(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___UserNotification(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -289,7 +299,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___UserNotification GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___UserNotification(conn.Fetch(UserNotification__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___UserNotification(conn.Fetch(UserNotification__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -435,6 +445,58 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int UserID,
+            string Title,
+            DateTime CreatedAt,
+            string TargetURL,
+            string QuickNote = null,
+            string Description = null,
+            string IconClass = null,
+            string HeadingColorClass = null,
+            DateTime? ReadAt = null,
+            string Identifier = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramUserID = new (defUserID, UserID);
+                DataColumnParameter paramTitle = new (defTitle, Title);
+                DataColumnParameter paramQuickNote = new (defQuickNote, QuickNote);
+                DataColumnParameter paramDescription = new (defDescription, Description);
+                DataColumnParameter paramIconClass = new (defIconClass, IconClass);
+                DataColumnParameter paramHeadingColorClass = new (defHeadingColorClass, HeadingColorClass);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramReadAt = new (defReadAt, ReadAt);
+                DataColumnParameter paramIdentifier = new (defIdentifier, Identifier);
+                DataColumnParameter paramTargetURL = new (defTargetURL, TargetURL);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([UserID],[Title],[QuickNote],[Description],[IconClass],[HeadingColorClass],[CreatedAt],[ReadAt],[Identifier],[TargetURL]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  ", TABLE_NAME,
+                        paramUserID.GetSQLQuotedValueForAdd(),
+                        paramTitle.GetSQLQuotedValueForAdd(),
+                        paramQuickNote.GetSQLQuotedValueForAdd(),
+                        paramDescription.GetSQLQuotedValueForAdd(),
+                        paramIconClass.GetSQLQuotedValueForAdd(),
+                        paramHeadingColorClass.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramReadAt.GetSQLQuotedValueForAdd(),
+                        paramIdentifier.GetSQLQuotedValueForAdd(),
+                        paramTargetURL.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

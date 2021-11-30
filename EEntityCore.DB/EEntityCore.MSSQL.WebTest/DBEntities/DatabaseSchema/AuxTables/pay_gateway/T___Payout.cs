@@ -185,6 +185,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___Payout(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___Payout(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -353,7 +363,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___Payout GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___Payout(conn.Fetch(Payout__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___Payout(conn.Fetch(Payout__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -541,6 +551,79 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int CreatedByID,
+            int ClientID,
+            decimal PaidInAmount,
+            decimal PaidInCharges,
+            decimal PayoutAmount,
+            decimal PayoutCharge,
+            decimal Balance,
+            DateTime TransactionStartDate,
+            DateTime TransactionEndDate,
+            DateTime CreatedAt,
+            int BankID,
+            string AccountName,
+            string AccountNumber,
+            int? UpdatedByID = null,
+            bool? AwaitingPayout = null,
+            bool? Synced = null,
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+                DataColumnParameter paramClientID = new (defClientID, ClientID);
+                DataColumnParameter paramPaidInAmount = new (defPaidInAmount, PaidInAmount);
+                DataColumnParameter paramPaidInCharges = new (defPaidInCharges, PaidInCharges);
+                DataColumnParameter paramPayoutAmount = new (defPayoutAmount, PayoutAmount);
+                DataColumnParameter paramPayoutCharge = new (defPayoutCharge, PayoutCharge);
+                DataColumnParameter paramBalance = new (defBalance, Balance);
+                DataColumnParameter paramTransactionStartDate = new (defTransactionStartDate, TransactionStartDate);
+                DataColumnParameter paramTransactionEndDate = new (defTransactionEndDate, TransactionEndDate);
+                DataColumnParameter paramAwaitingPayout = new (defAwaitingPayout, AwaitingPayout);
+                DataColumnParameter paramSynced = new (defSynced, Synced);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramBankID = new (defBankID, BankID);
+                DataColumnParameter paramAccountName = new (defAccountName, AccountName);
+                DataColumnParameter paramAccountNumber = new (defAccountNumber, AccountNumber);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([CreatedByID],[UpdatedByID],[ClientID],[PaidInAmount],[PaidInCharges],[PayoutAmount],[PayoutCharge],[Balance],[TransactionStartDate],[TransactionEndDate],[AwaitingPayout],[Synced],[CreatedAt],[UpdatedAt],[BankID],[AccountName],[AccountNumber]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17})  ", TABLE_NAME,
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd(),
+                        paramClientID.GetSQLQuotedValueForAdd(),
+                        paramPaidInAmount.GetSQLQuotedValueForAdd(),
+                        paramPaidInCharges.GetSQLQuotedValueForAdd(),
+                        paramPayoutAmount.GetSQLQuotedValueForAdd(),
+                        paramPayoutCharge.GetSQLQuotedValueForAdd(),
+                        paramBalance.GetSQLQuotedValueForAdd(),
+                        paramTransactionStartDate.GetSQLQuotedValueForAdd(),
+                        paramTransactionEndDate.GetSQLQuotedValueForAdd(),
+                        paramAwaitingPayout.GetSQLQuotedValueForAdd(),
+                        paramSynced.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramBankID.GetSQLQuotedValueForAdd(),
+                        paramAccountName.GetSQLQuotedValueForAdd(),
+                        paramAccountNumber.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

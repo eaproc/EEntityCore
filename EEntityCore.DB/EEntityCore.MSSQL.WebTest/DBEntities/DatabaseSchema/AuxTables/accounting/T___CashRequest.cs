@@ -169,6 +169,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___CashRequest(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___CashRequest(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -297,7 +307,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___CashRequest GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___CashRequest(conn.Fetch(CashRequest__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___CashRequest(conn.Fetch(CashRequest__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -437,6 +447,55 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            string Request,
+            int ExpenditureCategoryID,
+            decimal Amount,
+            DateTime Deadline,
+            DateTime CreatedAt,
+            int CreatedByID,
+            int BeneficiaryID,
+            int? TrackingID = null,
+            int? DataMonitorID = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramRequest = new (defRequest, Request);
+                DataColumnParameter paramExpenditureCategoryID = new (defExpenditureCategoryID, ExpenditureCategoryID);
+                DataColumnParameter paramAmount = new (defAmount, Amount);
+                DataColumnParameter paramDeadline = new (defDeadline, Deadline);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramBeneficiaryID = new (defBeneficiaryID, BeneficiaryID);
+                DataColumnParameter paramTrackingID = new (defTrackingID, TrackingID);
+                DataColumnParameter paramDataMonitorID = new (defDataMonitorID, DataMonitorID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([Request],[ExpenditureCategoryID],[Amount],[Deadline],[CreatedAt],[CreatedByID],[BeneficiaryID],[TrackingID],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9})  ", TABLE_NAME,
+                        paramRequest.GetSQLQuotedValueForAdd(),
+                        paramExpenditureCategoryID.GetSQLQuotedValueForAdd(),
+                        paramAmount.GetSQLQuotedValueForAdd(),
+                        paramDeadline.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramBeneficiaryID.GetSQLQuotedValueForAdd(),
+                        paramTrackingID.GetSQLQuotedValueForAdd(),
+                        paramDataMonitorID.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

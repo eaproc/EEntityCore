@@ -165,6 +165,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___PlannedEvent(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___PlannedEvent(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -292,7 +302,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___PlannedEvent GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___PlannedEvent(conn.Fetch(PlannedEvent__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___PlannedEvent(conn.Fetch(PlannedEvent__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -432,6 +442,55 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int CalendarEventID,
+            string Title,
+            DateTime StartDate,
+            DateTime EndDate,
+            DateTime CreatedAt,
+            int CreatedByID,
+            int AcademicSessionID,
+            string Comments = null,
+            int? TrackID = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramCalendarEventID = new (defCalendarEventID, CalendarEventID);
+                DataColumnParameter paramTitle = new (defTitle, Title);
+                DataColumnParameter paramStartDate = new (defStartDate, StartDate);
+                DataColumnParameter paramEndDate = new (defEndDate, EndDate);
+                DataColumnParameter paramComments = new (defComments, Comments);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramTrackID = new (defTrackID, TrackID);
+                DataColumnParameter paramAcademicSessionID = new (defAcademicSessionID, AcademicSessionID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([CalendarEventID],[Title],[StartDate],[EndDate],[Comments],[CreatedAt],[CreatedByID],[TrackID],[AcademicSessionID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9})  ", TABLE_NAME,
+                        paramCalendarEventID.GetSQLQuotedValueForAdd(),
+                        paramTitle.GetSQLQuotedValueForAdd(),
+                        paramStartDate.GetSQLQuotedValueForAdd(),
+                        paramEndDate.GetSQLQuotedValueForAdd(),
+                        paramComments.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramTrackID.GetSQLQuotedValueForAdd(),
+                        paramAcademicSessionID.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

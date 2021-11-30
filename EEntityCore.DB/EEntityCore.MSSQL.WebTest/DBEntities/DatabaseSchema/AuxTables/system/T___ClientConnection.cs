@@ -169,6 +169,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___ClientConnection(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___ClientConnection(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -325,7 +335,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___ClientConnection GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___ClientConnection(conn.Fetch(ClientConnection__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___ClientConnection(conn.Fetch(ClientConnection__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -501,6 +511,73 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ClientID,
+            string FileServerUrl,
+            string FileServerAccessKey,
+            string FileServerSecretKey,
+            string FileServerBucket,
+            string ClientAPIID,
+            string ClientAPIUrl,
+            string DB_HOST,
+            string DB_DATABASE,
+            string DB_USERNAME,
+            string DB_PASSWORD,
+            int DB_PORT,
+            DateTime CreatedAt,
+            string FileServerUrlHttps,
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramClientID = new (defClientID, ClientID);
+                DataColumnParameter paramFileServerUrl = new (defFileServerUrl, FileServerUrl);
+                DataColumnParameter paramFileServerAccessKey = new (defFileServerAccessKey, FileServerAccessKey);
+                DataColumnParameter paramFileServerSecretKey = new (defFileServerSecretKey, FileServerSecretKey);
+                DataColumnParameter paramFileServerBucket = new (defFileServerBucket, FileServerBucket);
+                DataColumnParameter paramClientAPIID = new (defClientAPIID, ClientAPIID);
+                DataColumnParameter paramClientAPIUrl = new (defClientAPIUrl, ClientAPIUrl);
+                DataColumnParameter paramDB_HOST = new (defDB_HOST, DB_HOST);
+                DataColumnParameter paramDB_DATABASE = new (defDB_DATABASE, DB_DATABASE);
+                DataColumnParameter paramDB_USERNAME = new (defDB_USERNAME, DB_USERNAME);
+                DataColumnParameter paramDB_PASSWORD = new (defDB_PASSWORD, DB_PASSWORD);
+                DataColumnParameter paramDB_PORT = new (defDB_PORT, DB_PORT);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramFileServerUrlHttps = new (defFileServerUrlHttps, FileServerUrlHttps);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15})  ", TABLE_NAME,
+                        paramClientID.GetSQLQuotedValueForAdd(),
+                        paramFileServerUrl.GetSQLQuotedValueForAdd(),
+                        paramFileServerAccessKey.GetSQLQuotedValueForAdd(),
+                        paramFileServerSecretKey.GetSQLQuotedValueForAdd(),
+                        paramFileServerBucket.GetSQLQuotedValueForAdd(),
+                        paramClientAPIID.GetSQLQuotedValueForAdd(),
+                        paramClientAPIUrl.GetSQLQuotedValueForAdd(),
+                        paramDB_HOST.GetSQLQuotedValueForAdd(),
+                        paramDB_DATABASE.GetSQLQuotedValueForAdd(),
+                        paramDB_USERNAME.GetSQLQuotedValueForAdd(),
+                        paramDB_PASSWORD.GetSQLQuotedValueForAdd(),
+                        paramDB_PORT.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramFileServerUrlHttps.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

@@ -22,6 +22,8 @@ namespace EEntityCore.MSSQL.WebTest
 
                 //TestAddWithID();
 
+                TestAdd();
+
                 //TestInsertGetID();
 
 
@@ -66,6 +68,12 @@ namespace EEntityCore.MSSQL.WebTest
         {
            bool result =   T___TestTable.AddWithID(2, "Funny", 400, true, (decimal)10.244, DateTime.Now);
            Console.WriteLine("Result was {0}", result);
+        }
+
+        private static void TestAdd()
+        {
+            bool result = T___TestTable.Add("Funny Add", 65400, true, (decimal)10.244, DateTime.Now);
+            Console.WriteLine("Result was {0}", result);
         }
 
         private static void TestInsertGetID()

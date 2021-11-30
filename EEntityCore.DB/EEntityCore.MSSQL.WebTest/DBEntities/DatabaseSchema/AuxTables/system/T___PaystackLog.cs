@@ -173,6 +173,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___PaystackLog(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___PaystackLog(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -320,7 +330,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___PaystackLog GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___PaystackLog(conn.Fetch(PaystackLog__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___PaystackLog(conn.Fetch(PaystackLog__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -484,6 +494,67 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int PaymentGatewayStatusID,
+            bool IsFinalized,
+            int InitializedByUserID,
+            string InitialLizeURL,
+            int AmountKobo,
+            DateTime CreatedAt,
+            string Reference = null,
+            string AccessCode = null,
+            string PaymentURL = null,
+            string VerifiyURL = null,
+            string VerifyResponseJSON = null,
+            int? VerifiedByUserID = null,
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramPaymentGatewayStatusID = new (defPaymentGatewayStatusID, PaymentGatewayStatusID);
+                DataColumnParameter paramIsFinalized = new (defIsFinalized, IsFinalized);
+                DataColumnParameter paramInitializedByUserID = new (defInitializedByUserID, InitializedByUserID);
+                DataColumnParameter paramReference = new (defReference, Reference);
+                DataColumnParameter paramAccessCode = new (defAccessCode, AccessCode);
+                DataColumnParameter paramInitialLizeURL = new (defInitialLizeURL, InitialLizeURL);
+                DataColumnParameter paramPaymentURL = new (defPaymentURL, PaymentURL);
+                DataColumnParameter paramVerifiyURL = new (defVerifiyURL, VerifiyURL);
+                DataColumnParameter paramAmountKobo = new (defAmountKobo, AmountKobo);
+                DataColumnParameter paramVerifyResponseJSON = new (defVerifyResponseJSON, VerifyResponseJSON);
+                DataColumnParameter paramVerifiedByUserID = new (defVerifiedByUserID, VerifiedByUserID);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([PaymentGatewayStatusID],[IsFinalized],[InitializedByUserID],[Reference],[AccessCode],[InitialLizeURL],[PaymentURL],[VerifiyURL],[AmountKobo],[VerifyResponseJSON],[VerifiedByUserID],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  ", TABLE_NAME,
+                        paramPaymentGatewayStatusID.GetSQLQuotedValueForAdd(),
+                        paramIsFinalized.GetSQLQuotedValueForAdd(),
+                        paramInitializedByUserID.GetSQLQuotedValueForAdd(),
+                        paramReference.GetSQLQuotedValueForAdd(),
+                        paramAccessCode.GetSQLQuotedValueForAdd(),
+                        paramInitialLizeURL.GetSQLQuotedValueForAdd(),
+                        paramPaymentURL.GetSQLQuotedValueForAdd(),
+                        paramVerifiyURL.GetSQLQuotedValueForAdd(),
+                        paramAmountKobo.GetSQLQuotedValueForAdd(),
+                        paramVerifyResponseJSON.GetSQLQuotedValueForAdd(),
+                        paramVerifiedByUserID.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

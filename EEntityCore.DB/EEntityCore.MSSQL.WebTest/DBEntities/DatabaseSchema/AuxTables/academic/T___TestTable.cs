@@ -155,6 +155,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___TestTable(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___TestTable(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -284,7 +294,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___TestTable GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___TestTable(conn.Fetch(TestTable__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___TestTable(conn.Fetch(TestTable__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -430,6 +440,58 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            string TestString,
+            int TestInt32,
+            bool TestBool,
+            decimal TestDecimal,
+            DateTime TestDateTime,
+            string TestStringNull = null,
+            int? TestInt32Null = null,
+            bool? TestBoolNull = null,
+            decimal? TestDecimalNull = null,
+            DateTime? TestDateTimeNull = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramTestString = new (defTestString, TestString);
+                DataColumnParameter paramTestStringNull = new (defTestStringNull, TestStringNull);
+                DataColumnParameter paramTestInt32 = new (defTestInt32, TestInt32);
+                DataColumnParameter paramTestInt32Null = new (defTestInt32Null, TestInt32Null);
+                DataColumnParameter paramTestBool = new (defTestBool, TestBool);
+                DataColumnParameter paramTestBoolNull = new (defTestBoolNull, TestBoolNull);
+                DataColumnParameter paramTestDecimal = new (defTestDecimal, TestDecimal);
+                DataColumnParameter paramTestDecimalNull = new (defTestDecimalNull, TestDecimalNull);
+                DataColumnParameter paramTestDateTime = new (defTestDateTime, TestDateTime);
+                DataColumnParameter paramTestDateTimeNull = new (defTestDateTimeNull, TestDateTimeNull);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([TestString],[TestStringNull],[TestInt32],[TestInt32Null],[TestBool],[TestBoolNull],[TestDecimal],[TestDecimalNull],[TestDateTime],[TestDateTimeNull]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  ", TABLE_NAME,
+                        paramTestString.GetSQLQuotedValueForAdd(),
+                        paramTestStringNull.GetSQLQuotedValueForAdd(),
+                        paramTestInt32.GetSQLQuotedValueForAdd(),
+                        paramTestInt32Null.GetSQLQuotedValueForAdd(),
+                        paramTestBool.GetSQLQuotedValueForAdd(),
+                        paramTestBoolNull.GetSQLQuotedValueForAdd(),
+                        paramTestDecimal.GetSQLQuotedValueForAdd(),
+                        paramTestDecimalNull.GetSQLQuotedValueForAdd(),
+                        paramTestDateTime.GetSQLQuotedValueForAdd(),
+                        paramTestDateTimeNull.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

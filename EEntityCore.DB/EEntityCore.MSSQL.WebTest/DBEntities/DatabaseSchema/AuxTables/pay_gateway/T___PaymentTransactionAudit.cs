@@ -171,6 +171,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___PaymentTransactionAudit(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___PaymentTransactionAudit(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -313,7 +323,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___PaymentTransactionAudit GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___PaymentTransactionAudit(conn.Fetch(PaymentTransactionAudit__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___PaymentTransactionAudit(conn.Fetch(PaymentTransactionAudit__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -471,6 +481,64 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int TransactionStatusID,
+            int PaymentTransactionID,
+            string AccountName,
+            string Bank,
+            string IPAddress,
+            decimal PaymentRequired,
+            decimal Charges,
+            decimal PaymentRequiredWithoutCharges,
+            decimal RefundAmount,
+            decimal Balance,
+            DateTime CreatedAt,
+            int CreatedByID,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramTransactionStatusID = new (defTransactionStatusID, TransactionStatusID);
+                DataColumnParameter paramPaymentTransactionID = new (defPaymentTransactionID, PaymentTransactionID);
+                DataColumnParameter paramAccountName = new (defAccountName, AccountName);
+                DataColumnParameter paramBank = new (defBank, Bank);
+                DataColumnParameter paramIPAddress = new (defIPAddress, IPAddress);
+                DataColumnParameter paramPaymentRequired = new (defPaymentRequired, PaymentRequired);
+                DataColumnParameter paramCharges = new (defCharges, Charges);
+                DataColumnParameter paramPaymentRequiredWithoutCharges = new (defPaymentRequiredWithoutCharges, PaymentRequiredWithoutCharges);
+                DataColumnParameter paramRefundAmount = new (defRefundAmount, RefundAmount);
+                DataColumnParameter paramBalance = new (defBalance, Balance);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([TransactionStatusID],[PaymentTransactionID],[AccountName],[Bank],[IPAddress],[PaymentRequired],[Charges],[PaymentRequiredWithoutCharges],[RefundAmount],[Balance],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  ", TABLE_NAME,
+                        paramTransactionStatusID.GetSQLQuotedValueForAdd(),
+                        paramPaymentTransactionID.GetSQLQuotedValueForAdd(),
+                        paramAccountName.GetSQLQuotedValueForAdd(),
+                        paramBank.GetSQLQuotedValueForAdd(),
+                        paramIPAddress.GetSQLQuotedValueForAdd(),
+                        paramPaymentRequired.GetSQLQuotedValueForAdd(),
+                        paramCharges.GetSQLQuotedValueForAdd(),
+                        paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
+                        paramRefundAmount.GetSQLQuotedValueForAdd(),
+                        paramBalance.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

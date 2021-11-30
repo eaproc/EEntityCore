@@ -197,6 +197,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___Person(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___Person(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -379,7 +389,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___Person GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___Person(conn.Fetch(Person__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___Person(conn.Fetch(Person__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -579,6 +589,85 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            string IdentificationNo,
+            string FirstName,
+            string LastName,
+            int CountryID,
+            DateTime DateOfBirth,
+            int GenderID,
+            bool IsSuperUser,
+            int MaritalStatusID,
+            bool CanBeUpdated,
+            bool CanBeDeleted,
+            DateTime CreatedAt,
+            string HomeAddress = null,
+            string Email = null,
+            int? PersonTitleID = null,
+            int? BloodTypeID = null,
+            string BirthPlace = null,
+            string PictureFileName = null,
+            DateTime? UpdatedAt = null,
+            int? DataMonitorID = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramIdentificationNo = new (defIdentificationNo, IdentificationNo);
+                DataColumnParameter paramFirstName = new (defFirstName, FirstName);
+                DataColumnParameter paramLastName = new (defLastName, LastName);
+                DataColumnParameter paramCountryID = new (defCountryID, CountryID);
+                DataColumnParameter paramDateOfBirth = new (defDateOfBirth, DateOfBirth);
+                DataColumnParameter paramGenderID = new (defGenderID, GenderID);
+                DataColumnParameter paramHomeAddress = new (defHomeAddress, HomeAddress);
+                DataColumnParameter paramEmail = new (defEmail, Email);
+                DataColumnParameter paramPersonTitleID = new (defPersonTitleID, PersonTitleID);
+                DataColumnParameter paramIsSuperUser = new (defIsSuperUser, IsSuperUser);
+                DataColumnParameter paramBloodTypeID = new (defBloodTypeID, BloodTypeID);
+                DataColumnParameter paramBirthPlace = new (defBirthPlace, BirthPlace);
+                DataColumnParameter paramPictureFileName = new (defPictureFileName, PictureFileName);
+                DataColumnParameter paramMaritalStatusID = new (defMaritalStatusID, MaritalStatusID);
+                DataColumnParameter paramCanBeUpdated = new (defCanBeUpdated, CanBeUpdated);
+                DataColumnParameter paramCanBeDeleted = new (defCanBeDeleted, CanBeDeleted);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramDataMonitorID = new (defDataMonitorID, DataMonitorID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19})  ", TABLE_NAME,
+                        paramIdentificationNo.GetSQLQuotedValueForAdd(),
+                        paramFirstName.GetSQLQuotedValueForAdd(),
+                        paramLastName.GetSQLQuotedValueForAdd(),
+                        paramCountryID.GetSQLQuotedValueForAdd(),
+                        paramDateOfBirth.GetSQLQuotedValueForAdd(),
+                        paramGenderID.GetSQLQuotedValueForAdd(),
+                        paramHomeAddress.GetSQLQuotedValueForAdd(),
+                        paramEmail.GetSQLQuotedValueForAdd(),
+                        paramPersonTitleID.GetSQLQuotedValueForAdd(),
+                        paramIsSuperUser.GetSQLQuotedValueForAdd(),
+                        paramBloodTypeID.GetSQLQuotedValueForAdd(),
+                        paramBirthPlace.GetSQLQuotedValueForAdd(),
+                        paramPictureFileName.GetSQLQuotedValueForAdd(),
+                        paramMaritalStatusID.GetSQLQuotedValueForAdd(),
+                        paramCanBeUpdated.GetSQLQuotedValueForAdd(),
+                        paramCanBeDeleted.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramDataMonitorID.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

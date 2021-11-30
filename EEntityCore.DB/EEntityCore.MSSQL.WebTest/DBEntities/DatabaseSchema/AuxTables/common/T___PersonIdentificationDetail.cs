@@ -171,6 +171,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___PersonIdentificationDetail(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___PersonIdentificationDetail(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -305,7 +315,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___PersonIdentificationDetail GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___PersonIdentificationDetail(conn.Fetch(PersonIdentificationDetail__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___PersonIdentificationDetail(conn.Fetch(PersonIdentificationDetail__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -451,6 +461,58 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int PersonID,
+            string Number,
+            int IdentificationTypeID,
+            int IssuingCountryID,
+            int IdentificationViabilityID,
+            DateTime CreatedAt,
+            DateTime? IssuedDate = null,
+            DateTime? ExpiryDate = null,
+            string DocumentFileName = null,
+            DateTime? UpdatedAt = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramPersonID = new (defPersonID, PersonID);
+                DataColumnParameter paramNumber = new (defNumber, Number);
+                DataColumnParameter paramIdentificationTypeID = new (defIdentificationTypeID, IdentificationTypeID);
+                DataColumnParameter paramIssuedDate = new (defIssuedDate, IssuedDate);
+                DataColumnParameter paramIssuingCountryID = new (defIssuingCountryID, IssuingCountryID);
+                DataColumnParameter paramExpiryDate = new (defExpiryDate, ExpiryDate);
+                DataColumnParameter paramIdentificationViabilityID = new (defIdentificationViabilityID, IdentificationViabilityID);
+                DataColumnParameter paramDocumentFileName = new (defDocumentFileName, DocumentFileName);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([PersonID],[Number],[IdentificationTypeID],[IssuedDate],[IssuingCountryID],[ExpiryDate],[IdentificationViabilityID],[DocumentFileName],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  ", TABLE_NAME,
+                        paramPersonID.GetSQLQuotedValueForAdd(),
+                        paramNumber.GetSQLQuotedValueForAdd(),
+                        paramIdentificationTypeID.GetSQLQuotedValueForAdd(),
+                        paramIssuedDate.GetSQLQuotedValueForAdd(),
+                        paramIssuingCountryID.GetSQLQuotedValueForAdd(),
+                        paramExpiryDate.GetSQLQuotedValueForAdd(),
+                        paramIdentificationViabilityID.GetSQLQuotedValueForAdd(),
+                        paramDocumentFileName.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

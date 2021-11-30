@@ -159,6 +159,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___OnlinePaymentAuthorization(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___OnlinePaymentAuthorization(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -290,7 +300,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___OnlinePaymentAuthorization GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___OnlinePaymentAuthorization(conn.Fetch(OnlinePaymentAuthorization__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___OnlinePaymentAuthorization(conn.Fetch(OnlinePaymentAuthorization__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -436,6 +446,58 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int OnlinePaymentID,
+            DateTime CreatedAt,
+            string AuthorizationCode = null,
+            string CardType = null,
+            string BIN = null,
+            string Last4Digits = null,
+            int? ExpirationMonth = null,
+            int? ExpirationYear = null,
+            string Bank = null,
+            string CountryCode = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramOnlinePaymentID = new (defOnlinePaymentID, OnlinePaymentID);
+                DataColumnParameter paramAuthorizationCode = new (defAuthorizationCode, AuthorizationCode);
+                DataColumnParameter paramCardType = new (defCardType, CardType);
+                DataColumnParameter paramBIN = new (defBIN, BIN);
+                DataColumnParameter paramLast4Digits = new (defLast4Digits, Last4Digits);
+                DataColumnParameter paramExpirationMonth = new (defExpirationMonth, ExpirationMonth);
+                DataColumnParameter paramExpirationYear = new (defExpirationYear, ExpirationYear);
+                DataColumnParameter paramBank = new (defBank, Bank);
+                DataColumnParameter paramCountryCode = new (defCountryCode, CountryCode);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  ", TABLE_NAME,
+                        paramOnlinePaymentID.GetSQLQuotedValueForAdd(),
+                        paramAuthorizationCode.GetSQLQuotedValueForAdd(),
+                        paramCardType.GetSQLQuotedValueForAdd(),
+                        paramBIN.GetSQLQuotedValueForAdd(),
+                        paramLast4Digits.GetSQLQuotedValueForAdd(),
+                        paramExpirationMonth.GetSQLQuotedValueForAdd(),
+                        paramExpirationYear.GetSQLQuotedValueForAdd(),
+                        paramBank.GetSQLQuotedValueForAdd(),
+                        paramCountryCode.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

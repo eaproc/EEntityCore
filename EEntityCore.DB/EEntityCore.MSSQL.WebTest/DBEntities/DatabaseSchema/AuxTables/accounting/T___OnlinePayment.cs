@@ -165,6 +165,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___OnlinePayment(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___OnlinePayment(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -311,7 +321,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___OnlinePayment GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___OnlinePayment(conn.Fetch(OnlinePayment__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___OnlinePayment(conn.Fetch(OnlinePayment__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -475,6 +485,67 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int PaymentID,
+            DateTime TransactionDate,
+            string Channel,
+            string IpAddress,
+            decimal GatewayCharges,
+            string GatewayLogReference,
+            string Gateway,
+            decimal PlatformCharges,
+            decimal GatewayAmountReceived,
+            decimal PlatformAmountReceived,
+            DateTime CreatedAt,
+            string GatewayChargesExplaination = null,
+            string PlatformChargesExplaination = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramPaymentID = new (defPaymentID, PaymentID);
+                DataColumnParameter paramTransactionDate = new (defTransactionDate, TransactionDate);
+                DataColumnParameter paramChannel = new (defChannel, Channel);
+                DataColumnParameter paramIpAddress = new (defIpAddress, IpAddress);
+                DataColumnParameter paramGatewayCharges = new (defGatewayCharges, GatewayCharges);
+                DataColumnParameter paramGatewayLogReference = new (defGatewayLogReference, GatewayLogReference);
+                DataColumnParameter paramGateway = new (defGateway, Gateway);
+                DataColumnParameter paramPlatformCharges = new (defPlatformCharges, PlatformCharges);
+                DataColumnParameter paramGatewayAmountReceived = new (defGatewayAmountReceived, GatewayAmountReceived);
+                DataColumnParameter paramPlatformAmountReceived = new (defPlatformAmountReceived, PlatformAmountReceived);
+                DataColumnParameter paramGatewayChargesExplaination = new (defGatewayChargesExplaination, GatewayChargesExplaination);
+                DataColumnParameter paramPlatformChargesExplaination = new (defPlatformChargesExplaination, PlatformChargesExplaination);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  ", TABLE_NAME,
+                        paramPaymentID.GetSQLQuotedValueForAdd(),
+                        paramTransactionDate.GetSQLQuotedValueForAdd(),
+                        paramChannel.GetSQLQuotedValueForAdd(),
+                        paramIpAddress.GetSQLQuotedValueForAdd(),
+                        paramGatewayCharges.GetSQLQuotedValueForAdd(),
+                        paramGatewayLogReference.GetSQLQuotedValueForAdd(),
+                        paramGateway.GetSQLQuotedValueForAdd(),
+                        paramPlatformCharges.GetSQLQuotedValueForAdd(),
+                        paramGatewayAmountReceived.GetSQLQuotedValueForAdd(),
+                        paramPlatformAmountReceived.GetSQLQuotedValueForAdd(),
+                        paramGatewayChargesExplaination.GetSQLQuotedValueForAdd(),
+                        paramPlatformChargesExplaination.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

@@ -177,6 +177,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___ClientStats(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___ClientStats(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -343,7 +353,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___ClientStats GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___ClientStats(conn.Fetch(ClientStats__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___ClientStats(conn.Fetch(ClientStats__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -531,6 +541,79 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int ClientID,
+            int TermID,
+            int RegisteredStudentCount,
+            int AssignedStudentCount,
+            int SCADWAREAccessCount,
+            decimal SCADWAREAccessThreshold,
+            decimal AverageTermBill,
+            decimal RatePerStudent,
+            decimal BilledPerStudent,
+            decimal TotalReceivedOnSCADWAREBill,
+            decimal MinimumExpectedOnSCADWAREBill,
+            decimal ExpectedOnSCADWAREBill,
+            string IPAddress,
+            DateTime CreatedAt,
+            int? FullScholarshipStudentCount = null,
+            DateTime? TermStartDate = null,
+            DateTime? TermEndDate = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramClientID = new (defClientID, ClientID);
+                DataColumnParameter paramTermID = new (defTermID, TermID);
+                DataColumnParameter paramRegisteredStudentCount = new (defRegisteredStudentCount, RegisteredStudentCount);
+                DataColumnParameter paramAssignedStudentCount = new (defAssignedStudentCount, AssignedStudentCount);
+                DataColumnParameter paramSCADWAREAccessCount = new (defSCADWAREAccessCount, SCADWAREAccessCount);
+                DataColumnParameter paramSCADWAREAccessThreshold = new (defSCADWAREAccessThreshold, SCADWAREAccessThreshold);
+                DataColumnParameter paramAverageTermBill = new (defAverageTermBill, AverageTermBill);
+                DataColumnParameter paramRatePerStudent = new (defRatePerStudent, RatePerStudent);
+                DataColumnParameter paramBilledPerStudent = new (defBilledPerStudent, BilledPerStudent);
+                DataColumnParameter paramTotalReceivedOnSCADWAREBill = new (defTotalReceivedOnSCADWAREBill, TotalReceivedOnSCADWAREBill);
+                DataColumnParameter paramMinimumExpectedOnSCADWAREBill = new (defMinimumExpectedOnSCADWAREBill, MinimumExpectedOnSCADWAREBill);
+                DataColumnParameter paramExpectedOnSCADWAREBill = new (defExpectedOnSCADWAREBill, ExpectedOnSCADWAREBill);
+                DataColumnParameter paramIPAddress = new (defIPAddress, IPAddress);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramFullScholarshipStudentCount = new (defFullScholarshipStudentCount, FullScholarshipStudentCount);
+                DataColumnParameter paramTermStartDate = new (defTermStartDate, TermStartDate);
+                DataColumnParameter paramTermEndDate = new (defTermEndDate, TermEndDate);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([ClientID],[TermID],[RegisteredStudentCount],[AssignedStudentCount],[SCADWAREAccessCount],[SCADWAREAccessThreshold],[AverageTermBill],[RatePerStudent],[BilledPerStudent],[TotalReceivedOnSCADWAREBill],[MinimumExpectedOnSCADWAREBill],[ExpectedOnSCADWAREBill],[IPAddress],[CreatedAt],[FullScholarshipStudentCount],[TermStartDate],[TermEndDate]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17})  ", TABLE_NAME,
+                        paramClientID.GetSQLQuotedValueForAdd(),
+                        paramTermID.GetSQLQuotedValueForAdd(),
+                        paramRegisteredStudentCount.GetSQLQuotedValueForAdd(),
+                        paramAssignedStudentCount.GetSQLQuotedValueForAdd(),
+                        paramSCADWAREAccessCount.GetSQLQuotedValueForAdd(),
+                        paramSCADWAREAccessThreshold.GetSQLQuotedValueForAdd(),
+                        paramAverageTermBill.GetSQLQuotedValueForAdd(),
+                        paramRatePerStudent.GetSQLQuotedValueForAdd(),
+                        paramBilledPerStudent.GetSQLQuotedValueForAdd(),
+                        paramTotalReceivedOnSCADWAREBill.GetSQLQuotedValueForAdd(),
+                        paramMinimumExpectedOnSCADWAREBill.GetSQLQuotedValueForAdd(),
+                        paramExpectedOnSCADWAREBill.GetSQLQuotedValueForAdd(),
+                        paramIPAddress.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramFullScholarshipStudentCount.GetSQLQuotedValueForAdd(),
+                        paramTermStartDate.GetSQLQuotedValueForAdd(),
+                        paramTermEndDate.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

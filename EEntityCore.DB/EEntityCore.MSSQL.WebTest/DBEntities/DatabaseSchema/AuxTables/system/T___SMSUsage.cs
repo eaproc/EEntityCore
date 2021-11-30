@@ -165,6 +165,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___SMSUsage(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___SMSUsage(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -310,7 +320,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___SMSUsage GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___SMSUsage(conn.Fetch(SMSUsage__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___SMSUsage(conn.Fetch(SMSUsage__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -474,6 +484,67 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int SMSDeliveryStatusID,
+            string Sender,
+            string Receiver,
+            string Message,
+            DateTime CreatedAt,
+            string Gateway,
+            string UID = null,
+            string APICreateResponse = null,
+            string APIUpdateResponse = null,
+            decimal? SMSCostNaira = null,
+            DateTime? UpdatedAt = null,
+            string ExceptionMessage = null,
+            string ExceptionStackTrace = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramSMSDeliveryStatusID = new (defSMSDeliveryStatusID, SMSDeliveryStatusID);
+                DataColumnParameter paramSender = new (defSender, Sender);
+                DataColumnParameter paramReceiver = new (defReceiver, Receiver);
+                DataColumnParameter paramMessage = new (defMessage, Message);
+                DataColumnParameter paramUID = new (defUID, UID);
+                DataColumnParameter paramAPICreateResponse = new (defAPICreateResponse, APICreateResponse);
+                DataColumnParameter paramAPIUpdateResponse = new (defAPIUpdateResponse, APIUpdateResponse);
+                DataColumnParameter paramSMSCostNaira = new (defSMSCostNaira, SMSCostNaira);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramExceptionMessage = new (defExceptionMessage, ExceptionMessage);
+                DataColumnParameter paramExceptionStackTrace = new (defExceptionStackTrace, ExceptionStackTrace);
+                DataColumnParameter paramGateway = new (defGateway, Gateway);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  ", TABLE_NAME,
+                        paramSMSDeliveryStatusID.GetSQLQuotedValueForAdd(),
+                        paramSender.GetSQLQuotedValueForAdd(),
+                        paramReceiver.GetSQLQuotedValueForAdd(),
+                        paramMessage.GetSQLQuotedValueForAdd(),
+                        paramUID.GetSQLQuotedValueForAdd(),
+                        paramAPICreateResponse.GetSQLQuotedValueForAdd(),
+                        paramAPIUpdateResponse.GetSQLQuotedValueForAdd(),
+                        paramSMSCostNaira.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramExceptionMessage.GetSQLQuotedValueForAdd(),
+                        paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
+                        paramGateway.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

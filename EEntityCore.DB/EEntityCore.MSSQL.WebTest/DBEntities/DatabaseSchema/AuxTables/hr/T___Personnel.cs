@@ -183,6 +183,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___Personnel(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___Personnel(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -339,7 +349,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___Personnel GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___Personnel(conn.Fetch(Personnel__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___Personnel(conn.Fetch(Personnel__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -509,6 +519,70 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            string PersonnelNumber,
+            int PersonID,
+            bool IsActive,
+            DateTime EmploymentDate,
+            bool IsSuperUser,
+            int PositionID,
+            int CreatedByID,
+            DateTime CreatedAt,
+            int? SalaryTypeID = null,
+            decimal? SalaryAmount = null,
+            int? UpdatedByID = null,
+            DateTime? UpdatedAt = null,
+            string Duties = null,
+            bool? IsWebVisible = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramPersonnelNumber = new (defPersonnelNumber, PersonnelNumber);
+                DataColumnParameter paramPersonID = new (defPersonID, PersonID);
+                DataColumnParameter paramIsActive = new (defIsActive, IsActive);
+                DataColumnParameter paramEmploymentDate = new (defEmploymentDate, EmploymentDate);
+                DataColumnParameter paramIsSuperUser = new (defIsSuperUser, IsSuperUser);
+                DataColumnParameter paramPositionID = new (defPositionID, PositionID);
+                DataColumnParameter paramSalaryTypeID = new (defSalaryTypeID, SalaryTypeID);
+                DataColumnParameter paramSalaryAmount = new (defSalaryAmount, SalaryAmount);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramDuties = new (defDuties, Duties);
+                DataColumnParameter paramIsWebVisible = new (defIsWebVisible, IsWebVisible);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  ", TABLE_NAME,
+                        paramPersonnelNumber.GetSQLQuotedValueForAdd(),
+                        paramPersonID.GetSQLQuotedValueForAdd(),
+                        paramIsActive.GetSQLQuotedValueForAdd(),
+                        paramEmploymentDate.GetSQLQuotedValueForAdd(),
+                        paramIsSuperUser.GetSQLQuotedValueForAdd(),
+                        paramPositionID.GetSQLQuotedValueForAdd(),
+                        paramSalaryTypeID.GetSQLQuotedValueForAdd(),
+                        paramSalaryAmount.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramDuties.GetSQLQuotedValueForAdd(),
+                        paramIsWebVisible.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

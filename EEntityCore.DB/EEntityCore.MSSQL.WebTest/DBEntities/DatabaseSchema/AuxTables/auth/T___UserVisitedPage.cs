@@ -161,6 +161,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___UserVisitedPage(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___UserVisitedPage(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -287,7 +297,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___UserVisitedPage GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___UserVisitedPage(conn.Fetch(UserVisitedPage__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___UserVisitedPage(conn.Fetch(UserVisitedPage__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -427,6 +437,55 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int UserID,
+            string SessionID,
+            string IPAddress,
+            bool TimedOut,
+            string WebURL,
+            string Page,
+            int RoleID,
+            DateTime CreatedAt,
+            DateTime? CheckedOutTime = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramUserID = new (defUserID, UserID);
+                DataColumnParameter paramSessionID = new (defSessionID, SessionID);
+                DataColumnParameter paramIPAddress = new (defIPAddress, IPAddress);
+                DataColumnParameter paramTimedOut = new (defTimedOut, TimedOut);
+                DataColumnParameter paramWebURL = new (defWebURL, WebURL);
+                DataColumnParameter paramPage = new (defPage, Page);
+                DataColumnParameter paramCheckedOutTime = new (defCheckedOutTime, CheckedOutTime);
+                DataColumnParameter paramRoleID = new (defRoleID, RoleID);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([UserID],[SessionID],[IPAddress],[TimedOut],[WebURL],[Page],[CheckedOutTime],[RoleID],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9})  ", TABLE_NAME,
+                        paramUserID.GetSQLQuotedValueForAdd(),
+                        paramSessionID.GetSQLQuotedValueForAdd(),
+                        paramIPAddress.GetSQLQuotedValueForAdd(),
+                        paramTimedOut.GetSQLQuotedValueForAdd(),
+                        paramWebURL.GetSQLQuotedValueForAdd(),
+                        paramPage.GetSQLQuotedValueForAdd(),
+                        paramCheckedOutTime.GetSQLQuotedValueForAdd(),
+                        paramRoleID.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

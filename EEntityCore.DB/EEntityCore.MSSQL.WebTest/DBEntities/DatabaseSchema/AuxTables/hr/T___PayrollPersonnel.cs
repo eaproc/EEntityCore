@@ -183,6 +183,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___PayrollPersonnel(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___PayrollPersonnel(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -347,7 +357,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___PayrollPersonnel GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___PayrollPersonnel(conn.Fetch(PayrollPersonnel__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___PayrollPersonnel(conn.Fetch(PayrollPersonnel__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -529,6 +539,76 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int PayrollID,
+            int PersonnelID,
+            int AttendanceCount,
+            decimal SalaryAmount,
+            decimal RatePerDay,
+            decimal CalculatedAmount,
+            bool IsDisbursed,
+            decimal ApprovedAmount,
+            DateTime CreatedAt,
+            int CreatedByID,
+            string HRComments = null,
+            string BursarComments = null,
+            decimal? DisbursedAmount = null,
+            DateTime? UpdatedAt = null,
+            DateTime? DisbursedAt = null,
+            int? UpdatedByID = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramPayrollID = new (defPayrollID, PayrollID);
+                DataColumnParameter paramPersonnelID = new (defPersonnelID, PersonnelID);
+                DataColumnParameter paramAttendanceCount = new (defAttendanceCount, AttendanceCount);
+                DataColumnParameter paramSalaryAmount = new (defSalaryAmount, SalaryAmount);
+                DataColumnParameter paramRatePerDay = new (defRatePerDay, RatePerDay);
+                DataColumnParameter paramCalculatedAmount = new (defCalculatedAmount, CalculatedAmount);
+                DataColumnParameter paramIsDisbursed = new (defIsDisbursed, IsDisbursed);
+                DataColumnParameter paramHRComments = new (defHRComments, HRComments);
+                DataColumnParameter paramApprovedAmount = new (defApprovedAmount, ApprovedAmount);
+                DataColumnParameter paramBursarComments = new (defBursarComments, BursarComments);
+                DataColumnParameter paramDisbursedAmount = new (defDisbursedAmount, DisbursedAmount);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramDisbursedAt = new (defDisbursedAt, DisbursedAt);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([PayrollID],[PersonnelID],[AttendanceCount],[SalaryAmount],[RatePerDay],[CalculatedAmount],[IsDisbursed],[HRComments],[ApprovedAmount],[BursarComments],[DisbursedAmount],[UpdatedAt],[CreatedAt],[CreatedByID],[DisbursedAt],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16})  ", TABLE_NAME,
+                        paramPayrollID.GetSQLQuotedValueForAdd(),
+                        paramPersonnelID.GetSQLQuotedValueForAdd(),
+                        paramAttendanceCount.GetSQLQuotedValueForAdd(),
+                        paramSalaryAmount.GetSQLQuotedValueForAdd(),
+                        paramRatePerDay.GetSQLQuotedValueForAdd(),
+                        paramCalculatedAmount.GetSQLQuotedValueForAdd(),
+                        paramIsDisbursed.GetSQLQuotedValueForAdd(),
+                        paramHRComments.GetSQLQuotedValueForAdd(),
+                        paramApprovedAmount.GetSQLQuotedValueForAdd(),
+                        paramBursarComments.GetSQLQuotedValueForAdd(),
+                        paramDisbursedAmount.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramDisbursedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

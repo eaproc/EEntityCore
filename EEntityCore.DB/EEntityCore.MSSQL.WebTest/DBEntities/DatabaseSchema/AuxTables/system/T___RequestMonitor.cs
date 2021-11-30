@@ -157,6 +157,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___RequestMonitor(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___RequestMonitor(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -282,7 +292,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___RequestMonitor GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___RequestMonitor(conn.Fetch(RequestMonitor__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___RequestMonitor(conn.Fetch(RequestMonitor__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -422,6 +432,55 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            string AbsoluteURL,
+            string IPAddress,
+            DateTime CreatedAt,
+            string RequestParametersJSON = null,
+            string SessionVariables = null,
+            string Browser = null,
+            int? UserID = null,
+            string RequestBody = null,
+            string RequestHeaders = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramAbsoluteURL = new (defAbsoluteURL, AbsoluteURL);
+                DataColumnParameter paramRequestParametersJSON = new (defRequestParametersJSON, RequestParametersJSON);
+                DataColumnParameter paramIPAddress = new (defIPAddress, IPAddress);
+                DataColumnParameter paramSessionVariables = new (defSessionVariables, SessionVariables);
+                DataColumnParameter paramBrowser = new (defBrowser, Browser);
+                DataColumnParameter paramUserID = new (defUserID, UserID);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramRequestBody = new (defRequestBody, RequestBody);
+                DataColumnParameter paramRequestHeaders = new (defRequestHeaders, RequestHeaders);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9})  ", TABLE_NAME,
+                        paramAbsoluteURL.GetSQLQuotedValueForAdd(),
+                        paramRequestParametersJSON.GetSQLQuotedValueForAdd(),
+                        paramIPAddress.GetSQLQuotedValueForAdd(),
+                        paramSessionVariables.GetSQLQuotedValueForAdd(),
+                        paramBrowser.GetSQLQuotedValueForAdd(),
+                        paramUserID.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramRequestBody.GetSQLQuotedValueForAdd(),
+                        paramRequestHeaders.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   

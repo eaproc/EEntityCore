@@ -201,6 +201,15 @@ namespace EEntityCore.DB.Abstracts
             }
         }
 
+        /// <summary>
+        /// Partial Access
+        /// </summary>
+        /// <param name="FullTable"></param>
+        /// <param name="pTargettedRowID"></param>
+        /// <remarks></remarks>
+        public SimpleTablePlugIn(DataTable FullTable):this(FullTable, DO__NOT____TARGET__ANY_ROWID)
+        {
+        }
 
         #endregion
 

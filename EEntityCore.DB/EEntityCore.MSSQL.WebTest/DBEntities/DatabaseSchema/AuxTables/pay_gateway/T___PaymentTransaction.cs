@@ -203,6 +203,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         public T___PaymentTransaction(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
+                                            
+        /// <summary>                                                      
+        /// Partial Access                                                      
+        /// </summary>                                                      
+        /// <param name="FullTable"></param>                                                      
+        /// <param name="TargettedRowID"></param>                                                      
+        /// <remarks></remarks>                                    
+        public T___PaymentTransaction(DataTable FullTable) : base(FullTable)                                    
+        {                                    
+        }                                    
                                     
                                     
         #endregion                                    
@@ -416,7 +426,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                                                                         
         public static T___PaymentTransaction GetFullTable(DBTransaction transaction = null) =>                   
             TransactionRunner.InvokeRun( (conn) =>                  
-                new T___PaymentTransaction(conn.Fetch(PaymentTransaction__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable(), DO__NOT____TARGET__ANY_ROWID),                  
+                new T___PaymentTransaction(conn.Fetch(PaymentTransaction__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
                 transaction                  
                 );                                                      
                                                       
@@ -658,6 +668,106 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         }                  
 
 
+        /// <summary> 
+        /// You can not save image with this method 
+        /// </summary> 
+        /// <returns>Boolean</returns> 
+        /// <remarks></remarks> 
+        public static bool Add(
+            int TransactionStatusID,
+            int ClientID,
+            string StudentNumber,
+            string FirstName,
+            string LastName,
+            string AccountName,
+            string AccountNumber,
+            string Bank,
+            string Channel,
+            string IPAddress,
+            decimal SchoolDiscountGiven,
+            decimal PaymentRequired,
+            decimal Charges,
+            decimal RefundAmount,
+            decimal Balance,
+            DateTime CreatedAt,
+            int CreatedByID,
+            int UpdatedByID,
+            decimal PaymentRequiredWithoutCharges,
+            decimal? ConfirmationThreshold = null,
+            DateTime? ConfirmationDate = null,
+            bool? AwaitingDisbursement = null,
+            DateTime? UpdatedAt = null,
+            string ConfirmedExplanation = null,
+            bool? ChargesBilledToClient = null,
+            bool? IsMultiTarget = null,
+            DBTransaction transaction = null
+          ){
+
+                DataColumnParameter paramTransactionStatusID = new (defTransactionStatusID, TransactionStatusID);
+                DataColumnParameter paramClientID = new (defClientID, ClientID);
+                DataColumnParameter paramStudentNumber = new (defStudentNumber, StudentNumber);
+                DataColumnParameter paramFirstName = new (defFirstName, FirstName);
+                DataColumnParameter paramLastName = new (defLastName, LastName);
+                DataColumnParameter paramAccountName = new (defAccountName, AccountName);
+                DataColumnParameter paramAccountNumber = new (defAccountNumber, AccountNumber);
+                DataColumnParameter paramBank = new (defBank, Bank);
+                DataColumnParameter paramChannel = new (defChannel, Channel);
+                DataColumnParameter paramIPAddress = new (defIPAddress, IPAddress);
+                DataColumnParameter paramSchoolDiscountGiven = new (defSchoolDiscountGiven, SchoolDiscountGiven);
+                DataColumnParameter paramPaymentRequired = new (defPaymentRequired, PaymentRequired);
+                DataColumnParameter paramCharges = new (defCharges, Charges);
+                DataColumnParameter paramRefundAmount = new (defRefundAmount, RefundAmount);
+                DataColumnParameter paramBalance = new (defBalance, Balance);
+                DataColumnParameter paramConfirmationThreshold = new (defConfirmationThreshold, ConfirmationThreshold);
+                DataColumnParameter paramConfirmationDate = new (defConfirmationDate, ConfirmationDate);
+                DataColumnParameter paramAwaitingDisbursement = new (defAwaitingDisbursement, AwaitingDisbursement);
+                DataColumnParameter paramCreatedAt = new (defCreatedAt, CreatedAt);
+                DataColumnParameter paramUpdatedAt = new (defUpdatedAt, UpdatedAt);
+                DataColumnParameter paramCreatedByID = new (defCreatedByID, CreatedByID);
+                DataColumnParameter paramUpdatedByID = new (defUpdatedByID, UpdatedByID);
+                DataColumnParameter paramConfirmedExplanation = new (defConfirmedExplanation, ConfirmedExplanation);
+                DataColumnParameter paramChargesBilledToClient = new (defChargesBilledToClient, ChargesBilledToClient);
+                DataColumnParameter paramPaymentRequiredWithoutCharges = new (defPaymentRequiredWithoutCharges, PaymentRequiredWithoutCharges);
+                DataColumnParameter paramIsMultiTarget = new (defIsMultiTarget, IsMultiTarget);
+
+                  
+                  
+            using var r = new TransactionRunner(transaction);                  
+                  
+            return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
+                    string.Format(" INSERT INTO {0}([TransactionStatusID],[ClientID],[StudentNumber],[FirstName],[LastName],[AccountName],[AccountNumber],[Bank],[Channel],[IPAddress],[SchoolDiscountGiven],[PaymentRequired],[Charges],[RefundAmount],[Balance],[ConfirmationThreshold],[ConfirmationDate],[AwaitingDisbursement],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID],[ConfirmedExplanation],[ChargesBilledToClient],[PaymentRequiredWithoutCharges],[IsMultiTarget]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26})  ", TABLE_NAME,
+                        paramTransactionStatusID.GetSQLQuotedValueForAdd(),
+                        paramClientID.GetSQLQuotedValueForAdd(),
+                        paramStudentNumber.GetSQLQuotedValueForAdd(),
+                        paramFirstName.GetSQLQuotedValueForAdd(),
+                        paramLastName.GetSQLQuotedValueForAdd(),
+                        paramAccountName.GetSQLQuotedValueForAdd(),
+                        paramAccountNumber.GetSQLQuotedValueForAdd(),
+                        paramBank.GetSQLQuotedValueForAdd(),
+                        paramChannel.GetSQLQuotedValueForAdd(),
+                        paramIPAddress.GetSQLQuotedValueForAdd(),
+                        paramSchoolDiscountGiven.GetSQLQuotedValueForAdd(),
+                        paramPaymentRequired.GetSQLQuotedValueForAdd(),
+                        paramCharges.GetSQLQuotedValueForAdd(),
+                        paramRefundAmount.GetSQLQuotedValueForAdd(),
+                        paramBalance.GetSQLQuotedValueForAdd(),
+                        paramConfirmationThreshold.GetSQLQuotedValueForAdd(),
+                        paramConfirmationDate.GetSQLQuotedValueForAdd(),
+                        paramAwaitingDisbursement.GetSQLQuotedValueForAdd(),
+                        paramCreatedAt.GetSQLQuotedValueForAdd(),
+                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
+                        paramCreatedByID.GetSQLQuotedValueForAdd(),
+                        paramUpdatedByID.GetSQLQuotedValueForAdd(),
+                        paramConfirmedExplanation.GetSQLQuotedValueForAdd(),
+                        paramChargesBilledToClient.GetSQLQuotedValueForAdd(),
+                        paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
+                        paramIsMultiTarget.GetSQLQuotedValueForAdd()                            
+                            )
+                        ).ToBoolean()
+                    );
+
+
+        }                  
 
 
                   
