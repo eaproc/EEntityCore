@@ -27,7 +27,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 #region EDITABLE REGION                  
                   
                   
-                          
+        public int AppendedAttribute { get { return 55555; } }                          
                   
                   
                   

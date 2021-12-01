@@ -1,4 +1,5 @@
-﻿using EEntityCore.DB.MSSQL;
+﻿using EEntityCore.DB.Modules;
+using EEntityCore.DB.MSSQL;
 using EEntityCore.MSSQL.WebTest.DBEntities;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTables.academic;
@@ -16,7 +17,9 @@ namespace EEntityCore.MSSQL.WebTest
 
                 DatabaseInit.DBConnectInterface = new DatabaseInit("SalesSCADWARE", "sa", "netEPRO@2017", 51391, @"localhost\SQLSERVER2016");
 
-                TestUpdate();
+                TestExtension();
+
+                //TestUpdate();
 
                 //TestFetch();
 
@@ -82,6 +85,20 @@ namespace EEntityCore.MSSQL.WebTest
             Console.WriteLine("After Update [{0}]", result.TestString);
 
 
+        }
+
+
+        private static void TestExtension()
+        {
+
+
+            T___TestTable result = T___TestTable.GetRowWhereIDUsingSQL(1);
+            Console.WriteLine("Result was {0}", result.TestString);
+
+
+            T___TestTableExtended result2 = result.As<T___TestTableExtended>();
+            Console.WriteLine("Result was {0}", result2.AppendedAttribute);
+            Console.WriteLine("Result was {0}", result2.TestString);
         }
 
 

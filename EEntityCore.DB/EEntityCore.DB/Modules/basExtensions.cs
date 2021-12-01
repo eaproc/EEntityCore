@@ -28,6 +28,21 @@ namespace EEntityCore.DB.Modules
             return drst;
         }
 
+        /// <summary>
+        /// Convert as Generic method on DB to conver SimplePlugin to Anyother 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="pObj"></param>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        public static T As<T>(this Abstracts.SimpleTablePlugIn pObj) where T : Abstracts.SimpleTablePlugIn, new()
+        {
+            var drst = new T();
+            if (pObj is null || !pObj.HasRows() || !pObj.IsTargettedRowValid)
+                return drst;
+
+            return drst.LoadGeneric<T>(pObj.TargettedRow);
+        }
 
         /// <summary>
         /// This return first row according to ID Asc
