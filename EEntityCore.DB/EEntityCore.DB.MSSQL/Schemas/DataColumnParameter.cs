@@ -33,13 +33,10 @@ namespace EEntityCore.DB.MSSQL.Schemas
         public const string DATETIME_FORMAT = DATE_FORMAT + " " + TIME_FORMAT;
 
         public DataColumnDefinition ColumnDefinition { private set; get; }
-        
-        /// <summary>
-        /// Eliminate this
-        /// </summary>
-        public object Value { private set; get; }
 
-      
+        /// <summary>
+        /// </summary>
+        private readonly object Value;
 
         /// <summary>
         /// Calling this means value is not NULL
@@ -113,40 +110,6 @@ namespace EEntityCore.DB.MSSQL.Schemas
 
             return GetSQLQuotedValue().ToString();
         }
-
-        ///// <summary>
-        ///// For update, nothing is treated as leave same value, nullval means null, else real value is returned
-        ///// </summary>
-        ///// <returns></returns>
-        ///// <remarks></remarks>
-        //public object GetSQLQuotedValueForUpdate()
-        //{
-        //    if (IsNullButNotEqualsNothing && !this.ColumnDefinition.Nullable)
-        //        throw new Exception(this.ColumnDefinition.ColumnName + " can not be NULL");
-        //    if (Value is null)
-        //        return this.ColumnDefinition.ColumnName;
-        //    if (IsNull)
-        //        return SQL_NULL_VALUE;
-        //    return GetSQLQuotedValue();
-        //}
-
-        ///// <summary>
-        ///// Just limit your result to NULL or Real Value
-        ///// </summary>
-        ///// <param name="pValue"></param>
-        ///// <returns></returns>
-        ///// <remarks></remarks>
-        //public static object TranslateNothingToNull(object pValue)
-        //{
-        //    if (pValue is null)
-        //        return new DataColumnNullParamValue();
-        //    return pValue;
-        //}
-
-        // 'Public Shared Function getDefinition(pholder As IDataColumnDefinitionsHolder, pColumnName As String) As DataColumnDefinition
-        // '    If pholder.getDefinitions().ContainsKey(pColumnName) Then Return pholder.getDefinitions()(pColumnName)
-        // '    Throw New Exception(pColumnName & " is not added among the data column definitions.")
-        // 'End Function
 
 
     }
