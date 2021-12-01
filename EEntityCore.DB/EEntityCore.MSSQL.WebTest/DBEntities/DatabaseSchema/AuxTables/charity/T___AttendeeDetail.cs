@@ -542,10 +542,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -624,22 +624,22 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([CenterVisitationID],[BeneficiaryID],[IsPresent],[PictureStoredPath],[Education],[Emotion],[Health],[Spiritual],[Social],[Talent],[Observations],[ChristSmilesFeedBack],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16})  ", TABLE_NAME,
-                        paramCenterVisitationID.GetSQLQuotedValueForAdd(),
-                        paramBeneficiaryID.GetSQLQuotedValueForAdd(),
-                        paramIsPresent.GetSQLQuotedValueForAdd(),
-                        paramPictureStoredPath.GetSQLQuotedValueForAdd(),
-                        paramEducation.GetSQLQuotedValueForAdd(),
-                        paramEmotion.GetSQLQuotedValueForAdd(),
-                        paramHealth.GetSQLQuotedValueForAdd(),
-                        paramSpiritual.GetSQLQuotedValueForAdd(),
-                        paramSocial.GetSQLQuotedValueForAdd(),
-                        paramTalent.GetSQLQuotedValueForAdd(),
-                        paramObservations.GetSQLQuotedValueForAdd(),
-                        paramChristSmilesFeedBack.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd(),
-                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        )
+                        paramCenterVisitationID.GetSQLValue(),
+                        paramBeneficiaryID.GetSQLValue(),
+                        paramIsPresent.GetSQLValue(),
+                        paramPictureStoredPath.GetSQLValue(),
+                        paramEducation.GetSQLValue(),
+                        paramEmotion.GetSQLValue(),
+                        paramHealth.GetSQLValue(),
+                        paramSpiritual.GetSQLValue(),
+                        paramSocial.GetSQLValue(),
+                        paramTalent.GetSQLValue(),
+                        paramObservations.GetSQLValue(),
+                        paramChristSmilesFeedBack.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramCreatedByID.GetSQLValue(),
+                        paramUpdatedByID.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -699,23 +699,23 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterVisitationID],[BeneficiaryID],[IsPresent],[PictureStoredPath],[Education],[Emotion],[Health],[Spiritual],[Social],[Talent],[Observations],[ChristSmilesFeedBack],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramCenterVisitationID.GetSQLQuotedValueForAdd(),
-                        paramBeneficiaryID.GetSQLQuotedValueForAdd(),
-                        paramIsPresent.GetSQLQuotedValueForAdd(),
-                        paramPictureStoredPath.GetSQLQuotedValueForAdd(),
-                        paramEducation.GetSQLQuotedValueForAdd(),
-                        paramEmotion.GetSQLQuotedValueForAdd(),
-                        paramHealth.GetSQLQuotedValueForAdd(),
-                        paramSpiritual.GetSQLQuotedValueForAdd(),
-                        paramSocial.GetSQLQuotedValueForAdd(),
-                        paramTalent.GetSQLQuotedValueForAdd(),
-                        paramObservations.GetSQLQuotedValueForAdd(),
-                        paramChristSmilesFeedBack.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd(),
-                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramCenterVisitationID.GetSQLValue(),
+                        paramBeneficiaryID.GetSQLValue(),
+                        paramIsPresent.GetSQLValue(),
+                        paramPictureStoredPath.GetSQLValue(),
+                        paramEducation.GetSQLValue(),
+                        paramEmotion.GetSQLValue(),
+                        paramHealth.GetSQLValue(),
+                        paramSpiritual.GetSQLValue(),
+                        paramSocial.GetSQLValue(),
+                        paramTalent.GetSQLValue(),
+                        paramObservations.GetSQLValue(),
+                        paramChristSmilesFeedBack.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramCreatedByID.GetSQLValue(),
+                        paramUpdatedByID.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -769,22 +769,22 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([CenterVisitationID],[BeneficiaryID],[IsPresent],[PictureStoredPath],[Education],[Emotion],[Health],[Spiritual],[Social],[Talent],[Observations],[ChristSmilesFeedBack],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16})  ", TABLE_NAME,
-                        paramCenterVisitationID.GetSQLQuotedValueForAdd(),
-                        paramBeneficiaryID.GetSQLQuotedValueForAdd(),
-                        paramIsPresent.GetSQLQuotedValueForAdd(),
-                        paramPictureStoredPath.GetSQLQuotedValueForAdd(),
-                        paramEducation.GetSQLQuotedValueForAdd(),
-                        paramEmotion.GetSQLQuotedValueForAdd(),
-                        paramHealth.GetSQLQuotedValueForAdd(),
-                        paramSpiritual.GetSQLQuotedValueForAdd(),
-                        paramSocial.GetSQLQuotedValueForAdd(),
-                        paramTalent.GetSQLQuotedValueForAdd(),
-                        paramObservations.GetSQLQuotedValueForAdd(),
-                        paramChristSmilesFeedBack.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd(),
-                        paramUpdatedByID.GetSQLQuotedValueForAdd()                            
+                        paramCenterVisitationID.GetSQLValue(),
+                        paramBeneficiaryID.GetSQLValue(),
+                        paramIsPresent.GetSQLValue(),
+                        paramPictureStoredPath.GetSQLValue(),
+                        paramEducation.GetSQLValue(),
+                        paramEmotion.GetSQLValue(),
+                        paramHealth.GetSQLValue(),
+                        paramSpiritual.GetSQLValue(),
+                        paramSocial.GetSQLValue(),
+                        paramTalent.GetSQLValue(),
+                        paramObservations.GetSQLValue(),
+                        paramChristSmilesFeedBack.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramCreatedByID.GetSQLValue(),
+                        paramUpdatedByID.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

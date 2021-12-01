@@ -482,10 +482,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -558,19 +558,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  ", TABLE_NAME,
-                        paramPaymentID.GetSQLQuotedValueForAdd(),
-                        paramTransactionDate.GetSQLQuotedValueForAdd(),
-                        paramChannel.GetSQLQuotedValueForAdd(),
-                        paramIpAddress.GetSQLQuotedValueForAdd(),
-                        paramGatewayCharges.GetSQLQuotedValueForAdd(),
-                        paramGatewayLogReference.GetSQLQuotedValueForAdd(),
-                        paramGateway.GetSQLQuotedValueForAdd(),
-                        paramPlatformCharges.GetSQLQuotedValueForAdd(),
-                        paramGatewayAmountReceived.GetSQLQuotedValueForAdd(),
-                        paramPlatformAmountReceived.GetSQLQuotedValueForAdd(),
-                        paramGatewayChargesExplaination.GetSQLQuotedValueForAdd(),
-                        paramPlatformChargesExplaination.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                        paramPaymentID.GetSQLValue(),
+                        paramTransactionDate.GetSQLValue(),
+                        paramChannel.GetSQLValue(),
+                        paramIpAddress.GetSQLValue(),
+                        paramGatewayCharges.GetSQLValue(),
+                        paramGatewayLogReference.GetSQLValue(),
+                        paramGateway.GetSQLValue(),
+                        paramPlatformCharges.GetSQLValue(),
+                        paramGatewayAmountReceived.GetSQLValue(),
+                        paramPlatformAmountReceived.GetSQLValue(),
+                        paramGatewayChargesExplaination.GetSQLValue(),
+                        paramPlatformChargesExplaination.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -624,20 +624,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramPaymentID.GetSQLQuotedValueForAdd(),
-                        paramTransactionDate.GetSQLQuotedValueForAdd(),
-                        paramChannel.GetSQLQuotedValueForAdd(),
-                        paramIpAddress.GetSQLQuotedValueForAdd(),
-                        paramGatewayCharges.GetSQLQuotedValueForAdd(),
-                        paramGatewayLogReference.GetSQLQuotedValueForAdd(),
-                        paramGateway.GetSQLQuotedValueForAdd(),
-                        paramPlatformCharges.GetSQLQuotedValueForAdd(),
-                        paramGatewayAmountReceived.GetSQLQuotedValueForAdd(),
-                        paramPlatformAmountReceived.GetSQLQuotedValueForAdd(),
-                        paramGatewayChargesExplaination.GetSQLQuotedValueForAdd(),
-                        paramPlatformChargesExplaination.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramPaymentID.GetSQLValue(),
+                        paramTransactionDate.GetSQLValue(),
+                        paramChannel.GetSQLValue(),
+                        paramIpAddress.GetSQLValue(),
+                        paramGatewayCharges.GetSQLValue(),
+                        paramGatewayLogReference.GetSQLValue(),
+                        paramGateway.GetSQLValue(),
+                        paramPlatformCharges.GetSQLValue(),
+                        paramGatewayAmountReceived.GetSQLValue(),
+                        paramPlatformAmountReceived.GetSQLValue(),
+                        paramGatewayChargesExplaination.GetSQLValue(),
+                        paramPlatformChargesExplaination.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -685,19 +685,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([PaymentID],[TransactionDate],[Channel],[IpAddress],[GatewayCharges],[GatewayLogReference],[Gateway],[PlatformCharges],[GatewayAmountReceived],[PlatformAmountReceived],[GatewayChargesExplaination],[PlatformChargesExplaination],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  ", TABLE_NAME,
-                        paramPaymentID.GetSQLQuotedValueForAdd(),
-                        paramTransactionDate.GetSQLQuotedValueForAdd(),
-                        paramChannel.GetSQLQuotedValueForAdd(),
-                        paramIpAddress.GetSQLQuotedValueForAdd(),
-                        paramGatewayCharges.GetSQLQuotedValueForAdd(),
-                        paramGatewayLogReference.GetSQLQuotedValueForAdd(),
-                        paramGateway.GetSQLQuotedValueForAdd(),
-                        paramPlatformCharges.GetSQLQuotedValueForAdd(),
-                        paramGatewayAmountReceived.GetSQLQuotedValueForAdd(),
-                        paramPlatformAmountReceived.GetSQLQuotedValueForAdd(),
-                        paramGatewayChargesExplaination.GetSQLQuotedValueForAdd(),
-                        paramPlatformChargesExplaination.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd()                            
+                        paramPaymentID.GetSQLValue(),
+                        paramTransactionDate.GetSQLValue(),
+                        paramChannel.GetSQLValue(),
+                        paramIpAddress.GetSQLValue(),
+                        paramGatewayCharges.GetSQLValue(),
+                        paramGatewayLogReference.GetSQLValue(),
+                        paramGateway.GetSQLValue(),
+                        paramPlatformCharges.GetSQLValue(),
+                        paramGatewayAmountReceived.GetSQLValue(),
+                        paramPlatformAmountReceived.GetSQLValue(),
+                        paramGatewayChargesExplaination.GetSQLValue(),
+                        paramPlatformChargesExplaination.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

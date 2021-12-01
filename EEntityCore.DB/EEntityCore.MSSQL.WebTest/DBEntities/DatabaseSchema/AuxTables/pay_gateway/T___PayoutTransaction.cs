@@ -322,10 +322,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -376,8 +376,8 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([PayoutID],[PaymentTransactionID]) VALUES({1},{2})  ", TABLE_NAME,
-                        paramPayoutID.GetSQLQuotedValueForAdd(),
-                        paramPaymentTransactionID.GetSQLQuotedValueForAdd()                        )
+                        paramPayoutID.GetSQLValue(),
+                        paramPaymentTransactionID.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -409,9 +409,9 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PayoutID],[PaymentTransactionID]) VALUES({1},{2},{3})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramPayoutID.GetSQLQuotedValueForAdd(),
-                        paramPaymentTransactionID.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramPayoutID.GetSQLValue(),
+                        paramPaymentTransactionID.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -437,8 +437,8 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([PayoutID],[PaymentTransactionID]) VALUES({1},{2})  ", TABLE_NAME,
-                        paramPayoutID.GetSQLQuotedValueForAdd(),
-                        paramPaymentTransactionID.GetSQLQuotedValueForAdd()                            
+                        paramPayoutID.GetSQLValue(),
+                        paramPaymentTransactionID.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

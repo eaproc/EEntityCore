@@ -422,10 +422,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -488,14 +488,14 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([ClientID],[TermID],[CreatedByID],[CreatedAt],[OriginalBillID],[Amount],[Bill],[Description]) VALUES({1},{2},{3},{4},{5},{6},{7},{8})  ", TABLE_NAME,
-                        paramClientID.GetSQLQuotedValueForAdd(),
-                        paramTermID.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramOriginalBillID.GetSQLQuotedValueForAdd(),
-                        paramAmount.GetSQLQuotedValueForAdd(),
-                        paramBill.GetSQLQuotedValueForAdd(),
-                        paramDescription.GetSQLQuotedValueForAdd()                        )
+                        paramClientID.GetSQLValue(),
+                        paramTermID.GetSQLValue(),
+                        paramCreatedByID.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramOriginalBillID.GetSQLValue(),
+                        paramAmount.GetSQLValue(),
+                        paramBill.GetSQLValue(),
+                        paramDescription.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -539,15 +539,15 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[TermID],[CreatedByID],[CreatedAt],[OriginalBillID],[Amount],[Bill],[Description]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramClientID.GetSQLQuotedValueForAdd(),
-                        paramTermID.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramOriginalBillID.GetSQLQuotedValueForAdd(),
-                        paramAmount.GetSQLQuotedValueForAdd(),
-                        paramBill.GetSQLQuotedValueForAdd(),
-                        paramDescription.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramClientID.GetSQLValue(),
+                        paramTermID.GetSQLValue(),
+                        paramCreatedByID.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramOriginalBillID.GetSQLValue(),
+                        paramAmount.GetSQLValue(),
+                        paramBill.GetSQLValue(),
+                        paramDescription.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -585,14 +585,14 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([ClientID],[TermID],[CreatedByID],[CreatedAt],[OriginalBillID],[Amount],[Bill],[Description]) VALUES({1},{2},{3},{4},{5},{6},{7},{8})  ", TABLE_NAME,
-                        paramClientID.GetSQLQuotedValueForAdd(),
-                        paramTermID.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramOriginalBillID.GetSQLQuotedValueForAdd(),
-                        paramAmount.GetSQLQuotedValueForAdd(),
-                        paramBill.GetSQLQuotedValueForAdd(),
-                        paramDescription.GetSQLQuotedValueForAdd()                            
+                        paramClientID.GetSQLValue(),
+                        paramTermID.GetSQLValue(),
+                        paramCreatedByID.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramOriginalBillID.GetSQLValue(),
+                        paramAmount.GetSQLValue(),
+                        paramBill.GetSQLValue(),
+                        paramDescription.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

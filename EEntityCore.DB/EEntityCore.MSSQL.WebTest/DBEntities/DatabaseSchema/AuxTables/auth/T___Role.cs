@@ -387,10 +387,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -451,13 +451,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([Name],[Description],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[Rank]) VALUES({1},{2},{3},{4},{5},{6},{7})  ", TABLE_NAME,
-                        paramName.GetSQLQuotedValueForAdd(),
-                        paramDescription.GetSQLQuotedValueForAdd(),
-                        paramCanBeUpdated.GetSQLQuotedValueForAdd(),
-                        paramCanBeDeleted.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramRank.GetSQLQuotedValueForAdd()                        )
+                        paramName.GetSQLValue(),
+                        paramDescription.GetSQLValue(),
+                        paramCanBeUpdated.GetSQLValue(),
+                        paramCanBeDeleted.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramRank.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -499,14 +499,14 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[Name],[Description],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[Rank]) VALUES({1},{2},{3},{4},{5},{6},{7},{8})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramName.GetSQLQuotedValueForAdd(),
-                        paramDescription.GetSQLQuotedValueForAdd(),
-                        paramCanBeUpdated.GetSQLQuotedValueForAdd(),
-                        paramCanBeDeleted.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramRank.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramName.GetSQLValue(),
+                        paramDescription.GetSQLValue(),
+                        paramCanBeUpdated.GetSQLValue(),
+                        paramCanBeDeleted.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramRank.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -542,13 +542,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([Name],[Description],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[Rank]) VALUES({1},{2},{3},{4},{5},{6},{7})  ", TABLE_NAME,
-                        paramName.GetSQLQuotedValueForAdd(),
-                        paramDescription.GetSQLQuotedValueForAdd(),
-                        paramCanBeUpdated.GetSQLQuotedValueForAdd(),
-                        paramCanBeDeleted.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramRank.GetSQLQuotedValueForAdd()                            
+                        paramName.GetSQLValue(),
+                        paramDescription.GetSQLValue(),
+                        paramCanBeUpdated.GetSQLValue(),
+                        paramCanBeDeleted.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramRank.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

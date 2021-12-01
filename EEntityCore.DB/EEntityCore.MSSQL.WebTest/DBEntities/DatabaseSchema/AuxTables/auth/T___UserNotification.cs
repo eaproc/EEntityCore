@@ -436,10 +436,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -506,16 +506,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([UserID],[Title],[QuickNote],[Description],[IconClass],[HeadingColorClass],[CreatedAt],[ReadAt],[Identifier],[TargetURL]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  ", TABLE_NAME,
-                        paramUserID.GetSQLQuotedValueForAdd(),
-                        paramTitle.GetSQLQuotedValueForAdd(),
-                        paramQuickNote.GetSQLQuotedValueForAdd(),
-                        paramDescription.GetSQLQuotedValueForAdd(),
-                        paramIconClass.GetSQLQuotedValueForAdd(),
-                        paramHeadingColorClass.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramReadAt.GetSQLQuotedValueForAdd(),
-                        paramIdentifier.GetSQLQuotedValueForAdd(),
-                        paramTargetURL.GetSQLQuotedValueForAdd()                        )
+                        paramUserID.GetSQLValue(),
+                        paramTitle.GetSQLValue(),
+                        paramQuickNote.GetSQLValue(),
+                        paramDescription.GetSQLValue(),
+                        paramIconClass.GetSQLValue(),
+                        paramHeadingColorClass.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramReadAt.GetSQLValue(),
+                        paramIdentifier.GetSQLValue(),
+                        paramTargetURL.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -563,17 +563,17 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[Title],[QuickNote],[Description],[IconClass],[HeadingColorClass],[CreatedAt],[ReadAt],[Identifier],[TargetURL]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramUserID.GetSQLQuotedValueForAdd(),
-                        paramTitle.GetSQLQuotedValueForAdd(),
-                        paramQuickNote.GetSQLQuotedValueForAdd(),
-                        paramDescription.GetSQLQuotedValueForAdd(),
-                        paramIconClass.GetSQLQuotedValueForAdd(),
-                        paramHeadingColorClass.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramReadAt.GetSQLQuotedValueForAdd(),
-                        paramIdentifier.GetSQLQuotedValueForAdd(),
-                        paramTargetURL.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramUserID.GetSQLValue(),
+                        paramTitle.GetSQLValue(),
+                        paramQuickNote.GetSQLValue(),
+                        paramDescription.GetSQLValue(),
+                        paramIconClass.GetSQLValue(),
+                        paramHeadingColorClass.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramReadAt.GetSQLValue(),
+                        paramIdentifier.GetSQLValue(),
+                        paramTargetURL.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -615,16 +615,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([UserID],[Title],[QuickNote],[Description],[IconClass],[HeadingColorClass],[CreatedAt],[ReadAt],[Identifier],[TargetURL]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  ", TABLE_NAME,
-                        paramUserID.GetSQLQuotedValueForAdd(),
-                        paramTitle.GetSQLQuotedValueForAdd(),
-                        paramQuickNote.GetSQLQuotedValueForAdd(),
-                        paramDescription.GetSQLQuotedValueForAdd(),
-                        paramIconClass.GetSQLQuotedValueForAdd(),
-                        paramHeadingColorClass.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramReadAt.GetSQLQuotedValueForAdd(),
-                        paramIdentifier.GetSQLQuotedValueForAdd(),
-                        paramTargetURL.GetSQLQuotedValueForAdd()                            
+                        paramUserID.GetSQLValue(),
+                        paramTitle.GetSQLValue(),
+                        paramQuickNote.GetSQLValue(),
+                        paramDescription.GetSQLValue(),
+                        paramIconClass.GetSQLValue(),
+                        paramHeadingColorClass.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramReadAt.GetSQLValue(),
+                        paramIdentifier.GetSQLValue(),
+                        paramTargetURL.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

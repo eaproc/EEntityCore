@@ -341,10 +341,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -399,10 +399,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([StockAmountNaira],[Quantity],[Comments],[CreatedAt]) VALUES({1},{2},{3},{4})  ", TABLE_NAME,
-                        paramStockAmountNaira.GetSQLQuotedValueForAdd(),
-                        paramQuantity.GetSQLQuotedValueForAdd(),
-                        paramComments.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                        paramStockAmountNaira.GetSQLValue(),
+                        paramQuantity.GetSQLValue(),
+                        paramComments.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -438,11 +438,11 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[StockAmountNaira],[Quantity],[Comments],[CreatedAt]) VALUES({1},{2},{3},{4},{5})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramStockAmountNaira.GetSQLQuotedValueForAdd(),
-                        paramQuantity.GetSQLQuotedValueForAdd(),
-                        paramComments.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramStockAmountNaira.GetSQLValue(),
+                        paramQuantity.GetSQLValue(),
+                        paramComments.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -472,10 +472,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([StockAmountNaira],[Quantity],[Comments],[CreatedAt]) VALUES({1},{2},{3},{4})  ", TABLE_NAME,
-                        paramStockAmountNaira.GetSQLQuotedValueForAdd(),
-                        paramQuantity.GetSQLQuotedValueForAdd(),
-                        paramComments.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd()                            
+                        paramStockAmountNaira.GetSQLValue(),
+                        paramQuantity.GetSQLValue(),
+                        paramComments.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

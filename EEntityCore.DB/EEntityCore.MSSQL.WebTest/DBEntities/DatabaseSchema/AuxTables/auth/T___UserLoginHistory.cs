@@ -376,10 +376,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -438,12 +438,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([UserID],[IPAddress],[UserAgent],[CreatedAt],[SessionID],[LoggedOutTime]) VALUES({1},{2},{3},{4},{5},{6})  ", TABLE_NAME,
-                        paramUserID.GetSQLQuotedValueForAdd(),
-                        paramIPAddress.GetSQLQuotedValueForAdd(),
-                        paramUserAgent.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramSessionID.GetSQLQuotedValueForAdd(),
-                        paramLoggedOutTime.GetSQLQuotedValueForAdd()                        )
+                        paramUserID.GetSQLValue(),
+                        paramIPAddress.GetSQLValue(),
+                        paramUserAgent.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramSessionID.GetSQLValue(),
+                        paramLoggedOutTime.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -483,13 +483,13 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[UserID],[IPAddress],[UserAgent],[CreatedAt],[SessionID],[LoggedOutTime]) VALUES({1},{2},{3},{4},{5},{6},{7})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramUserID.GetSQLQuotedValueForAdd(),
-                        paramIPAddress.GetSQLQuotedValueForAdd(),
-                        paramUserAgent.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramSessionID.GetSQLQuotedValueForAdd(),
-                        paramLoggedOutTime.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramUserID.GetSQLValue(),
+                        paramIPAddress.GetSQLValue(),
+                        paramUserAgent.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramSessionID.GetSQLValue(),
+                        paramLoggedOutTime.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -523,12 +523,12 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([UserID],[IPAddress],[UserAgent],[CreatedAt],[SessionID],[LoggedOutTime]) VALUES({1},{2},{3},{4},{5},{6})  ", TABLE_NAME,
-                        paramUserID.GetSQLQuotedValueForAdd(),
-                        paramIPAddress.GetSQLQuotedValueForAdd(),
-                        paramUserAgent.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramSessionID.GetSQLQuotedValueForAdd(),
-                        paramLoggedOutTime.GetSQLQuotedValueForAdd()                            
+                        paramUserID.GetSQLValue(),
+                        paramIPAddress.GetSQLValue(),
+                        paramUserAgent.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramSessionID.GetSQLValue(),
+                        paramLoggedOutTime.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

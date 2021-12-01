@@ -481,10 +481,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -557,19 +557,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  ", TABLE_NAME,
-                        paramSMSDeliveryStatusID.GetSQLQuotedValueForAdd(),
-                        paramSender.GetSQLQuotedValueForAdd(),
-                        paramReceiver.GetSQLQuotedValueForAdd(),
-                        paramMessage.GetSQLQuotedValueForAdd(),
-                        paramUID.GetSQLQuotedValueForAdd(),
-                        paramAPICreateResponse.GetSQLQuotedValueForAdd(),
-                        paramAPIUpdateResponse.GetSQLQuotedValueForAdd(),
-                        paramSMSCostNaira.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramExceptionMessage.GetSQLQuotedValueForAdd(),
-                        paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
-                        paramGateway.GetSQLQuotedValueForAdd()                        )
+                        paramSMSDeliveryStatusID.GetSQLValue(),
+                        paramSender.GetSQLValue(),
+                        paramReceiver.GetSQLValue(),
+                        paramMessage.GetSQLValue(),
+                        paramUID.GetSQLValue(),
+                        paramAPICreateResponse.GetSQLValue(),
+                        paramAPIUpdateResponse.GetSQLValue(),
+                        paramSMSCostNaira.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramExceptionMessage.GetSQLValue(),
+                        paramExceptionStackTrace.GetSQLValue(),
+                        paramGateway.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -623,20 +623,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramSMSDeliveryStatusID.GetSQLQuotedValueForAdd(),
-                        paramSender.GetSQLQuotedValueForAdd(),
-                        paramReceiver.GetSQLQuotedValueForAdd(),
-                        paramMessage.GetSQLQuotedValueForAdd(),
-                        paramUID.GetSQLQuotedValueForAdd(),
-                        paramAPICreateResponse.GetSQLQuotedValueForAdd(),
-                        paramAPIUpdateResponse.GetSQLQuotedValueForAdd(),
-                        paramSMSCostNaira.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramExceptionMessage.GetSQLQuotedValueForAdd(),
-                        paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
-                        paramGateway.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramSMSDeliveryStatusID.GetSQLValue(),
+                        paramSender.GetSQLValue(),
+                        paramReceiver.GetSQLValue(),
+                        paramMessage.GetSQLValue(),
+                        paramUID.GetSQLValue(),
+                        paramAPICreateResponse.GetSQLValue(),
+                        paramAPIUpdateResponse.GetSQLValue(),
+                        paramSMSCostNaira.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramExceptionMessage.GetSQLValue(),
+                        paramExceptionStackTrace.GetSQLValue(),
+                        paramGateway.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -684,19 +684,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([SMSDeliveryStatusID],[Sender],[Receiver],[Message],[UID],[APICreateResponse],[APIUpdateResponse],[SMSCostNaira],[CreatedAt],[UpdatedAt],[ExceptionMessage],[ExceptionStackTrace],[Gateway]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  ", TABLE_NAME,
-                        paramSMSDeliveryStatusID.GetSQLQuotedValueForAdd(),
-                        paramSender.GetSQLQuotedValueForAdd(),
-                        paramReceiver.GetSQLQuotedValueForAdd(),
-                        paramMessage.GetSQLQuotedValueForAdd(),
-                        paramUID.GetSQLQuotedValueForAdd(),
-                        paramAPICreateResponse.GetSQLQuotedValueForAdd(),
-                        paramAPIUpdateResponse.GetSQLQuotedValueForAdd(),
-                        paramSMSCostNaira.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramExceptionMessage.GetSQLQuotedValueForAdd(),
-                        paramExceptionStackTrace.GetSQLQuotedValueForAdd(),
-                        paramGateway.GetSQLQuotedValueForAdd()                            
+                        paramSMSDeliveryStatusID.GetSQLValue(),
+                        paramSender.GetSQLValue(),
+                        paramReceiver.GetSQLValue(),
+                        paramMessage.GetSQLValue(),
+                        paramUID.GetSQLValue(),
+                        paramAPICreateResponse.GetSQLValue(),
+                        paramAPIUpdateResponse.GetSQLValue(),
+                        paramSMSCostNaira.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramExceptionMessage.GetSQLValue(),
+                        paramExceptionStackTrace.GetSQLValue(),
+                        paramGateway.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

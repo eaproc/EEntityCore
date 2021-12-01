@@ -39,50 +39,7 @@ namespace EEntityCore.DB.MSSQL.Schemas
         /// </summary>
         public object Value { private set; get; }
 
-        //public bool IsNullButNotEqualsNothing
-        //{
-        //    get
-        //    {
-        //        return new DataColumnNullParamValue().Equals(Value) && Value is object;
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Returns nothing too as null
-        ///// </summary>
-        ///// <value></value>
-        ///// <returns></returns>
-        ///// <remarks></remarks>
-        //public bool IsNull
-        //{
-        //    get
-        //    {
-        //        return new DataColumnNullParamValue().Equals(Value);
-        //    }
-        //}
-
-        //public static DataColumnParameter get_NULL_Value(DataColumnDefinition pColumn)
-        //{
-        //    return new DataColumnParameter(pColumn, new DataColumnNullParamValue());
-        //}
-
-
-
-
-        // ''' <summary>
-        // ''' Only for BLob Type with no NULL result. Throws exception
-        // ''' </summary>
-        // ''' <returns></returns>
-        // ''' <remarks></remarks>
-        // Public Function getByteArrayValue() As Byte()
-        // If Me.Value Is Nothing OrElse
-        // Not DataColumnDefinition.getTypeAllowed(Me.DataType) = AllowedDataTypes.Blob Then Throw New Exception("Wrong Use of this method.")
-
-        // If Me.IsNull Then Return Nothing REM incase for update
-        // If TypeOf Me.Value Is System.Drawing.Image Then Return EImage.toByteArray(CType(Me.Value, System.Drawing.Image))
-        // Return CType(Me.Value, Byte())
-
-        // End Function
+      
 
         /// <summary>
         /// Calling this means value is not NULL
@@ -147,14 +104,14 @@ namespace EEntityCore.DB.MSSQL.Schemas
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
-        public object GetSQLQuotedValueForAdd()
+        public string GetSQLValue()
         {
             if ((Value is null ) && !this.ColumnDefinition.Nullable)
                 throw new Exception(this.ColumnDefinition.ColumnName + " can not be NULL");
 
             if (Value is null ) return SQL_NULL_VALUE;
 
-            return GetSQLQuotedValue();
+            return GetSQLQuotedValue().ToString();
         }
 
         ///// <summary>

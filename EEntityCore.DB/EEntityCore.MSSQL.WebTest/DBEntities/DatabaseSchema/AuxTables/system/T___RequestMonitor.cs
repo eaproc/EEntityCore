@@ -421,10 +421,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -489,15 +489,15 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9})  ", TABLE_NAME,
-                        paramAbsoluteURL.GetSQLQuotedValueForAdd(),
-                        paramRequestParametersJSON.GetSQLQuotedValueForAdd(),
-                        paramIPAddress.GetSQLQuotedValueForAdd(),
-                        paramSessionVariables.GetSQLQuotedValueForAdd(),
-                        paramBrowser.GetSQLQuotedValueForAdd(),
-                        paramUserID.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramRequestBody.GetSQLQuotedValueForAdd(),
-                        paramRequestHeaders.GetSQLQuotedValueForAdd()                        )
+                        paramAbsoluteURL.GetSQLValue(),
+                        paramRequestParametersJSON.GetSQLValue(),
+                        paramIPAddress.GetSQLValue(),
+                        paramSessionVariables.GetSQLValue(),
+                        paramBrowser.GetSQLValue(),
+                        paramUserID.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramRequestBody.GetSQLValue(),
+                        paramRequestHeaders.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -543,16 +543,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramAbsoluteURL.GetSQLQuotedValueForAdd(),
-                        paramRequestParametersJSON.GetSQLQuotedValueForAdd(),
-                        paramIPAddress.GetSQLQuotedValueForAdd(),
-                        paramSessionVariables.GetSQLQuotedValueForAdd(),
-                        paramBrowser.GetSQLQuotedValueForAdd(),
-                        paramUserID.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramRequestBody.GetSQLQuotedValueForAdd(),
-                        paramRequestHeaders.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramAbsoluteURL.GetSQLValue(),
+                        paramRequestParametersJSON.GetSQLValue(),
+                        paramIPAddress.GetSQLValue(),
+                        paramSessionVariables.GetSQLValue(),
+                        paramBrowser.GetSQLValue(),
+                        paramUserID.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramRequestBody.GetSQLValue(),
+                        paramRequestHeaders.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -592,15 +592,15 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([AbsoluteURL],[RequestParametersJSON],[IPAddress],[SessionVariables],[Browser],[UserID],[CreatedAt],[RequestBody],[RequestHeaders]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9})  ", TABLE_NAME,
-                        paramAbsoluteURL.GetSQLQuotedValueForAdd(),
-                        paramRequestParametersJSON.GetSQLQuotedValueForAdd(),
-                        paramIPAddress.GetSQLQuotedValueForAdd(),
-                        paramSessionVariables.GetSQLQuotedValueForAdd(),
-                        paramBrowser.GetSQLQuotedValueForAdd(),
-                        paramUserID.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramRequestBody.GetSQLQuotedValueForAdd(),
-                        paramRequestHeaders.GetSQLQuotedValueForAdd()                            
+                        paramAbsoluteURL.GetSQLValue(),
+                        paramRequestParametersJSON.GetSQLValue(),
+                        paramIPAddress.GetSQLValue(),
+                        paramSessionVariables.GetSQLValue(),
+                        paramBrowser.GetSQLValue(),
+                        paramUserID.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramRequestBody.GetSQLValue(),
+                        paramRequestHeaders.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

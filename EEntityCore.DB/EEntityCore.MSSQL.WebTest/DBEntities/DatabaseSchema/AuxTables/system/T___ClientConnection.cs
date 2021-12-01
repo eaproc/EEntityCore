@@ -512,10 +512,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -592,21 +592,21 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15})  ", TABLE_NAME,
-                        paramClientID.GetSQLQuotedValueForAdd(),
-                        paramFileServerUrl.GetSQLQuotedValueForAdd(),
-                        paramFileServerAccessKey.GetSQLQuotedValueForAdd(),
-                        paramFileServerSecretKey.GetSQLQuotedValueForAdd(),
-                        paramFileServerBucket.GetSQLQuotedValueForAdd(),
-                        paramClientAPIID.GetSQLQuotedValueForAdd(),
-                        paramClientAPIUrl.GetSQLQuotedValueForAdd(),
-                        paramDB_HOST.GetSQLQuotedValueForAdd(),
-                        paramDB_DATABASE.GetSQLQuotedValueForAdd(),
-                        paramDB_USERNAME.GetSQLQuotedValueForAdd(),
-                        paramDB_PASSWORD.GetSQLQuotedValueForAdd(),
-                        paramDB_PORT.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramFileServerUrlHttps.GetSQLQuotedValueForAdd()                        )
+                        paramClientID.GetSQLValue(),
+                        paramFileServerUrl.GetSQLValue(),
+                        paramFileServerAccessKey.GetSQLValue(),
+                        paramFileServerSecretKey.GetSQLValue(),
+                        paramFileServerBucket.GetSQLValue(),
+                        paramClientAPIID.GetSQLValue(),
+                        paramClientAPIUrl.GetSQLValue(),
+                        paramDB_HOST.GetSQLValue(),
+                        paramDB_DATABASE.GetSQLValue(),
+                        paramDB_USERNAME.GetSQLValue(),
+                        paramDB_PASSWORD.GetSQLValue(),
+                        paramDB_PORT.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramFileServerUrlHttps.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -664,22 +664,22 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramClientID.GetSQLQuotedValueForAdd(),
-                        paramFileServerUrl.GetSQLQuotedValueForAdd(),
-                        paramFileServerAccessKey.GetSQLQuotedValueForAdd(),
-                        paramFileServerSecretKey.GetSQLQuotedValueForAdd(),
-                        paramFileServerBucket.GetSQLQuotedValueForAdd(),
-                        paramClientAPIID.GetSQLQuotedValueForAdd(),
-                        paramClientAPIUrl.GetSQLQuotedValueForAdd(),
-                        paramDB_HOST.GetSQLQuotedValueForAdd(),
-                        paramDB_DATABASE.GetSQLQuotedValueForAdd(),
-                        paramDB_USERNAME.GetSQLQuotedValueForAdd(),
-                        paramDB_PASSWORD.GetSQLQuotedValueForAdd(),
-                        paramDB_PORT.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramFileServerUrlHttps.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramClientID.GetSQLValue(),
+                        paramFileServerUrl.GetSQLValue(),
+                        paramFileServerAccessKey.GetSQLValue(),
+                        paramFileServerSecretKey.GetSQLValue(),
+                        paramFileServerBucket.GetSQLValue(),
+                        paramClientAPIID.GetSQLValue(),
+                        paramClientAPIUrl.GetSQLValue(),
+                        paramDB_HOST.GetSQLValue(),
+                        paramDB_DATABASE.GetSQLValue(),
+                        paramDB_USERNAME.GetSQLValue(),
+                        paramDB_PASSWORD.GetSQLValue(),
+                        paramDB_PORT.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramFileServerUrlHttps.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -731,21 +731,21 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([ClientID],[FileServerUrl],[FileServerAccessKey],[FileServerSecretKey],[FileServerBucket],[ClientAPIID],[ClientAPIUrl],[DB_HOST],[DB_DATABASE],[DB_USERNAME],[DB_PASSWORD],[DB_PORT],[CreatedAt],[UpdatedAt],[FileServerUrlHttps]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15})  ", TABLE_NAME,
-                        paramClientID.GetSQLQuotedValueForAdd(),
-                        paramFileServerUrl.GetSQLQuotedValueForAdd(),
-                        paramFileServerAccessKey.GetSQLQuotedValueForAdd(),
-                        paramFileServerSecretKey.GetSQLQuotedValueForAdd(),
-                        paramFileServerBucket.GetSQLQuotedValueForAdd(),
-                        paramClientAPIID.GetSQLQuotedValueForAdd(),
-                        paramClientAPIUrl.GetSQLQuotedValueForAdd(),
-                        paramDB_HOST.GetSQLQuotedValueForAdd(),
-                        paramDB_DATABASE.GetSQLQuotedValueForAdd(),
-                        paramDB_USERNAME.GetSQLQuotedValueForAdd(),
-                        paramDB_PASSWORD.GetSQLQuotedValueForAdd(),
-                        paramDB_PORT.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramFileServerUrlHttps.GetSQLQuotedValueForAdd()                            
+                        paramClientID.GetSQLValue(),
+                        paramFileServerUrl.GetSQLValue(),
+                        paramFileServerAccessKey.GetSQLValue(),
+                        paramFileServerSecretKey.GetSQLValue(),
+                        paramFileServerBucket.GetSQLValue(),
+                        paramClientAPIID.GetSQLValue(),
+                        paramClientAPIUrl.GetSQLValue(),
+                        paramDB_HOST.GetSQLValue(),
+                        paramDB_DATABASE.GetSQLValue(),
+                        paramDB_USERNAME.GetSQLValue(),
+                        paramDB_PASSWORD.GetSQLValue(),
+                        paramDB_PORT.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramFileServerUrlHttps.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

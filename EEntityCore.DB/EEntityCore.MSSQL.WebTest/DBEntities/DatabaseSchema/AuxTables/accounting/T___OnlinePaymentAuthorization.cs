@@ -437,10 +437,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -507,16 +507,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  ", TABLE_NAME,
-                        paramOnlinePaymentID.GetSQLQuotedValueForAdd(),
-                        paramAuthorizationCode.GetSQLQuotedValueForAdd(),
-                        paramCardType.GetSQLQuotedValueForAdd(),
-                        paramBIN.GetSQLQuotedValueForAdd(),
-                        paramLast4Digits.GetSQLQuotedValueForAdd(),
-                        paramExpirationMonth.GetSQLQuotedValueForAdd(),
-                        paramExpirationYear.GetSQLQuotedValueForAdd(),
-                        paramBank.GetSQLQuotedValueForAdd(),
-                        paramCountryCode.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                        paramOnlinePaymentID.GetSQLValue(),
+                        paramAuthorizationCode.GetSQLValue(),
+                        paramCardType.GetSQLValue(),
+                        paramBIN.GetSQLValue(),
+                        paramLast4Digits.GetSQLValue(),
+                        paramExpirationMonth.GetSQLValue(),
+                        paramExpirationYear.GetSQLValue(),
+                        paramBank.GetSQLValue(),
+                        paramCountryCode.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -564,17 +564,17 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramOnlinePaymentID.GetSQLQuotedValueForAdd(),
-                        paramAuthorizationCode.GetSQLQuotedValueForAdd(),
-                        paramCardType.GetSQLQuotedValueForAdd(),
-                        paramBIN.GetSQLQuotedValueForAdd(),
-                        paramLast4Digits.GetSQLQuotedValueForAdd(),
-                        paramExpirationMonth.GetSQLQuotedValueForAdd(),
-                        paramExpirationYear.GetSQLQuotedValueForAdd(),
-                        paramBank.GetSQLQuotedValueForAdd(),
-                        paramCountryCode.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramOnlinePaymentID.GetSQLValue(),
+                        paramAuthorizationCode.GetSQLValue(),
+                        paramCardType.GetSQLValue(),
+                        paramBIN.GetSQLValue(),
+                        paramLast4Digits.GetSQLValue(),
+                        paramExpirationMonth.GetSQLValue(),
+                        paramExpirationYear.GetSQLValue(),
+                        paramBank.GetSQLValue(),
+                        paramCountryCode.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -616,16 +616,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([OnlinePaymentID],[AuthorizationCode],[CardType],[BIN],[Last4Digits],[ExpirationMonth],[ExpirationYear],[Bank],[CountryCode],[CreatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  ", TABLE_NAME,
-                        paramOnlinePaymentID.GetSQLQuotedValueForAdd(),
-                        paramAuthorizationCode.GetSQLQuotedValueForAdd(),
-                        paramCardType.GetSQLQuotedValueForAdd(),
-                        paramBIN.GetSQLQuotedValueForAdd(),
-                        paramLast4Digits.GetSQLQuotedValueForAdd(),
-                        paramExpirationMonth.GetSQLQuotedValueForAdd(),
-                        paramExpirationYear.GetSQLQuotedValueForAdd(),
-                        paramBank.GetSQLQuotedValueForAdd(),
-                        paramCountryCode.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd()                            
+                        paramOnlinePaymentID.GetSQLValue(),
+                        paramAuthorizationCode.GetSQLValue(),
+                        paramCardType.GetSQLValue(),
+                        paramBIN.GetSQLValue(),
+                        paramLast4Digits.GetSQLValue(),
+                        paramExpirationMonth.GetSQLValue(),
+                        paramExpirationYear.GetSQLValue(),
+                        paramBank.GetSQLValue(),
+                        paramCountryCode.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

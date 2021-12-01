@@ -437,10 +437,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -505,15 +505,15 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([AppModuleID],[Name],[Link],[LinkPermissionID],[LinkParentID],[OwnedByRoleID],[Description],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9})  ", TABLE_NAME,
-                        paramAppModuleID.GetSQLQuotedValueForAdd(),
-                        paramName.GetSQLQuotedValueForAdd(),
-                        paramLink.GetSQLQuotedValueForAdd(),
-                        paramLinkPermissionID.GetSQLQuotedValueForAdd(),
-                        paramLinkParentID.GetSQLQuotedValueForAdd(),
-                        paramOwnedByRoleID.GetSQLQuotedValueForAdd(),
-                        paramDescription.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        )
+                        paramAppModuleID.GetSQLValue(),
+                        paramName.GetSQLValue(),
+                        paramLink.GetSQLValue(),
+                        paramLinkPermissionID.GetSQLValue(),
+                        paramLinkParentID.GetSQLValue(),
+                        paramOwnedByRoleID.GetSQLValue(),
+                        paramDescription.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -559,16 +559,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[AppModuleID],[Name],[Link],[LinkPermissionID],[LinkParentID],[OwnedByRoleID],[Description],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramAppModuleID.GetSQLQuotedValueForAdd(),
-                        paramName.GetSQLQuotedValueForAdd(),
-                        paramLink.GetSQLQuotedValueForAdd(),
-                        paramLinkPermissionID.GetSQLQuotedValueForAdd(),
-                        paramLinkParentID.GetSQLQuotedValueForAdd(),
-                        paramOwnedByRoleID.GetSQLQuotedValueForAdd(),
-                        paramDescription.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramAppModuleID.GetSQLValue(),
+                        paramName.GetSQLValue(),
+                        paramLink.GetSQLValue(),
+                        paramLinkPermissionID.GetSQLValue(),
+                        paramLinkParentID.GetSQLValue(),
+                        paramOwnedByRoleID.GetSQLValue(),
+                        paramDescription.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -608,15 +608,15 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([AppModuleID],[Name],[Link],[LinkPermissionID],[LinkParentID],[OwnedByRoleID],[Description],[CreatedAt],[UpdatedAt]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9})  ", TABLE_NAME,
-                        paramAppModuleID.GetSQLQuotedValueForAdd(),
-                        paramName.GetSQLQuotedValueForAdd(),
-                        paramLink.GetSQLQuotedValueForAdd(),
-                        paramLinkPermissionID.GetSQLQuotedValueForAdd(),
-                        paramLinkParentID.GetSQLQuotedValueForAdd(),
-                        paramOwnedByRoleID.GetSQLQuotedValueForAdd(),
-                        paramDescription.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd()                            
+                        paramAppModuleID.GetSQLValue(),
+                        paramName.GetSQLValue(),
+                        paramLink.GetSQLValue(),
+                        paramLinkPermissionID.GetSQLValue(),
+                        paramLinkParentID.GetSQLValue(),
+                        paramOwnedByRoleID.GetSQLValue(),
+                        paramDescription.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

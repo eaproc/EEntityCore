@@ -651,10 +651,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -747,29 +747,29 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23})  ", TABLE_NAME,
-                        paramCenterID.GetSQLQuotedValueForAdd(),
-                        paramBeneficiaryStatusID.GetSQLQuotedValueForAdd(),
-                        paramFirstName.GetSQLQuotedValueForAdd(),
-                        paramLastName.GetSQLQuotedValueForAdd(),
-                        paramAddress.GetSQLQuotedValueForAdd(),
-                        paramCity.GetSQLQuotedValueForAdd(),
-                        paramState.GetSQLQuotedValueForAdd(),
-                        paramZipCode.GetSQLQuotedValueForAdd(),
-                        paramSchoolName.GetSQLQuotedValueForAdd(),
-                        paramSchoolAddress.GetSQLQuotedValueForAdd(),
-                        paramClassOnEnrollment.GetSQLQuotedValueForAdd(),
-                        paramHomePhone.GetSQLQuotedValueForAdd(),
-                        paramAlternatePhone.GetSQLQuotedValueForAdd(),
-                        paramEmail.GetSQLQuotedValueForAdd(),
-                        paramGenderID.GetSQLQuotedValueForAdd(),
-                        paramDateOfBirth.GetSQLQuotedValueForAdd(),
-                        paramVocation.GetSQLQuotedValueForAdd(),
-                        paramBirthCertificatePath.GetSQLQuotedValueForAdd(),
-                        paramPhotoPath.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd(),
-                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        )
+                        paramCenterID.GetSQLValue(),
+                        paramBeneficiaryStatusID.GetSQLValue(),
+                        paramFirstName.GetSQLValue(),
+                        paramLastName.GetSQLValue(),
+                        paramAddress.GetSQLValue(),
+                        paramCity.GetSQLValue(),
+                        paramState.GetSQLValue(),
+                        paramZipCode.GetSQLValue(),
+                        paramSchoolName.GetSQLValue(),
+                        paramSchoolAddress.GetSQLValue(),
+                        paramClassOnEnrollment.GetSQLValue(),
+                        paramHomePhone.GetSQLValue(),
+                        paramAlternatePhone.GetSQLValue(),
+                        paramEmail.GetSQLValue(),
+                        paramGenderID.GetSQLValue(),
+                        paramDateOfBirth.GetSQLValue(),
+                        paramVocation.GetSQLValue(),
+                        paramBirthCertificatePath.GetSQLValue(),
+                        paramPhotoPath.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramCreatedByID.GetSQLValue(),
+                        paramUpdatedByID.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -843,30 +843,30 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramCenterID.GetSQLQuotedValueForAdd(),
-                        paramBeneficiaryStatusID.GetSQLQuotedValueForAdd(),
-                        paramFirstName.GetSQLQuotedValueForAdd(),
-                        paramLastName.GetSQLQuotedValueForAdd(),
-                        paramAddress.GetSQLQuotedValueForAdd(),
-                        paramCity.GetSQLQuotedValueForAdd(),
-                        paramState.GetSQLQuotedValueForAdd(),
-                        paramZipCode.GetSQLQuotedValueForAdd(),
-                        paramSchoolName.GetSQLQuotedValueForAdd(),
-                        paramSchoolAddress.GetSQLQuotedValueForAdd(),
-                        paramClassOnEnrollment.GetSQLQuotedValueForAdd(),
-                        paramHomePhone.GetSQLQuotedValueForAdd(),
-                        paramAlternatePhone.GetSQLQuotedValueForAdd(),
-                        paramEmail.GetSQLQuotedValueForAdd(),
-                        paramGenderID.GetSQLQuotedValueForAdd(),
-                        paramDateOfBirth.GetSQLQuotedValueForAdd(),
-                        paramVocation.GetSQLQuotedValueForAdd(),
-                        paramBirthCertificatePath.GetSQLQuotedValueForAdd(),
-                        paramPhotoPath.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd(),
-                        paramUpdatedByID.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramCenterID.GetSQLValue(),
+                        paramBeneficiaryStatusID.GetSQLValue(),
+                        paramFirstName.GetSQLValue(),
+                        paramLastName.GetSQLValue(),
+                        paramAddress.GetSQLValue(),
+                        paramCity.GetSQLValue(),
+                        paramState.GetSQLValue(),
+                        paramZipCode.GetSQLValue(),
+                        paramSchoolName.GetSQLValue(),
+                        paramSchoolAddress.GetSQLValue(),
+                        paramClassOnEnrollment.GetSQLValue(),
+                        paramHomePhone.GetSQLValue(),
+                        paramAlternatePhone.GetSQLValue(),
+                        paramEmail.GetSQLValue(),
+                        paramGenderID.GetSQLValue(),
+                        paramDateOfBirth.GetSQLValue(),
+                        paramVocation.GetSQLValue(),
+                        paramBirthCertificatePath.GetSQLValue(),
+                        paramPhotoPath.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramCreatedByID.GetSQLValue(),
+                        paramUpdatedByID.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -934,29 +934,29 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([CenterID],[BeneficiaryStatusID],[FirstName],[LastName],[Address],[City],[State],[ZipCode],[SchoolName],[SchoolAddress],[ClassOnEnrollment],[HomePhone],[AlternatePhone],[Email],[GenderID],[DateOfBirth],[Vocation],[BirthCertificatePath],[PhotoPath],[CreatedAt],[UpdatedAt],[CreatedByID],[UpdatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23})  ", TABLE_NAME,
-                        paramCenterID.GetSQLQuotedValueForAdd(),
-                        paramBeneficiaryStatusID.GetSQLQuotedValueForAdd(),
-                        paramFirstName.GetSQLQuotedValueForAdd(),
-                        paramLastName.GetSQLQuotedValueForAdd(),
-                        paramAddress.GetSQLQuotedValueForAdd(),
-                        paramCity.GetSQLQuotedValueForAdd(),
-                        paramState.GetSQLQuotedValueForAdd(),
-                        paramZipCode.GetSQLQuotedValueForAdd(),
-                        paramSchoolName.GetSQLQuotedValueForAdd(),
-                        paramSchoolAddress.GetSQLQuotedValueForAdd(),
-                        paramClassOnEnrollment.GetSQLQuotedValueForAdd(),
-                        paramHomePhone.GetSQLQuotedValueForAdd(),
-                        paramAlternatePhone.GetSQLQuotedValueForAdd(),
-                        paramEmail.GetSQLQuotedValueForAdd(),
-                        paramGenderID.GetSQLQuotedValueForAdd(),
-                        paramDateOfBirth.GetSQLQuotedValueForAdd(),
-                        paramVocation.GetSQLQuotedValueForAdd(),
-                        paramBirthCertificatePath.GetSQLQuotedValueForAdd(),
-                        paramPhotoPath.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd(),
-                        paramUpdatedByID.GetSQLQuotedValueForAdd()                            
+                        paramCenterID.GetSQLValue(),
+                        paramBeneficiaryStatusID.GetSQLValue(),
+                        paramFirstName.GetSQLValue(),
+                        paramLastName.GetSQLValue(),
+                        paramAddress.GetSQLValue(),
+                        paramCity.GetSQLValue(),
+                        paramState.GetSQLValue(),
+                        paramZipCode.GetSQLValue(),
+                        paramSchoolName.GetSQLValue(),
+                        paramSchoolAddress.GetSQLValue(),
+                        paramClassOnEnrollment.GetSQLValue(),
+                        paramHomePhone.GetSQLValue(),
+                        paramAlternatePhone.GetSQLValue(),
+                        paramEmail.GetSQLValue(),
+                        paramGenderID.GetSQLValue(),
+                        paramDateOfBirth.GetSQLValue(),
+                        paramVocation.GetSQLValue(),
+                        paramBirthCertificatePath.GetSQLValue(),
+                        paramPhotoPath.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramCreatedByID.GetSQLValue(),
+                        paramUpdatedByID.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

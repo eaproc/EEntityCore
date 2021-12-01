@@ -476,10 +476,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -550,18 +550,18 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([TransactionStatusID],[PaymentTransactionID],[AccountName],[Bank],[IPAddress],[PaymentRequired],[Charges],[PaymentRequiredWithoutCharges],[RefundAmount],[Balance],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  ", TABLE_NAME,
-                        paramTransactionStatusID.GetSQLQuotedValueForAdd(),
-                        paramPaymentTransactionID.GetSQLQuotedValueForAdd(),
-                        paramAccountName.GetSQLQuotedValueForAdd(),
-                        paramBank.GetSQLQuotedValueForAdd(),
-                        paramIPAddress.GetSQLQuotedValueForAdd(),
-                        paramPaymentRequired.GetSQLQuotedValueForAdd(),
-                        paramCharges.GetSQLQuotedValueForAdd(),
-                        paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
-                        paramRefundAmount.GetSQLQuotedValueForAdd(),
-                        paramBalance.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd()                        )
+                        paramTransactionStatusID.GetSQLValue(),
+                        paramPaymentTransactionID.GetSQLValue(),
+                        paramAccountName.GetSQLValue(),
+                        paramBank.GetSQLValue(),
+                        paramIPAddress.GetSQLValue(),
+                        paramPaymentRequired.GetSQLValue(),
+                        paramCharges.GetSQLValue(),
+                        paramPaymentRequiredWithoutCharges.GetSQLValue(),
+                        paramRefundAmount.GetSQLValue(),
+                        paramBalance.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramCreatedByID.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -613,19 +613,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[TransactionStatusID],[PaymentTransactionID],[AccountName],[Bank],[IPAddress],[PaymentRequired],[Charges],[PaymentRequiredWithoutCharges],[RefundAmount],[Balance],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramTransactionStatusID.GetSQLQuotedValueForAdd(),
-                        paramPaymentTransactionID.GetSQLQuotedValueForAdd(),
-                        paramAccountName.GetSQLQuotedValueForAdd(),
-                        paramBank.GetSQLQuotedValueForAdd(),
-                        paramIPAddress.GetSQLQuotedValueForAdd(),
-                        paramPaymentRequired.GetSQLQuotedValueForAdd(),
-                        paramCharges.GetSQLQuotedValueForAdd(),
-                        paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
-                        paramRefundAmount.GetSQLQuotedValueForAdd(),
-                        paramBalance.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramTransactionStatusID.GetSQLValue(),
+                        paramPaymentTransactionID.GetSQLValue(),
+                        paramAccountName.GetSQLValue(),
+                        paramBank.GetSQLValue(),
+                        paramIPAddress.GetSQLValue(),
+                        paramPaymentRequired.GetSQLValue(),
+                        paramCharges.GetSQLValue(),
+                        paramPaymentRequiredWithoutCharges.GetSQLValue(),
+                        paramRefundAmount.GetSQLValue(),
+                        paramBalance.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramCreatedByID.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -671,18 +671,18 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([TransactionStatusID],[PaymentTransactionID],[AccountName],[Bank],[IPAddress],[PaymentRequired],[Charges],[PaymentRequiredWithoutCharges],[RefundAmount],[Balance],[CreatedAt],[CreatedByID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})  ", TABLE_NAME,
-                        paramTransactionStatusID.GetSQLQuotedValueForAdd(),
-                        paramPaymentTransactionID.GetSQLQuotedValueForAdd(),
-                        paramAccountName.GetSQLQuotedValueForAdd(),
-                        paramBank.GetSQLQuotedValueForAdd(),
-                        paramIPAddress.GetSQLQuotedValueForAdd(),
-                        paramPaymentRequired.GetSQLQuotedValueForAdd(),
-                        paramCharges.GetSQLQuotedValueForAdd(),
-                        paramPaymentRequiredWithoutCharges.GetSQLQuotedValueForAdd(),
-                        paramRefundAmount.GetSQLQuotedValueForAdd(),
-                        paramBalance.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd()                            
+                        paramTransactionStatusID.GetSQLValue(),
+                        paramPaymentTransactionID.GetSQLValue(),
+                        paramAccountName.GetSQLValue(),
+                        paramBank.GetSQLValue(),
+                        paramIPAddress.GetSQLValue(),
+                        paramPaymentRequired.GetSQLValue(),
+                        paramCharges.GetSQLValue(),
+                        paramPaymentRequiredWithoutCharges.GetSQLValue(),
+                        paramRefundAmount.GetSQLValue(),
+                        paramBalance.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramCreatedByID.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

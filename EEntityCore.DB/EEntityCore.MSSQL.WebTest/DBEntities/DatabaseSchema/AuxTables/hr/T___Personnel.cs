@@ -518,10 +518,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -596,20 +596,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  ", TABLE_NAME,
-                        paramPersonnelNumber.GetSQLQuotedValueForAdd(),
-                        paramPersonID.GetSQLQuotedValueForAdd(),
-                        paramIsActive.GetSQLQuotedValueForAdd(),
-                        paramEmploymentDate.GetSQLQuotedValueForAdd(),
-                        paramIsSuperUser.GetSQLQuotedValueForAdd(),
-                        paramPositionID.GetSQLQuotedValueForAdd(),
-                        paramSalaryTypeID.GetSQLQuotedValueForAdd(),
-                        paramSalaryAmount.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd(),
-                        paramUpdatedByID.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramDuties.GetSQLQuotedValueForAdd(),
-                        paramIsWebVisible.GetSQLQuotedValueForAdd()                        )
+                        paramPersonnelNumber.GetSQLValue(),
+                        paramPersonID.GetSQLValue(),
+                        paramIsActive.GetSQLValue(),
+                        paramEmploymentDate.GetSQLValue(),
+                        paramIsSuperUser.GetSQLValue(),
+                        paramPositionID.GetSQLValue(),
+                        paramSalaryTypeID.GetSQLValue(),
+                        paramSalaryAmount.GetSQLValue(),
+                        paramCreatedByID.GetSQLValue(),
+                        paramUpdatedByID.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramDuties.GetSQLValue(),
+                        paramIsWebVisible.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -665,21 +665,21 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramPersonnelNumber.GetSQLQuotedValueForAdd(),
-                        paramPersonID.GetSQLQuotedValueForAdd(),
-                        paramIsActive.GetSQLQuotedValueForAdd(),
-                        paramEmploymentDate.GetSQLQuotedValueForAdd(),
-                        paramIsSuperUser.GetSQLQuotedValueForAdd(),
-                        paramPositionID.GetSQLQuotedValueForAdd(),
-                        paramSalaryTypeID.GetSQLQuotedValueForAdd(),
-                        paramSalaryAmount.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd(),
-                        paramUpdatedByID.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramDuties.GetSQLQuotedValueForAdd(),
-                        paramIsWebVisible.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramPersonnelNumber.GetSQLValue(),
+                        paramPersonID.GetSQLValue(),
+                        paramIsActive.GetSQLValue(),
+                        paramEmploymentDate.GetSQLValue(),
+                        paramIsSuperUser.GetSQLValue(),
+                        paramPositionID.GetSQLValue(),
+                        paramSalaryTypeID.GetSQLValue(),
+                        paramSalaryAmount.GetSQLValue(),
+                        paramCreatedByID.GetSQLValue(),
+                        paramUpdatedByID.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramDuties.GetSQLValue(),
+                        paramIsWebVisible.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -729,20 +729,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([PersonnelNumber],[PersonID],[IsActive],[EmploymentDate],[IsSuperUser],[PositionID],[SalaryTypeID],[SalaryAmount],[CreatedByID],[UpdatedByID],[CreatedAt],[UpdatedAt],[Duties],[IsWebVisible]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14})  ", TABLE_NAME,
-                        paramPersonnelNumber.GetSQLQuotedValueForAdd(),
-                        paramPersonID.GetSQLQuotedValueForAdd(),
-                        paramIsActive.GetSQLQuotedValueForAdd(),
-                        paramEmploymentDate.GetSQLQuotedValueForAdd(),
-                        paramIsSuperUser.GetSQLQuotedValueForAdd(),
-                        paramPositionID.GetSQLQuotedValueForAdd(),
-                        paramSalaryTypeID.GetSQLQuotedValueForAdd(),
-                        paramSalaryAmount.GetSQLQuotedValueForAdd(),
-                        paramCreatedByID.GetSQLQuotedValueForAdd(),
-                        paramUpdatedByID.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramDuties.GetSQLQuotedValueForAdd(),
-                        paramIsWebVisible.GetSQLQuotedValueForAdd()                            
+                        paramPersonnelNumber.GetSQLValue(),
+                        paramPersonID.GetSQLValue(),
+                        paramIsActive.GetSQLValue(),
+                        paramEmploymentDate.GetSQLValue(),
+                        paramIsSuperUser.GetSQLValue(),
+                        paramPositionID.GetSQLValue(),
+                        paramSalaryTypeID.GetSQLValue(),
+                        paramSalaryAmount.GetSQLValue(),
+                        paramCreatedByID.GetSQLValue(),
+                        paramUpdatedByID.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramDuties.GetSQLValue(),
+                        paramIsWebVisible.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );

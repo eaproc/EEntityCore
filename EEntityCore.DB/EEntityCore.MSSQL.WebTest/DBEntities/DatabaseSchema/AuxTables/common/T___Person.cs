@@ -598,10 +598,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 var p = this.GetTouchedColumns();                  
                 System.Text.StringBuilder builder = new System.Text.StringBuilder($"UPDATE {TABLE_NAME} SET ");                  
                   
-                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLQuotedValueForAdd()},");                  
+                foreach (var v in p) builder.Append($"{v.ColumnDefinition.ColumnName}={v.GetSQLValue()},");                  
                   
                 builder = new System.Text.StringBuilder(builder.ToString().TrimEnd(','));                  
-                builder.Append($" WHERE ID={ParamID.GetSQLQuotedValueForAdd()}");                  
+                builder.Append($" WHERE ID={ParamID.GetSQLValue()}");                  
                   
                 return builder.ToString();                  
             }                  
@@ -686,25 +686,25 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             {                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19})  ", TABLE_NAME,
-                        paramIdentificationNo.GetSQLQuotedValueForAdd(),
-                        paramFirstName.GetSQLQuotedValueForAdd(),
-                        paramLastName.GetSQLQuotedValueForAdd(),
-                        paramCountryID.GetSQLQuotedValueForAdd(),
-                        paramDateOfBirth.GetSQLQuotedValueForAdd(),
-                        paramGenderID.GetSQLQuotedValueForAdd(),
-                        paramHomeAddress.GetSQLQuotedValueForAdd(),
-                        paramEmail.GetSQLQuotedValueForAdd(),
-                        paramPersonTitleID.GetSQLQuotedValueForAdd(),
-                        paramIsSuperUser.GetSQLQuotedValueForAdd(),
-                        paramBloodTypeID.GetSQLQuotedValueForAdd(),
-                        paramBirthPlace.GetSQLQuotedValueForAdd(),
-                        paramPictureFileName.GetSQLQuotedValueForAdd(),
-                        paramMaritalStatusID.GetSQLQuotedValueForAdd(),
-                        paramCanBeUpdated.GetSQLQuotedValueForAdd(),
-                        paramCanBeDeleted.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramDataMonitorID.GetSQLQuotedValueForAdd()                        )
+                        paramIdentificationNo.GetSQLValue(),
+                        paramFirstName.GetSQLValue(),
+                        paramLastName.GetSQLValue(),
+                        paramCountryID.GetSQLValue(),
+                        paramDateOfBirth.GetSQLValue(),
+                        paramGenderID.GetSQLValue(),
+                        paramHomeAddress.GetSQLValue(),
+                        paramEmail.GetSQLValue(),
+                        paramPersonTitleID.GetSQLValue(),
+                        paramIsSuperUser.GetSQLValue(),
+                        paramBloodTypeID.GetSQLValue(),
+                        paramBirthPlace.GetSQLValue(),
+                        paramPictureFileName.GetSQLValue(),
+                        paramMaritalStatusID.GetSQLValue(),
+                        paramCanBeUpdated.GetSQLValue(),
+                        paramCanBeDeleted.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramDataMonitorID.GetSQLValue()                        )
                     );
                          
                 return conn.GetScopeIdentity().ToLong();
@@ -770,26 +770,26 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
             return r.Run( (conn) =>                   
                       conn.ExecuteTransactionQuery(                  
                     string.Format(" SET IDENTITY_INSERT {0} ON INSERT INTO {0}([ID],[IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20})  SET IDENTITY_INSERT {0} OFF ", TABLE_NAME,
-                        paramID.GetSQLQuotedValueForAdd(),
-                        paramIdentificationNo.GetSQLQuotedValueForAdd(),
-                        paramFirstName.GetSQLQuotedValueForAdd(),
-                        paramLastName.GetSQLQuotedValueForAdd(),
-                        paramCountryID.GetSQLQuotedValueForAdd(),
-                        paramDateOfBirth.GetSQLQuotedValueForAdd(),
-                        paramGenderID.GetSQLQuotedValueForAdd(),
-                        paramHomeAddress.GetSQLQuotedValueForAdd(),
-                        paramEmail.GetSQLQuotedValueForAdd(),
-                        paramPersonTitleID.GetSQLQuotedValueForAdd(),
-                        paramIsSuperUser.GetSQLQuotedValueForAdd(),
-                        paramBloodTypeID.GetSQLQuotedValueForAdd(),
-                        paramBirthPlace.GetSQLQuotedValueForAdd(),
-                        paramPictureFileName.GetSQLQuotedValueForAdd(),
-                        paramMaritalStatusID.GetSQLQuotedValueForAdd(),
-                        paramCanBeUpdated.GetSQLQuotedValueForAdd(),
-                        paramCanBeDeleted.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramDataMonitorID.GetSQLQuotedValueForAdd()                        )
+                        paramID.GetSQLValue(),
+                        paramIdentificationNo.GetSQLValue(),
+                        paramFirstName.GetSQLValue(),
+                        paramLastName.GetSQLValue(),
+                        paramCountryID.GetSQLValue(),
+                        paramDateOfBirth.GetSQLValue(),
+                        paramGenderID.GetSQLValue(),
+                        paramHomeAddress.GetSQLValue(),
+                        paramEmail.GetSQLValue(),
+                        paramPersonTitleID.GetSQLValue(),
+                        paramIsSuperUser.GetSQLValue(),
+                        paramBloodTypeID.GetSQLValue(),
+                        paramBirthPlace.GetSQLValue(),
+                        paramPictureFileName.GetSQLValue(),
+                        paramMaritalStatusID.GetSQLValue(),
+                        paramCanBeUpdated.GetSQLValue(),
+                        paramCanBeDeleted.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramDataMonitorID.GetSQLValue()                        )
                     ).ToBoolean() 
                );
         }                  
@@ -849,25 +849,25 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                   
             return r.Run( (conn) => conn.ExecuteTransactionQuery(                  
                     string.Format(" INSERT INTO {0}([IdentificationNo],[FirstName],[LastName],[CountryID],[DateOfBirth],[GenderID],[HomeAddress],[Email],[PersonTitleID],[IsSuperUser],[BloodTypeID],[BirthPlace],[PictureFileName],[MaritalStatusID],[CanBeUpdated],[CanBeDeleted],[CreatedAt],[UpdatedAt],[DataMonitorID]) VALUES({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19})  ", TABLE_NAME,
-                        paramIdentificationNo.GetSQLQuotedValueForAdd(),
-                        paramFirstName.GetSQLQuotedValueForAdd(),
-                        paramLastName.GetSQLQuotedValueForAdd(),
-                        paramCountryID.GetSQLQuotedValueForAdd(),
-                        paramDateOfBirth.GetSQLQuotedValueForAdd(),
-                        paramGenderID.GetSQLQuotedValueForAdd(),
-                        paramHomeAddress.GetSQLQuotedValueForAdd(),
-                        paramEmail.GetSQLQuotedValueForAdd(),
-                        paramPersonTitleID.GetSQLQuotedValueForAdd(),
-                        paramIsSuperUser.GetSQLQuotedValueForAdd(),
-                        paramBloodTypeID.GetSQLQuotedValueForAdd(),
-                        paramBirthPlace.GetSQLQuotedValueForAdd(),
-                        paramPictureFileName.GetSQLQuotedValueForAdd(),
-                        paramMaritalStatusID.GetSQLQuotedValueForAdd(),
-                        paramCanBeUpdated.GetSQLQuotedValueForAdd(),
-                        paramCanBeDeleted.GetSQLQuotedValueForAdd(),
-                        paramCreatedAt.GetSQLQuotedValueForAdd(),
-                        paramUpdatedAt.GetSQLQuotedValueForAdd(),
-                        paramDataMonitorID.GetSQLQuotedValueForAdd()                            
+                        paramIdentificationNo.GetSQLValue(),
+                        paramFirstName.GetSQLValue(),
+                        paramLastName.GetSQLValue(),
+                        paramCountryID.GetSQLValue(),
+                        paramDateOfBirth.GetSQLValue(),
+                        paramGenderID.GetSQLValue(),
+                        paramHomeAddress.GetSQLValue(),
+                        paramEmail.GetSQLValue(),
+                        paramPersonTitleID.GetSQLValue(),
+                        paramIsSuperUser.GetSQLValue(),
+                        paramBloodTypeID.GetSQLValue(),
+                        paramBirthPlace.GetSQLValue(),
+                        paramPictureFileName.GetSQLValue(),
+                        paramMaritalStatusID.GetSQLValue(),
+                        paramCanBeUpdated.GetSQLValue(),
+                        paramCanBeDeleted.GetSQLValue(),
+                        paramCreatedAt.GetSQLValue(),
+                        paramUpdatedAt.GetSQLValue(),
+                        paramDataMonitorID.GetSQLValue()                            
                             )
                         ).ToBoolean()
                     );
