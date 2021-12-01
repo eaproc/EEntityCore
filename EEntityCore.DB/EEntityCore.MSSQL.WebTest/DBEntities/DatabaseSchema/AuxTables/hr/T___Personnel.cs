@@ -180,7 +180,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___Personnel(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___Personnel(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -288,46 +288,46 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defDuties;
        public static readonly DataColumnDefinition defIsWebVisible;
 
-       public string PersonnelNumber { get => (string)TargettedRow[TableColumnNames.PersonnelNumber.ToString()];  set => TargettedRow[TableColumnNames.PersonnelNumber.ToString()] = value; }
+       public string PersonnelNumber { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.PersonnelNumber.ToString());  set => TargettedRow[TableColumnNames.PersonnelNumber.ToString()] = value; }
 
 
-       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()];  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
+       public int PersonID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.PersonID.ToString());  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
 
 
-       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()];  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
+       public bool IsActive { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.IsActive.ToString());  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
 
 
-       public DateTime EmploymentDate { get => (DateTime)TargettedRow[TableColumnNames.EmploymentDate.ToString()];  set => TargettedRow[TableColumnNames.EmploymentDate.ToString()] = value; }
+       public DateTime EmploymentDate { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.EmploymentDate.ToString());  set => TargettedRow[TableColumnNames.EmploymentDate.ToString()] = value; }
 
 
-       public bool IsSuperUser { get => (bool)TargettedRow[TableColumnNames.IsSuperUser.ToString()];  set => TargettedRow[TableColumnNames.IsSuperUser.ToString()] = value; }
+       public bool IsSuperUser { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.IsSuperUser.ToString());  set => TargettedRow[TableColumnNames.IsSuperUser.ToString()] = value; }
 
 
-       public int PositionID { get => (int)TargettedRow[TableColumnNames.PositionID.ToString()];  set => TargettedRow[TableColumnNames.PositionID.ToString()] = value; }
+       public int PositionID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.PositionID.ToString());  set => TargettedRow[TableColumnNames.PositionID.ToString()] = value; }
 
 
-       public int? SalaryTypeID { get => (int?)TargettedRow[TableColumnNames.SalaryTypeID.ToString()];  set => TargettedRow[TableColumnNames.SalaryTypeID.ToString()] = value; }
+       public int? SalaryTypeID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.SalaryTypeID.ToString());  set => TargettedRow[TableColumnNames.SalaryTypeID.ToString()] = value; }
 
 
-       public decimal? SalaryAmount { get => (decimal?)TargettedRow[TableColumnNames.SalaryAmount.ToString()];  set => TargettedRow[TableColumnNames.SalaryAmount.ToString()] = value; }
+       public decimal? SalaryAmount { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.SalaryAmount.ToString());  set => TargettedRow[TableColumnNames.SalaryAmount.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
+       public int CreatedByID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CreatedByID.ToString());  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public int? UpdatedByID { get => (int?)TargettedRow[TableColumnNames.UpdatedByID.ToString()];  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
+       public int? UpdatedByID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.UpdatedByID.ToString());  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.UpdatedAt.ToString());  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public string Duties { get => (string)TargettedRow[TableColumnNames.Duties.ToString()];  set => TargettedRow[TableColumnNames.Duties.ToString()] = value; }
+       public string Duties { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Duties.ToString());  set => TargettedRow[TableColumnNames.Duties.ToString()] = value; }
 
 
-       public bool? IsWebVisible { get => (bool?)TargettedRow[TableColumnNames.IsWebVisible.ToString()];  set => TargettedRow[TableColumnNames.IsWebVisible.ToString()] = value; }
+       public bool? IsWebVisible { get => (bool?)TargettedRow.GetDBValueConverted<bool?>(TableColumnNames.IsWebVisible.ToString());  set => TargettedRow[TableColumnNames.IsWebVisible.ToString()] = value; }
 
 
  #endregion
@@ -353,7 +353,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___Personnel GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___Personnel GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -362,7 +362,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___Personnel GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___Personnel GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -407,6 +407,24 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___Personnel v):this(v.ID)                  
+            {                  
+
+                ParamPersonnelNumber = new(defPersonnelNumber, v.PersonnelNumber);                  
+                ParamPersonID = new(defPersonID, v.PersonID);                  
+                ParamIsActive = new(defIsActive, v.IsActive);                  
+                ParamEmploymentDate = new(defEmploymentDate, v.EmploymentDate);                  
+                ParamIsSuperUser = new(defIsSuperUser, v.IsSuperUser);                  
+                ParamPositionID = new(defPositionID, v.PositionID);                  
+                ParamSalaryTypeID = new(defSalaryTypeID, v.SalaryTypeID);                  
+                ParamSalaryAmount = new(defSalaryAmount, v.SalaryAmount);                  
+                ParamCreatedByID = new(defCreatedByID, v.CreatedByID);                  
+                ParamUpdatedByID = new(defUpdatedByID, v.UpdatedByID);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+                ParamUpdatedAt = new(defUpdatedAt, v.UpdatedAt);                  
+                ParamDuties = new(defDuties, v.Duties);                  
+                ParamIsWebVisible = new(defIsWebVisible, v.IsWebVisible);                  
+            }                  
                   
             public UpdateQueryBuilder SetPersonnelNumber(string v)                  
             {                  
@@ -519,7 +537,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -731,6 +749,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

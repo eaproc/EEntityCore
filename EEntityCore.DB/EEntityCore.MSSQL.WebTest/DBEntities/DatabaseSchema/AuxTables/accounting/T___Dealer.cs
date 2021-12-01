@@ -166,7 +166,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___Dealer(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___Dealer(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -266,37 +266,37 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defUpdatedAt;
 
-       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()];  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
+       public int PersonID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.PersonID.ToString());  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
 
 
-       public int? BankID { get => (int?)TargettedRow[TableColumnNames.BankID.ToString()];  set => TargettedRow[TableColumnNames.BankID.ToString()] = value; }
+       public int? BankID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.BankID.ToString());  set => TargettedRow[TableColumnNames.BankID.ToString()] = value; }
 
 
-       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()];  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
+       public string AccountNumber { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.AccountNumber.ToString());  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
 
 
-       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()];  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
+       public bool IsActive { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.IsActive.ToString());  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
 
 
-       public string DealerCode { get => (string)TargettedRow[TableColumnNames.DealerCode.ToString()];  set => TargettedRow[TableColumnNames.DealerCode.ToString()] = value; }
+       public string DealerCode { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.DealerCode.ToString());  set => TargettedRow[TableColumnNames.DealerCode.ToString()] = value; }
 
 
-       public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()];  set => TargettedRow[TableColumnNames.CompanyName.ToString()] = value; }
+       public string CompanyName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.CompanyName.ToString());  set => TargettedRow[TableColumnNames.CompanyName.ToString()] = value; }
 
 
-       public string WebsiteUrl { get => (string)TargettedRow[TableColumnNames.WebsiteUrl.ToString()];  set => TargettedRow[TableColumnNames.WebsiteUrl.ToString()] = value; }
+       public string WebsiteUrl { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.WebsiteUrl.ToString());  set => TargettedRow[TableColumnNames.WebsiteUrl.ToString()] = value; }
 
 
-       public string OfficeAddress { get => (string)TargettedRow[TableColumnNames.OfficeAddress.ToString()];  set => TargettedRow[TableColumnNames.OfficeAddress.ToString()] = value; }
+       public string OfficeAddress { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.OfficeAddress.ToString());  set => TargettedRow[TableColumnNames.OfficeAddress.ToString()] = value; }
 
 
-       public int CountryID { get => (int)TargettedRow[TableColumnNames.CountryID.ToString()];  set => TargettedRow[TableColumnNames.CountryID.ToString()] = value; }
+       public int CountryID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CountryID.ToString());  set => TargettedRow[TableColumnNames.CountryID.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.UpdatedAt.ToString());  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
  #endregion
@@ -322,7 +322,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___Dealer GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___Dealer GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -331,7 +331,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___Dealer GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___Dealer GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -373,6 +373,21 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___Dealer v):this(v.ID)                  
+            {                  
+
+                ParamPersonID = new(defPersonID, v.PersonID);                  
+                ParamBankID = new(defBankID, v.BankID);                  
+                ParamAccountNumber = new(defAccountNumber, v.AccountNumber);                  
+                ParamIsActive = new(defIsActive, v.IsActive);                  
+                ParamDealerCode = new(defDealerCode, v.DealerCode);                  
+                ParamCompanyName = new(defCompanyName, v.CompanyName);                  
+                ParamWebsiteUrl = new(defWebsiteUrl, v.WebsiteUrl);                  
+                ParamOfficeAddress = new(defOfficeAddress, v.OfficeAddress);                  
+                ParamCountryID = new(defCountryID, v.CountryID);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+                ParamUpdatedAt = new(defUpdatedAt, v.UpdatedAt);                  
+            }                  
                   
             public UpdateQueryBuilder SetPersonID(int v)                  
             {                  
@@ -467,7 +482,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -652,6 +667,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

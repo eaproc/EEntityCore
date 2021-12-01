@@ -195,7 +195,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___ExpandedPersons(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___ExpandedPersons(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -317,88 +317,88 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defCanBeDeleted;
        public static readonly DataColumnDefinition defCanBeUpdated;
 
-       public string IdentificationNo { get => (string)TargettedRow[TableColumnNames.IdentificationNo.ToString()];  set => TargettedRow[TableColumnNames.IdentificationNo.ToString()] = value; }
+       public string IdentificationNo { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.IdentificationNo.ToString());  set => TargettedRow[TableColumnNames.IdentificationNo.ToString()] = value; }
 
 
-       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()];  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
+       public string FirstName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FirstName.ToString());  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
 
 
-       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()];  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
+       public string LastName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.LastName.ToString());  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
 
 
-       public string PersonnelNumber { get => (string)TargettedRow[TableColumnNames.PersonnelNumber.ToString()];  set => TargettedRow[TableColumnNames.PersonnelNumber.ToString()] = value; }
+       public string PersonnelNumber { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.PersonnelNumber.ToString());  set => TargettedRow[TableColumnNames.PersonnelNumber.ToString()] = value; }
 
 
-       public bool? IsGuardian { get => (bool?)TargettedRow[TableColumnNames.IsGuardian.ToString()];  set => TargettedRow[TableColumnNames.IsGuardian.ToString()] = value; }
+       public bool? IsGuardian { get => (bool?)TargettedRow.GetDBValueConverted<bool?>(TableColumnNames.IsGuardian.ToString());  set => TargettedRow[TableColumnNames.IsGuardian.ToString()] = value; }
 
 
-       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()];  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
+       public string Email { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Email.ToString());  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
 
 
-       public string MobilePhone { get => (string)TargettedRow[TableColumnNames.MobilePhone.ToString()];  set => TargettedRow[TableColumnNames.MobilePhone.ToString()] = value; }
+       public string MobilePhone { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.MobilePhone.ToString());  set => TargettedRow[TableColumnNames.MobilePhone.ToString()] = value; }
 
 
-       public string Gender { get => (string)TargettedRow[TableColumnNames.Gender.ToString()];  set => TargettedRow[TableColumnNames.Gender.ToString()] = value; }
+       public string Gender { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Gender.ToString());  set => TargettedRow[TableColumnNames.Gender.ToString()] = value; }
 
 
-       public string Country { get => (string)TargettedRow[TableColumnNames.Country.ToString()];  set => TargettedRow[TableColumnNames.Country.ToString()] = value; }
+       public string Country { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Country.ToString());  set => TargettedRow[TableColumnNames.Country.ToString()] = value; }
 
 
-       public int CountryID { get => (int)TargettedRow[TableColumnNames.CountryID.ToString()];  set => TargettedRow[TableColumnNames.CountryID.ToString()] = value; }
+       public int CountryID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CountryID.ToString());  set => TargettedRow[TableColumnNames.CountryID.ToString()] = value; }
 
 
-       public int GenderID { get => (int)TargettedRow[TableColumnNames.GenderID.ToString()];  set => TargettedRow[TableColumnNames.GenderID.ToString()] = value; }
+       public int GenderID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.GenderID.ToString());  set => TargettedRow[TableColumnNames.GenderID.ToString()] = value; }
 
 
-       public DateTime DateOfBirth { get => (DateTime)TargettedRow[TableColumnNames.DateOfBirth.ToString()];  set => TargettedRow[TableColumnNames.DateOfBirth.ToString()] = value; }
+       public DateTime DateOfBirth { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.DateOfBirth.ToString());  set => TargettedRow[TableColumnNames.DateOfBirth.ToString()] = value; }
 
 
-       public string HomeAddress { get => (string)TargettedRow[TableColumnNames.HomeAddress.ToString()];  set => TargettedRow[TableColumnNames.HomeAddress.ToString()] = value; }
+       public string HomeAddress { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.HomeAddress.ToString());  set => TargettedRow[TableColumnNames.HomeAddress.ToString()] = value; }
 
 
-       public string HomePhone { get => (string)TargettedRow[TableColumnNames.HomePhone.ToString()];  set => TargettedRow[TableColumnNames.HomePhone.ToString()] = value; }
+       public string HomePhone { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.HomePhone.ToString());  set => TargettedRow[TableColumnNames.HomePhone.ToString()] = value; }
 
 
-       public int? PersonTitleID { get => (int?)TargettedRow[TableColumnNames.PersonTitleID.ToString()];  set => TargettedRow[TableColumnNames.PersonTitleID.ToString()] = value; }
+       public int? PersonTitleID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.PersonTitleID.ToString());  set => TargettedRow[TableColumnNames.PersonTitleID.ToString()] = value; }
 
 
-       public int? BloodTypeID { get => (int?)TargettedRow[TableColumnNames.BloodTypeID.ToString()];  set => TargettedRow[TableColumnNames.BloodTypeID.ToString()] = value; }
+       public int? BloodTypeID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.BloodTypeID.ToString());  set => TargettedRow[TableColumnNames.BloodTypeID.ToString()] = value; }
 
 
-       public string PictureFileName { get => (string)TargettedRow[TableColumnNames.PictureFileName.ToString()];  set => TargettedRow[TableColumnNames.PictureFileName.ToString()] = value; }
+       public string PictureFileName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.PictureFileName.ToString());  set => TargettedRow[TableColumnNames.PictureFileName.ToString()] = value; }
 
 
-       public int MaritalStatusID { get => (int)TargettedRow[TableColumnNames.MaritalStatusID.ToString()];  set => TargettedRow[TableColumnNames.MaritalStatusID.ToString()] = value; }
+       public int MaritalStatusID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.MaritalStatusID.ToString());  set => TargettedRow[TableColumnNames.MaritalStatusID.ToString()] = value; }
 
 
-       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()];  set => TargettedRow[TableColumnNames.Username.ToString()] = value; }
+       public string Username { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Username.ToString());  set => TargettedRow[TableColumnNames.Username.ToString()] = value; }
 
 
-       public bool? IsActive { get => (bool?)TargettedRow[TableColumnNames.IsActive.ToString()];  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
+       public bool? IsActive { get => (bool?)TargettedRow.GetDBValueConverted<bool?>(TableColumnNames.IsActive.ToString());  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
 
 
-       public int? PersonnelID { get => (int?)TargettedRow[TableColumnNames.PersonnelID.ToString()];  set => TargettedRow[TableColumnNames.PersonnelID.ToString()] = value; }
+       public int? PersonnelID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.PersonnelID.ToString());  set => TargettedRow[TableColumnNames.PersonnelID.ToString()] = value; }
 
 
-       public string BirthPlace { get => (string)TargettedRow[TableColumnNames.BirthPlace.ToString()];  set => TargettedRow[TableColumnNames.BirthPlace.ToString()] = value; }
+       public string BirthPlace { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.BirthPlace.ToString());  set => TargettedRow[TableColumnNames.BirthPlace.ToString()] = value; }
 
 
-       public string Title { get => (string)TargettedRow[TableColumnNames.Title.ToString()];  set => TargettedRow[TableColumnNames.Title.ToString()] = value; }
+       public string Title { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Title.ToString());  set => TargettedRow[TableColumnNames.Title.ToString()] = value; }
 
 
-       public string MaritalStatus { get => (string)TargettedRow[TableColumnNames.MaritalStatus.ToString()];  set => TargettedRow[TableColumnNames.MaritalStatus.ToString()] = value; }
+       public string MaritalStatus { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.MaritalStatus.ToString());  set => TargettedRow[TableColumnNames.MaritalStatus.ToString()] = value; }
 
 
-       public string BloodType { get => (string)TargettedRow[TableColumnNames.BloodType.ToString()];  set => TargettedRow[TableColumnNames.BloodType.ToString()] = value; }
+       public string BloodType { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.BloodType.ToString());  set => TargettedRow[TableColumnNames.BloodType.ToString()] = value; }
 
 
-       public bool IsSuperUser { get => (bool)TargettedRow[TableColumnNames.IsSuperUser.ToString()];  set => TargettedRow[TableColumnNames.IsSuperUser.ToString()] = value; }
+       public bool IsSuperUser { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.IsSuperUser.ToString());  set => TargettedRow[TableColumnNames.IsSuperUser.ToString()] = value; }
 
 
-       public bool CanBeDeleted { get => (bool)TargettedRow[TableColumnNames.CanBeDeleted.ToString()];  set => TargettedRow[TableColumnNames.CanBeDeleted.ToString()] = value; }
+       public bool CanBeDeleted { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.CanBeDeleted.ToString());  set => TargettedRow[TableColumnNames.CanBeDeleted.ToString()] = value; }
 
 
-       public bool CanBeUpdated { get => (bool)TargettedRow[TableColumnNames.CanBeUpdated.ToString()];  set => TargettedRow[TableColumnNames.CanBeUpdated.ToString()] = value; }
+       public bool CanBeUpdated { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.CanBeUpdated.ToString());  set => TargettedRow[TableColumnNames.CanBeUpdated.ToString()] = value; }
 
 
  #endregion
@@ -424,7 +424,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___ExpandedPersons GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___ExpandedPersons GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -433,7 +433,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___ExpandedPersons GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___ExpandedPersons GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

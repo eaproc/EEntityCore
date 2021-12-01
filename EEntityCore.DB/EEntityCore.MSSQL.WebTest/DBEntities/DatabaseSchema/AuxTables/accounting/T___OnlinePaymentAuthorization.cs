@@ -156,7 +156,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___OnlinePaymentAuthorization(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___OnlinePaymentAuthorization(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -251,34 +251,34 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCountryCode;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public int OnlinePaymentID { get => (int)TargettedRow[TableColumnNames.OnlinePaymentID.ToString()];  set => TargettedRow[TableColumnNames.OnlinePaymentID.ToString()] = value; }
+       public int OnlinePaymentID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.OnlinePaymentID.ToString());  set => TargettedRow[TableColumnNames.OnlinePaymentID.ToString()] = value; }
 
 
-       public string AuthorizationCode { get => (string)TargettedRow[TableColumnNames.AuthorizationCode.ToString()];  set => TargettedRow[TableColumnNames.AuthorizationCode.ToString()] = value; }
+       public string AuthorizationCode { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.AuthorizationCode.ToString());  set => TargettedRow[TableColumnNames.AuthorizationCode.ToString()] = value; }
 
 
-       public string CardType { get => (string)TargettedRow[TableColumnNames.CardType.ToString()];  set => TargettedRow[TableColumnNames.CardType.ToString()] = value; }
+       public string CardType { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.CardType.ToString());  set => TargettedRow[TableColumnNames.CardType.ToString()] = value; }
 
 
-       public string BIN { get => (string)TargettedRow[TableColumnNames.BIN.ToString()];  set => TargettedRow[TableColumnNames.BIN.ToString()] = value; }
+       public string BIN { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.BIN.ToString());  set => TargettedRow[TableColumnNames.BIN.ToString()] = value; }
 
 
-       public string Last4Digits { get => (string)TargettedRow[TableColumnNames.Last4Digits.ToString()];  set => TargettedRow[TableColumnNames.Last4Digits.ToString()] = value; }
+       public string Last4Digits { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Last4Digits.ToString());  set => TargettedRow[TableColumnNames.Last4Digits.ToString()] = value; }
 
 
-       public int? ExpirationMonth { get => (int?)TargettedRow[TableColumnNames.ExpirationMonth.ToString()];  set => TargettedRow[TableColumnNames.ExpirationMonth.ToString()] = value; }
+       public int? ExpirationMonth { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.ExpirationMonth.ToString());  set => TargettedRow[TableColumnNames.ExpirationMonth.ToString()] = value; }
 
 
-       public int? ExpirationYear { get => (int?)TargettedRow[TableColumnNames.ExpirationYear.ToString()];  set => TargettedRow[TableColumnNames.ExpirationYear.ToString()] = value; }
+       public int? ExpirationYear { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.ExpirationYear.ToString());  set => TargettedRow[TableColumnNames.ExpirationYear.ToString()] = value; }
 
 
-       public string Bank { get => (string)TargettedRow[TableColumnNames.Bank.ToString()];  set => TargettedRow[TableColumnNames.Bank.ToString()] = value; }
+       public string Bank { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Bank.ToString());  set => TargettedRow[TableColumnNames.Bank.ToString()] = value; }
 
 
-       public string CountryCode { get => (string)TargettedRow[TableColumnNames.CountryCode.ToString()];  set => TargettedRow[TableColumnNames.CountryCode.ToString()] = value; }
+       public string CountryCode { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.CountryCode.ToString());  set => TargettedRow[TableColumnNames.CountryCode.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
  #endregion
@@ -304,7 +304,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___OnlinePaymentAuthorization GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___OnlinePaymentAuthorization GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -313,7 +313,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___OnlinePaymentAuthorization GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___OnlinePaymentAuthorization GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -354,6 +354,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___OnlinePaymentAuthorization v):this(v.ID)                  
+            {                  
+
+                ParamOnlinePaymentID = new(defOnlinePaymentID, v.OnlinePaymentID);                  
+                ParamAuthorizationCode = new(defAuthorizationCode, v.AuthorizationCode);                  
+                ParamCardType = new(defCardType, v.CardType);                  
+                ParamBIN = new(defBIN, v.BIN);                  
+                ParamLast4Digits = new(defLast4Digits, v.Last4Digits);                  
+                ParamExpirationMonth = new(defExpirationMonth, v.ExpirationMonth);                  
+                ParamExpirationYear = new(defExpirationYear, v.ExpirationYear);                  
+                ParamBank = new(defBank, v.Bank);                  
+                ParamCountryCode = new(defCountryCode, v.CountryCode);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+            }                  
                   
             public UpdateQueryBuilder SetOnlinePaymentID(int v)                  
             {                  
@@ -442,7 +456,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -618,6 +632,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

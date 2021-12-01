@@ -152,7 +152,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___CronjobProceeding(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___CronjobProceeding(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -239,22 +239,22 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defIsSuccessful;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public int CronjobID { get => (int)TargettedRow[TableColumnNames.CronjobID.ToString()];  set => TargettedRow[TableColumnNames.CronjobID.ToString()] = value; }
+       public int CronjobID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CronjobID.ToString());  set => TargettedRow[TableColumnNames.CronjobID.ToString()] = value; }
 
 
-       public int ProceedingStatusID { get => (int)TargettedRow[TableColumnNames.ProceedingStatusID.ToString()];  set => TargettedRow[TableColumnNames.ProceedingStatusID.ToString()] = value; }
+       public int ProceedingStatusID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ProceedingStatusID.ToString());  set => TargettedRow[TableColumnNames.ProceedingStatusID.ToString()] = value; }
 
 
-       public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()];  set => TargettedRow[TableColumnNames.Comments.ToString()] = value; }
+       public string Comments { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Comments.ToString());  set => TargettedRow[TableColumnNames.Comments.ToString()] = value; }
 
 
-       public DateTime? NextExpectedExecutionTime { get => (DateTime?)TargettedRow[TableColumnNames.NextExpectedExecutionTime.ToString()];  set => TargettedRow[TableColumnNames.NextExpectedExecutionTime.ToString()] = value; }
+       public DateTime? NextExpectedExecutionTime { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.NextExpectedExecutionTime.ToString());  set => TargettedRow[TableColumnNames.NextExpectedExecutionTime.ToString()] = value; }
 
 
-       public bool IsSuccessful { get => (bool)TargettedRow[TableColumnNames.IsSuccessful.ToString()];  set => TargettedRow[TableColumnNames.IsSuccessful.ToString()] = value; }
+       public bool IsSuccessful { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.IsSuccessful.ToString());  set => TargettedRow[TableColumnNames.IsSuccessful.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
  #endregion
@@ -280,7 +280,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___CronjobProceeding GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___CronjobProceeding GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -289,7 +289,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___CronjobProceeding GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___CronjobProceeding GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -326,6 +326,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___CronjobProceeding v):this(v.ID)                  
+            {                  
+
+                ParamCronjobID = new(defCronjobID, v.CronjobID);                  
+                ParamProceedingStatusID = new(defProceedingStatusID, v.ProceedingStatusID);                  
+                ParamComments = new(defComments, v.Comments);                  
+                ParamNextExpectedExecutionTime = new(defNextExpectedExecutionTime, v.NextExpectedExecutionTime);                  
+                ParamIsSuccessful = new(defIsSuccessful, v.IsSuccessful);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+            }                  
                   
             public UpdateQueryBuilder SetCronjobID(int v)                  
             {                  
@@ -390,7 +400,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -530,6 +540,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

@@ -57,18 +57,30 @@ namespace EEntityCore.MSSQL.WebTest
 
         private static void TestUpdate()
         {
-            T___TestTable result = T___TestTable.GetRowWhereIDUsingSQL(1);
-            Console.WriteLine("Result was {0}", result.TestInt32);
 
-            // Testing Mutilators
-            result.TestString = "What is happening";
+            //T___TestTable.UpdateQueryBuilder builder = new T___TestTable.UpdateQueryBuilder(1);
+            //builder.SetTestString("This is getting hilarious").SetTestBool(true).SetTestInt32(5500);
+
+            //Console.WriteLine("Result was [{0}]", builder.BuildSQL());
+
+            T___TestTable result = T___TestTable.GetRowWhereIDUsingSQL(1);
             Console.WriteLine("Result was {0}", result.TestString);
 
+            //// Testing Mutilators
+            //result.TestString = "What is happening";
+            //Console.WriteLine("Result was {0}", result.TestString);
 
-            T___TestTable.UpdateQueryBuilder builder = new T___TestTable.UpdateQueryBuilder(result.ID);
-            builder.SetTestString("This is getting hilarious").SetTestBool(true).SetTestInt32(5500);
+            result.TestString = "This is getting hilarious";
 
-            Console.WriteLine("Result was [{0}]", builder.BuildSQL());
+            T___TestTable.UpdateQueryBuilder builder2 = new T___TestTable.UpdateQueryBuilder(result);
+            //builder2.SetTestString("This is getting hilarious").SetTestBool(true).SetTestInt32(5500);
+            Console.WriteLine("SQL: [{0}]", builder2.BuildSQL());
+
+            result.Update(reloadTable: true);
+
+
+            Console.WriteLine("After Update [{0}]", result.TestString);
+
 
         }
 

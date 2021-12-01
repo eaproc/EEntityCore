@@ -152,7 +152,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___TestTable(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___TestTable(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -245,34 +245,34 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defTestDateTime;
        public static readonly DataColumnDefinition defTestDateTimeNull;
 
-       public string TestString { get => (string)TargettedRow[TableColumnNames.TestString.ToString()];  set => TargettedRow[TableColumnNames.TestString.ToString()] = value; }
+       public string TestString { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.TestString.ToString());  set => TargettedRow[TableColumnNames.TestString.ToString()] = value; }
 
 
-       public string TestStringNull { get => (string)TargettedRow[TableColumnNames.TestStringNull.ToString()];  set => TargettedRow[TableColumnNames.TestStringNull.ToString()] = value; }
+       public string TestStringNull { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.TestStringNull.ToString());  set => TargettedRow[TableColumnNames.TestStringNull.ToString()] = value; }
 
 
-       public int TestInt32 { get => (int)TargettedRow[TableColumnNames.TestInt32.ToString()];  set => TargettedRow[TableColumnNames.TestInt32.ToString()] = value; }
+       public int TestInt32 { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.TestInt32.ToString());  set => TargettedRow[TableColumnNames.TestInt32.ToString()] = value; }
 
 
-       public int? TestInt32Null { get => (int?)TargettedRow[TableColumnNames.TestInt32Null.ToString()];  set => TargettedRow[TableColumnNames.TestInt32Null.ToString()] = value; }
+       public int? TestInt32Null { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.TestInt32Null.ToString());  set => TargettedRow[TableColumnNames.TestInt32Null.ToString()] = value; }
 
 
-       public bool TestBool { get => (bool)TargettedRow[TableColumnNames.TestBool.ToString()];  set => TargettedRow[TableColumnNames.TestBool.ToString()] = value; }
+       public bool TestBool { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.TestBool.ToString());  set => TargettedRow[TableColumnNames.TestBool.ToString()] = value; }
 
 
-       public bool? TestBoolNull { get => (bool?)TargettedRow[TableColumnNames.TestBoolNull.ToString()];  set => TargettedRow[TableColumnNames.TestBoolNull.ToString()] = value; }
+       public bool? TestBoolNull { get => (bool?)TargettedRow.GetDBValueConverted<bool?>(TableColumnNames.TestBoolNull.ToString());  set => TargettedRow[TableColumnNames.TestBoolNull.ToString()] = value; }
 
 
-       public decimal TestDecimal { get => (decimal)TargettedRow[TableColumnNames.TestDecimal.ToString()];  set => TargettedRow[TableColumnNames.TestDecimal.ToString()] = value; }
+       public decimal TestDecimal { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.TestDecimal.ToString());  set => TargettedRow[TableColumnNames.TestDecimal.ToString()] = value; }
 
 
-       public decimal? TestDecimalNull { get => (decimal?)TargettedRow[TableColumnNames.TestDecimalNull.ToString()];  set => TargettedRow[TableColumnNames.TestDecimalNull.ToString()] = value; }
+       public decimal? TestDecimalNull { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.TestDecimalNull.ToString());  set => TargettedRow[TableColumnNames.TestDecimalNull.ToString()] = value; }
 
 
-       public DateTime TestDateTime { get => (DateTime)TargettedRow[TableColumnNames.TestDateTime.ToString()];  set => TargettedRow[TableColumnNames.TestDateTime.ToString()] = value; }
+       public DateTime TestDateTime { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.TestDateTime.ToString());  set => TargettedRow[TableColumnNames.TestDateTime.ToString()] = value; }
 
 
-       public DateTime? TestDateTimeNull { get => (DateTime?)TargettedRow[TableColumnNames.TestDateTimeNull.ToString()];  set => TargettedRow[TableColumnNames.TestDateTimeNull.ToString()] = value; }
+       public DateTime? TestDateTimeNull { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.TestDateTimeNull.ToString());  set => TargettedRow[TableColumnNames.TestDateTimeNull.ToString()] = value; }
 
 
  #endregion
@@ -298,7 +298,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___TestTable GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___TestTable GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -307,7 +307,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___TestTable GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___TestTable GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -348,6 +348,20 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___TestTable v):this(v.ID)                  
+            {                  
+
+                ParamTestString = new(defTestString, v.TestString);                  
+                ParamTestStringNull = new(defTestStringNull, v.TestStringNull);                  
+                ParamTestInt32 = new(defTestInt32, v.TestInt32);                  
+                ParamTestInt32Null = new(defTestInt32Null, v.TestInt32Null);                  
+                ParamTestBool = new(defTestBool, v.TestBool);                  
+                ParamTestBoolNull = new(defTestBoolNull, v.TestBoolNull);                  
+                ParamTestDecimal = new(defTestDecimal, v.TestDecimal);                  
+                ParamTestDecimalNull = new(defTestDecimalNull, v.TestDecimalNull);                  
+                ParamTestDateTime = new(defTestDateTime, v.TestDateTime);                  
+                ParamTestDateTimeNull = new(defTestDateTimeNull, v.TestDateTimeNull);                  
+            }                  
                   
             public UpdateQueryBuilder SetTestString(string v)                  
             {                  
@@ -436,7 +450,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -612,6 +626,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

@@ -184,7 +184,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___BeneficiaryRelation(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___BeneficiaryRelation(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -295,52 +295,52 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedByID;
        public static readonly DataColumnDefinition defUpdatedByID;
 
-       public int BeneficiaryID { get => (int)TargettedRow[TableColumnNames.BeneficiaryID.ToString()];  set => TargettedRow[TableColumnNames.BeneficiaryID.ToString()] = value; }
+       public int BeneficiaryID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.BeneficiaryID.ToString());  set => TargettedRow[TableColumnNames.BeneficiaryID.ToString()] = value; }
 
 
-       public int RelationshipTypeID { get => (int)TargettedRow[TableColumnNames.RelationshipTypeID.ToString()];  set => TargettedRow[TableColumnNames.RelationshipTypeID.ToString()] = value; }
+       public int RelationshipTypeID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.RelationshipTypeID.ToString());  set => TargettedRow[TableColumnNames.RelationshipTypeID.ToString()] = value; }
 
 
-       public int MaritalStatusID { get => (int)TargettedRow[TableColumnNames.MaritalStatusID.ToString()];  set => TargettedRow[TableColumnNames.MaritalStatusID.ToString()] = value; }
+       public int MaritalStatusID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.MaritalStatusID.ToString());  set => TargettedRow[TableColumnNames.MaritalStatusID.ToString()] = value; }
 
 
-       public bool IsDeceased { get => (bool)TargettedRow[TableColumnNames.IsDeceased.ToString()];  set => TargettedRow[TableColumnNames.IsDeceased.ToString()] = value; }
+       public bool IsDeceased { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.IsDeceased.ToString());  set => TargettedRow[TableColumnNames.IsDeceased.ToString()] = value; }
 
 
-       public string RelationshipNarration { get => (string)TargettedRow[TableColumnNames.RelationshipNarration.ToString()];  set => TargettedRow[TableColumnNames.RelationshipNarration.ToString()] = value; }
+       public string RelationshipNarration { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.RelationshipNarration.ToString());  set => TargettedRow[TableColumnNames.RelationshipNarration.ToString()] = value; }
 
 
-       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()];  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
+       public string FullName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FullName.ToString());  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
 
 
-       public string Occupation { get => (string)TargettedRow[TableColumnNames.Occupation.ToString()];  set => TargettedRow[TableColumnNames.Occupation.ToString()] = value; }
+       public string Occupation { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Occupation.ToString());  set => TargettedRow[TableColumnNames.Occupation.ToString()] = value; }
 
 
-       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()];  set => TargettedRow[TableColumnNames.Address.ToString()] = value; }
+       public string Address { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Address.ToString());  set => TargettedRow[TableColumnNames.Address.ToString()] = value; }
 
 
-       public string HomePhone { get => (string)TargettedRow[TableColumnNames.HomePhone.ToString()];  set => TargettedRow[TableColumnNames.HomePhone.ToString()] = value; }
+       public string HomePhone { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.HomePhone.ToString());  set => TargettedRow[TableColumnNames.HomePhone.ToString()] = value; }
 
 
-       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()];  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
+       public string Email { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Email.ToString());  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
 
 
-       public string DeathCertificatePath { get => (string)TargettedRow[TableColumnNames.DeathCertificatePath.ToString()];  set => TargettedRow[TableColumnNames.DeathCertificatePath.ToString()] = value; }
+       public string DeathCertificatePath { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.DeathCertificatePath.ToString());  set => TargettedRow[TableColumnNames.DeathCertificatePath.ToString()] = value; }
 
 
-       public string PhotoPath { get => (string)TargettedRow[TableColumnNames.PhotoPath.ToString()];  set => TargettedRow[TableColumnNames.PhotoPath.ToString()] = value; }
+       public string PhotoPath { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.PhotoPath.ToString());  set => TargettedRow[TableColumnNames.PhotoPath.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime UpdatedAt { get => (DateTime)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
+       public DateTime UpdatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.UpdatedAt.ToString());  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
+       public int CreatedByID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CreatedByID.ToString());  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()];  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
+       public int UpdatedByID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.UpdatedByID.ToString());  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
 
 
  #endregion
@@ -366,7 +366,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___BeneficiaryRelation GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___BeneficiaryRelation GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -375,7 +375,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___BeneficiaryRelation GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___BeneficiaryRelation GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -422,6 +422,26 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___BeneficiaryRelation v):this(v.ID)                  
+            {                  
+
+                ParamBeneficiaryID = new(defBeneficiaryID, v.BeneficiaryID);                  
+                ParamRelationshipTypeID = new(defRelationshipTypeID, v.RelationshipTypeID);                  
+                ParamMaritalStatusID = new(defMaritalStatusID, v.MaritalStatusID);                  
+                ParamIsDeceased = new(defIsDeceased, v.IsDeceased);                  
+                ParamRelationshipNarration = new(defRelationshipNarration, v.RelationshipNarration);                  
+                ParamFullName = new(defFullName, v.FullName);                  
+                ParamOccupation = new(defOccupation, v.Occupation);                  
+                ParamAddress = new(defAddress, v.Address);                  
+                ParamHomePhone = new(defHomePhone, v.HomePhone);                  
+                ParamEmail = new(defEmail, v.Email);                  
+                ParamDeathCertificatePath = new(defDeathCertificatePath, v.DeathCertificatePath);                  
+                ParamPhotoPath = new(defPhotoPath, v.PhotoPath);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+                ParamUpdatedAt = new(defUpdatedAt, v.UpdatedAt);                  
+                ParamCreatedByID = new(defCreatedByID, v.CreatedByID);                  
+                ParamUpdatedByID = new(defUpdatedByID, v.UpdatedByID);                  
+            }                  
                   
             public UpdateQueryBuilder SetBeneficiaryID(int v)                  
             {                  
@@ -546,7 +566,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -776,6 +796,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

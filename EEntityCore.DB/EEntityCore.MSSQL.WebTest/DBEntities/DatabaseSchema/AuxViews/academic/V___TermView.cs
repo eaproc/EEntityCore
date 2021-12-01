@@ -154,7 +154,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___TermView(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___TermView(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -242,37 +242,37 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defID;
        public static readonly DataColumnDefinition defDescription;
 
-       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()];  set => TargettedRow[TableColumnNames.Name.ToString()] = value; }
+       public string Name { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Name.ToString());  set => TargettedRow[TableColumnNames.Name.ToString()] = value; }
 
 
-       public string TermOrder { get => (string)TargettedRow[TableColumnNames.TermOrder.ToString()];  set => TargettedRow[TableColumnNames.TermOrder.ToString()] = value; }
+       public string TermOrder { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.TermOrder.ToString());  set => TargettedRow[TableColumnNames.TermOrder.ToString()] = value; }
 
 
-       public string AcademicSession { get => (string)TargettedRow[TableColumnNames.AcademicSession.ToString()];  set => TargettedRow[TableColumnNames.AcademicSession.ToString()] = value; }
+       public string AcademicSession { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.AcademicSession.ToString());  set => TargettedRow[TableColumnNames.AcademicSession.ToString()] = value; }
 
 
-       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()];  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
+       public bool IsActive { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.IsActive.ToString());  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
 
 
-       public int AcademicSessionID { get => (int)TargettedRow[TableColumnNames.AcademicSessionID.ToString()];  set => TargettedRow[TableColumnNames.AcademicSessionID.ToString()] = value; }
+       public int AcademicSessionID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.AcademicSessionID.ToString());  set => TargettedRow[TableColumnNames.AcademicSessionID.ToString()] = value; }
 
 
-       public DateTime TermStartDate { get => (DateTime)TargettedRow[TableColumnNames.TermStartDate.ToString()];  set => TargettedRow[TableColumnNames.TermStartDate.ToString()] = value; }
+       public DateTime TermStartDate { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.TermStartDate.ToString());  set => TargettedRow[TableColumnNames.TermStartDate.ToString()] = value; }
 
 
-       public DateTime TermEndDate { get => (DateTime)TargettedRow[TableColumnNames.TermEndDate.ToString()];  set => TargettedRow[TableColumnNames.TermEndDate.ToString()] = value; }
+       public DateTime TermEndDate { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.TermEndDate.ToString());  set => TargettedRow[TableColumnNames.TermEndDate.ToString()] = value; }
 
 
-       public DateTime SessionStartDate { get => (DateTime)TargettedRow[TableColumnNames.SessionStartDate.ToString()];  set => TargettedRow[TableColumnNames.SessionStartDate.ToString()] = value; }
+       public DateTime SessionStartDate { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.SessionStartDate.ToString());  set => TargettedRow[TableColumnNames.SessionStartDate.ToString()] = value; }
 
 
-       public DateTime SessionEndDate { get => (DateTime)TargettedRow[TableColumnNames.SessionEndDate.ToString()];  set => TargettedRow[TableColumnNames.SessionEndDate.ToString()] = value; }
+       public DateTime SessionEndDate { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.SessionEndDate.ToString());  set => TargettedRow[TableColumnNames.SessionEndDate.ToString()] = value; }
 
 
-       public int TermOrderID { get => (int)TargettedRow[TableColumnNames.TermOrderID.ToString()];  set => TargettedRow[TableColumnNames.TermOrderID.ToString()] = value; }
+       public int TermOrderID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.TermOrderID.ToString());  set => TargettedRow[TableColumnNames.TermOrderID.ToString()] = value; }
 
 
-       public string Description { get => (string)TargettedRow[TableColumnNames.Description.ToString()];  set => TargettedRow[TableColumnNames.Description.ToString()] = value; }
+       public string Description { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Description.ToString());  set => TargettedRow[TableColumnNames.Description.ToString()] = value; }
 
 
  #endregion
@@ -298,7 +298,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___TermView GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___TermView GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -307,7 +307,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___TermView GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___TermView GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

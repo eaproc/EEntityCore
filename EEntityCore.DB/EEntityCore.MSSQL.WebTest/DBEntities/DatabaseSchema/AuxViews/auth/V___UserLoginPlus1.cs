@@ -158,7 +158,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___UserLoginPlus1(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___UserLoginPlus1(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -250,46 +250,46 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defPersonID;
        public static readonly DataColumnDefinition defIsActive;
 
-       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()];  set => TargettedRow[TableColumnNames.Username.ToString()] = value; }
+       public string Username { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Username.ToString());  set => TargettedRow[TableColumnNames.Username.ToString()] = value; }
 
 
-       public DateTime? LastLoginTime { get => (DateTime?)TargettedRow[TableColumnNames.LastLoginTime.ToString()];  set => TargettedRow[TableColumnNames.LastLoginTime.ToString()] = value; }
+       public DateTime? LastLoginTime { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.LastLoginTime.ToString());  set => TargettedRow[TableColumnNames.LastLoginTime.ToString()] = value; }
 
 
-       public DateTime? LoggedOutTime { get => (DateTime?)TargettedRow[TableColumnNames.LoggedOutTime.ToString()];  set => TargettedRow[TableColumnNames.LoggedOutTime.ToString()] = value; }
+       public DateTime? LoggedOutTime { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.LoggedOutTime.ToString());  set => TargettedRow[TableColumnNames.LoggedOutTime.ToString()] = value; }
 
 
-       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()];  set => TargettedRow[TableColumnNames.IPAddress.ToString()] = value; }
+       public string IPAddress { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.IPAddress.ToString());  set => TargettedRow[TableColumnNames.IPAddress.ToString()] = value; }
 
 
-       public string SessionID { get => (string)TargettedRow[TableColumnNames.SessionID.ToString()];  set => TargettedRow[TableColumnNames.SessionID.ToString()] = value; }
+       public string SessionID { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.SessionID.ToString());  set => TargettedRow[TableColumnNames.SessionID.ToString()] = value; }
 
 
-       public DateTime? SessionIDCreatedTime { get => (DateTime?)TargettedRow[TableColumnNames.SessionIDCreatedTime.ToString()];  set => TargettedRow[TableColumnNames.SessionIDCreatedTime.ToString()] = value; }
+       public DateTime? SessionIDCreatedTime { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.SessionIDCreatedTime.ToString());  set => TargettedRow[TableColumnNames.SessionIDCreatedTime.ToString()] = value; }
 
 
-       public int? SessionTimeoutMins { get => (int?)TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()];  set => TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()] = value; }
+       public int? SessionTimeoutMins { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.SessionTimeoutMins.ToString());  set => TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()] = value; }
 
 
-       public DateTime? LastActive { get => (DateTime?)TargettedRow[TableColumnNames.LastActive.ToString()];  set => TargettedRow[TableColumnNames.LastActive.ToString()] = value; }
+       public DateTime? LastActive { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.LastActive.ToString());  set => TargettedRow[TableColumnNames.LastActive.ToString()] = value; }
 
 
-       public DateTime? ExpiryDate { get => (DateTime?)TargettedRow[TableColumnNames.ExpiryDate.ToString()];  set => TargettedRow[TableColumnNames.ExpiryDate.ToString()] = value; }
+       public DateTime? ExpiryDate { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.ExpiryDate.ToString());  set => TargettedRow[TableColumnNames.ExpiryDate.ToString()] = value; }
 
 
-       public int? SecondsLeft { get => (int?)TargettedRow[TableColumnNames.SecondsLeft.ToString()];  set => TargettedRow[TableColumnNames.SecondsLeft.ToString()] = value; }
+       public int? SecondsLeft { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.SecondsLeft.ToString());  set => TargettedRow[TableColumnNames.SecondsLeft.ToString()] = value; }
 
 
-       public string ActiveSessions { get => (string)TargettedRow[TableColumnNames.ActiveSessions.ToString()];  set => TargettedRow[TableColumnNames.ActiveSessions.ToString()] = value; }
+       public string ActiveSessions { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.ActiveSessions.ToString());  set => TargettedRow[TableColumnNames.ActiveSessions.ToString()] = value; }
 
 
-       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
+       public int UserID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.UserID.ToString());  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
-       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()];  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
+       public int PersonID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.PersonID.ToString());  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
 
 
-       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()];  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
+       public bool IsActive { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.IsActive.ToString());  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
 
 
  #endregion
@@ -315,7 +315,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___UserLoginPlus1 GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___UserLoginPlus1 GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -324,7 +324,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___UserLoginPlus1 GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___UserLoginPlus1 GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

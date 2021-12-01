@@ -154,7 +154,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___Session(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___Session(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -250,37 +250,37 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defUpdatedAt;
 
-       public string SessionID { get => (string)TargettedRow[TableColumnNames.SessionID.ToString()];  set => TargettedRow[TableColumnNames.SessionID.ToString()] = value; }
+       public string SessionID { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.SessionID.ToString());  set => TargettedRow[TableColumnNames.SessionID.ToString()] = value; }
 
 
-       public int SessionTimeoutMins { get => (int)TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()];  set => TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()] = value; }
+       public int SessionTimeoutMins { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.SessionTimeoutMins.ToString());  set => TargettedRow[TableColumnNames.SessionTimeoutMins.ToString()] = value; }
 
 
-       public int? UserID { get => (int?)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
+       public int? UserID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.UserID.ToString());  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
-       public bool? IsNewSession { get => (bool?)TargettedRow[TableColumnNames.IsNewSession.ToString()];  set => TargettedRow[TableColumnNames.IsNewSession.ToString()] = value; }
+       public bool? IsNewSession { get => (bool?)TargettedRow.GetDBValueConverted<bool?>(TableColumnNames.IsNewSession.ToString());  set => TargettedRow[TableColumnNames.IsNewSession.ToString()] = value; }
 
 
-       public bool? IsReadOnly { get => (bool?)TargettedRow[TableColumnNames.IsReadOnly.ToString()];  set => TargettedRow[TableColumnNames.IsReadOnly.ToString()] = value; }
+       public bool? IsReadOnly { get => (bool?)TargettedRow.GetDBValueConverted<bool?>(TableColumnNames.IsReadOnly.ToString());  set => TargettedRow[TableColumnNames.IsReadOnly.ToString()] = value; }
 
 
-       public DateTime? LastActive { get => (DateTime?)TargettedRow[TableColumnNames.LastActive.ToString()];  set => TargettedRow[TableColumnNames.LastActive.ToString()] = value; }
+       public DateTime? LastActive { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.LastActive.ToString());  set => TargettedRow[TableColumnNames.LastActive.ToString()] = value; }
 
 
-       public string IpAddress { get => (string)TargettedRow[TableColumnNames.IpAddress.ToString()];  set => TargettedRow[TableColumnNames.IpAddress.ToString()] = value; }
+       public string IpAddress { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.IpAddress.ToString());  set => TargettedRow[TableColumnNames.IpAddress.ToString()] = value; }
 
 
-       public string Browser { get => (string)TargettedRow[TableColumnNames.Browser.ToString()];  set => TargettedRow[TableColumnNames.Browser.ToString()] = value; }
+       public string Browser { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Browser.ToString());  set => TargettedRow[TableColumnNames.Browser.ToString()] = value; }
 
 
-       public string SessionVariables { get => (string)TargettedRow[TableColumnNames.SessionVariables.ToString()];  set => TargettedRow[TableColumnNames.SessionVariables.ToString()] = value; }
+       public string SessionVariables { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.SessionVariables.ToString());  set => TargettedRow[TableColumnNames.SessionVariables.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.UpdatedAt.ToString());  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
  #endregion
@@ -306,7 +306,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___Session GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___Session GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -315,7 +315,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___Session GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___Session GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -357,6 +357,21 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___Session v):this(v.ID)                  
+            {                  
+
+                ParamSessionID = new(defSessionID, v.SessionID);                  
+                ParamSessionTimeoutMins = new(defSessionTimeoutMins, v.SessionTimeoutMins);                  
+                ParamUserID = new(defUserID, v.UserID);                  
+                ParamIsNewSession = new(defIsNewSession, v.IsNewSession);                  
+                ParamIsReadOnly = new(defIsReadOnly, v.IsReadOnly);                  
+                ParamLastActive = new(defLastActive, v.LastActive);                  
+                ParamIpAddress = new(defIpAddress, v.IpAddress);                  
+                ParamBrowser = new(defBrowser, v.Browser);                  
+                ParamSessionVariables = new(defSessionVariables, v.SessionVariables);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+                ParamUpdatedAt = new(defUpdatedAt, v.UpdatedAt);                  
+            }                  
                   
             public UpdateQueryBuilder SetSessionID(string v)                  
             {                  
@@ -451,7 +466,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -636,6 +651,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

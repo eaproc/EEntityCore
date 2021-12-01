@@ -139,7 +139,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___UserRoleView(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___UserRoleView(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -213,16 +213,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defRole;
        public static readonly DataColumnDefinition defRoleRank;
 
-       public int RoleID { get => (int)TargettedRow[TableColumnNames.RoleID.ToString()];  set => TargettedRow[TableColumnNames.RoleID.ToString()] = value; }
+       public int RoleID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.RoleID.ToString());  set => TargettedRow[TableColumnNames.RoleID.ToString()] = value; }
 
 
-       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
+       public int UserID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.UserID.ToString());  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
-       public string Role { get => (string)TargettedRow[TableColumnNames.Role.ToString()];  set => TargettedRow[TableColumnNames.Role.ToString()] = value; }
+       public string Role { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Role.ToString());  set => TargettedRow[TableColumnNames.Role.ToString()] = value; }
 
 
-       public byte RoleRank { get => (byte)TargettedRow[TableColumnNames.RoleRank.ToString()];  set => TargettedRow[TableColumnNames.RoleRank.ToString()] = value; }
+       public byte RoleRank { get => (byte)TargettedRow.GetDBValueConverted<byte>(TableColumnNames.RoleRank.ToString());  set => TargettedRow[TableColumnNames.RoleRank.ToString()] = value; }
 
 
  #endregion
@@ -248,7 +248,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___UserRoleView GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___UserRoleView GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -257,7 +257,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___UserRoleView GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___UserRoleView GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

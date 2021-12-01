@@ -152,7 +152,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___UserPermittedLink(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___UserPermittedLink(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -236,34 +236,34 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defLink;
        public static readonly DataColumnDefinition defUserID;
 
-       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()];  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
+       public string FirstName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FirstName.ToString());  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
 
 
-       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()];  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
+       public string LastName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.LastName.ToString());  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
 
 
-       public string MobileNumber { get => (string)TargettedRow[TableColumnNames.MobileNumber.ToString()];  set => TargettedRow[TableColumnNames.MobileNumber.ToString()] = value; }
+       public string MobileNumber { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.MobileNumber.ToString());  set => TargettedRow[TableColumnNames.MobileNumber.ToString()] = value; }
 
 
-       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()];  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
+       public string Email { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Email.ToString());  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
 
 
-       public int? PersonID { get => (int?)TargettedRow[TableColumnNames.PersonID.ToString()];  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
+       public int? PersonID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.PersonID.ToString());  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
 
 
-       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()];  set => TargettedRow[TableColumnNames.Username.ToString()] = value; }
+       public string Username { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Username.ToString());  set => TargettedRow[TableColumnNames.Username.ToString()] = value; }
 
 
-       public string Role { get => (string)TargettedRow[TableColumnNames.Role.ToString()];  set => TargettedRow[TableColumnNames.Role.ToString()] = value; }
+       public string Role { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Role.ToString());  set => TargettedRow[TableColumnNames.Role.ToString()] = value; }
 
 
-       public int LinkID { get => (int)TargettedRow[TableColumnNames.LinkID.ToString()];  set => TargettedRow[TableColumnNames.LinkID.ToString()] = value; }
+       public int LinkID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.LinkID.ToString());  set => TargettedRow[TableColumnNames.LinkID.ToString()] = value; }
 
 
-       public string Link { get => (string)TargettedRow[TableColumnNames.Link.ToString()];  set => TargettedRow[TableColumnNames.Link.ToString()] = value; }
+       public string Link { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Link.ToString());  set => TargettedRow[TableColumnNames.Link.ToString()] = value; }
 
 
-       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
+       public int UserID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.UserID.ToString());  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
  #endregion
@@ -289,7 +289,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___UserPermittedLink GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___UserPermittedLink GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -298,7 +298,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___UserPermittedLink GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___UserPermittedLink GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

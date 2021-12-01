@@ -132,7 +132,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___ActiveModules(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___ActiveModules(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -200,7 +200,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defID;
        public static readonly DataColumnDefinition defDefinition;
 
-       public string Definition { get => (string)TargettedRow[TableColumnNames.Definition.ToString()];  set => TargettedRow[TableColumnNames.Definition.ToString()] = value; }
+       public string Definition { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Definition.ToString());  set => TargettedRow[TableColumnNames.Definition.ToString()] = value; }
 
 
  #endregion
@@ -226,7 +226,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___ActiveModules GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___ActiveModules GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -235,7 +235,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___ActiveModules GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___ActiveModules GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

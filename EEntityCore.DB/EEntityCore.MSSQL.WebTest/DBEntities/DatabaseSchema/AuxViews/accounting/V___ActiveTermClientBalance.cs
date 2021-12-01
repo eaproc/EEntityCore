@@ -156,7 +156,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___ActiveTermClientBalance(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___ActiveTermClientBalance(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -244,40 +244,40 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defBalanceDue;
        public static readonly DataColumnDefinition defSurplus;
 
-       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()];  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
+       public int ClientID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ClientID.ToString());  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
 
 
-       public int TermID { get => (int)TargettedRow[TableColumnNames.TermID.ToString()];  set => TargettedRow[TableColumnNames.TermID.ToString()] = value; }
+       public int TermID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.TermID.ToString());  set => TargettedRow[TableColumnNames.TermID.ToString()] = value; }
 
 
-       public string Term { get => (string)TargettedRow[TableColumnNames.Term.ToString()];  set => TargettedRow[TableColumnNames.Term.ToString()] = value; }
+       public string Term { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Term.ToString());  set => TargettedRow[TableColumnNames.Term.ToString()] = value; }
 
 
-       public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()];  set => TargettedRow[TableColumnNames.CompanyName.ToString()] = value; }
+       public string CompanyName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.CompanyName.ToString());  set => TargettedRow[TableColumnNames.CompanyName.ToString()] = value; }
 
 
-       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()];  set => TargettedRow[TableColumnNames.Name.ToString()] = value; }
+       public string Name { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Name.ToString());  set => TargettedRow[TableColumnNames.Name.ToString()] = value; }
 
 
-       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()];  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
+       public string FullName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FullName.ToString());  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
 
 
-       public decimal? BillTotal { get => (decimal?)TargettedRow[TableColumnNames.BillTotal.ToString()];  set => TargettedRow[TableColumnNames.BillTotal.ToString()] = value; }
+       public decimal? BillTotal { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.BillTotal.ToString());  set => TargettedRow[TableColumnNames.BillTotal.ToString()] = value; }
 
 
-       public decimal? Arrears { get => (decimal?)TargettedRow[TableColumnNames.Arrears.ToString()];  set => TargettedRow[TableColumnNames.Arrears.ToString()] = value; }
+       public decimal? Arrears { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.Arrears.ToString());  set => TargettedRow[TableColumnNames.Arrears.ToString()] = value; }
 
 
-       public decimal? PaymentMade { get => (decimal?)TargettedRow[TableColumnNames.PaymentMade.ToString()];  set => TargettedRow[TableColumnNames.PaymentMade.ToString()] = value; }
+       public decimal? PaymentMade { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.PaymentMade.ToString());  set => TargettedRow[TableColumnNames.PaymentMade.ToString()] = value; }
 
 
-       public decimal? Discount { get => (decimal?)TargettedRow[TableColumnNames.Discount.ToString()];  set => TargettedRow[TableColumnNames.Discount.ToString()] = value; }
+       public decimal? Discount { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.Discount.ToString());  set => TargettedRow[TableColumnNames.Discount.ToString()] = value; }
 
 
-       public decimal? BalanceDue { get => (decimal?)TargettedRow[TableColumnNames.BalanceDue.ToString()];  set => TargettedRow[TableColumnNames.BalanceDue.ToString()] = value; }
+       public decimal? BalanceDue { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.BalanceDue.ToString());  set => TargettedRow[TableColumnNames.BalanceDue.ToString()] = value; }
 
 
-       public decimal? Surplus { get => (decimal?)TargettedRow[TableColumnNames.Surplus.ToString()];  set => TargettedRow[TableColumnNames.Surplus.ToString()] = value; }
+       public decimal? Surplus { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.Surplus.ToString());  set => TargettedRow[TableColumnNames.Surplus.ToString()] = value; }
 
 
  #endregion
@@ -303,7 +303,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___ActiveTermClientBalance GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___ActiveTermClientBalance GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -312,7 +312,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___ActiveTermClientBalance GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___ActiveTermClientBalance GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

@@ -166,7 +166,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___ClientConnection(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___ClientConnection(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -271,49 +271,49 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defUpdatedAt;
        public static readonly DataColumnDefinition defFileServerUrlHttps;
 
-       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()];  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
+       public int ClientID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ClientID.ToString());  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
 
 
-       public string FileServerUrl { get => (string)TargettedRow[TableColumnNames.FileServerUrl.ToString()];  set => TargettedRow[TableColumnNames.FileServerUrl.ToString()] = value; }
+       public string FileServerUrl { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FileServerUrl.ToString());  set => TargettedRow[TableColumnNames.FileServerUrl.ToString()] = value; }
 
 
-       public string FileServerAccessKey { get => (string)TargettedRow[TableColumnNames.FileServerAccessKey.ToString()];  set => TargettedRow[TableColumnNames.FileServerAccessKey.ToString()] = value; }
+       public string FileServerAccessKey { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FileServerAccessKey.ToString());  set => TargettedRow[TableColumnNames.FileServerAccessKey.ToString()] = value; }
 
 
-       public string FileServerSecretKey { get => (string)TargettedRow[TableColumnNames.FileServerSecretKey.ToString()];  set => TargettedRow[TableColumnNames.FileServerSecretKey.ToString()] = value; }
+       public string FileServerSecretKey { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FileServerSecretKey.ToString());  set => TargettedRow[TableColumnNames.FileServerSecretKey.ToString()] = value; }
 
 
-       public string FileServerBucket { get => (string)TargettedRow[TableColumnNames.FileServerBucket.ToString()];  set => TargettedRow[TableColumnNames.FileServerBucket.ToString()] = value; }
+       public string FileServerBucket { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FileServerBucket.ToString());  set => TargettedRow[TableColumnNames.FileServerBucket.ToString()] = value; }
 
 
-       public string ClientAPIID { get => (string)TargettedRow[TableColumnNames.ClientAPIID.ToString()];  set => TargettedRow[TableColumnNames.ClientAPIID.ToString()] = value; }
+       public string ClientAPIID { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.ClientAPIID.ToString());  set => TargettedRow[TableColumnNames.ClientAPIID.ToString()] = value; }
 
 
-       public string ClientAPIUrl { get => (string)TargettedRow[TableColumnNames.ClientAPIUrl.ToString()];  set => TargettedRow[TableColumnNames.ClientAPIUrl.ToString()] = value; }
+       public string ClientAPIUrl { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.ClientAPIUrl.ToString());  set => TargettedRow[TableColumnNames.ClientAPIUrl.ToString()] = value; }
 
 
-       public string DB_HOST { get => (string)TargettedRow[TableColumnNames.DB_HOST.ToString()];  set => TargettedRow[TableColumnNames.DB_HOST.ToString()] = value; }
+       public string DB_HOST { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.DB_HOST.ToString());  set => TargettedRow[TableColumnNames.DB_HOST.ToString()] = value; }
 
 
-       public string DB_DATABASE { get => (string)TargettedRow[TableColumnNames.DB_DATABASE.ToString()];  set => TargettedRow[TableColumnNames.DB_DATABASE.ToString()] = value; }
+       public string DB_DATABASE { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.DB_DATABASE.ToString());  set => TargettedRow[TableColumnNames.DB_DATABASE.ToString()] = value; }
 
 
-       public string DB_USERNAME { get => (string)TargettedRow[TableColumnNames.DB_USERNAME.ToString()];  set => TargettedRow[TableColumnNames.DB_USERNAME.ToString()] = value; }
+       public string DB_USERNAME { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.DB_USERNAME.ToString());  set => TargettedRow[TableColumnNames.DB_USERNAME.ToString()] = value; }
 
 
-       public string DB_PASSWORD { get => (string)TargettedRow[TableColumnNames.DB_PASSWORD.ToString()];  set => TargettedRow[TableColumnNames.DB_PASSWORD.ToString()] = value; }
+       public string DB_PASSWORD { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.DB_PASSWORD.ToString());  set => TargettedRow[TableColumnNames.DB_PASSWORD.ToString()] = value; }
 
 
-       public int DB_PORT { get => (int)TargettedRow[TableColumnNames.DB_PORT.ToString()];  set => TargettedRow[TableColumnNames.DB_PORT.ToString()] = value; }
+       public int DB_PORT { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.DB_PORT.ToString());  set => TargettedRow[TableColumnNames.DB_PORT.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.UpdatedAt.ToString());  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public string FileServerUrlHttps { get => (string)TargettedRow[TableColumnNames.FileServerUrlHttps.ToString()];  set => TargettedRow[TableColumnNames.FileServerUrlHttps.ToString()] = value; }
+       public string FileServerUrlHttps { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FileServerUrlHttps.ToString());  set => TargettedRow[TableColumnNames.FileServerUrlHttps.ToString()] = value; }
 
 
  #endregion
@@ -339,7 +339,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___ClientConnection GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___ClientConnection GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -348,7 +348,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___ClientConnection GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___ClientConnection GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -394,6 +394,25 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___ClientConnection v):this(v.ID)                  
+            {                  
+
+                ParamClientID = new(defClientID, v.ClientID);                  
+                ParamFileServerUrl = new(defFileServerUrl, v.FileServerUrl);                  
+                ParamFileServerAccessKey = new(defFileServerAccessKey, v.FileServerAccessKey);                  
+                ParamFileServerSecretKey = new(defFileServerSecretKey, v.FileServerSecretKey);                  
+                ParamFileServerBucket = new(defFileServerBucket, v.FileServerBucket);                  
+                ParamClientAPIID = new(defClientAPIID, v.ClientAPIID);                  
+                ParamClientAPIUrl = new(defClientAPIUrl, v.ClientAPIUrl);                  
+                ParamDB_HOST = new(defDB_HOST, v.DB_HOST);                  
+                ParamDB_DATABASE = new(defDB_DATABASE, v.DB_DATABASE);                  
+                ParamDB_USERNAME = new(defDB_USERNAME, v.DB_USERNAME);                  
+                ParamDB_PASSWORD = new(defDB_PASSWORD, v.DB_PASSWORD);                  
+                ParamDB_PORT = new(defDB_PORT, v.DB_PORT);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+                ParamUpdatedAt = new(defUpdatedAt, v.UpdatedAt);                  
+                ParamFileServerUrlHttps = new(defFileServerUrlHttps, v.FileServerUrlHttps);                  
+            }                  
                   
             public UpdateQueryBuilder SetClientID(int v)                  
             {                  
@@ -512,7 +531,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -733,6 +752,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

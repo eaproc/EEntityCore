@@ -183,7 +183,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___CashRequestLastResponse(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___CashRequestLastResponse(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -297,76 +297,76 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defLastProceedingCreatedByID;
        public static readonly DataColumnDefinition defCashRequestProceedingID;
 
-       public string Request { get => (string)TargettedRow[TableColumnNames.Request.ToString()];  set => TargettedRow[TableColumnNames.Request.ToString()] = value; }
+       public string Request { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Request.ToString());  set => TargettedRow[TableColumnNames.Request.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime Deadline { get => (DateTime)TargettedRow[TableColumnNames.Deadline.ToString()];  set => TargettedRow[TableColumnNames.Deadline.ToString()] = value; }
+       public DateTime Deadline { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.Deadline.ToString());  set => TargettedRow[TableColumnNames.Deadline.ToString()] = value; }
 
 
-       public int? TrackingID { get => (int?)TargettedRow[TableColumnNames.TrackingID.ToString()];  set => TargettedRow[TableColumnNames.TrackingID.ToString()] = value; }
+       public int? TrackingID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.TrackingID.ToString());  set => TargettedRow[TableColumnNames.TrackingID.ToString()] = value; }
 
 
-       public string LastProceedingDocumentFileName { get => (string)TargettedRow[TableColumnNames.LastProceedingDocumentFileName.ToString()];  set => TargettedRow[TableColumnNames.LastProceedingDocumentFileName.ToString()] = value; }
+       public string LastProceedingDocumentFileName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.LastProceedingDocumentFileName.ToString());  set => TargettedRow[TableColumnNames.LastProceedingDocumentFileName.ToString()] = value; }
 
 
-       public int BeneficiaryID { get => (int)TargettedRow[TableColumnNames.BeneficiaryID.ToString()];  set => TargettedRow[TableColumnNames.BeneficiaryID.ToString()] = value; }
+       public int BeneficiaryID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.BeneficiaryID.ToString());  set => TargettedRow[TableColumnNames.BeneficiaryID.ToString()] = value; }
 
 
-       public decimal Amount { get => (decimal)TargettedRow[TableColumnNames.Amount.ToString()];  set => TargettedRow[TableColumnNames.Amount.ToString()] = value; }
+       public decimal Amount { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.Amount.ToString());  set => TargettedRow[TableColumnNames.Amount.ToString()] = value; }
 
 
-       public string Category { get => (string)TargettedRow[TableColumnNames.Category.ToString()];  set => TargettedRow[TableColumnNames.Category.ToString()] = value; }
+       public string Category { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Category.ToString());  set => TargettedRow[TableColumnNames.Category.ToString()] = value; }
 
 
-       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()];  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
+       public string FullName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FullName.ToString());  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
 
 
-       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()];  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
+       public string FirstName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FirstName.ToString());  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
 
 
-       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()];  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
+       public string LastName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.LastName.ToString());  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
 
 
-       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()];  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
+       public int PersonID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.PersonID.ToString());  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
 
 
-       public string PictureFileName { get => (string)TargettedRow[TableColumnNames.PictureFileName.ToString()];  set => TargettedRow[TableColumnNames.PictureFileName.ToString()] = value; }
+       public string PictureFileName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.PictureFileName.ToString());  set => TargettedRow[TableColumnNames.PictureFileName.ToString()] = value; }
 
 
-       public string RequestStatus { get => (string)TargettedRow[TableColumnNames.RequestStatus.ToString()];  set => TargettedRow[TableColumnNames.RequestStatus.ToString()] = value; }
+       public string RequestStatus { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.RequestStatus.ToString());  set => TargettedRow[TableColumnNames.RequestStatus.ToString()] = value; }
 
 
-       public int ExpenditureCategoryID { get => (int)TargettedRow[TableColumnNames.ExpenditureCategoryID.ToString()];  set => TargettedRow[TableColumnNames.ExpenditureCategoryID.ToString()] = value; }
+       public int ExpenditureCategoryID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ExpenditureCategoryID.ToString());  set => TargettedRow[TableColumnNames.ExpenditureCategoryID.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
+       public int CreatedByID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CreatedByID.ToString());  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public decimal RevisedAmount { get => (decimal)TargettedRow[TableColumnNames.RevisedAmount.ToString()];  set => TargettedRow[TableColumnNames.RevisedAmount.ToString()] = value; }
+       public decimal RevisedAmount { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.RevisedAmount.ToString());  set => TargettedRow[TableColumnNames.RevisedAmount.ToString()] = value; }
 
 
-       public string Title { get => (string)TargettedRow[TableColumnNames.Title.ToString()];  set => TargettedRow[TableColumnNames.Title.ToString()] = value; }
+       public string Title { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Title.ToString());  set => TargettedRow[TableColumnNames.Title.ToString()] = value; }
 
 
-       public int CashRequestStatusID { get => (int)TargettedRow[TableColumnNames.CashRequestStatusID.ToString()];  set => TargettedRow[TableColumnNames.CashRequestStatusID.ToString()] = value; }
+       public int CashRequestStatusID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CashRequestStatusID.ToString());  set => TargettedRow[TableColumnNames.CashRequestStatusID.ToString()] = value; }
 
 
-       public string LastProceedingCreatedBy { get => (string)TargettedRow[TableColumnNames.LastProceedingCreatedBy.ToString()];  set => TargettedRow[TableColumnNames.LastProceedingCreatedBy.ToString()] = value; }
+       public string LastProceedingCreatedBy { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.LastProceedingCreatedBy.ToString());  set => TargettedRow[TableColumnNames.LastProceedingCreatedBy.ToString()] = value; }
 
 
-       public string LastResponseComments { get => (string)TargettedRow[TableColumnNames.LastResponseComments.ToString()];  set => TargettedRow[TableColumnNames.LastResponseComments.ToString()] = value; }
+       public string LastResponseComments { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.LastResponseComments.ToString());  set => TargettedRow[TableColumnNames.LastResponseComments.ToString()] = value; }
 
 
-       public DateTime LastProceedingCreatedAt { get => (DateTime)TargettedRow[TableColumnNames.LastProceedingCreatedAt.ToString()];  set => TargettedRow[TableColumnNames.LastProceedingCreatedAt.ToString()] = value; }
+       public DateTime LastProceedingCreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.LastProceedingCreatedAt.ToString());  set => TargettedRow[TableColumnNames.LastProceedingCreatedAt.ToString()] = value; }
 
 
-       public int LastProceedingCreatedByID { get => (int)TargettedRow[TableColumnNames.LastProceedingCreatedByID.ToString()];  set => TargettedRow[TableColumnNames.LastProceedingCreatedByID.ToString()] = value; }
+       public int LastProceedingCreatedByID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.LastProceedingCreatedByID.ToString());  set => TargettedRow[TableColumnNames.LastProceedingCreatedByID.ToString()] = value; }
 
 
-       public int CashRequestProceedingID { get => (int)TargettedRow[TableColumnNames.CashRequestProceedingID.ToString()];  set => TargettedRow[TableColumnNames.CashRequestProceedingID.ToString()] = value; }
+       public int CashRequestProceedingID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CashRequestProceedingID.ToString());  set => TargettedRow[TableColumnNames.CashRequestProceedingID.ToString()] = value; }
 
 
  #endregion
@@ -392,7 +392,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___CashRequestLastResponse GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___CashRequestLastResponse GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -401,7 +401,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___CashRequestLastResponse GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___CashRequestLastResponse GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

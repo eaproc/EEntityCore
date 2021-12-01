@@ -148,7 +148,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___UserPasswordResetMode(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___UserPasswordResetMode(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -233,16 +233,16 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defModeCarrier;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public int PasswordResetTypeID { get => (int)TargettedRow[TableColumnNames.PasswordResetTypeID.ToString()];  set => TargettedRow[TableColumnNames.PasswordResetTypeID.ToString()] = value; }
+       public int PasswordResetTypeID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.PasswordResetTypeID.ToString());  set => TargettedRow[TableColumnNames.PasswordResetTypeID.ToString()] = value; }
 
 
-       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
+       public int UserID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.UserID.ToString());  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
-       public string ModeCarrier { get => (string)TargettedRow[TableColumnNames.ModeCarrier.ToString()];  set => TargettedRow[TableColumnNames.ModeCarrier.ToString()] = value; }
+       public string ModeCarrier { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.ModeCarrier.ToString());  set => TargettedRow[TableColumnNames.ModeCarrier.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
  #endregion
@@ -268,7 +268,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___UserPasswordResetMode GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___UserPasswordResetMode GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -277,7 +277,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___UserPasswordResetMode GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___UserPasswordResetMode GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -312,6 +312,14 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___UserPasswordResetMode v):this(v.ID)                  
+            {                  
+
+                ParamPasswordResetTypeID = new(defPasswordResetTypeID, v.PasswordResetTypeID);                  
+                ParamUserID = new(defUserID, v.UserID);                  
+                ParamModeCarrier = new(defModeCarrier, v.ModeCarrier);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+            }                  
                   
             public UpdateQueryBuilder SetPasswordResetTypeID(int v)                  
             {                  
@@ -364,7 +372,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -486,6 +494,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

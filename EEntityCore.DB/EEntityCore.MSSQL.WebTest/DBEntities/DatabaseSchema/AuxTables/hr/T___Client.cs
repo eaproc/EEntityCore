@@ -172,7 +172,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___Client(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___Client(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -280,52 +280,52 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defAccountName;
        public static readonly DataColumnDefinition defAccountNumber;
 
-       public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()];  set => TargettedRow[TableColumnNames.CompanyName.ToString()] = value; }
+       public string CompanyName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.CompanyName.ToString());  set => TargettedRow[TableColumnNames.CompanyName.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public int OwnerID { get => (int)TargettedRow[TableColumnNames.OwnerID.ToString()];  set => TargettedRow[TableColumnNames.OwnerID.ToString()] = value; }
+       public int OwnerID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.OwnerID.ToString());  set => TargettedRow[TableColumnNames.OwnerID.ToString()] = value; }
 
 
-       public string SLAFileName { get => (string)TargettedRow[TableColumnNames.SLAFileName.ToString()];  set => TargettedRow[TableColumnNames.SLAFileName.ToString()] = value; }
+       public string SLAFileName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.SLAFileName.ToString());  set => TargettedRow[TableColumnNames.SLAFileName.ToString()] = value; }
 
 
-       public string ScadwareURL { get => (string)TargettedRow[TableColumnNames.ScadwareURL.ToString()];  set => TargettedRow[TableColumnNames.ScadwareURL.ToString()] = value; }
+       public string ScadwareURL { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.ScadwareURL.ToString());  set => TargettedRow[TableColumnNames.ScadwareURL.ToString()] = value; }
 
 
-       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()];  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
+       public string Email { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Email.ToString());  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
 
 
-       public string Mobile { get => (string)TargettedRow[TableColumnNames.Mobile.ToString()];  set => TargettedRow[TableColumnNames.Mobile.ToString()] = value; }
+       public string Mobile { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Mobile.ToString());  set => TargettedRow[TableColumnNames.Mobile.ToString()] = value; }
 
 
-       public string WebsiteURL { get => (string)TargettedRow[TableColumnNames.WebsiteURL.ToString()];  set => TargettedRow[TableColumnNames.WebsiteURL.ToString()] = value; }
+       public string WebsiteURL { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.WebsiteURL.ToString());  set => TargettedRow[TableColumnNames.WebsiteURL.ToString()] = value; }
 
 
-       public string LogoFileName { get => (string)TargettedRow[TableColumnNames.LogoFileName.ToString()];  set => TargettedRow[TableColumnNames.LogoFileName.ToString()] = value; }
+       public string LogoFileName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.LogoFileName.ToString());  set => TargettedRow[TableColumnNames.LogoFileName.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.UpdatedAt.ToString());  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public bool IsActive { get => (bool)TargettedRow[TableColumnNames.IsActive.ToString()];  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
+       public bool IsActive { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.IsActive.ToString());  set => TargettedRow[TableColumnNames.IsActive.ToString()] = value; }
 
 
-       public string NameAbbreviation { get => (string)TargettedRow[TableColumnNames.NameAbbreviation.ToString()];  set => TargettedRow[TableColumnNames.NameAbbreviation.ToString()] = value; }
+       public string NameAbbreviation { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.NameAbbreviation.ToString());  set => TargettedRow[TableColumnNames.NameAbbreviation.ToString()] = value; }
 
 
-       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()];  set => TargettedRow[TableColumnNames.Address.ToString()] = value; }
+       public string Address { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Address.ToString());  set => TargettedRow[TableColumnNames.Address.ToString()] = value; }
 
 
-       public int? BankID { get => (int?)TargettedRow[TableColumnNames.BankID.ToString()];  set => TargettedRow[TableColumnNames.BankID.ToString()] = value; }
+       public int? BankID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.BankID.ToString());  set => TargettedRow[TableColumnNames.BankID.ToString()] = value; }
 
 
-       public string AccountName { get => (string)TargettedRow[TableColumnNames.AccountName.ToString()];  set => TargettedRow[TableColumnNames.AccountName.ToString()] = value; }
+       public string AccountName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.AccountName.ToString());  set => TargettedRow[TableColumnNames.AccountName.ToString()] = value; }
 
 
-       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()];  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
+       public string AccountNumber { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.AccountNumber.ToString());  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
 
 
  #endregion
@@ -351,7 +351,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___Client GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___Client GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -360,7 +360,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___Client GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___Client GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -407,6 +407,26 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___Client v):this(v.ID)                  
+            {                  
+
+                ParamCompanyName = new(defCompanyName, v.CompanyName);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+                ParamOwnerID = new(defOwnerID, v.OwnerID);                  
+                ParamSLAFileName = new(defSLAFileName, v.SLAFileName);                  
+                ParamScadwareURL = new(defScadwareURL, v.ScadwareURL);                  
+                ParamEmail = new(defEmail, v.Email);                  
+                ParamMobile = new(defMobile, v.Mobile);                  
+                ParamWebsiteURL = new(defWebsiteURL, v.WebsiteURL);                  
+                ParamLogoFileName = new(defLogoFileName, v.LogoFileName);                  
+                ParamUpdatedAt = new(defUpdatedAt, v.UpdatedAt);                  
+                ParamIsActive = new(defIsActive, v.IsActive);                  
+                ParamNameAbbreviation = new(defNameAbbreviation, v.NameAbbreviation);                  
+                ParamAddress = new(defAddress, v.Address);                  
+                ParamBankID = new(defBankID, v.BankID);                  
+                ParamAccountName = new(defAccountName, v.AccountName);                  
+                ParamAccountNumber = new(defAccountNumber, v.AccountNumber);                  
+            }                  
                   
             public UpdateQueryBuilder SetCompanyName(string v)                  
             {                  
@@ -531,7 +551,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -761,6 +781,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

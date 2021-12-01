@@ -177,7 +177,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___MonthlyDonationView(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___MonthlyDonationView(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -285,67 +285,67 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defCreatedByID;
        public static readonly DataColumnDefinition defUpdatedByID;
 
-       public int DonationYear { get => (int)TargettedRow[TableColumnNames.DonationYear.ToString()];  set => TargettedRow[TableColumnNames.DonationYear.ToString()] = value; }
+       public int DonationYear { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.DonationYear.ToString());  set => TargettedRow[TableColumnNames.DonationYear.ToString()] = value; }
 
 
-       public int DonationMonth { get => (int)TargettedRow[TableColumnNames.DonationMonth.ToString()];  set => TargettedRow[TableColumnNames.DonationMonth.ToString()] = value; }
+       public int DonationMonth { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.DonationMonth.ToString());  set => TargettedRow[TableColumnNames.DonationMonth.ToString()] = value; }
 
 
-       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()];  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
+       public string AccountNumber { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.AccountNumber.ToString());  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
 
 
-       public bool IsApproved { get => (bool)TargettedRow[TableColumnNames.IsApproved.ToString()];  set => TargettedRow[TableColumnNames.IsApproved.ToString()] = value; }
+       public bool IsApproved { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.IsApproved.ToString());  set => TargettedRow[TableColumnNames.IsApproved.ToString()] = value; }
 
 
-       public bool IsDisbursed { get => (bool)TargettedRow[TableColumnNames.IsDisbursed.ToString()];  set => TargettedRow[TableColumnNames.IsDisbursed.ToString()] = value; }
+       public bool IsDisbursed { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.IsDisbursed.ToString());  set => TargettedRow[TableColumnNames.IsDisbursed.ToString()] = value; }
 
 
-       public decimal TotalAmount { get => (decimal)TargettedRow[TableColumnNames.TotalAmount.ToString()];  set => TargettedRow[TableColumnNames.TotalAmount.ToString()] = value; }
+       public decimal TotalAmount { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.TotalAmount.ToString());  set => TargettedRow[TableColumnNames.TotalAmount.ToString()] = value; }
 
 
-       public int TotalBeneficiaries { get => (int)TargettedRow[TableColumnNames.TotalBeneficiaries.ToString()];  set => TargettedRow[TableColumnNames.TotalBeneficiaries.ToString()] = value; }
+       public int TotalBeneficiaries { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.TotalBeneficiaries.ToString());  set => TargettedRow[TableColumnNames.TotalBeneficiaries.ToString()] = value; }
 
 
-       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()];  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
+       public string FullName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FullName.ToString());  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
 
 
-       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()];  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
+       public string Email { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Email.ToString());  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
 
 
-       public string MobilePhone { get => (string)TargettedRow[TableColumnNames.MobilePhone.ToString()];  set => TargettedRow[TableColumnNames.MobilePhone.ToString()] = value; }
+       public string MobilePhone { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.MobilePhone.ToString());  set => TargettedRow[TableColumnNames.MobilePhone.ToString()] = value; }
 
 
-       public int ResidingPastorPersonID { get => (int)TargettedRow[TableColumnNames.ResidingPastorPersonID.ToString()];  set => TargettedRow[TableColumnNames.ResidingPastorPersonID.ToString()] = value; }
+       public int ResidingPastorPersonID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ResidingPastorPersonID.ToString());  set => TargettedRow[TableColumnNames.ResidingPastorPersonID.ToString()] = value; }
 
 
-       public string BankName { get => (string)TargettedRow[TableColumnNames.BankName.ToString()];  set => TargettedRow[TableColumnNames.BankName.ToString()] = value; }
+       public string BankName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.BankName.ToString());  set => TargettedRow[TableColumnNames.BankName.ToString()] = value; }
 
 
-       public string CenterName { get => (string)TargettedRow[TableColumnNames.CenterName.ToString()];  set => TargettedRow[TableColumnNames.CenterName.ToString()] = value; }
+       public string CenterName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.CenterName.ToString());  set => TargettedRow[TableColumnNames.CenterName.ToString()] = value; }
 
 
-       public string CenterAddress { get => (string)TargettedRow[TableColumnNames.CenterAddress.ToString()];  set => TargettedRow[TableColumnNames.CenterAddress.ToString()] = value; }
+       public string CenterAddress { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.CenterAddress.ToString());  set => TargettedRow[TableColumnNames.CenterAddress.ToString()] = value; }
 
 
-       public int CenterID { get => (int)TargettedRow[TableColumnNames.CenterID.ToString()];  set => TargettedRow[TableColumnNames.CenterID.ToString()] = value; }
+       public int CenterID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CenterID.ToString());  set => TargettedRow[TableColumnNames.CenterID.ToString()] = value; }
 
 
-       public int ResidingPastorID { get => (int)TargettedRow[TableColumnNames.ResidingPastorID.ToString()];  set => TargettedRow[TableColumnNames.ResidingPastorID.ToString()] = value; }
+       public int ResidingPastorID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ResidingPastorID.ToString());  set => TargettedRow[TableColumnNames.ResidingPastorID.ToString()] = value; }
 
 
-       public int BankID { get => (int)TargettedRow[TableColumnNames.BankID.ToString()];  set => TargettedRow[TableColumnNames.BankID.ToString()] = value; }
+       public int BankID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.BankID.ToString());  set => TargettedRow[TableColumnNames.BankID.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime UpdatedAt { get => (DateTime)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
+       public DateTime UpdatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.UpdatedAt.ToString());  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
+       public int CreatedByID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CreatedByID.ToString());  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()];  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
+       public int UpdatedByID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.UpdatedByID.ToString());  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
 
 
  #endregion
@@ -371,7 +371,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___MonthlyDonationView GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___MonthlyDonationView GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -380,7 +380,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___MonthlyDonationView GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___MonthlyDonationView GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

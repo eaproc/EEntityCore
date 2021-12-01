@@ -166,7 +166,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___ReferredClient(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___ReferredClient(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -259,25 +259,25 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defUpdatedAt;
 
-       public int DealerID { get => (int)TargettedRow[TableColumnNames.DealerID.ToString()];  set => TargettedRow[TableColumnNames.DealerID.ToString()] = value; }
+       public int DealerID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.DealerID.ToString());  set => TargettedRow[TableColumnNames.DealerID.ToString()] = value; }
 
 
-       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()];  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
+       public int ClientID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ClientID.ToString());  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
 
 
-       public int TermID { get => (int)TargettedRow[TableColumnNames.TermID.ToString()];  set => TargettedRow[TableColumnNames.TermID.ToString()] = value; }
+       public int TermID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.TermID.ToString());  set => TargettedRow[TableColumnNames.TermID.ToString()] = value; }
 
 
-       public int ReferralTypeID { get => (int)TargettedRow[TableColumnNames.ReferralTypeID.ToString()];  set => TargettedRow[TableColumnNames.ReferralTypeID.ToString()] = value; }
+       public int ReferralTypeID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ReferralTypeID.ToString());  set => TargettedRow[TableColumnNames.ReferralTypeID.ToString()] = value; }
 
 
-       public int ReferralBenefitStatusID { get => (int)TargettedRow[TableColumnNames.ReferralBenefitStatusID.ToString()];  set => TargettedRow[TableColumnNames.ReferralBenefitStatusID.ToString()] = value; }
+       public int ReferralBenefitStatusID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ReferralBenefitStatusID.ToString());  set => TargettedRow[TableColumnNames.ReferralBenefitStatusID.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.UpdatedAt.ToString());  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
  #endregion
@@ -303,7 +303,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___ReferredClient GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___ReferredClient GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -312,7 +312,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___ReferredClient GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___ReferredClient GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -350,6 +350,17 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___ReferredClient v):this(v.ID)                  
+            {                  
+
+                ParamDealerID = new(defDealerID, v.DealerID);                  
+                ParamClientID = new(defClientID, v.ClientID);                  
+                ParamTermID = new(defTermID, v.TermID);                  
+                ParamReferralTypeID = new(defReferralTypeID, v.ReferralTypeID);                  
+                ParamReferralBenefitStatusID = new(defReferralBenefitStatusID, v.ReferralBenefitStatusID);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+                ParamUpdatedAt = new(defUpdatedAt, v.UpdatedAt);                  
+            }                  
                   
             public UpdateQueryBuilder SetDealerID(int v)                  
             {                  
@@ -420,7 +431,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -569,6 +580,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

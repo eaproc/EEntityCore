@@ -176,7 +176,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___TermInvoiceGuide(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___TermInvoiceGuide(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -284,67 +284,67 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defBalance;
        public static readonly DataColumnDefinition defBalanceDue;
 
-       public int TermID { get => (int)TargettedRow[TableColumnNames.TermID.ToString()];  set => TargettedRow[TableColumnNames.TermID.ToString()] = value; }
+       public int TermID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.TermID.ToString());  set => TargettedRow[TableColumnNames.TermID.ToString()] = value; }
 
 
-       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()];  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
+       public int ClientID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ClientID.ToString());  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
 
 
-       public string CompanyName { get => (string)TargettedRow[TableColumnNames.CompanyName.ToString()];  set => TargettedRow[TableColumnNames.CompanyName.ToString()] = value; }
+       public string CompanyName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.CompanyName.ToString());  set => TargettedRow[TableColumnNames.CompanyName.ToString()] = value; }
 
 
-       public int? OriginalBillID { get => (int?)TargettedRow[TableColumnNames.OriginalBillID.ToString()];  set => TargettedRow[TableColumnNames.OriginalBillID.ToString()] = value; }
+       public int? OriginalBillID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.OriginalBillID.ToString());  set => TargettedRow[TableColumnNames.OriginalBillID.ToString()] = value; }
 
 
-       public string BillDefinition { get => (string)TargettedRow[TableColumnNames.BillDefinition.ToString()];  set => TargettedRow[TableColumnNames.BillDefinition.ToString()] = value; }
+       public string BillDefinition { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.BillDefinition.ToString());  set => TargettedRow[TableColumnNames.BillDefinition.ToString()] = value; }
 
 
-       public string BillDescription { get => (string)TargettedRow[TableColumnNames.BillDescription.ToString()];  set => TargettedRow[TableColumnNames.BillDescription.ToString()] = value; }
+       public string BillDescription { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.BillDescription.ToString());  set => TargettedRow[TableColumnNames.BillDescription.ToString()] = value; }
 
 
-       public DateTime? TermStartDate { get => (DateTime?)TargettedRow[TableColumnNames.TermStartDate.ToString()];  set => TargettedRow[TableColumnNames.TermStartDate.ToString()] = value; }
+       public DateTime? TermStartDate { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.TermStartDate.ToString());  set => TargettedRow[TableColumnNames.TermStartDate.ToString()] = value; }
 
 
-       public int? CurrentWeek { get => (int?)TargettedRow[TableColumnNames.CurrentWeek.ToString()];  set => TargettedRow[TableColumnNames.CurrentWeek.ToString()] = value; }
+       public int? CurrentWeek { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.CurrentWeek.ToString());  set => TargettedRow[TableColumnNames.CurrentWeek.ToString()] = value; }
 
 
-       public DateTime? FirstBillDeadline { get => (DateTime?)TargettedRow[TableColumnNames.FirstBillDeadline.ToString()];  set => TargettedRow[TableColumnNames.FirstBillDeadline.ToString()] = value; }
+       public DateTime? FirstBillDeadline { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.FirstBillDeadline.ToString());  set => TargettedRow[TableColumnNames.FirstBillDeadline.ToString()] = value; }
 
 
-       public DateTime? TermEndDate { get => (DateTime?)TargettedRow[TableColumnNames.TermEndDate.ToString()];  set => TargettedRow[TableColumnNames.TermEndDate.ToString()] = value; }
+       public DateTime? TermEndDate { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.TermEndDate.ToString());  set => TargettedRow[TableColumnNames.TermEndDate.ToString()] = value; }
 
 
-       public DateTime? SecondBillDeadline { get => (DateTime?)TargettedRow[TableColumnNames.SecondBillDeadline.ToString()];  set => TargettedRow[TableColumnNames.SecondBillDeadline.ToString()] = value; }
+       public DateTime? SecondBillDeadline { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.SecondBillDeadline.ToString());  set => TargettedRow[TableColumnNames.SecondBillDeadline.ToString()] = value; }
 
 
-       public decimal RatePerStudent { get => (decimal)TargettedRow[TableColumnNames.RatePerStudent.ToString()];  set => TargettedRow[TableColumnNames.RatePerStudent.ToString()] = value; }
+       public decimal RatePerStudent { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.RatePerStudent.ToString());  set => TargettedRow[TableColumnNames.RatePerStudent.ToString()] = value; }
 
 
-       public decimal? BilledRatePerStudent { get => (decimal?)TargettedRow[TableColumnNames.BilledRatePerStudent.ToString()];  set => TargettedRow[TableColumnNames.BilledRatePerStudent.ToString()] = value; }
+       public decimal? BilledRatePerStudent { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.BilledRatePerStudent.ToString());  set => TargettedRow[TableColumnNames.BilledRatePerStudent.ToString()] = value; }
 
 
-       public int RegisteredStudentCount { get => (int)TargettedRow[TableColumnNames.RegisteredStudentCount.ToString()];  set => TargettedRow[TableColumnNames.RegisteredStudentCount.ToString()] = value; }
+       public int RegisteredStudentCount { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.RegisteredStudentCount.ToString());  set => TargettedRow[TableColumnNames.RegisteredStudentCount.ToString()] = value; }
 
 
-       public int? FullScholarshipStudentCount { get => (int?)TargettedRow[TableColumnNames.FullScholarshipStudentCount.ToString()];  set => TargettedRow[TableColumnNames.FullScholarshipStudentCount.ToString()] = value; }
+       public int? FullScholarshipStudentCount { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.FullScholarshipStudentCount.ToString());  set => TargettedRow[TableColumnNames.FullScholarshipStudentCount.ToString()] = value; }
 
 
-       public int? BillableStudentCount { get => (int?)TargettedRow[TableColumnNames.BillableStudentCount.ToString()];  set => TargettedRow[TableColumnNames.BillableStudentCount.ToString()] = value; }
+       public int? BillableStudentCount { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.BillableStudentCount.ToString());  set => TargettedRow[TableColumnNames.BillableStudentCount.ToString()] = value; }
 
 
-       public decimal? ExpectedMinimumBillable { get => (decimal?)TargettedRow[TableColumnNames.ExpectedMinimumBillable.ToString()];  set => TargettedRow[TableColumnNames.ExpectedMinimumBillable.ToString()] = value; }
+       public decimal? ExpectedMinimumBillable { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.ExpectedMinimumBillable.ToString());  set => TargettedRow[TableColumnNames.ExpectedMinimumBillable.ToString()] = value; }
 
 
-       public decimal? ExpectedTotalBillable { get => (decimal?)TargettedRow[TableColumnNames.ExpectedTotalBillable.ToString()];  set => TargettedRow[TableColumnNames.ExpectedTotalBillable.ToString()] = value; }
+       public decimal? ExpectedTotalBillable { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.ExpectedTotalBillable.ToString());  set => TargettedRow[TableColumnNames.ExpectedTotalBillable.ToString()] = value; }
 
 
-       public decimal BilledAmount { get => (decimal)TargettedRow[TableColumnNames.BilledAmount.ToString()];  set => TargettedRow[TableColumnNames.BilledAmount.ToString()] = value; }
+       public decimal BilledAmount { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.BilledAmount.ToString());  set => TargettedRow[TableColumnNames.BilledAmount.ToString()] = value; }
 
 
-       public decimal? Balance { get => (decimal?)TargettedRow[TableColumnNames.Balance.ToString()];  set => TargettedRow[TableColumnNames.Balance.ToString()] = value; }
+       public decimal? Balance { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.Balance.ToString());  set => TargettedRow[TableColumnNames.Balance.ToString()] = value; }
 
 
-       public decimal? BalanceDue { get => (decimal?)TargettedRow[TableColumnNames.BalanceDue.ToString()];  set => TargettedRow[TableColumnNames.BalanceDue.ToString()] = value; }
+       public decimal? BalanceDue { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.BalanceDue.ToString());  set => TargettedRow[TableColumnNames.BalanceDue.ToString()] = value; }
 
 
  #endregion
@@ -370,7 +370,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___TermInvoiceGuide GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___TermInvoiceGuide GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -379,7 +379,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___TermInvoiceGuide GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___TermInvoiceGuide GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

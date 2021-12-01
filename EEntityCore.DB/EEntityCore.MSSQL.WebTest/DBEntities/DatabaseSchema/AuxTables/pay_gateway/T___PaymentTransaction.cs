@@ -200,7 +200,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___PaymentTransaction(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___PaymentTransaction(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -329,82 +329,82 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defPaymentRequiredWithoutCharges;
        public static readonly DataColumnDefinition defIsMultiTarget;
 
-       public int TransactionStatusID { get => (int)TargettedRow[TableColumnNames.TransactionStatusID.ToString()];  set => TargettedRow[TableColumnNames.TransactionStatusID.ToString()] = value; }
+       public int TransactionStatusID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.TransactionStatusID.ToString());  set => TargettedRow[TableColumnNames.TransactionStatusID.ToString()] = value; }
 
 
-       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()];  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
+       public int ClientID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ClientID.ToString());  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
 
 
-       public string StudentNumber { get => (string)TargettedRow[TableColumnNames.StudentNumber.ToString()];  set => TargettedRow[TableColumnNames.StudentNumber.ToString()] = value; }
+       public string StudentNumber { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.StudentNumber.ToString());  set => TargettedRow[TableColumnNames.StudentNumber.ToString()] = value; }
 
 
-       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()];  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
+       public string FirstName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FirstName.ToString());  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
 
 
-       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()];  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
+       public string LastName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.LastName.ToString());  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
 
 
-       public string AccountName { get => (string)TargettedRow[TableColumnNames.AccountName.ToString()];  set => TargettedRow[TableColumnNames.AccountName.ToString()] = value; }
+       public string AccountName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.AccountName.ToString());  set => TargettedRow[TableColumnNames.AccountName.ToString()] = value; }
 
 
-       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()];  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
+       public string AccountNumber { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.AccountNumber.ToString());  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
 
 
-       public string Bank { get => (string)TargettedRow[TableColumnNames.Bank.ToString()];  set => TargettedRow[TableColumnNames.Bank.ToString()] = value; }
+       public string Bank { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Bank.ToString());  set => TargettedRow[TableColumnNames.Bank.ToString()] = value; }
 
 
-       public string Channel { get => (string)TargettedRow[TableColumnNames.Channel.ToString()];  set => TargettedRow[TableColumnNames.Channel.ToString()] = value; }
+       public string Channel { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Channel.ToString());  set => TargettedRow[TableColumnNames.Channel.ToString()] = value; }
 
 
-       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()];  set => TargettedRow[TableColumnNames.IPAddress.ToString()] = value; }
+       public string IPAddress { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.IPAddress.ToString());  set => TargettedRow[TableColumnNames.IPAddress.ToString()] = value; }
 
 
-       public decimal SchoolDiscountGiven { get => (decimal)TargettedRow[TableColumnNames.SchoolDiscountGiven.ToString()];  set => TargettedRow[TableColumnNames.SchoolDiscountGiven.ToString()] = value; }
+       public decimal SchoolDiscountGiven { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.SchoolDiscountGiven.ToString());  set => TargettedRow[TableColumnNames.SchoolDiscountGiven.ToString()] = value; }
 
 
-       public decimal PaymentRequired { get => (decimal)TargettedRow[TableColumnNames.PaymentRequired.ToString()];  set => TargettedRow[TableColumnNames.PaymentRequired.ToString()] = value; }
+       public decimal PaymentRequired { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.PaymentRequired.ToString());  set => TargettedRow[TableColumnNames.PaymentRequired.ToString()] = value; }
 
 
-       public decimal Charges { get => (decimal)TargettedRow[TableColumnNames.Charges.ToString()];  set => TargettedRow[TableColumnNames.Charges.ToString()] = value; }
+       public decimal Charges { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.Charges.ToString());  set => TargettedRow[TableColumnNames.Charges.ToString()] = value; }
 
 
-       public decimal RefundAmount { get => (decimal)TargettedRow[TableColumnNames.RefundAmount.ToString()];  set => TargettedRow[TableColumnNames.RefundAmount.ToString()] = value; }
+       public decimal RefundAmount { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.RefundAmount.ToString());  set => TargettedRow[TableColumnNames.RefundAmount.ToString()] = value; }
 
 
-       public decimal Balance { get => (decimal)TargettedRow[TableColumnNames.Balance.ToString()];  set => TargettedRow[TableColumnNames.Balance.ToString()] = value; }
+       public decimal Balance { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.Balance.ToString());  set => TargettedRow[TableColumnNames.Balance.ToString()] = value; }
 
 
-       public decimal? ConfirmationThreshold { get => (decimal?)TargettedRow[TableColumnNames.ConfirmationThreshold.ToString()];  set => TargettedRow[TableColumnNames.ConfirmationThreshold.ToString()] = value; }
+       public decimal? ConfirmationThreshold { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.ConfirmationThreshold.ToString());  set => TargettedRow[TableColumnNames.ConfirmationThreshold.ToString()] = value; }
 
 
-       public DateTime? ConfirmationDate { get => (DateTime?)TargettedRow[TableColumnNames.ConfirmationDate.ToString()];  set => TargettedRow[TableColumnNames.ConfirmationDate.ToString()] = value; }
+       public DateTime? ConfirmationDate { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.ConfirmationDate.ToString());  set => TargettedRow[TableColumnNames.ConfirmationDate.ToString()] = value; }
 
 
-       public bool? AwaitingDisbursement { get => (bool?)TargettedRow[TableColumnNames.AwaitingDisbursement.ToString()];  set => TargettedRow[TableColumnNames.AwaitingDisbursement.ToString()] = value; }
+       public bool? AwaitingDisbursement { get => (bool?)TargettedRow.GetDBValueConverted<bool?>(TableColumnNames.AwaitingDisbursement.ToString());  set => TargettedRow[TableColumnNames.AwaitingDisbursement.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.UpdatedAt.ToString());  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
+       public int CreatedByID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CreatedByID.ToString());  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()];  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
+       public int UpdatedByID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.UpdatedByID.ToString());  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
 
 
-       public string ConfirmedExplanation { get => (string)TargettedRow[TableColumnNames.ConfirmedExplanation.ToString()];  set => TargettedRow[TableColumnNames.ConfirmedExplanation.ToString()] = value; }
+       public string ConfirmedExplanation { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.ConfirmedExplanation.ToString());  set => TargettedRow[TableColumnNames.ConfirmedExplanation.ToString()] = value; }
 
 
-       public bool? ChargesBilledToClient { get => (bool?)TargettedRow[TableColumnNames.ChargesBilledToClient.ToString()];  set => TargettedRow[TableColumnNames.ChargesBilledToClient.ToString()] = value; }
+       public bool? ChargesBilledToClient { get => (bool?)TargettedRow.GetDBValueConverted<bool?>(TableColumnNames.ChargesBilledToClient.ToString());  set => TargettedRow[TableColumnNames.ChargesBilledToClient.ToString()] = value; }
 
 
-       public decimal PaymentRequiredWithoutCharges { get => (decimal)TargettedRow[TableColumnNames.PaymentRequiredWithoutCharges.ToString()];  set => TargettedRow[TableColumnNames.PaymentRequiredWithoutCharges.ToString()] = value; }
+       public decimal PaymentRequiredWithoutCharges { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.PaymentRequiredWithoutCharges.ToString());  set => TargettedRow[TableColumnNames.PaymentRequiredWithoutCharges.ToString()] = value; }
 
 
-       public bool? IsMultiTarget { get => (bool?)TargettedRow[TableColumnNames.IsMultiTarget.ToString()];  set => TargettedRow[TableColumnNames.IsMultiTarget.ToString()] = value; }
+       public bool? IsMultiTarget { get => (bool?)TargettedRow.GetDBValueConverted<bool?>(TableColumnNames.IsMultiTarget.ToString());  set => TargettedRow[TableColumnNames.IsMultiTarget.ToString()] = value; }
 
 
  #endregion
@@ -430,7 +430,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___PaymentTransaction GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___PaymentTransaction GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -439,7 +439,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___PaymentTransaction GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___PaymentTransaction GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -496,6 +496,36 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___PaymentTransaction v):this(v.ID)                  
+            {                  
+
+                ParamTransactionStatusID = new(defTransactionStatusID, v.TransactionStatusID);                  
+                ParamClientID = new(defClientID, v.ClientID);                  
+                ParamStudentNumber = new(defStudentNumber, v.StudentNumber);                  
+                ParamFirstName = new(defFirstName, v.FirstName);                  
+                ParamLastName = new(defLastName, v.LastName);                  
+                ParamAccountName = new(defAccountName, v.AccountName);                  
+                ParamAccountNumber = new(defAccountNumber, v.AccountNumber);                  
+                ParamBank = new(defBank, v.Bank);                  
+                ParamChannel = new(defChannel, v.Channel);                  
+                ParamIPAddress = new(defIPAddress, v.IPAddress);                  
+                ParamSchoolDiscountGiven = new(defSchoolDiscountGiven, v.SchoolDiscountGiven);                  
+                ParamPaymentRequired = new(defPaymentRequired, v.PaymentRequired);                  
+                ParamCharges = new(defCharges, v.Charges);                  
+                ParamRefundAmount = new(defRefundAmount, v.RefundAmount);                  
+                ParamBalance = new(defBalance, v.Balance);                  
+                ParamConfirmationThreshold = new(defConfirmationThreshold, v.ConfirmationThreshold);                  
+                ParamConfirmationDate = new(defConfirmationDate, v.ConfirmationDate);                  
+                ParamAwaitingDisbursement = new(defAwaitingDisbursement, v.AwaitingDisbursement);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+                ParamUpdatedAt = new(defUpdatedAt, v.UpdatedAt);                  
+                ParamCreatedByID = new(defCreatedByID, v.CreatedByID);                  
+                ParamUpdatedByID = new(defUpdatedByID, v.UpdatedByID);                  
+                ParamConfirmedExplanation = new(defConfirmedExplanation, v.ConfirmedExplanation);                  
+                ParamChargesBilledToClient = new(defChargesBilledToClient, v.ChargesBilledToClient);                  
+                ParamPaymentRequiredWithoutCharges = new(defPaymentRequiredWithoutCharges, v.PaymentRequiredWithoutCharges);                  
+                ParamIsMultiTarget = new(defIsMultiTarget, v.IsMultiTarget);                  
+            }                  
                   
             public UpdateQueryBuilder SetTransactionStatusID(int v)                  
             {                  
@@ -680,7 +710,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -1000,6 +1030,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

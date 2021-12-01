@@ -125,5 +125,21 @@ namespace EEntityCore.DB.Modules
         {
             return pObj==null || pObj.Tables.Count == 0 ? null : pObj.Tables[0];
         }
+
+
+        /// <summary>
+        /// Converts DB Null to system understandable type
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        public static object GetDBValueConverted<T>(this DataRow row, string columnName)
+        {
+            var r = row[columnName];
+
+            if ( typeof(T) == typeof(string) )
+                return r == null || r is System.DBNull ? null : r;
+
+            return r == null || r is System.DBNull ? null : (T)r;
+        }
     }
 }

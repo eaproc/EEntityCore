@@ -150,7 +150,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___LoggedInUser(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___LoggedInUser(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -234,31 +234,31 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defPictureFileName;
        public static readonly DataColumnDefinition defFullName;
 
-       public string Username { get => (string)TargettedRow[TableColumnNames.Username.ToString()];  set => TargettedRow[TableColumnNames.Username.ToString()] = value; }
+       public string Username { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Username.ToString());  set => TargettedRow[TableColumnNames.Username.ToString()] = value; }
 
 
-       public int PersonID { get => (int)TargettedRow[TableColumnNames.PersonID.ToString()];  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
+       public int PersonID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.PersonID.ToString());  set => TargettedRow[TableColumnNames.PersonID.ToString()] = value; }
 
 
-       public string RememberToken { get => (string)TargettedRow[TableColumnNames.RememberToken.ToString()];  set => TargettedRow[TableColumnNames.RememberToken.ToString()] = value; }
+       public string RememberToken { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.RememberToken.ToString());  set => TargettedRow[TableColumnNames.RememberToken.ToString()] = value; }
 
 
-       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()];  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
+       public string FirstName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FirstName.ToString());  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
 
 
-       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()];  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
+       public string LastName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.LastName.ToString());  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
 
 
-       public string VerifiedMobileNumber { get => (string)TargettedRow[TableColumnNames.VerifiedMobileNumber.ToString()];  set => TargettedRow[TableColumnNames.VerifiedMobileNumber.ToString()] = value; }
+       public string VerifiedMobileNumber { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.VerifiedMobileNumber.ToString());  set => TargettedRow[TableColumnNames.VerifiedMobileNumber.ToString()] = value; }
 
 
-       public string VerifiedEmail { get => (string)TargettedRow[TableColumnNames.VerifiedEmail.ToString()];  set => TargettedRow[TableColumnNames.VerifiedEmail.ToString()] = value; }
+       public string VerifiedEmail { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.VerifiedEmail.ToString());  set => TargettedRow[TableColumnNames.VerifiedEmail.ToString()] = value; }
 
 
-       public string PictureFileName { get => (string)TargettedRow[TableColumnNames.PictureFileName.ToString()];  set => TargettedRow[TableColumnNames.PictureFileName.ToString()] = value; }
+       public string PictureFileName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.PictureFileName.ToString());  set => TargettedRow[TableColumnNames.PictureFileName.ToString()] = value; }
 
 
-       public string FullName { get => (string)TargettedRow[TableColumnNames.FullName.ToString()];  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
+       public string FullName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FullName.ToString());  set => TargettedRow[TableColumnNames.FullName.ToString()] = value; }
 
 
  #endregion
@@ -284,7 +284,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___LoggedInUser GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___LoggedInUser GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -293,7 +293,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___LoggedInUser GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___LoggedInUser GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

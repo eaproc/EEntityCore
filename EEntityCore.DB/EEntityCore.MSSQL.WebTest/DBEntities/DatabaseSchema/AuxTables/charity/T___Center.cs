@@ -168,7 +168,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___Center(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___Center(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -268,40 +268,40 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedByID;
        public static readonly DataColumnDefinition defUpdatedByID;
 
-       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()];  set => TargettedRow[TableColumnNames.Name.ToString()] = value; }
+       public string Name { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Name.ToString());  set => TargettedRow[TableColumnNames.Name.ToString()] = value; }
 
 
-       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()];  set => TargettedRow[TableColumnNames.Address.ToString()] = value; }
+       public string Address { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Address.ToString());  set => TargettedRow[TableColumnNames.Address.ToString()] = value; }
 
 
-       public int BeneficiariesAvailableOnRegistration { get => (int)TargettedRow[TableColumnNames.BeneficiariesAvailableOnRegistration.ToString()];  set => TargettedRow[TableColumnNames.BeneficiariesAvailableOnRegistration.ToString()] = value; }
+       public int BeneficiariesAvailableOnRegistration { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.BeneficiariesAvailableOnRegistration.ToString());  set => TargettedRow[TableColumnNames.BeneficiariesAvailableOnRegistration.ToString()] = value; }
 
 
-       public int CenterStatusID { get => (int)TargettedRow[TableColumnNames.CenterStatusID.ToString()];  set => TargettedRow[TableColumnNames.CenterStatusID.ToString()] = value; }
+       public int CenterStatusID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CenterStatusID.ToString());  set => TargettedRow[TableColumnNames.CenterStatusID.ToString()] = value; }
 
 
-       public int YearFounded { get => (int)TargettedRow[TableColumnNames.YearFounded.ToString()];  set => TargettedRow[TableColumnNames.YearFounded.ToString()] = value; }
+       public int YearFounded { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.YearFounded.ToString());  set => TargettedRow[TableColumnNames.YearFounded.ToString()] = value; }
 
 
-       public int ChurchCapacity { get => (int)TargettedRow[TableColumnNames.ChurchCapacity.ToString()];  set => TargettedRow[TableColumnNames.ChurchCapacity.ToString()] = value; }
+       public int ChurchCapacity { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ChurchCapacity.ToString());  set => TargettedRow[TableColumnNames.ChurchCapacity.ToString()] = value; }
 
 
-       public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()];  set => TargettedRow[TableColumnNames.Comments.ToString()] = value; }
+       public string Comments { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Comments.ToString());  set => TargettedRow[TableColumnNames.Comments.ToString()] = value; }
 
 
-       public string PictureStoredPath { get => (string)TargettedRow[TableColumnNames.PictureStoredPath.ToString()];  set => TargettedRow[TableColumnNames.PictureStoredPath.ToString()] = value; }
+       public string PictureStoredPath { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.PictureStoredPath.ToString());  set => TargettedRow[TableColumnNames.PictureStoredPath.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime UpdatedAt { get => (DateTime)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
+       public DateTime UpdatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.UpdatedAt.ToString());  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
+       public int CreatedByID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CreatedByID.ToString());  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public int UpdatedByID { get => (int)TargettedRow[TableColumnNames.UpdatedByID.ToString()];  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
+       public int UpdatedByID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.UpdatedByID.ToString());  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
 
 
  #endregion
@@ -327,7 +327,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___Center GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___Center GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -336,7 +336,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___Center GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___Center GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -379,6 +379,22 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___Center v):this(v.ID)                  
+            {                  
+
+                ParamName = new(defName, v.Name);                  
+                ParamAddress = new(defAddress, v.Address);                  
+                ParamBeneficiariesAvailableOnRegistration = new(defBeneficiariesAvailableOnRegistration, v.BeneficiariesAvailableOnRegistration);                  
+                ParamCenterStatusID = new(defCenterStatusID, v.CenterStatusID);                  
+                ParamYearFounded = new(defYearFounded, v.YearFounded);                  
+                ParamChurchCapacity = new(defChurchCapacity, v.ChurchCapacity);                  
+                ParamComments = new(defComments, v.Comments);                  
+                ParamPictureStoredPath = new(defPictureStoredPath, v.PictureStoredPath);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+                ParamUpdatedAt = new(defUpdatedAt, v.UpdatedAt);                  
+                ParamCreatedByID = new(defCreatedByID, v.CreatedByID);                  
+                ParamUpdatedByID = new(defUpdatedByID, v.UpdatedByID);                  
+            }                  
                   
             public UpdateQueryBuilder SetName(string v)                  
             {                  
@@ -479,7 +495,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -673,6 +689,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

@@ -140,7 +140,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___DealersBalance(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___DealersBalance(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -214,19 +214,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defWithdrawnAmount;
        public static readonly DataColumnDefinition defBalance;
 
-       public int DealerID { get => (int)TargettedRow[TableColumnNames.DealerID.ToString()];  set => TargettedRow[TableColumnNames.DealerID.ToString()] = value; }
+       public int DealerID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.DealerID.ToString());  set => TargettedRow[TableColumnNames.DealerID.ToString()] = value; }
 
 
-       public decimal? EarnedAmount { get => (decimal?)TargettedRow[TableColumnNames.EarnedAmount.ToString()];  set => TargettedRow[TableColumnNames.EarnedAmount.ToString()] = value; }
+       public decimal? EarnedAmount { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.EarnedAmount.ToString());  set => TargettedRow[TableColumnNames.EarnedAmount.ToString()] = value; }
 
 
-       public decimal? PendingAmount { get => (decimal?)TargettedRow[TableColumnNames.PendingAmount.ToString()];  set => TargettedRow[TableColumnNames.PendingAmount.ToString()] = value; }
+       public decimal? PendingAmount { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.PendingAmount.ToString());  set => TargettedRow[TableColumnNames.PendingAmount.ToString()] = value; }
 
 
-       public decimal? WithdrawnAmount { get => (decimal?)TargettedRow[TableColumnNames.WithdrawnAmount.ToString()];  set => TargettedRow[TableColumnNames.WithdrawnAmount.ToString()] = value; }
+       public decimal? WithdrawnAmount { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.WithdrawnAmount.ToString());  set => TargettedRow[TableColumnNames.WithdrawnAmount.ToString()] = value; }
 
 
-       public decimal? Balance { get => (decimal?)TargettedRow[TableColumnNames.Balance.ToString()];  set => TargettedRow[TableColumnNames.Balance.ToString()] = value; }
+       public decimal? Balance { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.Balance.ToString());  set => TargettedRow[TableColumnNames.Balance.ToString()] = value; }
 
 
  #endregion
@@ -252,7 +252,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___DealersBalance GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___DealersBalance GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -261,7 +261,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___DealersBalance GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___DealersBalance GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

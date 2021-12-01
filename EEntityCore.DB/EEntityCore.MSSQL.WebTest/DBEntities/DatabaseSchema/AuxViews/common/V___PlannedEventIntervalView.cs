@@ -160,7 +160,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___PlannedEventIntervalView(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___PlannedEventIntervalView(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -254,46 +254,46 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defClassColor;
        public static readonly DataColumnDefinition defCalendarEvent;
 
-       public int PlannedEventID { get => (int)TargettedRow[TableColumnNames.PlannedEventID.ToString()];  set => TargettedRow[TableColumnNames.PlannedEventID.ToString()] = value; }
+       public int PlannedEventID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.PlannedEventID.ToString());  set => TargettedRow[TableColumnNames.PlannedEventID.ToString()] = value; }
 
 
-       public int DayOfWeekID { get => (int)TargettedRow[TableColumnNames.DayOfWeekID.ToString()];  set => TargettedRow[TableColumnNames.DayOfWeekID.ToString()] = value; }
+       public int DayOfWeekID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.DayOfWeekID.ToString());  set => TargettedRow[TableColumnNames.DayOfWeekID.ToString()] = value; }
 
 
-       public DateTime StartTime { get => (DateTime)TargettedRow[TableColumnNames.StartTime.ToString()];  set => TargettedRow[TableColumnNames.StartTime.ToString()] = value; }
+       public DateTime StartTime { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.StartTime.ToString());  set => TargettedRow[TableColumnNames.StartTime.ToString()] = value; }
 
 
-       public DateTime EndTime { get => (DateTime)TargettedRow[TableColumnNames.EndTime.ToString()];  set => TargettedRow[TableColumnNames.EndTime.ToString()] = value; }
+       public DateTime EndTime { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.EndTime.ToString());  set => TargettedRow[TableColumnNames.EndTime.ToString()] = value; }
 
 
-       public DateTime? IntervalDate { get => (DateTime?)TargettedRow[TableColumnNames.IntervalDate.ToString()];  set => TargettedRow[TableColumnNames.IntervalDate.ToString()] = value; }
+       public DateTime? IntervalDate { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.IntervalDate.ToString());  set => TargettedRow[TableColumnNames.IntervalDate.ToString()] = value; }
 
 
-       public DateTime StartDate { get => (DateTime)TargettedRow[TableColumnNames.StartDate.ToString()];  set => TargettedRow[TableColumnNames.StartDate.ToString()] = value; }
+       public DateTime StartDate { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.StartDate.ToString());  set => TargettedRow[TableColumnNames.StartDate.ToString()] = value; }
 
 
-       public DateTime EndDate { get => (DateTime)TargettedRow[TableColumnNames.EndDate.ToString()];  set => TargettedRow[TableColumnNames.EndDate.ToString()] = value; }
+       public DateTime EndDate { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.EndDate.ToString());  set => TargettedRow[TableColumnNames.EndDate.ToString()] = value; }
 
 
-       public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()];  set => TargettedRow[TableColumnNames.Comments.ToString()] = value; }
+       public string Comments { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Comments.ToString());  set => TargettedRow[TableColumnNames.Comments.ToString()] = value; }
 
 
-       public string Title { get => (string)TargettedRow[TableColumnNames.Title.ToString()];  set => TargettedRow[TableColumnNames.Title.ToString()] = value; }
+       public string Title { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Title.ToString());  set => TargettedRow[TableColumnNames.Title.ToString()] = value; }
 
 
-       public int CalendarEventID { get => (int)TargettedRow[TableColumnNames.CalendarEventID.ToString()];  set => TargettedRow[TableColumnNames.CalendarEventID.ToString()] = value; }
+       public int CalendarEventID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CalendarEventID.ToString());  set => TargettedRow[TableColumnNames.CalendarEventID.ToString()] = value; }
 
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
+       public int CreatedByID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CreatedByID.ToString());  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public bool CanBeDeleted { get => (bool)TargettedRow[TableColumnNames.CanBeDeleted.ToString()];  set => TargettedRow[TableColumnNames.CanBeDeleted.ToString()] = value; }
+       public bool CanBeDeleted { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.CanBeDeleted.ToString());  set => TargettedRow[TableColumnNames.CanBeDeleted.ToString()] = value; }
 
 
-       public string ClassColor { get => (string)TargettedRow[TableColumnNames.ClassColor.ToString()];  set => TargettedRow[TableColumnNames.ClassColor.ToString()] = value; }
+       public string ClassColor { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.ClassColor.ToString());  set => TargettedRow[TableColumnNames.ClassColor.ToString()] = value; }
 
 
-       public string CalendarEvent { get => (string)TargettedRow[TableColumnNames.CalendarEvent.ToString()];  set => TargettedRow[TableColumnNames.CalendarEvent.ToString()] = value; }
+       public string CalendarEvent { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.CalendarEvent.ToString());  set => TargettedRow[TableColumnNames.CalendarEvent.ToString()] = value; }
 
 
  #endregion
@@ -319,7 +319,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___PlannedEventIntervalView GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___PlannedEventIntervalView GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -328,7 +328,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___PlannedEventIntervalView GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___PlannedEventIntervalView GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

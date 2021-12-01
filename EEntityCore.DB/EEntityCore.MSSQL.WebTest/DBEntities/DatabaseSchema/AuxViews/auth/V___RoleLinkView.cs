@@ -146,7 +146,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___RoleLinkView(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___RoleLinkView(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -226,25 +226,25 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defInclusivePermissionID;
        public static readonly DataColumnDefinition defInclusivePermissionDefinition;
 
-       public int RoleID { get => (int)TargettedRow[TableColumnNames.RoleID.ToString()];  set => TargettedRow[TableColumnNames.RoleID.ToString()] = value; }
+       public int RoleID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.RoleID.ToString());  set => TargettedRow[TableColumnNames.RoleID.ToString()] = value; }
 
 
-       public int BaseLinkID { get => (int)TargettedRow[TableColumnNames.BaseLinkID.ToString()];  set => TargettedRow[TableColumnNames.BaseLinkID.ToString()] = value; }
+       public int BaseLinkID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.BaseLinkID.ToString());  set => TargettedRow[TableColumnNames.BaseLinkID.ToString()] = value; }
 
 
-       public int BaseLinkPermissionID { get => (int)TargettedRow[TableColumnNames.BaseLinkPermissionID.ToString()];  set => TargettedRow[TableColumnNames.BaseLinkPermissionID.ToString()] = value; }
+       public int BaseLinkPermissionID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.BaseLinkPermissionID.ToString());  set => TargettedRow[TableColumnNames.BaseLinkPermissionID.ToString()] = value; }
 
 
-       public string BaseLink { get => (string)TargettedRow[TableColumnNames.BaseLink.ToString()];  set => TargettedRow[TableColumnNames.BaseLink.ToString()] = value; }
+       public string BaseLink { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.BaseLink.ToString());  set => TargettedRow[TableColumnNames.BaseLink.ToString()] = value; }
 
 
-       public string Permission { get => (string)TargettedRow[TableColumnNames.Permission.ToString()];  set => TargettedRow[TableColumnNames.Permission.ToString()] = value; }
+       public string Permission { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Permission.ToString());  set => TargettedRow[TableColumnNames.Permission.ToString()] = value; }
 
 
-       public int InclusivePermissionID { get => (int)TargettedRow[TableColumnNames.InclusivePermissionID.ToString()];  set => TargettedRow[TableColumnNames.InclusivePermissionID.ToString()] = value; }
+       public int InclusivePermissionID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.InclusivePermissionID.ToString());  set => TargettedRow[TableColumnNames.InclusivePermissionID.ToString()] = value; }
 
 
-       public string InclusivePermissionDefinition { get => (string)TargettedRow[TableColumnNames.InclusivePermissionDefinition.ToString()];  set => TargettedRow[TableColumnNames.InclusivePermissionDefinition.ToString()] = value; }
+       public string InclusivePermissionDefinition { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.InclusivePermissionDefinition.ToString());  set => TargettedRow[TableColumnNames.InclusivePermissionDefinition.ToString()] = value; }
 
 
  #endregion
@@ -270,7 +270,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___RoleLinkView GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___RoleLinkView GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -279,7 +279,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___RoleLinkView GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___RoleLinkView GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

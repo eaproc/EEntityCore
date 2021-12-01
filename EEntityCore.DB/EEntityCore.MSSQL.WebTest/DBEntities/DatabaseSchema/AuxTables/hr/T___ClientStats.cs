@@ -174,7 +174,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___ClientStats(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___ClientStats(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -283,55 +283,55 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defTermStartDate;
        public static readonly DataColumnDefinition defTermEndDate;
 
-       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()];  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
+       public int ClientID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ClientID.ToString());  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
 
 
-       public int TermID { get => (int)TargettedRow[TableColumnNames.TermID.ToString()];  set => TargettedRow[TableColumnNames.TermID.ToString()] = value; }
+       public int TermID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.TermID.ToString());  set => TargettedRow[TableColumnNames.TermID.ToString()] = value; }
 
 
-       public int RegisteredStudentCount { get => (int)TargettedRow[TableColumnNames.RegisteredStudentCount.ToString()];  set => TargettedRow[TableColumnNames.RegisteredStudentCount.ToString()] = value; }
+       public int RegisteredStudentCount { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.RegisteredStudentCount.ToString());  set => TargettedRow[TableColumnNames.RegisteredStudentCount.ToString()] = value; }
 
 
-       public int AssignedStudentCount { get => (int)TargettedRow[TableColumnNames.AssignedStudentCount.ToString()];  set => TargettedRow[TableColumnNames.AssignedStudentCount.ToString()] = value; }
+       public int AssignedStudentCount { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.AssignedStudentCount.ToString());  set => TargettedRow[TableColumnNames.AssignedStudentCount.ToString()] = value; }
 
 
-       public int SCADWAREAccessCount { get => (int)TargettedRow[TableColumnNames.SCADWAREAccessCount.ToString()];  set => TargettedRow[TableColumnNames.SCADWAREAccessCount.ToString()] = value; }
+       public int SCADWAREAccessCount { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.SCADWAREAccessCount.ToString());  set => TargettedRow[TableColumnNames.SCADWAREAccessCount.ToString()] = value; }
 
 
-       public decimal SCADWAREAccessThreshold { get => (decimal)TargettedRow[TableColumnNames.SCADWAREAccessThreshold.ToString()];  set => TargettedRow[TableColumnNames.SCADWAREAccessThreshold.ToString()] = value; }
+       public decimal SCADWAREAccessThreshold { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.SCADWAREAccessThreshold.ToString());  set => TargettedRow[TableColumnNames.SCADWAREAccessThreshold.ToString()] = value; }
 
 
-       public decimal AverageTermBill { get => (decimal)TargettedRow[TableColumnNames.AverageTermBill.ToString()];  set => TargettedRow[TableColumnNames.AverageTermBill.ToString()] = value; }
+       public decimal AverageTermBill { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.AverageTermBill.ToString());  set => TargettedRow[TableColumnNames.AverageTermBill.ToString()] = value; }
 
 
-       public decimal RatePerStudent { get => (decimal)TargettedRow[TableColumnNames.RatePerStudent.ToString()];  set => TargettedRow[TableColumnNames.RatePerStudent.ToString()] = value; }
+       public decimal RatePerStudent { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.RatePerStudent.ToString());  set => TargettedRow[TableColumnNames.RatePerStudent.ToString()] = value; }
 
 
-       public decimal BilledPerStudent { get => (decimal)TargettedRow[TableColumnNames.BilledPerStudent.ToString()];  set => TargettedRow[TableColumnNames.BilledPerStudent.ToString()] = value; }
+       public decimal BilledPerStudent { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.BilledPerStudent.ToString());  set => TargettedRow[TableColumnNames.BilledPerStudent.ToString()] = value; }
 
 
-       public decimal TotalReceivedOnSCADWAREBill { get => (decimal)TargettedRow[TableColumnNames.TotalReceivedOnSCADWAREBill.ToString()];  set => TargettedRow[TableColumnNames.TotalReceivedOnSCADWAREBill.ToString()] = value; }
+       public decimal TotalReceivedOnSCADWAREBill { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.TotalReceivedOnSCADWAREBill.ToString());  set => TargettedRow[TableColumnNames.TotalReceivedOnSCADWAREBill.ToString()] = value; }
 
 
-       public decimal MinimumExpectedOnSCADWAREBill { get => (decimal)TargettedRow[TableColumnNames.MinimumExpectedOnSCADWAREBill.ToString()];  set => TargettedRow[TableColumnNames.MinimumExpectedOnSCADWAREBill.ToString()] = value; }
+       public decimal MinimumExpectedOnSCADWAREBill { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.MinimumExpectedOnSCADWAREBill.ToString());  set => TargettedRow[TableColumnNames.MinimumExpectedOnSCADWAREBill.ToString()] = value; }
 
 
-       public decimal ExpectedOnSCADWAREBill { get => (decimal)TargettedRow[TableColumnNames.ExpectedOnSCADWAREBill.ToString()];  set => TargettedRow[TableColumnNames.ExpectedOnSCADWAREBill.ToString()] = value; }
+       public decimal ExpectedOnSCADWAREBill { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.ExpectedOnSCADWAREBill.ToString());  set => TargettedRow[TableColumnNames.ExpectedOnSCADWAREBill.ToString()] = value; }
 
 
-       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()];  set => TargettedRow[TableColumnNames.IPAddress.ToString()] = value; }
+       public string IPAddress { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.IPAddress.ToString());  set => TargettedRow[TableColumnNames.IPAddress.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public int? FullScholarshipStudentCount { get => (int?)TargettedRow[TableColumnNames.FullScholarshipStudentCount.ToString()];  set => TargettedRow[TableColumnNames.FullScholarshipStudentCount.ToString()] = value; }
+       public int? FullScholarshipStudentCount { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.FullScholarshipStudentCount.ToString());  set => TargettedRow[TableColumnNames.FullScholarshipStudentCount.ToString()] = value; }
 
 
-       public DateTime? TermStartDate { get => (DateTime?)TargettedRow[TableColumnNames.TermStartDate.ToString()];  set => TargettedRow[TableColumnNames.TermStartDate.ToString()] = value; }
+       public DateTime? TermStartDate { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.TermStartDate.ToString());  set => TargettedRow[TableColumnNames.TermStartDate.ToString()] = value; }
 
 
-       public DateTime? TermEndDate { get => (DateTime?)TargettedRow[TableColumnNames.TermEndDate.ToString()];  set => TargettedRow[TableColumnNames.TermEndDate.ToString()] = value; }
+       public DateTime? TermEndDate { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.TermEndDate.ToString());  set => TargettedRow[TableColumnNames.TermEndDate.ToString()] = value; }
 
 
  #endregion
@@ -357,7 +357,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___ClientStats GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___ClientStats GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -366,7 +366,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___ClientStats GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___ClientStats GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -414,6 +414,27 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___ClientStats v):this(v.ID)                  
+            {                  
+
+                ParamClientID = new(defClientID, v.ClientID);                  
+                ParamTermID = new(defTermID, v.TermID);                  
+                ParamRegisteredStudentCount = new(defRegisteredStudentCount, v.RegisteredStudentCount);                  
+                ParamAssignedStudentCount = new(defAssignedStudentCount, v.AssignedStudentCount);                  
+                ParamSCADWAREAccessCount = new(defSCADWAREAccessCount, v.SCADWAREAccessCount);                  
+                ParamSCADWAREAccessThreshold = new(defSCADWAREAccessThreshold, v.SCADWAREAccessThreshold);                  
+                ParamAverageTermBill = new(defAverageTermBill, v.AverageTermBill);                  
+                ParamRatePerStudent = new(defRatePerStudent, v.RatePerStudent);                  
+                ParamBilledPerStudent = new(defBilledPerStudent, v.BilledPerStudent);                  
+                ParamTotalReceivedOnSCADWAREBill = new(defTotalReceivedOnSCADWAREBill, v.TotalReceivedOnSCADWAREBill);                  
+                ParamMinimumExpectedOnSCADWAREBill = new(defMinimumExpectedOnSCADWAREBill, v.MinimumExpectedOnSCADWAREBill);                  
+                ParamExpectedOnSCADWAREBill = new(defExpectedOnSCADWAREBill, v.ExpectedOnSCADWAREBill);                  
+                ParamIPAddress = new(defIPAddress, v.IPAddress);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+                ParamFullScholarshipStudentCount = new(defFullScholarshipStudentCount, v.FullScholarshipStudentCount);                  
+                ParamTermStartDate = new(defTermStartDate, v.TermStartDate);                  
+                ParamTermEndDate = new(defTermEndDate, v.TermEndDate);                  
+            }                  
                   
             public UpdateQueryBuilder SetClientID(int v)                  
             {                  
@@ -544,7 +565,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -783,6 +804,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

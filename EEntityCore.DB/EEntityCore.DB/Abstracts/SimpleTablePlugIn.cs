@@ -168,19 +168,7 @@ namespace EEntityCore.DB.Abstracts
         public SimpleTablePlugIn(IEnumerable<DataRow> pTableRows, long pTargettedRowID)
         {
             _OpenAccessFor = RecordAccessibility.PARTIAL_ACCESS;
-            if (pTableRows is object && pTableRows.Count() > 0)
-            {
-                try
-                {
-                    LoadFromRows(pTableRows);
-                    if (pTargettedRowID != DO__NOT____TARGET__ANY_ROWID)
-                        LoadID(pTargettedRowID);
-                }
-                catch (Exception ex)
-                {
-                    Logger.Print("Error Converting from IEnumerable(of datarow) to Table", ex);
-                }
-            }
+            LoadFromRows(pTableRows, pTargettedRowID);
         }
 
         /// <summary>
@@ -192,13 +180,8 @@ namespace EEntityCore.DB.Abstracts
         public SimpleTablePlugIn(DataTable FullTable, long pTargettedRowID)
         {
             _OpenAccessFor = RecordAccessibility.PARTIAL_ACCESS;
-
             // Incase there is empty table
-            ___RawTable = FullTable;
-            if (FullTable is object && FullTable.Rows.Count > 0)
-            {
-                LoadID(pTargettedRowID);
-            }
+            LoadFromRows(FullTable, pTargettedRowID);
         }
 
         /// <summary>
@@ -391,23 +374,28 @@ namespace EEntityCore.DB.Abstracts
 
         internal T LoadGeneric<T>(DataRow pDataRow) where T : SimpleTablePlugIn, new()
         {
-            LoadFromRows(new DataRow[] { pDataRow });
-            if (HasRows())
-                TargettedRow_Cached = AllRows.ElementAtOrDefault(0);
+            LoadFromRows(pDataRow);
             _OpenAccessFor = RecordAccessibility.SHALLOW_ACCESS;
             return (T)this;
         }
 
-        private void LoadFromRows(IEnumerable<DataRow> pTableRows)
+        protected void LoadFromRows(DataRow pDataRow)
         {
-            try
-            {
-                ___RawTable = pTableRows.CopyToDataTable();
-            }
-            catch (Exception ex)
-            {
-                Logger.Print("Error Converting Rows to Table", ex);
-            }
+            LoadFromRows(new DataRow[] { pDataRow });
+            if (HasRows())
+                TargettedRow_Cached = AllRows.ElementAtOrDefault(0);
+        }
+
+        protected void LoadFromRows(IEnumerable<DataRow> pTableRows, long pTargettedRowID = DO__NOT____TARGET__ANY_ROWID)
+        {
+            LoadFromRows(pTableRows.CopyToDataTable());
+            LoadID(pTargettedRowID);
+        }
+
+        protected void LoadFromRows(DataTable pTableRows, long pTargettedRowID = DO__NOT____TARGET__ANY_ROWID)
+        {
+            ___RawTable = pTableRows;
+            LoadID(pTargettedRowID);
         }
 
 

@@ -158,7 +158,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___ServerExceptionLogger(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___ServerExceptionLogger(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -255,37 +255,37 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defIPAddress;
        public static readonly DataColumnDefinition defUserID;
 
-       public string TraceID { get => (string)TargettedRow[TableColumnNames.TraceID.ToString()];  set => TargettedRow[TableColumnNames.TraceID.ToString()] = value; }
+       public string TraceID { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.TraceID.ToString());  set => TargettedRow[TableColumnNames.TraceID.ToString()] = value; }
 
 
-       public string RequestParametersJSON { get => (string)TargettedRow[TableColumnNames.RequestParametersJSON.ToString()];  set => TargettedRow[TableColumnNames.RequestParametersJSON.ToString()] = value; }
+       public string RequestParametersJSON { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.RequestParametersJSON.ToString());  set => TargettedRow[TableColumnNames.RequestParametersJSON.ToString()] = value; }
 
 
-       public string ExceptionMessage { get => (string)TargettedRow[TableColumnNames.ExceptionMessage.ToString()];  set => TargettedRow[TableColumnNames.ExceptionMessage.ToString()] = value; }
+       public string ExceptionMessage { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.ExceptionMessage.ToString());  set => TargettedRow[TableColumnNames.ExceptionMessage.ToString()] = value; }
 
 
-       public string StackTrace { get => (string)TargettedRow[TableColumnNames.StackTrace.ToString()];  set => TargettedRow[TableColumnNames.StackTrace.ToString()] = value; }
+       public string StackTrace { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.StackTrace.ToString());  set => TargettedRow[TableColumnNames.StackTrace.ToString()] = value; }
 
 
-       public bool IsResolved { get => (bool)TargettedRow[TableColumnNames.IsResolved.ToString()];  set => TargettedRow[TableColumnNames.IsResolved.ToString()] = value; }
+       public bool IsResolved { get => (bool)TargettedRow.GetDBValueConverted<bool>(TableColumnNames.IsResolved.ToString());  set => TargettedRow[TableColumnNames.IsResolved.ToString()] = value; }
 
 
-       public string Comments { get => (string)TargettedRow[TableColumnNames.Comments.ToString()];  set => TargettedRow[TableColumnNames.Comments.ToString()] = value; }
+       public string Comments { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Comments.ToString());  set => TargettedRow[TableColumnNames.Comments.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.UpdatedAt.ToString());  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public string AbsoluteURL { get => (string)TargettedRow[TableColumnNames.AbsoluteURL.ToString()];  set => TargettedRow[TableColumnNames.AbsoluteURL.ToString()] = value; }
+       public string AbsoluteURL { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.AbsoluteURL.ToString());  set => TargettedRow[TableColumnNames.AbsoluteURL.ToString()] = value; }
 
 
-       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()];  set => TargettedRow[TableColumnNames.IPAddress.ToString()] = value; }
+       public string IPAddress { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.IPAddress.ToString());  set => TargettedRow[TableColumnNames.IPAddress.ToString()] = value; }
 
 
-       public int? UserID { get => (int?)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
+       public int? UserID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.UserID.ToString());  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
  #endregion
@@ -311,7 +311,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___ServerExceptionLogger GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___ServerExceptionLogger GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -320,7 +320,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___ServerExceptionLogger GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___ServerExceptionLogger GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -362,6 +362,21 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___ServerExceptionLogger v):this(v.ID)                  
+            {                  
+
+                ParamTraceID = new(defTraceID, v.TraceID);                  
+                ParamRequestParametersJSON = new(defRequestParametersJSON, v.RequestParametersJSON);                  
+                ParamExceptionMessage = new(defExceptionMessage, v.ExceptionMessage);                  
+                ParamStackTrace = new(defStackTrace, v.StackTrace);                  
+                ParamIsResolved = new(defIsResolved, v.IsResolved);                  
+                ParamComments = new(defComments, v.Comments);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+                ParamUpdatedAt = new(defUpdatedAt, v.UpdatedAt);                  
+                ParamAbsoluteURL = new(defAbsoluteURL, v.AbsoluteURL);                  
+                ParamIPAddress = new(defIPAddress, v.IPAddress);                  
+                ParamUserID = new(defUserID, v.UserID);                  
+            }                  
                   
             public UpdateQueryBuilder SetTraceID(string v)                  
             {                  
@@ -456,7 +471,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -641,6 +656,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

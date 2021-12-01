@@ -182,7 +182,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___Payout(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___Payout(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -293,55 +293,55 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defAccountName;
        public static readonly DataColumnDefinition defAccountNumber;
 
-       public int CreatedByID { get => (int)TargettedRow[TableColumnNames.CreatedByID.ToString()];  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
+       public int CreatedByID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CreatedByID.ToString());  set => TargettedRow[TableColumnNames.CreatedByID.ToString()] = value; }
 
 
-       public int? UpdatedByID { get => (int?)TargettedRow[TableColumnNames.UpdatedByID.ToString()];  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
+       public int? UpdatedByID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.UpdatedByID.ToString());  set => TargettedRow[TableColumnNames.UpdatedByID.ToString()] = value; }
 
 
-       public int ClientID { get => (int)TargettedRow[TableColumnNames.ClientID.ToString()];  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
+       public int ClientID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ClientID.ToString());  set => TargettedRow[TableColumnNames.ClientID.ToString()] = value; }
 
 
-       public decimal PaidInAmount { get => (decimal)TargettedRow[TableColumnNames.PaidInAmount.ToString()];  set => TargettedRow[TableColumnNames.PaidInAmount.ToString()] = value; }
+       public decimal PaidInAmount { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.PaidInAmount.ToString());  set => TargettedRow[TableColumnNames.PaidInAmount.ToString()] = value; }
 
 
-       public decimal PaidInCharges { get => (decimal)TargettedRow[TableColumnNames.PaidInCharges.ToString()];  set => TargettedRow[TableColumnNames.PaidInCharges.ToString()] = value; }
+       public decimal PaidInCharges { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.PaidInCharges.ToString());  set => TargettedRow[TableColumnNames.PaidInCharges.ToString()] = value; }
 
 
-       public decimal PayoutAmount { get => (decimal)TargettedRow[TableColumnNames.PayoutAmount.ToString()];  set => TargettedRow[TableColumnNames.PayoutAmount.ToString()] = value; }
+       public decimal PayoutAmount { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.PayoutAmount.ToString());  set => TargettedRow[TableColumnNames.PayoutAmount.ToString()] = value; }
 
 
-       public decimal PayoutCharge { get => (decimal)TargettedRow[TableColumnNames.PayoutCharge.ToString()];  set => TargettedRow[TableColumnNames.PayoutCharge.ToString()] = value; }
+       public decimal PayoutCharge { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.PayoutCharge.ToString());  set => TargettedRow[TableColumnNames.PayoutCharge.ToString()] = value; }
 
 
-       public decimal Balance { get => (decimal)TargettedRow[TableColumnNames.Balance.ToString()];  set => TargettedRow[TableColumnNames.Balance.ToString()] = value; }
+       public decimal Balance { get => (decimal)TargettedRow.GetDBValueConverted<decimal>(TableColumnNames.Balance.ToString());  set => TargettedRow[TableColumnNames.Balance.ToString()] = value; }
 
 
-       public DateTime TransactionStartDate { get => (DateTime)TargettedRow[TableColumnNames.TransactionStartDate.ToString()];  set => TargettedRow[TableColumnNames.TransactionStartDate.ToString()] = value; }
+       public DateTime TransactionStartDate { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.TransactionStartDate.ToString());  set => TargettedRow[TableColumnNames.TransactionStartDate.ToString()] = value; }
 
 
-       public DateTime TransactionEndDate { get => (DateTime)TargettedRow[TableColumnNames.TransactionEndDate.ToString()];  set => TargettedRow[TableColumnNames.TransactionEndDate.ToString()] = value; }
+       public DateTime TransactionEndDate { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.TransactionEndDate.ToString());  set => TargettedRow[TableColumnNames.TransactionEndDate.ToString()] = value; }
 
 
-       public bool? AwaitingPayout { get => (bool?)TargettedRow[TableColumnNames.AwaitingPayout.ToString()];  set => TargettedRow[TableColumnNames.AwaitingPayout.ToString()] = value; }
+       public bool? AwaitingPayout { get => (bool?)TargettedRow.GetDBValueConverted<bool?>(TableColumnNames.AwaitingPayout.ToString());  set => TargettedRow[TableColumnNames.AwaitingPayout.ToString()] = value; }
 
 
-       public bool? Synced { get => (bool?)TargettedRow[TableColumnNames.Synced.ToString()];  set => TargettedRow[TableColumnNames.Synced.ToString()] = value; }
+       public bool? Synced { get => (bool?)TargettedRow.GetDBValueConverted<bool?>(TableColumnNames.Synced.ToString());  set => TargettedRow[TableColumnNames.Synced.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.UpdatedAt.ToString());  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
-       public int BankID { get => (int)TargettedRow[TableColumnNames.BankID.ToString()];  set => TargettedRow[TableColumnNames.BankID.ToString()] = value; }
+       public int BankID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.BankID.ToString());  set => TargettedRow[TableColumnNames.BankID.ToString()] = value; }
 
 
-       public string AccountName { get => (string)TargettedRow[TableColumnNames.AccountName.ToString()];  set => TargettedRow[TableColumnNames.AccountName.ToString()] = value; }
+       public string AccountName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.AccountName.ToString());  set => TargettedRow[TableColumnNames.AccountName.ToString()] = value; }
 
 
-       public string AccountNumber { get => (string)TargettedRow[TableColumnNames.AccountNumber.ToString()];  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
+       public string AccountNumber { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.AccountNumber.ToString());  set => TargettedRow[TableColumnNames.AccountNumber.ToString()] = value; }
 
 
  #endregion
@@ -367,7 +367,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___Payout GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___Payout GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -376,7 +376,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___Payout GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___Payout GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -424,6 +424,27 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___Payout v):this(v.ID)                  
+            {                  
+
+                ParamCreatedByID = new(defCreatedByID, v.CreatedByID);                  
+                ParamUpdatedByID = new(defUpdatedByID, v.UpdatedByID);                  
+                ParamClientID = new(defClientID, v.ClientID);                  
+                ParamPaidInAmount = new(defPaidInAmount, v.PaidInAmount);                  
+                ParamPaidInCharges = new(defPaidInCharges, v.PaidInCharges);                  
+                ParamPayoutAmount = new(defPayoutAmount, v.PayoutAmount);                  
+                ParamPayoutCharge = new(defPayoutCharge, v.PayoutCharge);                  
+                ParamBalance = new(defBalance, v.Balance);                  
+                ParamTransactionStartDate = new(defTransactionStartDate, v.TransactionStartDate);                  
+                ParamTransactionEndDate = new(defTransactionEndDate, v.TransactionEndDate);                  
+                ParamAwaitingPayout = new(defAwaitingPayout, v.AwaitingPayout);                  
+                ParamSynced = new(defSynced, v.Synced);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+                ParamUpdatedAt = new(defUpdatedAt, v.UpdatedAt);                  
+                ParamBankID = new(defBankID, v.BankID);                  
+                ParamAccountName = new(defAccountName, v.AccountName);                  
+                ParamAccountNumber = new(defAccountNumber, v.AccountNumber);                  
+            }                  
                   
             public UpdateQueryBuilder SetCreatedByID(int v)                  
             {                  
@@ -554,7 +575,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -793,6 +814,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

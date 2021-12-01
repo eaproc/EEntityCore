@@ -133,7 +133,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___SMSUsageLogBalance(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___SMSUsageLogBalance(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -201,10 +201,10 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defQuantityStocked;
        public static readonly DataColumnDefinition defQuantityUsed;
 
-       public decimal? QuantityStocked { get => (decimal?)TargettedRow[TableColumnNames.QuantityStocked.ToString()];  set => TargettedRow[TableColumnNames.QuantityStocked.ToString()] = value; }
+       public decimal? QuantityStocked { get => (decimal?)TargettedRow.GetDBValueConverted<decimal?>(TableColumnNames.QuantityStocked.ToString());  set => TargettedRow[TableColumnNames.QuantityStocked.ToString()] = value; }
 
 
-       public int? QuantityUsed { get => (int?)TargettedRow[TableColumnNames.QuantityUsed.ToString()];  set => TargettedRow[TableColumnNames.QuantityUsed.ToString()] = value; }
+       public int? QuantityUsed { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.QuantityUsed.ToString());  set => TargettedRow[TableColumnNames.QuantityUsed.ToString()] = value; }
 
 
  #endregion
@@ -230,7 +230,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___SMSUsageLogBalance GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___SMSUsageLogBalance GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -239,7 +239,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___SMSUsageLogBalance GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___SMSUsageLogBalance GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

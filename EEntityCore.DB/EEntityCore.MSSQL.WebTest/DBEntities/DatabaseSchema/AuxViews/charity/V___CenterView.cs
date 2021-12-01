@@ -158,7 +158,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public V___CenterView(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public V___CenterView(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -248,40 +248,40 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
        public static readonly DataColumnDefinition defCenterStatusID;
        public static readonly DataColumnDefinition defCenterStatus;
 
-       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()];  set => TargettedRow[TableColumnNames.Name.ToString()] = value; }
+       public string Name { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Name.ToString());  set => TargettedRow[TableColumnNames.Name.ToString()] = value; }
 
 
-       public string Address { get => (string)TargettedRow[TableColumnNames.Address.ToString()];  set => TargettedRow[TableColumnNames.Address.ToString()] = value; }
+       public string Address { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Address.ToString());  set => TargettedRow[TableColumnNames.Address.ToString()] = value; }
 
 
-       public string PastorName { get => (string)TargettedRow[TableColumnNames.PastorName.ToString()];  set => TargettedRow[TableColumnNames.PastorName.ToString()] = value; }
+       public string PastorName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.PastorName.ToString());  set => TargettedRow[TableColumnNames.PastorName.ToString()] = value; }
 
 
-       public string PastorEmail { get => (string)TargettedRow[TableColumnNames.PastorEmail.ToString()];  set => TargettedRow[TableColumnNames.PastorEmail.ToString()] = value; }
+       public string PastorEmail { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.PastorEmail.ToString());  set => TargettedRow[TableColumnNames.PastorEmail.ToString()] = value; }
 
 
-       public string PastorPhone { get => (string)TargettedRow[TableColumnNames.PastorPhone.ToString()];  set => TargettedRow[TableColumnNames.PastorPhone.ToString()] = value; }
+       public string PastorPhone { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.PastorPhone.ToString());  set => TargettedRow[TableColumnNames.PastorPhone.ToString()] = value; }
 
 
-       public string PastorAddress { get => (string)TargettedRow[TableColumnNames.PastorAddress.ToString()];  set => TargettedRow[TableColumnNames.PastorAddress.ToString()] = value; }
+       public string PastorAddress { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.PastorAddress.ToString());  set => TargettedRow[TableColumnNames.PastorAddress.ToString()] = value; }
 
 
-       public int PastorID { get => (int)TargettedRow[TableColumnNames.PastorID.ToString()];  set => TargettedRow[TableColumnNames.PastorID.ToString()] = value; }
+       public int PastorID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.PastorID.ToString());  set => TargettedRow[TableColumnNames.PastorID.ToString()] = value; }
 
 
-       public int PastorPersonID { get => (int)TargettedRow[TableColumnNames.PastorPersonID.ToString()];  set => TargettedRow[TableColumnNames.PastorPersonID.ToString()] = value; }
+       public int PastorPersonID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.PastorPersonID.ToString());  set => TargettedRow[TableColumnNames.PastorPersonID.ToString()] = value; }
 
 
-       public int? BeneficiaryCount { get => (int?)TargettedRow[TableColumnNames.BeneficiaryCount.ToString()];  set => TargettedRow[TableColumnNames.BeneficiaryCount.ToString()] = value; }
+       public int? BeneficiaryCount { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.BeneficiaryCount.ToString());  set => TargettedRow[TableColumnNames.BeneficiaryCount.ToString()] = value; }
 
 
-       public int ChurchCapacity { get => (int)TargettedRow[TableColumnNames.ChurchCapacity.ToString()];  set => TargettedRow[TableColumnNames.ChurchCapacity.ToString()] = value; }
+       public int ChurchCapacity { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ChurchCapacity.ToString());  set => TargettedRow[TableColumnNames.ChurchCapacity.ToString()] = value; }
 
 
-       public int CenterStatusID { get => (int)TargettedRow[TableColumnNames.CenterStatusID.ToString()];  set => TargettedRow[TableColumnNames.CenterStatusID.ToString()] = value; }
+       public int CenterStatusID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.CenterStatusID.ToString());  set => TargettedRow[TableColumnNames.CenterStatusID.ToString()] = value; }
 
 
-       public string CenterStatus { get => (string)TargettedRow[TableColumnNames.CenterStatus.ToString()];  set => TargettedRow[TableColumnNames.CenterStatus.ToString()] = value; }
+       public string CenterStatus { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.CenterStatus.ToString());  set => TargettedRow[TableColumnNames.CenterStatus.ToString()] = value; }
 
 
  #endregion
@@ -307,7 +307,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 transaction                  
                 );                                                      
                                                       
-        public static V___CenterView GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static V___CenterView GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -316,7 +316,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
                 );                  
         }                                                                        
                                                                         
-        public V___CenterView GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public V___CenterView GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             

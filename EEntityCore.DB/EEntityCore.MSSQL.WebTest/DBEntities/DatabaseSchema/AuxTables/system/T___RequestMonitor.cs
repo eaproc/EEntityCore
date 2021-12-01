@@ -154,7 +154,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___RequestMonitor(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___RequestMonitor(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -246,31 +246,31 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defRequestBody;
        public static readonly DataColumnDefinition defRequestHeaders;
 
-       public string AbsoluteURL { get => (string)TargettedRow[TableColumnNames.AbsoluteURL.ToString()];  set => TargettedRow[TableColumnNames.AbsoluteURL.ToString()] = value; }
+       public string AbsoluteURL { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.AbsoluteURL.ToString());  set => TargettedRow[TableColumnNames.AbsoluteURL.ToString()] = value; }
 
 
-       public string RequestParametersJSON { get => (string)TargettedRow[TableColumnNames.RequestParametersJSON.ToString()];  set => TargettedRow[TableColumnNames.RequestParametersJSON.ToString()] = value; }
+       public string RequestParametersJSON { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.RequestParametersJSON.ToString());  set => TargettedRow[TableColumnNames.RequestParametersJSON.ToString()] = value; }
 
 
-       public string IPAddress { get => (string)TargettedRow[TableColumnNames.IPAddress.ToString()];  set => TargettedRow[TableColumnNames.IPAddress.ToString()] = value; }
+       public string IPAddress { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.IPAddress.ToString());  set => TargettedRow[TableColumnNames.IPAddress.ToString()] = value; }
 
 
-       public string SessionVariables { get => (string)TargettedRow[TableColumnNames.SessionVariables.ToString()];  set => TargettedRow[TableColumnNames.SessionVariables.ToString()] = value; }
+       public string SessionVariables { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.SessionVariables.ToString());  set => TargettedRow[TableColumnNames.SessionVariables.ToString()] = value; }
 
 
-       public string Browser { get => (string)TargettedRow[TableColumnNames.Browser.ToString()];  set => TargettedRow[TableColumnNames.Browser.ToString()] = value; }
+       public string Browser { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Browser.ToString());  set => TargettedRow[TableColumnNames.Browser.ToString()] = value; }
 
 
-       public int? UserID { get => (int?)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
+       public int? UserID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.UserID.ToString());  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public string RequestBody { get => (string)TargettedRow[TableColumnNames.RequestBody.ToString()];  set => TargettedRow[TableColumnNames.RequestBody.ToString()] = value; }
+       public string RequestBody { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.RequestBody.ToString());  set => TargettedRow[TableColumnNames.RequestBody.ToString()] = value; }
 
 
-       public string RequestHeaders { get => (string)TargettedRow[TableColumnNames.RequestHeaders.ToString()];  set => TargettedRow[TableColumnNames.RequestHeaders.ToString()] = value; }
+       public string RequestHeaders { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.RequestHeaders.ToString());  set => TargettedRow[TableColumnNames.RequestHeaders.ToString()] = value; }
 
 
  #endregion
@@ -296,7 +296,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___RequestMonitor GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___RequestMonitor GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -305,7 +305,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___RequestMonitor GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___RequestMonitor GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -345,6 +345,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___RequestMonitor v):this(v.ID)                  
+            {                  
+
+                ParamAbsoluteURL = new(defAbsoluteURL, v.AbsoluteURL);                  
+                ParamRequestParametersJSON = new(defRequestParametersJSON, v.RequestParametersJSON);                  
+                ParamIPAddress = new(defIPAddress, v.IPAddress);                  
+                ParamSessionVariables = new(defSessionVariables, v.SessionVariables);                  
+                ParamBrowser = new(defBrowser, v.Browser);                  
+                ParamUserID = new(defUserID, v.UserID);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+                ParamRequestBody = new(defRequestBody, v.RequestBody);                  
+                ParamRequestHeaders = new(defRequestHeaders, v.RequestHeaders);                  
+            }                  
                   
             public UpdateQueryBuilder SetAbsoluteURL(string v)                  
             {                  
@@ -427,7 +440,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -594,6 +607,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

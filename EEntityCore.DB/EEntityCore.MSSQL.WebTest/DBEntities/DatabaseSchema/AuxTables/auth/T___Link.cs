@@ -166,7 +166,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___Link(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___Link(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -262,31 +262,31 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defCreatedAt;
        public static readonly DataColumnDefinition defUpdatedAt;
 
-       public int AppModuleID { get => (int)TargettedRow[TableColumnNames.AppModuleID.ToString()];  set => TargettedRow[TableColumnNames.AppModuleID.ToString()] = value; }
+       public int AppModuleID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.AppModuleID.ToString());  set => TargettedRow[TableColumnNames.AppModuleID.ToString()] = value; }
 
 
-       public string Name { get => (string)TargettedRow[TableColumnNames.Name.ToString()];  set => TargettedRow[TableColumnNames.Name.ToString()] = value; }
+       public string Name { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Name.ToString());  set => TargettedRow[TableColumnNames.Name.ToString()] = value; }
 
 
-       public string Link { get => (string)TargettedRow[TableColumnNames.Link.ToString()];  set => TargettedRow[TableColumnNames.Link.ToString()] = value; }
+       public string Link { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Link.ToString());  set => TargettedRow[TableColumnNames.Link.ToString()] = value; }
 
 
-       public int LinkPermissionID { get => (int)TargettedRow[TableColumnNames.LinkPermissionID.ToString()];  set => TargettedRow[TableColumnNames.LinkPermissionID.ToString()] = value; }
+       public int LinkPermissionID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.LinkPermissionID.ToString());  set => TargettedRow[TableColumnNames.LinkPermissionID.ToString()] = value; }
 
 
-       public int? LinkParentID { get => (int?)TargettedRow[TableColumnNames.LinkParentID.ToString()];  set => TargettedRow[TableColumnNames.LinkParentID.ToString()] = value; }
+       public int? LinkParentID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.LinkParentID.ToString());  set => TargettedRow[TableColumnNames.LinkParentID.ToString()] = value; }
 
 
-       public int? OwnedByRoleID { get => (int?)TargettedRow[TableColumnNames.OwnedByRoleID.ToString()];  set => TargettedRow[TableColumnNames.OwnedByRoleID.ToString()] = value; }
+       public int? OwnedByRoleID { get => (int?)TargettedRow.GetDBValueConverted<int?>(TableColumnNames.OwnedByRoleID.ToString());  set => TargettedRow[TableColumnNames.OwnedByRoleID.ToString()] = value; }
 
 
-       public string Description { get => (string)TargettedRow[TableColumnNames.Description.ToString()];  set => TargettedRow[TableColumnNames.Description.ToString()] = value; }
+       public string Description { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Description.ToString());  set => TargettedRow[TableColumnNames.Description.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow[TableColumnNames.UpdatedAt.ToString()];  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
+       public DateTime? UpdatedAt { get => (DateTime?)TargettedRow.GetDBValueConverted<DateTime?>(TableColumnNames.UpdatedAt.ToString());  set => TargettedRow[TableColumnNames.UpdatedAt.ToString()] = value; }
 
 
  #endregion
@@ -312,7 +312,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___Link GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___Link GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -321,7 +321,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___Link GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___Link GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -361,6 +361,19 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___Link v):this(v.ID)                  
+            {                  
+
+                ParamAppModuleID = new(defAppModuleID, v.AppModuleID);                  
+                ParamName = new(defName, v.Name);                  
+                ParamLink = new(defLink, v.Link);                  
+                ParamLinkPermissionID = new(defLinkPermissionID, v.LinkPermissionID);                  
+                ParamLinkParentID = new(defLinkParentID, v.LinkParentID);                  
+                ParamOwnedByRoleID = new(defOwnedByRoleID, v.OwnedByRoleID);                  
+                ParamDescription = new(defDescription, v.Description);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+                ParamUpdatedAt = new(defUpdatedAt, v.UpdatedAt);                  
+            }                  
                   
             public UpdateQueryBuilder SetAppModuleID(int v)                  
             {                  
@@ -443,7 +456,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -610,6 +623,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

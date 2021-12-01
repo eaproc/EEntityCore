@@ -158,7 +158,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___PasswordResetHistory(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___PasswordResetHistory(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -248,25 +248,25 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defChangedByUserID;
        public static readonly DataColumnDefinition defIpAddress;
 
-       public int UserID { get => (int)TargettedRow[TableColumnNames.UserID.ToString()];  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
+       public int UserID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.UserID.ToString());  set => TargettedRow[TableColumnNames.UserID.ToString()] = value; }
 
 
-       public string OldPassword { get => (string)TargettedRow[TableColumnNames.OldPassword.ToString()];  set => TargettedRow[TableColumnNames.OldPassword.ToString()] = value; }
+       public string OldPassword { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.OldPassword.ToString());  set => TargettedRow[TableColumnNames.OldPassword.ToString()] = value; }
 
 
-       public string NewPassword { get => (string)TargettedRow[TableColumnNames.NewPassword.ToString()];  set => TargettedRow[TableColumnNames.NewPassword.ToString()] = value; }
+       public string NewPassword { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.NewPassword.ToString());  set => TargettedRow[TableColumnNames.NewPassword.ToString()] = value; }
 
 
-       public int PasswordResetTypeID { get => (int)TargettedRow[TableColumnNames.PasswordResetTypeID.ToString()];  set => TargettedRow[TableColumnNames.PasswordResetTypeID.ToString()] = value; }
+       public int PasswordResetTypeID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.PasswordResetTypeID.ToString());  set => TargettedRow[TableColumnNames.PasswordResetTypeID.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
-       public int ChangedByUserID { get => (int)TargettedRow[TableColumnNames.ChangedByUserID.ToString()];  set => TargettedRow[TableColumnNames.ChangedByUserID.ToString()] = value; }
+       public int ChangedByUserID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ChangedByUserID.ToString());  set => TargettedRow[TableColumnNames.ChangedByUserID.ToString()] = value; }
 
 
-       public string IpAddress { get => (string)TargettedRow[TableColumnNames.IpAddress.ToString()];  set => TargettedRow[TableColumnNames.IpAddress.ToString()] = value; }
+       public string IpAddress { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.IpAddress.ToString());  set => TargettedRow[TableColumnNames.IpAddress.ToString()] = value; }
 
 
  #endregion
@@ -292,7 +292,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___PasswordResetHistory GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___PasswordResetHistory GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -301,7 +301,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___PasswordResetHistory GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___PasswordResetHistory GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -339,6 +339,17 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___PasswordResetHistory v):this(v.ID)                  
+            {                  
+
+                ParamUserID = new(defUserID, v.UserID);                  
+                ParamOldPassword = new(defOldPassword, v.OldPassword);                  
+                ParamNewPassword = new(defNewPassword, v.NewPassword);                  
+                ParamPasswordResetTypeID = new(defPasswordResetTypeID, v.PasswordResetTypeID);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+                ParamChangedByUserID = new(defChangedByUserID, v.ChangedByUserID);                  
+                ParamIpAddress = new(defIpAddress, v.IpAddress);                  
+            }                  
                   
             public UpdateQueryBuilder SetUserID(int v)                  
             {                  
@@ -409,7 +420,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -558,6 +569,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   

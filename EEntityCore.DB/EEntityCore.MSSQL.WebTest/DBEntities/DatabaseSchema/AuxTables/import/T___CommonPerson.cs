@@ -172,7 +172,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
         /// <param name="FullTable"></param>                                                      
         /// <param name="TargettedRowID"></param>                                                      
         /// <remarks></remarks>                                    
-        public T___CommonPerson(DataTable FullTable, int TargettedRowID) : base(FullTable, TargettedRowID)                                    
+        public T___CommonPerson(DataTable FullTable, long TargettedRowID) : base(FullTable, TargettedRowID)                                    
         {                                    
         }                                    
                                             
@@ -279,52 +279,52 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
        public static readonly DataColumnDefinition defImportComment;
        public static readonly DataColumnDefinition defCreatedAt;
 
-       public int DataMonitorID { get => (int)TargettedRow[TableColumnNames.DataMonitorID.ToString()];  set => TargettedRow[TableColumnNames.DataMonitorID.ToString()] = value; }
+       public int DataMonitorID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.DataMonitorID.ToString());  set => TargettedRow[TableColumnNames.DataMonitorID.ToString()] = value; }
 
 
-       public int ImportStatusID { get => (int)TargettedRow[TableColumnNames.ImportStatusID.ToString()];  set => TargettedRow[TableColumnNames.ImportStatusID.ToString()] = value; }
+       public int ImportStatusID { get => (int)TargettedRow.GetDBValueConverted<int>(TableColumnNames.ImportStatusID.ToString());  set => TargettedRow[TableColumnNames.ImportStatusID.ToString()] = value; }
 
 
-       public string IdentificationNo { get => (string)TargettedRow[TableColumnNames.IdentificationNo.ToString()];  set => TargettedRow[TableColumnNames.IdentificationNo.ToString()] = value; }
+       public string IdentificationNo { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.IdentificationNo.ToString());  set => TargettedRow[TableColumnNames.IdentificationNo.ToString()] = value; }
 
 
-       public string PersonTitle { get => (string)TargettedRow[TableColumnNames.PersonTitle.ToString()];  set => TargettedRow[TableColumnNames.PersonTitle.ToString()] = value; }
+       public string PersonTitle { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.PersonTitle.ToString());  set => TargettedRow[TableColumnNames.PersonTitle.ToString()] = value; }
 
 
-       public string FirstName { get => (string)TargettedRow[TableColumnNames.FirstName.ToString()];  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
+       public string FirstName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.FirstName.ToString());  set => TargettedRow[TableColumnNames.FirstName.ToString()] = value; }
 
 
-       public string LastName { get => (string)TargettedRow[TableColumnNames.LastName.ToString()];  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
+       public string LastName { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.LastName.ToString());  set => TargettedRow[TableColumnNames.LastName.ToString()] = value; }
 
 
-       public string Country { get => (string)TargettedRow[TableColumnNames.Country.ToString()];  set => TargettedRow[TableColumnNames.Country.ToString()] = value; }
+       public string Country { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Country.ToString());  set => TargettedRow[TableColumnNames.Country.ToString()] = value; }
 
 
-       public DateTime DateOfBirth { get => (DateTime)TargettedRow[TableColumnNames.DateOfBirth.ToString()];  set => TargettedRow[TableColumnNames.DateOfBirth.ToString()] = value; }
+       public DateTime DateOfBirth { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.DateOfBirth.ToString());  set => TargettedRow[TableColumnNames.DateOfBirth.ToString()] = value; }
 
 
-       public string Gender { get => (string)TargettedRow[TableColumnNames.Gender.ToString()];  set => TargettedRow[TableColumnNames.Gender.ToString()] = value; }
+       public string Gender { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Gender.ToString());  set => TargettedRow[TableColumnNames.Gender.ToString()] = value; }
 
 
-       public string HomeAddress { get => (string)TargettedRow[TableColumnNames.HomeAddress.ToString()];  set => TargettedRow[TableColumnNames.HomeAddress.ToString()] = value; }
+       public string HomeAddress { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.HomeAddress.ToString());  set => TargettedRow[TableColumnNames.HomeAddress.ToString()] = value; }
 
 
-       public string Email { get => (string)TargettedRow[TableColumnNames.Email.ToString()];  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
+       public string Email { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.Email.ToString());  set => TargettedRow[TableColumnNames.Email.ToString()] = value; }
 
 
-       public string BirthPlace { get => (string)TargettedRow[TableColumnNames.BirthPlace.ToString()];  set => TargettedRow[TableColumnNames.BirthPlace.ToString()] = value; }
+       public string BirthPlace { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.BirthPlace.ToString());  set => TargettedRow[TableColumnNames.BirthPlace.ToString()] = value; }
 
 
-       public string MobileAreaCode { get => (string)TargettedRow[TableColumnNames.MobileAreaCode.ToString()];  set => TargettedRow[TableColumnNames.MobileAreaCode.ToString()] = value; }
+       public string MobileAreaCode { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.MobileAreaCode.ToString());  set => TargettedRow[TableColumnNames.MobileAreaCode.ToString()] = value; }
 
 
-       public string MobileNumber { get => (string)TargettedRow[TableColumnNames.MobileNumber.ToString()];  set => TargettedRow[TableColumnNames.MobileNumber.ToString()] = value; }
+       public string MobileNumber { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.MobileNumber.ToString());  set => TargettedRow[TableColumnNames.MobileNumber.ToString()] = value; }
 
 
-       public string ImportComment { get => (string)TargettedRow[TableColumnNames.ImportComment.ToString()];  set => TargettedRow[TableColumnNames.ImportComment.ToString()] = value; }
+       public string ImportComment { get => (string)TargettedRow.GetDBValueConverted<string>(TableColumnNames.ImportComment.ToString());  set => TargettedRow[TableColumnNames.ImportComment.ToString()] = value; }
 
 
-       public DateTime CreatedAt { get => (DateTime)TargettedRow[TableColumnNames.CreatedAt.ToString()];  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
+       public DateTime CreatedAt { get => (DateTime)TargettedRow.GetDBValueConverted<DateTime>(TableColumnNames.CreatedAt.ToString());  set => TargettedRow[TableColumnNames.CreatedAt.ToString()] = value; }
 
 
  #endregion
@@ -350,7 +350,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 transaction                  
                 );                                                      
                                                       
-        public static T___CommonPerson GetRowWhereIDUsingSQL(int pID, DBTransaction transaction = null)                                                                        
+        public static T___CommonPerson GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
         {                  
             return TransactionRunner.InvokeRun(                  
                 (conn) =>                   
@@ -359,7 +359,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 );                  
         }                                                                        
                                                                         
-        public T___CommonPerson GetRowWhereID(int pID) => new(this.RawTable, pID);                                                      
+        public T___CommonPerson GetRowWhereID(long pID) => new(this.RawTable, pID);                                                      
                                                       
         public Dictionary<string, DataColumnDefinition> GetDefinitions() => ColumnDefns;                                             
                                             
@@ -406,6 +406,26 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                 ParamID = new(defID, ID);                  
             }                  
 
+            public UpdateQueryBuilder( T___CommonPerson v):this(v.ID)                  
+            {                  
+
+                ParamDataMonitorID = new(defDataMonitorID, v.DataMonitorID);                  
+                ParamImportStatusID = new(defImportStatusID, v.ImportStatusID);                  
+                ParamIdentificationNo = new(defIdentificationNo, v.IdentificationNo);                  
+                ParamPersonTitle = new(defPersonTitle, v.PersonTitle);                  
+                ParamFirstName = new(defFirstName, v.FirstName);                  
+                ParamLastName = new(defLastName, v.LastName);                  
+                ParamCountry = new(defCountry, v.Country);                  
+                ParamDateOfBirth = new(defDateOfBirth, v.DateOfBirth);                  
+                ParamGender = new(defGender, v.Gender);                  
+                ParamHomeAddress = new(defHomeAddress, v.HomeAddress);                  
+                ParamEmail = new(defEmail, v.Email);                  
+                ParamBirthPlace = new(defBirthPlace, v.BirthPlace);                  
+                ParamMobileAreaCode = new(defMobileAreaCode, v.MobileAreaCode);                  
+                ParamMobileNumber = new(defMobileNumber, v.MobileNumber);                  
+                ParamImportComment = new(defImportComment, v.ImportComment);                  
+                ParamCreatedAt = new(defCreatedAt, v.CreatedAt);                  
+            }                  
                   
             public UpdateQueryBuilder SetDataMonitorID(int v)                  
             {                  
@@ -530,7 +550,7 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
                     .ToList();                  
             }                  
                   
-            public int Execute(DBTransaction trans)                  
+            public int Execute(DBTransaction trans = null)                  
             {                  
                 return TransactionRunner.InvokeRun((conn) => conn.ExecuteTransactionQuery(this.BuildSQL()), trans);                  
             }                  
@@ -760,6 +780,28 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxTable
 
 
         }                  
+
+
+                  
+        /// <summary>                  
+        /// Update current table. Works just for Target Row                  
+        /// </summary>                  
+        /// <param name="reloadTable">if you want this class reloaded</param>                  
+        /// <param name="transaction"></param>                  
+        /// <returns></returns>                  
+        public bool Update(bool reloadTable = false, DBTransaction transaction = null)                  
+        {                  
+            return TransactionRunner.InvokeRun(                  
+               (conn) => {                  
+                   bool r = new UpdateQueryBuilder(this).Execute(conn).ToBoolean();                  
+                   if (reloadTable) this.LoadFromRows( GetRowWhereIDUsingSQL(this.ID, conn).TargettedRow );                  
+                   return r;                  
+               },                  
+               transaction                  
+               );                  
+        }                  
+                  
+
 
 
                   
