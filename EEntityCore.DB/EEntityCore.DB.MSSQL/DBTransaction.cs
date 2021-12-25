@@ -11,13 +11,23 @@ namespace EEntityCore.DB.MSSQL
     /// <summary>
     /// This connection will be closed after usage
     /// </summary>
-    public class DBTransaction:IDisposable
+    public partial class DBTransaction:IDisposable
     {
 
         private SqlConnection DBTransactionConn = null;
         private readonly SqlCommand DBTransactionCommand = null;
 
         public string TransactionName { get; }
+
+        public struct QueryTimeReport
+        {
+            public long ElapsedMilliseconds;
+            public string SQL;
+        }
+        /// <summary>
+        /// Store Queries Executed Against Time taken in millisecs
+        /// </summary>
+        public List<QueryTimeReport> Queries { get; private set; }
 
         private readonly SqlTransaction CommandTransactionPointer = null;
         private bool disposedValue;
@@ -33,6 +43,8 @@ namespace EEntityCore.DB.MSSQL
         {
             finalizedTransaction = false;
             disposedValue = false;
+
+            this.Queries = new List<QueryTimeReport>();
 
             this.DBTransactionConn = Connection;
 
@@ -64,17 +76,31 @@ namespace EEntityCore.DB.MSSQL
         {
             if (this.finalizedTransaction || this.disposedValue) throw new InvalidOperationException("Transaction is not in a good state!");
 
+            // begin timing
+            QueryExecutionTimer timer = null;
+
             try
             {
                 touched = true;
 
                 this.DBTransactionCommand.CommandText = pSQL;
-                return this.DBTransactionCommand.ExecuteNonQuery();
+
+                using (timer = new(pSQL))
+                {
+                    return this.DBTransactionCommand.ExecuteNonQuery();
+                }
+
             }
             catch (Exception)
             {
                 this.RollBackDBTransaction();
                 throw;
+            }
+            finally
+            {
+                // end timing
+                // record timing
+                this.Queries.Add(new() { ElapsedMilliseconds = timer.ElapsedMilliseconds, SQL = pSQL });
             }
         }
 
@@ -90,17 +116,30 @@ namespace EEntityCore.DB.MSSQL
         {
             if (this.finalizedTransaction || this.disposedValue) throw new InvalidOperationException("Transaction is not in a good state!");
 
+            // begin timing
+            QueryExecutionTimer timer = null;
+
             try
             {
                 touched = true;
 
                 this.DBTransactionCommand.CommandText = pSQL;
-                return this.DBTransactionCommand.ExecuteScalar();
+
+                using (timer = new(pSQL))
+                {
+                    return this.DBTransactionCommand.ExecuteScalar();
+                }
             }
             catch (Exception)
             {
                 this.RollBackDBTransaction();
                 throw;
+            }
+            finally
+            {
+                // end timing
+                // record timing
+                this.Queries.Add(new() { ElapsedMilliseconds = timer.ElapsedMilliseconds, SQL = pSQL });
             }
         }
 
@@ -108,21 +147,32 @@ namespace EEntityCore.DB.MSSQL
         {
             if (this.finalizedTransaction || this.disposedValue) throw new InvalidOperationException("Transaction is not in a good state!");
 
+            // begin timing
+            QueryExecutionTimer timer = null;
+
             try
             {
+                using (timer = new(SQL))
+                {
+                    DataSet srs = new();
+                    DBTransactionCommand.CommandText = SQL;
 
-                DataSet srs = new();
-                DBTransactionCommand.CommandText = SQL;
+                    var da = new SqlDataAdapter(DBTransactionCommand);
+                    da.Fill(srs);
 
-                var da = new SqlDataAdapter(DBTransactionCommand);
-                da.Fill(srs);
-
-                return srs;
+                    return srs;
+                }
             }
             catch (Exception)
             {
                 this.RollBackDBTransaction();
                 throw;
+            }
+            finally
+            {
+                // end timing
+                // record timing
+                this.Queries.Add(new() { ElapsedMilliseconds = timer.ElapsedMilliseconds, SQL = SQL } );
             }
         }
 

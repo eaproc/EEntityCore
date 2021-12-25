@@ -91,10 +91,12 @@ namespace EEntityCore.MSSQL.WebTest
         private static void TestExtension()
         {
 
+            using var transaction = DatabaseInit.CreateTransaction();
 
-            T___TestTable result = T___TestTable.GetRowWhereIDUsingSQL(1);
+            T___TestTable result = T___TestTable.GetRowWhereIDUsingSQL(1, transaction);
             Console.WriteLine("Result was {0}", result.TestString);
 
+            Console.WriteLine(JsonConvert.SerializeObject(transaction.Queries));
 
             T___TestTableExtended result2 = result.As<T___TestTableExtended>();
             Console.WriteLine("Result was {0}", result2.AppendedAttribute);
