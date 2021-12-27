@@ -15,9 +15,15 @@ namespace EEntityCore.MSSQL.WebTest
             try
             {
 
-                DatabaseInit.DBConnectInterface = new DatabaseInit("SalesSCADWARE", "sa", "netEPRO@2017", 51391, @"localhost\SQLSERVER2016");
+                var service = new TestService( new EWebFrameworkCore.Vendor.Configurations.MSSQLConnectionOption() {
+                    DATABASE_NAME = "SalesSCADWARE", 
+                    DATABASE_USER_NAME = "sa",
+                    DATABASE_USER_PASSWORD = "netEPRO@2017",
+                    PORT = 51391, 
+                    HOST = @"localhost\SQLSERVER2016"
+                });
 
-                TestExtension();
+                service.TestExtension();
 
                 //TestUpdate();
 
@@ -48,90 +54,77 @@ namespace EEntityCore.MSSQL.WebTest
             }
         }
 
-        private static void TestFetch()
-        {
-            T___TestTable result = T___TestTable.GetFullTable();
-            Console.WriteLine("Result was {0}", result.RowCount);
+        //private static void TestFetch()
+        //{
+        //    T___TestTable result = T___TestTable.GetFullTable();
+        //    Console.WriteLine("Result was {0}", result.RowCount);
 
-            result = T___TestTable.GetRowWhereIDUsingSQL(1);
-            Console.WriteLine("Result was {0}", result.TestInt32);
-        }
-
-
-        private static void TestUpdate()
-        {
-
-            //T___TestTable.UpdateQueryBuilder builder = new T___TestTable.UpdateQueryBuilder(1);
-            //builder.SetTestString("This is getting hilarious").SetTestBool(true).SetTestInt32(5500);
-
-            //Console.WriteLine("Result was [{0}]", builder.BuildSQL());
-
-            T___TestTable result = T___TestTable.GetRowWhereIDUsingSQL(1);
-            Console.WriteLine("Result was {0}", result.TestString);
-
-            //// Testing Mutilators
-            //result.TestString = "What is happening";
-            //Console.WriteLine("Result was {0}", result.TestString);
-
-            result.TestString = "This is getting hilarious";
-
-            T___TestTable.UpdateQueryBuilder builder2 = new T___TestTable.UpdateQueryBuilder(result);
-            //builder2.SetTestString("This is getting hilarious").SetTestBool(true).SetTestInt32(5500);
-            Console.WriteLine("SQL: [{0}]", builder2.BuildSQL());
-
-            result.Update(reloadTable: true);
+        //    result = T___TestTable.GetRowWhereIDUsingSQL(1);
+        //    Console.WriteLine("Result was {0}", result.TestInt32);
+        //}
 
 
-            Console.WriteLine("After Update [{0}]", result.TestString);
+        //private static void TestUpdate()
+        //{
+
+        //    //T___TestTable.UpdateQueryBuilder builder = new T___TestTable.UpdateQueryBuilder(1);
+        //    //builder.SetTestString("This is getting hilarious").SetTestBool(true).SetTestInt32(5500);
+
+        //    //Console.WriteLine("Result was [{0}]", builder.BuildSQL());
+
+        //    T___TestTable result = T___TestTable.GetRowWhereIDUsingSQL(1);
+        //    Console.WriteLine("Result was {0}", result.TestString);
+
+        //    //// Testing Mutilators
+        //    //result.TestString = "What is happening";
+        //    //Console.WriteLine("Result was {0}", result.TestString);
+
+        //    result.TestString = "This is getting hilarious";
+
+        //    T___TestTable.UpdateQueryBuilder builder2 = new T___TestTable.UpdateQueryBuilder(result);
+        //    //builder2.SetTestString("This is getting hilarious").SetTestBool(true).SetTestInt32(5500);
+        //    Console.WriteLine("SQL: [{0}]", builder2.BuildSQL());
+
+        //    result.Update(reloadTable: true);
 
 
-        }
+        //    Console.WriteLine("After Update [{0}]", result.TestString);
 
 
-        private static void TestExtension()
-        {
-
-            using var transaction = DatabaseInit.CreateTransaction();
-
-            T___TestTable result = T___TestTable.GetRowWhereIDUsingSQL(1, transaction);
-            Console.WriteLine("Result was {0}", result.TestString);
-
-            Console.WriteLine(JsonConvert.SerializeObject(transaction.Queries));
-
-            T___TestTableExtended result2 = result.As<T___TestTableExtended>();
-            Console.WriteLine("Result was {0}", result2.AppendedAttribute);
-            Console.WriteLine("Result was {0}", result2.TestString);
-        }
+        //}
 
 
-        private static void TestDelete()
-        {
-            T___TestTable result = T___TestTable.GetRowWhereIDUsingSQL(3);
-            Console.WriteLine("Result was {0}", result.TestInt32);
-
-            var r = result.DeleteRow();
-            Console.WriteLine("Result was {0}", r);
-
-        }
+      
 
 
-        private static void TestAddWithID()
-        {
-           bool result =   T___TestTable.AddWithID(2, "Funny", 400, true, (decimal)10.244, DateTime.Now);
-           Console.WriteLine("Result was {0}", result);
-        }
+        //private static void TestDelete()
+        //{
+        //    T___TestTable result = T___TestTable.GetRowWhereIDUsingSQL(3);
+        //    Console.WriteLine("Result was {0}", result.TestInt32);
 
-        private static void TestAdd()
-        {
-            bool result = T___TestTable.Add("Funny Add", 65400, true, (decimal)10.244, DateTime.Now);
-            Console.WriteLine("Result was {0}", result);
-        }
+        //    var r = result.DeleteRow();
+        //    Console.WriteLine("Result was {0}", r);
 
-        private static void TestInsertGetID()
-        {
-            //using var transaction = new DBTransaction( DatabaseInit.DBConnectInterface.GetDBConn().GetSQLConnection());
-            long result = T___TestTable.InsertGetID("Funny", 400, true, (decimal)10.244, DateTime.Now, transaction: null);
-            Console.WriteLine("Result was {0}", result);
-        }
+        //}
+
+
+        //private static void TestAddWithID()
+        //{
+        //   bool result =   T___TestTable.AddWithID(2, "Funny", 400, true, (decimal)10.244, DateTime.Now);
+        //   Console.WriteLine("Result was {0}", result);
+        //}
+
+        //private static void TestAdd()
+        //{
+        //    bool result = T___TestTable.Add("Funny Add", 65400, true, (decimal)10.244, DateTime.Now);
+        //    Console.WriteLine("Result was {0}", result);
+        //}
+
+        //private static void TestInsertGetID()
+        //{
+        //    //using var transaction = new DBTransaction( DatabaseInit.DBConnectInterface.GetDBConn().GetSQLConnection());
+        //    long result = T___TestTable.InsertGetID("Funny", 400, true, (decimal)10.244, DateTime.Now, transaction: null);
+        //    Console.WriteLine("Result was {0}", result);
+        //}
     }
 }

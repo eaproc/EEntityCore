@@ -2,9 +2,9 @@ using System;
 
 namespace EEntityCore.DB.MSSQL.Schemas
 {
-    public interface IDatabaseInit: ISQLServerDBCredential
+    public interface IDatabaseInit
     {
-        IDatabaseInit GetDatabaseInit();
+        //IDatabaseInit GetDatabaseInit();
         MsSQLDB GetDBConn();
     }
 }

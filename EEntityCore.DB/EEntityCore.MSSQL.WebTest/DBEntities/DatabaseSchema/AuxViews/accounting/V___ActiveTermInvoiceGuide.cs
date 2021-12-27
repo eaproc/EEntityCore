@@ -10,7 +10,6 @@ using ELibrary.Standard.VB.Modules;
 using EEntityCore.DB.MSSQL.Schemas;                  
 using EEntityCore.DB.MSSQL;                  
 using EEntityCore.DB.Modules;                  
-using static EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.DatabaseInit;
 using EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema;
 
 namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews.accounting                  
@@ -325,18 +324,14 @@ namespace EEntityCore.MSSQL.WebTest.DBEntities.DatabaseSchema.AuxTables.AuxViews
             return null;                                                                        
         }                                                                        
                                                                         
-        public static V___ActiveTermInvoiceGuide GetFullTable(DBTransaction transaction = null) =>                   
-            TransactionRunner.InvokeRun( (conn) =>                  
-                new V___ActiveTermInvoiceGuide(conn.Fetch(ActiveTermInvoiceGuide__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable()),                  
-                transaction                  
+        public static V___ActiveTermInvoiceGuide GetFullTable(TransactionRunner runner) =>                   
+            runner.Run( (conn) =>                  
+                new V___ActiveTermInvoiceGuide(conn.Fetch(ActiveTermInvoiceGuide__ALL_COLUMNS___SQL_FILL_QUERY).FirstTable())                  
                 );                                                      
                                                       
-        public static V___ActiveTermInvoiceGuide GetRowWhereIDUsingSQL(long pID, DBTransaction transaction = null)                                                                        
+        public static V___ActiveTermInvoiceGuide GetRowWhereIDUsingSQL(long pID, TransactionRunner runner)                                                                        
         {                  
-            return TransactionRunner.InvokeRun(                  
-                (conn) =>                   
-                new V___ActiveTermInvoiceGuide( conn.Fetch($"SELECT * FROM {TABLE_NAME} WHERE ID={pID}" ).FirstTable(), pID ),                  
-                transaction                  
+            return runner.Run( (conn) =>  new V___ActiveTermInvoiceGuide( conn.Fetch($"SELECT * FROM {TABLE_NAME} WHERE ID={pID}" ).FirstTable(), pID )                  
                 );                  
         }                                                                        
                                                                         
