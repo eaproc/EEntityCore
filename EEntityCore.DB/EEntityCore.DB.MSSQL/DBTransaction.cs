@@ -91,9 +91,15 @@ namespace EEntityCore.DB.MSSQL
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 this.RollBackDBTransaction();
+
+                Exceptions.DuplicateRowException.DetectAndThrow(ex);
+                Exceptions.DeleteForeignKeyException.DetectAndThrow(ex);
+                Exceptions.TooLargeNumericValue.DetectAndThrow(ex);
+                Exceptions.UpdateForeignKeyException.DetectAndThrow(ex);
+
                 throw;
             }
             finally
@@ -130,9 +136,15 @@ namespace EEntityCore.DB.MSSQL
                     return this.DBTransactionCommand.ExecuteScalar();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 this.RollBackDBTransaction();
+
+                Exceptions.DuplicateRowException.DetectAndThrow(ex);
+                Exceptions.DeleteForeignKeyException.DetectAndThrow(ex);
+                Exceptions.TooLargeNumericValue.DetectAndThrow(ex);
+                Exceptions.UpdateForeignKeyException.DetectAndThrow(ex);
+
                 throw;
             }
             finally
