@@ -359,6 +359,9 @@ namespace EEntityCore.DB.MSSQL
             }
             catch (Exception ex)
             {
+                DeleteForeignKeyException.DetectAndThrow(ex);
+                DuplicateRowException.DetectAndThrow(ex);
+
                 var ex2 = new SQLCodeException(SQL, ex);
 
                 // Logger.Log(New SQLCodeException(SQL, ex))

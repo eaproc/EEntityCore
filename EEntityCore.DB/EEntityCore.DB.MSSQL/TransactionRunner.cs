@@ -8,17 +8,26 @@ namespace EEntityCore.DB.MSSQL
 {
     public class TransactionRunner : IDisposable
     {
-        private bool AllowDispose;
+        private bool AllowDispose { get; }
+
+        public bool ImmediateDisposal { get; }
         public DBTransaction Transaction { get; private set; }
 
-        public TransactionRunner(DBTransaction trans, bool allowDispose = true)
+        /// <summary>
+        /// Note the usage of allow dispose here
+        /// </summary>
+        /// <param name="trans"></param>
+        /// <param name="allowDispose">If true, Dispose method will work fine on Garbage Collection and on normal call else you will need to call ForceDispose()</param>
+        /// <param name="immediateDisposal">If true and allowDispose is true, it will dispose immediately on the first call of Run</param>
+        public TransactionRunner(DBTransaction trans, bool allowDispose = true, bool immediateDisposal = true)
         {
             Transaction = trans;
             AllowDispose = allowDispose;
+            ImmediateDisposal = immediateDisposal;
         }
 
         /// <summary>
-        /// NB: This will call dispose immediately if allowed
+        /// NB: This will call dispose immediately if allowed on constructor
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="action"></param>
@@ -28,7 +37,7 @@ namespace EEntityCore.DB.MSSQL
             var r = action(this.Transaction);
 
             // Dispose immediately if no need to hold for long
-            if (AllowDispose) this.Dispose();
+            if (AllowDispose && this.ImmediateDisposal) this.Dispose();
 
             return r;
         }
