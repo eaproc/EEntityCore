@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,11 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\EEntityCore.DB.MSSQL\EEntityCore.DB.MSSQL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +23,9 @@
     </Reference>
     <Reference Include="EEntityCore.DB">
       <HintPath>..\EEntityCore.DB\bin\Debug\net5.0\EEntityCore.DB.dll</HintPath>
+    </Reference>
+    <Reference Include="EEntityCore.DB.MSSQL">
+      <HintPath>..\EEntityCore.DB.MSSQL\bin\Debug\net6.0\EEntityCore.DB.MSSQL.dll</HintPath>
     </Reference>
     <Reference Include="ELibrary.Standard.VB">
       <HintPath>..\..\..\ELibrary\ELibrary.Standard.VB\bin\Debug\netstandard2.0\ELibrary.Standard.VB.dll</HintPath>
