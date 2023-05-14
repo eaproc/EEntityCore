@@ -161,6 +161,7 @@ namespace EEntityCore.DB.MSSQL.Schemas
             switch (pType)
             {
                 case var @case when @case == typeof(bool):
+                case var case22 when case22 == typeof(bool?):
                     {
                         return AllowedDataTypes.Bool;
                     }
@@ -171,17 +172,20 @@ namespace EEntityCore.DB.MSSQL.Schemas
                 case var case4 when case4 == typeof(ushort):
                 case var case5 when case5 == typeof(int):
                 case var case6 when case6 == typeof(uint):
+                case var case61 when case61 == typeof(int?):
                     {
                         return AllowedDataTypes.Int;
                     }
 
                 case var case7 when case7 == typeof(long):
+                case var case77 when case77 == typeof(long?):
                 case var case8 when case8 == typeof(ulong):
                     {
                         return AllowedDataTypes.Long;
                     }
 
                 case var case9 when case9 == typeof(decimal):
+                case var case99 when case99 == typeof(decimal?):
                 case var case10 when case10 == typeof(double):
                     {
                         return AllowedDataTypes.Decimal;
@@ -198,6 +202,7 @@ namespace EEntityCore.DB.MSSQL.Schemas
                         return AllowedDataTypes.Blob;
                     }
 
+                case var case17 when case17 == typeof(DateTime?):
                 case var case14 when case14 == typeof(DateTime):
                     {
                         return AllowedDataTypes.DateTime;

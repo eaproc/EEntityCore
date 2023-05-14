@@ -223,6 +223,10 @@ namespace EEntityCore.DB.MSSQL
 
         }
 
+        /// <summary>
+        /// This will call the commit automatically if you have not called it
+        /// </summary>
+        /// <param name="disposing"></param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
