@@ -2,6 +2,9 @@ using ELibrary.Standard.VB.Modules;
 
 namespace EEntityCore.DB.MSSQL.Schemas
 {
+    /// <summary>
+    /// Used as just indicator
+    /// </summary>
     public class DataColumnNullParamValue
     {
         public DataColumnNullParamValue()
@@ -25,7 +28,7 @@ namespace EEntityCore.DB.MSSQL.Schemas
             return false;
         }
 
-        public const string NULL_VALUE = "--(*_*)- CODER => You Rock";
+        public const string NULL_VALUE = "-SKIP^.^COLUMN-";
 
         public override int GetHashCode()
         {

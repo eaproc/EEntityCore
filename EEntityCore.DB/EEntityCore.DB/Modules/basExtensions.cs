@@ -149,6 +149,8 @@ namespace EEntityCore.DB.Modules
         /// <remarks></remarks>
         public static object GetDBValueConverted<T>(this DataRow row, string columnName)
         {
+            if(row == null) return null;
+
             var r = row[columnName];
 
             if ( typeof(T) == typeof(string) )

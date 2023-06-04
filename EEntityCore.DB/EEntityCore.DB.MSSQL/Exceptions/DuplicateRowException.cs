@@ -41,7 +41,7 @@ namespace EEntityCore.DB.MSSQL.Exceptions
             String s = exception.Message;
             if (s.IndexOf("Violation of UNIQUE KEY constraint")<0 && s.IndexOf("Cannot insert duplicate key row")<0 ) return null;
 
-            bool IsFirstMethod = s.IndexOf("Violation of UNIQUE KEY constraint")>=0;
+            bool IsFirstMethod = s.Contains("Violation of UNIQUE KEY constraint", StringComparison.CurrentCulture);
 
             String sVoilatedConstraint = IsFirstMethod ?
                 ExtractString(s, key1: "Violation of UNIQUE KEY constraint '", key2: "'") :
@@ -67,11 +67,10 @@ namespace EEntityCore.DB.MSSQL.Exceptions
 
         public static String ExtractString(String originalString, String key1, String key2)
         {
-            if (originalString.IndexOf(key1) == -1) return String.Empty;
+            if (!originalString.Contains(key1, StringComparison.CurrentCulture)) return String.Empty;
             int keyword1StartIndex = originalString.IndexOf(key1) + key1.Length;
             int keyword1StopIndex = originalString.IndexOf(key2, keyword1StartIndex);
-            String keywordValue = originalString.Substring(keyword1StartIndex, keyword1StopIndex - keyword1StartIndex);
-            return keywordValue;
+            return originalString[keyword1StartIndex..keyword1StopIndex];
         }
 
 
