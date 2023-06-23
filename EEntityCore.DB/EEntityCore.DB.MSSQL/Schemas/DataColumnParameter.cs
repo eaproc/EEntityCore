@@ -112,5 +112,20 @@ namespace EEntityCore.DB.MSSQL.Schemas
         }
 
 
+        // '' <summary>
+        // '' Just limit your result to NULL or Real Value
+        // '' </summary>
+        // '' <param name="pValue"></param>
+        // '' <returns></returns>
+        // '' <remarks></remarks>
+        public static object TranslateNothingToNull(object pValue)
+        {
+            if (pValue == null)
+            {
+                return new DataColumnNullParamValue();
+            }
+
+            return pValue;
+        }
     }
 }

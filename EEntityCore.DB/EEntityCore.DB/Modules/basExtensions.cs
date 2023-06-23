@@ -151,7 +151,7 @@ namespace EEntityCore.DB.Modules
         {
             if(row == null) return null;
 
-            var r = row[columnName];
+            object r = row[columnName];
 
             if ( typeof(T) == typeof(string) )
                 return r == null || r is System.DBNull ? null : r;
