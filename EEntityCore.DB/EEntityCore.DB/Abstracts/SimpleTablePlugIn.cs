@@ -122,7 +122,7 @@ namespace EEntityCore.DB.Abstracts
         {
             _OpenAccessFor = RecordAccessibility.FULL_ACCESS;
             _____DbConn = pDBConn;
-
+            LastSQL_Passed = pSQL;
             // REM try load first time
             ReloadClass(pSQL);
 
@@ -461,9 +461,9 @@ namespace EEntityCore.DB.Abstracts
         /// <remarks></remarks>
         public virtual void ReloadClass(string SQL = Constants.vbNullString)
         {
+            long pLastID = ID;
             ___RawTable = null;
             TargettedRow_Cached = null;
-            long pLastID = ID;
             if (DBConn is null)
                 return;
 
@@ -494,7 +494,17 @@ namespace EEntityCore.DB.Abstracts
             return RawTable.Rows.Count > 0;
         }
 
+        public SimpleTablePlugIn SetDbConn(All__DBs dBConn)
+        {
+            _____DbConn = dBConn;
+            return this;
+        }
 
+        public SimpleTablePlugIn SetLastSqlQuery(string Sql)
+        {
+            LastSQL_Passed = Sql;
+            return this;
+        }
 
         /// <summary>
         /// Deletes a row using an id. *Already functional. if DBConn is valid
