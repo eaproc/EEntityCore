@@ -98,7 +98,7 @@ namespace EEntityCore.DB.Abstracts
         /// <param name="pTableRows"></param>
         /// <param name="pTargettedRowID"></param>
         /// <remarks></remarks>
-        public Sample__Table(IEnumerable<DataRow> pTableRows) : base(pTableRows, DO__NOT____TARGET__ANY_ROWID)
+        public Sample__Table(IEnumerable<DataRow> pTableRows) : base(pTableRows, DO__NOTEap_TARGET__ANY_ROWID)
         {
         }
 

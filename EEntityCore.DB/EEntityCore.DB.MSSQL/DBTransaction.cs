@@ -98,7 +98,7 @@ namespace EEntityCore.DB.MSSQL
                 Exceptions.DuplicateRowException.DetectAndThrow(ex);
                 Exceptions.DeleteForeignKeyException.DetectAndThrow(ex);
                 Exceptions.TooLargeNumericValue.DetectAndThrow(ex);
-                Exceptions.UpdateForeignKeyException.DetectAndThrow(ex);
+                Exceptions.UpdateForeignKeyException.DetectAndThrow(ex, SQL: pSQL);
 
                 throw;
             }

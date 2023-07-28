@@ -7,10 +7,10 @@ namespace EEntityCore.DB.MSSQL.Exceptions
     /// <summary>
     /// Indicates the foreign key record doesn't exist
     /// </summary>
-    public class UpdateForeignKeyException : Exception
+    public class UpdateForeignKeyException : Exception, ISerializableException
     {
-        public String ViolatedConstraint;
-        public String ViolatedTable;
+        public string ViolatedConstraint { get; private set; }
+        public string ViolatedTable { get; private set; }
 
         public UpdateForeignKeyException(
             String pViolatedConstraint,
@@ -22,25 +22,33 @@ namespace EEntityCore.DB.MSSQL.Exceptions
             this.ViolatedTable = pViolatedTable;
         }
 
-
-
-
-
         public static void DetectAndThrow(Exception exception)
         {
             UpdateForeignKeyException d = Detect(exception);
             if (d != null) throw d;
         }
 
+        public static void DetectAndThrow(Exception exception, string SQL)
+        {
+            UpdateForeignKeyException d = Detect(exception);
+            if (d != null)
+            {
+                d.Data.Add("SQL", SQL);
+                d.Data.Add("ViolatedTable", d.ViolatedTable);
+                d.Data.Add("ViolatedConstraint", d.ViolatedConstraint);
+                throw new QueryException<UpdateForeignKeyException>(d);
+            }
+        }
+
         public static UpdateForeignKeyException Detect(Exception exception)
         {
-            String s = exception.Message;
+            string s = exception.Message;
             if (s.IndexOf("conflicted with the FOREIGN KEY") <0) return null;
 
-            String sVoilatedConstraint = DuplicateRowException.ExtractString(s, key1: "constraint \"", key2: "\""
+            string sVoilatedConstraint = DuplicateRowException.ExtractString(s, key1: "constraint \"", key2: "\""
                 );
 
-            String sViolatedTable = DuplicateRowException.ExtractString(s, key1: "table \"", key2: "\""
+            string sViolatedTable = DuplicateRowException.ExtractString(s, key1: "table \"", key2: "\""
                 );
 
 
@@ -50,11 +58,6 @@ namespace EEntityCore.DB.MSSQL.Exceptions
 
         }
 
-
-
-
-
-
-
+        public dynamic ToDynamicClass() => Data;
     }
 }

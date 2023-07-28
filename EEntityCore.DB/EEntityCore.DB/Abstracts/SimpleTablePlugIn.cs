@@ -54,7 +54,7 @@ namespace EEntityCore.DB.Abstracts
             UNKNOWN
         }
 
-        public const int DO__NOT____TARGET__ANY_ROWID = 0;
+        public const int DO__NOTEap_TARGET__ANY_ROWID = 0;
 
         #endregion
 
@@ -76,7 +76,7 @@ namespace EEntityCore.DB.Abstracts
         /// <param name="DBConn"></param>
         /// <param name="TableName"></param>
         /// <remarks></remarks>
-        public SimpleTablePlugIn(All__DBs DBConn) : this(DBConn, DO__NOT____TARGET__ANY_ROWID)
+        public SimpleTablePlugIn(All__DBs DBConn) : this(DBConn, DO__NOTEap_TARGET__ANY_ROWID)
         {
         }
 
@@ -106,7 +106,7 @@ namespace EEntityCore.DB.Abstracts
         /// <param name="pTableName"></param>
         /// <param name="pSQL">Load table with your own SQL</param>
         /// <remarks></remarks>
-        public SimpleTablePlugIn(All__DBs pDBConn, string pSQL) : this(pDBConn, pSQL, DO__NOT____TARGET__ANY_ROWID)
+        public SimpleTablePlugIn(All__DBs pDBConn, string pSQL) : this(pDBConn, pSQL, DO__NOTEap_TARGET__ANY_ROWID)
         {
         }
 
@@ -154,7 +154,7 @@ namespace EEntityCore.DB.Abstracts
         /// <param name="pTableRows"></param>
         /// <param name="pTargettedRowID"></param>
         /// <remarks></remarks>
-        public SimpleTablePlugIn(IEnumerable<DataRow> pTableRows) : this(pTableRows, DO__NOT____TARGET__ANY_ROWID)
+        public SimpleTablePlugIn(IEnumerable<DataRow> pTableRows) : this(pTableRows, DO__NOTEap_TARGET__ANY_ROWID)
         {
         }
 
@@ -190,7 +190,7 @@ namespace EEntityCore.DB.Abstracts
         /// <param name="FullTable"></param>
         /// <param name="pTargettedRowID"></param>
         /// <remarks></remarks>
-        public SimpleTablePlugIn(DataTable FullTable):this(FullTable, DO__NOT____TARGET__ANY_ROWID)
+        public SimpleTablePlugIn(DataTable FullTable):this(FullTable, DO__NOTEap_TARGET__ANY_ROWID)
         {
         }
 
@@ -205,7 +205,7 @@ namespace EEntityCore.DB.Abstracts
         /// </summary>
         /// <param name="TargettedRow"></param>
         /// <remarks>Assuming this Row has a Column Called ID and It will be assigned</remarks>
-        public SimpleTablePlugIn(DataRow TargettedRow) : this(new DataRow[] { TargettedRow }, pTargettedRowID: DO__NOT____TARGET__ANY_ROWID)
+        public SimpleTablePlugIn(DataRow TargettedRow) : this(new DataRow[] { TargettedRow }, pTargettedRowID: DO__NOTEap_TARGET__ANY_ROWID)
         {
             _OpenAccessFor = RecordAccessibility.SHALLOW_ACCESS;
             if (HasRows())
@@ -386,13 +386,13 @@ namespace EEntityCore.DB.Abstracts
                 TargettedRow_Cached = AllRows.ElementAtOrDefault(0);
         }
 
-        protected void LoadFromRows(IEnumerable<DataRow> pTableRows, long pTargettedRowID = DO__NOT____TARGET__ANY_ROWID)
+        protected void LoadFromRows(IEnumerable<DataRow> pTableRows, long pTargettedRowID = DO__NOTEap_TARGET__ANY_ROWID)
         {
             LoadFromRows(pTableRows.CopyToDataTable());
             LoadID(pTargettedRowID);
         }
 
-        protected void LoadFromRows(DataTable pTableRows, long pTargettedRowID = DO__NOT____TARGET__ANY_ROWID)
+        protected void LoadFromRows(DataTable pTableRows, long pTargettedRowID = DO__NOTEap_TARGET__ANY_ROWID)
         {
             ___RawTable = pTableRows;
             LoadID(pTargettedRowID);
@@ -409,7 +409,7 @@ namespace EEntityCore.DB.Abstracts
             try
             {
                 TargettedRow_Cached = null;
-                if (IsTableValid() && pTargettedRowID != DO__NOT____TARGET__ANY_ROWID && HasNumericPrimaryKeyColumn && RawTable.Columns.Contains(NumericPrimaryKeyName))
+                if (IsTableValid() && pTargettedRowID != DO__NOTEap_TARGET__ANY_ROWID && HasNumericPrimaryKeyColumn && RawTable.Columns.Contains(NumericPrimaryKeyName))
                 {
                     var pMatch = from d in AllRows
                                  where ELong.ValueOf(d[NumericPrimaryKeyName]) == pTargettedRowID
@@ -483,7 +483,7 @@ namespace EEntityCore.DB.Abstracts
             }
 
             // Retarget if possible
-            if (pLastID != DO__NOT____TARGET__ANY_ROWID)
+            if (pLastID != DO__NOTEap_TARGET__ANY_ROWID)
                 LoadID(pLastID);
         }
 
