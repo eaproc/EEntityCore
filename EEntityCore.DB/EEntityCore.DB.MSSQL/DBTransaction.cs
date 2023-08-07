@@ -99,6 +99,7 @@ namespace EEntityCore.DB.MSSQL
                 Exceptions.DeleteForeignKeyException.DetectAndThrow(ex);
                 Exceptions.TooLargeNumericValue.DetectAndThrow(ex);
                 Exceptions.UpdateForeignKeyException.DetectAndThrow(ex, SQL: pSQL);
+                Exceptions.DataTruncateException.DetectAndThrow(ex, SQL: pSQL);
 
                 throw;
             }
