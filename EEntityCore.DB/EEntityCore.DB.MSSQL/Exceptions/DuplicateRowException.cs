@@ -18,7 +18,7 @@ namespace EEntityCore.DB.MSSQL.Exceptions
             String pViolatedConstraint,
             String pViolatedTable,
             String pDuplicatedValue,
-            Exception exception = null) :base(message: String.Format( "This value ({0}) will cause a duplicate record!", pDuplicatedValue),
+            Exception exception = null) :base(message: string.Format( "This value ({0}) will cause a duplicate record!", pDuplicatedValue),
             innerException: exception)
         {
             this.ViolatedConstraint = pViolatedConstraint;
@@ -67,7 +67,7 @@ namespace EEntityCore.DB.MSSQL.Exceptions
 
         public static String ExtractString(String originalString, String key1, String key2)
         {
-            if (!originalString.Contains(key1, StringComparison.CurrentCulture)) return String.Empty;
+            if (!originalString.Contains(key1, StringComparison.CurrentCulture)) return string.Empty;
             int keyword1StartIndex = originalString.IndexOf(key1) + key1.Length;
             int keyword1StopIndex = originalString.IndexOf(key2, keyword1StartIndex);
             return originalString[keyword1StartIndex..keyword1StopIndex];

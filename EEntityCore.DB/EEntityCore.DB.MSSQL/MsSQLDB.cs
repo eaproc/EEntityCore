@@ -921,7 +921,7 @@ namespace EEntityCore.DB.MSSQL
 
 
         //    // If __byte IsNot Nothing Then
-        //    // Dim originalFileName As String = String.Format("{0}\{1}", FolderPath, suggestedFileName)
+        //    // Dim originalFileName As String = string.Format("{0}\{1}", FolderPath, suggestedFileName)
         //    // If Overwrite Then
         //    // If File.Exists(originalFileName) Then File.Delete(originalFileName)
         //    // Else
@@ -959,7 +959,7 @@ namespace EEntityCore.DB.MSSQL
 
 
         //    // If __byte IsNot Nothing Then
-        //    // Dim originalFileName As String = String.Format("{0}\{1}", FolderPath, suggestedFileName)
+        //    // Dim originalFileName As String = string.Format("{0}\{1}", FolderPath, suggestedFileName)
         //    // If Overwrite Then
         //    // If File.Exists(originalFileName) Then File.Delete(originalFileName)
         //    // Else
