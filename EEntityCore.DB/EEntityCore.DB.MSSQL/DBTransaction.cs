@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using EEntityCore.DB.MSSQL.Interfaces;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,12 +19,6 @@ namespace EEntityCore.DB.MSSQL
         private readonly SqlCommand DBTransactionCommand = null;
 
         public string TransactionName { get; }
-
-        public struct QueryTimeReport
-        {
-            public long ElapsedMilliseconds;
-            public string SQL;
-        }
         /// <summary>
         /// Store Queries Executed Against Time taken in millisecs
         /// </summary>
@@ -31,7 +26,8 @@ namespace EEntityCore.DB.MSSQL
 
         private readonly SqlTransaction CommandTransactionPointer = null;
         private bool disposedValue;
-
+        private readonly IQueryTracer _queryTracer;
+        private readonly bool _traceQuery;
         private bool finalizedTransaction;
 
         /// <summary>
@@ -39,10 +35,13 @@ namespace EEntityCore.DB.MSSQL
         /// </summary>
         private bool touched;
 
-        public DBTransaction(SqlConnection Connection)
+        public DBTransaction(SqlConnection Connection, IQueryTracer tracer = null, bool traceQuery = false)
         {
             finalizedTransaction = false;
             disposedValue = false;
+
+            _queryTracer = tracer;
+            _traceQuery = traceQuery;
 
             this.Queries = new List<QueryTimeReport>();
 
@@ -78,7 +77,7 @@ namespace EEntityCore.DB.MSSQL
 
             // begin timing
             QueryExecutionTimer timer = null;
-
+            bool isSucceeded = true;
             try
             {
                 touched = true;
@@ -94,6 +93,7 @@ namespace EEntityCore.DB.MSSQL
             catch (Exception ex)
             {
                 this.RollBackDBTransaction();
+                isSucceeded = false;
 
                 Exceptions.DuplicateRowException.DetectAndThrow(ex);
                 Exceptions.DeleteForeignKeyException.DetectAndThrow(ex);
@@ -107,7 +107,7 @@ namespace EEntityCore.DB.MSSQL
             {
                 // end timing
                 // record timing
-                this.Queries.Add(new() { ElapsedMilliseconds = timer.ElapsedMilliseconds, SQL = pSQL });
+                Queries.Add(new(sql: pSQL, succeeded: isSucceeded, elapsedMilliseconds:timer.ElapsedMilliseconds));
             }
         }
 
@@ -125,6 +125,7 @@ namespace EEntityCore.DB.MSSQL
 
             // begin timing
             QueryExecutionTimer timer = null;
+            bool isSucceeded = true;
 
             try
             {
@@ -140,7 +141,7 @@ namespace EEntityCore.DB.MSSQL
             catch (Exception ex)
             {
                 this.RollBackDBTransaction();
-
+                isSucceeded = false;
                 Exceptions.DuplicateRowException.DetectAndThrow(ex);
                 Exceptions.DeleteForeignKeyException.DetectAndThrow(ex);
                 Exceptions.TooLargeNumericValue.DetectAndThrow(ex);
@@ -152,7 +153,7 @@ namespace EEntityCore.DB.MSSQL
             {
                 // end timing
                 // record timing
-                this.Queries.Add(new() { ElapsedMilliseconds = timer.ElapsedMilliseconds, SQL = pSQL });
+                Queries.Add(new(sql: pSQL, succeeded: isSucceeded, elapsedMilliseconds: timer.ElapsedMilliseconds));
             }
         }
 
@@ -162,6 +163,7 @@ namespace EEntityCore.DB.MSSQL
 
             // begin timing
             QueryExecutionTimer timer = null;
+            bool isSucceeded = true;
 
             try
             {
@@ -179,13 +181,14 @@ namespace EEntityCore.DB.MSSQL
             catch (Exception)
             {
                 this.RollBackDBTransaction();
+                isSucceeded = false;
                 throw;
             }
             finally
             {
                 // end timing
                 // record timing
-                this.Queries.Add(new() { ElapsedMilliseconds = timer.ElapsedMilliseconds, SQL = SQL } );
+                Queries.Add(new(sql: SQL, succeeded: isSucceeded, elapsedMilliseconds: timer.ElapsedMilliseconds));
             }
         }
 
@@ -236,6 +239,9 @@ namespace EEntityCore.DB.MSSQL
                 {
                     // TODO: dispose managed state (managed objects)
                     if (!this.finalizedTransaction) this.CommitDBTransaction();
+
+                    if( _traceQuery && _queryTracer != null )
+                        _queryTracer.TraceSqlQuery(Queries.ToArray());
 
                     this.DBTransactionConn.Dispose();
                     this.DBTransactionConn = null;

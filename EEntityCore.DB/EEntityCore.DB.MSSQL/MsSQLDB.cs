@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using CODERiT.Logger.Standard.VB.Exceptions;
 using EEntityCore.DB.Abstracts;
 using EEntityCore.DB.Exceptions;
 using EEntityCore.DB.MSSQL.Exceptions;
+using EEntityCore.DB.MSSQL.Interfaces;
 using ELibrary.Standard.VB;
 using ELibrary.Standard.VB.Modules;
 using ELibrary.Standard.VB.Objects;
@@ -48,6 +51,12 @@ namespace EEntityCore.DB.MSSQL
 
 
         protected string __SQLServerAddress { get; set; }
+
+        /// <summary>
+        /// These 2 needs to be true for tracing to occur
+        /// </summary>
+        protected IQueryTracer _queryTracer;
+        protected bool _traceQuery = false;
 
         /// <summary>
         /// Server address or host name with address like WINHOST-PC\SQLEXPRESS
@@ -162,6 +171,18 @@ namespace EEntityCore.DB.MSSQL
             __SQLServerPort = sPort;
         }
 
+        /// <summary>
+        /// Initialize Class With Necessary Parameters. It tries to connect immediately on constructor
+        /// </summary>
+        /// <param name="sAddress">IP or Name of Host PC on Network full instance name. like db.ciu.edu or 192.163.334.222\sqlexpress2014</param>
+        /// <param name="sUserName"></param>
+        /// <param name="sPassword"></param>
+        /// <remarks></remarks>
+        public MsSQLDB(string sAddress, int sPort, string sUserName, string sPassword, string sDatabase, IQueryTracer tracer, bool traceQuery) : this(sAddress, sPort, sUserName, sPassword, sDatabase)
+        {
+            _queryTracer = tracer;
+            _traceQuery = traceQuery;
+        }
 
         #endregion
 
@@ -248,33 +269,25 @@ namespace EEntityCore.DB.MSSQL
         /// <summary>
         /// Using SQL Default Path 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>SqlConnection</returns>
         /// <remarks></remarks>
+        /// <exception cref="SQLServerConnectionException">If there is an error getting the connection open</exception>
         public SqlConnection GetSQLConnection()
         {
-            Microsoft.Data.SqlClient.SqlConnection sCon;
             try
             {
                 // 'sCon = New SqlClient.SqlConnection(
                 // '    "Data Source=" & svrServer & ";Initial Catalog=" & dbName &
                 // '    ";Integrated Security=True;User ID=" & strUser & ";Password=" & strPassword)
-
-
-                sCon = new SqlConnection(GetConnectionString());
+                SqlConnection sCon = new (GetConnectionString());
                 sCon.Open();
+                return sCon;
             }
-
-            // sCon.Close()
-
             catch (Exception ex)
             {
                 throw new SQLServerConnectionException("Error Connecting to MS SQL Server From Client", GetConnectionString(), ex);
             }
-
-            return sCon;
         }
-
-
 
         /// <summary>
         /// Using SQL Default Path and DB 
@@ -342,13 +355,13 @@ namespace EEntityCore.DB.MSSQL
             // 
             // Be careful because tracking works on the database name passed in
             // 
-            var sqlDBCon = GetSQLConnection();
-            if (basExtensions.IsNothing(sqlDBCon))
-                return -1;
+            using var sqlDBCon = GetSQLConnection();
+            Stopwatch watch = _traceQuery && _queryTracer != null ? Stopwatch.StartNew() : null;
+            bool isSucceeded = true;
+
             try
             {
-                var sqlCommand = new SqlCommand();
-                using (sqlCommand)
+                using (SqlCommand sqlCommand = new())
                 {
                     sqlCommand.Connection = sqlDBCon;
                     sqlCommand.CommandType = CommandType.Text;
@@ -370,15 +383,13 @@ namespace EEntityCore.DB.MSSQL
             }
             finally
             {
-                if (sqlDBCon is object)
+                if (_traceQuery && _queryTracer != null && watch != null)
                 {
-                    if (sqlDBCon.State != ConnectionState.Closed)
-                        sqlDBCon.Close();
-                    sqlDBCon = null;
+                    watch.Stop();
+                    _queryTracer.TraceSqlQuery(new QueryTimeReport(sql: SQL, succeeded: isSucceeded, elapsedMilliseconds: watch.ElapsedMilliseconds, connectionString: GetConnectionString()));
                 }
             }
         }
-
 
         /// <summary>
         /// Get RS using Specific DB. Throws Exception.
@@ -395,42 +406,36 @@ namespace EEntityCore.DB.MSSQL
             // 
 
             var srs = new DataSet();
-            var sqlDBCon = GetSQLConnection();
-            if (basExtensions.IsNothing(sqlDBCon))
-                return null;
+            using var sqlDBCon = GetSQLConnection();
+            Stopwatch watch = _traceQuery && _queryTracer != null ? Stopwatch.StartNew() : null;
+            bool isSucceeded = true;
             try
             {
-                var sqlCommand = new SqlCommand();
-                using (sqlCommand)
+                using (SqlCommand sqlCommand = new ())
                 {
                     sqlCommand.Connection = sqlDBCon;
                     sqlCommand.CommandType = CommandType.Text;
                     sqlCommand.CommandTimeout = 0;  // no time out here
                     sqlCommand.CommandText = SQL;
-                    var da = new SqlDataAdapter(sqlCommand);
+                    using SqlDataAdapter da = new (sqlCommand);
                     da.Fill(srs);
-                    da.Dispose();
-                    da = null;
                 }
             }
             catch (Exception ex)
             {
+                isSucceeded = false;
                 throw new SQLCodeException(SQL, ex);
             }
             finally
             {
-                if (sqlDBCon is object)
+                if (_traceQuery && _queryTracer != null && watch != null)
                 {
-                    if (sqlDBCon.State != ConnectionState.Closed)
-                        sqlDBCon.Close();
-                    sqlDBCon = null;
+                    watch.Stop();
+                    _queryTracer.TraceSqlQuery(new QueryTimeReport(sql: SQL, succeeded: isSucceeded, elapsedMilliseconds: watch.ElapsedMilliseconds, connectionString: GetConnectionString()) );
                 }
             }
-
             return srs;
         }
-
-        
 
         /// <summary>
         /// Get RS using default DB and Stored Procedures
