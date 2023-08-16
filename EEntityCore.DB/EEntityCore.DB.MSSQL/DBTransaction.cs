@@ -82,7 +82,9 @@ namespace EEntityCore.DB.MSSQL
             {
                 touched = true;
 
-                this.DBTransactionCommand.CommandText = pSQL;
+                DBTransactionCommand.CommandType = CommandType.Text;
+                DBTransactionCommand.CommandTimeout = 0;  // no time out here
+                DBTransactionCommand.CommandText = pSQL;
 
                 using (timer = new(pSQL))
                 {
