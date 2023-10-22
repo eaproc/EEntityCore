@@ -50,7 +50,7 @@ namespace EEntityCore.DB.MSSQL
             this.DBTransactionCommand = DBTransactionConn.CreateCommand();
             // Start a local transaction.
             // Maximum Identifier length | Transaction Name is 32 characters
-            this.TransactionName = "TRANS: " + DateTime.Now.ToString() + new Random().Next(9999).ToString();
+            this.TransactionName = "TRANS: " + DateTime.Now.ToString() + new Random().Next(99).ToString();
             this.CommandTransactionPointer = DBTransactionConn.BeginTransaction(this.TransactionName);
 
             // Must assign both transaction object and connection
