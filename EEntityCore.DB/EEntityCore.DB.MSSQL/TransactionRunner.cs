@@ -29,6 +29,7 @@ namespace EEntityCore.DB.MSSQL
 
     // Also, you can use this 2 approaches when using the keyword "using"
 
+    // careful, set to false false and dispose manually if the transaction is calling dispose like InsideGetId
     //using (var runner = CreateTransactionRunner(true, immediateDisposal: false))
     //{
     //    // This is only best if immediateDisposal is true and allowDispose is true
@@ -46,6 +47,8 @@ namespace EEntityCore.DB.MSSQL
         private bool AllowDispose { get; }
 
         public bool ImmediateDisposal { get; }
+
+        private bool _isTainted = false;
 
         /// <summary>
         /// You can directly use this property if you are running in transaction lock.
@@ -100,6 +103,12 @@ namespace EEntityCore.DB.MSSQL
             return r;
         }
 
+        public TransactionRunner MarkAsTainted(bool isTainted = true)
+        {
+            _isTainted = isTainted;
+            return this;
+        }
+
         //public static T InvokeRun<T>(Func<DBTransaction, T> action, DBTransaction trans = null)
         //{
         //    using var r = new TransactionRunner(trans);
@@ -111,11 +120,16 @@ namespace EEntityCore.DB.MSSQL
         /// </summary>
         public void ForceDispose()
         {
-            if (Transaction != null)
+            if (Transaction != null && _isTainted)
             {
-                Transaction.Dispose();
-                Transaction = null;
+                Transaction.ForceRollBackOnLogic();
             }
+            else
+            {
+                Transaction?.Dispose(); // this will call commit
+            }
+
+            Transaction = null;
         }
 
         /// <summary>

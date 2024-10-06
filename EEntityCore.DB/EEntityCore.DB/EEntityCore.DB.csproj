@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <Reference Include="CODERiT.Logger.Standard.VB">
-      <HintPath>..\..\..\..\..\epro-libraries-for-vs\coderit-logger\CODERiT.Logger.Standard.VB\bin\Debug\netstandard2.0\CODERiT.Logger.Standard.VB.dll</HintPath>
+      <HintPath>..\..\..\..\epro-libraries-for-vs\coderit-logger\CODERiT.Logger.Standard.VB\bin\Debug\netstandard2.0\CODERiT.Logger.Standard.VB.dll</HintPath>
     </Reference>
     <Reference Include="ELibrary.Standard.VB">
       <HintPath>..\..\..\ELibrary\ELibrary.Standard.VB\bin\Debug\netstandard2.0\ELibrary.Standard.VB.dll</HintPath>
